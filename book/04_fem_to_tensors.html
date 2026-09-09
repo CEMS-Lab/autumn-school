@@ -33,7 +33,7 @@
     <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="_static/mobile_math.css?v=acf5579e" />
-    <link rel="stylesheet" type="text/css" href="_static/learning_book.css?v=ce3b4251" />
+    <link rel="stylesheet" type="text/css" href="_static/learning_book.css?v=d8208df1" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -52,7 +52,7 @@
     <script src="_static/learning_book.js?v=7a62d495"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="5.8.1. Run and interpret a small PhAST fracture calculation" href="labs/01_phast_tiny_evolving_fracture.html" />
+    <link rel="next" title="5.8.1. End-to-End Simulation: Running Phase-Field Fracture in PhAST" href="labs/01_phast_tiny_evolving_fracture.html" />
     <link rel="prev" title="4. From solid mechanics to staggered damage updates" href="03_staggered_solution.html" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -167,36 +167,36 @@
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="index.html">
-                    PhAST: a learn-by-doing introduction to phase-field fracture
+                    PhAST: A Learn-by-Doing Introduction to Phase-Field Fracture
                 </a>
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1 has-children"><a class="reference internal" href="00_welcome_and_routes.html">1. From cracks to computation: learn by doing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="labs/00_why_average_predictions_can_fail.html">1.2.1. Why average predictions can fail</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="00_welcome_and_routes.html">1. From Cracks to Computation: Learn by Doing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="labs/00_why_average_predictions_can_fail.html">1.2.1. Branch Selection and Energy-Based Objectives in Physics-Informed Learning</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="01_crack_representations.html">2. Crack representations: sharp, cohesive, and diffuse</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="02_phase_field_energy.html">3. Fracture energy: AT1, AT2, degradation, and width</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="labs/02_degradation_autograd.html">3.3.1. Differentiate a degradation law</a></li>
+<li class="toctree-l2"><a class="reference internal" href="labs/02_degradation_autograd.html">3.3.1. Differentiating Material Degradation: Analytical, Autograd, and Finite Differences</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="03_staggered_solution.html">4. From solid mechanics to staggered damage updates</a></li>
 <li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">5. Geometry, FEM, tensors, and matrix-free operators</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="labs/01_phast_tiny_evolving_fracture.html">5.8.1. Run and interpret a small PhAST fracture calculation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="labs/01_phast_tiny_evolving_fracture.html">5.8.1. End-to-End Simulation: Running Phase-Field Fracture in PhAST</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="05_differentiation_and_inverse.html">6. Differentiation and an illustrative inverse problem</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="05a_backpropagation_step_by_step.html">6.3.1. Backpropagation through a stepped update</a></li>
-<li class="toctree-l2"><a class="reference internal" href="labs/03_tiny_derivative_inverse_toy.html">6.6.1. Differentiate and recover the elastic modulus</a></li>
+<li class="toctree-l2"><a class="reference internal" href="labs/03_tiny_derivative_inverse_toy.html">6.6.1. Differentiable Mechanics and Inverse Parameter Identification</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="06_learning_adapter.html">7. Train, save, reload, adapters, and checked proposals</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="labs/04_train_save_reload_adapter.html">7.5.1. Train, save, reload, and compare a field model</a></li>
-<li class="toctree-l2"><a class="reference internal" href="labs/05_hybrid_reference_correction.html">7.8.1. Assess a proposal and use a reference correction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="labs/04_train_save_reload_adapter.html">7.5.1. Training, Saving, and Reloading Neural Field Adapters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="labs/05_hybrid_reference_correction.html">7.8.1. Hybrid Physics-AI: Residual-Gated Model Proposals and Solver Correction</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1"><a class="reference internal" href="07_practice_references.html">8. Practice, solutions, glossary, references, and contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_practice_references.html">8. Practice, Solutions, Glossary, and References</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Optional inverse experiments</span></p>
 <ul class="nav bd-sidenav">
@@ -336,7 +336,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#static-and-dynamic-arrays">5.5. Static and dynamic arrays</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#where-automatic-differentiation-fits">5.6. Where automatic differentiation fits</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inspecting-results-four-views-one-interpretation">5.7. Inspecting results: four views, one interpretation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#computational-lesson-follow-a-phast-calculation">5.8. Computational lesson: follow a PhAST calculation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hands-on-lab-running-an-end-to-end-phast-fracture-simulation">5.8. Hands-On Lab: Running an End-to-End PhAST Fracture Simulation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-identify-a-silent-shape-error">5.9. Exercise: identify a silent shape error</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#take-away">5.10. Take-away</a></li>
 </ul>
@@ -508,23 +508,21 @@ and</p></li>
 <li><p>a scalar observation such as reaction force, energy term, or residual.</p></li>
 </ol>
 </section>
-<section id="computational-lesson-follow-a-phast-calculation">
-<h2><span class="section-number">5.8. </span>Computational lesson: follow a PhAST calculation<a class="headerlink" href="#computational-lesson-follow-a-phast-calculation" title="Link to this heading">#</a></h2>
-<p>The lesson below uses a small PhAST example. It defines a
-rectangular T3 mesh, labelled boundaries, a locked centreline precrack, and
-symmetric displacement loading before showing the damage fields, response
-trace, and stagger-iteration trace. Read the case card before interpreting the
-plots. The route is quasistatic and uses an assembled sparse-direct mechanics
-solve.</p>
+<section id="hands-on-lab-running-an-end-to-end-phast-fracture-simulation">
+<h2><span class="section-number">5.8. </span>Hands-On Lab: Running an End-to-End PhAST Fracture Simulation<a class="headerlink" href="#hands-on-lab-running-an-end-to-end-phast-fracture-simulation" title="Link to this heading">#</a></h2>
+<p>In the accompanying computational notebook, you will execute a complete phase-field fracture calculation using the PhAST solver:</p>
+<ol class="arabic simple">
+<li><p><strong>Geometry &amp; Meshing:</strong> Generate a two-dimensional rectangular specimen and discretize it with structured triangular (T3) finite elements.</p></li>
+<li><p><strong>Boundary Conditions &amp; Precrack:</strong> Identify boundary node sets (<code class="docutils literal notranslate"><span class="pre">left</span></code>, <code class="docutils literal notranslate"><span class="pre">right</span></code>, <code class="docutils literal notranslate"><span class="pre">top</span></code>, <code class="docutils literal notranslate"><span class="pre">bottom</span></code>) and define an initial center-notch precrack.</p></li>
+<li><p><strong>Solver Execution:</strong> Run the staggered displacement-damage solver over 60 incremental load steps.</p></li>
+<li><p><strong>Post-Processing &amp; Field Visualization:</strong> Extract the global load-displacement curve, observe peak softening, and render the localized diffuse damage field.</p></li>
+</ol>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="labs/01_phast_tiny_evolving_fracture.html">5.8.1. Run and interpret a small PhAST fracture calculation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="labs/01_phast_tiny_evolving_fracture.html">5.8.1. End-to-End Simulation: Running Phase-Field Fracture in PhAST</a></li>
 </ul>
 </div>
-<p>Interpret each image using the case definition, keeping the relevant boundary,
-notch, colourbar, and load increment visible. The
-lesson’s retained result card belongs to its recorded environment. If you
-download it for execution, record a new result card for your own environment.</p>
+<p>This notebook serves as our reference simulation pipeline throughout the course. You will see how tensor representations map directly to physical finite element fields.</p>
 </section>
 <section id="exercise-identify-a-silent-shape-error">
 <h2><span class="section-number">5.9. </span>Exercise: identify a silent shape error<a class="headerlink" href="#exercise-identify-a-silent-shape-error" title="Link to this heading">#</a></h2>
@@ -580,7 +578,7 @@ how boundary conditions are enforced, and how the resulting field is checked.</p
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">5.8.1. </span>Run and interpret a small PhAST fracture calculation</p>
+        <p class="prev-next-title"><span class="section-number">5.8.1. </span>End-to-End Simulation: Running Phase-Field Fracture in PhAST</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -607,7 +605,7 @@ how boundary conditions are enforced, and how the resulting field is checked.</p
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#static-and-dynamic-arrays">5.5. Static and dynamic arrays</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#where-automatic-differentiation-fits">5.6. Where automatic differentiation fits</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inspecting-results-four-views-one-interpretation">5.7. Inspecting results: four views, one interpretation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#computational-lesson-follow-a-phast-calculation">5.8. Computational lesson: follow a PhAST calculation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hands-on-lab-running-an-end-to-end-phast-fracture-simulation">5.8. Hands-On Lab: Running an End-to-End PhAST Fracture Simulation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-identify-a-silent-shape-error">5.9. Exercise: identify a silent shape error</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#take-away">5.10. Take-away</a></li>
 </ul>

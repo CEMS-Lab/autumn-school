@@ -1,53 +1,28 @@
-# Practice, solutions, glossary, references, and contributing
+# Practice, Solutions, Glossary, and References
 
-## A six-part learn-by-doing sequence
+## Workshop Synthesis: The Four Core Milestones
 
-The book can be read in order or used as a companion to six teaching blocks.
-Each block should leave a visible artefact: a written prediction, a derived
-equation, a labelled field, a result card, or a checked derivative. Where a
-computational lesson appears in the table of contents beneath its chapter,
-read the prompt and retained output before downloading code to execute.
+Throughout this tutorial course, we navigated the bridge connecting continuum fracture mechanics to modern differentiable scientific computing and machine learning. As a review, ensure you can comfortably explain the four foundational milestones:
 
-1. **Represent a crack.** Separate sharp cracks, cohesive interfaces, phase
-   fields, XFEM enrichment, and nonlinear solvers.
-2. **Read the energy.** Identify $G_c$, $\ell$, $w(d)$, $g(d)$, the
-   tension--compression split, and the damage convention.
-3. **Follow an update.** Sketch a staggered mechanics/damage loop and locate
-   the irreversibility rule.
-4. **Trace data.** Start with geometry and boundary conditions; end with
-   fields and observables; write tensor shapes at the interface.
-5. **Check a derivative.** Define a scalar loss, select a direction, and
-   compare automatic differentiation with a finite difference.
-6. **Audit a learned proposal.** Save state, reload it, define the adapter,
-   and separate a proposal from a corrected mechanics result.
+1. **Pillar 1: What Phase-Field Fracture Is**  
+   Explain how Griffith's surface energy is approximated by a volume integral over a continuous scalar damage field $d(x)$, governed by the regularisation length $\ell$, the crack-density function $w(d)$, and the stiffness degradation law $g(d)$.
+2. **Pillar 2: The Computational Simulation Pipeline (PhAST)**  
+   Trace an end-to-end simulation: defining domain coordinates and connectivity, assembling finite element tensors, applying boundary conditions and precracks, and executing the staggered alternating minimization loop until equilibrium residuals converge.
+3. **Pillar 3: Differentiability and Inverse Discovery**  
+   Explain how reverse-mode automatic differentiation computes exact sensitivities through numerical mechanics graphs, verify autograd gradients against directional numerical finite differences, and formulate gradient-based inverse optimization to recover unknown physical parameters.
+4. **Pillar 4: Deep Learning Surrogates and Hybrid Correction**  
+   Formulate how neural networks can serve as fast surrogate proposal models, evaluate neural predictions against physical PDE residuals, and use trusted numerical solvers in a hybrid loop to correct out-of-distribution predictions.
 
-The computational exercises are intentionally small. Their code, retained
-outputs, hints, and worked solutions belong to the same reading route as the
-theory. Record runtime with the device and software versions used for each run.
+---
 
-## Quickstart checklist
+## Best Practices for Computational Exploration
 
-Before an activity:
+When experimenting with computational mechanics models in Jupyter or Colab:
 
-- read the problem definition and prediction prompt;
-- record the phase-field convention, mesh/array dimensions, and parameters;
-- identify the quantity that will be checked; and
-- read the corresponding integrated computational lesson; download its
-  notebook when you intend to execute cells in a suitable environment.
-
-During an activity:
-
-- change one named input at a time;
-- retain the original result card when making a comparison;
-- inspect a field, an observable, and a numerical check; and
-- stop and diagnose if bounds, residuals, or tensor shapes are unexpected.
-
-After an activity:
-
-- state what was observed;
-- state which assumption or numerical choice could change that observation;
-- link the output to its lesson and case definition; and
-- state the assumptions and numerical conditions under which the result applies.
+- **Vary One Parameter at a Time:** For example, decrease $\ell$ to observe crack bandwidth narrowing, or increase $G_c$ to observe higher fracture toughness and peak load.
+- **Examine Both Fields and Curves:** Do not rely solely on scalar metrics. Always inspect the full spatial damage and stress fields alongside global load-displacement curves.
+- **Verify Gradients Early:** When writing custom differentiable loss functions, verify gradients against finite differences before launching long optimization runs.
+- **Check Physical Bounds:** Ensure the damage field respects $0 \le d \le 1$ and non-decreasing history $d_n \ge d_{n-1}$.
 
 ## Worked consolidation exercise
 

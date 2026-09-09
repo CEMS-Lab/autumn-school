@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>8. Practice, solutions, glossary, references, and contributing &#8212; PhAST: Phase-field fracture with differentiable FEM</title>
+    <title>8. Practice, Solutions, Glossary, and References &#8212; PhAST: Phase-field fracture with differentiable FEM</title>
   
   
   
@@ -33,7 +33,7 @@
     <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="_static/mobile_math.css?v=acf5579e" />
-    <link rel="stylesheet" type="text/css" href="_static/learning_book.css?v=ce3b4251" />
+    <link rel="stylesheet" type="text/css" href="_static/learning_book.css?v=d8208df1" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -53,7 +53,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="From gradients to reliable inverse experiments" href="research/index.html" />
-    <link rel="prev" title="7.8.1. Assess a proposal and use a reference correction" href="labs/05_hybrid_reference_correction.html" />
+    <link rel="prev" title="7.8.1. Hybrid Physics-AI: Residual-Gated Model Proposals and Solver Correction" href="labs/05_hybrid_reference_correction.html" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -167,36 +167,36 @@
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="index.html">
-                    PhAST: a learn-by-doing introduction to phase-field fracture
+                    PhAST: A Learn-by-Doing Introduction to Phase-Field Fracture
                 </a>
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1 has-children"><a class="reference internal" href="00_welcome_and_routes.html">1. From cracks to computation: learn by doing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="labs/00_why_average_predictions_can_fail.html">1.2.1. Why average predictions can fail</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="00_welcome_and_routes.html">1. From Cracks to Computation: Learn by Doing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="labs/00_why_average_predictions_can_fail.html">1.2.1. Branch Selection and Energy-Based Objectives in Physics-Informed Learning</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="01_crack_representations.html">2. Crack representations: sharp, cohesive, and diffuse</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="02_phase_field_energy.html">3. Fracture energy: AT1, AT2, degradation, and width</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="labs/02_degradation_autograd.html">3.3.1. Differentiate a degradation law</a></li>
+<li class="toctree-l2"><a class="reference internal" href="labs/02_degradation_autograd.html">3.3.1. Differentiating Material Degradation: Analytical, Autograd, and Finite Differences</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="03_staggered_solution.html">4. From solid mechanics to staggered damage updates</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="04_fem_to_tensors.html">5. Geometry, FEM, tensors, and matrix-free operators</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="labs/01_phast_tiny_evolving_fracture.html">5.8.1. Run and interpret a small PhAST fracture calculation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="labs/01_phast_tiny_evolving_fracture.html">5.8.1. End-to-End Simulation: Running Phase-Field Fracture in PhAST</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="05_differentiation_and_inverse.html">6. Differentiation and an illustrative inverse problem</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="05a_backpropagation_step_by_step.html">6.3.1. Backpropagation through a stepped update</a></li>
-<li class="toctree-l2"><a class="reference internal" href="labs/03_tiny_derivative_inverse_toy.html">6.6.1. Differentiate and recover the elastic modulus</a></li>
+<li class="toctree-l2"><a class="reference internal" href="labs/03_tiny_derivative_inverse_toy.html">6.6.1. Differentiable Mechanics and Inverse Parameter Identification</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="06_learning_adapter.html">7. Train, save, reload, adapters, and checked proposals</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="labs/04_train_save_reload_adapter.html">7.5.1. Train, save, reload, and compare a field model</a></li>
-<li class="toctree-l2"><a class="reference internal" href="labs/05_hybrid_reference_correction.html">7.8.1. Assess a proposal and use a reference correction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="labs/04_train_save_reload_adapter.html">7.5.1. Training, Saving, and Reloading Neural Field Adapters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="labs/05_hybrid_reference_correction.html">7.8.1. Hybrid Physics-AI: Residual-Gated Model Proposals and Solver Correction</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">8. Practice, solutions, glossary, references, and contributing</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">8. Practice, Solutions, Glossary, and References</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Optional inverse experiments</span></p>
 <ul class="nav bd-sidenav">
@@ -319,7 +319,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Practice, solutions, glossary, references, and contributing</h1>
+    <h1>Practice, Solutions, Glossary, and References</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -329,8 +329,8 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-six-part-learn-by-doing-sequence">8.1. A six-part learn-by-doing sequence</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quickstart-checklist">8.2. Quickstart checklist</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#workshop-synthesis-the-four-core-milestones">8.1. Workshop Synthesis: The Four Core Milestones</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#best-practices-for-computational-exploration">8.2. Best Practices for Computational Exploration</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#worked-consolidation-exercise">8.3. Worked consolidation exercise</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#glossary">8.4. Glossary</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contributing-a-new-course-activity">8.5. Contributing a new course activity</a></li>
@@ -351,56 +351,31 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="practice-solutions-glossary-references-and-contributing">
-<h1><span class="section-number">8. </span>Practice, solutions, glossary, references, and contributing<a class="headerlink" href="#practice-solutions-glossary-references-and-contributing" title="Link to this heading">#</a></h1>
-<section id="a-six-part-learn-by-doing-sequence">
-<h2><span class="section-number">8.1. </span>A six-part learn-by-doing sequence<a class="headerlink" href="#a-six-part-learn-by-doing-sequence" title="Link to this heading">#</a></h2>
-<p>The book can be read in order or used as a companion to six teaching blocks.
-Each block should leave a visible artefact: a written prediction, a derived
-equation, a labelled field, a result card, or a checked derivative. Where a
-computational lesson appears in the table of contents beneath its chapter,
-read the prompt and retained output before downloading code to execute.</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="practice-solutions-glossary-and-references">
+<h1><span class="section-number">8. </span>Practice, Solutions, Glossary, and References<a class="headerlink" href="#practice-solutions-glossary-and-references" title="Link to this heading">#</a></h1>
+<section id="workshop-synthesis-the-four-core-milestones">
+<h2><span class="section-number">8.1. </span>Workshop Synthesis: The Four Core Milestones<a class="headerlink" href="#workshop-synthesis-the-four-core-milestones" title="Link to this heading">#</a></h2>
+<p>Throughout this tutorial course, we navigated the bridge connecting continuum fracture mechanics to modern differentiable scientific computing and machine learning. As a review, ensure you can comfortably explain the four foundational milestones:</p>
 <ol class="arabic simple">
-<li><p><strong>Represent a crack.</strong> Separate sharp cracks, cohesive interfaces, phase
-fields, XFEM enrichment, and nonlinear solvers.</p></li>
-<li><p><strong>Read the energy.</strong> Identify <span class="math notranslate nohighlight">\(G_c\)</span>, <span class="math notranslate nohighlight">\(\ell\)</span>, <span class="math notranslate nohighlight">\(w(d)\)</span>, <span class="math notranslate nohighlight">\(g(d)\)</span>, the
-tension–compression split, and the damage convention.</p></li>
-<li><p><strong>Follow an update.</strong> Sketch a staggered mechanics/damage loop and locate
-the irreversibility rule.</p></li>
-<li><p><strong>Trace data.</strong> Start with geometry and boundary conditions; end with
-fields and observables; write tensor shapes at the interface.</p></li>
-<li><p><strong>Check a derivative.</strong> Define a scalar loss, select a direction, and
-compare automatic differentiation with a finite difference.</p></li>
-<li><p><strong>Audit a learned proposal.</strong> Save state, reload it, define the adapter,
-and separate a proposal from a corrected mechanics result.</p></li>
+<li><p><strong>Pillar 1: What Phase-Field Fracture Is</strong><br />
+Explain how Griffith’s surface energy is approximated by a volume integral over a continuous scalar damage field <span class="math notranslate nohighlight">\(d(x)\)</span>, governed by the regularisation length <span class="math notranslate nohighlight">\(\ell\)</span>, the crack-density function <span class="math notranslate nohighlight">\(w(d)\)</span>, and the stiffness degradation law <span class="math notranslate nohighlight">\(g(d)\)</span>.</p></li>
+<li><p><strong>Pillar 2: The Computational Simulation Pipeline (PhAST)</strong><br />
+Trace an end-to-end simulation: defining domain coordinates and connectivity, assembling finite element tensors, applying boundary conditions and precracks, and executing the staggered alternating minimization loop until equilibrium residuals converge.</p></li>
+<li><p><strong>Pillar 3: Differentiability and Inverse Discovery</strong><br />
+Explain how reverse-mode automatic differentiation computes exact sensitivities through numerical mechanics graphs, verify autograd gradients against directional numerical finite differences, and formulate gradient-based inverse optimization to recover unknown physical parameters.</p></li>
+<li><p><strong>Pillar 4: Deep Learning Surrogates and Hybrid Correction</strong><br />
+Formulate how neural networks can serve as fast surrogate proposal models, evaluate neural predictions against physical PDE residuals, and use trusted numerical solvers in a hybrid loop to correct out-of-distribution predictions.</p></li>
 </ol>
-<p>The computational exercises are intentionally small. Their code, retained
-outputs, hints, and worked solutions belong to the same reading route as the
-theory. Record runtime with the device and software versions used for each run.</p>
 </section>
-<section id="quickstart-checklist">
-<h2><span class="section-number">8.2. </span>Quickstart checklist<a class="headerlink" href="#quickstart-checklist" title="Link to this heading">#</a></h2>
-<p>Before an activity:</p>
+<hr class="docutils" />
+<section id="best-practices-for-computational-exploration">
+<h2><span class="section-number">8.2. </span>Best Practices for Computational Exploration<a class="headerlink" href="#best-practices-for-computational-exploration" title="Link to this heading">#</a></h2>
+<p>When experimenting with computational mechanics models in Jupyter or Colab:</p>
 <ul class="simple">
-<li><p>read the problem definition and prediction prompt;</p></li>
-<li><p>record the phase-field convention, mesh/array dimensions, and parameters;</p></li>
-<li><p>identify the quantity that will be checked; and</p></li>
-<li><p>read the corresponding integrated computational lesson; download its
-notebook when you intend to execute cells in a suitable environment.</p></li>
-</ul>
-<p>During an activity:</p>
-<ul class="simple">
-<li><p>change one named input at a time;</p></li>
-<li><p>retain the original result card when making a comparison;</p></li>
-<li><p>inspect a field, an observable, and a numerical check; and</p></li>
-<li><p>stop and diagnose if bounds, residuals, or tensor shapes are unexpected.</p></li>
-</ul>
-<p>After an activity:</p>
-<ul class="simple">
-<li><p>state what was observed;</p></li>
-<li><p>state which assumption or numerical choice could change that observation;</p></li>
-<li><p>link the output to its lesson and case definition; and</p></li>
-<li><p>state the assumptions and numerical conditions under which the result applies.</p></li>
+<li><p><strong>Vary One Parameter at a Time:</strong> For example, decrease <span class="math notranslate nohighlight">\(\ell\)</span> to observe crack bandwidth narrowing, or increase <span class="math notranslate nohighlight">\(G_c\)</span> to observe higher fracture toughness and peak load.</p></li>
+<li><p><strong>Examine Both Fields and Curves:</strong> Do not rely solely on scalar metrics. Always inspect the full spatial damage and stress fields alongside global load-displacement curves.</p></li>
+<li><p><strong>Verify Gradients Early:</strong> When writing custom differentiable loss functions, verify gradients against finite differences before launching long optimization runs.</p></li>
+<li><p><strong>Check Physical Bounds:</strong> Ensure the damage field respects <span class="math notranslate nohighlight">\(0 \le d \le 1\)</span> and non-decreasing history <span class="math notranslate nohighlight">\(d_n \ge d_{n-1}\)</span>.</p></li>
 </ul>
 </section>
 <section id="worked-consolidation-exercise">
@@ -596,7 +571,7 @@ Transactions of the Royal Society A</em> 379 (2021),
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">7.8.1. </span>Assess a proposal and use a reference correction</p>
+        <p class="prev-next-title"><span class="section-number">7.8.1. </span>Hybrid Physics-AI: Residual-Gated Model Proposals and Solver Correction</p>
       </div>
     </a>
     <a class="right-next"
@@ -624,8 +599,8 @@ Transactions of the Royal Society A</em> 379 (2021),
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-six-part-learn-by-doing-sequence">8.1. A six-part learn-by-doing sequence</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quickstart-checklist">8.2. Quickstart checklist</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#workshop-synthesis-the-four-core-milestones">8.1. Workshop Synthesis: The Four Core Milestones</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#best-practices-for-computational-exploration">8.2. Best Practices for Computational Exploration</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#worked-consolidation-exercise">8.3. Worked consolidation exercise</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#glossary">8.4. Glossary</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contributing-a-new-course-activity">8.5. Contributing a new course activity</a></li>

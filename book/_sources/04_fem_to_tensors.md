@@ -169,14 +169,14 @@ For a tiny evolving-fracture run, inspect at least:
    and
 4. a scalar observation such as reaction force, energy term, or residual.
 
-## Computational lesson: follow a PhAST calculation
+## Hands-On Lab: Running an End-to-End PhAST Fracture Simulation
 
-The lesson below uses a small PhAST example. It defines a
-rectangular T3 mesh, labelled boundaries, a locked centreline precrack, and
-symmetric displacement loading before showing the damage fields, response
-trace, and stagger-iteration trace. Read the case card before interpreting the
-plots. The route is quasistatic and uses an assembled sparse-direct mechanics
-solve.
+In the accompanying computational notebook, you will execute a complete phase-field fracture calculation using the PhAST solver:
+
+1. **Geometry & Meshing:** Generate a two-dimensional rectangular specimen and discretize it with structured triangular (T3) finite elements.
+2. **Boundary Conditions & Precrack:** Identify boundary node sets (`left`, `right`, `top`, `bottom`) and define an initial center-notch precrack.
+3. **Solver Execution:** Run the staggered displacement-damage solver over 60 incremental load steps.
+4. **Post-Processing & Field Visualization:** Extract the global load-displacement curve, observe peak softening, and render the localized diffuse damage field.
 
 ```{toctree}
 :maxdepth: 1
@@ -184,10 +184,7 @@ solve.
 labs/01_phast_tiny_evolving_fracture
 ```
 
-Interpret each image using the case definition, keeping the relevant boundary,
-notch, colourbar, and load increment visible. The
-lesson's retained result card belongs to its recorded environment. If you
-download it for execution, record a new result card for your own environment.
+This notebook serves as our reference simulation pipeline throughout the course. You will see how tensor representations map directly to physical finite element fields.
 
 ## Exercise: identify a silent shape error
 

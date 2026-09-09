@@ -65,20 +65,20 @@ degraded tensile energy. The resulting damage evolution also depends on
 fracture density, gradients, boundary data, and irreversibility through the
 total variation.
 
-## Computational lesson: inspect a degradation derivative
+## Hands-On Lab: Verifying the Degradation Derivative
 
-Continue directly to the lesson below. Predict the sign of $g_\eta'(d)$ at an
-interior damage value, then compare the analytic derivative with automatic
-differentiation and a central finite difference. The code calls the pinned
-PhAST material law for a local, smooth check with damage as its input.
-Differentiating a coupled fracture history additionally requires the
-derivatives of its state updates, constraints, and nonlinear solves.
+In the accompanying computational lesson, you will implement this quadratic degradation law in PyTorch and compute its derivative:
+- **Analytically:** Using explicit calculus, $g'_\eta(d) = -2(1-\eta_{\mathrm{res}})(1-d)$.
+- **Automatically:** Using PyTorch's automatic differentiation engine (`torch.autograd`).
+- **Numerically:** Using central finite differences with varying perturbation step sizes.
 
 ```{toctree}
 :maxdepth: 1
 
 labs/02_degradation_autograd
 ```
+
+This exercise demonstrates the core mechanic of automatic differentiation: computing exact programmatic derivatives through the operations defined in your code.
 
 ## AT2 and AT1 are normalised choices
 

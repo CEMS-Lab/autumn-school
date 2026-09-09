@@ -217,26 +217,25 @@ training and final evaluation data. In mechanics, the reference procedure may
 fail or become inappropriate outside its assumptions; retain those outcomes
 when evaluating the method.
 
-## Evaluation: fields, quantities, and failure modes
+## Evaluation: Physical Metrics and Model Validation
 
-Field error, reaction error, and residual measure different aspects of a result.
-For a candidate $\widehat d$ and reference $d$, possible diagnostics include
+Evaluating a machine learning model for physical problems requires examining both statistical accuracy and physical consistency. Standard mean squared error alone can be deceptive: a low average field error may mask an unphysical local stress concentration or an incorrect crack path. 
 
-$$
-e_d=\frac{\|\widehat d-d\|_2}{\max(\|d\|_2,\epsilon)}
-$$
+A comprehensive validation protocol evaluates:
 
-alongside a damage-bound check and a mechanics residual after the candidate is
-used in the stated equation. A good evaluation card reports:
-
-- the split and cases evaluated;
-- the field metric and its weighting;
-- at least one mechanics-relevant quantity;
-- the frequency and criterion of correction/fallback, if applicable; and
-- failures, out-of-distribution cases, or unresolved cases.
-
-A low average field error may coexist with a wrong local crack path. A good
-reaction curve may coexist with a poor spatial field. Inspect both.
+1. **Field-Level Discrepancy:**
+   $$
+   e_d = \frac{\|\widehat d - d_{\mathrm{ref}}\|_2}{\max(\|d_{\mathrm{ref}}\|_2, \epsilon)}
+   $$
+   measures normalized spatial disagreement across test meshes.
+2. **Physical Constraints:**
+   Verify that predicted fields respect admissibility conditions (such as $0 \le d \le 1$ and non-decreasing damage history $d_n \ge d_{n-1}$).
+3. **Mechanics Residuals:**
+   Substitute the predicted field directly into the governing mechanical weak form. A physically consistent prediction yields low equilibrium residuals.
+4. **Engineering Observables:**
+   Compare integral quantities of direct engineering interest, such as global reaction curves, peak load capacity, and total dissipated fracture energy.
+5. **Generalization Bounds:**
+   Report performance across varying load levels, mesh densities, and unseen geometries to characterize the model's domain of applicability.
 
 ## Exercise: identify the missing provenance
 

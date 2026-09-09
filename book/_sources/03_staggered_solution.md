@@ -169,14 +169,12 @@ Interpret the iteration count together with the residual definition. Field
 inspection helps identify an incorrect boundary condition, a flipped damage
 convention, or an under-resolved band even when the residual decreases.
 
-## Predict before the PhAST calculation
+## Looking Ahead: Running the PhAST Staggered Solver
 
-The integrated PhAST lesson in the next chapter uses a quasistatic staggered
-route. Before reading its code or retained plots, predict which two traces
-should change as the load is increased: one trace should describe the evolving
-damage outside the locked precrack, and another should record how many coupled
-updates were needed at each load level. Use the case card, residuals, and field
-plots to interpret these traces; assess mesh convergence through refinement.
+In the next chapter, we put this staggered solution strategy into action using PhAST on a notched specimen loaded in tension. As you step through the simulation, pay close attention to two physical features:
+1. **The Damage Evolution:** Notice how damage remains concentrated near the precrack during initial elastic loading, then rapidly localizes and forms a propagating crack band once the critical fracture threshold is reached.
+2. **Solver Convergence Dynamics:** Notice how the staggered iteration count increases dynamically during active crack propagation as displacement and damage fields interact strongly before stabilizing.
+
 
 ## Exercise: write the update before reading the code
 

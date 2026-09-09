@@ -114,66 +114,60 @@ discretisation are conceptually separate. The diffuse approach was developed
 for brittle fracture by
 [Bourdin, Francfort, and Marigo (2000)](https://doi.org/10.1016/S0022-5096(99)00028-9).
 
-## A fair comparison
+## Comparing Crack Representations
 
-Choose a method by first stating the question.
+Each representation offers distinct advantages depending on the engineering application:
 
-**If the crack path and interface are known.** An interface model with a
-cohesive law may make the physical parameters particularly direct. A new path
-outside that interface requires an additional representation.
+| Method | Geometric Representation | Mesh Requirements | Crack Branching & Merging | Primary Engineering Applications |
+| :--- | :--- | :--- | :--- | :--- |
+| **Sharp Crack (LEFM)** | Exact lower-dimensional surface $\Gamma$ | Conforming mesh with tip singularity elements | Requires remeshing at every crack extension step | Standard fatigue crack propagation along known paths |
+| **Cohesive Zone (CZM)** | Traction–separation interface law | Interface elements along predefined element boundaries | Predefined along mesh interfaces | Delamination in composites, adhesive joints, masonry |
+| **XFEM** | Enriched continuous displacement field | Fixed background mesh with Heaviside and tip enrichments | Requires level-set tracking for multiple crack fronts | Crack growth without global remeshing on structured grids |
+| **Phase Field (PFM)** | Continuous scalar damage field $d(x) \in [0, 1]$ | Standard finite elements (element size $h < \ell$) | Handled naturally via energy minimization without tracking | Complex crack topologies, branching, coalescence in 2D/3D |
 
-**If a sharp discontinuity is needed on a fixed background mesh.** XFEM gives
-a route to enrich the approximation. The fracture criterion and evolution law
-are specified separately.
+### When to Choose Phase-Field Fracture
 
-**If evolving, branching, or merging cracks make explicit tracking awkward.**
-A phase field can be convenient because the crack is an evolving field.
-Resolution and regularisation sensitivity then become central scientific
-questions in the comparison.
+Phase-field methods have become widely adopted in modern computational mechanics because they transform a complex geometric interface tracking problem into the solution of coupled partial differential equations on a fixed mesh. The crack trajectory, initiation, branching, and coalescence emerge naturally from energy minimization without requiring *ad hoc* geometric tracking criteria.
 
-The choice depends on the intended role. Cost depends
-on mesh, dimension, nonlinear solver, loading path, conditioning, and the
-question being asked.
+---
 
-## Formulation, discretisation, and algorithm
+## Separating Formulation, Discretization, and Solver
 
-The following labels belong at different levels:
+To reason clearly about any computational mechanics calculation, we maintain a clean separation between three levels:
 
-- **phase field, Griffith, cohesive zone:** fracture energy or interface-law
-  choices;
-- **standard FEM, XFEM, mesh refinement:** spatial representations;
-- **staggered iteration, Newton, quasi-Newton:** nonlinear solution methods;
-- **finite difference, unrolled automatic differentiation, implicit adjoint:**
-  sensitivity strategies.
+1. **Continuum Formulation:**  
+   The governing energy functional or constitutive equations (e.g., linear elasticity coupled to an AT1 or AT2 phase-field damage model).
+2. **Spatial Discretization:**  
+   The mathematical approximation space and mesh topology used to discretize continuous fields (e.g., standard continuous linear triangular T3 elements).
+3. **Nonlinear Solution Strategy:**  
+   The iterative numerical algorithm used to solve the coupled nonlinear system of equations (e.g., staggered alternating minimization, or monolithic Newton–Raphson).
 
-For example, a phase-field calculation can use standard finite elements and a
-staggered solver; another may use Newton-type iterations. The quasi-Newton
-update acts on the resulting nonlinear equations.
+This separation is modular: a phase-field formulation can be discretized using standard continuous Galerkin finite elements, and the resulting equations can be solved using either a staggered alternating loop or a monolithic Newton–Raphson solver.
 
-## Exercise: separate the layers before reading code
+---
 
-Rewrite the sentence below as two technically accurate sentences.
+## Exercise: Identifying the Computational Layers
 
-> “We use XFEM phase field with a quasi-Newton fracture method.”
+Consider the following statement from a research paper:
+> *"We simulate crack branching using an AT2 phase-field model on triangular finite elements solved with a staggered alternating minimization scheme."*
+
+Break this down by identifying:
+1. The fracture formulation.
+2. The spatial discretization.
+3. The nonlinear solver.
 
 :::{admonition} Solution
 :class: dropdown
 
-One possible rewrite is: “We represent brittle fracture with a
-phase-field regularisation and approximate its displacement and damage fields
-with a stated finite-element space. We solve the resulting nonlinear problem
-with a quasi-Newton method; XFEM describes an approximation space explicitly
-enriched for a discontinuity or crack-tip feature.”
-
-The revised description identifies the fracture energy, any enrichment of the
-approximation space, and the equations solved by the optimisation method.
+1. **Fracture Formulation:** The AT2 phase-field regularisation, which specifies the quadratic local dissipation function $w(d) = d^2$ and degradation law $g(d) = (1-d)^2$.
+2. **Spatial Discretization:** Standard continuous triangular (T3) finite elements with piecewise linear shape functions.
+3. **Nonlinear Solver:** A staggered (alternating minimization) algorithm that decouples the mechanical equilibrium and damage updates within each load increment.
 :::
 
-## Take-away
+---
 
-Before comparing curves, mesh sizes, or runtimes, identify the crack
-representation, the finite-element approximation, and the nonlinear solver.
-That separation makes the phase-field energy in the next chapter much easier
-to read. It also gives a useful template for the later computational lessons:
-the case card states the formulation, mesh and solver route before any output
-is interpreted.
+## Summary of Key Concepts
+
+- **Sharp vs. Diffuse:** Sharp crack models treat cracks as surfaces of discontinuity; phase-field models diffuse the crack over a narrow zone of characteristic width governed by the length scale $\ell$.
+- **Energy Balance:** In a phase-field model, the total energy consists of bulk elastic strain energy and surface fracture dissipation.
+- **Modularity:** Distinguishing formulation, discretization, and solver ensures clarity when comparing numerical results and computational costs.

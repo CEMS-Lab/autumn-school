@@ -1,54 +1,50 @@
-# PhAST: a learn-by-doing introduction to phase-field fracture
+# PhAST: A Learn-by-Doing Introduction to Phase-Field Fracture
 
 ```{figure} figures/00_course_map.*
 :name: fig-course-map
 :width: 100%
-:alt: Three 120-minute sessions: understand fracture and FEM with notebook 00; run PhAST and check derivatives with notebooks 01 to 03; train and assess learned proposals with notebooks 04 and 05. Each session includes a ten-minute break.
+:alt: Overview of the 6-hour workshop: 3 hours of interactive theory and demonstrations paired with 3 hours of hands-on computational lab exercises.
 
-The six-hour route combines explanation, discussion and notebook activities.
-Each two-hour session includes a ten-minute break; computation time is measured
-separately.
+The workshop combines interactive lecture demonstrations with hands-on notebook activities across four core pillars of computational mechanics and scientific machine learning.
 ```
 
-This short textbook develops a reproducible way to reason about phase-field
-fracture computations. It moves from a stated fracture model to compact
-computational lessons, retained outputs, exercises, and worked solutions in
-one reading route. The aim is to connect a variational fracture model to a
-mesh, tensors, differentiation, and interpretable numerical checks.
+Welcome to this interactive tutorial guide on **phase-field fracture modeling and differentiable finite elements**. 
 
-The convention throughout is $d=0$ for intact material and $d=1$ for fully
-broken material. A small residual stiffness is retained in practical
-calculations to avoid a singular elastic operator. This numerical
-regularisation influences the residual load carried by damaged material and
-should be included in the case definition.
+This guide connects continuum solid mechanics, numerical algorithms, and machine learning into a clear, hands-on learning route. Designed for students, researchers, and engineers with an undergraduate background in mechanics or computing, this course demystifies how cracks nucleate and evolve, how finite element equations are assembled in modern tensor frameworks like PyTorch, and how automatic differentiation enables inverse parameter discovery.
 
-```{admonition} How to use this book
+---
+
+## Four Core Workshop Pillars
+
+This course is organized into four key computational and physical milestones:
+
+1. **What Phase-Field Fracture Is (Fundamentals):**  
+   We begin with the physics of fracture, contrasting sharp cracks with smooth diffuse approximations. We study the Griffith energy balance, regularisation length scales ($\ell$), crack density functionals $\Gamma_\ell(d)$, and degradation laws $g(d)$ in AT1 and AT2 models.
+2. **Hands-on with the PhAST Solver (Simulation Pipeline):**  
+   We walk through an end-to-end simulation: creating a two-dimensional specimen geometry, generating a triangular (T3) mesh, prescribing displacement and precrack boundary conditions, running the staggered Newton/direct solver, and post-processing the resulting stress and diffuse damage fields.
+3. **Differentiability and Inverse Problems (Sensitivities & Discovery):**  
+   We explore how automatic differentiation operates on numerical mechanics solvers. We verify gradients by comparing PyTorch autograd with directional finite differences, backpropagate sensitivities through coupled equilibrium steps, and solve an inverse problem to recover unknown material properties (such as Young's modulus $E$).
+4. **Deep Learning Integration (Plug-and-Play Surrogates):**  
+   We examine how neural networks and operator learning interface with physics solvers. We train a neural adapter on simulation data, save and reload model checkpoints, evaluate neural field proposals against physical equilibrium residuals, and apply hybrid solver-in-the-loop corrections.
+
+---
+
+## Course Schedule & Hands-On Labs
+
+The workshop is designed for a **six-hour curriculum**, divided into two complementary streams:
+- **3 Hours of Interactive Demonstrations:** Concepts, mathematical derivations, numerical algorithms, and visual field walkthroughs.
+- **3 Hours of Hands-on Lab Notebooks:** Interactive Jupyter tutorials where you run code, inspect fields, modify physical parameters, and solve guided exercises.
+
+```{admonition} How to Use This Tutorial Guide
 :class: tip
 
-For each topic, make a prediction, read the derivation, inspect the code and
-its retained output, and answer the exercise before opening the worked
-solution. The computational lessons are child pages of their theory chapters.
-Each may also be downloaded for execution in a Jupyter environment.
-For the six core lessons, keep the complete course folder, including its
-solver, configurations and helper modules. The environment guide explains
-the local and Colab setup. The optional diffusion companion is standalone.
-
-One lesson contains a small PhAST quasistatic calculation. The inverse
-lesson uses an elastic bar, and the learning lessons use a scalar field model
-to study model interfaces and correction. When you execute a lesson, record
-the mesh, parameters, outputs, and runtime for your environment.
+- **Read and Follow:** Each chapter introduces the physical intuition before deriving the governing equations and presenting the code.
+- **Run the Notebooks:** Computational lessons can be read inline or executed interactively in Jupyter or Google Colab.
+- **Explore and Modify:** Use the practice notebooks to test your understanding. Try varying the material parameters (such as fracture toughness $G_c$ or length scale $\ell$) to see how the physical crack pattern responds.
+- **Notation Convention:** Throughout this guide, $d=0$ denotes completely intact material, while $d=1$ denotes fully damaged material. A small numerical residual stiffness $\eta_{\mathrm{res}} \ll 1$ is retained in computation to keep the linear elasticity operator well-conditioned.
 ```
 
-For visual experiments alongside the text, open the
-[interactive explorations](../explorations.html). To run the computational
-lessons, use the [environment guide](../SETUP.md). The HTML lessons include
-the code, recorded figures and complete worked solutions, with practice and
-solution notebooks available for download.
-
-:::{only} html
-Select a diagram to open its full-size vector view. On a small screen, enlarge
-that view to follow the equation labels and feedback arrows.
-:::
+For visual experiments alongside the text, explore the [interactive visual explorations](../explorations.html) or follow the [environment setup guide](../SETUP.md). Practice and solution notebooks are provided for each computational chapter.
 
 ```{toctree}
 :maxdepth: 2

@@ -1,35 +1,25 @@
-# From cracks to computation: learn by doing
+# From Cracks to Computation: Learn by Doing
 
-## What this course is for
+## Motivation and Learning Goals
 
-Interpreting a damaged band, a softening reaction curve, or a computed gradient
-requires knowing the model, discretisation, and numerical assumptions that
-produced it. This course connects each of these layers to the observed result.
+Predicting when, where, and how materials break is one of the foundational challenges of modern solid mechanics. In traditional engineering, we often treat cracks as sharp geometric discontinuities. In modern computational physics and scientific machine learning, however, we represent cracks as continuous damage fields governed by energy minimization.
 
-By the end of the day, you should be able to:
+Interpreting a damage band, a softening reaction curve, or an automatically computed sensitivity gradient requires understanding the interplay between three distinct layers:
+1. **The Physical Formulation:** The continuum theory and energy functional describing deformation and fracture.
+2. **The Numerical Discretization:** The finite element interpolation, mesh geometry, and quadrature rules that translate continuous fields into discrete tensors.
+3. **The Solution and Sensitivity Algorithm:** The nonlinear solver (such as staggered Newton iterations) and differentiation engine (such as reverse-mode automatic differentiation).
 
-- distinguish a fracture *formulation* from a finite-element
-  *discretisation* and a nonlinear *solution method*;
-- write a common phase-field energy and explain the role of its length scale;
-- trace a computation from geometry and boundary conditions to arrays, fields,
-  and observable quantities;
-- use automatic differentiation for a stated computational graph, and compare
-  one directional derivative with a finite-difference estimate; and
-- explain the role of a learned proposal, adapter, or correction in a
-  mechanics workflow.
+By the end of this workshop, you will be able to:
+- **Understand Phase-Field Fracture:** Formulate the variational Griffith brittle fracture problem, explain the physical role of regularisation length $\ell$ and fracture toughness $G_c$, and contrast AT1 and AT2 models.
+- **Run the PhAST Solver End-to-End:** Set up a two-dimensional domain, generate a triangular mesh, assign boundary conditions, execute the coupled staggered solve, and extract reaction forces and damage fields.
+- **Differentiate Mechanics Computations:** Construct a computational graph in PyTorch, verify analytical and autograd derivatives against directional finite differences, and solve an inverse parameter identification problem.
+- **Integrate Machine Learning Plug-and-Play:** Train neural operator adapters on field data, evaluate neural predictions against physical equilibrium residuals, and apply hybrid solver-in-the-loop corrections.
 
-The examples are small enough to inspect their assumptions and calculations
-directly. Each computational lesson follows the same rhythm: predict, derive or identify the
-relevant quantity, inspect the code and retained output, then test your
-interpretation against a worked solution.
+---
 
-## Opening experiment: can a good average be a bad prediction?
+## Introductory Experiment: Multi-Valued Systems and Energy Objectives
 
-Suppose an input admits two valid states. Will a single learned average be
-valid too? The short opening experiment compares balanced supervised fitting
-with an explicitly selected energy-minimising branch. Predict the answer
-before opening the plots; return to its gradient calculation after the
-differentiation chapter.
+Many non-linear physical systems exhibit multiple stable equilibrium states for a given set of boundary conditions. In our opening tutorial, we explore what happens when we train a learning model on data generated from multiple solution branches.
 
 ```{toctree}
 :maxdepth: 1
@@ -37,90 +27,43 @@ differentiation chapter.
 labs/00_why_average_predictions_can_fail
 ```
 
-This original algebraic activity is inspired by the
-[Physics-based Deep Learning teaser](https://physicsbaseddeeplearning.org/intro-teaser.html).
-It uses an algebraic energy with two branches to introduce a recurring
-question: does the objective measure the property that we actually want?
+We compare two fundamental approaches:
+- **Supervised Regression (Mean Squared Error):** Which naturally converges to conditional averages.
+- **Physics-Informed Energy Minimization:** Which guides the model directly to physical equilibrium branches.
 
-## Reading and running the book
+This motivating exercise illustrates a key takeaway: in physical problems, optimizing a physically grounded energy functional is often essential for capturing true physical branches.
 
-The primary route is contained in this book. Read a theory section, continue
-to its computational lesson in the local table of contents, and return to the
-next theory section with one observation in hand.
+---
 
-**Read and predict.** Read the figures and worked equations first. Before a
-code cell, state what sign, field pattern, or check you expect to see.
+## Course Workflow: Theory, Code, and Practice
 
-**Inspect and explain.** After the opening teaser, the five core lessons pair code
-with its retained figures and result cards: a degradation derivative, a
-PhAST notched-tension calculation, a differentiable elastic-bar toy, a saved
-toy field model, and a checked toy proposal with fallback. Use the exercise and
-solution in each lesson to connect the output to the assumptions of the model.
+This tutorial series pairs concise mathematical derivations with executable code:
 
-**Execute.** Download a lesson notebook when you want to alter
-an input or repeat the calculation in a Jupyter environment. Read its recorded
-result card before running it, then record the runtime and software versions
-for your own environment.
+1. **Physical Intuition First:** Every topic begins with the governing physical principles and intuitive sketches.
+2. **Mathematical Formulation:** We write out governing equations, weak forms, and tensor operations clearly.
+3. **Code Walkthrough:** Step-by-step implementation in PyTorch and PhAST, explaining key data structures and tensor dimensions.
+4. **Physical Analysis:** Visualizing the resulting fields and discussing what the plots reveal about material behavior.
+5. **Hands-On Exercises:** Each chapter concludes with conceptual questions and code tasks to solidify your understanding.
 
-**Extend a local solver deliberately.** Install and document a solver
-environment when you need to alter the physics, mesh, or algorithm. The public
-[PhAST source repository](https://github.com/CEMS-Lab/PhAST) is a useful
-starting point for source and release information. A local run should record
-the software revision, numerical settings, and output location alongside the
-physical parameters.
+---
 
-## The result card
+## Documenting Computational Experiments
 
-For every computational activity, write a compact result card. It separates
-what was specified from what was observed.
+Whenever you run a simulation or inverse optimization, it is good engineering practice to document four key aspects:
 
-### Minimum result card
+1. **Problem Definition:** Geometry, material properties ($E$, $\nu$, $G_c$), and boundary conditions.
+2. **Numerical Discretization:** Mesh type (e.g., T3 triangles), characteristic element size $h$, quadrature order, and phase-field length scale $\ell$.
+3. **Physical Observations:** Peak force, displacement at peak, crack nucleation point, and crack trajectory.
+4. **Verification & Sensitivity:** Energy balance checks, residual tolerances, and comparisons across mesh refinements.
 
-1. **Case:** geometry, material regions, and boundary/loading conditions.
-2. **Numerics:** mesh or nodal layout, quadrature convention, load steps,
-   tolerances, and the phase-field length $\ell$.
-3. **Environment:** software version, device, precision, and seed where a
-   random process is used.
-4. **Observation:** the selected field, scalar quantity, and a labelled plot.
-5. **Check:** a named equilibrium, residual, constraint, or derivative check.
-6. **Scope:** the assumptions and numerical conditions under which the result applies.
+---
 
-For example, a monotone increase in $d$ at one node is consistent with a
-damage-irreversibility rule; mesh objectivity requires comparisons across
-refinements. A close directional derivative match at one parameter value
-checks a local calculation, while uniqueness of an inverse recovery depends
-on the observations and parameterisation.
+## What to Observe Before We Begin
 
-## Describing a numerical result
+Before opening the computational lessons, consider a simple intuitive question:
+*If a rectangular specimen contains a sharp horizontal notch and is pulled vertically in tension, where should material damage first accumulate?*
 
-Use the following three sentence patterns when describing a numerical result.
-
-- **Specified:** “The calculation used $d=0$ as intact, $d=1$ as broken, a
-  stated regularisation length $\ell$, and the listed boundary conditions.”
-- **Observed:** “For this discretisation and load increment, the plotted
-  damage field localised near the prescribed notch.”
-- **Scope:** “The crack path is evaluated at this mesh resolution and loading
-  rate; their influence can be assessed through refinement and rate studies.”
-
-These statements make the calculation reproducible and identify useful
-questions for further study.
-
-## A first prediction before a first computational lesson
-
-Before reading the first computational lesson, make a prediction in words. If the tensile energy
-driving damage is high near a notch and the loading increases, where should a
-phase-field model first permit the damage variable to grow? What quantity
-would you plot to distinguish a narrow diffuse band from a broadly distributed
-reduction in stiffness?
-
-After the run, return to the prediction. A useful explanation has four parts:
-
-1. the location and shape actually observed;
-2. the terms in the energy that encourage or resist that shape;
-3. the numerical choice that may influence it; and
-4. one test that would make the explanation stronger.
-
-This pattern will be used throughout the book.
+As you run the simulations, observe how the high stress concentration at the notch tip naturally drives localized damage accumulation, causing a diffuse crack band to propagate across the specimen.
 
 ## Exercise: label the layers
 

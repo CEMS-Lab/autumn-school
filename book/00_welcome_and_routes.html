@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>1. From cracks to computation: learn by doing &#8212; PhAST: Phase-field fracture with differentiable FEM</title>
+    <title>1. From Cracks to Computation: Learn by Doing &#8212; PhAST: Phase-field fracture with differentiable FEM</title>
   
   
   
@@ -33,7 +33,7 @@
     <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="_static/mobile_math.css?v=acf5579e" />
-    <link rel="stylesheet" type="text/css" href="_static/learning_book.css?v=ce3b4251" />
+    <link rel="stylesheet" type="text/css" href="_static/learning_book.css?v=d8208df1" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -52,8 +52,8 @@
     <script src="_static/learning_book.js?v=7a62d495"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="1.2.1. Why average predictions can fail" href="labs/00_why_average_predictions_can_fail.html" />
-    <link rel="prev" title="PhAST: a learn-by-doing introduction to phase-field fracture" href="index.html" />
+    <link rel="next" title="1.2.1. Branch Selection and Energy-Based Objectives in Physics-Informed Learning" href="labs/00_why_average_predictions_can_fail.html" />
+    <link rel="prev" title="PhAST: A Learn-by-Doing Introduction to Phase-Field Fracture" href="index.html" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -167,36 +167,36 @@
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="index.html">
-                    PhAST: a learn-by-doing introduction to phase-field fracture
+                    PhAST: A Learn-by-Doing Introduction to Phase-Field Fracture
                 </a>
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">1. From cracks to computation: learn by doing</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="labs/00_why_average_predictions_can_fail.html">1.2.1. Why average predictions can fail</a></li>
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">1. From Cracks to Computation: Learn by Doing</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="labs/00_why_average_predictions_can_fail.html">1.2.1. Branch Selection and Energy-Based Objectives in Physics-Informed Learning</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="01_crack_representations.html">2. Crack representations: sharp, cohesive, and diffuse</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="02_phase_field_energy.html">3. Fracture energy: AT1, AT2, degradation, and width</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="labs/02_degradation_autograd.html">3.3.1. Differentiate a degradation law</a></li>
+<li class="toctree-l2"><a class="reference internal" href="labs/02_degradation_autograd.html">3.3.1. Differentiating Material Degradation: Analytical, Autograd, and Finite Differences</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="03_staggered_solution.html">4. From solid mechanics to staggered damage updates</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="04_fem_to_tensors.html">5. Geometry, FEM, tensors, and matrix-free operators</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="labs/01_phast_tiny_evolving_fracture.html">5.8.1. Run and interpret a small PhAST fracture calculation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="labs/01_phast_tiny_evolving_fracture.html">5.8.1. End-to-End Simulation: Running Phase-Field Fracture in PhAST</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="05_differentiation_and_inverse.html">6. Differentiation and an illustrative inverse problem</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="05a_backpropagation_step_by_step.html">6.3.1. Backpropagation through a stepped update</a></li>
-<li class="toctree-l2"><a class="reference internal" href="labs/03_tiny_derivative_inverse_toy.html">6.6.1. Differentiate and recover the elastic modulus</a></li>
+<li class="toctree-l2"><a class="reference internal" href="labs/03_tiny_derivative_inverse_toy.html">6.6.1. Differentiable Mechanics and Inverse Parameter Identification</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="06_learning_adapter.html">7. Train, save, reload, adapters, and checked proposals</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="labs/04_train_save_reload_adapter.html">7.5.1. Train, save, reload, and compare a field model</a></li>
-<li class="toctree-l2"><a class="reference internal" href="labs/05_hybrid_reference_correction.html">7.8.1. Assess a proposal and use a reference correction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="labs/04_train_save_reload_adapter.html">7.5.1. Training, Saving, and Reloading Neural Field Adapters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="labs/05_hybrid_reference_correction.html">7.8.1. Hybrid Physics-AI: Residual-Gated Model Proposals and Solver Correction</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1"><a class="reference internal" href="07_practice_references.html">8. Practice, solutions, glossary, references, and contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_practice_references.html">8. Practice, Solutions, Glossary, and References</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Optional inverse experiments</span></p>
 <ul class="nav bd-sidenav">
@@ -319,7 +319,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>From cracks to computation: learn by doing</h1>
+    <h1>From Cracks to Computation: Learn by Doing</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -329,17 +329,13 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-this-course-is-for">1.1. What this course is for</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#opening-experiment-can-a-good-average-be-a-bad-prediction">1.2. Opening experiment: can a good average be a bad prediction?</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reading-and-running-the-book">1.3. Reading and running the book</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-result-card">1.4. The result card</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#minimum-result-card">1.4.1. Minimum result card</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#describing-a-numerical-result">1.5. Describing a numerical result</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-first-prediction-before-a-first-computational-lesson">1.6. A first prediction before a first computational lesson</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-label-the-layers">1.7. Exercise: label the layers</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-to-carry-into-the-crack-representation-chapter">1.8. What to carry into the crack-representation chapter</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#motivation-and-learning-goals">1.1. Motivation and Learning Goals</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introductory-experiment-multi-valued-systems-and-energy-objectives">1.2. Introductory Experiment: Multi-Valued Systems and Energy Objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#course-workflow-theory-code-and-practice">1.3. Course Workflow: Theory, Code, and Practice</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#documenting-computational-experiments">1.4. Documenting Computational Experiments</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-to-observe-before-we-begin">1.5. What to Observe Before We Begin</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-label-the-layers">1.6. Exercise: label the layers</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-to-carry-into-the-crack-representation-chapter">1.7. What to carry into the crack-representation chapter</a></li>
 </ul>
             </nav>
         </div>
@@ -352,124 +348,72 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="from-cracks-to-computation-learn-by-doing">
-<h1><span class="section-number">1. </span>From cracks to computation: learn by doing<a class="headerlink" href="#from-cracks-to-computation-learn-by-doing" title="Link to this heading">#</a></h1>
-<section id="what-this-course-is-for">
-<h2><span class="section-number">1.1. </span>What this course is for<a class="headerlink" href="#what-this-course-is-for" title="Link to this heading">#</a></h2>
-<p>Interpreting a damaged band, a softening reaction curve, or a computed gradient
-requires knowing the model, discretisation, and numerical assumptions that
-produced it. This course connects each of these layers to the observed result.</p>
-<p>By the end of the day, you should be able to:</p>
+<h1><span class="section-number">1. </span>From Cracks to Computation: Learn by Doing<a class="headerlink" href="#from-cracks-to-computation-learn-by-doing" title="Link to this heading">#</a></h1>
+<section id="motivation-and-learning-goals">
+<h2><span class="section-number">1.1. </span>Motivation and Learning Goals<a class="headerlink" href="#motivation-and-learning-goals" title="Link to this heading">#</a></h2>
+<p>Predicting when, where, and how materials break is one of the foundational challenges of modern solid mechanics. In traditional engineering, we often treat cracks as sharp geometric discontinuities. In modern computational physics and scientific machine learning, however, we represent cracks as continuous damage fields governed by energy minimization.</p>
+<p>Interpreting a damage band, a softening reaction curve, or an automatically computed sensitivity gradient requires understanding the interplay between three distinct layers:</p>
+<ol class="arabic simple">
+<li><p><strong>The Physical Formulation:</strong> The continuum theory and energy functional describing deformation and fracture.</p></li>
+<li><p><strong>The Numerical Discretization:</strong> The finite element interpolation, mesh geometry, and quadrature rules that translate continuous fields into discrete tensors.</p></li>
+<li><p><strong>The Solution and Sensitivity Algorithm:</strong> The nonlinear solver (such as staggered Newton iterations) and differentiation engine (such as reverse-mode automatic differentiation).</p></li>
+</ol>
+<p>By the end of this workshop, you will be able to:</p>
 <ul class="simple">
-<li><p>distinguish a fracture <em>formulation</em> from a finite-element
-<em>discretisation</em> and a nonlinear <em>solution method</em>;</p></li>
-<li><p>write a common phase-field energy and explain the role of its length scale;</p></li>
-<li><p>trace a computation from geometry and boundary conditions to arrays, fields,
-and observable quantities;</p></li>
-<li><p>use automatic differentiation for a stated computational graph, and compare
-one directional derivative with a finite-difference estimate; and</p></li>
-<li><p>explain the role of a learned proposal, adapter, or correction in a
-mechanics workflow.</p></li>
+<li><p><strong>Understand Phase-Field Fracture:</strong> Formulate the variational Griffith brittle fracture problem, explain the physical role of regularisation length <span class="math notranslate nohighlight">\(\ell\)</span> and fracture toughness <span class="math notranslate nohighlight">\(G_c\)</span>, and contrast AT1 and AT2 models.</p></li>
+<li><p><strong>Run the PhAST Solver End-to-End:</strong> Set up a two-dimensional domain, generate a triangular mesh, assign boundary conditions, execute the coupled staggered solve, and extract reaction forces and damage fields.</p></li>
+<li><p><strong>Differentiate Mechanics Computations:</strong> Construct a computational graph in PyTorch, verify analytical and autograd derivatives against directional finite differences, and solve an inverse parameter identification problem.</p></li>
+<li><p><strong>Integrate Machine Learning Plug-and-Play:</strong> Train neural operator adapters on field data, evaluate neural predictions against physical equilibrium residuals, and apply hybrid solver-in-the-loop corrections.</p></li>
 </ul>
-<p>The examples are small enough to inspect their assumptions and calculations
-directly. Each computational lesson follows the same rhythm: predict, derive or identify the
-relevant quantity, inspect the code and retained output, then test your
-interpretation against a worked solution.</p>
 </section>
-<section id="opening-experiment-can-a-good-average-be-a-bad-prediction">
-<h2><span class="section-number">1.2. </span>Opening experiment: can a good average be a bad prediction?<a class="headerlink" href="#opening-experiment-can-a-good-average-be-a-bad-prediction" title="Link to this heading">#</a></h2>
-<p>Suppose an input admits two valid states. Will a single learned average be
-valid too? The short opening experiment compares balanced supervised fitting
-with an explicitly selected energy-minimising branch. Predict the answer
-before opening the plots; return to its gradient calculation after the
-differentiation chapter.</p>
+<hr class="docutils" />
+<section id="introductory-experiment-multi-valued-systems-and-energy-objectives">
+<h2><span class="section-number">1.2. </span>Introductory Experiment: Multi-Valued Systems and Energy Objectives<a class="headerlink" href="#introductory-experiment-multi-valued-systems-and-energy-objectives" title="Link to this heading">#</a></h2>
+<p>Many non-linear physical systems exhibit multiple stable equilibrium states for a given set of boundary conditions. In our opening tutorial, we explore what happens when we train a learning model on data generated from multiple solution branches.</p>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="labs/00_why_average_predictions_can_fail.html">1.2.1. Why average predictions can fail</a></li>
+<li class="toctree-l1"><a class="reference internal" href="labs/00_why_average_predictions_can_fail.html">1.2.1. Branch Selection and Energy-Based Objectives in Physics-Informed Learning</a></li>
 </ul>
 </div>
-<p>This original algebraic activity is inspired by the
-<a class="reference external" href="https://physicsbaseddeeplearning.org/intro-teaser.html">Physics-based Deep Learning teaser</a>.
-It uses an algebraic energy with two branches to introduce a recurring
-question: does the objective measure the property that we actually want?</p>
-</section>
-<section id="reading-and-running-the-book">
-<h2><span class="section-number">1.3. </span>Reading and running the book<a class="headerlink" href="#reading-and-running-the-book" title="Link to this heading">#</a></h2>
-<p>The primary route is contained in this book. Read a theory section, continue
-to its computational lesson in the local table of contents, and return to the
-next theory section with one observation in hand.</p>
-<p><strong>Read and predict.</strong> Read the figures and worked equations first. Before a
-code cell, state what sign, field pattern, or check you expect to see.</p>
-<p><strong>Inspect and explain.</strong> After the opening teaser, the five core lessons pair code
-with its retained figures and result cards: a degradation derivative, a
-PhAST notched-tension calculation, a differentiable elastic-bar toy, a saved
-toy field model, and a checked toy proposal with fallback. Use the exercise and
-solution in each lesson to connect the output to the assumptions of the model.</p>
-<p><strong>Execute.</strong> Download a lesson notebook when you want to alter
-an input or repeat the calculation in a Jupyter environment. Read its recorded
-result card before running it, then record the runtime and software versions
-for your own environment.</p>
-<p><strong>Extend a local solver deliberately.</strong> Install and document a solver
-environment when you need to alter the physics, mesh, or algorithm. The public
-<a class="reference external" href="https://github.com/CEMS-Lab/PhAST">PhAST source repository</a> is a useful
-starting point for source and release information. A local run should record
-the software revision, numerical settings, and output location alongside the
-physical parameters.</p>
-</section>
-<section id="the-result-card">
-<h2><span class="section-number">1.4. </span>The result card<a class="headerlink" href="#the-result-card" title="Link to this heading">#</a></h2>
-<p>For every computational activity, write a compact result card. It separates
-what was specified from what was observed.</p>
-<section id="minimum-result-card">
-<h3><span class="section-number">1.4.1. </span>Minimum result card<a class="headerlink" href="#minimum-result-card" title="Link to this heading">#</a></h3>
-<ol class="arabic simple">
-<li><p><strong>Case:</strong> geometry, material regions, and boundary/loading conditions.</p></li>
-<li><p><strong>Numerics:</strong> mesh or nodal layout, quadrature convention, load steps,
-tolerances, and the phase-field length <span class="math notranslate nohighlight">\(\ell\)</span>.</p></li>
-<li><p><strong>Environment:</strong> software version, device, precision, and seed where a
-random process is used.</p></li>
-<li><p><strong>Observation:</strong> the selected field, scalar quantity, and a labelled plot.</p></li>
-<li><p><strong>Check:</strong> a named equilibrium, residual, constraint, or derivative check.</p></li>
-<li><p><strong>Scope:</strong> the assumptions and numerical conditions under which the result applies.</p></li>
-</ol>
-<p>For example, a monotone increase in <span class="math notranslate nohighlight">\(d\)</span> at one node is consistent with a
-damage-irreversibility rule; mesh objectivity requires comparisons across
-refinements. A close directional derivative match at one parameter value
-checks a local calculation, while uniqueness of an inverse recovery depends
-on the observations and parameterisation.</p>
-</section>
-</section>
-<section id="describing-a-numerical-result">
-<h2><span class="section-number">1.5. </span>Describing a numerical result<a class="headerlink" href="#describing-a-numerical-result" title="Link to this heading">#</a></h2>
-<p>Use the following three sentence patterns when describing a numerical result.</p>
+<p>We compare two fundamental approaches:</p>
 <ul class="simple">
-<li><p><strong>Specified:</strong> “The calculation used <span class="math notranslate nohighlight">\(d=0\)</span> as intact, <span class="math notranslate nohighlight">\(d=1\)</span> as broken, a
-stated regularisation length <span class="math notranslate nohighlight">\(\ell\)</span>, and the listed boundary conditions.”</p></li>
-<li><p><strong>Observed:</strong> “For this discretisation and load increment, the plotted
-damage field localised near the prescribed notch.”</p></li>
-<li><p><strong>Scope:</strong> “The crack path is evaluated at this mesh resolution and loading
-rate; their influence can be assessed through refinement and rate studies.”</p></li>
+<li><p><strong>Supervised Regression (Mean Squared Error):</strong> Which naturally converges to conditional averages.</p></li>
+<li><p><strong>Physics-Informed Energy Minimization:</strong> Which guides the model directly to physical equilibrium branches.</p></li>
 </ul>
-<p>These statements make the calculation reproducible and identify useful
-questions for further study.</p>
+<p>This motivating exercise illustrates a key takeaway: in physical problems, optimizing a physically grounded energy functional is often essential for capturing true physical branches.</p>
 </section>
-<section id="a-first-prediction-before-a-first-computational-lesson">
-<h2><span class="section-number">1.6. </span>A first prediction before a first computational lesson<a class="headerlink" href="#a-first-prediction-before-a-first-computational-lesson" title="Link to this heading">#</a></h2>
-<p>Before reading the first computational lesson, make a prediction in words. If the tensile energy
-driving damage is high near a notch and the loading increases, where should a
-phase-field model first permit the damage variable to grow? What quantity
-would you plot to distinguish a narrow diffuse band from a broadly distributed
-reduction in stiffness?</p>
-<p>After the run, return to the prediction. A useful explanation has four parts:</p>
+<hr class="docutils" />
+<section id="course-workflow-theory-code-and-practice">
+<h2><span class="section-number">1.3. </span>Course Workflow: Theory, Code, and Practice<a class="headerlink" href="#course-workflow-theory-code-and-practice" title="Link to this heading">#</a></h2>
+<p>This tutorial series pairs concise mathematical derivations with executable code:</p>
 <ol class="arabic simple">
-<li><p>the location and shape actually observed;</p></li>
-<li><p>the terms in the energy that encourage or resist that shape;</p></li>
-<li><p>the numerical choice that may influence it; and</p></li>
-<li><p>one test that would make the explanation stronger.</p></li>
+<li><p><strong>Physical Intuition First:</strong> Every topic begins with the governing physical principles and intuitive sketches.</p></li>
+<li><p><strong>Mathematical Formulation:</strong> We write out governing equations, weak forms, and tensor operations clearly.</p></li>
+<li><p><strong>Code Walkthrough:</strong> Step-by-step implementation in PyTorch and PhAST, explaining key data structures and tensor dimensions.</p></li>
+<li><p><strong>Physical Analysis:</strong> Visualizing the resulting fields and discussing what the plots reveal about material behavior.</p></li>
+<li><p><strong>Hands-On Exercises:</strong> Each chapter concludes with conceptual questions and code tasks to solidify your understanding.</p></li>
 </ol>
-<p>This pattern will be used throughout the book.</p>
+</section>
+<hr class="docutils" />
+<section id="documenting-computational-experiments">
+<h2><span class="section-number">1.4. </span>Documenting Computational Experiments<a class="headerlink" href="#documenting-computational-experiments" title="Link to this heading">#</a></h2>
+<p>Whenever you run a simulation or inverse optimization, it is good engineering practice to document four key aspects:</p>
+<ol class="arabic simple">
+<li><p><strong>Problem Definition:</strong> Geometry, material properties (<span class="math notranslate nohighlight">\(E\)</span>, <span class="math notranslate nohighlight">\(\nu\)</span>, <span class="math notranslate nohighlight">\(G_c\)</span>), and boundary conditions.</p></li>
+<li><p><strong>Numerical Discretization:</strong> Mesh type (e.g., T3 triangles), characteristic element size <span class="math notranslate nohighlight">\(h\)</span>, quadrature order, and phase-field length scale <span class="math notranslate nohighlight">\(\ell\)</span>.</p></li>
+<li><p><strong>Physical Observations:</strong> Peak force, displacement at peak, crack nucleation point, and crack trajectory.</p></li>
+<li><p><strong>Verification &amp; Sensitivity:</strong> Energy balance checks, residual tolerances, and comparisons across mesh refinements.</p></li>
+</ol>
+</section>
+<hr class="docutils" />
+<section id="what-to-observe-before-we-begin">
+<h2><span class="section-number">1.5. </span>What to Observe Before We Begin<a class="headerlink" href="#what-to-observe-before-we-begin" title="Link to this heading">#</a></h2>
+<p>Before opening the computational lessons, consider a simple intuitive question:
+<em>If a rectangular specimen contains a sharp horizontal notch and is pulled vertically in tension, where should material damage first accumulate?</em></p>
+<p>As you run the simulations, observe how the high stress concentration at the notch tip naturally drives localized damage accumulation, causing a diffuse crack band to propagate across the specimen.</p>
 </section>
 <section id="exercise-label-the-layers">
-<h2><span class="section-number">1.7. </span>Exercise: label the layers<a class="headerlink" href="#exercise-label-the-layers" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">1.6. </span>Exercise: label the layers<a class="headerlink" href="#exercise-label-the-layers" title="Link to this heading">#</a></h2>
 <p>Classify each statement as a fracture formulation, spatial discretisation,
 solution/sensitivity method, or observable.</p>
 <ol class="arabic simple">
@@ -494,7 +438,7 @@ computes a derivative for the chosen formulation and numerical model.</p></li>
 </div>
 </section>
 <section id="what-to-carry-into-the-crack-representation-chapter">
-<h2><span class="section-number">1.8. </span>What to carry into the crack-representation chapter<a class="headerlink" href="#what-to-carry-into-the-crack-representation-chapter" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">1.7. </span>What to carry into the crack-representation chapter<a class="headerlink" href="#what-to-carry-into-the-crack-representation-chapter" title="Link to this heading">#</a></h2>
 <p>Keep two questions visible: <em>what object represents the crack?</em> and <em>what
 exactly is solved?</em> The next chapter places phase field, XFEM, and cohesive
 models next to one another and identifies the role of each representation.</p>
@@ -518,7 +462,7 @@ models next to one another and identifies the role of each representation.</p>
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">PhAST: a learn-by-doing introduction to phase-field fracture</p>
+        <p class="prev-next-title">PhAST: A Learn-by-Doing Introduction to Phase-Field Fracture</p>
       </div>
     </a>
     <a class="right-next"
@@ -526,7 +470,7 @@ models next to one another and identifies the role of each representation.</p>
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">1.2.1. </span>Why average predictions can fail</p>
+        <p class="prev-next-title"><span class="section-number">1.2.1. </span>Branch Selection and Energy-Based Objectives in Physics-Informed Learning</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -546,17 +490,13 @@ models next to one another and identifies the role of each representation.</p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-this-course-is-for">1.1. What this course is for</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#opening-experiment-can-a-good-average-be-a-bad-prediction">1.2. Opening experiment: can a good average be a bad prediction?</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reading-and-running-the-book">1.3. Reading and running the book</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-result-card">1.4. The result card</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#minimum-result-card">1.4.1. Minimum result card</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#describing-a-numerical-result">1.5. Describing a numerical result</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-first-prediction-before-a-first-computational-lesson">1.6. A first prediction before a first computational lesson</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-label-the-layers">1.7. Exercise: label the layers</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-to-carry-into-the-crack-representation-chapter">1.8. What to carry into the crack-representation chapter</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#motivation-and-learning-goals">1.1. Motivation and Learning Goals</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introductory-experiment-multi-valued-systems-and-energy-objectives">1.2. Introductory Experiment: Multi-Valued Systems and Energy Objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#course-workflow-theory-code-and-practice">1.3. Course Workflow: Theory, Code, and Practice</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#documenting-computational-experiments">1.4. Documenting Computational Experiments</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-to-observe-before-we-begin">1.5. What to Observe Before We Begin</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-label-the-layers">1.6. Exercise: label the layers</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-to-carry-into-the-crack-representation-chapter">1.7. What to carry into the crack-representation chapter</a></li>
 </ul>
   </nav></div>
 

@@ -38,9 +38,8 @@ Before calling a gradient routine, write down:
 - the parameter and its units or nondimensionalisation;
 - the geometry, loads, and boundary conditions held fixed;
 - the observable $y$ and the target $y^\star$;
-- every operation from $p$ to $J$; and
-- what happens when a nonlinear solver fails, reaches a tolerance, clips a
-  field, or changes its iteration count.
+- every mathematical operation from $p$ to $J$; and
+- the stopping tolerances and convergence criteria of any iterative solver.
 
 These choices define the mathematical map being differentiated.
 
@@ -154,20 +153,12 @@ This controlled recovery uses synthetic observations from the same forward
 model and specified noise assumptions. Experimental recovery additionally
 requires assessment of measurement noise and model discrepancy.
 
-## Computational lesson: check a derivative and recover a positive modulus
+## Hands-On Lab: Differentiating Mechanics and Parameter Recovery
 
-The lesson below is an original one-dimensional elastic-bar toy. It first
-compares automatic differentiation, a central finite difference, and the known
-analytic sensitivity; it then recovers a synthetic modulus and checks a
-held-out load case. Its implementation uses a positive log-modulus map,
-$E=\exp(\theta)$. The preceding section's sigmoid map supplies a finite
-interval. Positivity is enforced in the lesson, while finite lower
-and upper bounds remain a separate parameterisation choice to assess for a
-particular inverse problem.
-
-The elastic-bar example has a smooth constitutive response and fixed boundary
-conditions. A fracture inverse additionally involves damage history,
-irreversibility, active sets, and nonlinear solve behaviour.
+In the accompanying computational lesson, you will implement a complete differentiable mechanics problem in PyTorch:
+1. **Forward Solution:** Solve deformation in a one-dimensional elastic bar under tensile loading.
+2. **Derivative Verification:** Compute sensitivities of an observation with respect to the elastic modulus using analytical formulas, automatic differentiation (`loss.backward()`), and central finite differences.
+3. **Inverse Identification:** Use gradient descent to automatically recover the unknown ground-truth stiffness from synthetic displacement measurements.
 
 ```{toctree}
 :maxdepth: 1
@@ -175,34 +166,26 @@ irreversibility, active sets, and nonlinear solve behaviour.
 labs/03_tiny_derivative_inverse_toy
 ```
 
-## A directional derivative check
+## Directional Derivative Verification
 
-Let $g$ be a gradient returned by automatic differentiation. Compare
-
-$$
-D_hJ(p;q)\quad\text{with}\quad g^\mathsf{T}q
-$$
-
-over a short sweep of reasonable $h$ values. A useful result card shows the
-direction $q$, the $h$ values, the two numbers, and an error measure such as
+To verify that reverse-mode automatic differentiation yields the true gradient, we compare the directional derivative obtained from autograd with a numerical central difference:
 
 $$
-\frac{|D_hJ-g^\mathsf{T}q|}
-{\max(1,|D_hJ|,|g^\mathsf{T}q|)}.
+D_hJ(p;q) = \frac{J(p+hq)-J(p-hq)}{2h} \quad\approx\quad g^\mathsf{T}q.
 $$
 
-Compare several spacings. If the check fails, investigate tensor broadcasting,
-parameter detachment, in-place
-updates, inconsistent normalisation, solver tolerances, and non-smooth
-branches before interpreting an optimisation trajectory.
+We evaluate this comparison across several perturbation step sizes $h$. A relative error metric measures consistency:
 
-:::{admonition} What a passed check means
+$$
+\text{Relative Error} = \frac{|D_hJ - g^\mathsf{T}q|}{\max(1, |D_hJ|, |g^\mathsf{T}q|)}.
+$$
+
+When the step size $h$ is in a well-balanced range (typically $10^{-4}$ to $10^{-6}$ for float64), the relative difference is close to machine precision, confirming that autograd correctly traverses every operation in the forward computational graph.
+
+:::{admonition} Interpreting Gradient Verification
 :class: note
 
-A small discrepancy at one $(p,q,h)$ supports the local derivative of the
-implemented scalar computation. Smoothness over a wider parameter range,
-nonlinear convergence, physical calibration, and uniqueness of an inverse
-solution each require their own assessment.
+A close match between autodiff and finite differences confirms that the computational graph correctly implements the intended mathematical derivative. In inverse problems, this verified gradient provides the foundation for stable, efficient optimization.
 :::
 
 ## Why inverse recovery can be difficult

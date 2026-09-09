@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>3.3.1. Differentiate a degradation law &#8212; PhAST: Phase-field fracture with differentiable FEM</title>
+    <title>3.3.1. Differentiating Material Degradation: Analytical, Autograd, and Finite Differences &#8212; PhAST: Phase-field fracture with differentiable FEM</title>
   
   
   
@@ -33,7 +33,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/mobile_math.css?v=acf5579e" />
-    <link rel="stylesheet" type="text/css" href="../_static/learning_book.css?v=ce3b4251" />
+    <link rel="stylesheet" type="text/css" href="../_static/learning_book.css?v=d8208df1" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -167,36 +167,36 @@
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="../index.html">
-                    PhAST: a learn-by-doing introduction to phase-field fracture
+                    PhAST: A Learn-by-Doing Introduction to Phase-Field Fracture
                 </a>
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1 has-children"><a class="reference internal" href="../00_welcome_and_routes.html">1. From cracks to computation: learn by doing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="00_why_average_predictions_can_fail.html">1.2.1. Why average predictions can fail</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../00_welcome_and_routes.html">1. From Cracks to Computation: Learn by Doing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="00_why_average_predictions_can_fail.html">1.2.1. Branch Selection and Energy-Based Objectives in Physics-Informed Learning</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../01_crack_representations.html">2. Crack representations: sharp, cohesive, and diffuse</a></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../02_phase_field_energy.html">3. Fracture energy: AT1, AT2, degradation, and width</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">3.3.1. Differentiate a degradation law</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">3.3.1. Differentiating Material Degradation: Analytical, Autograd, and Finite Differences</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../03_staggered_solution.html">4. From solid mechanics to staggered damage updates</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../04_fem_to_tensors.html">5. Geometry, FEM, tensors, and matrix-free operators</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="01_phast_tiny_evolving_fracture.html">5.8.1. Run and interpret a small PhAST fracture calculation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="01_phast_tiny_evolving_fracture.html">5.8.1. End-to-End Simulation: Running Phase-Field Fracture in PhAST</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../05_differentiation_and_inverse.html">6. Differentiation and an illustrative inverse problem</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../05a_backpropagation_step_by_step.html">6.3.1. Backpropagation through a stepped update</a></li>
-<li class="toctree-l2"><a class="reference internal" href="03_tiny_derivative_inverse_toy.html">6.6.1. Differentiate and recover the elastic modulus</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_tiny_derivative_inverse_toy.html">6.6.1. Differentiable Mechanics and Inverse Parameter Identification</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../06_learning_adapter.html">7. Train, save, reload, adapters, and checked proposals</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="04_train_save_reload_adapter.html">7.5.1. Train, save, reload, and compare a field model</a></li>
-<li class="toctree-l2"><a class="reference internal" href="05_hybrid_reference_correction.html">7.8.1. Assess a proposal and use a reference correction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04_train_save_reload_adapter.html">7.5.1. Training, Saving, and Reloading Neural Field Adapters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="05_hybrid_reference_correction.html">7.8.1. Hybrid Physics-AI: Residual-Gated Model Proposals and Solver Correction</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1"><a class="reference internal" href="../07_practice_references.html">8. Practice, solutions, glossary, references, and contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../07_practice_references.html">8. Practice, Solutions, Glossary, and References</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Optional inverse experiments</span></p>
 <ul class="nav bd-sidenav">
@@ -319,7 +319,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Differentiate a degradation law</h1>
+    <h1>Differentiating Material Degradation: Analytical, Autograd, and Finite Differences</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -331,7 +331,7 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">3.3.1.1. Exercises</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1-evaluate-the-law-its-slope-and-its-curvature">3.3.1.1.1. Exercise 1: Evaluate the law, its slope, and its curvature</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2-interpret-the-derivative-comparison">3.3.1.1.2. Exercise 2: Interpret the derivative comparison</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2-understanding-finite-difference-accuracy-and-truncation-error">3.3.1.1.2. Exercise 2: Understanding Finite-Difference Accuracy and Truncation Error</a></li>
 </ul>
 </li>
 </ul>
@@ -345,24 +345,26 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="differentiate-a-degradation-law">
-<h1><span class="section-number">3.3.1. </span>Differentiate a degradation law<a class="headerlink" href="#differentiate-a-degradation-law" title="Link to this heading">#</a></h1>
-<p><strong>Learning objective.</strong> Differentiate the normalised quadratic degradation law, compare analytic, automatic and finite-difference derivatives, and connect the calculation to a coupled parameter-to-loss map.</p>
-<p><strong>Predict first.</strong> Predict how the residual parameter <span class="math notranslate nohighlight">\(\eta=10^{-7}\)</span> affects <span class="math notranslate nohighlight">\(g(1)\)</span> and the behaviour of the degradation law near the broken state.</p>
-<p>Follow the worked calculation, then use the downloadable notebook to explore the exercises.</p>
-<p><a class="reference external" href="../../notebooks/study/02_degradation_autograd.ipynb">Download practice notebook</a> · <a class="reference external" href="../../notebooks/solutions/02_degradation_autograd.ipynb">Download with worked solutions</a> · <a class="reference external" href="../../SETUP.md">Environment setup</a></p>
-<p>This short exercise checks the exact standard normalised
-degradation law in the pinned public PhAST source:</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="differentiating-material-degradation-analytical-autograd-and-finite-differences">
+<h1><span class="section-number">3.3.1. </span>Differentiating Material Degradation: Analytical, Autograd, and Finite Differences<a class="headerlink" href="#differentiating-material-degradation-analytical-autograd-and-finite-differences" title="Link to this heading">#</a></h1>
+<p><strong>Learning Objective:</strong> Implement a quadratic degradation function in PyTorch, compute its derivative using analytical calculus, automatic differentiation (<code class="docutils literal notranslate"><span class="pre">torch.autograd</span></code>), and central finite differences, and explore the numerical precision properties of gradient evaluation.</p>
+<div class="badge-row">
+  <a class="badge-link" href="../../notebooks/study/02_degradation_autograd.ipynb"><i class="fa-solid fa-download"></i> Download Practice Notebook</a>
+  <a class="badge-link" href="../../notebooks/solutions/02_degradation_autograd.ipynb"><i class="fa-solid fa-check-circle"></i> Download with Worked Solutions</a>
+  <a class="badge-link" href="../../SETUP.md"><i class="fa-solid fa-gear"></i> Environment Setup</a>
+</div>
+<p>In phase-field fracture, the material stiffness degrades as damage increases. The standard quadratic degradation function is:</p>
 <div class="math notranslate nohighlight">
 \[
-g(d)=(1-\eta)(1-d)^2+\eta, \qquad
-g'(d)=-2(1-\eta)(1-d).
+g_\eta(d) = (1 - \eta_{\mathrm{res}})(1 - d)^2 + \eta_{\mathrm{res}},
 \]</div>
-<p>We use <span class="math notranslate nohighlight">\(d=0\)</span> for intact and <span class="math notranslate nohighlight">\(d=1\)</span> for broken, <span class="math notranslate nohighlight">\(\eta=10^{-7}\)</span>, and
-<code class="docutils literal notranslate"><span class="pre">float64</span></code>. We compare analytic, automatic and finite-difference
-derivatives of this smooth scalar material law. A coupled fracture
-derivative also depends on history updates, constraints and the
-solution procedure.</p>
+<p>where <span class="math notranslate nohighlight">\(\eta_{\mathrm{res}} \ll 1\)</span> is a small residual stiffness parameter that ensures numerical stability when damage reaches <span class="math notranslate nohighlight">\(d = 1\)</span>.</p>
+<p>In this tutorial, we evaluate <span class="math notranslate nohighlight">\(g_\eta(d)\)</span> and its sensitivity <span class="math notranslate nohighlight">\(g'_\eta(d)\)</span> using three distinct methods:</p>
+<ol class="arabic simple">
+<li><p><strong>Analytical Differentiation:</strong> Explicit mathematical evaluation of <span class="math notranslate nohighlight">\(g'_\eta(d) = -2(1-\eta_{\mathrm{res}})(1-d)\)</span>.</p></li>
+<li><p><strong>Automatic Differentiation:</strong> Reverse-mode autograd via PyTorch (<code class="docutils literal notranslate"><span class="pre">loss.backward()</span></code>).</p></li>
+<li><p><strong>Numerical Differentiation:</strong> Central finite differences with step size <span class="math notranslate nohighlight">\(h\)</span>.</p></li>
+</ol>
 <div class="cell tag_hide-input docutils container">
 <details class="admonition hide above-input">
 <summary aria-label="Toggle hidden content">
@@ -542,13 +544,18 @@ g'(0.25)=-2(0.9999999)(0.75)=-1.49999985.
 <p>Finally, <span class="math notranslate nohighlight">\(g''=1.9999998&gt;0\)</span>, so the law is convex. For <span class="math notranslate nohighlight">\(d&lt;1\)</span>, <span class="math notranslate nohighlight">\(g'(d)&lt;0\)</span>, hence it is decreasing over the intact-to-broken interval. These values match the notebook output.</p>
 </div>
 </section>
-<section id="exercise-2-interpret-the-derivative-comparison">
-<h3><span class="section-number">3.3.1.1.2. </span>Exercise 2: Interpret the derivative comparison<a class="headerlink" href="#exercise-2-interpret-the-derivative-comparison" title="Link to this heading">#</a></h3>
-<p>At <span class="math notranslate nohighlight">\(d=0.25\)</span>, the notebook reports analytic and autograd derivatives of <span class="math notranslate nohighlight">\(-1.49999985\)</span>. Its centred finite difference uses <span class="math notranslate nohighlight">\(h=10^{-6}\)</span> and gives <span class="math notranslate nohighlight">\(-1.4999998499964917\)</span>, with absolute error <span class="math notranslate nohighlight">\(3.5083\times10^{-12}\)</span>.</p>
+<section id="exercise-2-understanding-finite-difference-accuracy-and-truncation-error">
+<h3><span class="section-number">3.3.1.1.2. </span>Exercise 2: Understanding Finite-Difference Accuracy and Truncation Error<a class="headerlink" href="#exercise-2-understanding-finite-difference-accuracy-and-truncation-error" title="Link to this heading">#</a></h3>
 <ol class="arabic simple">
-<li><p>Write the centred-difference formula used here.</p></li>
-<li><p>Explain what this result checks.</p></li>
-<li><p>Name two additional operations whose derivatives enter a coupled fracture calculation.</p></li>
+<li><p>The central finite-difference approximation is defined by:
+<div class="math notranslate nohighlight">
+\[
+g'_{\mathrm{FD}}(d) = \frac{g(d + h) - g(d - h)}{2h}.
+\]</div>
+
+Using a Taylor expansion of <span class="math notranslate nohighlight">\(g(d+h)\)</span> and <span class="math notranslate nohighlight">\(g(d-h)\)</span>, show that the truncation error of this estimator scales as <span class="math notranslate nohighlight">\(\mathcal{O}(h^2)\)</span>.</p></li>
+<li><p>Why does choosing an excessively small perturbation step size (e.g. <span class="math notranslate nohighlight">\(h = 10^{-16}\)</span>) degrade accuracy when using standard 64-bit floating-point arithmetic?</p></li>
+<li><p>In scientific computing, why is reverse-mode automatic differentiation preferred over finite differences for computing gradients with respect to millions of parameter values?</p></li>
 </ol>
 <div class="dropdown course-hint admonition">
 <p class="admonition-title">Hint 2</p>
@@ -557,16 +564,26 @@ g'(0.25)=-2(0.9999999)(0.75)=-1.49999985.
 <div class="dropdown course-solution admonition">
 <p class="admonition-title">Worked solution 2</p>
 <ol class="arabic simple">
-<li><p>The numerical estimate is</p></li>
-</ol>
+<li><p><strong>Truncation Error Analysis:</strong> Expanding <span class="math notranslate nohighlight">\(g(d \pm h)\)</span> in a Taylor series about <span class="math notranslate nohighlight">\(d\)</span>:
 <div class="math notranslate nohighlight">
 \[
-g'_{\mathrm{FD}}(d)=\frac{g(d+h)-g(d-h)}{2h},
-\qquad h=10^{-6}.
+g(d + h) = g(d) + h g'(d) + \frac{h^2}{2} g''(d) + \frac{h^3}{6} g'''(d) + \mathcal{O}(h^4),
 \]</div>
-<ol class="arabic simple" start="2">
-<li><p>Its agreement with the analytic and autograd values checks the local implementation of this smooth scalar degradation function at the chosen point and precision. The <span class="math notranslate nohighlight">\(3.5083\times10^{-12}\)</span> discrepancy is consistent with a well-resolved centred difference in <strong>float64</strong>.</p></li>
-<li><p>A coupled calculation also differentiates the selected boundary treatment, equilibrium solve and history or irreversibility update. Convergence-dependent iterations and active constraints affect this derivative. Trace each operation from the chosen parameter to the observation and scalar loss, then check the complete derivative.</p></li>
+
+<div class="math notranslate nohighlight">
+\[
+g(d - h) = g(d) - h g'(d) + \frac{h^2}{2} g''(d) - \frac{h^3}{6} g'''(d) + \mathcal{O}(h^4).
+\]</div>
+
+Subtracting the two series cancels all even-order powers of <span class="math notranslate nohighlight">\(h\)</span>:
+<div class="math notranslate nohighlight">
+\[
+\frac{g(d+h) - g(d-h)}{2h} = g'(d) + \frac{h^2}{6} g'''(d) + \mathcal{O}(h^4).
+\]</div>
+
+Thus, the leading error term is proportional to <span class="math notranslate nohighlight">\(h^2\)</span>, confirming that the central difference is second-order accurate.</p></li>
+<li><p><strong>Step Size and Numerical Cancellation:</strong> In finite-precision floating-point arithmetic, when <span class="math notranslate nohighlight">\(h\)</span> is extremely small (approaching machine precision <span class="math notranslate nohighlight">\(\epsilon_{\mathrm{mach}} \approx 10^{-16}\)</span> for double precision), the terms <span class="math notranslate nohighlight">\(g(d+h)\)</span> and <span class="math notranslate nohighlight">\(g(d-h)\)</span> share nearly identical high-order bits. Subtracting them causes catastrophic cancellation (loss of significant digits). The total numerical error is the sum of truncation error <span class="math notranslate nohighlight">\(\mathcal{O}(h^2)\)</span> and roundoff error <span class="math notranslate nohighlight">\(\mathcal{O}(\epsilon_{\mathrm{mach}} / h)\)</span>, leading to an optimal step size around <span class="math notranslate nohighlight">\(h \approx \sqrt[3]{\epsilon_{\mathrm{mach}}} \approx 10^{-5}\)</span> to <span class="math notranslate nohighlight">\(10^{-6}\)</span>.</p></li>
+<li><p><strong>Computational Efficiency of Autograd:</strong> To compute the gradient of a scalar loss with respect to <span class="math notranslate nohighlight">\(P\)</span> parameters via finite differences requires <span class="math notranslate nohighlight">\(2P\)</span> evaluations of the entire forward simulation. In contrast, reverse-mode automatic differentiation evaluates the exact gradient with respect to all <span class="math notranslate nohighlight">\(P\)</span> parameters in a single backward pass, requiring a computational cost comparable to just <span class="math notranslate nohighlight">\(2\)</span> to <span class="math notranslate nohighlight">\(3\)</span> forward evaluations, regardless of <span class="math notranslate nohighlight">\(P\)</span>.</p></li>
 </ol>
 </div>
 </section>
@@ -620,7 +637,7 @@ g'_{\mathrm{FD}}(d)=\frac{g(d+h)-g(d-h)}{2h},
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">3.3.1.1. Exercises</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1-evaluate-the-law-its-slope-and-its-curvature">3.3.1.1.1. Exercise 1: Evaluate the law, its slope, and its curvature</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2-interpret-the-derivative-comparison">3.3.1.1.2. Exercise 2: Interpret the derivative comparison</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2-understanding-finite-difference-accuracy-and-truncation-error">3.3.1.1.2. Exercise 2: Understanding Finite-Difference Accuracy and Truncation Error</a></li>
 </ul>
 </li>
 </ul>
