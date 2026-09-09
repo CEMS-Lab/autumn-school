@@ -41,7 +41,7 @@
       
     
         <link rel="stylesheet" type="text/css" href="_static/sphinx_immaterial_theme.ad7809648a4561548.min.css?v=f290928c" />
-        <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+        <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
         <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
         <link rel="stylesheet" type="text/css" href="_static/mobile_math.css?v=1c40619e" />
         <link rel="stylesheet" type="text/css" href="_static/learning_book.css?v=6dcc5951" />
@@ -840,9 +840,9 @@ on the recorded CPU and is reproducible with:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code>python<span class="w"> </span>source/book/scripts/build_backprop_example.py
 </code></pre></div>
 </div>
-<p>This command is written for the extracted public edition, from its package
-root; the script resolves <code class="docutils literal notranslate"><span class="pre">source/</span></code> as its course root and writes only its
-figure and review receipt there.</p>
+<p>Run this command from the extracted public edition’s root. It updates the
+figure under <code class="docutils literal notranslate"><span class="pre">source/book/figures/</span></code> and writes a new validation receipt under
+<code class="docutils literal notranslate"><span class="pre">reviews/</span></code>, leaving the published evidence receipt unchanged.</p>
 <p>The <a class="reference external" href="../evidence/backprop_example.json">machine-readable validation receipt</a>
 retains the measured runtime, all forward/reverse values, and the analytic,
 automatic-differentiation, and central-difference assertions used here.</p>

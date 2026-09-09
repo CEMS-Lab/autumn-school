@@ -167,9 +167,9 @@ on the recorded CPU and is reproducible with:
 python source/book/scripts/build_backprop_example.py
 ```
 
-This command is written for the extracted public edition, from its package
-root; the script resolves `source/` as its course root and writes only its
-figure and review receipt there.
+Run this command from the extracted public edition's root. It updates the
+figure under `source/book/figures/` and writes a new validation receipt under
+`reviews/`, leaving the published evidence receipt unchanged.
 
 The [machine-readable validation receipt](../evidence/backprop_example.json)
 retains the measured runtime, all forward/reverse values, and the analytic,

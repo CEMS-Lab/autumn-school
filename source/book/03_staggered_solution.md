@@ -51,7 +51,7 @@ assembly or matrix-free operation then evaluates the residual.
 
 ## Why the damage equation resembles diffusion
 
-From Chapter 2, the unconstrained damage residual contains
+From the fracture-energy chapter, the unconstrained damage residual contains
 
 $$
 \frac{w'(d)}{\ell}-2\ell\Delta d.

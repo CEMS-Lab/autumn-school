@@ -54,7 +54,7 @@ next theory section with one observation in hand.
 **Read and predict.** Read the figures and worked equations first. Before a
 code cell, state what sign, field pattern, or check you expect to see.
 
-**Inspect and explain.** The five integrated lessons pair the reviewed code
+**Inspect and explain.** After the opening teaser, the five core lessons pair the reviewed code
 with its retained figures and result cards: a degradation derivative, a public
 PhAST notched-tension calculation, a differentiable elastic-bar toy, a saved
 toy field model, and a checked toy proposal with fallback. Use the exercise and
@@ -149,7 +149,7 @@ solution/sensitivity method, or observable.
    may compute the derivative; neither is itself a fracture formulation.
 :::
 
-## What to carry into Chapter 1
+## What to carry into the crack-representation chapter
 
 Keep two questions visible: *what object represents the crack?* and *what
 exactly is solved?* The next chapter places phase field, XFEM, and cohesive
