@@ -1,0 +1,16 @@
+{
+  "passed": true,
+  "whole_notebook_seconds": 8.560833017341793,
+  "execution": "HPC CPU",
+  "includes_kernel_startup": true,
+  "excludes": [
+    "environment installation",
+    "queue wait",
+    "HTML rendering"
+  ],
+  "input_sha256": "14cbd25db46420ed43401b3954d169b26fb69cb2d27e30b81f5c420dc5a336c0",
+  "output_sha256": "a615283d79acb8b99bf7a14fadfb046c3f7e79241711553ad65e025d45850e15",
+  "code_cells": 16,
+  "figure_outputs": 8,
+  "scope": "Seven original analytic/history/linear-algebra models; not full fracture recovery."
+}

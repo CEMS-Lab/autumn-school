@@ -9,7 +9,7 @@ const {chromium} = require("playwright");
   const output = path.resolve(process.argv[3]);
   fs.mkdirSync(output, {recursive:true});
   const names = ["index", "01_geometry", "02_observations", "03_derivatives",
-    "04_recovery", "05_learning", "06_applications", "07_results",
+    "03_history", "04_recovery", "05_learning", "06_applications", "07_results",
     "notebooks/inverse_experiments"];
   const browser = await chromium.launch({headless:true,
     executablePath:"/Applications/Brave Browser.app/Contents/MacOS/Brave Browser"});
@@ -57,8 +57,8 @@ const {chromium} = require("playwright");
         assert.deepEqual(errors, [], name+" JS errors");
         assert.deepEqual(failed, [], name+" offline resources");
         if (name === "notebooks/inverse_experiments") {
-          assert.equal(await page.locator(".cell_input").count(), 14);
-          assert.equal(await page.locator(".cell_output img").count(), 7);
+          assert.equal(await page.locator(".cell_input").count(), 16);
+          assert.equal(await page.locator(".cell_output img").count(), 8);
           await page.locator(".cell_output img").first().scrollIntoViewIfNeeded();
           await page.screenshot({path:path.join(output,"notebook-output-"+width+".png")});
         }

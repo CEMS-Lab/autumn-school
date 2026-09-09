@@ -12,13 +12,18 @@ no external course-helper or data-file dependency. The unexecuted source is
 excluded from the HTML build; only a verified HPC-executed copy is added to
 the reading route.
 
-- index.md and 01--06: foundations, derivations, 17 exercises with worked
+- index.md and 01--06 including 03_history: foundations, derivations, 20 exercises with worked
   answers and four application protocols.
 - 07_results.md: generated teaching result card.
 - code/lab.py: six original analytic/linear-algebra experiments, run on HPC.
+- code/history_lesson.py: one history-rule example, with 11 additional checks.
+- data/notebook_execution_receipt.json: complete HPC notebook execution,
+  16 code cells, eight plots and 26 passing checks; 8.56 seconds including
+  kernel startup, excluding queue wait, installation and HTML rendering.
 - data/teaching_results.json: unchanged retained HPC output, 15 passing checks.
 - code/render.py: render the retained arrays; no numerical experiment rerun.
-- figures/: seven original Matplotlib figures as PNG/PDF and the workflow PNG.
+- figures/: seven original Matplotlib figures as PNG/PDF, the workflow PNG,
+  and history_rules.png extracted directly from the executed notebook.
 - tex/inverse_workflow.tex and .pdf: editable original TikZ workflow.
 - conf.py, _static/ and code/check_preview.cjs: isolated preview/QA support.
 

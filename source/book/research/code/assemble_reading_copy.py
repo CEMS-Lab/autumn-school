@@ -7,6 +7,9 @@ from pathlib import Path
 import nbformat
 
 root = Path(__file__).resolve().parents[1]
+current = root / 'notebooks/inverse_experiments.ipynb'
+if current.exists() and nbformat.read(current, as_version=4).metadata.get('provenance', {}).get('status') == 'HPC executed':
+    raise RuntimeError('Preserve the verified HPC notebook; this legacy retained-output assembler is not a replacement.')
 source = root / "notebooks/inverse_experiments_source.ipynb"
 notebook = nbformat.read(source, as_version=4)
 receipt = json.loads((root / "data/rendering_receipt.json").read_text())

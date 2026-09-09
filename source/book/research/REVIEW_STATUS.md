@@ -6,29 +6,27 @@ This topic branch preserves the existing published course and its main
 navigation. It adds an isolated inverse teaching extension for review.
 No private paper source, solver modifications or private fracture arrays are
 included. The notebook contains original explanations, all numerical/plotting
-code, worked answers and seven hash-verified retained plots.
+code, 20 worked answers and eight freshly executed plot outputs.
 
 ## Current verification
 
-- The six original teaching calculations previously passed 15 HPC checks.
-- Every code cell in the assembled notebook parses.
-- The reading notebook labels its figures as retained outputs. It does not
-  claim the entire notebook has been executed from top to bottom.
-- A fresh whole-notebook CPU execution is queued on HPC.
-- The extended HTML has passed offline desktop/mobile checks.
+- The expanded seven-example notebook passed all 26 HPC checks.
+- All 16 code cells executed; all eight plots have native cell outputs.
+- Whole-notebook time was 8.56 seconds including kernel startup, excluding
+  queue wait, installation and HTML rendering. The public receipt records hashes.
+- Independent source-primitive checks also passed, retained privately;
+  those are not whole-trajectory gradient verification.
+- The extended HTML passed 20 offline desktop/mobile page checks.
 - Full fracture recovery, GNN training and probabilistic fracture inference
-  are outside the executed six-example scope.
+  are outside the executed teaching-example scope.
 
 ## Before integration
 
-1. Retrieve the fresh executed notebook and execution receipt; verify hashes.
-2. Preserve any failed execution and address genuine numerical/rendering errors.
-3. Require all 15 checks, all seven native plot outputs and a whole-notebook
-   runtime below 300 seconds, excluding dependency installation and queue wait.
-4. Replace the retained-output reading copy only with the verified notebook.
-5. Review the plots, complete derivations, solution text and public provenance.
-6. Integrate with the main curriculum through the publication owner.
+1. Review the new history lesson and public execution receipt.
+2. Keep the hard-forward/sigmoid-backward rule labelled as a surrogate.
+3. Preserve the private failure log from the earlier pre-execution quota issue.
+4. Integrate with the main curriculum through the publication owner.
 
-The draft has not been pushed or merged. The main v0.1.0 course is unchanged.
+The draft has not been pushed or merged. Published v0.1.0/v0.1.1 are unchanged.
 The standalone preview reuses the published book's MathJax/static assets;
 these are not duplicated in this source subtree.

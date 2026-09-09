@@ -15,7 +15,7 @@ progress from short calculations to protocols suitable for a fracture solver.
 You should be able to differentiate a scalar function and multiply a matrix
 by a vector. Each section introduces the additional notation it uses. The
 one-stop notebook includes the derivations, complete numerical and plotting
-code, retained outputs and worked answers for the six executed examples.
+code, outputs and worked answers for the seven teaching examples.
 
 Our damage convention is $d=0$ for intact material and $d=1$ for complete
 damage. A particle is a material inclusion; its centre is an unknown model
@@ -36,14 +36,15 @@ Editable LaTeX/TikZ source accompanies this original schematic.
 Open the [one-stop notebook](notebooks/inverse_experiments.ipynb) for a
 continuous explanation with complete code, worked answers and retained plots.
 It also has a {download}`downloadable Jupyter copy <notebooks/inverse_experiments.ipynb>`.
-The execution-status note distinguishes retained figures from the pending
-fresh whole-notebook HPC run.
+The execution receipt distinguishes completed HPC calculations from proposed
+full-fracture research protocols.
 
 | Part | Question | Computation |
 |---|---|---|
 | Geometry | Can a particle move through a fixed mesh smoothly? | Indicator and overlap gradients |
 | Observations | Which discrepancy does the loss measure? | Nodal and integrated error |
 | Differentiation | Does the computed gradient match the stated map? | AD, adjoint and FD comparison |
+| Fracture history | What happens at a kink, a tie or unloading? | Hard forward, smooth forward and surrogate backward |
 | Recovery | Why do different starts give different answers? | Conditioning and observation rank |
 | Learning | What can a learned component safely contribute? | Initial prediction and exact correction |
 | Applications | How do these tests become a fracture study? | A controlled research protocol |
@@ -59,6 +60,7 @@ the checks with PhAST and how to keep those results separate.
 01_geometry
 02_observations
 03_derivatives
+03_history
 04_recovery
 05_learning
 06_applications

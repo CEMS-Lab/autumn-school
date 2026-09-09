@@ -27,6 +27,10 @@ for node in ast.parse(plot_source).body:
         if name == "hybrid":
             break
 assert len(plots) == 7
+history_source = (ROOT / "code/history_lesson.py").read_text()
+functions.update({node.name: ast.get_source_segment(history_source, node)
+                  for node in ast.parse(history_source).body if isinstance(node, ast.FunctionDef)})
+plots['history_rules'] = functions['plot_history_rules'] + "\n\nsave(plot_history_rules(results['history_rules']), 'history_rules')"
 
 cells = []
 def md(text):
@@ -42,7 +46,7 @@ md("""# From gradients to reliable inverse experiments
 ## A self-contained computational notebook
 
 We work from particle geometry and observations to gradients, optimisation,
-uncertainty and a learned initial guess. All derivations needed for the six
+uncertainty and a learned initial guess. All derivations needed for the seven
 executed examples, the complete numerical and plotting code, and the worked
 answers are included below. External references are optional.
 
@@ -115,6 +119,7 @@ chapters = [
     ("01_geometry", ["geometry"]),
     ("02_observations", ["quadrature"]),
     ("03_derivatives", ["solve_loss", "derivatives"]),
+    ("03_history", ["history_rules"]),
     ("04_recovery", ["conditioning", "observations"]),
     ("05_learning", ["hybrid"]),
     ("06_applications", []),
@@ -150,7 +155,7 @@ The complete FD sweep and optimisation paths remain in `results`; the
 figures do not replace those arrays. The checks include the deliberately
 retained zero separating gradient at coincident centres.
 """)
-code("""assert len(checks) == 15 and all(checks.values()), checks
+code("""assert len(checks) == 26 and all(checks.values()), checks
 print(f"Checks passed: {sum(checks.values())} / {len(checks)}")
 print(f"AD derivative: {results['derivatives']['ad']:.6g}")
 print(f"Implicit derivative: {results['derivatives']['implicit']:.6g}")
@@ -175,7 +180,7 @@ additional perspectives, not prerequisites for reproducing this notebook.
 
 The application protocols describe subsequent fracture research, GNNs,
 observation selection and probabilistic inference. These are distinguished
-from the six computations actually executed here. In particular, the learned
+from the seven computations actually executed here. In particular, the learned
 linear map is not a trained fracture GNN, and the linear Gaussian posterior
 is not a posterior for particle positions in a cracking specimen.
 """)
@@ -186,6 +191,7 @@ notebook = nbformat.v4.new_notebook(cells=cells, metadata={
         "status": "unexecuted source; execute on HPC before distribution",
         "lab_source_sha256": hashlib.sha256(lab.encode()).hexdigest(),
         "figure_generator_sha256": hashlib.sha256(plot_source.encode()).hexdigest(),
+        "history_lesson_sha256": hashlib.sha256(history_source.encode()).hexdigest(),
         "scope": "Original analytic and linear-algebra teaching examples",
     },
 })
