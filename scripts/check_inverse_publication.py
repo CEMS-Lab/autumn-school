@@ -19,7 +19,7 @@ texts = 0
 for p in BASE.rglob("*"):
     if not p.is_file() or any(x in {"_build","__pycache__","_attachments"} for x in p.parts):
         continue
-    if p.suffix in {".md",".py",".js",".cjs",".css",".json",".ipynb",".tex",".txt"}:
+    if p.suffix in {".md",".py",".js",".cjs",".css",".json",".ipynb",".tex",".txt",".html"}:
         if private.search(p.read_text()):
             raise ValueError(f"Private path or credential marker: {p.relative_to(ROOT)}")
         texts += 1
@@ -45,6 +45,17 @@ history = json.loads((visuals/"history_manifest.json").read_text())
 for name,digest in history["sources"].items():
     assert sha(BASE/"code"/name) == digest, name
 assert all(history["checks"].values())
+panel_dir = BASE / "interactive"
+panel = json.loads((panel_dir/"history_plate_manifest.json").read_text())
+panel_verified = 0
+for name,digest in {**panel["source_hashes"],**panel["outputs"]}.items():
+    folder = BASE/"code" if name.endswith(".py") else panel_dir
+    assert sha(folder/name) == digest, name
+    panel_verified += 1
+assert panel["frames"] == 12 and panel["selected_frame_difference"] == 0
+assert panel["float32_maximum_error"] < 3e-8
+assert panel["cycle_animation"]["duration_seconds"] == 40
+assert not panel["cycle_animation"]["new_forward_solve"]
 notebook = json.loads((BASE/"notebooks/inverse_experiments.ipynb").read_text())
 cells = [c for c in notebook["cells"] if c["cell_type"]=="code"]
 assert len(cells)==16 and all(c.get("execution_count") is not None for c in cells)
@@ -54,6 +65,10 @@ report = {"scope":"User-authorised optional inverse HTML extension; frozen PDF/s
           "text_files_scanned":texts,"archive_inputs_verified":len(inputs),
           "visual_artifact_hashes_verified":verified,
           "history_primitive_checks":len(history["checks"]),
+          "interactive_source_commit":"bafb35e",
+          "interactive_source_and_output_hashes_verified":panel_verified,
+          "retained_plate_frames":panel["frames"],
+          "algorithm_animation_seconds":40,
           "retained_notebook_cells":len(cells),
           "new_numerical_execution":False,
           "classroom_notebooks_changed":False,
@@ -69,8 +84,8 @@ if args.refresh_manifest:
         assert not p.is_symlink() and p.resolve().is_relative_to(ROOT), name
         assert not any(x in {".git",".build","reviews","jupyter_execute","_attachments"} for x in Path(name).parts), name
     manifest = json.loads((ROOT/"MANIFEST.json").read_text())
-    manifest.update(version="main-20260909-inverse",date="2026-09-09",
-                    change_scope="Optional inverse HTML extension; frozen PDF/slides unchanged",
+    manifest.update(version="main-20260909-guided-history",date="2026-09-09",
+                    change_scope="Guided interactive history lesson and algorithm animation; frozen PDF/slides and numerical notebooks unchanged",
                     runtime_scope="Earlier local classroom receipts plus separate HPC inverse teaching receipts; no new execution or fresh Colab claim")
     manifest["files"]={name:sha(ROOT/name) for name in names}
     (ROOT/"MANIFEST.json").write_text(json.dumps(manifest,indent=2)+"\n")

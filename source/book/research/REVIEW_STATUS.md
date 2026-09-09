@@ -57,3 +57,56 @@ It is integrated as an optional HTML reading route; earlier v0.1.0/v0.1.1
 release assets and the classroom numerical notebooks remain unchanged.
 The standalone preview reuses the published book's MathJax/static assets;
 these are not duplicated in this source subtree.
+
+## Interactive history and plate revision
+
+The follow-up on `teaching/interactive-history` adds an offline interactive
+panel to the short history lesson. It preserves the original movie as a
+collapsible alternative. The left pane demonstrates the hard-forward history
+rule and its optional sigmoid surrogate; the independent right pane shows 12
+retained FEM damage frames in the full plate. It includes time scrubbing,
+play/pause, nearest-node damage probing, a grayscale/colour toggle and an
+optional particle boundary. Matching energy/history fields were not retained.
+
+CPU export 127849 reused the existing fields without a new fracture solve.
+All four retained inverse target frames match exactly; browser float32 damage
+rounding is below 3e-8. Four source/output hashes match the retained receipt.
+The panel passed offline desktop/mobile interaction and embedded-height tests.
+The complete research book passed 24 page checks with 24 expandable answers;
+the original history movie passed two viewport/playback checks. The full
+Sphinx build passed with warnings treated as errors. No shared theme,
+manuscript or notebook numerical cell was changed. This follow-up is a local
+preview pending the next publication decision.
+
+## Guided forward-to-reverse story
+
+The next revision adds a 40-second, text-led algorithm animation and eight
+guided stages to the self-contained panel. It explains the prescribed ramp
+and boundary masks, smooth particle indicator, explicit mechanics, spectral
+positive parts, hard-forward/sigmoid-backward history, implicit damage solve,
+damage bounds, time recurrence and observation-loss reverse route. Native
+MathML equations render offline. The sigmoid surrogate is now the default
+playground selection; hard branches remain available for comparison.
+
+The plate recording has 1600 steps, not 2000. Twelve saved damage frames do
+not constitute the autograd graph. The text explicitly separates archived
+setup evidence, current inspected implementation, and illustrative energy
+curves. For two inputs, sigmoid weights can equivalently be written as
+softmax weights; this does not change the hard forward maximum into the
+separate log-sum-exp smooth-forward option.
+
+Final export 127855 reused the checked animation from 127854; no new FEM solve
+was run. Seventeen source/output hashes pass. Both viewport tests pass for
+the guided equations and decoded movie, alongside standalone/embedded control
+tests, 24 book checks and two original-video checks. The updated full Sphinx
+build passes with -W. This revision is a local review candidate, not a new
+published release. Earlier exports and the failed typesetting attempt remain
+retained in the private rendering work area.
+
+## Main-book publication
+
+The user subsequently explicitly approved merging and publishing the latest
+interactive additions. They are integrated into main through the existing
+optional research route. The main publication checker verifies the additional
+17 source/output hashes. This publication does not include the subsequently
+requested Manim animation, which is separate work.

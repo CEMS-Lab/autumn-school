@@ -1,5 +1,21 @@
 # About the integrated edition
 
+## Interactive history integration, 9 September 2026
+
+The main HTML book now includes the interactive plate/history playground,
+the 40-second algorithm walkthrough and eight explanatory stages with offline
+equations. The user explicitly authorised merging and publishing this latest
+addition. The source payload is teaching/interactive-history at bafb35e.
+
+The plate contains 12 retained frames from a 1600-step forward calculation.
+Local energy curves are illustrative; energy/history and active-set snapshots
+were not retained. The lesson distinguishes the hard-forward, sigmoid-backward
+surrogate from a smooth-forward history model. Seventeen new source/artifact
+hashes are checked in addition to the earlier inverse-extension receipts.
+The numerical notebook cells, frozen PDF/slides and shared theme are unchanged.
+The separately requested Manim animation is subsequent work, not part of this
+published payload.
+
 ## Optional inverse extension, 9 September 2026
 
 The HTML now includes source-grounded history explanations, an 18-second

@@ -25,6 +25,7 @@ const {PNG} = require('pngjs');
       assert.equal(await videos.count(),expectedVideos);
       for(let i=0;i<expectedVideos;i++) {
         const video = videos.nth(i);
+        await video.evaluate(v=>{let p=v.parentElement;while(p){if(p.tagName==='DETAILS')p.open=true;p=p.parentElement;}});
         const contract = await video.evaluate(v=>({src:v.src,poster:v.poster,controls:v.controls,
           autoplay:v.autoplay,preload:v.preload,paused:v.paused,name:v.dataset.visualFilm}));
         assert.ok(contract.controls && contract.paused && !contract.autoplay);

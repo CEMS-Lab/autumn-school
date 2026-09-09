@@ -1,0 +1,26 @@
+{
+  "kind": "Algorithm walkthrough with illustrative local curves and retained FEM context",
+  "frames": 240,
+  "fps": 6,
+  "duration_seconds": 40,
+  "retained_steps": [
+    1,
+    146,
+    291,
+    437,
+    582,
+    727,
+    873,
+    1018,
+    1163,
+    1309,
+    1454,
+    1600
+  ],
+  "new_forward_solve": false,
+  "reconstructed_energy_or_history": false,
+  "full_damage_range": [
+    0,
+    1
+  ]
+}

@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Explore fracture memory and a recorded crack</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#fff;color:#18252c;font:15px/1.5 system-ui,-apple-system,sans-serif;letter-spacing:0}
+main{max-width:1220px;margin:auto;padding:18px}header{display:flex;align-items:center;justify-content:space-between;gap:12px;border-bottom:1px solid #ccd4d8;padding-bottom:12px}
+h1{font-size:21px;line-height:1.25;margin:0}h2{font-size:18px;margin:0 0 4px}h3{font-size:14px;margin:14px 0 4px}.eyebrow{font-size:12px;font-weight:650;color:#526168;margin:0 0 3px}
+.subtitle{font-size:13px;color:#526168;margin:4px 0 14px}.panes{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:28px;padding-top:18px}.pane{min-width:0}
+.pane+.pane{border-left:1px solid #d9dfe2;padding-left:28px}label{display:block;font-size:13px;font-weight:600}.control{margin:12px 0}.labelrow{display:flex;align-items:center;justify-content:space-between;gap:10px}
+output{font-variant-numeric:tabular-nums;font-weight:650;color:#18252c}input[type=range]{width:100%;accent-color:#0072b2;min-height:30px;margin:0}
+input[type=number]{width:76px;padding:6px;border:1px solid #9ba8ae;border-radius:3px;font:inherit}select,button{font:inherit;font-size:13px;border:1px solid #87969e;background:#fff;color:#18252c;border-radius:4px;min-height:34px;padding:5px 9px}button{cursor:pointer}button:hover{background:#edf4f7}button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #dfa944;outline-offset:2px}
+.row{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.row.between{justify-content:space-between}.numbers{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;border-block:1px solid #d8e0e4;padding:10px 0;margin:12px 0}.numbers span{display:block;font-size:12px;color:#526168}.numbers output{font-size:18px}
+.status{min-height:43px;margin:8px 0;font-size:13px}.chart{display:block;width:100%;height:auto;background:#fff;overflow:visible}.chart text{font-family:STIXGeneral,"Times New Roman",serif;fill:#26343b;font-size:18px}.chart .tick{font-size:17px}.chart .axis{stroke:#526168;stroke-width:1}.chart .grid{stroke:#e3e8eb;stroke-width:1}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12px;line-height:1.4;margin:4px 0}.key{width:22px;display:inline-block;border-top:3px solid;vertical-align:middle;margin-right:5px}.key.dash{border-top-style:dashed}
+.note{font-size:12px;color:#526168;padding-top:12px;margin-top:14px;border-top:1px solid #d9dfe2}.probe{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:7px 0}.probe label{font-weight:400}.probe-summary{font-size:13px;font-variant-numeric:tabular-nums;min-height:39px;margin:8px 0}
+#plate-image{cursor:crosshair}.help{font-size:12px;color:#526168;margin:4px 0}.check{display:flex;gap:7px;align-items:center;font-weight:400}.check input{accent-color:#0072b2}
+.intro{max-width:850px;margin:16px 0 0;font-size:15px}.intro a,.walkthrough a{color:#00689f;text-decoration:underline;text-underline-offset:3px}
+.cycle{max-width:950px;margin:24px auto;border-block:1px solid #d8e0e4;padding:16px 0}.cycle summary{cursor:pointer;font-size:17px;font-weight:650}.cycle video{display:block;width:100%;aspect-ratio:12/7;margin-top:12px;background:white}.cycle p{font-size:13px;color:#526168}
+.walkthrough{max-width:900px;margin:30px auto 0;border-top:2px solid #ccd4d8;padding-top:28px;font-size:16px;line-height:1.65}.walkthrough h2{font-size:25px;line-height:1.25}.walkthrough h3{font-size:21px;line-height:1.35;margin:30px 0 12px}.walkthrough section{padding-top:4px;scroll-margin-top:15px}.walkthrough p{margin:12px 0}.walkthrough .standfirst{font-size:18px}.route{display:flex;flex-wrap:wrap;gap:10px 30px;padding:15px 15px 15px 25px;border-block:1px solid #d8e0e4}.route li{font-size:14px}.guide-plates{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}.guide-plates figure{margin:0}.guide-plate{display:block;width:100%;height:auto}.guide-plate text{font-family:STIXGeneral,"Times New Roman",serif;font-size:14px;fill:#26343b}.guide-plates figcaption{font-size:14px;line-height:1.55}.equation{padding:14px 4px;margin:12px 0;background:#f6f8fa;overflow-x:auto}.equation math{font-size:20px;margin:0;min-width:max-content}.guide-summary{border-top:1px solid #ccd4d8;margin-top:30px}.guide-provenance{font-size:13px;color:#526168}.walkthrough li{margin:6px 0}.walkthrough ul{padding-left:22px}
+@media(max-width:620px){main{padding:12px}.panes{grid-template-columns:1fr;gap:20px}.pane+.pane{border-left:0;border-top:1px solid #d9dfe2;padding:20px 0 0}header{align-items:flex-start}h1{font-size:19px}.numbers{gap:6px}}
+@media(max-width:620px){.guide-plates{grid-template-columns:1fr;gap:24px}.walkthrough h2{font-size:23px}.walkthrough h3{font-size:20px}.equation math{font-size:18px}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<main id="history-panel">
+<header><h1>Memory and crack growth</h1><button id="expand" type="button">Expand</button></header>
+<p class="intro">A crack changes how a plate carries load, while its history remembers earlier loading. Explore that decision here, then <a href="#walkthrough">follow the complete solver story</a>: boundary conditions, motion, energy, history, damage bounds and the reverse pass. The plate recording contains 1,600 forward steps with 12 saved frames.</p>
+<details class="cycle" open><summary>Watch the 40-second solver walkthrough</summary>
+<video id="cycle-video" controls playsinline preload="none" poster="__CYCLE_POSTER__" src="__CYCLE_MOVIE__" aria-label="Eight-stage forward and reverse algorithm walkthrough with illustrative history and bound switches"></video>
+<p>The stages show computational order, not elapsed physical time. Local energy and bound curves are illustrative. The plate is recorded FEM data; its saved frames play during the repeated-cycle stage. Playback is optional.</p>
+</details>
+<div class="panes" id="playground">
+<section class="pane" aria-labelledby="history-title">
+<p class="eyebrow">ILLUSTRATIVE MATERIAL POINT</p>
+<h2 id="history-title">Explore one history update</h2>
+<p class="subtitle">Dimensionless energy. The stored maximum remembers earlier loading.</p>
+<div class="row between"><label for="scenario">Loading situation</label><select id="scenario"><option value="unload">Below the previous peak</option><option value="loading">A new maximum</option><option value="tie">Exactly at the peak</option><option value="custom">Custom values</option></select></div>
+<div class="control"><div class="labelrow"><label for="old">Previous maximum H<sub>n</sub></label><output id="old-out" for="old">1.00</output></div><input id="old" type="range" min="0" max="1.6" step=".01" value="1"></div>
+<div class="control"><div class="labelrow"><label for="energy">Current energy &psi;<sup>+</sup></label><output id="energy-out" for="energy">0.55</output></div><input id="energy" type="range" min="0" max="1.6" step=".01" value=".55"></div>
+<div class="row between"><label for="rule">Reverse rule</label><select id="rule"><option value="hard">Hard-branch comparison</option><option value="surrogate" selected>PhAST sigmoid surrogate</option></select></div>
+<div class="control"><div class="labelrow"><label for="sharpness">Sigmoid sharpness k</label><output id="sharpness-out" for="sharpness">12</output></div><input id="sharpness" type="range" min="2" max="60" step="1" value="12"></div>
+<div class="numbers"><div><span>Updated maximum</span><output id="updated">1.00</output></div><div><span>Old-history weight</span><output id="old-weight">1.000</output></div><div><span>Current-energy weight</span><output id="energy-weight">0.000</output></div></div>
+<p id="history-status" class="status" aria-live="polite"></p>
+<div class="row"><button id="remember" type="button">Remember this step</button><button id="reset" type="button">Reset</button></div>
+<h3>The forward maximum</h3>
+<svg id="max-chart" class="chart" viewBox="0 0 460 230" role="img" aria-label="History maximum versus current energy"></svg>
+<h3>Where the reverse sensitivity goes</h3>
+<svg id="weight-chart" class="chart" viewBox="0 0 460 230" role="img" aria-label="Hard branch and sigmoid reverse weight versus energy"></svg>
+<div class="legend"><span><i class="key" style="border-color:#0072b2"></i>Hard branch</span><span><i class="key dash" style="border-color:#009e73"></i>Sigmoid surrogate</span></div>
+<p class="help">At equality, the open circle marks the half-weight convention. The hard maximum has no unique classical partial derivative there.</p>
+</section>
+<section class="pane" aria-labelledby="plate-title">
+<p class="eyebrow">RETAINED PhAST FINITE-ELEMENT FIELDS</p>
+<h2 id="plate-title">Follow the crack through the plate</h2>
+<p class="subtitle">A 40 &times; 40 mm notched plate containing a stiff particle.</p>
+<div class="row between"><label for="colour">Field rendering</label><select id="colour"><option value="plate">Dark crack on light plate</option><option value="damage">Colour damage map</option></select></div>
+<svg id="plate-chart" class="chart" viewBox="0 0 460 390" role="img" aria-label="Recorded phase-field damage in the full notched plate; select a probe with coordinate controls"></svg>
+<div class="control"><div class="labelrow"><label for="frame">Recorded forward step</label><output id="frame-out" for="frame"></output></div><input id="frame" type="range" min="0" step="1" value="0"></div>
+<div class="row"><button id="previous" type="button">Previous</button><button id="play" type="button">Play</button><button id="next" type="button">Next</button><span id="frame-count" class="help"></span></div>
+<div class="probe"><label for="probe-x">Probe x (mm)</label><input id="probe-x" type="number" min="0" max="40" step=".25" value="25"><label for="probe-y">y (mm)</label><input id="probe-y" type="number" min="0" max="40" step=".25" value="20"></div>
+<div class="row"><label class="check"><input id="show-probe" type="checkbox" checked>Show probe</label><label class="check"><input id="show-particle" type="checkbox">Show particle boundary</label></div>
+<p class="help">Select a point on the plate or enter coordinates. The nearest retained mesh node supplies the damage values.</p>
+<p id="probe-summary" class="probe-summary" aria-live="polite"></p>
+<h3>Damage at the selected material point</h3>
+<svg id="damage-chart" class="chart" viewBox="0 0 460 230" role="img" aria-label="Damage at the selected node across all retained frames"></svg>
+<p class="help">White is intact material and dark is high damage in plate view. The notch is already present in the first frame. Both renderings show the full phase field from 0 to 1.</p>
+</section>
+</div>
+<p class="note">The two panes have independent controls. The left pane illustrates a history rule; the right shows recorded FEM damage. Matching tensile-energy and history fields were not retained, so changing the energy sliders does not rerun or alter this crack. Lines between recorded damage samples guide the eye; intermediate fracture states are not synthesized.</p>
+__WALKTHROUGH__
+</main>
+<script id="panel-data" type="application/json">__PAYLOAD__</script>
+<script>
+"use strict";
+const D=JSON.parse(document.getElementById("panel-data").textContent);
+const $=id=>document.getElementById(id);
+const NS="http://www.w3.org/2000/svg";
+function unpack(s){const raw=atob(s),bytes=Uint8Array.from(raw,c=>c.charCodeAt(0));const view=new DataView(bytes.buffer),out=new Float32Array(bytes.length/4);for(let i=0;i<out.length;i++)out[i]=view.getFloat32(i*4,true);return out;}
+const nodes=unpack(D.nodes),damage=unpack(D.damage),N=D.nodeCount;
+let frame=Math.floor(D.steps.length/2),node=0,timer=null;
+$("frame").max=D.steps.length-1;
+function el(tag,attrs={},parent){const e=document.createElementNS(NS,tag);for(const [k,v] of Object.entries(attrs))e.setAttribute(k,v);if(parent)parent.append(e);return e;}
+function text(p,x,y,value,attrs={}){const e=el("text",{x,y,...attrs},p);e.textContent=value;return e;}
+function axes(svg,ymax=1.6,xmax=1.6,xlabel="Current energy",ylabel="History"){
+ svg.replaceChildren();const box={l:58,r:438,t:18,b:176};
+ const X=x=>box.l+x/xmax*(box.r-box.l),Y=y=>box.b-y/ymax*(box.b-box.t);
+ for(const f of [0,.5,1]){
+  const x=X(f*xmax),y=Y(f*ymax);
+  el("line",{x1:x,y1:box.t,x2:x,y2:box.b,class:"grid"},svg);
+  el("line",{x1:box.l,y1:y,x2:box.r,y2:y,class:"grid"},svg);
+  text(svg,x,201,Number((f*xmax).toFixed(2)),{"text-anchor":"middle",class:"tick"});
+  text(svg,48,y+6,Number((f*ymax).toFixed(2)),{"text-anchor":"end",class:"tick"});
+ }
+ el("path",{d:`M${box.l},${box.t}V${box.b}H${box.r}`,class:"axis",fill:"none"},svg);
+ text(svg,(box.l+box.r)/2,226,xlabel,{"text-anchor":"middle"});
+ text(svg,17,97,ylabel,{transform:"rotate(-90 17 97)","text-anchor":"middle"});
+ return {X,Y,...box};
+}
+function path(svg,values,X,Y,colour,dash=false){el("path",{d:values.map((v,i)=>(i?"L":"M")+X(v[0])+","+Y(v[1])).join(" "),fill:"none",stroke:colour,"stroke-width":3,...(dash?{"stroke-dasharray":"7 4"}:{})},svg);}
+function dot(svg,x,y,color,r=5,open=false){el("circle",{cx:x,cy:y,r,fill:open?"white":color,stroke:color,"stroke-width":2},svg);}
+function updateHistory(){
+ const old=+$("old").value,energy=+$("energy").value,k=+$("sharpness").value;
+ const updated=Math.max(old,energy),hard=energy>old?1:energy<old?0:.5;
+ const sigmoid=x=>1/(1+Math.exp(-k*(x-old)));
+ const selected=$("rule").value==="hard"?hard:sigmoid(energy);
+ $("old-out").value=old.toFixed(2);$("energy-out").value=energy.toFixed(2);$("sharpness-out").value=k;
+ $("updated").value=updated.toFixed(2);$("old-weight").value=(1-selected).toFixed(3);$("energy-weight").value=selected.toFixed(3);
+ const action=energy>old?"A new maximum: current energy takes over.":energy<old?"Below the peak: the forward value keeps the earlier maximum.":"At the kink: equal inputs use the half-weight convention.";
+ $("history-status").textContent=action+($("rule").value==="surrogate"?" The displayed weights are a surrogate near the switch.":"");
+ let s=$("max-chart"),a=axes(s);
+ path(s,[[0,old],[old,old],[1.6,1.6]],a.X,a.Y,"#0072b2");
+ el("line",{x1:a.X(old),x2:a.X(old),y1:a.t,y2:a.b,stroke:"#86979e","stroke-dasharray":"3 4"},s);
+ dot(s,a.X(energy),a.Y(updated),"#d55e00",6);
+ s=$("weight-chart");a=axes(s,1,1.6,"Current energy","Reverse weight");
+ path(s,[[0,0],[old,0]],a.X,a.Y,"#0072b2");path(s,[[old,1],[1.6,1]],a.X,a.Y,"#0072b2");
+ el("line",{x1:a.X(old),x2:a.X(old),y1:a.t,y2:a.b,stroke:"#86979e","stroke-dasharray":"3 4"},s);
+ path(s,Array.from({length:241},(_,i)=>[i/150,sigmoid(i/150)]),a.X,a.Y,"#009e73",true);
+ dot(s,a.X(old),a.Y(.5),"#0072b2",5,true);dot(s,a.X(energy),a.Y(selected),"#d55e00",6);
+ $("history-panel").dataset.weight=selected;$("history-panel").dataset.history=updated;
+}
+function stop(){if(timer){clearInterval(timer);timer=null;}$("play").textContent="Play";$("play").setAttribute("aria-pressed","false");}
+function nearest(x,y){let min=Infinity,result=0;for(let i=0;i<N;i++){const d=(nodes[2*i]-x)**2+(nodes[2*i+1]-y)**2;if(d<min){min=d;result=i;}}return result;}
+function probe(x,y,syncInputs=true){
+ x=Math.min(40,Math.max(0,Number.isFinite(x)?x:25));y=Math.min(40,Math.max(0,Number.isFinite(y)?y:20));
+ node=nearest(x,y);
+ if(syncInputs){$("probe-x").value=x.toFixed(2);$("probe-y").value=y.toFixed(2);}
+ renderPlate();
+}
+function renderPlate(){
+ const svg=$("plate-chart"),mode=$("colour").value,px=50,py=15,w=320;
+ svg.replaceChildren();
+ const defs=el("defs",{},svg),g=el("linearGradient",{id:"damage-scale",x1:"0%",y1:"100%",x2:"0%",y2:"0%"},defs);
+ D.luts[mode].forEach((c,i)=>el("stop",{offset:i/(D.luts[mode].length-1),"stop-color":c},g));
+ const image=el("image",{id:"plate-image",x:px,y:py,width:w,height:w,href:D.pictures[mode][frame]},svg);
+ el("rect",{x:px,y:py,width:w,height:w,fill:"none",stroke:"#34454e","stroke-width":1.5,"pointer-events":"none"},svg);
+ for(const value of [0,20,40]){
+  const x=px+w*value/40,y=py+w-w*value/40;
+  text(svg,x,360,value,{"text-anchor":"middle",class:"tick"});
+  text(svg,40,y+6,value,{"text-anchor":"end",class:"tick"});
+ }
+ text(svg,210,387,"x (mm)",{"text-anchor":"middle"});
+ text(svg,15,175,"y (mm)",{transform:"rotate(-90 15 175)","text-anchor":"middle"});
+ el("rect",{x:388,y:py,width:13,height:w,fill:"url(#damage-scale)",stroke:"#526168","stroke-width":.7},svg);
+ for(const value of [0,.5,1])text(svg,408,py+w-w*value+6,value,{class:"tick"});
+ text(svg,451,175,"Damage d",{transform:"rotate(-90 451 175)","text-anchor":"middle"});
+ if($("show-particle").checked)el("circle",{cx:px+D.particle.center[0]*8,cy:py+w-D.particle.center[1]*8,r:D.particle.radius*8,fill:"none",stroke:mode==="plate"?"#526168":"#fff","stroke-dasharray":"5 4","stroke-width":1.6,"pointer-events":"none"},svg);
+ if($("show-probe").checked){
+  const x=px+nodes[node*2]*8,y=py+w-nodes[node*2+1]*8;
+  el("circle",{cx:x,cy:y,r:6,fill:"none",stroke:mode==="plate"?"#0072b2":"#fff","stroke-width":2.4,"pointer-events":"none"},svg);
+ }
+ image.addEventListener("pointerdown",e=>{const pt=new DOMPoint(e.clientX,e.clientY).matrixTransform(svg.getScreenCTM().inverse());probe((pt.x-px)/8,(py+w-pt.y)/8);});
+ const v=damage[frame*N+node];
+ $("frame").value=frame;$("frame-out").value=D.steps[frame];$("frame-count").textContent=`Frame ${frame+1} / ${D.steps.length}`;
+ $("previous").disabled=frame===0;$("next").disabled=frame===D.steps.length-1;
+ $("probe-summary").textContent=`Mesh point (${nodes[node*2].toFixed(2)}, ${nodes[node*2+1].toFixed(2)}) mm: damage d = ${v.toFixed(4)}.`;
+ const s=$("damage-chart"),a=axes(s,1,D.steps.at(-1),"Recorded forward step","Damage d");
+ const values=D.steps.map((step,i)=>[step,damage[i*N+node]]);
+ path(s,values,a.X,a.Y,"#0072b2");
+ values.forEach(p=>dot(s,a.X(p[0]),a.Y(p[1]),"#0072b2",3));
+ dot(s,a.X(D.steps[frame]),a.Y(v),"#d55e00",6);
+ $("history-panel").dataset.frame=frame;$("history-panel").dataset.node=node;$("history-panel").dataset.damage=v;
+}
+["old","energy","sharpness"].forEach(id=>$(id).addEventListener("input",()=>{$("scenario").value="custom";updateHistory();}));
+$("rule").addEventListener("change",updateHistory);
+$("scenario").addEventListener("change",()=>{if($("scenario").value==="custom")return;$("old").value=1;$("energy").value={unload:.55,loading:1.25,tie:1}[$("scenario").value];updateHistory();});
+$("remember").addEventListener("click",()=>{$("old").value=Math.max(+$("old").value,+$("energy").value);$("scenario").value="custom";updateHistory();});
+$("reset").addEventListener("click",()=>{$("old").value=1;$("energy").value=.55;$("sharpness").value=12;$("rule").value="surrogate";$("scenario").value="unload";updateHistory();});
+$("frame").addEventListener("input",()=>{stop();frame=+$("frame").value;renderPlate();});
+$("previous").addEventListener("click",()=>{stop();frame=Math.max(0,frame-1);renderPlate();});
+$("next").addEventListener("click",()=>{stop();frame=Math.min(D.steps.length-1,frame+1);renderPlate();});
+$("play").addEventListener("click",()=>{
+ if(timer){stop();return;}if(frame===D.steps.length-1)frame=0;
+ $("play").textContent="Pause";$("play").setAttribute("aria-pressed","true");renderPlate();
+ timer=setInterval(()=>{frame++;renderPlate();if(frame===D.steps.length-1)stop();},850);
+});
+$("colour").addEventListener("change",renderPlate);
+["show-probe","show-particle"].forEach(id=>$(id).addEventListener("change",renderPlate));
+["probe-x","probe-y"].forEach(id=>$(id).addEventListener("input",()=>{
+ if($("probe-x").value!==""&&$("probe-y").value!=="")probe(+$("probe-x").value,+$("probe-y").value,false);
+}));
+$("expand").addEventListener("click",async()=>{try{if(document.fullscreenElement)await document.exitFullscreen();else await document.documentElement.requestFullscreen();}catch{window.open(location.href,"_blank","noopener");}});
+document.addEventListener("visibilitychange",()=>{if(document.hidden)stop();});
+document.addEventListener("fullscreenchange",()=>{$("expand").textContent=document.fullscreenElement?"Exit full view":"Expand";});
+node=nearest(25,20);updateHistory();renderPlate();
+document.querySelectorAll("[data-guide-frame]").forEach(e=>e.setAttribute("href",D.pictures.plate[e.dataset.guideFrame==="first"?0:D.steps.length-1]));
+new ResizeObserver(()=>parent.postMessage({type:"phast-history-panel-size",height:Math.ceil(document.querySelector("main").getBoundingClientRect().height)},"*")).observe(document.querySelector("main"));
+</script>
+</body>
+</html>
