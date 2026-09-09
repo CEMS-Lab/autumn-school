@@ -17,6 +17,9 @@ with the sigmoid reverse rule. Beside that calculation, scrub through the
 recorded fracture sequence and select a point to inspect its damage history.
 The default view shows a dark crack in a light plate; the colour view uses
 the same complete damage field.
+The guided walkthrough below the controls follows the complete forward step,
+then traces the reverse pass through each local decision. It distinguishes
+the recorded 1,600-step trajectory from an illustrative 2,000-step extension.
 
 ```{raw} html
 <p><a id="history-panel-open" target="_blank" rel="noopener">Open the full interactive panel</a></p>
@@ -25,6 +28,15 @@ the same complete damage field.
 
 {download}`Download the self-contained interactive panel <interactive/history_plate.html>`.
 The controls run in the browser, without a notebook kernel or installation.
+The introductory {download}`40-second algorithm walkthrough <interactive/forward_cycle.mp4>`
+is also available separately. It shows the computational sequence, with
+illustrative local curves and distinctly labelled retained FEM context.
+Its {download}`Matplotlib renderer <code/render_forward_cycle.py>` and
+{download}`animation receipt <interactive/forward_cycle_manifest.json>`
+identify the plotted sequence. The panel's
+{download}`HTML template <interactive/history_plate.template.html>` and
+{download}`guided explanation source <interactive/history_walkthrough.html>`
+are supplied for editing; open the self-contained panel above for playback.
 
 The two panes answer different questions: the left is a dimensionless history
 example, while the right contains retained PhAST damage fields. Matching
@@ -147,7 +159,7 @@ if (panelLink) {
 }
 window.addEventListener('message', event => {
   if (event.source !== panel.contentWindow || event.data?.type !== 'phast-history-panel-size') return;
-  if (Number.isFinite(event.data.height)) panel.style.height = Math.max(640, Math.min(2600, event.data.height + 4)) + 'px';
+  if (Number.isFinite(event.data.height)) panel.style.height = Math.max(640, Math.min(30000, event.data.height + 4)) + 'px';
 });
 document.querySelectorAll('video[data-visual-film]').forEach(video => {
   const name = video.dataset.visualFilm;

@@ -77,3 +77,28 @@ the original history movie passed two viewport/playback checks. The full
 Sphinx build passed with warnings treated as errors. No shared theme,
 manuscript or notebook numerical cell was changed. This follow-up is a local
 preview pending the next publication decision.
+
+## Guided forward-to-reverse story
+
+The next revision adds a 40-second, text-led algorithm animation and eight
+guided stages to the self-contained panel. It explains the prescribed ramp
+and boundary masks, smooth particle indicator, explicit mechanics, spectral
+positive parts, hard-forward/sigmoid-backward history, implicit damage solve,
+damage bounds, time recurrence and observation-loss reverse route. Native
+MathML equations render offline. The sigmoid surrogate is now the default
+playground selection; hard branches remain available for comparison.
+
+The plate recording has 1600 steps, not 2000. Twelve saved damage frames do
+not constitute the autograd graph. The text explicitly separates archived
+setup evidence, current inspected implementation, and illustrative energy
+curves. For two inputs, sigmoid weights can equivalently be written as
+softmax weights; this does not change the hard forward maximum into the
+separate log-sum-exp smooth-forward option.
+
+Final export 127855 reused the checked animation from 127854; no new FEM solve
+was run. Seventeen source/output hashes pass. Both viewport tests pass for
+the guided equations and decoded movie, alongside standalone/embedded control
+tests, 24 book checks and two original-video checks. The updated full Sphinx
+build passes with -W. This revision is a local review candidate, not a new
+published release. Earlier exports and the failed typesetting attempt remain
+retained in the private rendering work area.

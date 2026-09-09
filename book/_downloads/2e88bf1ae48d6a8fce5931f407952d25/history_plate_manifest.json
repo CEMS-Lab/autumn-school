@@ -1,6 +1,6 @@
 {
   "scope": "Retained PhAST FEM damage; no new forward solve",
-  "job": "127849",
+  "job": "127855",
   "frames": 12,
   "nodes": 5149,
   "elements": 9990,
@@ -10,8 +10,36 @@
   "energy_and_history_fields_retained": false,
   "rendering": "Full d in [0,1]; linear FEM colour interpolation; no masking or artificial crack line",
   "source_hashes": {
-    "build_history_panel.py": "ee92128160b5e7c6a00fded2ef8dd4b64123e6a7beea3a6b07bcc6ff2583d36d",
-    "history_plate.template.html": "29cf2919e82357cbeb8eeb9fd5fcd4abfde8a6c8950a01212ab9083262ccd193"
+    "build_history_panel.py": "4d6c47831ac9cc22a76ecd3a23ea5396e60b4cc5a539d4e39dd4fd89b793ed3c",
+    "history_plate.template.html": "6ed7fc101de072e8790c34c5d134122e0a9091c7e7e3ae6f06908493343a43ac",
+    "history_walkthrough.html": "621caa75bb4028c605b5ef5cfc8f16891efbf48e31e8830ff39c85f308d547e8",
+    "render_forward_cycle.py": "fc7aa381ff3c94f40123fc265cece7834b4eab06715b2213780a753b5d820cb9"
+  },
+  "cycle_animation": {
+    "kind": "Algorithm walkthrough with illustrative local curves and retained FEM context",
+    "frames": 240,
+    "fps": 6,
+    "duration_seconds": 40,
+    "retained_steps": [
+      1,
+      146,
+      291,
+      437,
+      582,
+      727,
+      873,
+      1018,
+      1163,
+      1309,
+      1454,
+      1600
+    ],
+    "new_forward_solve": false,
+    "reconstructed_energy_or_history": false,
+    "full_damage_range": [
+      0,
+      1
+    ]
   },
   "input_hashes": {
     "blind_temporal_iter_pred_steps.npy": "6e6de9006c1d21f2b34aecce600484623647f59d78f7ee117801e11f95bcc91a",
@@ -22,10 +50,21 @@
     "truth_damage_snapshots.npz": "eb051455ddc234ae2750cf4a5f4dd083d75458e99af858a43880cee2b6b36ce4"
   },
   "outputs": {
-    "history_plate.html": "e1dc70ead77b302eee66b7f504be988f5120b895012ac2eb34d0e77595d0844a",
+    "cycle_scene_1.png": "071eb665ff074a15e87fa53cc8fcd4f7f84bd943da6f0b286d7563bec9ca0658",
+    "cycle_scene_2.png": "b5a4b0b7bec366a71297a6bc907e63ee4ba52ca716eaef6761b6d6428f31b2aa",
+    "cycle_scene_3.png": "94b0cf1627b2b393889d75e41626accf64b0752aab81638719bca1cd9affeba0",
+    "cycle_scene_4.png": "59144a81ffceba3f93be6044683dc29e41326328abb5e1836516624abc525196",
+    "cycle_scene_5.png": "2bc482ed98cdaa5afdb0280b847173b7af116e0f6a03f6e13d6eb7062021c94b",
+    "cycle_scene_6.png": "a53135fe7ec15f7184fa049e318147a41dcdc2dc6e5543642bf0f86a96fd7eaf",
+    "cycle_scene_7.png": "1eabe015fb3cc18a353c830a177503918e37c08fe87872c06ed8fb708405a983",
+    "cycle_scene_8.png": "526c93bd23ff2e05e6e5d5046039a1b2513a53dded4b3415549625a0c587dd0a",
+    "forward_cycle.mp4": "221dcaa4f1ec01c49712c730b4db3f6dd6a0697b6778babc219049303240a626",
+    "forward_cycle.png": "11522edb4cc53d8768d419bff9c89bba1724cbbf0355f80f0f18d6fff0968c27",
+    "forward_cycle_manifest.json": "d02b31e243e91efe124a5c9cc42fe73eea23f000d5db21aad225dd1cd08bff81",
+    "history_plate.html": "fbfb33ef838fcc27b4e4b84a4d2c7a961334644adba5137ba5be346d8e699104",
     "history_plate_arrays.npz": "e6d19babd2760540f81be749d25134e2c3e430b97a48a2ba2176127ef0c4fd4d"
   },
-  "seconds": 2.446317291003652,
+  "seconds": 2.415445101010846,
   "numpy": "2.4.2",
   "matplotlib": "3.10.8"
 }

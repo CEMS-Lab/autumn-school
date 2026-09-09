@@ -956,10 +956,22 @@ that decision through loading, unloading and backpropagation.</p>
 with the sigmoid reverse rule. Beside that calculation, scrub through the
 recorded fracture sequence and select a point to inspect its damage history.
 The default view shows a dark crack in a light plate; the colour view uses
-the same complete damage field.</p>
+the same complete damage field.
+The guided walkthrough below the controls follows the complete forward step,
+then traces the reverse pass through each local decision. It distinguishes
+the recorded 1,600-step trajectory from an illustrative 2,000-step extension.</p>
 <p><a id="history-panel-open" target="_blank" rel="noopener">Open the full interactive panel</a></p>
 <iframe id="history-explorer" title="Interactive history rule and recorded crack propagation in a plate" allow="fullscreen" allowfullscreen style="display:block;width:100%;height:1080px;border:1px solid #cbd4d8;border-radius:4px;background:white"></iframe><p><a class="reference download internal" download="" href="../_downloads/58d729853ab111885c4abe37dca0b95b/history_plate.html"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">the</span> <span class="pre">self-contained</span> <span class="pre">interactive</span> <span class="pre">panel</span></code></a>.
-The controls run in the browser, without a notebook kernel or installation.</p>
+The controls run in the browser, without a notebook kernel or installation.
+The introductory <a class="reference download internal" download="" href="../_downloads/e34777b659539181dd21e013c3dd6f11/forward_cycle.mp4"><code class="xref download docutils literal notranslate"><span class="pre">40-second</span> <span class="pre">algorithm</span> <span class="pre">walkthrough</span></code></a>
+is also available separately. It shows the computational sequence, with
+illustrative local curves and distinctly labelled retained FEM context.
+Its <a class="reference download internal" download="" href="../_downloads/4effa619f8a30328db2debae016f8e47/render_forward_cycle.py"><code class="xref download docutils literal notranslate"><span class="pre">Matplotlib</span> <span class="pre">renderer</span></code></a> and
+<a class="reference download internal" download="" href="../_downloads/4b605deefbc18aae18a406a67cc2cf64/forward_cycle_manifest.json"><code class="xref download docutils literal notranslate"><span class="pre">animation</span> <span class="pre">receipt</span></code></a>
+identify the plotted sequence. The panel’s
+<a class="reference download internal" download="" href="../_downloads/36b16ac439a8cd8e13971ea7822e771e/history_plate.template.html"><code class="xref download docutils literal notranslate"><span class="pre">HTML</span> <span class="pre">template</span></code></a> and
+<a class="reference download internal" download="" href="../_downloads/e704e69977dab7ea430a06b0566ba2ff/history_walkthrough.html"><code class="xref download docutils literal notranslate"><span class="pre">guided</span> <span class="pre">explanation</span> <span class="pre">source</span></code></a>
+are supplied for editing; open the self-contained panel above for playback.</p>
 <p>The two panes answer different questions: the left is a dimensionless history
 example, while the right contains retained PhAST damage fields. Matching
 energy/history snapshots were not saved, so the panel does not infer an energy
@@ -1057,7 +1069,7 @@ if (panelLink) {
 }
 window.addEventListener('message', event => {
   if (event.source !== panel.contentWindow || event.data?.type !== 'phast-history-panel-size') return;
-  if (Number.isFinite(event.data.height)) panel.style.height = Math.max(640, Math.min(2600, event.data.height + 4)) + 'px';
+  if (Number.isFinite(event.data.height)) panel.style.height = Math.max(640, Math.min(30000, event.data.height + 4)) + 'px';
 });
 document.querySelectorAll('video[data-visual-film]').forEach(video => {
   const name = video.dataset.visualFilm;
