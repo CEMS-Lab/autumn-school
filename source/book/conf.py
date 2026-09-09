@@ -68,8 +68,27 @@ def _copy_local_mathjax(app, exception):
         copytree(source, target, dirs_exist_ok=True)
 
 
+def _verify_design_directives(app, exception):
+    """Validate design directives and pedagogical standards upon HTML finalization."""
+    if exception is not None or app.builder.format != "html":
+        return
+    import runpy
+    import sys
+    checker_path = Path(__file__).resolve().parents[2] / "scripts/check_design_directives.py"
+    if checker_path.is_file():
+        support = runpy.run_path(str(checker_path))
+        passed, errors, elapsed_ms = support["check_directives"](Path(app.outdir))
+        if passed:
+            print(f"\n✓ [Design Directives] Verified: 0 violations, 4 pillars present, all tutorial badges active ({elapsed_ms:.1f} ms)")
+        else:
+            print(f"\n⚠ [Design Directives] Found {len(errors)} violation(s):", file=sys.stderr)
+            for err in errors:
+                print(f"  - {err}", file=sys.stderr)
+
+
 def setup(app):
     app.connect("build-finished", _copy_local_mathjax)
+    app.connect("build-finished", _verify_design_directives)
     # Expand retained notebook attachments for the optional inverse laboratory.
     import runpy
     support = runpy.run_path(str(Path(__file__).parent / "research" / "conf.py"))

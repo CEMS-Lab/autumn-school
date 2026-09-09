@@ -125,6 +125,10 @@ for relative in [
     if not (BOOK / relative).is_file():
         errors.append(f"Missing required asset: {relative}")
 
+from check_design_directives import check_directives
+passed_directives, directive_errors, directive_time = check_directives(BOOK)
+errors.extend(directive_errors)
+
 print(json.dumps({
     "scope": "Static HTML/source checks, not browser or numerical validation",
     "html_pages": len(pages),
@@ -132,6 +136,9 @@ print(json.dumps({
     "standalone_payloads": standalone_count,
     "notebook_lessons": lesson_count,
     "local_asset_references": asset_refs,
+    "design_directives": "passed" if passed_directives else "failed",
+    "design_directives_ms": round(directive_time, 1),
     "errors": errors,
 }, indent=2))
 raise SystemExit(bool(errors))
+

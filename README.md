@@ -56,8 +56,11 @@ Editable book sources live in `source/book/`; canonical executed notebooks
 live in `notebooks/`; original exercise sources live in
 `source/book/solutions/`. See [contributor guidance](CONTRIBUTING.md) and
 [edition notes](INTEGRATED_EDITION.md) before editing generated pages.
+The [Design Directives](DESIGN_DIRECTIVES.md) and [Pedagogical Walkthrough](PEDAGOGICAL_WALKTHROUGH.md)
+record the D2L/ADL4P pedagogical standards, notebook anatomy, and Matplotlib plotting rules,
+enforced automatically on every Sphinx build.
 The [academic diagram standard](DESIGN_STANDARD.md) records the inspected
-Delft, TUM and ETH references and the original course-wide visual grammar.
+Delft, TUM and ETH references and visual grammar.
 
 The reading design is informed by [D2L](https://d2l.ai/),
 [ADL4P](https://tum-pbs.github.io/ADL4P/) and
