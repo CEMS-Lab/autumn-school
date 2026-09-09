@@ -22,6 +22,13 @@ code, 20 worked answers and eight freshly executed plot outputs.
 
 ## Before integration
 
+The application chapter now explains weak multi-particle sensitivities,
+normalized window fusion, temporary block freezing with cumulative correction,
+checkpoint derivatives, and the progression from local uncertainty to
+conditional microstructure ensembles. These are educational protocols; the
+retained numerical code and HPC outputs are unchanged. Private fracture
+diagnostics remain outside this branch.
+
 1. Review the new history lesson and public execution receipt.
 2. Keep the hard-forward/sigmoid-backward rule labelled as a surrogate.
 3. Preserve the private failure log from the earlier pre-execution quota issue.
