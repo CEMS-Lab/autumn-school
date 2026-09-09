@@ -47,11 +47,16 @@ All notebooks were upgraded with:
 - Softened header accent line (`h1::after`).
 - Styled badge links (`.badge-row`, `.badge-link`) for all notebook tutorials.
 
+### D. Interactive Notebooks & Google Colab Integration
+- **Sphinx Book Theme Colab & Download Buttons:** Enabled `use_download_button: True` and configured `launch_buttons` with `colab_url` in `source/book/conf.py`. Every notebook page now features native top-bar actions to launch in Colab or download `.ipynb` source files directly.
+- **Central Notebook Hub:** Added an intuitive, prominent table to `source/book/index.md` and `source/book/07_practice_references.md` linking all 6 labs, their core pillar, 1-click Google Colab execution, practice downloads, and worked solution downloads.
+- **Colab Badges & Auto-Setup:** Added official Google Colab badges to all lab notebooks in `source/book/labs/`, `notebooks/study/`, and `notebooks/solutions/`, along with automated Colab repository bootstrapping (`git clone` and `sys.path` setup) so cloud sessions run without `FileNotFoundError`.
+
 ---
 
 ## 3. Highlighting and Automated Verification
 
 To ensure that future contributions and automated builds continuously maintain these standards without causing delays:
 1. **Authoritative Directives Document:** [DESIGN_DIRECTIVES.md](DESIGN_DIRECTIVES.md) codifies tone, forbidden phrases, notebook anatomy, and Matplotlib plotting parameters.
-2. **Automated Sphinx Build Hook:** `scripts/check_design_directives.py` validates compliance in **under 0.05 seconds** on every Sphinx HTML build.
-3. **Smoke Check Integration:** `scripts/check_book_theme.py` enforces directives compliance as part of repository validation.
+2. **Automated Sphinx Build Hook:** `scripts/check_design_directives.py` validates compliance in **under 0.08 seconds** on every Sphinx HTML build.
+3. **Smoke Check Integration:** `scripts/check_book_theme.py` enforces directives compliance, Colab links, and offline asset integrity as part of repository validation.

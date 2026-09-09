@@ -33,7 +33,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/mobile_math.css?v=acf5579e" />
-    <link rel="stylesheet" type="text/css" href="../_static/learning_book.css?v=d8208df1" />
+    <link rel="stylesheet" type="text/css" href="../_static/learning_book.css?v=37e7f39f" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -257,18 +257,129 @@
 <div class="article-header-buttons">
 
 
-<a href="https://github.com/CEMS-Lab/autumn-school" target="_blank"
-   class="btn btn-sm btn-source-repository-button"
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/source/book/labs/00_why_average_predictions_can_fail.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/CEMS-Lab/autumn-school" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
    title="Source repository"
-   data-bs-placement="bottom" data-bs-toggle="tooltip"
+   data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
 
 <span class="btn__icon-container">
   <i class="fab fa-github"></i>
   </span>
-
+<span class="btn__text-container">Repository</span>
 </a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/CEMS-Lab/autumn-school/issues/new?title=Issue%20on%20page%20%2Flabs/00_why_average_predictions_can_fail.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/labs/00_why_average_predictions_can_fail.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
 
 
 
@@ -352,18 +463,19 @@ document.write(`
 <h1><span class="section-number">1.2.1. </span>Branch Selection and Energy-Based Objectives in Physics-Informed Learning<a class="headerlink" href="#branch-selection-and-energy-based-objectives-in-physics-informed-learning" title="Link to this heading">#</a></h1>
 <p><strong>Learning Objective:</strong> In physical systems with multi-valued equilibrium solutions (such as post-buckling or symmetric crack paths), understand why standard supervised regression converges to unphysical conditional averages, and how physics-informed energy minimization guides models toward valid physical branches.</p>
 <div class="badge-row">
+  <a class="badge-colab" href="https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/study/00_why_average_predictions_can_fail.ipynb" target="_blank"><img src="../_static/colab-badge.svg" alt="Open In Colab"/></a>
   <a class="badge-link" href="../../notebooks/study/00_why_average_predictions_can_fail.ipynb"><i class="fa-solid fa-download"></i> Download Practice Notebook</a>
-  <a class="badge-link" href="../../notebooks/solutions/00_why_average_predictions_can_fail.ipynb"><i class="fa-solid fa-check-circle"></i> Download with Worked Solutions</a>
+  <a class="badge-link" href="../../notebooks/solutions/00_why_average_predictions_can_fail.ipynb"><i class="fa-solid fa-check-circle"></i> Download Worked Solutions</a>
   <a class="badge-link" href="../../SETUP.md"><i class="fa-solid fa-gear"></i> Environment Setup</a>
 </div>
 <p>Consider a scalar physical system governed by a double-well potential energy. For a control parameter  \in [0.25, 1]$, define the potential energy:</p>
-<p>28488
+<p>29159
 W(q; s) = rac{(q^2 - s)^2}{4}.
-28488</p>
+29159</p>
 <p>For any control value  &gt; 0$, the system admits two zero-energy equilibrium states:</p>
-<p>28488
+<p>29159
 q_+(s) = +\sqrt{s} \quad 	ext{and} \quad q_-(s) = -\sqrt{s}.
-28488</p>
+29159</p>
 <p>In this tutorial, we contrast two learning paradigms:</p>
 <ol class="arabic simple">
 <li><p><strong>Supervised Regression (Mean Squared Error):</strong> Trained on balanced observations from both branches.</p></li>
@@ -376,7 +488,17 @@ q_+(s) = +\sqrt{s} \quad 	ext{and} \quad q_-(s) = -\sqrt{s}.
 <p class="expanded admonition-title">Hide code cell source</p>
 </summary>
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Google Colab environment setup</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">google.colab</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">subprocess</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;autumn-school&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">is_dir</span><span class="p">()</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;notebooks&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">is_dir</span><span class="p">():</span>
+        <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="s2">&quot;git&quot;</span><span class="p">,</span> <span class="s2">&quot;clone&quot;</span><span class="p">,</span> <span class="s2">&quot;--depth&quot;</span><span class="p">,</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;https://github.com/CEMS-Lab/autumn-school.git&quot;</span><span class="p">],</span> <span class="n">check</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="k">pass</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">platform</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
@@ -397,6 +519,8 @@ q_+(s) = +\sqrt{s} \quad 	ext{and} \quad q_-(s) = -\sqrt{s}.
             <span class="k">return</span> <span class="n">direct</span>
         <span class="k">if</span> <span class="p">(</span><span class="n">base</span> <span class="o">/</span> <span class="s2">&quot;notebooks&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">is_dir</span><span class="p">()</span> <span class="ow">and</span> <span class="p">(</span><span class="n">base</span> <span class="o">/</span> <span class="s2">&quot;assets&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">is_dir</span><span class="p">():</span>
             <span class="k">return</span> <span class="n">base</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">base</span> <span class="o">/</span> <span class="s2">&quot;autumn-school&quot;</span> <span class="o">/</span> <span class="s2">&quot;notebooks&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">is_dir</span><span class="p">():</span>
+            <span class="k">return</span> <span class="n">base</span> <span class="o">/</span> <span class="s2">&quot;autumn-school&quot;</span>
     <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span><span class="s2">&quot;Could not find the UKACM course root.&quot;</span><span class="p">)</span>
 
 <span class="n">COURSE_ROOT</span> <span class="o">=</span> <span class="n">locate_course_root</span><span class="p">()</span>
@@ -666,7 +790,7 @@ output. This explicit branch selection determines which solution it learns.</p>
 <h2><span class="section-number">1.2.1.3. </span>Physical Interpretation<a class="headerlink" href="#physical-interpretation" title="Link to this heading">#</a></h2>
 <p>The results highlight a fundamental distinction between standard data regression and physical energy minimization:</p>
 <ul class="simple">
-<li><p><strong>Supervised Regression:</strong> Under a squared-error loss, the optimal point prediction for equally balanced target branches is their conditional expectation, <span class="math notranslate nohighlight">\(\mathbb{E}[q|s] = 0\)</span>. Although this minimises the statistical MSE loss, =0<span class="math notranslate nohighlight">\( is not a physical equilibrium state—it has high potential energy (0; s) = s^2/4\)</span> and a non-zero residual ^2 - s = -s$.</p></li>
+<li><p><strong>Supervised Regression:</strong> Under a squared-error loss, the optimal point prediction for equally balanced target branches is their conditional expectation, <span class="math notranslate nohighlight">\(\mathbb{E}[q|s] = 0\)</span>. Although this minimises the statistical MSE loss, =0<span class="math notranslate nohighlight">\( is not a physical equilibrium state—it has high potential energy (0; s) = s^2/4\)</span> and a non-zero residual  = 0^2 - s = -s$.</p></li>
 <li><p><strong>Energy-Based Minimization:</strong> By directly minimizing the physical potential energy (q; s)<span class="math notranslate nohighlight">\( with a positive branch parameterization ( = \operatorname{softplus}(a)\)</span>), the model converges directly to the positive physical equilibrium branch  = +\sqrt{s}$, achieving near-zero energy and near-zero residual.</p></li>
 </ul>
 <p>In physical modeling, predicting the conditional average of two valid configurations (such as an uncracked state between two symmetric crack paths) is often unphysical. Incorporating physical energy functions or branch conditioning ensures that learned models produce physically admissible states.</p>

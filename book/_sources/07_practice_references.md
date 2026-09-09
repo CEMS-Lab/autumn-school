@@ -24,6 +24,23 @@ When experimenting with computational mechanics models in Jupyter or Colab:
 - **Verify Gradients Early:** When writing custom differentiable loss functions, verify gradients against finite differences before launching long optimization runs.
 - **Check Physical Bounds:** Ensure the damage field respects $0 \le d \le 1$ and non-decreasing history $d_n \ge d_{n-1}$.
 
+---
+
+## Complete Notebook Index & Google Colab Links
+
+Use the quick-reference table below to open any course notebook directly in **Google Colab**, or download the practice and solution notebooks for offline study:
+
+| Lab | Milestone / Topic | Launch in Colab | Practice Notebook | Worked Solutions | In-Book Chapter |
+| :--- | :--- | :---: | :---: | :---: | :---: |
+| **Lab 00** | **Branch Selection & Energy Objectives** | [![Open In Colab](_static/colab-badge.svg)](https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/study/00_why_average_predictions_can_fail.ipynb) | [Practice .ipynb](https://github.com/CEMS-Lab/autumn-school/blob/main/notebooks/study/00_why_average_predictions_can_fail.ipynb) | [Solutions .ipynb](https://github.com/CEMS-Lab/autumn-school/blob/main/notebooks/solutions/00_why_average_predictions_can_fail.ipynb) | {doc}`00_welcome_and_routes` |
+| **Lab 01** | **End-to-End PhAST Simulation** | [![Open In Colab](_static/colab-badge.svg)](https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/study/01_phast_tiny_evolving_fracture.ipynb) | [Practice .ipynb](https://github.com/CEMS-Lab/autumn-school/blob/main/notebooks/study/01_phast_tiny_evolving_fracture.ipynb) | [Solutions .ipynb](https://github.com/CEMS-Lab/autumn-school/blob/main/notebooks/solutions/01_phast_tiny_evolving_fracture.ipynb) | {doc}`04_fem_to_tensors` |
+| **Lab 02** | **Autograd vs. Finite Differences** | [![Open In Colab](_static/colab-badge.svg)](https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/study/02_degradation_autograd.ipynb) | [Practice .ipynb](https://github.com/CEMS-Lab/autumn-school/blob/main/notebooks/study/02_degradation_autograd.ipynb) | [Solutions .ipynb](https://github.com/CEMS-Lab/autumn-school/blob/main/notebooks/solutions/02_degradation_autograd.ipynb) | {doc}`02_phase_field_energy` |
+| **Lab 03** | **Inverse Parameter Discovery** | [![Open In Colab](_static/colab-badge.svg)](https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/study/03_tiny_derivative_inverse_toy.ipynb) | [Practice .ipynb](https://github.com/CEMS-Lab/autumn-school/blob/main/notebooks/study/03_tiny_derivative_inverse_toy.ipynb) | [Solutions .ipynb](https://github.com/CEMS-Lab/autumn-school/blob/main/notebooks/solutions/03_tiny_derivative_inverse_toy.ipynb) | {doc}`05_differentiation_and_inverse` |
+| **Lab 04** | **Neural Field Adapter** | [![Open In Colab](_static/colab-badge.svg)](https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/study/04_train_save_reload_adapter.ipynb) | [Practice .ipynb](https://github.com/CEMS-Lab/autumn-school/blob/main/notebooks/study/04_train_save_reload_adapter.ipynb) | [Solutions .ipynb](https://github.com/CEMS-Lab/autumn-school/blob/main/notebooks/solutions/04_train_save_reload_adapter.ipynb) | {doc}`06_learning_adapter` |
+| **Lab 05** | **Residual Evaluation & Hybrid Correction** | [![Open In Colab](_static/colab-badge.svg)](https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/study/05_hybrid_reference_correction.ipynb) | [Practice .ipynb](https://github.com/CEMS-Lab/autumn-school/blob/main/notebooks/study/05_hybrid_reference_correction.ipynb) | [Solutions .ipynb](https://github.com/CEMS-Lab/autumn-school/blob/main/notebooks/solutions/05_hybrid_reference_correction.ipynb) | {doc}`06_learning_adapter` |
+
+---
+
 ## Worked consolidation exercise
 
 Consider a two-dimensional notched specimen represented by displacement $u$

@@ -31,8 +31,10 @@ Every tutorial notebook must follow a standardized 6-part anatomy:
 1. **Header & Action Badges:**
    - Title (`# Clear, Descriptive Title`)
    - **Learning Objective:** A 1–2 sentence pedagogical summary of what the student will build and understand.
-   - Action badges: `[Download Practice Notebook]`, `[Download with Worked Solutions]`, `[Environment Setup]`, and `[Open in Colab]`.
-2. **Physical Motivation & Governing Equations:**
+   - Action badges: One-click `[Open in Colab]` badge (`colab-badge.svg`), `[Download Practice Notebook]`, `[Download with Worked Solutions]`, and `[Environment Setup]`.
+2. **Interactive Cloud Execution (Google Colab Ready):**
+   - The opening code cell must include automated Google Colab detection and bootstrapping: cloning `https://github.com/CEMS-Lab/autumn-school.git` if running on a fresh cloud instance and setting `sys.path` to include `notebooks/` and `vendor/PhAST/src` without requiring manual file uploads.
+3. **Physical Motivation & Governing Equations:**
    - Concise conceptual introduction with an intuitive physical diagram or schematic.
    - Clean mathematical formulation with all symbols defined upon appearance.
 3. **Step-by-Step Code Walkthrough:**

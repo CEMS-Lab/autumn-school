@@ -53,13 +53,19 @@ def check_directives(book_dir=BOOK):
         for pillar in pillars:
             if pillar.lower() not in index_content.lower():
                 errors.append(f"index.html: missing core workshop pillar '{pillar}'")
+        if "colab" not in index_content.lower():
+            errors.append("index.html: missing Google Colab links or badges")
 
-    # 3. Check lab notebooks action badges
+    # 3. Check lab notebooks action badges, download buttons, and Colab integration
     lab_files = sorted((book_dir / "labs").glob("*.html")) if (book_dir / "labs").is_dir() else []
     for lf in lab_files:
         l_content = lf.read_text(encoding="utf-8", errors="ignore")
         if "badge-row" not in l_content and "badge-link" not in l_content:
             errors.append(f"{lf.relative_to(ROOT)}: missing tutorial action badges (.badge-row)")
+        if "colab" not in l_content.lower():
+            errors.append(f"{lf.relative_to(ROOT)}: missing Google Colab launch button or badge")
+        if "download" not in l_content.lower() and "btn-download" not in l_content:
+            errors.append(f"{lf.relative_to(ROOT)}: missing notebook download option")
 
     elapsed_ms = (time.time() - t0) * 1000
     return len(errors) == 0, errors, elapsed_ms

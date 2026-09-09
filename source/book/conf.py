@@ -43,9 +43,15 @@ html_theme_options = {
     "show_navbar_depth": 1,
     "show_toc_level": 1,
     "repository_url": "https://github.com/CEMS-Lab/autumn-school",
+    "repository_branch": "main",
+    "path_to_docs": "source/book",
     "use_repository_button": True,
-    # Lessons already link complete practice/solution notebooks and companions.
-    "use_download_button": False,
+    "use_download_button": True,
+    "use_issues_button": True,
+    "launch_buttons": {
+        "colab_url": "https://colab.research.google.com",
+        "notebook_interface": "jupyterlab",
+    },
     "footer_content_items": ["phast-credit.html", "phast-discoveries.html"],
 }
 templates_path = ["_templates"]

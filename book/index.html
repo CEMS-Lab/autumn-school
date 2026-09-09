@@ -33,7 +33,7 @@
     <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="_static/mobile_math.css?v=acf5579e" />
-    <link rel="stylesheet" type="text/css" href="_static/learning_book.css?v=d8208df1" />
+    <link rel="stylesheet" type="text/css" href="_static/learning_book.css?v=37e7f39f" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -258,18 +258,98 @@
 <div class="article-header-buttons">
 
 
-<a href="https://github.com/CEMS-Lab/autumn-school" target="_blank"
-   class="btn btn-sm btn-source-repository-button"
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/CEMS-Lab/autumn-school" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
    title="Source repository"
-   data-bs-placement="bottom" data-bs-toggle="tooltip"
+   data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
 
 <span class="btn__icon-container">
   <i class="fab fa-github"></i>
   </span>
-
+<span class="btn__text-container">Repository</span>
 </a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/CEMS-Lab/autumn-school/issues/new?title=Issue%20on%20page%20%2Findex.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/index.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
 
 
 
@@ -331,7 +411,10 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#four-core-workshop-pillars">Four Core Workshop Pillars</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#course-schedule-hands-on-labs">Course Schedule &amp; Hands-On Labs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#course-schedule-hands-on-labs">Course Schedule &amp; Hands-On Labs</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interactive-computational-labs-google-colab">Interactive Computational Labs &amp; Google Colab</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#optional-inverse-experiments">Optional inverse experiments</a></li>
 </ul>
             </nav>
@@ -378,11 +461,70 @@ We examine how neural networks and operator learning interface with physics solv
 <li><p><strong>3 Hours of Interactive Demonstrations:</strong> Concepts, mathematical derivations, numerical algorithms, and visual field walkthroughs.</p></li>
 <li><p><strong>3 Hours of Hands-on Lab Notebooks:</strong> Interactive Jupyter tutorials where you run code, inspect fields, modify physical parameters, and solve guided exercises.</p></li>
 </ul>
+<section id="interactive-computational-labs-google-colab">
+<h3>Interactive Computational Labs &amp; Google Colab<a class="headerlink" href="#interactive-computational-labs-google-colab" title="Link to this heading">#</a></h3>
+<p>Every computational chapter pairs with a self-contained, executable Jupyter notebook. You can run each lab with a single click in <strong>Google Colab</strong> (using free cloud CPU/GPU runtimes), download the blank practice notebooks for hands-on assignments, or inspect the worked solutions:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Lab &amp; Pillar</p></th>
+<th class="head text-left"><p>Focus &amp; Key Concepts</p></th>
+<th class="head text-center"><p>One-Click Run</p></th>
+<th class="head text-center"><p>Practice Notebook</p></th>
+<th class="head text-center"><p>Worked Solutions</p></th>
+<th class="head text-center"><p>In-Book Lesson</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p><strong>Lab 00</strong><br><em>(Pillars 1 &amp; 4)</em></p></td>
+<td class="text-left"><p><strong>Branch Selection &amp; Energy Objectives</strong><br>Multi-valued systems, conditional MSE averaging vs. energy minimization</p></td>
+<td class="text-center"><p><a class="reference external" href="https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/study/00_why_average_predictions_can_fail.ipynb"><img alt="Open In Colab" src="_images/colab-badge.svg" /></a></p></td>
+<td class="text-center"><p><a class="reference external" href="https://github.com/CEMS-Lab/autumn-school/blob/main/notebooks/study/00_why_average_predictions_can_fail.ipynb">Practice .ipynb</a></p></td>
+<td class="text-center"><p><a class="reference external" href="https://github.com/CEMS-Lab/autumn-school/blob/main/notebooks/solutions/00_why_average_predictions_can_fail.ipynb">Solutions .ipynb</a></p></td>
+<td class="text-center"><p><a class="reference internal" href="00_welcome_and_routes.html"><span class="doc">From Cracks to Computation: Learn by Doing</span></a></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><strong>Lab 01</strong><br><em>(Pillar 2)</em></p></td>
+<td class="text-left"><p><strong>End-to-End PhAST Simulation</strong><br>T3 meshing, displacement BCs, staggered Newton solver, load curves</p></td>
+<td class="text-center"><p><a class="reference external" href="https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/study/01_phast_tiny_evolving_fracture.ipynb"><img alt="Open In Colab" src="_images/colab-badge.svg" /></a></p></td>
+<td class="text-center"><p><a class="reference external" href="https://github.com/CEMS-Lab/autumn-school/blob/main/notebooks/study/01_phast_tiny_evolving_fracture.ipynb">Practice .ipynb</a></p></td>
+<td class="text-center"><p><a class="reference external" href="https://github.com/CEMS-Lab/autumn-school/blob/main/notebooks/solutions/01_phast_tiny_evolving_fracture.ipynb">Solutions .ipynb</a></p></td>
+<td class="text-center"><p><a class="reference internal" href="04_fem_to_tensors.html"><span class="doc">Geometry, FEM, tensors, and matrix-free operators</span></a></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><strong>Lab 02</strong><br><em>(Pillar 3)</em></p></td>
+<td class="text-left"><p><strong>Autograd vs. Finite Differences</strong><br>Taylor test, central differences, truncation vs. roundoff, autograd sensitivity</p></td>
+<td class="text-center"><p><a class="reference external" href="https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/study/02_degradation_autograd.ipynb"><img alt="Open In Colab" src="_images/colab-badge.svg" /></a></p></td>
+<td class="text-center"><p><a class="reference external" href="https://github.com/CEMS-Lab/autumn-school/blob/main/notebooks/study/02_degradation_autograd.ipynb">Practice .ipynb</a></p></td>
+<td class="text-center"><p><a class="reference external" href="https://github.com/CEMS-Lab/autumn-school/blob/main/notebooks/solutions/02_degradation_autograd.ipynb">Solutions .ipynb</a></p></td>
+<td class="text-center"><p><a class="reference internal" href="02_phase_field_energy.html"><span class="doc">Fracture energy: AT1, AT2, degradation, and width</span></a></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><strong>Lab 03</strong><br><em>(Pillar 3)</em></p></td>
+<td class="text-left"><p><strong>Inverse Parameter Discovery</strong><br>Adjoint backpropagation, synthetic displacement data, Young’s modulus recovery</p></td>
+<td class="text-center"><p><a class="reference external" href="https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/study/03_tiny_derivative_inverse_toy.ipynb"><img alt="Open In Colab" src="_images/colab-badge.svg" /></a></p></td>
+<td class="text-center"><p><a class="reference external" href="https://github.com/CEMS-Lab/autumn-school/blob/main/notebooks/study/03_tiny_derivative_inverse_toy.ipynb">Practice .ipynb</a></p></td>
+<td class="text-center"><p><a class="reference external" href="https://github.com/CEMS-Lab/autumn-school/blob/main/notebooks/solutions/03_tiny_derivative_inverse_toy.ipynb">Solutions .ipynb</a></p></td>
+<td class="text-center"><p><a class="reference internal" href="05_differentiation_and_inverse.html"><span class="doc">Differentiation and an illustrative inverse problem</span></a></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><strong>Lab 04</strong><br><em>(Pillar 4)</em></p></td>
+<td class="text-left"><p><strong>Neural Field Adapter</strong><br>PyTorch MLP surrogate, feature normalization, checkpointing, reload verification</p></td>
+<td class="text-center"><p><a class="reference external" href="https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/study/04_train_save_reload_adapter.ipynb"><img alt="Open In Colab" src="_images/colab-badge.svg" /></a></p></td>
+<td class="text-center"><p><a class="reference external" href="https://github.com/CEMS-Lab/autumn-school/blob/main/notebooks/study/04_train_save_reload_adapter.ipynb">Practice .ipynb</a></p></td>
+<td class="text-center"><p><a class="reference external" href="https://github.com/CEMS-Lab/autumn-school/blob/main/notebooks/solutions/04_train_save_reload_adapter.ipynb">Solutions .ipynb</a></p></td>
+<td class="text-center"><p><a class="reference internal" href="06_learning_adapter.html"><span class="doc">Train, save, reload, adapters, and checked proposals</span></a></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><strong>Lab 05</strong><br><em>(Pillar 4)</em></p></td>
+<td class="text-left"><p><strong>Residual Evaluation &amp; Hybrid Correction</strong><br>Equilibrium residual scoring, gating threshold, solver-in-the-loop hybrid steps</p></td>
+<td class="text-center"><p><a class="reference external" href="https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/study/05_hybrid_reference_correction.ipynb"><img alt="Open In Colab" src="_images/colab-badge.svg" /></a></p></td>
+<td class="text-center"><p><a class="reference external" href="https://github.com/CEMS-Lab/autumn-school/blob/main/notebooks/study/05_hybrid_reference_correction.ipynb">Practice .ipynb</a></p></td>
+<td class="text-center"><p><a class="reference external" href="https://github.com/CEMS-Lab/autumn-school/blob/main/notebooks/solutions/05_hybrid_reference_correction.ipynb">Solutions .ipynb</a></p></td>
+<td class="text-center"><p><a class="reference internal" href="06_learning_adapter.html"><span class="doc">Train, save, reload, adapters, and checked proposals</span></a></p></td>
+</tr>
+</tbody>
+</table>
+</div>
 <div class="tip admonition">
 <p class="admonition-title">How to Use This Tutorial Guide</p>
 <ul class="simple">
 <li><p><strong>Read and Follow:</strong> Each chapter introduces the physical intuition before deriving the governing equations and presenting the code.</p></li>
-<li><p><strong>Run the Notebooks:</strong> Computational lessons can be read inline or executed interactively in Jupyter or Google Colab.</p></li>
+<li><p><strong>Run the Notebooks:</strong> Computational lessons can be read inline or executed interactively in Jupyter or Google Colab with one click.</p></li>
 <li><p><strong>Explore and Modify:</strong> Use the practice notebooks to test your understanding. Try varying the material parameters (such as fracture toughness <span class="math notranslate nohighlight">\(G_c\)</span> or length scale <span class="math notranslate nohighlight">\(\ell\)</span>) to see how the physical crack pattern responds.</p></li>
 <li><p><strong>Notation Convention:</strong> Throughout this guide, <span class="math notranslate nohighlight">\(d=0\)</span> denotes completely intact material, while <span class="math notranslate nohighlight">\(d=1\)</span> denotes fully damaged material. A small numerical residual stiffness <span class="math notranslate nohighlight">\(\eta_{\mathrm{res}} \ll 1\)</span> is retained in computation to keep the linear elasticity operator well-conditioned.</p></li>
 </ul>
@@ -479,15 +621,17 @@ We examine how neural networks and operator learning interface with physics solv
 <li class="toctree-l1"><a class="reference internal" href="07_practice_references.html">8. Practice, Solutions, Glossary, and References</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="07_practice_references.html#workshop-synthesis-the-four-core-milestones">8.1. Workshop Synthesis: The Four Core Milestones</a></li>
 <li class="toctree-l2"><a class="reference internal" href="07_practice_references.html#best-practices-for-computational-exploration">8.2. Best Practices for Computational Exploration</a></li>
-<li class="toctree-l2"><a class="reference internal" href="07_practice_references.html#worked-consolidation-exercise">8.3. Worked consolidation exercise</a></li>
-<li class="toctree-l2"><a class="reference internal" href="07_practice_references.html#glossary">8.4. Glossary</a></li>
-<li class="toctree-l2"><a class="reference internal" href="07_practice_references.html#contributing-a-new-course-activity">8.5. Contributing a new course activity</a></li>
-<li class="toctree-l2"><a class="reference internal" href="07_practice_references.html#reference-trail">8.6. Reference trail</a></li>
-<li class="toctree-l2"><a class="reference internal" href="07_practice_references.html#final-checklist">8.7. Final checklist</a></li>
+<li class="toctree-l2"><a class="reference internal" href="07_practice_references.html#complete-notebook-index-google-colab-links">8.3. Complete Notebook Index &amp; Google Colab Links</a></li>
+<li class="toctree-l2"><a class="reference internal" href="07_practice_references.html#worked-consolidation-exercise">8.4. Worked consolidation exercise</a></li>
+<li class="toctree-l2"><a class="reference internal" href="07_practice_references.html#glossary">8.5. Glossary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="07_practice_references.html#contributing-a-new-course-activity">8.6. Contributing a new course activity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="07_practice_references.html#reference-trail">8.7. Reference trail</a></li>
+<li class="toctree-l2"><a class="reference internal" href="07_practice_references.html#final-checklist">8.8. Final checklist</a></li>
 </ul>
 </li>
 </ul>
 </div>
+</section>
 </section>
 <section id="optional-inverse-experiments">
 <h2>Optional inverse experiments<a class="headerlink" href="#optional-inverse-experiments" title="Link to this heading">#</a></h2>
@@ -543,7 +687,10 @@ and animations accompany the downloadable notebooks and figures.</p>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#four-core-workshop-pillars">Four Core Workshop Pillars</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#course-schedule-hands-on-labs">Course Schedule &amp; Hands-On Labs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#course-schedule-hands-on-labs">Course Schedule &amp; Hands-On Labs</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interactive-computational-labs-google-colab">Interactive Computational Labs &amp; Google Colab</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#optional-inverse-experiments">Optional inverse experiments</a></li>
 </ul>
   </nav></div>
