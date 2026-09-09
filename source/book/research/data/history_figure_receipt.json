@@ -1,0 +1,5 @@
+{
+  "figure_sha256": "05535ab498c96ee0209492b91ae5a375b8702618ec56497b75b6ebae2b981db7",
+  "executed_notebook_sha256": "a615283d79acb8b99bf7a14fadfb046c3f7e79241711553ad65e025d45850e15",
+  "method": "Exact embedded output from the executed notebook; no local recomputation"
+}

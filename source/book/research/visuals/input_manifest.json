@@ -1,0 +1,14 @@
+{
+  "scope": "Allowlisted numerical inputs; source paths remain in private handoff",
+  "files": {
+    "blind_temporal_iter_pred_snapshots.npy": "6d95dc410e164f3256445f89e943983600d4b022de812bdef333c7daedee1bfa",
+    "blind_temporal_iter_pred_steps.npy": "6e6de9006c1d21f2b34aecce600484623647f59d78f7ee117801e11f95bcc91a",
+    "blind_temporal_recovery.json": "b05c6daac57316eeaa38f026d211c9e4f6189a4b6de664f47c504c6f3ef8000d",
+    "blind_temporal_target_snapshots.npy": "9dae687e28c526a86b0ba3247e12c309b1f926cdd04a104efe658db5e1c21168",
+    "loss_landscape_step1454.json": "0be211598cdef3efe48496613d23219903f3dcd4cc0938d1c34f89ba84a0c062",
+    "mesh_elements.npy": "f6cc972d43ae150c1296954abbb95f2c42c4cd51adc6e26ac0ac1fe78cb7194b",
+    "mesh_nodes.npy": "556363e1b116c30e520a6eedd949e86a2dcad624b44d3ed34af978058dbffb71",
+    "particle_params.json": "2b1a2df0db26c9753f49df7b473db2dde86357f2a4b0275f961e79359681ac02"
+  },
+  "description": "Extract retained_inputs.zip to create inputs/. These numerical inputs are used by particle_visuals.py."
+}

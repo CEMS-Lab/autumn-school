@@ -1,5 +1,25 @@
 # About the integrated edition
 
+## Optional inverse extension, 9 September 2026
+
+The HTML now includes source-grounded history explanations, an 18-second
+animation, seven original HPC-executed teaching examples and a visual
+laboratory with three further animations. The latter distinguishes a dense
+geometry-image toy from a retained 25-point FEM scan and a recorded inverse
+trajectory. Numerical receipts and downloadable inputs accompany the pages.
+The user authorised this bounded merge and publication. It does not close
+issue #7's fresh actual-fracture notebook requirements or change the six-hour
+classroom sequence. No new solver or manuscript changes are included.
+
+The printable PDF and slide release assets remain the earlier classroom
+edition; this HTML addition does not imply those frozen files were rebuilt.
+See evidence/inverse_publication.json for the content/receipt checks.
+The integrated HTML passed a warning-free Sphinx build, 24 inverse and six
+classroom page/viewport checks, and eight native-video viewport checks.
+Local links, offline equations, downloads, playback and seeking were checked.
+
+## Classroom edition
+
 The book renders six notebooks as native chapter pages, including
 their code and recorded outputs. It does not display a separate notebook website
 inside an iframe. MyST-NB and Sphinx generate both HTML and PDF.

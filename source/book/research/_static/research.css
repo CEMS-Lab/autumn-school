@@ -1,0 +1,16 @@
+.md-typeset { font-size: .85rem; line-height: 1.65; color: #202124; }
+.md-typeset h1 { font-size: 1.7rem; font-weight: 600; color: #202124; }
+.md-typeset h2 { font-size: 1.2rem; color: #202124; }
+.md-typeset img { max-width: 100%; height: auto; }
+.md-typeset .math { max-width: 100%; overflow-x: auto; }
+.md-typeset div.math { padding: .4rem 0; }
+.md-typeset table { font-size: .76rem; }
+.md-typeset .worked-answer > summary { cursor: pointer; font-weight: 600; }
+.md-typeset .worked-answer[open] > summary { margin-bottom: .6rem; }
+.md-typeset .dropdown { box-shadow: none; border: 1px solid #b9d4dc; }
+@media (max-width: 600px) {
+  .md-typeset { font-size: .82rem; }
+  .md-typeset h1 { font-size: 1.45rem; overflow-wrap: anywhere; }
+  .md-typeset .highlight { overflow-x: auto; }
+  .md-typeset table { display: block; max-width: 100%; overflow-x: auto; }
+}

@@ -1,0 +1,100 @@
+{
+  "geometry": {
+    "model": "Smooth geometry-image mismatch; no elasticity or fracture solve",
+    "radius_mm": 3.0,
+    "interface_width_mm": 1.5,
+    "pixel_grid": [
+      80,
+      80
+    ],
+    "landscape_grid": [
+      81,
+      65
+    ],
+    "sample_count": 5265,
+    "analytic_fd_relative_error": 2.514596015338899e-10,
+    "updates": 24,
+    "optimization_evaluations": 113,
+    "initial_loss": 0.023490348831883733,
+    "final_loss": 2.856886715548753e-16,
+    "final_centre": [
+      28.000000347234405,
+      23.000000557841066
+    ]
+  },
+  "fem_recovery": {
+    "model": "Retained nonlinear FEM inverse; no new fracture solve",
+    "loss": "sum_t sum((d_pred(t) - d_obs(t))^2) / max(sum_t sum(d_obs(t)), eps)",
+    "steps": [
+      1018,
+      1163,
+      1309,
+      1454
+    ],
+    "updates": 20,
+    "initial_centre_mm": [
+      34.0,
+      33.392
+    ],
+    "final_centre_mm": [
+      28.07964937368428,
+      23.034450885123633
+    ],
+    "reference_centre_mm": [
+      28.0,
+      23.0
+    ],
+    "radius_mm": 3.0,
+    "initial_distance_mm": 11.99973599709594,
+    "final_distance_mm": 0.08678067880640128,
+    "saved_loss_max_recompute_difference": 3.469446951953614e-18,
+    "nonmonotone_updates": [
+      16,
+      18
+    ],
+    "error_colour_limit": 0.7509397505915891
+  },
+  "sampled_landscape": {
+    "samples": 25,
+    "step": 1454,
+    "loss": "sum((d_pred - d_obs)^2) / max(sum(d_obs), eps)",
+    "scope": "Single-frame same-basin sample grid; separate objective from the four-frame inverse",
+    "display": "Only adjacent sampled cells joined; no dense resampling, clipping or fabricated roughness"
+  },
+  "seconds": 63.28429331816733,
+  "matplotlib": "3.10.8",
+  "numpy": "2.4.2",
+  "renderer_sha256": "0be74addfb4758b572582601fb9362c6ab8b537d81d77fc2486b564a53a92273",
+  "input_sha256": {
+    "blind_temporal_iter_pred_snapshots.npy": "6d95dc410e164f3256445f89e943983600d4b022de812bdef333c7daedee1bfa",
+    "blind_temporal_iter_pred_steps.npy": "6e6de9006c1d21f2b34aecce600484623647f59d78f7ee117801e11f95bcc91a",
+    "blind_temporal_recovery.json": "b05c6daac57316eeaa38f026d211c9e4f6189a4b6de664f47c504c6f3ef8000d",
+    "blind_temporal_target_snapshots.npy": "9dae687e28c526a86b0ba3247e12c309b1f926cdd04a104efe658db5e1c21168",
+    "loss_landscape_step1454.json": "0be211598cdef3efe48496613d23219903f3dcd4cc0938d1c34f89ba84a0c062",
+    "mesh_elements.npy": "f6cc972d43ae150c1296954abbb95f2c42c4cd51adc6e26ac0ac1fe78cb7194b",
+    "mesh_nodes.npy": "556363e1b116c30e520a6eedd949e86a2dcad624b44d3ed34af978058dbffb71",
+    "particle_params.json": "2b1a2df0db26c9753f49df7b473db2dde86357f2a4b0275f961e79359681ac02",
+    "phase2_blind_temporal_recovery.py": "3298e7c6434714d6bd88e83cddabd46ab0f12b7d4cd321520e9b0a5a9271175c",
+    "phase2_loss_landscape_gate.py": "ef66fb72364ef4ad0daf325a6efa690ef5b342ff4d1ad90684f4064dbeb6f8e9"
+  },
+  "artifact_sha256": {
+    "fem_arrays.npz": "f0b11d50f41e0fa2aa0ae89b1b65e6a2862ad1462001b4e72cc36c87026d88be",
+    "fem_recovery.mp4": "cfc504e371d710f3104dffdbfd4ccbdd08ccb3d13f07e79fad65ac25ea92fb5d",
+    "fem_recovery.pdf": "f505fa9a96f1c5096a05b2b57c2dbe082feec0f3341b49be31b48ace3a6ecb05",
+    "fem_recovery.png": "e72567785d3fe0c83af8a3b3804c038cbf09a7bd2633ac531f25cda1d0279d51",
+    "fem_sampled_loss.pdf": "a07ff2316d8e9d5cb027159987e79393fd851e682a6f6b0fdea3def14877199e",
+    "fem_sampled_loss.png": "5de42c3ea6d0b84ace22718c40673c6ee7d2c92902f735aa86d0932e72ad6ec1",
+    "fem_time.mp4": "290f690f431357c8b8d34283f8416057b4b54c01065b2f52f112f14e7c3743f7",
+    "fem_time.pdf": "a9241479c1500819633efb8fb05019c4c68d9d6f67392c413d1594e031b18b93",
+    "fem_time.png": "f927293a339efbcc9b93ec476ecb801cf7e1d266807e4bc403915768211628d5",
+    "geometry_arrays.npz": "f70e621a62f61e9988762f0a0f696fa902bf29c1e525aa10cb1d506b3baf7865",
+    "geometry_descent.mp4": "d3c4f3b44953a96f4c9788941e8034e19ddd66d127c34a7b1465ed978afd267a",
+    "geometry_loss.pdf": "01d4c3645f483b678c40d81319a6c8b02cfe7fcb5f84370c6ce972fd41b90540",
+    "geometry_loss.png": "a95f9aff89c4ad17a6c081cfd4ca13bb67bb5a5b2df1e5bf00d14ae720861941",
+    "geometry_observation.pdf": "1b3cf6f370f9044aec7c59a59b6930418c9ab480b1debe2d6dca2ba0899976a4",
+    "geometry_observation.png": "cec812966d1bb6ad3482bda29f94e425a77209b0b9510885001b12838d2e01e9",
+    "retained_inputs.zip": "b66e24491edb4c2ca8bf0d4a21709795240c45b74c5baaca1bd55a5efb02ced0",
+    "sampled_landscape.npz": "988ae91df2b5b29d87cee1ec717838c37ea8e2b8507e541a8761600c939cc9f3"
+  },
+  "execution": "HPC CPU; retained FEM rendering plus a new geometry-observation toy"
+}

@@ -1,0 +1,25 @@
+{
+  "scope": "Local authoring/rendering only; numerical arrays were retained from HPC.",
+  "matplotlib": "3.10.8",
+  "numpy": "2.2.6",
+  "data_sha256": "67a43a36ece8a7b692a0a12848078f91d4032ee92a21a0613e3fe0f6151a2347",
+  "renderer_sha256": "1a00a98602c69de234c5eb0a6ac24d43291d9908eb401be05f38880e3d9e0690",
+  "workflow_tex_sha256": "ea3daf60141d75bff12355369bd2db05cfbc0a6c0ec62df866227f79934aa004",
+  "figure_sha256": {
+    "conditioning.pdf": "51f09c6490093cc8a7cb587b5fe146785de4c75d03a693dfcf90365cbb16af1c",
+    "conditioning.png": "7c448b5f56e443e1a18530e919beb1d8df2b5c5b7ff087623a22fcc2c779a78e",
+    "derivatives.pdf": "ef1c72ff761b1b687b67f3de6140c12ff37ea83d1ea023b54ac604bf31611336",
+    "derivatives.png": "61020f5b9918c8661528b05af986b39a5371860f2295b8707675b00f8e27ab8c",
+    "geometry.pdf": "ca3a56d579062ab92acb0070006c95c8efdf435b5e8334248636837afbcb52ea",
+    "geometry.png": "959cbd9f5992f5f9e65127374d1932b2af1adfdbd1047692473d7bd2b7bf65e6",
+    "hybrid.pdf": "49e8efab18d02a0f0ea315c635d07df9df0699298c79ac1cd5fb0aef3f88fa0c",
+    "hybrid.png": "7f60dac97ce63cfbf0f659ca0ae92e4568ec7081248b3e968e5f85aff91e10bc",
+    "inverse_workflow.png": "1795ab974b000dbaca117186fec3b04e8ac1a48040e8213d4685a8a03a23297b",
+    "observations.pdf": "69cbac98906bc4e2c66b12fb820e1b6fbaf5f2ea2c16557d22e5fc9ae3322c83",
+    "observations.png": "a2dc6b5ae4c736eca8d36f291c3ce5957422c05581c1d39c84651c18e8773442",
+    "quadrature.pdf": "8c2c7a52098934ef22b9090b1cfe9aaee7e5ad2611f6870c4a1422e6c77959e3",
+    "quadrature.png": "e0242aed236078fb898db2900e68274745f6f6143f7e2e58961ba98cd5a83425",
+    "uncertainty.pdf": "a363b65c1a6cad9b128af75780c110245b3dae64472c477994396264fdd3c940",
+    "uncertainty.png": "836a3621b84d6d9153600ca77a101e8a4bc3be7747fb9788be24a151ddfb9963"
+  }
+}

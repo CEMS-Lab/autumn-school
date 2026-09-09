@@ -64,3 +64,20 @@ that view to follow the equation labels and feedback arrows.
 06_learning_adapter
 07_practice_references
 ```
+
+## Optional inverse experiments
+
+The {doc}`inverse visual laboratory <research/08_visual_lab>` connects particle
+geometry, sampled loss landscapes and retained fracture fields. Begin with
+the {doc}`animated history lesson <research/03_history_visual>` to see how loading
+and unloading change a derivative route. These optional readings extend the
+six-hour course without replacing its classroom activities. The current
+printable edition covers the classroom route; this extension is available
+in HTML and downloadable notebooks and figures.
+
+```{toctree}
+:maxdepth: 1
+:caption: Optional inverse experiments
+
+research/index
+```

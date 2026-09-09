@@ -1,5 +1,8 @@
 # Differentiation and an illustrative inverse problem
 
+For a visual explanation of history-dependent derivatives, see the
+{doc}`short animated fracture-history lesson <research/03_history_visual>`.
+
 :::{figure} figures/05_autograd_inverse.*
 :name: fig-autograd-inverse
 :width: 96%

@@ -17,6 +17,8 @@ or notebooks with solutions when you want to run or modify a calculation.
 - Phase-field fracture fundamentals, degradation laws and solution methods.
 - A small public PhAST quasistatic calculation with generated geometry and mesh.
 - Derivative checks and a small elastic-bar inverse problem.
+- An optional inverse extension with an animated history lesson, a complete
+  teaching notebook, particle loss landscapes and retained FEM recovery films.
 - Train/save/reload and checked model proposals on a labelled toy field problem.
 - A printable e-book, 44-slide lecture deck and three two-hour teaching schedule.
 
@@ -39,6 +41,13 @@ not a validated branching demonstration. The inverse and learning activities
 are original teaching models, not full fracture inversion, a trained fracture
 accelerator or a completed DAgger cycle. These are explicit course development
 directions, not capabilities established by the included notebooks.
+
+The [optional inverse extension](https://cems-lab.github.io/autumn-school/book/research/index.html)
+adds seven small HPC-executed teaching examples and separately identified
+retained FEM visualizations. Its recorded fracture fields are not a new
+under-five-minute fracture-inverse notebook or a historical solver replay.
+The existing downloadable PDF and slides remain the earlier classroom edition;
+the new extension is currently in HTML and its downloadable notebooks/figures.
 
 ## Source and maintenance
 

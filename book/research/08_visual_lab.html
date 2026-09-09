@@ -1,0 +1,1245 @@
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="06_applications.html">
+      
+      
+        <link rel="next" href="07_results.html">
+      
+      
+      <link rel="icon" href="">
+    
+    
+      
+        <title>Watch the particle, the crack and the loss - PhAST: Phase-field fracture with differentiable FEM</title>
+      
+    
+    
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+        <link rel="stylesheet" type="text/css" href="../_static/sphinx_immaterial_theme.ad7809648a4561548.min.css?v=f290928c" />
+        <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
+        <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+        <link rel="stylesheet" type="text/css" href="../_static/mobile_math.css?v=1c40619e" />
+        <link rel="stylesheet" type="text/css" href="../_static/learning_book.css?v=6dcc5951" />
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#begin-with-something-we-can-see-directly" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../index.html" title="PhAST: Phase-field fracture with differentiable FEM" class="md-header__button md-logo" aria-label="PhAST: Phase-field fracture with differentiable FEM" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            PhAST: Phase-field fracture with differentiable FEM
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Watch the particle, the crack and the loss
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../index.html" title="PhAST: Phase-field fracture with differentiable FEM" class="md-nav__button md-logo" aria-label="PhAST: Phase-field fracture with differentiable FEM" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+    </a>
+    PhAST: Phase-field fracture with differentiable FEM
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../00_welcome_and_routes.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>From cracks to computation:<wbr> learn by doing</span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_crack_representations.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>Crack representations:<wbr> sharp, cohesive, and diffuse</span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_phase_field_energy.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>Fracture energy:<wbr> AT1, AT2, degradation, and width</span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_staggered_solution.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>From solid mechanics to staggered damage updates</span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_fem_to_tensors.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>Geometry, FEM, tensors, and matrix-<wbr>free operators</span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05_differentiation_and_inverse.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>Differentiation and an illustrative inverse problem</span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06_learning_adapter.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>Train, save, reload, adapters, and checked proposals</span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07_practice_references.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>Practice, solutions, glossary, references, and contributing</span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    <span>Optional inverse experiments</span>
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            <span>Optional inverse experiments</span>
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9_1" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="index.html" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    <span>From gradients to reliable inverse experiments</span>
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_9_1" id="__nav_9_1_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_9_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_9_1">
+            <span class="md-nav__icon md-icon"></span>
+            <span>From gradients to reliable inverse experiments</span>
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9_1_1" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="index.html#a-reading-and-computation-route" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    <span>A reading and computation route</span>
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_9_1_1" id="__nav_9_1_1_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_9_1_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_9_1_1">
+            <span class="md-nav__icon md-icon"></span>
+            <span>A reading and computation route</span>
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="01_geometry.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>Representing particles and testing their geometry</span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="02_observations.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>From measurements to a loss</span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="03_derivatives.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>Verify a derivative before interpreting an update</span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="03_history_visual.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>Why a fracture solver needs a memory-<wbr>aware derivative</span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="03_history.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>Differentiating fracture:<wbr> memory, switches and useful limits</span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="04_recovery.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>Why a correct gradient can give slow or ambiguous recovery</span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="05_learning.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>A useful role for learning:<wbr> propose, solve and check</span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="06_applications.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>Designing a fracture-<wbr>inverse research programme</span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    <span>Watch the particle, the crack and the loss</span>
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="#" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>Watch the particle, the crack and the loss</span>
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#begin-with-something-we-can-see-directly" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>1.<wbr> Begin with something we can see directly</span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lift-the-same-loss-into-a-landscape" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>2.<wbr> Lift the same loss into a landscape</span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#inspect-a-real-sampled-fracture-loss" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>3.<wbr> Inspect a real, sampled fracture loss</span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#watch-a-recorded-particle-recovery" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>4.<wbr> Watch a recorded particle recovery</span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#separate-physical-time-from-inverse-updates" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>5.<wbr> Separate physical time from inverse updates</span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#inspect-or-reproduce-the-visuals" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>Inspect or reproduce the visuals</span>
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="07_results.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>Retained computations and reproducibility</span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="notebooks/inverse_experiments.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>From gradients to reliable inverse experiments</span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#begin-with-something-we-can-see-directly" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>1.<wbr> Begin with something we can see directly</span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lift-the-same-loss-into-a-landscape" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>2.<wbr> Lift the same loss into a landscape</span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#inspect-a-real-sampled-fracture-loss" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>3.<wbr> Inspect a real, sampled fracture loss</span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#watch-a-recorded-particle-recovery" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>4.<wbr> Watch a recorded particle recovery</span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#separate-physical-time-from-inverse-updates" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>5.<wbr> Separate physical time from inverse updates</span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#inspect-or-reproduce-the-visuals" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>Inspect or reproduce the visuals</span>
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset" role="main">
+                
+                
+                  
+
+
+<h1 id="watch-the-particle-the-crack-and-the-loss">Watch the particle, the crack and the loss<a class="headerlink" href="#watch-the-particle-the-crack-and-the-loss" title="Link to this heading">¶</a></h1>
+<p>A loss landscape assigns a height to each candidate parameter pair. Here the
+horizontal coordinates are the unknown particle centre <span class="math notranslate nohighlight">\((c_x,c_y)\)</span> and the
+height is the loss. The plate is a physical domain; the landscape is a
+parameter domain. We connect the two views without confusing them.</p>
+<p>This visual laboratory has three evidence levels: a newly computed geometry
+toy, a retained 25-point FEM scan, and a retained fracture-inverse trajectory.
+Each uses its own stated observations and loss. Videos start only when you
+press play; their controls provide pause, seeking and fullscreen viewing.</p>
+<h2 id="begin-with-something-we-can-see-directly">1. Begin with something we can see directly<a class="headerlink" href="#begin-with-something-we-can-see-directly" title="Link to this heading">¶</a></h2>
+<p>Imagine observing a soft-edged image of a circular inclusion in a 40 mm plate.
+The radius is fixed at 3 mm; only its centre is unknown. This teaching example
+assumes that the geometry image is measured directly. A real fracture inverse
+problem observes the response of the specimen instead.</p>
+<p>At pixel centres <span class="math notranslate nohighlight">\(\mathbf x_p\)</span>, define</p>
+<div class="math notranslate nohighlight">
+\[
+s_p(\mathbf c)=\frac{1}{1+\exp[(\|\mathbf x_p-\mathbf c\|-r)/\epsilon]},
+\qquad
+L_{\rm geom}(\mathbf c)=\frac{1}{N}\sum_p
+[s_p(\mathbf c)-s_p(\mathbf c^*)]^2.
+\]</div>
+<p>We use an <span class="math notranslate nohighlight">\(80\times80\)</span> pixel grid, <span class="math notranslate nohighlight">\(\epsilon=1.5\)</span> mm and reference centre
+<span class="math notranslate nohighlight">\((28,23)\)</span> mm. This explicitly smooth image makes a compact differentiable
+example. It is not a stiffness field or a solution of the fracture equations.</p>
+<figure class="align-default" id="fig-visual-geometry">
+<a class="reference internal image-reference" href="../_images/geometry_observation.png"><img alt="Three plate images show the reference circular indicator, the offset initial indicator, and their signed residual." src="../_images/geometry_observation.png" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Figure 12 </span><span class="caption-text"><span class="caption-text">
+The initial centre is <span class="math notranslate nohighlight">\((34,33)\)</span> mm. Both indicator images use the same colour
+scale. The residual changes sign where the reference and trial images differ.
+No crack or displacement calculation is involved in this example.</span><a class="headerlink" href="#fig-visual-geometry" title="Permalink to this image">¶</a></figcaption>
+</figure>
+<p><strong>Predict:</strong> should moving the candidate circle towards the reference reduce
+the mismatch? What happens to the information available far from the circle?</p>
+<h2 id="lift-the-same-loss-into-a-landscape">2. Lift the same loss into a landscape<a class="headerlink" href="#lift-the-same-loss-into-a-landscape" title="Link to this heading">¶</a></h2>
+<figure class="align-default" id="fig-visual-landscape">
+<a class="reference internal image-reference" href="../_images/geometry_loss.png"><img alt="A three-dimensional geometry-loss surface and its top-down map show the computed descent trajectory into a low-loss region." src="../_images/geometry_loss.png" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Figure 13 </span><span class="caption-text"><span class="caption-text">
+The surface is calculated at 5,265 centre locations on a <span class="math notranslate nohighlight">\(65\times81\)</span> grid.
+The map and surface display the same untransformed loss. Orange marks a
+computed descent using analytic gradients and a sufficient-decrease line
+search. Surface tessellation is a rendering choice, not additional physics.</span><a class="headerlink" href="#fig-visual-landscape" title="Permalink to this image">¶</a></figcaption>
+</figure>
+<p>The algorithm does not need this entire map. At each iterate it evaluates its
+current loss and gradient, proposes a direction and tests a step. We compute
+the complete map afterwards to help interpret its movement. In the companion
+code, an independent central-difference check tests the analytic derivative at
+one stated point.</p>
+<video data-visual-film="geometry_descent.mp4" data-poster="fig-visual-landscape" controls preload="none" playsinline aria-label="Geometry image and loss-surface descent animation" style="display:block;width:100%;aspect-ratio:14/6;background:#fff"></video><p><a class="reference download internal" download="" href="../_downloads/8abb5415f500dac54453d929875ae77a/geometry_descent.mp4"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">the</span> <span class="pre">geometry</span> <span class="pre">descent</span> <span class="pre">animation</span></code></a>.
+The two panels advance together. Each displayed state is a computed iterate;
+the status line identifies its update number.</p>
+<div class="dropdown admonition">
+<p class="admonition-title">What should I notice?</p>
+<p>The candidate geometry changes on the plate while its centre moves across
+parameter space. Far from overlap, the mismatch changes slowly, so a gradient
+can be small even when the position error is large. Near the reference, the
+loss is more informative. A line search tests whether a proposed update
+actually reduces the objective.</p>
+</div>
+<h2 id="inspect-a-real-sampled-fracture-loss">3. Inspect a real, sampled fracture loss<a class="headerlink" href="#inspect-a-real-sampled-fracture-loss" title="Link to this heading">¶</a></h2>
+<p>For the retained PhAST scan, each of 25 candidate centres was evaluated by a
+forward fracture calculation. The observation is the damage field at step
+1454. Its recorded loss is</p>
+<div class="math notranslate nohighlight">
+\[
+L_{\rm single}(\mathbf c)=
+\frac{\sum_i[d_i(\mathbf c)-d_i^{\rm obs}]^2}
+{\max(\sum_i d_i^{\rm obs},10^{-12})}.
+\]</div>
+<p>This is the archived damage-mass normalization. It differs from both the
+geometry-image MSE above and the four-frame objective in the next section.</p>
+<figure class="align-default" id="fig-visual-fem-landscape">
+<a class="reference internal image-reference" href="../_images/fem_sampled_loss.png"><img alt="A coarse three-dimensional FEM loss surface and a five-by-five sample map mark every evaluated particle centre." src="../_images/fem_sampled_loss.png" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Figure 14 </span><span class="caption-text"><span class="caption-text">
+Exactly 25 retained FEM values are shown. Facets join adjacent samples;
+the top-down view shows their individual values. The reference centre lies at
+<span class="math notranslate nohighlight">\((28,23)\)</span> mm. This is a local same-basin scan, not an exhaustive global map.
+No optimizer path from a different objective is superposed.</span><a class="headerlink" href="#fig-visual-fem-landscape" title="Permalink to this image">¶</a></figcaption>
+</figure>
+<p>This surface is coarser than the geometry toy because each height requires a
+fracture solve. A dense grid would cost additional solves; plotting a smooth
+interpolant would not supply the missing evidence. The retained grid is useful
+for comparing nearby candidates without claiming the shape between samples.</p>
+<h2 id="watch-a-recorded-particle-recovery">4. Watch a recorded particle recovery<a class="headerlink" href="#watch-a-recorded-particle-recovery" title="Link to this heading">¶</a></h2>
+<p>The next case recovers two centre coordinates with radius and material
+contrasts fixed. The synthetic reference centre is <span class="math notranslate nohighlight">\((28,23)\)</span> mm and the initial
+centre is <span class="math notranslate nohighlight">\((34,33.392)\)</span> mm, approximately 12 mm away. The recorded calculation
+uses four damage observations selected from observed damage-mass increments:
+steps 1018, 1163, 1309 and 1454.</p>
+<div class="math notranslate nohighlight">
+\[
+L_{\rm time}(\mathbf c)=
+\frac{\sum_{t\in\mathcal T}\sum_i[d_i(t;\mathbf c)-d_i^{\rm obs}(t)]^2}
+{\max(\sum_{t\in\mathcal T}\sum_i d_i^{\rm obs}(t),10^{-12})}.
+\]</div>
+<figure class="align-default" id="fig-visual-recovery">
+<a class="reference internal image-reference" href="../_images/fem_recovery.png"><img alt="Five panels compare reference damage, predicted damage, signed error, particle centre updates and the complete objective history." src="../_images/fem_recovery.png" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Figure 15 </span><span class="caption-text"><span class="caption-text">
+Final recorded state after 20 inverse updates. The centre is approximately
+<span class="math notranslate nohighlight">\((28.080,23.034)\)</span> mm, with a 0.087 mm centre error. The damage panels show the
+last fitting frame, step 1454. Full damage values are retained; no threshold
+removes diffuse damage. Particle circles and trajectories are shown separately
+on a geometry plate. The signed-error scale is fixed over the entire animation.</span><a class="headerlink" href="#fig-visual-recovery" title="Permalink to this image">¶</a></figcaption>
+</figure>
+<video data-visual-film="fem_recovery.mp4" data-poster="fig-visual-recovery" controls preload="none" playsinline aria-label="Five-panel recorded FEM inverse recovery animation" style="display:block;width:100%;aspect-ratio:14/9;background:#fff"></video><p><a class="reference download internal" download="" href="../_downloads/50656a62237cb98dc3251892fc8ec1c6/fem_recovery.mp4"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">the</span> <span class="pre">recorded</span> <span class="pre">recovery</span> <span class="pre">animation</span></code></a>.
+Each frame is a saved inverse iterate, not interpolated particle motion. The
+underlying FEM damage arrays and recorded loss history are checked together
+before rendering. This verifies their consistency, rather than re-verifying
+the complete historical solver or its derivative.</p>
+<p>The fixed normalized step of 0.75 mm brings the particle close to its target,
+then overshoots on updates 17 and 19. The plotted history preserves those
+oscillations. The reference is used to assess the result; the optimizer follows
+the damage objective. The four displayed observations are fitting data, so
+their agreement is not independent validation.</p>
+<div class="dropdown admonition">
+<p class="admonition-title">Why does the last part of the curve oscillate?</p>
+<p>A fixed travel distance can exceed the remaining distance to a low-loss
+region. After crossing it, the gradient points back. A smaller step or an
+adaptive step strategy could be tested, but this animation shows the original
+recorded schedule, including its increases in loss.</p>
+</div>
+<h2 id="separate-physical-time-from-inverse-updates">5. Separate physical time from inverse updates<a class="headerlink" href="#separate-physical-time-from-inverse-updates" title="Link to this heading">¶</a></h2>
+<figure class="align-default" id="fig-visual-time">
+<a class="reference internal image-reference" href="../_images/fem_time.png"><img alt="Four reference damage fields show successive retained physical observation steps with one shared colour scale." src="../_images/fem_time.png" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Figure 16 </span><span class="caption-text"><span class="caption-text">
+Four saved reference observations. Here geometry stays fixed while physical
+time advances. In the inverse animation above, the observation step stays
+fixed while the candidate geometry changes between forward replays.</span><a class="headerlink" href="#fig-visual-time" title="Permalink to this image">¶</a></figcaption>
+</figure>
+<video data-visual-film="fem_time.mp4" data-poster="fig-visual-time" controls preload="none" playsinline aria-label="Reference and recovered-geometry crack evolution at four retained steps" style="display:block;width:100%;aspect-ratio:10/5.3;background:#fff"></video><p><a class="reference download internal" download="" href="../_downloads/c97d039b73ab213d91cc59ff8433dbb0/fem_time.mp4"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">the</span> <span class="pre">four-frame</span> <span class="pre">crack</span> <span class="pre">evolution</span></code></a>.
+Playback advances through the four stored steps without synthesizing
+intermediate fracture states. The screen duration is for reading; it is not
+the physical time scale of the experiment.</p>
+<div class="dropdown admonition">
+<p class="admonition-title">Check your interpretation</p>
+<p>In a forward movie, the crack evolves under one specified geometry. In an
+inverse movie, the geometry changes and the forward problem is solved again.
+The changing particle centre represents an updated estimate, not a particle
+physically translating inside the plate during fracture.</p>
+</div>
+<h2 id="inspect-or-reproduce-the-visuals">Inspect or reproduce the visuals<a class="headerlink" href="#inspect-or-reproduce-the-visuals" title="Link to this heading">¶</a></h2>
+<p>The <a class="reference download internal" download="" href="../_downloads/d8dfb272a21d81b70ad077561f4541e1/particle_visuals.py"><code class="xref download docutils literal notranslate"><span class="pre">Matplotlib</span> <span class="pre">source</span></code></a> computes the
+geometry toy and renders the retained FEM arrays. The
+<a class="reference download internal" download="" href="../_downloads/d67dd2fdbd602005bfc4decaf51b5ce9/manifest.json"><code class="xref download docutils literal notranslate"><span class="pre">artifact</span> <span class="pre">manifest</span></code></a> records the input hashes,
+checks, plotting versions and output hashes. Download the
+<a class="reference download internal" download="" href="../_downloads/1472bcf3756a254ff86cb0ffc090edec/geometry_arrays.npz"><code class="xref download docutils literal notranslate"><span class="pre">geometry</span> <span class="pre">arrays</span></code></a>,
+<a class="reference download internal" download="" href="../_downloads/f210a18b18acb02259ea945343214413/fem_arrays.npz"><code class="xref download docutils literal notranslate"><span class="pre">retained</span> <span class="pre">FEM</span> <span class="pre">arrays</span></code></a> and
+<a class="reference download internal" download="" href="../_downloads/3337fbda25758eb99d57a3d77ed5cc0a/sampled_landscape.npz"><code class="xref download docutils literal notranslate"><span class="pre">25-point</span> <span class="pre">loss</span> <span class="pre">grid</span></code></a> for inspection.
+These compressed data contain the exact plotted values. The
+<a class="reference download internal" download="" href="../_downloads/649cf8d013fe6950e0fcc19f2dd8dc96/retained_inputs.zip"><code class="xref download docutils literal notranslate"><span class="pre">original</span> <span class="pre">numerical</span> <span class="pre">input</span> <span class="pre">bundle</span></code></a>
+contains the files expected by the renderer. Extract it, then run:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code>python<span class="w"> </span>particle_visuals.py<span class="w"> </span>--inputs<span class="w"> </span>inputs<span class="w"> </span>--output<span class="w"> </span>regenerated_visuals
+</code></pre></div>
+</div>
+<p>NumPy, Matplotlib and an FFmpeg executable with H.264 support are needed.
+Use a new output directory to preserve earlier receipts. Research execution
+for this project uses HPC. The private source-lineage map accompanies the
+integration handoff; the downloadable bundle contains numerical data only.</p>
+<p>Vector figures:
+<a class="reference download internal" download="" href="../_downloads/c6607a028f8f1e98cbfe6d9dca7c4394/geometry_observation.pdf"><code class="xref download docutils literal notranslate"><span class="pre">geometry</span> <span class="pre">observations</span></code></a>,
+<a class="reference download internal" download="" href="../_downloads/c11e04c14cdf5e70a1544793bef7c387/geometry_loss.pdf"><code class="xref download docutils literal notranslate"><span class="pre">geometry</span> <span class="pre">landscape</span></code></a>,
+<a class="reference download internal" download="" href="../_downloads/6cdf7b1b0943dbf7f752737fff17dba6/fem_sampled_loss.pdf"><code class="xref download docutils literal notranslate"><span class="pre">FEM</span> <span class="pre">loss</span> <span class="pre">samples</span></code></a>,
+<a class="reference download internal" download="" href="../_downloads/3f221186963237e3e8e0f8b0f7648451/fem_recovery.pdf"><code class="xref download docutils literal notranslate"><span class="pre">inverse</span> <span class="pre">recovery</span></code></a>, and
+<a class="reference download internal" download="" href="../_downloads/92bc0a4e4a760a7efda27b917161e90d/fem_time.pdf"><code class="xref download docutils literal notranslate"><span class="pre">physical</span> <span class="pre">observation</span> <span class="pre">frames</span></code></a>.</p>
+<p>Numerical generation and rendering for this laboratory run on HPC. The two
+FEM examples reuse archived data. Their agreement and source-file hashes are
+not a new source-locked rerun of the historical fracture calculation. All
+materials form the optional inverse extension of the autumn-school book.</p>
+<script>
+document.querySelectorAll('video[data-visual-film]').forEach(video => {
+  const name = video.dataset.visualFilm;
+  const link = Array.from(document.querySelectorAll('a[href]')).find(a => a.getAttribute('href').endsWith('/' + name));
+  if (link) video.src = link.href;
+  const poster = document.querySelector('#' + video.dataset.poster + ' img');
+  if (poster) video.poster = poster.src;
+});
+</script>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  
+  
+  <div class="md-footer-meta md-typeset">
+    
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-footer-copyright__highlight">
+        &#169; Copyright 2026, UKACM Autumn School.
+        
+    </div>
+  
+    Created using
+    <a href="https://www.sphinx-doc.org/" target="_blank" rel="noopener">Sphinx</a>
+    7.4.7.
+     and
+    <a href="https://github.com/jbms/sphinx-immaterial/" target="_blank" rel="noopener">Sphinx-Immaterial</a>
+  
+</div>
+      
+    </div>
+    
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": [], "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+      
+        <script src="../_static/documentation_options.js?v=fc6fd62b"></script>
+        <script src="../_static/sphinx_immaterial_theme.32136f45f91ae6956.min.js?v=a7a9472a"></script>
+        <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../_static/copybutton.js?v=f281be69"></script>
+        <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script defer="defer" src="../_static/mathjax/tex-mml-chtml.js?v=cadf963e"></script>
+        <script src="../_static/learning_book.js?v=7a62d495"></script>
+    
+  </body>
+</html>

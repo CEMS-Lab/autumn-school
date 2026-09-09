@@ -1,0 +1,14 @@
+{
+  "scope": "User-authorised optional inverse HTML extension; frozen PDF/slides unchanged",
+  "date": "2026-09-09",
+  "source_commit": "4c79cd6",
+  "text_files_scanned": 38,
+  "archive_inputs_verified": 8,
+  "visual_artifact_hashes_verified": 21,
+  "history_primitive_checks": 14,
+  "retained_notebook_cells": 16,
+  "new_numerical_execution": false,
+  "classroom_notebooks_changed": false,
+  "full_fracture_issue_7_closed": false,
+  "private_paths_or_credential_markers_found": false
+}

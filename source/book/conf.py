@@ -20,7 +20,9 @@ nb_output_stderr = "warn"
 nb_ipywidgets_js = {}
 
 master_doc = "index"
-exclude_patterns = ["_build", "README.md", "solutions", "research", "Thumbs.db", ".DS_Store"]
+exclude_patterns = ["_build", "README.md", "solutions", "Thumbs.db", ".DS_Store",
+                    "research/_build", "research/README.md", "research/REVIEW_STATUS.md",
+                    "research/notebooks/inverse_experiments_source.ipynb"]
 numfig = True
 numfig_format = {"figure": "Figure %s"}
 
@@ -29,11 +31,17 @@ html_title = project
 html_static_path = ["_static"]
 html_css_files = ["mobile_math.css", "learning_book.css"]
 html_js_files = ["learning_book.js"]
+mathjax_path = "mathjax/tex-mml-chtml.js"
 
 
 def setup(app):
     """Load the Sphinx options object before the copy-button extension."""
     app.add_js_file("documentation_options.js", priority=100)
+    # Reuse the extension's attachment handling; retain the course theme/controls.
+    from pathlib import Path
+    import runpy
+    support = runpy.run_path(str(Path(__file__).parent / "research" / "conf.py"))
+    app.connect("source-read", support["expand_notebook_attachments"])
 
 latex_engine = "xelatex"
 latex_documents = [

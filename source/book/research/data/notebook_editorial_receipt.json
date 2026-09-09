@@ -1,0 +1,7 @@
+{
+  "raw_execution_output_sha256": "a615283d79acb8b99bf7a14fadfb046c3f7e79241711553ad65e025d45850e15",
+  "published_notebook_sha256": "19f1de8da869222ad652d4b715257cd6d41cc92802ef4fd6414ccfd5430a8bdc",
+  "reviewed_source_sha256": "be55a89d25a196a555c2f80eb4b1b8a5684f3f842cf0f1994372730f2220d30b",
+  "all_code_cells_identical_to_executed": true,
+  "change": "Qualify FD agreement for forward-consistent backward rules; extend the application explanation of sequential recovery, checkpoint dependencies and conditional microstructure uncertainty. Numerical cells are unchanged."
+}

@@ -1,0 +1,1440 @@
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="05_learning.html">
+      
+      
+        <link rel="next" href="08_visual_lab.html">
+      
+      
+      <link rel="icon" href="">
+    
+    
+      
+        <title>Designing a fracture-inverse research programme - PhAST: Phase-field fracture with differentiable FEM</title>
+      
+    
+    
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+        <link rel="stylesheet" type="text/css" href="../_static/sphinx_immaterial_theme.ad7809648a4561548.min.css?v=f290928c" />
+        <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
+        <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+        <link rel="stylesheet" type="text/css" href="../_static/mobile_math.css?v=1c40619e" />
+        <link rel="stylesheet" type="text/css" href="../_static/learning_book.css?v=6dcc5951" />
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#application-1-three-particles-ahead-of-a-crack" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../index.html" title="PhAST: Phase-field fracture with differentiable FEM" class="md-header__button md-logo" aria-label="PhAST: Phase-field fracture with differentiable FEM" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            PhAST: Phase-field fracture with differentiable FEM
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Designing a fracture-inverse research programme
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../index.html" title="PhAST: Phase-field fracture with differentiable FEM" class="md-nav__button md-logo" aria-label="PhAST: Phase-field fracture with differentiable FEM" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+    </a>
+    PhAST: Phase-field fracture with differentiable FEM
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../00_welcome_and_routes.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>From cracks to computation:<wbr> learn by doing</span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_crack_representations.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>Crack representations:<wbr> sharp, cohesive, and diffuse</span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_phase_field_energy.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>Fracture energy:<wbr> AT1, AT2, degradation, and width</span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_staggered_solution.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>From solid mechanics to staggered damage updates</span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_fem_to_tensors.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>Geometry, FEM, tensors, and matrix-<wbr>free operators</span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05_differentiation_and_inverse.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>Differentiation and an illustrative inverse problem</span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06_learning_adapter.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>Train, save, reload, adapters, and checked proposals</span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07_practice_references.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>Practice, solutions, glossary, references, and contributing</span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    <span>Optional inverse experiments</span>
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            <span>Optional inverse experiments</span>
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9_1" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="index.html" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    <span>From gradients to reliable inverse experiments</span>
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_9_1" id="__nav_9_1_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_9_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_9_1">
+            <span class="md-nav__icon md-icon"></span>
+            <span>From gradients to reliable inverse experiments</span>
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9_1_1" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="index.html#a-reading-and-computation-route" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    <span>A reading and computation route</span>
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_9_1_1" id="__nav_9_1_1_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_9_1_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_9_1_1">
+            <span class="md-nav__icon md-icon"></span>
+            <span>A reading and computation route</span>
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="01_geometry.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>Representing particles and testing their geometry</span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="02_observations.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>From measurements to a loss</span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="03_derivatives.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>Verify a derivative before interpreting an update</span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="03_history_visual.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>Why a fracture solver needs a memory-<wbr>aware derivative</span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="03_history.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>Differentiating fracture:<wbr> memory, switches and useful limits</span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="04_recovery.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>Why a correct gradient can give slow or ambiguous recovery</span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="05_learning.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>A useful role for learning:<wbr> propose, solve and check</span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    <span>Designing a fracture-<wbr>inverse research programme</span>
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="#" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>Designing a fracture-<wbr>inverse research programme</span>
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#application-1-three-particles-ahead-of-a-crack" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>Application 1:<wbr> three particles ahead of a crack</span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Application 1: three particles ahead of a crack">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#why-additional-particles-make-recovery-harder" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>Why additional particles make recovery harder</span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a-sequential-algorithm-with-cumulative-correction" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>A sequential algorithm with cumulative correction</span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-does-freezing-a-state-mean" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>What does freezing a state mean?</span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#application-2-a-distributed-degraded-stiffness-field" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>Application 2:<wbr> a distributed degraded stiffness field</span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#application-3-selecting-observations" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>Application 3:<wbr> selecting observations</span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#application-4-uncertainty-and-generative-proposals" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>Application 4:<wbr> uncertainty and generative proposals</span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Application 4: uncertainty and generative proposals">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#from-a-recovered-geometry-to-uncertainty-intervals" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>From a recovered geometry to uncertainty intervals</span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-can-one-crack-tell-us-about-an-rve" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>What can one crack tell us about an RVE?</span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercise-a-complete-experiment-card" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>Exercise:<wbr> a complete experiment card</span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#research-status" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>Research status</span>
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="08_visual_lab.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>Watch the particle, the crack and the loss</span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="07_results.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>Retained computations and reproducibility</span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="notebooks/inverse_experiments.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>From gradients to reliable inverse experiments</span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#application-1-three-particles-ahead-of-a-crack" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>Application 1:<wbr> three particles ahead of a crack</span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Application 1: three particles ahead of a crack">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#why-additional-particles-make-recovery-harder" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>Why additional particles make recovery harder</span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a-sequential-algorithm-with-cumulative-correction" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>A sequential algorithm with cumulative correction</span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-does-freezing-a-state-mean" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>What does freezing a state mean?</span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#application-2-a-distributed-degraded-stiffness-field" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>Application 2:<wbr> a distributed degraded stiffness field</span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#application-3-selecting-observations" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>Application 3:<wbr> selecting observations</span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#application-4-uncertainty-and-generative-proposals" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>Application 4:<wbr> uncertainty and generative proposals</span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Application 4: uncertainty and generative proposals">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#from-a-recovered-geometry-to-uncertainty-intervals" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>From a recovered geometry to uncertainty intervals</span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-can-one-crack-tell-us-about-an-rve" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>What can one crack tell us about an RVE?</span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercise-a-complete-experiment-card" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>Exercise:<wbr> a complete experiment card</span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#research-status" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>Research status</span>
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset" role="main">
+                
+                
+                  
+
+
+<h1 id="designing-a-fracture-inverse-research-programme">Designing a fracture-inverse research programme<a class="headerlink" href="#designing-a-fracture-inverse-research-programme" title="Link to this heading">¶</a></h1>
+<p>Start with the <a class="reference internal" href="08_visual_lab.html"><span class="std std-doc">visual laboratory</span></a> to connect particle
+geometry, a loss surface and recorded crack fields. Its animations distinguish
+physical time from inverse updates before we generalize to multiple particles.</p>
+<h2 id="application-1-three-particles-ahead-of-a-crack">Application 1: three particles ahead of a crack<a class="headerlink" href="#application-1-three-particles-ahead-of-a-crack" title="Link to this heading">¶</a></h2>
+<p>We prescribe a notched plate, three stiff circular inclusions, material
+contrasts and loading. The unknowns are the three centres and radii. The
+observations are selected displacement and damage fields; synthetic damage
+observations and experimental displacement measurements require different
+observation contracts.</p>
+<p>The first research question is precise: does increasing a prescribed initial
+offset change recovery when everything else stays fixed? Use the same target,
+mesh, material parameters, fitting observations, bounds, optimiser and budgets
+at both initialisations. Keep particles inside the plate and preserve the
+stated upper/lower grouping relative to the initial crack.</p>
+<p>Compare four explicitly defined schedules:</p>
+<table class="docutils data align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Schedule</p></th>
+<th class="head"><p>Variables updated</p></th>
+<th class="head"><p>Observations used</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>A: simultaneous</p></td>
+<td><p>All nine</p></td>
+<td><p>All fitting windows</p></td>
+</tr>
+<tr class="row-odd"><td><p>B: strict sequential</p></td>
+<td><p>One particle at a time; earlier estimates frozen</p></td>
+<td><p>Current window and declared shared frames</p></td>
+</tr>
+<tr class="row-even"><td><p>C: cumulative</p></td>
+<td><p>Expand from three to six to nine variables</p></td>
+<td><p>Accumulate fitting windows</p></td>
+</tr>
+<tr class="row-odd"><td><p>D: independent-window fusion</p></td>
+<td><p>All nine independently per window</p></td>
+<td><p>Separate windows, followed by a declared fusion rule</p></td>
+</tr>
+</tbody>
+</table>
+<p>All three particles remain in the forward model, even when only one is being
+updated. Removing the other particles would change the physical problem.
+Fusion weights must be defined from available observations and sensitivities;
+selecting a rule using the true geometry would leak the synthetic answer.</p>
+<p>Before interpreting the comparison, inspect forward convergence, initial
+sensitivities, derivative checks, accepted updates, rejected trials and final
+assessment fields. Matching update budgets does not match total forward work.</p>
+<h3 id="why-additional-particles-make-recovery-harder">Why additional particles make recovery harder<a class="headerlink" href="#why-additional-particles-make-recovery-harder" title="Link to this heading">¶</a></h3>
+<p>There is no special mathematical failure at the third particle. Each additional
+circle introduces three unknowns, while the measured crack can remain sensitive
+to only a few combinations of them. Moving a centre and changing its radius can
+produce similar deflections. A particle away from the observed crack can have
+little influence on the measured data. The elasticity problem still couples
+the entire plate, so distance from the crack is only a heuristic for influence.</p>
+<p>Let <span class="math notranslate nohighlight">\(\theta=(c_{x,1},c_{y,1},r_1,\ldots,c_{x,3},c_{y,3},r_3)\)</span> and let
+<span class="math notranslate nohighlight">\(g(\theta)=\mathcal O(F(\theta))\)</span> denote the simulated observations. Locally,</p>
+<div class="math notranslate nohighlight">
+\[
+g(\theta+\Delta\theta)\approx g(\theta)+J\Delta\theta,
+\qquad J=\frac{\partial g}{\partial\theta}.
+\]</div>
+<p>Small singular values of a consistently scaled <span class="math notranslate nohighlight">\(J\)</span> identify combinations that
+change the observations weakly. Similar columns indicate parameter trade-offs.
+Report the singular values as well as their ratio: a moderate condition number
+can accompany uniformly small sensitivities. The interpretation depends on
+parameter units, observation weights and measurement noise. Numerical full
+rank alone does not establish reliable recovery.</p>
+<p>Optimization introduces another difficulty. Early errors change the later crack
+trajectory and the recorded loading history. An observation window intended to
+identify the third particle can then contain errors caused by the first two.
+Simultaneous updates must resolve these coupled effects. Strict sequential
+updates carry earlier estimation errors forward. Independent-window estimates
+can disagree because each window constrains different combinations.</p>
+<p>For example, a fusion rule can take the form</p>
+<div class="math notranslate nohighlight">
+\[
+\bar\theta_i=\frac{\sum_k w_{ik}\theta_i^{(k)}}{\sum_k w_{ik}}.
+\]</div>
+<p>If all weights for one particle are multiplied by the same positive constant,
+its fused estimate is unchanged. Thus small absolute weights alone do not
+explain failure of this normalized rule. Relative weights, biased window
+estimates and nonlinear parameter coupling matter. The average of two
+geometries that fit separate windows need not fit either window when replayed.
+Accumulated loss-gradient magnitude is also different from a noise-calibrated
+information matrix.</p>
+<p>Use these observations to separate three questions: does the forward solve
+converge; does its derivative match its implemented objective locally; and do
+the observations constrain the geometry well enough to recover it? Each needs
+its own evidence.</p>
+<h3 id="a-sequential-algorithm-with-cumulative-correction">A sequential algorithm with cumulative correction<a class="headerlink" href="#a-sequential-algorithm-with-cumulative-correction" title="Link to this heading">¶</a></h3>
+<p>A practical extension temporarily fixes parameter blocks, then revisits them
+as more observations arrive. All particles remain in the physical model.
+The following is a proposed research schedule, rather than a claim of an
+already validated fracture algorithm.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span><code>Inputs: initial geometry, physical initial state, fixed observation windows,
+        bounds, objective weights, derivative checks and iteration budgets.
+For stage k = 1, 2, 3:
+    Form the unique union of fitting frames through window k.
+    Check the local derivative of this stage&#39;s objective.
+    Update particle k briefly with the other parameter blocks fixed.
+    Update particles 1 through k jointly against the accumulated frames.
+    For every trial, replay the full forward model from its physical start.
+    Record accepted updates, rejected trials and all forward/backward work.
+Assess the final geometry on observations excluded from fitting.
+</code></pre></div>
+</div>
+<p>Shared frames enter the cumulative objective once with their declared weights.
+The optimizer uses observed misfit, step criteria and a fixed maximum budget;
+synthetic true-position errors are evaluated afterwards. A bounded comparison
+can allocate five accepted updates to the current block and ten to cumulative
+correction at each stage, giving at most 45 updates. This is a testable budget,
+not an established optimum. Reset or resize optimizer curvature information
+when the active parameter block changes.</p>
+<p>The cumulative step gives later evidence an opportunity to correct earlier
+estimates. It can help with error propagation, but additional windows cannot
+recover a parameter direction to which all of those observations are
+insensitive. Compare this schedule with A-D using the same physical model,
+initialization, fitting data and accounting of forward work.</p>
+<h3 id="what-does-freezing-a-state-mean">What does freezing a state mean?<a class="headerlink" href="#what-does-freezing-a-state-mean" title="Link to this heading">¶</a></h3>
+<p>Temporarily holding a centre or radius fixed keeps a valid forward calculation
+for that trial geometry. Prescribing the earlier crack field instead changes
+the inverse problem into a conditional one. A damage image is only part of the
+state: displacement, velocity in a dynamic model, history variables and other
+internal variables also determine subsequent evolution.</p>
+<p>Write a checkpoint as <span class="math notranslate nohighlight">\(s_k(\theta)\)</span> and the next evolution as
+<span class="math notranslate nohighlight">\(s_{k+1}=F_k(s_k(\theta),\theta)\)</span>. Its derivative contains two terms:</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{d s_{k+1}}{d\theta}
+=\frac{\partial F_k}{\partial\theta}
++\frac{\partial F_k}{\partial s_k}\frac{d s_k}{d\theta}.
+\]</div>
+<p>Detaching a parameter-dependent checkpoint discards the second term. Even a
+particle encountered later by the crack can affect earlier elastic fields.
+Reuse checkpoints when their dependencies are unchanged, or define and test
+the approximation explicitly. A frozen-state calculation can propose an
+update; a full replay then checks its actual objective and trajectory.</p>
+<h2 id="application-2-a-distributed-degraded-stiffness-field">Application 2: a distributed degraded stiffness field<a class="headerlink" href="#application-2-a-distributed-degraded-stiffness-field" title="Link to this heading">¶</a></h2>
+<p>For a diffuse weakened region, a useful parameterisation is
+<span class="math notranslate nohighlight">\(E(\mathbf x)=E_0\,f(\sum_j a_j\phi_j(\mathbf x))\)</span>, where
+<span class="math notranslate nohighlight">\(\phi_j\)</span> are spatial basis functions and <span class="math notranslate nohighlight">\(f\)</span> enforces a declared admissible
+range. The coefficients <span class="math notranslate nohighlight">\(a_j\)</span> replace individual circle parameters.</p>
+<p>Basis centres locate functions; they are not independent physical particles.
+Increasing their number increases representational freedom and can introduce
+weakly observed combinations. Evaluate field error, observable error,
+regularisation sensitivity and local parameter information separately.</p>
+<p>For a barely visible impact damage motivation, explain the modelling link:
+the recovered field represents a chosen stiffness-degradation model. A
+synthetic weakened region is not itself an experimental impact-damage map.</p>
+<h2 id="application-3-selecting-observations">Application 3: selecting observations<a class="headerlink" href="#application-3-selecting-observations" title="Link to this heading">¶</a></h2>
+<p>Given several available fitting frames, examine which add independent
+sensitivity directions. Begin with deterministic ranking and a measurement
+budget. A new load case can be more informative than another similar time
+frame, but it also requires a new forward experiment.</p>
+<p>Reinforcement learning becomes relevant when sequential choices and their
+future consequences justify training a policy. It should be compared with
+a simpler information-based selection rule. Fracture history belongs to the
+state; a damage image alone need not determine subsequent evolution.</p>
+<h2 id="application-4-uncertainty-and-generative-proposals">Application 4: uncertainty and generative proposals<a class="headerlink" href="#application-4-uncertainty-and-generative-proposals" title="Link to this heading">¶</a></h2>
+<p>If multiple material fields explain the data, a conditional model can propose
+several candidates. Each candidate can be checked by PhAST. To interpret them
+as a posterior distribution, specify priors, measurement noise and the
+likelihood or inference approximation, then check calibration.</p>
+<p>Diffusion and flow matching provide possible conditional models. They require
+training data and introduce inference costs. Physics guidance can improve
+residuals while changing the distribution of samples. Assess both physical
+consistency and distributional quality.</p>
+<h3 id="from-a-recovered-geometry-to-uncertainty-intervals">From a recovered geometry to uncertainty intervals<a class="headerlink" href="#from-a-recovered-geometry-to-uncertainty-intervals" title="Link to this heading">¶</a></h3>
+<p>Begin with a small known-count problem and write an observation model,</p>
+<div class="math notranslate nohighlight">
+\[
+y=g(\theta)+b+\varepsilon,\qquad
+\varepsilon\sim\mathcal N(0,\Sigma).
+\]</div>
+<p>Here <span class="math notranslate nohighlight">\(y\)</span> contains the measured quantities, <span class="math notranslate nohighlight">\(g\)</span> includes registration and the
+observation operator, <span class="math notranslate nohighlight">\(b\)</span> represents model or discretization discrepancy, and
+<span class="math notranslate nohighlight">\(\Sigma\)</span> describes measurement error. For a first controlled synthetic test,
+one can explicitly assume <span class="math notranslate nohighlight">\(b=0\)</span> and generate noise with a known covariance.
+That assumption must accompany the resulting uncertainty intervals. In an
+experiment, estimate noise and address discrepancy using calibration data or
+a stated statistical model. Optimization weights alone do not supply this
+calibration.</p>
+<p>Bayes’ rule combines the likelihood with a physical prior:</p>
+<div class="math notranslate nohighlight">
+\[
+p(\theta\mid y)\propto p(y\mid\theta)\,p(\theta).
+\]</div>
+<p>Priors can encode admissible radii, non-overlap and independently known volume
+fraction. A local Gaussian approximation near a recovered mode has covariance</p>
+<div class="math notranslate nohighlight">
+\[
+C\approx\left(J^T\Sigma^{-1}J+\Lambda_{\rm prior}\right)^{-1},
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\Lambda_{\rm prior}\)</span> is the local curvature of the negative log prior.
+This Gauss-Newton approximation describes one locally smooth basin. It needs
+care near active bounds, switching trajectories, significant residuals or
+multiple modes. Strong intervals created mainly by a strong prior should be
+identified as such. The linear exercise in this notebook illustrates the
+algebra; fracture posterior sampling is a separate computational study.</p>
+<p>A sequential probabilistic update carries the uncertainty of earlier particles
+forward. Setting their variances to zero because they were optimized earlier
+overstates certainty. Each new datum enters a sequential update once, with a
+conditional likelihood that respects correlations. Repeated cumulative
+optimization is useful for finding a mode, but is not itself posterior sampling.
+Likewise, the spread of optimizer endpoints from different starts is not a
+calibrated posterior distribution.</p>
+<h3 id="what-can-one-crack-tell-us-about-an-rve">What can one crack tell us about an RVE?<a class="headerlink" href="#what-can-one-crack-tell-us-about-an-rve" title="Link to this heading">¶</a></h3>
+<p>Consider two microstructures that differ mainly away from the observed crack.
+If their measured trajectories are indistinguishable at the noise level, the
+data cannot choose between them. A useful output is therefore an ensemble of
+compatible microstructures with spatial uncertainty, rather than a uniquely
+asserted reconstruction of every particle.</p>
+<p>Build this programme in stages:</p>
+<ol class="arabic simple">
+<li><p>Verify a known-count geometry with a declared likelihood, prior and local
+derivative diagnostics at an accepted recovery.</p></li>
+<li><p>Check alternate modes and predictive fields using the actual likelihood.
+Keep particle labels identifiable or use permutation-invariant summaries.</p></li>
+<li><p>Add displacement, reaction or other measurements that constrain weak
+directions; evaluate unused observations for predictive performance.</p></li>
+<li><p>Extend to unknown count or random fields with explicit priors on spatial
+statistics, and report which statistics are informed by the data.</p></li>
+<li><p>Check representative volume size and variability of homogenized responses
+before calling the inferred specimen an RVE.</p></li>
+</ol>
+<p>Independent fracture experiments often require fresh specimens. Combining
+them can identify shared material or microstructure-distribution parameters;
+it does not mean that every specimen has the same particle arrangement.
+Sampling, surrogate construction and validation costs belong in the research
+budget. A gradient surrogate used for optimization also needs separate
+justification before it is used inside an exact posterior sampler.</p>
+<h2 id="exercise-a-complete-experiment-card">Exercise: a complete experiment card<a class="headerlink" href="#exercise-a-complete-experiment-card" title="Link to this heading">¶</a></h2>
+<p>Write a card for one of the applications. Include the following:</p>
+<ul class="simple">
+<li><p>Unknowns, units and admissible bounds.</p></li>
+<li><p>Fixed model, mesh, loading and initial state.</p></li>
+<li><p>Fitting observations, normalisation and independent assessment.</p></li>
+<li><p>Optimiser and stopping rule available without the true parameters.</p></li>
+<li><p>Forward and derivative checks, total work and resource budget.</p></li>
+<li><p>Stored fields, source fingerprint and the result needed to support the claim.</p></li>
+</ul>
+<div class="dropdown admonition">
+<p class="admonition-title">Worked interpretation</p>
+<p>For the three-particle application, stopping can use objective or step
+criteria and a declared budget. True centre/radius errors are post-run
+assessment quantities. A passing derivative check supports a local
+sensitivity; geometric recovery and predictive agreement are separate
+outcomes. Preserve failures and document exactly which assumptions differ
+between experiments.</p>
+</div>
+<h2 id="research-status">Research status<a class="headerlink" href="#research-status" title="Link to this heading">¶</a></h2>
+<p>The executable exercises in this extension are complete only when their
+retained HPC checks pass. Full fracture comparisons, GNN training,
+distributional inference and learned experiment design have separate issue
+cards. A chapter explaining a proposed method does not mark that research
+as completed.</p>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  
+  
+  <div class="md-footer-meta md-typeset">
+    
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-footer-copyright__highlight">
+        &#169; Copyright 2026, UKACM Autumn School.
+        
+    </div>
+  
+    Created using
+    <a href="https://www.sphinx-doc.org/" target="_blank" rel="noopener">Sphinx</a>
+    7.4.7.
+     and
+    <a href="https://github.com/jbms/sphinx-immaterial/" target="_blank" rel="noopener">Sphinx-Immaterial</a>
+  
+</div>
+      
+    </div>
+    
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": [], "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+      
+        <script src="../_static/documentation_options.js?v=fc6fd62b"></script>
+        <script src="../_static/sphinx_immaterial_theme.32136f45f91ae6956.min.js?v=a7a9472a"></script>
+        <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../_static/copybutton.js?v=f281be69"></script>
+        <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script defer="defer" src="../_static/mathjax/tex-mml-chtml.js?v=cadf963e"></script>
+        <script src="../_static/learning_book.js?v=7a62d495"></script>
+    
+  </body>
+</html>

@@ -47,7 +47,9 @@ def main():
     files = sorted(set(s.decode() for s in raw.split(b'\0') if s))
     files = [f for f in files if f != 'MANIFEST.json' and (ROOT/f).is_file()]
     for f in files:
-        if any(part in {'.git','.build','reviews','research','jupyter_execute'} for part in Path(f).parts):
+        approved_extension = f.startswith(('source/book/research/', 'book/research/'))
+        forbidden = {'.git','.build','reviews','jupyter_execute','_attachments'}
+        if any(part in forbidden for part in Path(f).parts) or ('research' in Path(f).parts and not approved_extension):
             raise ValueError(f'Non-public build or draft path: {f}')
         if (ROOT/f).is_symlink() or not (ROOT/f).resolve().is_relative_to(ROOT):
             raise ValueError(f'Non-local payload: {f}')
