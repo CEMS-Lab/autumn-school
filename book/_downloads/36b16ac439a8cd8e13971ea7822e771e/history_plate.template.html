@@ -31,7 +31,7 @@ input[type=number]{width:76px;padding:6px;border:1px solid #9ba8ae;border-radius
 <p class="intro">A crack changes how a plate carries load, while its history remembers earlier loading. Explore that decision here, then <a href="#walkthrough">follow the complete solver story</a>: boundary conditions, motion, energy, history, damage bounds and the reverse pass. The plate recording contains 1,600 forward steps with 12 saved frames.</p>
 <details class="cycle" open><summary>Watch the 40-second solver walkthrough</summary>
 <video id="cycle-video" controls playsinline preload="none" poster="__CYCLE_POSTER__" src="__CYCLE_MOVIE__" aria-label="Eight-stage forward and reverse algorithm walkthrough with illustrative history and bound switches"></video>
-<p>The stages show computational order, not elapsed physical time. Local energy and bound curves are illustrative. The plate is recorded FEM data; its saved frames play during the repeated-cycle stage. Playback is optional.</p>
+<p>The stages follow computational order, with playback paced for reading. Local energy and bound curves are illustrative. The plate is recorded FEM data; its saved frames play during the repeated-cycle stage. Playback is optional.</p>
 </details>
 <div class="panes" id="playground">
 <section class="pane" aria-labelledby="history-title">
@@ -70,7 +70,7 @@ input[type=number]{width:76px;padding:6px;border:1px solid #9ba8ae;border-radius
 <p class="help">White is intact material and dark is high damage in plate view. The notch is already present in the first frame. Both renderings show the full phase field from 0 to 1.</p>
 </section>
 </div>
-<p class="note">The two panes have independent controls. The left pane illustrates a history rule; the right shows recorded FEM damage. Matching tensile-energy and history fields were not retained, so changing the energy sliders does not rerun or alter this crack. Lines between recorded damage samples guide the eye; intermediate fracture states are not synthesized.</p>
+<p class="note">The two panes have independent controls. The left pane illustrates a history rule using the energy sliders; the right replays recorded FEM damage. Lines between recorded damage samples guide the eye, while frame labels identify the saved states.</p>
 __WALKTHROUGH__
 </main>
 <script id="panel-data" type="application/json">__PAYLOAD__</script>

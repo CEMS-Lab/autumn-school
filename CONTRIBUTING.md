@@ -31,17 +31,10 @@ successful Sphinx build is not a numerical test. Re-run any changed computation
 in the course environment and record its whole-notebook runtime, environment,
 checks and limitations. Preserve failing evidence when reporting an issue.
 
-For a PDF, install XeLaTeX and latexmk separately, then run:
-
-```bash
-python -m sphinx -b latex -E -a source/book .build/latex -W --keep-going
-latexmk -cd -xelatex -interaction=nonstopmode -halt-on-error .build/latex/phast-ukacm-course.tex
-```
-
-Inspect rendered pages, equations, plots, code and solutions before replacing
-`ebooks/phast-ukacm-course.pdf`. Test the HTML on a narrow screen and with the
-network disconnected. Verify local notebook downloads and keyboard-operated
-answer panels. Keep `.nojekyll` so GitHub Pages serves Sphinx's asset folders.
+Inspect the HTML chapters, equations, plots, code and solutions. Test the HTML
+on a narrow screen and with the network disconnected. Verify local practice
+and solution notebook downloads and keyboard-operated answer panels. Keep
+`.nojekyll` so GitHub Pages serves Sphinx's asset folders.
 
 ## Acceptance criteria for a computational change
 

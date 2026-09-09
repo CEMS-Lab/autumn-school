@@ -1,855 +1,363 @@
 
+<!DOCTYPE html>
 
 
-<!doctype html>
-<html lang="en" class="no-js">
+<html lang="en" data-content_root="./" data-theme="dark">
+
   <head>
-    
-      <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width,initial-scale=1">
-      
-      
-      
-      
-        <link rel="prev" href="index.html">
-      
-      
-        <link rel="next" href="labs/00_why_average_predictions_can_fail.html">
-      
-      
-      <link rel="icon" href="">
-    
-    
-      
-        <title>1. From cracks to computation: learn by doing - PhAST: Phase-field fracture with differentiable FEM</title>
-      
-    
-    
-      
-      
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
+    <title>1. From cracks to computation: learn by doing &#8212; PhAST: Phase-field fracture with differentiable FEM</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "dark";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "dark";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
 
-    
-    
-      
-    
-    
-      
-        
-        
-        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
-      
-    
-        <link rel="stylesheet" type="text/css" href="_static/sphinx_immaterial_theme.ad7809648a4561548.min.css?v=f290928c" />
-        <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
-        <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-        <link rel="stylesheet" type="text/css" href="_static/mobile_math.css?v=1c40619e" />
-        <link rel="stylesheet" type="text/css" href="_static/learning_book.css?v=6dcc5951" />
-    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
-    
-      
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    
-    
-    
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mobile_math.css?v=acf5579e" />
+    <link rel="stylesheet" type="text/css" href="_static/learning_book.css?v=ce3b4251" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=c22d28c4"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="_static/mathjax/tex-mml-chtml.js?v=cadf963e"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '00_welcome_and_routes';</script>
+    <script src="_static/learning_book.js?v=7a62d495"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="1.2.1. Why average predictions can fail" href="labs/00_why_average_predictions_can_fail.html" />
+    <link rel="prev" title="PhAST: a learn-by-doing introduction to phase-field fracture" href="index.html" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+<meta name="author" content="Allamaprabhu Ani">
+<meta name="presenter" content="Sathiskumar A. Ponnusami">
+<meta name="presenter-affiliation" content="Queen Mary University of London · CEMS-Lab">
+<meta name="course" content="CEMS-Lab · UKACM Autumn School 2026">
+
   </head>
   
   
-    <body dir="ltr">
-  
-    
-    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
-    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
-    <label class="md-overlay" for="__drawer"></label>
-    <div data-md-component="skip">
-      
-        
-        <a href="#what-this-course-is-for" class="md-skip">
-          Skip to content
-        </a>
-      
-    </div>
-    <div data-md-component="announce">
-      
-    </div>
-    
-    
-      
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="dark">
 
   
-
-<header class="md-header md-header--shadow" data-md-component="header">
-  <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="index.html" title="PhAST: Phase-field fracture with differentiable FEM" class="md-header__button md-logo" aria-label="PhAST: Phase-field fracture with differentiable FEM" data-md-component="logo">
-      
   
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
-    </a>
-    <label class="md-header__button md-icon" for="__drawer">
-      
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
-    </label>
-    <div class="md-header__title" data-md-component="header-title">
-      <div class="md-header__ellipsis">
-        <div class="md-header__topic">
-          <span class="md-ellipsis">
-            PhAST: Phase-field fracture with differentiable FEM
-          </span>
-        </div>
-        <div class="md-header__topic" data-md-component="header-topic">
-          <span class="md-ellipsis">
-            
-              1. From cracks to computation: learn by doing
-            
-          </span>
-        </div>
-      </div>
-    </div>
-    
-    
-      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
-    
-    
-    
-      <label class="md-header__button md-icon" for="__search">
-        
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
-      </label>
-      <div class="md-search" data-md-component="search" role="dialog">
-  <label class="md-search__overlay" for="__search"></label>
-  <div class="md-search__inner" role="search">
-    <form class="md-search__form" name="search">
-      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
-      <label class="md-search__icon md-icon" for="__search">
-        
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
-        
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
-      </label>
-      <nav class="md-search__options" aria-label="Search">
-        
-        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
-          
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
-        </button>
-      </nav>
-      
-    </form>
-    <div class="md-search__output">
-      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
-        <div class="md-search-result" data-md-component="search-result">
-          <div class="md-search-result__meta">
-            Initializing search
-          </div>
-          <ol class="md-search-result__list" role="presentation"></ol>
-        </div>
-      </div>
-    </div>
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
   </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
 </div>
-    
-    
-  </nav>
+
   
-</header>
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
     
-    <div class="md-container" data-md-component="container">
-      
-      
-      
-      
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">PhAST: Phase-field fracture with differentiable FEM</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
         
-          
-        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="index.html">
+                    PhAST: a learn-by-doing introduction to phase-field fracture
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">1. From cracks to computation: learn by doing</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="labs/00_why_average_predictions_can_fail.html">1.2.1. Why average predictions can fail</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="01_crack_representations.html">2. Crack representations: sharp, cohesive, and diffuse</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="02_phase_field_energy.html">3. Fracture energy: AT1, AT2, degradation, and width</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="labs/02_degradation_autograd.html">3.3.1. Differentiate a degradation law</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="03_staggered_solution.html">4. From solid mechanics to staggered damage updates</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="04_fem_to_tensors.html">5. Geometry, FEM, tensors, and matrix-free operators</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="labs/01_phast_tiny_evolving_fracture.html">5.8.1. Run and interpret a small PhAST fracture calculation</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="05_differentiation_and_inverse.html">6. Differentiation and an illustrative inverse problem</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="05a_backpropagation_step_by_step.html">6.3.1. Backpropagation through a stepped update</a></li>
+<li class="toctree-l2"><a class="reference internal" href="labs/03_tiny_derivative_inverse_toy.html">6.6.1. Differentiate and recover the elastic modulus</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="06_learning_adapter.html">7. Train, save, reload, adapters, and checked proposals</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="labs/04_train_save_reload_adapter.html">7.5.1. Train, save, reload, and compare a field model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="labs/05_hybrid_reference_correction.html">7.8.1. Assess a proposal and use a reference correction</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="07_practice_references.html">8. Practice, solutions, glossary, references, and contributing</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Optional inverse experiments</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="research/index.html">From gradients to reliable inverse experiments</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="research/01_geometry.html">Representing particles and testing their geometry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="research/02_observations.html">From measurements to a loss</a></li>
+<li class="toctree-l2"><a class="reference internal" href="research/03_derivatives.html">Verify a derivative before interpreting an update</a></li>
+<li class="toctree-l2"><a class="reference internal" href="research/03_history_visual.html">Why a fracture solver needs a memory-aware derivative</a></li>
+<li class="toctree-l2"><a class="reference internal" href="research/03_history.html">Differentiating fracture: memory, switches and useful limits</a></li>
+<li class="toctree-l2"><a class="reference internal" href="research/04_recovery.html">Why a correct gradient can give slow or ambiguous recovery</a></li>
+<li class="toctree-l2"><a class="reference internal" href="research/05_learning.html">A useful role for learning: propose, solve and check</a></li>
+<li class="toctree-l2"><a class="reference internal" href="research/06_applications.html">Designing a fracture-inverse research programme</a></li>
+<li class="toctree-l2"><a class="reference internal" href="research/08_visual_lab.html">Watch the particle, the crack and the loss</a></li>
+<li class="toctree-l2"><a class="reference internal" href="research/07_results.html">Retained computations and reproducibility</a></li>
+<li class="toctree-l2"><a class="reference internal" href="research/notebooks/inverse_experiments.html">From gradients to reliable inverse experiments</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
       
-      <main class="md-main" data-md-component="main">
-        <div class="md-main__inner md-grid">
-          
-            
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
               
-              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
-                <div class="md-sidebar__scrollwrap">
-                  <div class="md-sidebar__inner">
-                    
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/CEMS-Lab/autumn-school" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
 
 
 
-<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
-  <label class="md-nav__title" for="__drawer">
-    <a href="index.html" title="PhAST: Phase-field fracture with differentiable FEM" class="md-nav__button md-logo" aria-label="PhAST: Phase-field fracture with differentiable FEM" data-md-component="logo">
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
       
+    </div>
   
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
-    </a>
-    PhAST: Phase-field fracture with differentiable FEM
-  </label>
-  
-  <ul class="md-nav__list" data-md-scrollfix>
-    
-      
-      
-  
-  
-    
-  
-    
-  
-  
-    
-    
-    
-    <li class="md-nav__item md-nav__item--active md-nav__current-nested md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" checked>
-        
-          
-          <div class="md-nav__link md-nav__container">
-            <a href="#" class="md-nav__link md-nav__link--active">
+</div>
+</div>
               
-  
-  
-  <span class="md-ellipsis">
-    <span>From cracks to computation:<wbr> learn by doing</span>
-    
-  </span>
-  
-
-            </a>
-            
               
-              <label class="md-nav__link md-nav__link--active" for="__nav_1" id="__nav_1_label" tabindex="0">
-                <span class="md-nav__icon md-icon"></span>
-              </label>
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>From cracks to computation: learn by doing</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
             
-          </div>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_1">
-            <span class="md-nav__icon md-icon"></span>
-            <span>From cracks to computation:<wbr> learn by doing</span>
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_1" >
-        
-          
-          <div class="md-nav__link md-nav__container">
-            <a href="#opening-experiment-can-a-good-average-be-a-bad-prediction" class="md-nav__link ">
-              
-  
-  
-  <span class="md-ellipsis">
-    <span>Opening experiment:<wbr> can a good average be a bad prediction?</span>
-    
-  </span>
-  
-
-            </a>
-            
-              
-              <label class="md-nav__link " for="__nav_1_1" id="__nav_1_1_label" tabindex="0">
-                <span class="md-nav__icon md-icon"></span>
-              </label>
-            
-          </div>
-        
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_1_1_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_1_1">
-            <span class="md-nav__icon md-icon"></span>
-            <span>Opening experiment:<wbr> can a good average be a bad prediction?</span>
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="labs/00_why_average_predictions_can_fail.html" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    <span>Why average predictions can fail</span>
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-  
-      
-    <li class="md-nav__item md-nav__item--active md-nav__current-toc">
-      
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    <span>From cracks to computation:<wbr> learn by doing</span>
-    
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="#" class="md-nav__link md-nav__link--active">
-        
-  
-  
-  <span class="md-ellipsis">
-    <span>From cracks to computation:<wbr> learn by doing</span>
-    
-  </span>
-  
-
-      </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary">
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#what-this-course-is-for" class="md-nav__link">
-    
-    <span class="md-ellipsis">
-      <span>What this course is for</span>
-    </span>
-  </a>
-  
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-this-course-is-for">1.1. What this course is for</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#opening-experiment-can-a-good-average-be-a-bad-prediction">1.2. Opening experiment: can a good average be a bad prediction?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reading-and-running-the-book">1.3. Reading and running the book</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-result-card">1.4. The result card</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#minimum-result-card">1.4.1. Minimum result card</a></li>
+</ul>
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#opening-experiment-can-a-good-average-be-a-bad-prediction" class="md-nav__link">
-    
-    <span class="md-ellipsis">
-      <span>Opening experiment:<wbr> can a good average be a bad prediction?</span>
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Opening experiment: can a good average be a bad prediction?">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="labs/00_why_average_predictions_can_fail.html" class="md-nav__link">
-    
-    <span class="md-ellipsis">
-      <span>Why average predictions can fail</span>
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#reading-and-running-the-book" class="md-nav__link">
-    
-    <span class="md-ellipsis">
-      <span>Reading and running the book</span>
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#the-result-card" class="md-nav__link">
-    
-    <span class="md-ellipsis">
-      <span>The result card</span>
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="The result card">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#minimum-result-card" class="md-nav__link">
-    
-    <span class="md-ellipsis">
-      <span>Minimum result card</span>
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#a-vocabulary-for-careful-claims" class="md-nav__link">
-    
-    <span class="md-ellipsis">
-      <span>A vocabulary for careful claims</span>
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#a-first-prediction-before-a-first-computational-lesson" class="md-nav__link">
-    
-    <span class="md-ellipsis">
-      <span>A first prediction before a first computational lesson</span>
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#exercise-label-the-layers" class="md-nav__link">
-    
-    <span class="md-ellipsis">
-      <span>Exercise:<wbr> label the layers</span>
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#what-to-carry-into-the-crack-representation-chapter" class="md-nav__link">
-    
-    <span class="md-ellipsis">
-      <span>What to carry into the crack-<wbr>representation chapter</span>
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
-    </li>
-  
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#describing-a-numerical-result">1.5. Describing a numerical result</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-first-prediction-before-a-first-computational-lesson">1.6. A first prediction before a first computational lesson</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-label-the-layers">1.7. Exercise: label the layers</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-to-carry-into-the-crack-representation-chapter">1.8. What to carry into the crack-representation chapter</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
 
-    
-      
-      
-  
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="01_crack_representations.html" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    <span>Crack representations:<wbr> sharp, cohesive, and diffuse</span>
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="02_phase_field_energy.html" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    <span>Fracture energy:<wbr> AT1, AT2, degradation, and width</span>
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="03_staggered_solution.html" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    <span>From solid mechanics to staggered damage updates</span>
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="04_fem_to_tensors.html" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    <span>Geometry, FEM, tensors, and matrix-<wbr>free operators</span>
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="05_differentiation_and_inverse.html" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    <span>Differentiation and an illustrative inverse problem</span>
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="06_learning_adapter.html" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    <span>Train, save, reload, adapters, and checked proposals</span>
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="07_practice_references.html" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    <span>Practice, solutions, glossary, references, and contributing</span>
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
-        
-          
-          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    <span>Optional inverse experiments</span>
-    
-  </span>
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_9">
-            <span class="md-nav__icon md-icon"></span>
-            <span>Optional inverse experiments</span>
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
               
                 
-  
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="research/index.html" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    <span>From gradients to reliable inverse experiments</span>
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-  
-
-    
-  </ul>
-</nav>
-                  </div>
-                </div>
-              </div>
-            
-            
-              
-              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
-                <div class="md-sidebar__scrollwrap">
-                  <div class="md-sidebar__inner">
-                    
-
-<nav class="md-nav md-nav--secondary">
-  
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#what-this-course-is-for" class="md-nav__link">
-    
-    <span class="md-ellipsis">
-      <span>What this course is for</span>
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#opening-experiment-can-a-good-average-be-a-bad-prediction" class="md-nav__link">
-    
-    <span class="md-ellipsis">
-      <span>Opening experiment:<wbr> can a good average be a bad prediction?</span>
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#reading-and-running-the-book" class="md-nav__link">
-    
-    <span class="md-ellipsis">
-      <span>Reading and running the book</span>
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#the-result-card" class="md-nav__link">
-    
-    <span class="md-ellipsis">
-      <span>The result card</span>
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="The result card">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#minimum-result-card" class="md-nav__link">
-    
-    <span class="md-ellipsis">
-      <span>Minimum result card</span>
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#a-vocabulary-for-careful-claims" class="md-nav__link">
-    
-    <span class="md-ellipsis">
-      <span>A vocabulary for careful claims</span>
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#a-first-prediction-before-a-first-computational-lesson" class="md-nav__link">
-    
-    <span class="md-ellipsis">
-      <span>A first prediction before a first computational lesson</span>
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#exercise-label-the-layers" class="md-nav__link">
-    
-    <span class="md-ellipsis">
-      <span>Exercise:<wbr> label the layers</span>
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#what-to-carry-into-the-crack-representation-chapter" class="md-nav__link">
-    
-    <span class="md-ellipsis">
-      <span>What to carry into the crack-<wbr>representation chapter</span>
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-                  </div>
-                </div>
-              </div>
-            
-          
-          
-            <div class="md-content" data-md-component="content">
-              <article class="md-content__inner md-typeset" role="main">
-                
-                
+<div id="searchbox"></div>
+                <article class="bd-article">
                   
-
-
-<h1 id="from-cracks-to-computation-learn-by-doing"><span class="section-number">1. </span>From cracks to computation: learn by doing<a class="headerlink" href="#from-cracks-to-computation-learn-by-doing" title="Link to this heading">¶</a></h1>
-<h2 id="what-this-course-is-for"><span class="section-number">1.1. </span>What this course is for<a class="headerlink" href="#what-this-course-is-for" title="Link to this heading">¶</a></h2>
-<p>Fracture simulations can look persuasive long before they are understood. A
-colour map may show a thin damaged band, a reaction curve may soften, and a
-notebook may differentiate an objective. None of those observations alone
-identifies the model, the discretisation, or the numerical assumptions that
-produced them. This course develops a habit of naming each layer.</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="from-cracks-to-computation-learn-by-doing">
+<h1><span class="section-number">1. </span>From cracks to computation: learn by doing<a class="headerlink" href="#from-cracks-to-computation-learn-by-doing" title="Link to this heading">#</a></h1>
+<section id="what-this-course-is-for">
+<h2><span class="section-number">1.1. </span>What this course is for<a class="headerlink" href="#what-this-course-is-for" title="Link to this heading">#</a></h2>
+<p>Interpreting a damaged band, a softening reaction curve, or a computed gradient
+requires knowing the model, discretisation, and numerical assumptions that
+produced it. This course connects each of these layers to the observed result.</p>
 <p>By the end of the day, you should be able to:</p>
 <ul class="simple">
 <li><p>distinguish a fracture <em>formulation</em> from a finite-element
@@ -859,15 +367,16 @@ produced them. This course develops a habit of naming each layer.</p>
 and observable quantities;</p></li>
 <li><p>use automatic differentiation for a stated computational graph, and compare
 one directional derivative with a finite-difference estimate; and</p></li>
-<li><p>describe what a learned proposal, adapter, or correction is allowed to
-claim in a mechanics workflow.</p></li>
+<li><p>explain the role of a learned proposal, adapter, or correction in a
+mechanics workflow.</p></li>
 </ul>
-<p>The examples are deliberately small. Their purpose is to make assumptions
-inspectable, not to establish a material prediction or a benchmark. Each
-computational lesson follows the same rhythm: predict, derive or identify the
+<p>The examples are small enough to inspect their assumptions and calculations
+directly. Each computational lesson follows the same rhythm: predict, derive or identify the
 relevant quantity, inspect the code and retained output, then test your
 interpretation against a worked solution.</p>
-<h2 id="opening-experiment-can-a-good-average-be-a-bad-prediction"><span class="section-number">1.2. </span>Opening experiment: can a good average be a bad prediction?<a class="headerlink" href="#opening-experiment-can-a-good-average-be-a-bad-prediction" title="Link to this heading">¶</a></h2>
+</section>
+<section id="opening-experiment-can-a-good-average-be-a-bad-prediction">
+<h2><span class="section-number">1.2. </span>Opening experiment: can a good average be a bad prediction?<a class="headerlink" href="#opening-experiment-can-a-good-average-be-a-bad-prediction" title="Link to this heading">#</a></h2>
 <p>Suppose an input admits two valid states. Will a single learned average be
 valid too? The short opening experiment compares balanced supervised fitting
 with an explicitly selected energy-minimising branch. Predict the answer
@@ -880,34 +389,38 @@ differentiation chapter.</p>
 </div>
 <p>This original algebraic activity is inspired by the
 <a class="reference external" href="https://physicsbaseddeeplearning.org/intro-teaser.html">Physics-based Deep Learning teaser</a>.
-It is not a phase-field fracture model. It introduces a recurring question:
-does the objective measure the property that we actually want?</p>
-<h2 id="reading-and-running-the-book"><span class="section-number">1.3. </span>Reading and running the book<a class="headerlink" href="#reading-and-running-the-book" title="Link to this heading">¶</a></h2>
+It uses an algebraic energy with two branches to introduce a recurring
+question: does the objective measure the property that we actually want?</p>
+</section>
+<section id="reading-and-running-the-book">
+<h2><span class="section-number">1.3. </span>Reading and running the book<a class="headerlink" href="#reading-and-running-the-book" title="Link to this heading">#</a></h2>
 <p>The primary route is contained in this book. Read a theory section, continue
 to its computational lesson in the local table of contents, and return to the
 next theory section with one observation in hand.</p>
 <p><strong>Read and predict.</strong> Read the figures and worked equations first. Before a
 code cell, state what sign, field pattern, or check you expect to see.</p>
-<p><strong>Inspect and explain.</strong> After the opening teaser, the five core lessons pair the reviewed code
-with its retained figures and result cards: a degradation derivative, a public
+<p><strong>Inspect and explain.</strong> After the opening teaser, the five core lessons pair code
+with its retained figures and result cards: a degradation derivative, a
 PhAST notched-tension calculation, a differentiable elastic-bar toy, a saved
 toy field model, and a checked toy proposal with fallback. Use the exercise and
-solution in each lesson to distinguish what the output shows from what it does
-not establish.</p>
-<p><strong>Execute optionally.</strong> Download a lesson notebook only when you want to alter
+solution in each lesson to connect the output to the assumptions of the model.</p>
+<p><strong>Execute.</strong> Download a lesson notebook when you want to alter
 an input or repeat the calculation in a Jupyter environment. Read its recorded
-result card before running it. The record belongs to the environment in which
-it was measured; it is not a portable runtime prediction.</p>
+result card before running it, then record the runtime and software versions
+for your own environment.</p>
 <p><strong>Extend a local solver deliberately.</strong> Install and document a solver
-environment only when you need to alter the physics, mesh, or algorithm. The public
+environment when you need to alter the physics, mesh, or algorithm. The public
 <a class="reference external" href="https://github.com/CEMS-Lab/PhAST">PhAST source repository</a> is a useful
 starting point for source and release information. A local run should record
 the software revision, numerical settings, and output location alongside the
 physical parameters.</p>
-<h2 id="the-result-card"><span class="section-number">1.4. </span>The result card<a class="headerlink" href="#the-result-card" title="Link to this heading">¶</a></h2>
+</section>
+<section id="the-result-card">
+<h2><span class="section-number">1.4. </span>The result card<a class="headerlink" href="#the-result-card" title="Link to this heading">#</a></h2>
 <p>For every computational activity, write a compact result card. It separates
 what was specified from what was observed.</p>
-<h3 id="minimum-result-card"><span class="section-number">1.4.1. </span>Minimum result card<a class="headerlink" href="#minimum-result-card" title="Link to this heading">¶</a></h3>
+<section id="minimum-result-card">
+<h3><span class="section-number">1.4.1. </span>Minimum result card<a class="headerlink" href="#minimum-result-card" title="Link to this heading">#</a></h3>
 <ol class="arabic simple">
 <li><p><strong>Case:</strong> geometry, material regions, and boundary/loading conditions.</p></li>
 <li><p><strong>Numerics:</strong> mesh or nodal layout, quadrature convention, load steps,
@@ -916,25 +429,31 @@ tolerances, and the phase-field length <span class="math notranslate nohighlight
 random process is used.</p></li>
 <li><p><strong>Observation:</strong> the selected field, scalar quantity, and a labelled plot.</p></li>
 <li><p><strong>Check:</strong> a named equilibrium, residual, constraint, or derivative check.</p></li>
-<li><p><strong>Limit:</strong> one sentence describing what the check does <em>not</em> establish.</p></li>
+<li><p><strong>Scope:</strong> the assumptions and numerical conditions under which the result applies.</p></li>
 </ol>
 <p>For example, a monotone increase in <span class="math notranslate nohighlight">\(d\)</span> at one node is consistent with a
-damage-irreversibility rule, but it does not by itself demonstrate mesh
-objectivity. A close directional derivative match at one parameter value
-checks a local calculation, not the uniqueness of an inverse recovery.</p>
-<h2 id="a-vocabulary-for-careful-claims"><span class="section-number">1.5. </span>A vocabulary for careful claims<a class="headerlink" href="#a-vocabulary-for-careful-claims" title="Link to this heading">¶</a></h2>
+damage-irreversibility rule; mesh objectivity requires comparisons across
+refinements. A close directional derivative match at one parameter value
+checks a local calculation, while uniqueness of an inverse recovery depends
+on the observations and parameterisation.</p>
+</section>
+</section>
+<section id="describing-a-numerical-result">
+<h2><span class="section-number">1.5. </span>Describing a numerical result<a class="headerlink" href="#describing-a-numerical-result" title="Link to this heading">#</a></h2>
 <p>Use the following three sentence patterns when describing a numerical result.</p>
 <ul class="simple">
 <li><p><strong>Specified:</strong> “The calculation used <span class="math notranslate nohighlight">\(d=0\)</span> as intact, <span class="math notranslate nohighlight">\(d=1\)</span> as broken, a
 stated regularisation length <span class="math notranslate nohighlight">\(\ell\)</span>, and the listed boundary conditions.”</p></li>
 <li><p><strong>Observed:</strong> “For this discretisation and load increment, the plotted
 damage field localised near the prescribed notch.”</p></li>
-<li><p><strong>Not inferred:</strong> “This observation alone does not identify a physical crack
-path at all mesh resolutions or loading rates.”</p></li>
+<li><p><strong>Scope:</strong> “The crack path is evaluated at this mesh resolution and loading
+rate; their influence can be assessed through refinement and rate studies.”</p></li>
 </ul>
-<p>This is not cautious wording for its own sake. It tells another reader which
-part of a conclusion they can reproduce, challenge, or extend.</p>
-<h2 id="a-first-prediction-before-a-first-computational-lesson"><span class="section-number">1.6. </span>A first prediction before a first computational lesson<a class="headerlink" href="#a-first-prediction-before-a-first-computational-lesson" title="Link to this heading">¶</a></h2>
+<p>These statements make the calculation reproducible and identify useful
+questions for further study.</p>
+</section>
+<section id="a-first-prediction-before-a-first-computational-lesson">
+<h2><span class="section-number">1.6. </span>A first prediction before a first computational lesson<a class="headerlink" href="#a-first-prediction-before-a-first-computational-lesson" title="Link to this heading">#</a></h2>
 <p>Before reading the first computational lesson, make a prediction in words. If the tensile energy
 driving damage is high near a notch and the loading increases, where should a
 phase-field model first permit the damage variable to grow? What quantity
@@ -948,7 +467,9 @@ reduction in stiffness?</p>
 <li><p>one test that would make the explanation stronger.</p></li>
 </ol>
 <p>This pattern will be used throughout the book.</p>
-<h2 id="exercise-label-the-layers"><span class="section-number">1.7. </span>Exercise: label the layers<a class="headerlink" href="#exercise-label-the-layers" title="Link to this heading">¶</a></h2>
+</section>
+<section id="exercise-label-the-layers">
+<h2><span class="section-number">1.7. </span>Exercise: label the layers<a class="headerlink" href="#exercise-label-the-layers" title="Link to this heading">#</a></h2>
 <p>Classify each statement as a fracture formulation, spatial discretisation,
 solution/sensitivity method, or observable.</p>
 <ol class="arabic simple">
@@ -968,80 +489,141 @@ penalty define a regularised crack representation.</p></li>
 formulation and discretisation.</p></li>
 <li><p>An <strong>observable</strong> derived from the computed state and boundary data.</p></li>
 <li><p>A <strong>sensitivity method/task</strong>. Automatic differentiation or an adjoint
-may compute the derivative; neither is itself a fracture formulation.</p></li>
+computes a derivative for the chosen formulation and numerical model.</p></li>
 </ol>
 </div>
-<h2 id="what-to-carry-into-the-crack-representation-chapter"><span class="section-number">1.8. </span>What to carry into the crack-representation chapter<a class="headerlink" href="#what-to-carry-into-the-crack-representation-chapter" title="Link to this heading">¶</a></h2>
+</section>
+<section id="what-to-carry-into-the-crack-representation-chapter">
+<h2><span class="section-number">1.8. </span>What to carry into the crack-representation chapter<a class="headerlink" href="#what-to-carry-into-the-crack-representation-chapter" title="Link to this heading">#</a></h2>
 <p>Keep two questions visible: <em>what object represents the crack?</em> and <em>what
 exactly is solved?</em> The next chapter places phase field, XFEM, and cohesive
-models next to one another without treating them as interchangeable labels.</p>
+models next to one another and identifies the role of each representation.</p>
+</section>
+</section>
 
 
+                </article>
+              
 
-
-
-
-
-  
-  
-
-
-
-
-
-
-                
-              </article>
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="index.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">PhAST: a learn-by-doing introduction to phase-field fracture</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="labs/00_why_average_predictions_can_fail.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">1.2.1. </span>Why average predictions can fail</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
             </div>
-          
-          
-        </div>
-        
-      </main>
-      
-        <footer class="md-footer">
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-this-course-is-for">1.1. What this course is for</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#opening-experiment-can-a-good-average-be-a-bad-prediction">1.2. Opening experiment: can a good average be a bad prediction?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reading-and-running-the-book">1.3. Reading and running the book</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-result-card">1.4. The result card</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#minimum-result-card">1.4.1. Minimum result card</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#describing-a-numerical-result">1.5. Describing a numerical result</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-first-prediction-before-a-first-computational-lesson">1.6. A first prediction before a first computational lesson</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-label-the-layers">1.7. Exercise: label the layers</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-to-carry-into-the-crack-representation-chapter">1.8. What to carry into the crack-representation chapter</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
   
+  <div class="footer-item">
+    <div class="phast-course-credit">
+  <!-- Course material created by Allamaprabhu Ani, CEMS-Lab, 2026. -->
+  <p class="phast-course-creators">Presented by <span>Sathiskumar A. Ponnusami · Queen Mary University of London · CEMS-Lab</span></p>
+  <p class="phast-course-purpose">© 2026
+    <a href="https://github.com/CEMS-Lab">CEMS-Lab</a>
+    <span aria-hidden="true"> · </span>
+    Prepared for the
+    <a href="https://www.ukacm-school.uk/home">UKACM Autumn School 2026</a>.
+  </p>
+</div>
+  </div>
   
-  
-  <div class="md-footer-meta md-typeset">
+  <div class="footer-item">
     
-    <div class="md-footer-meta__inner md-grid">
-      <div class="md-copyright">
-  
-    <div class="md-footer-copyright__highlight">
-        &#169; Copyright 2026, UKACM Autumn School.
-        
+<div class="phast-discoveries" aria-label="Optional PhAST discoveries">
+  <details class="phast-discovery" id="phast-gradient-discovery">
+    <summary aria-label="PhAST ∇: a gradient discovery">PhAST ∇</summary>
+    <div class="phast-discovery-body">
+      <p><strong>No neural network required.</strong></p>
+      <p>A differentiable simulation can provide parameter sensitivities on
+        its own. The chain rule was here before the neural network.</p>
     </div>
-  
-    Created using
-    <a href="https://www.sphinx-doc.org/" target="_blank" rel="noopener">Sphinx</a>
-    7.4.7.
-     and
-    <a href="https://github.com/jbms/sphinx-immaterial/" target="_blank" rel="noopener">Sphinx-Immaterial</a>
+  </details>
+  <details class="phast-discovery" id="phast-backward-discovery">
+    <summary><code>.backward()</code></summary>
+    <div class="phast-discovery-body">
+      <p><strong>A pocket chain rule.</strong></p>
+      <p>Let <var>q</var> = <var>θ</var><sup>2</sup> and
+        <var>L</var> = ½(<var>q</var> − 4)<sup>2</sup>.
+        At <var>θ</var> = 1, which way does the loss decrease locally?</p>
+      <details class="phast-pocket-answer">
+        <summary>Follow the derivative</summary>
+        <p>d<var>L</var>/d<var>θ</var> = (<var>q</var> − 4) · 2<var>θ</var> = −6.
+          A sufficiently small positive change in <var>θ</var> decreases
+          the loss. The gradient points uphill; a descent step goes against it.</p>
+      </details>
+    </div>
+  </details>
+</div>
+
+  </div>
   
 </div>
-      
+          </footer>
+        
+
+      </main>
     </div>
-    
   </div>
-</footer>
-      
-    </div>
-    <div class="md-dialog" data-md-component="dialog">
-      <div class="md-dialog__inner md-typeset"></div>
-    </div>
-    
-    
-    <script id="__config" type="application/json">{"base": ".", "features": [], "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
-    
-      
-        <script src="_static/documentation_options.js?v=fc6fd62b"></script>
-        <script src="_static/sphinx_immaterial_theme.32136f45f91ae6956.min.js?v=a7a9472a"></script>
-        <script src="_static/clipboard.min.js?v=a7894cd8"></script>
-        <script src="_static/copybutton.js?v=f281be69"></script>
-        <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-        <script defer="defer" src="_static/mathjax/tex-mml-chtml.js?v=cadf963e"></script>
-        <script src="_static/learning_book.js?v=7a62d495"></script>
-    
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
   </body>
 </html>

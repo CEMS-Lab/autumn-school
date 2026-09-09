@@ -1,0 +1,27 @@
+WEBVTT
+
+00:00.000 --> 00:06.600
+Define the feature contract: graph or mesh, node order, units,
+field channels and normalisation. Use a compatible model to propose damage.
+
+00:06.600 --> 00:09.800
+Check admissibility, including bounds and irreversibility,
+and the declared residual or constraint tolerance.
+
+00:09.800 --> 00:12.400
+A passing proposal may be accepted as the checked state.
+
+00:12.400 --> 00:17.600
+A failing proposal requires reference correction.
+The corrected field must then be checked again.
+
+00:17.600 --> 00:19.800
+Accept the corrected field when the second check passes.
+
+00:19.800 --> 00:22.700
+If the second check fails, stop and report nonconvergence.
+Acceptance requires a passing check.
+
+00:22.700 --> 00:26.500
+Measure the complete route: prediction, conversion, checking and correction.
+Compare total runtime alongside field quality and failure rates.

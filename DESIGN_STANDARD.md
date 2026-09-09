@@ -24,6 +24,59 @@ Instagram/PDF repository inventory.
 
 ## Visual grammar
 
+### HTML reading theme
+
+The HTML book uses **Sphinx Book Theme 1.1.4 / PyData Sphinx Theme 0.15.4**,
+matching the theme stack served by
+[Physics-based Deep Learning](https://physicsbaseddeeplearning.org/intro.html).
+Reference HTML, stylesheets and local package source were inspected on
+9 September 2026; this is not a claim of a new side-by-side browser review.
+
+Retain the upstream defaults: dark background `#121212`, primary/link blue
+`#528fe4`, secondary/hover orange `#e89217`, system sans-serif text, and 1.65
+body line height. The wide layout caps the page at 88 rem, uses a 20% primary
+sidebar from 992 px, a 17 rem page-contents column from 1200 px, and 2 rem
+article padding (1 rem at narrow widths). Let the theme collapse navigation
+at its native breakpoints; do not force three columns onto a small screen.
+
+Dark is the initial mode; the reader may choose light or system mode with
+the standard toolbar control. Course CSS only adapts notebook cells, solution
+panels, equation overflow and print. Quantitative figures must not be inverted,
+darkened or recoloured: preserve white canvases and original colour bars.
+Lecture slides and scientific figure exports keep their existing white design.
+The theme does not alter notebook computation, output or runtime claims.
+
+#### PhAST accents and optional discoveries
+
+The subsequent user-approved accent pass keeps the same dark surfaces and
+column geometry but replaces the stock blue/orange accents with PhAST-derived
+colours. Public [PhAST documentation CSS](https://github.com/CEMS-Lab/PhAST/blob/f6324f899f0701769810be117f27f1208f7a582e/docs/_static/phast.css)
+declares orange `#e95420`. Pixel (600, 406) of the
+[public gradient banner](https://github.com/CEMS-Lab/PhAST/blob/f6324f899f0701769810be117f27f1208f7a582e/assets/phast-banner.png)
+is blue `#0261e0`; this is a sampled colour, not a formally declared palette.
+Reading accents are adapted to `#79b8ff` / `#ff9966` in dark mode and
+`#005bc4` / `#b83e13` in light mode. Keep headings predominantly neutral:
+only the short heading rule, current navigation, links and answer-panel edges
+carry the two colours. Do not replace semantic warning/error colours.
+
+Two tiny, closed-by-default footer disclosures offer a gradient observation
+and a scalar chain-rule puzzle. They work without JavaScript, collect no data,
+play no sound, trigger no animation and are omitted from print. They are
+optional extras, never prerequisites or a gate on reading a solution.
+
+The footer credits Allamaprabhu Ani and Sathiskumar A. Ponnusami as creators,
+identifies CEMS-Lab and states “Prepared for the UKACM Autumn School 2026”.
+Keep those two lines readable but secondary to the lesson, without academic
+titles, promotional claims or an implication that UKACM owns the course content.
+
+Rebuild with the pinned requirements and the existing Sphinx command below.
+The local MathJax distribution is retained in `book/_static/mathjax/`; do not
+delete it when rebuilding the tracked HTML output. The Sphinx build hook copies
+that retained distribution into other HTML output directories. Keep upstream theme
+licences in `source/book/_static/licenses/` so Sphinx includes them in HTML.
+
+### Diagram conventions
+
 - Use white space and a clear left-aligned heading. One figure answers one
   principal question; remove unnecessary panels, shadows and branded ribbons.
 - Blue (`#245A81`) denotes forward evaluation. Orange (`#B85C20`) denotes
@@ -44,13 +97,16 @@ Instagram/PDF repository inventory.
   14–18 pt principal annotations on an approximately nine-inch source canvas.
   Use editable LaTeX/TikZ for lecture diagrams. Recompose for each aspect ratio
   rather than shrinking the whole textbook figure onto a slide.
-- Export SVG for sharp HTML, PDF for print and PNG for simple previews.
+- Export SVG for sharp HTML, PDF for vector figure reuse and PNG for simple previews.
   Preserve live SVG text and embedded PDF fonts. Supply meaningful alternative
   text and a prose interpretation beside each diagram.
 
 ## Course-wide invariants
 
-The overview has three 120-minute blocks, each including a ten-minute break.
+The next-edition overview follows three 60-minute lecture blocks, then three
+60-minute exercise blocks, with breaks separately scheduled. The 330-minute
+contact fallback is explicit in TEACHING_SCHEDULE.md. The existing v0.1.1
+overview still depicts the previous three mixed 120-minute blocks.
 It must show the fundamentals and model-learning activities, not only inverse
 problems. Notebook numbers refer to the canonical six notebooks. Lecture time
 includes explanation and discussion; it is not a computational runtime.
@@ -73,8 +129,6 @@ offline browser rendering does not depend on locally installed font families.
 python source/book/scripts/build_figures.py --flowcharts-only
 python source/book/scripts/build_backprop_example.py --figure-only
 python -m sphinx -b html -E -a source/book book -W --keep-going
-python -m sphinx -b latex -E -a source/book .build/latex -W --keep-going
-latexmk -cd -xelatex -interaction=nonstopmode -halt-on-error .build/latex/phast-ukacm-course.tex
 cd source/slides
 latexmk -pdf -outdir=../../.build/slides -interaction=nonstopmode -halt-on-error phast_autumn_school_2026.tex
 ```

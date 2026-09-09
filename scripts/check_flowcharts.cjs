@@ -1,4 +1,4 @@
-// Offline checks for the seven vector diagrams. No notebook execution.
+// Local-page checks for seven vector diagrams, with external requests blocked.
 const fs = require('fs');
 const path = require('path');
 const assert = require('assert/strict');
@@ -7,6 +7,7 @@ const {chromium} = require('playwright');
 
 (async () => {
   const root = path.resolve(process.argv[2] || 'book');
+  const baseURL = process.env.COURSE_BASE_URL;
   const out = path.resolve(process.argv[3] || 'reviews/flowcharts');
   fs.mkdirSync(out, {recursive:true});
   const browser = await chromium.launch({headless:true,
@@ -17,18 +18,23 @@ const {chromium} = require('playwright');
   const results = [];
   try {
     for (const width of [1440,390]) {
-      const context = await browser.newContext({viewport:{width,height:1000},offline:true});
-      await context.route(/^https?:/, route => route.abort());
+      const context = await browser.newContext({viewport:{width,height:1000},offline:!baseURL});
+      await context.route(/^https?:/, route =>
+        baseURL && new URL(route.request().url()).origin === new URL(baseURL).origin
+          ? route.continue() : route.abort());
       for (const name of lessons) {
         const page = await context.newPage();
         const errors = [], failed = [];
         page.on('pageerror',e=>errors.push(e.message));
         page.on('requestfailed',r=>failed.push(r.url()));
-        await page.goto(pathToFileURL(path.join(root,name+'.html')).href);
+        await page.goto(baseURL ? new URL(name+'.html', baseURL).href
+          : pathToFileURL(path.join(root,name+'.html')).href);
         await page.evaluate(async()=>{
           if(window.MathJax?.startup?.promise) await window.MathJax.startup.promise;
           await Promise.all([...document.images].map(i=>i.decode().catch(()=>{})));
+          await document.fonts.ready;
         });
+        await page.waitForLoadState('networkidle');
         const figure = page.locator('figure').first();
         const img = figure.locator('img');
         assert.ok((await img.getAttribute('src')).endsWith('.svg'));

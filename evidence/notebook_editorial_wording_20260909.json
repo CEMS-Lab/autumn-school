@@ -1,0 +1,391 @@
+{
+  "date": "2026-09-09",
+  "kind": "editorial wording update to retained teaching records",
+  "numerical_execution": "Original execution counts, numerical values, images and timings retained for notebooks 00–05.",
+  "original_execution_archive": ".build/notebook-language-20260909.2mRx0Q/original",
+  "notebooks": [
+    {
+      "path": "notebooks/00_why_average_predictions_can_fail.ipynb",
+      "before_sha256": "72b8e72577f9a718d45b5a5379ab2353481cf2e26aa96843de81676093503484",
+      "after_sha256": "0d8f102b9eaa79d502fd3013c7e935f316b1063ca0022f5136d2950902945595",
+      "code_cells": 6,
+      "computational_ast_preserved_modulo_declared_display_strings": true,
+      "outputs_preserved_modulo_declared_display_strings": true,
+      "math_expressions_preserved": true,
+      "edits": [
+        {
+          "location": "cell 1: code",
+          "before": "original reduced algebraic energy toy; not PhAST fracture or a solver-in-loop result",
+          "after": "original scalar quartic-energy model with supervised and positive-branch energy objectives",
+          "count": 1
+        },
+        {
+          "location": "cell 1: output 0",
+          "before": "original reduced algebraic energy toy; not PhAST fracture or a solver-in-loop result",
+          "after": "original scalar quartic-energy model with supervised and positive-branch energy objectives",
+          "count": 1
+        },
+        {
+          "location": "cell 5: markdown",
+          "before": "## A stationary point can still be wrong",
+          "after": "## Stationary points and reference branches",
+          "count": 1
+        },
+        {
+          "location": "cell 5: markdown",
+          "before": "has zero energy gradient even though its residual is",
+          "after": "has zero energy gradient, a residual of",
+          "count": 1
+        },
+        {
+          "location": "cell 5: markdown",
+          "before": "and\nits energy is positive when",
+          "after": "and\npositive energy when",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "path": "notebooks/01_phast_tiny_evolving_fracture.ipynb",
+      "before_sha256": "7e5e7211c793ba7c6b86bd3e16ef7fa75bfc60a9415ae17d162420fc23661fac",
+      "after_sha256": "552d97c4cf1a260fe68557d8a3aad14be102f01516a64ac2c19aa16dab963172",
+      "code_cells": 7,
+      "computational_ast_preserved_modulo_declared_display_strings": true,
+      "outputs_preserved_modulo_declared_display_strings": true,
+      "math_expressions_preserved": true,
+      "edits": [
+        {
+          "location": "cell 7: code",
+          "before": "# The checks describe the promised evidence, not an aesthetic judgement.",
+          "after": "# Check convergence, irreversibility and damage evolution numerically.",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "path": "notebooks/02_degradation_autograd.ipynb",
+      "before_sha256": "892ecd4eb0f3290d81a844550f8d7e50be27a1aab0e29419ff6d71a9bcd53f7d",
+      "after_sha256": "be7ac9a815fd270fc402409dd6680f4c6e43da7c568aef0a8c23a6ee5f8da538",
+      "code_cells": 4,
+      "computational_ast_preserved_modulo_declared_display_strings": true,
+      "outputs_preserved_modulo_declared_display_strings": true,
+      "math_expressions_preserved": true,
+      "edits": []
+    },
+    {
+      "path": "notebooks/03_tiny_derivative_inverse_toy.ipynb",
+      "before_sha256": "7d9bad340e2614d8f5304de8e782e4ec33b638a53bbb70c994a3434ae70b7698",
+      "after_sha256": "1d08ddd7311abc89dde55a1686cf4bbfb041f7f36307fd3bb4c88cb29723b34b",
+      "code_cells": 4,
+      "computational_ast_preserved_modulo_declared_display_strings": true,
+      "outputs_preserved_modulo_declared_display_strings": true,
+      "math_expressions_preserved": true,
+      "edits": []
+    },
+    {
+      "path": "notebooks/04_train_save_reload_adapter.ipynb",
+      "before_sha256": "19c46f132711efb911045f130c3e1e7f9eea959a3e8c553e36643a8c1cce69cc",
+      "after_sha256": "d8838ca41c5e77ade2d8df79500c0347baa96ced91a7b23b4b01cb4a4446bb04",
+      "code_cells": 5,
+      "computational_ast_preserved_modulo_declared_display_strings": true,
+      "outputs_preserved_modulo_declared_display_strings": true,
+      "math_expressions_preserved": true,
+      "edits": [
+        {
+          "location": "cell 2: output 0",
+          "before": "course-owned ToyHelmholtzProblem; not PhAST or research data",
+          "after": "course-owned synthetic fields from the discrete ToyHelmholtzProblem",
+          "count": 1
+        },
+        {
+          "location": "cell 4: code",
+          "before": "same toy feature contract only",
+          "after": "shared nodewise feature contract for the discrete Helmholtz model",
+          "count": 1
+        },
+        {
+          "location": "cell 4: output 0",
+          "before": "same toy feature contract only",
+          "after": "shared nodewise feature contract for the discrete Helmholtz model",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "path": "notebooks/05_hybrid_reference_correction.ipynb",
+      "before_sha256": "a12c5704860ac2de7bb6460ef8a55e95b754e8bc62db524844b9d25ef6cd1076",
+      "after_sha256": "ccd914cc20b5459ef64085e080506bfd2d020360351c8740433ccb58e170639f",
+      "code_cells": 6,
+      "computational_ast_preserved_modulo_declared_display_strings": true,
+      "outputs_preserved_modulo_declared_display_strings": true,
+      "math_expressions_preserved": true,
+      "edits": [
+        {
+          "location": "cell 3: output 0",
+          "before": "ToyHelmholtzProblem residual only; not a PhAST AT2 residual",
+          "after": "Residual of the discrete ToyHelmholtzProblem",
+          "count": 1
+        },
+        {
+          "location": "cell 3: output 0",
+          "before": "ToyHelmholtzProblem residual only; not a PhAST AT2 residual",
+          "after": "Residual of the discrete ToyHelmholtzProblem",
+          "count": 1
+        },
+        {
+          "location": "cell 6: code",
+          "before": "# One correction record is a replay-style teaching artefact, not an\n# end-to-end DAgger result. Reference-label cost remains part of any\n# later retraining comparison.",
+          "after": "# Save one proposal/reference pair for an offline replay dataset.\n# Include reference-label cost in a later retraining comparison.",
+          "count": 1
+        },
+        {
+          "location": "cell 6: code",
+          "before": "course-owned ToyHelmholtzProblem; one offline correction record, not PhAST DAgger",
+          "after": "course-owned ToyHelmholtzProblem; one offline proposal/reference correction record",
+          "count": 1
+        }
+      ]
+    }
+  ],
+  "exercise_sources": [
+    {
+      "path": "source/book/solutions/00.json",
+      "before_sha256": "281b1d9686d4f8661d54c884c3646dcdf6992dd3626f24da179a819af77457c9",
+      "after_sha256": "1566569f2e3dc745494b3e84f616425918de849fecf0a3c6c5c18bb7a072696f",
+      "math_expressions_preserved": true,
+      "edits": [
+        {
+          "location": "exercise prose",
+          "before": "rather than on either one.",
+          "after": "and is their conditional mean.",
+          "count": 1
+        },
+        {
+          "location": "exercise prose",
+          "before": "The residual and energy are nonzero, but the quartic energy has a stationary point at",
+          "after": "The residual and energy are nonzero, and the quartic energy has a stationary point at",
+          "count": 1
+        },
+        {
+          "location": "exercise prose",
+          "before": "A gradient-based energy objective can therefore fail to move from that exact point.",
+          "after": "A gradient-based energy objective therefore gives a zero update at that exact point.",
+          "count": 1
+        },
+        {
+          "location": "exercise prose",
+          "before": "Its positive-branch RMSE is also only about",
+          "after": "Its positive-branch RMSE is about",
+          "count": 1
+        },
+        {
+          "location": "exercise prose",
+          "before": "rather than $1.0938\\times10^{-1}$",
+          "after": "compared with $1.0938\\times10^{-1}$",
+          "count": 1
+        },
+        {
+          "location": "exercise prose",
+          "before": "That value can minimise the supervised loss while failing the algebraic branch relation $q^2=s$.",
+          "after": "That value minimises the supervised loss. The algebraic branch relation $q^2=s$ holds at the positive and negative references.",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "path": "source/book/solutions/01.json",
+      "before_sha256": "5e91f3ba7cf476a7aacf88d1dcc5850fb46b0eebb956da8d961d359b9cac2ade",
+      "after_sha256": "c9fbf80bb2048939095ccc57fb0229182e0c48f6199e47d62b81cdef4e52ddd8",
+      "math_expressions_preserved": true,
+      "edits": [
+        {
+          "location": "exercise prose",
+          "before": "so there is no grid node exactly at $x=0.8$.",
+          "after": "placing the nominal endpoint $x=0.8$ between grid nodes.",
+          "count": 1
+        },
+        {
+          "location": "exercise prose",
+          "before": "last represented centreline node not exceeding it",
+          "after": "last represented centreline node within that threshold",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "path": "source/book/solutions/02.json",
+      "before_sha256": "d5da311f2507c1105f11b82682446239d10516a67ad7512a3bd99bec9d286ea1",
+      "after_sha256": "d5da311f2507c1105f11b82682446239d10516a67ad7512a3bd99bec9d286ea1",
+      "math_expressions_preserved": true,
+      "edits": []
+    },
+    {
+      "path": "source/book/solutions/03.json",
+      "before_sha256": "a0bfe045eaeb21c1ab3744b3258cbdb974533c68021b13ea5f1b8c89074069cf",
+      "after_sha256": "a0bfe045eaeb21c1ab3744b3258cbdb974533c68021b13ea5f1b8c89074069cf",
+      "math_expressions_preserved": true,
+      "edits": []
+    },
+    {
+      "path": "source/book/solutions/04.json",
+      "before_sha256": "48a75b46500763ef164ac30a6ac7c7547d620213b80111747b89a473543e583b",
+      "after_sha256": "4c80ebcb942cdd7c1a087f152a4e7a6fb25199672246576d04520bf1581d86a5",
+      "math_expressions_preserved": true,
+      "edits": [
+        {
+          "location": "exercise prose",
+          "before": "Explain why the split is made by whole load case rather than by individual node.",
+          "after": "Explain why all nodes from a load case are kept together in the split.",
+          "count": 1
+        },
+        {
+          "location": "exercise prose",
+          "before": "If some nodes from a field appeared in training while other nodes from that same field appeared in test, the measured test error would partly reflect interpolation within a seen case rather than generalisation to an unseen load case. The canonical exercise therefore keeps entire loads together.",
+          "after": "Splitting the nodes of one field between training and test partly measures interpolation within a seen load case. Keeping entire loads together evaluates predictions at held-out load cases.",
+          "count": 1
+        },
+        {
+          "location": "exercise prose",
+          "before": "3. No. The checkpoint metadata lists test loads",
+          "after": "3. The held-out field belongs to the test split. The checkpoint metadata lists test loads",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "path": "source/book/solutions/05.json",
+      "before_sha256": "8c0f68c17d04184b52977bb20f3e08634edea363e3257847a091cf3fa33827af",
+      "after_sha256": "0f22e46179dad73e827b8d12fb7987e0188dbb3d211d956f585ad0af31350a51",
+      "math_expressions_preserved": true,
+      "edits": [
+        {
+          "location": "exercise prose",
+          "before": "A feature-order mismatch or a NaN is rejected rather than silently reshaped.",
+          "after": "A feature-order mismatch or a NaN triggers rejection.",
+          "count": 1
+        }
+      ]
+    }
+  ],
+  "helper": {
+    "path": "notebooks/day2_helpers/course_tools.py",
+    "allowed_changes": "Two descriptive display-string literals",
+    "algorithm_ast_preserved_modulo_declared_display_strings": true,
+    "before_sha256": "d61268a30e53e33d52ade410690dcfc32d7aa0effb6e1555b3c95f08a6634ffd",
+    "after_sha256": "cc67d54efe6427b1ab7279ce819251fd39daf69b81096a9a16f08aa83df74d46"
+  },
+  "edit_counts": {
+    "notebook_source_occurrences": 8,
+    "stored_output_display_occurrences": 5,
+    "exercise_prose_occurrences": 12
+  },
+  "generator": {
+    "path": "source/notebooks/build_day2_notebooks.py",
+    "root_fix": "COURSE now resolves parents[2], the repository root, instead of the source directory.",
+    "preview_command": "python source/notebooks/build_day2_notebooks.py --previews-only",
+    "preview_scope": "Six retained notebook exports with hidden creator metadata and visible presenter/affiliation footer.",
+    "generated_code_matches_canonical_notebooks": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "sha256": "38d10b565d267d72b118e606ba65bafff4d40ecbb4cc4f9c7d655a5d59264312"
+  },
+  "generated_files_checked": {
+    "count": 30,
+    "paths": [
+      "notebooks/00_why_average_predictions_can_fail.ipynb",
+      "notebooks/01_phast_tiny_evolving_fracture.ipynb",
+      "notebooks/02_degradation_autograd.ipynb",
+      "notebooks/03_tiny_derivative_inverse_toy.ipynb",
+      "notebooks/04_train_save_reload_adapter.ipynb",
+      "notebooks/05_hybrid_reference_correction.ipynb",
+      "notebooks/study/00_why_average_predictions_can_fail.ipynb",
+      "notebooks/study/01_phast_tiny_evolving_fracture.ipynb",
+      "notebooks/study/02_degradation_autograd.ipynb",
+      "notebooks/study/03_tiny_derivative_inverse_toy.ipynb",
+      "notebooks/study/04_train_save_reload_adapter.ipynb",
+      "notebooks/study/05_hybrid_reference_correction.ipynb",
+      "notebooks/solutions/00_why_average_predictions_can_fail.ipynb",
+      "notebooks/solutions/01_phast_tiny_evolving_fracture.ipynb",
+      "notebooks/solutions/02_degradation_autograd.ipynb",
+      "notebooks/solutions/03_tiny_derivative_inverse_toy.ipynb",
+      "notebooks/solutions/04_train_save_reload_adapter.ipynb",
+      "notebooks/solutions/05_hybrid_reference_correction.ipynb",
+      "source/book/labs/00_why_average_predictions_can_fail.ipynb",
+      "source/book/labs/01_phast_tiny_evolving_fracture.ipynb",
+      "source/book/labs/02_degradation_autograd.ipynb",
+      "source/book/labs/03_tiny_derivative_inverse_toy.ipynb",
+      "source/book/labs/04_train_save_reload_adapter.ipynb",
+      "source/book/labs/05_hybrid_reference_correction.ipynb",
+      "notebooks/html/00_why_average_predictions_can_fail.html",
+      "notebooks/html/01_phast_tiny_evolving_fracture.html",
+      "notebooks/html/02_degradation_autograd.html",
+      "notebooks/html/03_tiny_derivative_inverse_toy.html",
+      "notebooks/html/04_train_save_reload_adapter.html",
+      "notebooks/html/05_hybrid_reference_correction.html"
+    ],
+    "file_sha256": {
+      "notebooks/00_why_average_predictions_can_fail.ipynb": "0d8f102b9eaa79d502fd3013c7e935f316b1063ca0022f5136d2950902945595",
+      "notebooks/01_phast_tiny_evolving_fracture.ipynb": "552d97c4cf1a260fe68557d8a3aad14be102f01516a64ac2c19aa16dab963172",
+      "notebooks/02_degradation_autograd.ipynb": "be7ac9a815fd270fc402409dd6680f4c6e43da7c568aef0a8c23a6ee5f8da538",
+      "notebooks/03_tiny_derivative_inverse_toy.ipynb": "1d08ddd7311abc89dde55a1686cf4bbfb041f7f36307fd3bb4c88cb29723b34b",
+      "notebooks/04_train_save_reload_adapter.ipynb": "d8838ca41c5e77ade2d8df79500c0347baa96ced91a7b23b4b01cb4a4446bb04",
+      "notebooks/05_hybrid_reference_correction.ipynb": "ccd914cc20b5459ef64085e080506bfd2d020360351c8740433ccb58e170639f",
+      "notebooks/study/00_why_average_predictions_can_fail.ipynb": "85b611458419e96f0786a434e0b464735398a328c39c4d656f8d4a1e497b3c1a",
+      "notebooks/study/01_phast_tiny_evolving_fracture.ipynb": "b79153b991c163faa6e00b14149105ce30a12aa4030364045fab18b7faa2a15a",
+      "notebooks/study/02_degradation_autograd.ipynb": "310baf5d0d72183934030027b115cfa41770cc955f5b7cdac50b8c673a98cf2b",
+      "notebooks/study/03_tiny_derivative_inverse_toy.ipynb": "790073fb6d549f174b96f7b7ea34895e4d6b6e16af93928035daee3d5fccb5d1",
+      "notebooks/study/04_train_save_reload_adapter.ipynb": "9ba74d5a69b0cbc05be74f77498351be3ccd6ba29541e7f2b6e67aa4aa829626",
+      "notebooks/study/05_hybrid_reference_correction.ipynb": "5b503323ac1c434ac4d76827dcf1a774b727fa0da599956d63c3ea07b1961698",
+      "notebooks/solutions/00_why_average_predictions_can_fail.ipynb": "c6a9f4ed36c7985739581b9311df808463696cab3fa9a6f4e5fc1e6d72c0956f",
+      "notebooks/solutions/01_phast_tiny_evolving_fracture.ipynb": "c0951a0651d4995e0d3c5f3d21001744ca350f26ad275b93268e6a816f9a9d6f",
+      "notebooks/solutions/02_degradation_autograd.ipynb": "4d59d7dfecf7ffd70a6bff0141d7aa1937ffdfd47b480aabb414c89246ef4115",
+      "notebooks/solutions/03_tiny_derivative_inverse_toy.ipynb": "6dec24eae7988861eb698c9fa7476726e10900eea9e5813f63cc3c94da18730d",
+      "notebooks/solutions/04_train_save_reload_adapter.ipynb": "f88c1be5a79292e887537ab194272d67be22267a4a4bc7390338e03c64e52100",
+      "notebooks/solutions/05_hybrid_reference_correction.ipynb": "8cc336d1fa7f180f81e38ba56bba2e9a073a4f39ff5cc93adb1d82c11190ff85",
+      "source/book/labs/00_why_average_predictions_can_fail.ipynb": "310f53d94224a3f484b249db5cc7ae2a69256e8f85c49ac1db5cd241209bf9dd",
+      "source/book/labs/01_phast_tiny_evolving_fracture.ipynb": "1259262cf84d5ea30f68fe60bf83f6306d138a8f7f912b5ae9d489dc003b3fba",
+      "source/book/labs/02_degradation_autograd.ipynb": "deb507881f8d86cfa3c41ef974ebaed8d7b86016576ef8ca40a5486de631b37d",
+      "source/book/labs/03_tiny_derivative_inverse_toy.ipynb": "e650a8d6bb25d302610a9139e48d831de35c0c83819c1db2b8802594f2e77460",
+      "source/book/labs/04_train_save_reload_adapter.ipynb": "46ad4e9231c7f29cd88392af4edd6371dc7849f16655f3dc8f84ddfffce144f5",
+      "source/book/labs/05_hybrid_reference_correction.ipynb": "e7e0e10ec358240c2cc460b397f43af2664d44deea06bb67cd87ada90c83f2bd",
+      "notebooks/html/00_why_average_predictions_can_fail.html": "7c232fedfb08b0d8e4cd899351257a9b89b5b389a6a3508681cd120c7053d6f2",
+      "notebooks/html/01_phast_tiny_evolving_fracture.html": "60301b316e858ebfacf1a3725060b79a4447d38b2e8a1a6d8b7b63900d7a70a8",
+      "notebooks/html/02_degradation_autograd.html": "1e6832b52a63157c5c43bb17837d0f08ef9589d377a1bbd7365abbcfbd1d79d7",
+      "notebooks/html/03_tiny_derivative_inverse_toy.html": "98c75732757d7896124987f5d3d21d44734a95f7bd7badda43a481f5ad02d742",
+      "notebooks/html/04_train_save_reload_adapter.html": "ad381275f696498d17d177719007f31bc9a8b2908d1483eae00ff069dee1c73d",
+      "notebooks/html/05_hybrid_reference_correction.html": "a590bb481a8b42ecad41cef239b68f0133429b183dce99909244b9e601362ebb"
+    },
+    "all_notebooks_valid": true,
+    "learner_facing_phrase_sweep_passed": true,
+    "machine_specific_path_sweep_passed": true
+  },
+  "diffusion_rerun": {
+    "reason": "Regenerate the revised gradient-plot legend from the unchanged numerical calculation.",
+    "all_existing_math_expressions_preserved": true,
+    "computational_ast_preserved_modulo_two_display_strings_and_colab_status_keys": true,
+    "array_names_bitwise_equal": [
+      "x",
+      "initial_field",
+      "forward_states",
+      "target",
+      "initial_prediction",
+      "recovered_prediction",
+      "alpha_history",
+      "loss_history",
+      "fd_spacings",
+      "fd_values",
+      "fd_relative_errors",
+      "step_contributions"
+    ],
+    "all_check_values_exactly_equal": true,
+    "source_sha256": "a14c3209e79d1c400f0226a9af01f86aae67e672bdfe2f17095b4aa56a57309d",
+    "notebook_sha256": "2a557410439ef1317b6a717f536c535c76b2c7282729d11241be6da37edd0761",
+    "html_sha256": "c66a37d65684efc4e645b9f2f62b6015fdd8ba6e3c662ea2b3f358af9261c86a",
+    "execution_receipt": "evidence/differentiability_step_by_step.json",
+    "original_receipt_sha256": "e4489ff4b80c6dab1f583fb4ee733181675e7d493d6b446165b87859ab386c10"
+  }
+}

@@ -10,10 +10,16 @@ from matplotlib.animation import FFMpegWriter
 
 
 def render(inputs: Path, output: Path):
-    nodes = np.load(inputs / "mesh_nodes.npy", allow_pickle=False)
-    cells = np.load(inputs / "mesh_elements.npy", allow_pickle=False)
-    with np.load(inputs / "truth_damage_snapshots.npz", allow_pickle=False) as data:
-        steps, damage = data["snapshot_steps"], data["snapshots"]
+    if inputs.is_file():
+        # The public panel archive contains the same retained mesh and frames.
+        with np.load(inputs, allow_pickle=False) as data:
+            nodes, cells = data["nodes"], data["elements"]
+            steps, damage = data["steps"], data["damage"]
+    else:
+        nodes = np.load(inputs / "mesh_nodes.npy", allow_pickle=False)
+        cells = np.load(inputs / "mesh_elements.npy", allow_pickle=False)
+        with np.load(inputs / "truth_damage_snapshots.npz", allow_pickle=False) as data:
+            steps, damage = data["snapshot_steps"], data["snapshots"]
     tri = mtri.Triangulation(nodes[:, 0], nodes[:, 1], cells)
     plt.rcParams.update({"font.family": "DejaVu Sans", "font.size": 12,
                          "axes.titlesize": 13, "axes.labelsize": 12,
@@ -89,7 +95,7 @@ def render(inputs: Path, output: Path):
             extra = {
                 1: "$M a = f^{\\rm ext}-f^{\\rm int}-f^{\\rm damp}$\n\nFixed boundary values are re-applied.",
                 4: "$A^T\\lambda=g$\n\n$J_q=\\lambda^T(b_q-A_q\\widetilde d)$\n\nCheck measured solve residuals.",
-                6: "1,600 forward steps\n12 retained damage frames\n\nNo intermediate fields are invented.",
+                6: "1,600 forward steps\n12 retained damage frames\n\nPlayback uses the 12 retained frames.",
                 7: "Loss -> damage -> history -> energy\n-> mechanics -> material parameters\n\nCheck branches and finite differences."
             }
             right.text(0,.8,extra[stage],va="top",fontsize=13,linespacing=1.55)
@@ -99,8 +105,8 @@ def render(inputs: Path, output: Path):
             x=.052+j*.119
             fig.text(x,.145,label,fontsize=12,color="#0072b2" if j==stage else "#627078",weight="bold" if j==stage else "normal")
             if j<7:fig.text(x+.09,.145,"<" if stage==7 else ">",fontsize=12,color="#9aa4aa")
-        fig.text(.045,.077,"Full plate damage: white 0, black 1. Algorithmic stages are not physical time; local curves are illustrative.",fontsize=10,color="#526168")
-        fig.text(.045,.048,"Energy, history and active-set snapshots were not retained for this plate. The animation does not reconstruct them.",fontsize=10,color="#526168")
+        fig.text(.045,.077,"Full plate damage: white 0, black 1. Stages follow computational order; playback is paced for reading.",fontsize=10,color="#526168")
+        fig.text(.045,.048,"Retained plate damage frames with illustrative energy/history curves.",fontsize=10,color="#526168")
     with writer.saving(fig, str(output / "forward_cycle.mp4"), dpi=110):
         for frame in range(total):
             draw(frame)
@@ -116,3 +122,14 @@ def render(inputs: Path, output: Path):
                "full_damage_range":[0,1]}
     (output / "forward_cycle_manifest.json").write_text(json.dumps(receipt,indent=2)+"\n")
     return receipt
+
+
+if __name__ == "__main__":
+    import argparse
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--inputs", type=Path, required=True,
+                        help="Retained input directory or public history_plate_arrays.npz")
+    parser.add_argument("--output", type=Path, required=True)
+    args = parser.parse_args()
+    args.output.mkdir(parents=True, exist_ok=False)
+    render(args.inputs, args.output)

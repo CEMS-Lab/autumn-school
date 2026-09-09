@@ -1,0 +1,545 @@
+{
+  "schema": "isolated-core-notebook-rehearsal-v1",
+  "date": "2026-09-09",
+  "scope": "Actual sequential local execution of byte-identical copies after environment setup, with an initially empty assets directory.",
+  "platform": {
+    "system": "Darwin",
+    "release": "27.0.0",
+    "machine": "arm64",
+    "logical_cpus": 14,
+    "python": "3.10.18"
+  },
+  "versions": {
+    "torch": "2.8.0",
+    "numpy": "2.2.6",
+    "scipy": "1.14.1",
+    "matplotlib": "3.10.8",
+    "nbclient": "0.10.4",
+    "nbconvert": "7.17.0",
+    "ipykernel": "7.2.0"
+  },
+  "source_sha256": {
+    "notebooks/00_why_average_predictions_can_fail.ipynb": "0d8f102b9eaa79d502fd3013c7e935f316b1063ca0022f5136d2950902945595",
+    "notebooks/01_phast_tiny_evolving_fracture.ipynb": "552d97c4cf1a260fe68557d8a3aad14be102f01516a64ac2c19aa16dab963172",
+    "notebooks/02_degradation_autograd.ipynb": "be7ac9a815fd270fc402409dd6680f4c6e43da7c568aef0a8c23a6ee5f8da538",
+    "notebooks/03_tiny_derivative_inverse_toy.ipynb": "1d08ddd7311abc89dde55a1686cf4bbfb041f7f36307fd3bb4c88cb29723b34b",
+    "notebooks/04_train_save_reload_adapter.ipynb": "d8838ca41c5e77ade2d8df79500c0347baa96ced91a7b23b4b01cb4a4446bb04",
+    "notebooks/05_hybrid_reference_correction.ipynb": "ccd914cc20b5459ef64085e080506bfd2d020360351c8740433ccb58e170639f",
+    "notebooks/day2_helpers/course_tools.py": "cc67d54efe6427b1ab7279ce819251fd39daf69b81096a9a16f08aa83df74d46",
+    "notebooks/day2_helpers/__init__.py": "bfd018cd360ad872e988b428b0fe8fe93b9faef3ff4b5ebb325b88d024b73a14",
+    "configs/day2_forward/tiny_notched_tension.json": "31f808405a43c6d9aa88b54041ca8b51fde8f6991c3c149a3d03d23473627aa2",
+    "scripts/run_course.py": "408ac13dd3e30ce4723014cb7c392d1bc1b63b60ec201ba465f1634ca699e40b"
+  },
+  "thread_policy": {
+    "environment_blas_openmp": 1,
+    "public_forward_helper_explicit_torch_threads": "min(4, logical CPU count)",
+    "training_helper_explicit_torch_threads": 1,
+    "copied_sources_modified": false
+  },
+  "budget": {
+    "cell_timeout_seconds": 280,
+    "runner_process_wait_seconds": 295,
+    "termination_grace_seconds": 2,
+    "notebook_limit_seconds": 300
+  },
+  "environment_installation": "Existing provisioned scientific Python; no dependency installation performed in this rehearsal.",
+  "live_colab": {
+    "status": "blocked",
+    "reason": "Colab opened in course browser on 2026-09-09; Google sign-in required before runtime execution.",
+    "runtime_started": false
+  },
+  "notebooks": [
+    {
+      "notebook": "00_why_average_predictions_can_fail",
+      "seconds": 7.355624209012603,
+      "status": "passed",
+      "limit_seconds": 300,
+      "scope": "whole notebook process after environment setup",
+      "returncode": 0
+    },
+    {
+      "notebook": "01_phast_tiny_evolving_fracture",
+      "seconds": 70.19303070800379,
+      "status": "passed",
+      "limit_seconds": 300,
+      "scope": "whole notebook process after environment setup",
+      "returncode": 0
+    },
+    {
+      "notebook": "02_degradation_autograd",
+      "seconds": 4.78071970801102,
+      "status": "passed",
+      "limit_seconds": 300,
+      "scope": "whole notebook process after environment setup",
+      "returncode": 0
+    },
+    {
+      "notebook": "03_tiny_derivative_inverse_toy",
+      "seconds": 4.873678583011497,
+      "status": "passed",
+      "limit_seconds": 300,
+      "scope": "whole notebook process after environment setup",
+      "returncode": 0
+    },
+    {
+      "notebook": "04_train_save_reload_adapter",
+      "seconds": 5.708786792005412,
+      "status": "passed",
+      "limit_seconds": 300,
+      "scope": "whole notebook process after environment setup",
+      "returncode": 0
+    },
+    {
+      "notebook": "05_hybrid_reference_correction",
+      "seconds": 4.243984915985493,
+      "status": "passed",
+      "limit_seconds": 300,
+      "scope": "whole notebook process after environment setup",
+      "returncode": 0
+    }
+  ],
+  "aggregate_rehearsal_seconds": 97.36510662498767,
+  "published_source_files_unchanged": true,
+  "all_passed": true,
+  "retained_artifact_root": ".build/core-notebook-rehearsal-20260909.vcy8X3",
+  "local_http_download_verification": [
+    {
+      "path": "notebooks/study/00_why_average_predictions_can_fail.ipynb",
+      "http_status": 200,
+      "served_bytes_equal_to_file": true
+    },
+    {
+      "path": "notebooks/study/01_phast_tiny_evolving_fracture.ipynb",
+      "http_status": 200,
+      "served_bytes_equal_to_file": true
+    },
+    {
+      "path": "notebooks/study/02_degradation_autograd.ipynb",
+      "http_status": 200,
+      "served_bytes_equal_to_file": true
+    },
+    {
+      "path": "notebooks/study/03_tiny_derivative_inverse_toy.ipynb",
+      "http_status": 200,
+      "served_bytes_equal_to_file": true
+    },
+    {
+      "path": "notebooks/study/04_train_save_reload_adapter.ipynb",
+      "http_status": 200,
+      "served_bytes_equal_to_file": true
+    },
+    {
+      "path": "notebooks/study/05_hybrid_reference_correction.ipynb",
+      "http_status": 200,
+      "served_bytes_equal_to_file": true
+    },
+    {
+      "path": "notebooks/solutions/00_why_average_predictions_can_fail.ipynb",
+      "http_status": 200,
+      "served_bytes_equal_to_file": true
+    },
+    {
+      "path": "notebooks/solutions/01_phast_tiny_evolving_fracture.ipynb",
+      "http_status": 200,
+      "served_bytes_equal_to_file": true
+    },
+    {
+      "path": "notebooks/solutions/02_degradation_autograd.ipynb",
+      "http_status": 200,
+      "served_bytes_equal_to_file": true
+    },
+    {
+      "path": "notebooks/solutions/03_tiny_derivative_inverse_toy.ipynb",
+      "http_status": 200,
+      "served_bytes_equal_to_file": true
+    },
+    {
+      "path": "notebooks/solutions/04_train_save_reload_adapter.ipynb",
+      "http_status": 200,
+      "served_bytes_equal_to_file": true
+    },
+    {
+      "path": "notebooks/solutions/05_hybrid_reference_correction.ipynb",
+      "http_status": 200,
+      "served_bytes_equal_to_file": true
+    }
+  ],
+  "validation": [
+    {
+      "notebook": "00_why_average_predictions_can_fail",
+      "executed_sha256": "722e6df708ac003f0e04246d254582ff9a752b32b7bf2d3d4c9b0b1badb7a76c",
+      "executed_code_cells": 6,
+      "error_outputs": 0,
+      "execution_counts": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "executed_code_identical_to_canonical": true,
+      "variant_parity": {
+        "study": true,
+        "solutions": true,
+        "labs": true
+      },
+      "download_links": [
+        {
+          "href": "../../notebooks/study/00_why_average_predictions_can_fail.ipynb",
+          "file_exists": true,
+          "within_course": true
+        },
+        {
+          "href": "../../notebooks/solutions/00_why_average_predictions_can_fail.ipynb",
+          "file_exists": true,
+          "within_course": true
+        }
+      ],
+      "worked_solution_blocks": 2,
+      "hint_blocks": 2
+    },
+    {
+      "notebook": "01_phast_tiny_evolving_fracture",
+      "executed_sha256": "aa6b3fc9feeeae63ce5e562bc5f413d7df3f40f8da8ad76cd9e27c0205f75053",
+      "executed_code_cells": 7,
+      "error_outputs": 0,
+      "execution_counts": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "executed_code_identical_to_canonical": true,
+      "variant_parity": {
+        "study": true,
+        "solutions": true,
+        "labs": true
+      },
+      "download_links": [
+        {
+          "href": "../../notebooks/study/01_phast_tiny_evolving_fracture.ipynb",
+          "file_exists": true,
+          "within_course": true
+        },
+        {
+          "href": "../../notebooks/solutions/01_phast_tiny_evolving_fracture.ipynb",
+          "file_exists": true,
+          "within_course": true
+        }
+      ],
+      "worked_solution_blocks": 2,
+      "hint_blocks": 2
+    },
+    {
+      "notebook": "02_degradation_autograd",
+      "executed_sha256": "68d2f9bb19fbf514625e922ff110f8e451ede8c58f52e75bfab9fb2661e18f92",
+      "executed_code_cells": 4,
+      "error_outputs": 0,
+      "execution_counts": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "executed_code_identical_to_canonical": true,
+      "variant_parity": {
+        "study": true,
+        "solutions": true,
+        "labs": true
+      },
+      "download_links": [
+        {
+          "href": "../../notebooks/study/02_degradation_autograd.ipynb",
+          "file_exists": true,
+          "within_course": true
+        },
+        {
+          "href": "../../notebooks/solutions/02_degradation_autograd.ipynb",
+          "file_exists": true,
+          "within_course": true
+        }
+      ],
+      "worked_solution_blocks": 2,
+      "hint_blocks": 2
+    },
+    {
+      "notebook": "03_tiny_derivative_inverse_toy",
+      "executed_sha256": "a1efe032655b81ab25d54e84a391d0f6c7b2d2c69341562230fdc1aa4f684e4e",
+      "executed_code_cells": 4,
+      "error_outputs": 0,
+      "execution_counts": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "executed_code_identical_to_canonical": true,
+      "variant_parity": {
+        "study": true,
+        "solutions": true,
+        "labs": true
+      },
+      "download_links": [
+        {
+          "href": "../../notebooks/study/03_tiny_derivative_inverse_toy.ipynb",
+          "file_exists": true,
+          "within_course": true
+        },
+        {
+          "href": "../../notebooks/solutions/03_tiny_derivative_inverse_toy.ipynb",
+          "file_exists": true,
+          "within_course": true
+        }
+      ],
+      "worked_solution_blocks": 2,
+      "hint_blocks": 2
+    },
+    {
+      "notebook": "04_train_save_reload_adapter",
+      "executed_sha256": "f8ce9eedb637f60bfb4f94e0ee269276370c164d97a52695d8bc3654ffa838c8",
+      "executed_code_cells": 5,
+      "error_outputs": 0,
+      "execution_counts": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "executed_code_identical_to_canonical": true,
+      "variant_parity": {
+        "study": true,
+        "solutions": true,
+        "labs": true
+      },
+      "download_links": [
+        {
+          "href": "../../notebooks/study/04_train_save_reload_adapter.ipynb",
+          "file_exists": true,
+          "within_course": true
+        },
+        {
+          "href": "../../notebooks/solutions/04_train_save_reload_adapter.ipynb",
+          "file_exists": true,
+          "within_course": true
+        }
+      ],
+      "worked_solution_blocks": 2,
+      "hint_blocks": 2
+    },
+    {
+      "notebook": "05_hybrid_reference_correction",
+      "executed_sha256": "9eb2912541b7859ab6062b1d5e740686d0501eca59d58fa1e35c61671671be6d",
+      "executed_code_cells": 6,
+      "error_outputs": 0,
+      "execution_counts": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "executed_code_identical_to_canonical": true,
+      "variant_parity": {
+        "study": true,
+        "solutions": true,
+        "labs": true
+      },
+      "download_links": [
+        {
+          "href": "../../notebooks/study/05_hybrid_reference_correction.ipynb",
+          "file_exists": true,
+          "within_course": true
+        },
+        {
+          "href": "../../notebooks/solutions/05_hybrid_reference_correction.ipynb",
+          "file_exists": true,
+          "within_course": true
+        }
+      ],
+      "worked_solution_blocks": 2,
+      "hint_blocks": 2
+    }
+  ],
+  "generated_artifacts": {
+    "assets/day2_forward/degradation_autograd.png": "fee6150012022e95fcb82bc4025058d3b3d19adeba49af40be6ae2f73fa5cbc1",
+    "assets/day2_forward/models/tiny_damage_mlp.metadata.json": "167056ed8d6d194a97a7eb206102946dcae56429d9b16069af47016ccb858793",
+    "assets/day2_forward/models/tiny_damage_mlp.pt": "9e7aa2de480456c6592b7e93bead21b54749755b32c3fadef428166cbe619f83",
+    "assets/day2_forward/tiny_inverse_bar.png": "0d624282c78d36a4eeb2501799f40cd5f9b0abb0b58654d05fbfd136bc1515e1",
+    "assets/day2_forward/tiny_mlp_heldout_field.png": "409d7cbaf485b3a012b5fda22f2530d0a3c472618055bee570418b5dd5004c83",
+    "assets/day2_forward/tiny_notched_tension_damage.png": "8f7eece21af1e9836ce8d4379ee3ad99090ece9066d01233f246371b27c9f3a8",
+    "assets/day2_forward/tiny_notched_tension_fields.npz": "e1e6931a7f7435cb68c2156aa29fb3a9c87ad0c11ecfcec14c1e6495dca370bc",
+    "assets/day2_forward/tiny_notched_tension_increment.png": "24d863c0caebdc5803a68e91aeff17459e3e5c88d18318e36609223b4635ed4e",
+    "assets/day2_forward/tiny_notched_tension_prepared_mesh.npz": "65fd6a49f515b45e41df5515bd24c26e29b57f7c4a82888ea2defc2eb58e92c8",
+    "assets/day2_forward/tiny_notched_tension_response.png": "3009d94a890862ebdd2ffaae1bf0fc88439169c0a43db5e4a610c42325ff7c23",
+    "assets/day2_forward/tiny_notched_tension_summary.json": "5983f3622b5c5e765d4e38b0800f796e6b0a97e434220b881ac4023f84a39618",
+    "assets/day2_forward/toy_adapter_fallback.png": "d0a6c763c4a0cf4e926f0494230f2a3901833e449fbc45455f7924d08fd334c6",
+    "assets/day2_forward/toy_adapter_replay_record.json": "f4e093b1d30d9d4b1af6d7ef7a5210999e871b7f0041acfd56a97ba0f1d3b3fd",
+    "assets/teaser/teaser_metrics.json": "590a925a560916bdd6050b0e43eb2828539f8b905eaad6250093bf98cba26f34",
+    "assets/teaser/why_average_predictions_can_fail.png": "822b63a6e05161ddcad240b0392cf744a434e44290c759fc03e75c87d5b8bd7a"
+  },
+  "saved_npz_schema": {
+    "tiny_notched_tension_fields.npz": {
+      "nodes": {
+        "shape": [
+          8385,
+          2
+        ],
+        "dtype": "float64",
+        "finite": true
+      },
+      "elements": {
+        "shape": [
+          16384,
+          3
+        ],
+        "dtype": "int64",
+        "finite": true
+      },
+      "precrack": {
+        "shape": [
+          8385
+        ],
+        "dtype": "bool",
+        "finite": true
+      },
+      "seeded_damage": {
+        "shape": [
+          8385
+        ],
+        "dtype": "float64",
+        "finite": true
+      },
+      "first_damage": {
+        "shape": [
+          8385
+        ],
+        "dtype": "float64",
+        "finite": true
+      },
+      "final_damage": {
+        "shape": [
+          8385
+        ],
+        "dtype": "float64",
+        "finite": true
+      },
+      "incremental_damage": {
+        "shape": [
+          8385
+        ],
+        "dtype": "float64",
+        "finite": true
+      }
+    },
+    "tiny_notched_tension_prepared_mesh.npz": {
+      "nodes": {
+        "shape": [
+          8385,
+          2
+        ],
+        "dtype": "float64",
+        "finite": true
+      },
+      "elements": {
+        "shape": [
+          16384,
+          3
+        ],
+        "dtype": "int64",
+        "finite": true
+      },
+      "precrack_nodes": {
+        "shape": [
+          26
+        ],
+        "dtype": "int64",
+        "finite": true
+      },
+      "left": {
+        "shape": [
+          65
+        ],
+        "dtype": "int64",
+        "finite": true
+      },
+      "right": {
+        "shape": [
+          65
+        ],
+        "dtype": "int64",
+        "finite": true
+      },
+      "bottom": {
+        "shape": [
+          129
+        ],
+        "dtype": "int64",
+        "finite": true
+      },
+      "top": {
+        "shape": [
+          129
+        ],
+        "dtype": "int64",
+        "finite": true
+      }
+    }
+  },
+  "forward_checks": {
+    "nodes": 8385,
+    "elements": 16384,
+    "load_steps": 60,
+    "dtype": "float64",
+    "setup_seconds": 0.021558042004471645,
+    "solve_seconds": 64.8717150419834,
+    "incremental_damage_outside_sum": 967.4594747770745,
+    "incremental_damage_outside_max": 0.33508128500651757,
+    "all_steps_returned_with_failure_flags_enabled": true,
+    "warnings": [],
+    "phast": {
+      "source": "vendor/PhAST/src (manifest-verified when vendored)",
+      "module_file": "phast/__init__.py",
+      "revision": "f6324f899f0701769810be117f27f1208f7a582e",
+      "version": "0.16.2",
+      "import_route": "PYTHONPATH=<public-PhAST>/src",
+      "verification": "COURSE_SOURCE_MANIFEST.json hashes verified"
+    }
+  },
+  "model_roundtrip_and_derivative_checks": {
+    "reload_max_abs_difference": 0.0,
+    "heldout_mlp_rmse": 0.05636315718170472,
+    "degradation_ad_error": 0.0,
+    "degradation_fd_error": 3.5083047578154947e-12,
+    "bar_true_modulus": 2.4,
+    "bar_fitted_modulus": 2.400302387627723,
+    "compatible_proposal_accepted": true,
+    "corrupted_proposal_accepted": false,
+    "fallback_relative_residual": 2.969565304912253e-15,
+    "origin": "Recorded print outputs and passed assertions in the newly executed notebook copies."
+  },
+  "visual_inspection": {
+    "fresh_pngs_inspected": [
+      "assets/day2_forward/tiny_notched_tension_damage.png",
+      "assets/day2_forward/tiny_notched_tension_increment.png",
+      "assets/day2_forward/tiny_notched_tension_response.png",
+      "assets/day2_forward/tiny_mlp_heldout_field.png",
+      "assets/day2_forward/toy_adapter_fallback.png"
+    ],
+    "finding": "Fields, shared colour scales, increments, response histories, learned-field comparison and correction comparison are legible; no clipped labels or panels observed.",
+    "web_dom_scope": "Static inspection of all six current lab HTML files. Browser math/responsiveness QA is recorded separately by the main agent."
+  },
+  "bootstrap_and_portability": {
+    "core_route": "Keep complete course folder including vendor, configs, notebooks and helpers; use SETUP.md to install into the notebook kernel. The six canonical notebooks themselves do not contain dependency-install cells.",
+    "path_test": "Executed from isolated course/notebooks with copied public vendor/helpers/configs and initially empty assets; no private solver or parent-worktree fallback needed.",
+    "single_notebook_upload": "Core notebooks need the complete course folder in Colab. Uploading only one ipynb without the helpers/vendor/configs is insufficient.",
+    "diffusion_route": "Standalone notebook includes a separate bootstrap that reuses NumPy/Matplotlib/PyTorch when importable and installs only missing packages; relative result directory and CPU execution are configured.",
+    "fresh_install_tested_in_this_rehearsal": false,
+    "remaining_external_gate": "Fresh authenticated Colab runtime execution and timing."
+  }
+}

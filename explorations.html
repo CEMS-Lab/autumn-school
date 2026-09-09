@@ -25,7 +25,7 @@
     <a href="#learning"><span>08</span> Train, exchange, correct</a>
     <a href="#library"><span>09</span> Take the course with you</a>
   </nav>
-  <div class="sidebar-foot">Six hours · three sessions<br>Concepts, computations, experiments<br><a href="ebooks/phast-ukacm-course.pdf">Download the e-book ↗</a></div>
+  <div class="sidebar-foot">Six hours · three sessions<br>Concepts, computations, experiments<br><a href="book/index.html">Read the HTML book ↗</a></div>
 </aside>
 <main id="main">
 <header id="welcome" class="hero">
@@ -37,7 +37,7 @@
 </header>
 <div class="content">
   <section class="intro-panel" aria-labelledby="route-title">
-    <div><div class="eyebrow dark">A route through the day</div><h2 id="route-title">Predict. Compute. Explain.</h2><p>Before changing a parameter, predict its effect. Run a small calculation, inspect the fields, and explain what the result can—and cannot—tell you.</p></div>
+    <div><div class="eyebrow dark">A route through the day</div><h2 id="route-title">Predict. Compute. Explain.</h2><p>Before changing a parameter, predict its effect. Run a small calculation, inspect the fields, and explain the result using its assumptions and numerical checks.</p></div>
     <div class="day-route">
       <a href="#representations"><b>A · 120 min</b><strong>The fracture model</strong><span>Cracks → energy → damage → solution</span></a>
       <a href="#first-run"><b>B · 120 min</b><strong>From equations to a run</strong><span>Mesh → PhAST → results → derivatives</span></a>
@@ -59,11 +59,11 @@
       </fieldset>
       <svg id="crack-view" class="wide-figure" viewBox="0 0 800 240" role="img" aria-label="Schematic comparison of crack representations"></svg>
       <div id="representation-text" class="readout" aria-live="polite"></div>
-      <p class="caption">Original schematic, not a computed crack field. These choices are not mutually exclusive in every formulation.</p>
+      <p class="caption">Original schematic of four crack representations. A formulation can combine several of these ideas.</p>
     </div>
-    <div class="two-col"><div><h3>Why use a phase field?</h3><p>A continuous damage variable replaces the explicit crack surface. Initiation, turning, merging and branching can be described without prescribing each new crack segment or updating an explicit crack topology.</p></div><div><h3>What does it cost?</h3><p>The damage zone must be resolved by the mesh. The formulation introduces a length scale, an additional field and nonlinear coupling. Load increments, irreversibility, convergence and material calibration still matter.</p></div></div>
+    <div class="two-col"><div><h3>Why use a phase field?</h3><p>A continuous damage variable replaces the explicit crack surface. Initiation, turning, merging and branching are represented by the evolution of this internal field.</p></div><div><h3>What does it cost?</h3><p>The damage zone must be resolved by the mesh. The formulation introduces a length scale, an additional field and nonlinear coupling. Load increments, irreversibility, convergence and material calibration still matter.</p></div></div>
     <aside class="note"><b>A useful distinction.</b> Phase field and cohesive-zone models describe fracture; XFEM enriches a spatial approximation; quasi-Newton is an algorithm for solving nonlinear equations. Quasi-Newton methods can also solve phase-field problems.</aside>
-    <div class="question"><b>Predict</b><p>Which part of your numerical model must change when a crack branches: the mesh, the approximation, the constitutive description, or an internal field?</p><details><summary>Discuss the answer</summary><p>It depends on the representation. A fitted sharp crack may require remeshing; an enriched approximation changes its enrichment description; a phase-field model evolves its damage field. None of these statements removes the need to resolve the relevant physics.</p></details></div>
+    <div class="question"><b>Predict</b><p>Which part of your numerical model must change when a crack branches: the mesh, the approximation, the constitutive description, or an internal field?</p><details><summary>Discuss the answer</summary><p>It depends on the representation. A fitted sharp crack may require remeshing; an enriched approximation changes its enrichment description; a phase-field model evolves its damage field. Each representation requires spatial and temporal resolution appropriate to the physics.</p></details></div>
   </section>
 
   <section id="energy">
@@ -86,10 +86,10 @@
       <svg id="profile-chart" viewBox="0 0 800 280" role="img" aria-label="Damage across an isolated crack, with adjustable length scale"></svg>
       <svg id="profile-band" viewBox="0 0 800 88" role="img" aria-label="Colour map of the same analytical damage profile"></svg>
       <div id="profile-equation" class="readout"></div>
-      <p class="caption">Distance x is measured normal to a straight crack centred at x = 0. These unloaded one-dimensional profiles illustrate regularisation; they are not solutions for crack initiation in the specimen above.</p>
+      <p class="caption">Distance x is measured normal to a straight crack centred at x = 0. These unloaded one-dimensional profiles illustrate regularisation around an isolated, fully developed crack.</p>
     </div>
-    <div class="two-col"><div><h3>AT1</h3><p>w(d) = d, c₀ = 8/3. The standard formulation has a finite elastic threshold and a compactly supported isolated-crack profile.</p></div><div><h3>AT2</h3><p>w(d) = d², c₀ = 2. The standard formulation has no strictly elastic damage-free stage under homogeneous tension and has an exponentially decaying isolated-crack profile.</p></div></div>
-    <aside class="note">The length scale is not merely a display blur. It influences the model's damage localisation and, with other constitutive choices, its initiation response. Refine the mesh relative to ℓ and test convergence rather than adopting a universal mesh ratio.</aside>
+    <div class="two-col"><div><h3>AT1</h3><p>w(d) = d, c₀ = 8/3. The standard formulation has a finite elastic threshold and a compactly supported isolated-crack profile.</p></div><div><h3>AT2</h3><p>w(d) = d², c₀ = 2. In the standard formulation, damage can develop from the onset of homogeneous tensile loading. Its isolated-crack profile decays exponentially.</p></div></div>
+    <aside class="note">The length scale controls damage localisation and, with other constitutive choices, the initiation response. Refine the mesh relative to ℓ and assess convergence for the chosen problem.</aside>
   </section>
 
   <section id="degradation">
@@ -100,16 +100,16 @@
       <div class="controls"><label>Law <select id="degradation-law"><option value="quadratic">Normalised quadratic</option><option value="cubic">Illustrative cubic</option><option value="rational">Illustrative rational</option></select></label><label>Damage d <input id="damage-value" type="range" min="0" max="1" step="0.01" value="0.4"><output id="damage-output">0.40</output></label></div>
       <div class="plot-pair"><svg id="g-chart" viewBox="0 0 390 250" role="img" aria-label="Selected degradation law as a function of damage"></svg><svg id="dg-chart" viewBox="0 0 390 250" role="img" aria-label="Derivative of the selected degradation law"></svg></div>
       <div id="degradation-readout" class="readout" aria-live="polite"></div>
-      <p class="caption">The cubic and rational curves illustrate constitutive choices, not calibrated replacements for a complete fracture model. Changing g without revisiting w, strength calibration and the solution algorithm does not define a validated PF-CZM model.</p>
+      <p class="caption">The cubic and rational curves illustrate constitutive choices. A PF-CZM formulation requires consistent choices of g and w, strength calibration, and a suitable solution algorithm.</p>
     </div>
     <p>The quadratic law is simple, smooth, and has zero slope at d = 1. It is widely used with common regularised fracture models. Other laws can help control strength and softening, but they must be selected as part of a consistent constitutive formulation.</p>
-    <div class="question"><b>Predict</b><p>At the same value of damage, do two laws necessarily give the same stiffness or damage-driving force?</p><details><summary>Reveal the connection</summary><p>No. The stiffness reduction involves g(d), while the derivative of the stored energy with respect to damage involves g′(d) ψ⁺. Equal endpoints do not imply equal values or slopes between those endpoints.</p></details></div>
+    <div class="question"><b>Predict</b><p>At the same value of damage, do two laws necessarily give the same stiffness or damage-driving force?</p><details><summary>Reveal the connection</summary><p>The stiffness reduction involves g(d), while the derivative of the stored energy with respect to damage involves g′(d) ψ⁺. Two laws can share endpoints while having different interior values and slopes.</p></details></div>
     <a class="text-link" href="notebooks/html/02_degradation_autograd.html">Open notebook 02: compare analytic, autograd and finite-difference derivatives →</a>
   </section>
 
   <section id="solution">
     <div class="section-number">04 / Numerical solution</div><h2>Two coupled fields, one load step at a time.</h2>
-    <p>Displacement changes the stored energy. Damage changes the stiffness. A staggered scheme alternates the two solves until the coupled update is sufficiently converged. A single mechanics–damage pass is not automatically a converged staggered solution.</p>
+    <p>Displacement changes the stored energy. Damage changes the stiffness. A staggered scheme alternates the two solves until the coupled update is sufficiently converged. Convergence is assessed after each pass using coupled residual and field-change criteria.</p>
     <div class="lab">
       <div class="lab-top"><span class="pill">Algorithm stepper</span><span>Quasi-static illustrative sequence</span></div>
       <div id="staggered-nodes" class="flow-nodes">
@@ -121,7 +121,7 @@
       </div>
       <div class="controls"><button class="button" id="step-algorithm">Next stage →</button><button class="button secondary" id="reset-algorithm">Restart</button><label class="check"><input type="checkbox" id="repeat-iteration" checked>Repeat inner iteration at convergence check</label></div>
       <div id="staggered-readout" class="readout" aria-live="polite"></div>
-      <p class="caption">This animation explains control flow; it does not calculate residuals. A history-field maximum is a common irreversibility treatment, not a universal substitute for the original constrained problem.</p>
+      <p class="caption">This schematic animation follows the staggered control flow. History-field maxima enforce a chosen history rule; relate that rule to the original irreversibility constraint.</p>
     </div>
     <div class="table-wrap"><table><thead><tr><th>Question</th><th>Two distinct choices</th><th>What to inspect</th></tr></thead><tbody>
       <tr><td>Is inertia relevant?</td><td>Static/quasi-static: equilibrium at each load. Dynamic: mass × acceleration enters the balance.</td><td>Loading time scale, waves and kinetic energy.</td></tr>
@@ -129,13 +129,13 @@
       <tr><td>How are fields coupled?</td><td>Staggered: alternate subproblems. Monolithic: solve the coupled system together.</td><td>Coupling error and convergence of both fields.</td></tr>
       <tr><td>How is a linear action evaluated?</td><td>Assembled matrix or matrix-free element operations.</td><td>Memory, preconditioning and full solve cost.</td></tr>
     </tbody></table></div>
-    <p>These choices can be mixed: explicit dynamics for mechanics can coexist with an implicit damage solve. Explicit schemes have stability restrictions; an implicit scheme's stability does not remove the need to resolve the physics in time.</p>
-    <details class="reading"><summary>Why does damage sometimes resemble a transport equation?</summary><p>The gradient penalty produces a spatial coupling term resembling diffusion. A transport equation evolves a concentration or temperature with its own balance law; the damage equation follows a fracture energy and irreversibility condition. The mathematical resemblance is instructive, but it is not evidence that every solver provides a general transport module.</p></details>
+    <p>These choices can be mixed: explicit dynamics for mechanics can coexist with an implicit damage solve. Both explicit and implicit schemes require time-resolution studies; explicit schemes also impose stability restrictions.</p>
+    <details class="reading"><summary>Why does damage sometimes resemble a transport equation?</summary><p>The gradient penalty produces a spatial coupling term resembling diffusion. A transport equation evolves a concentration or temperature with its own balance law; the damage equation follows a fracture energy and irreversibility condition. The shared gradient structure helps compare discretisations; each solver's transport capabilities follow from its supported balance laws.</p></details>
   </section>
 
   <section id="operators">
     <div class="section-number">05 / Computational structure</div><h2>The same finite elements, expressed as tensor operations.</h2>
-    <p>A finite-element operator can be assembled into a global sparse matrix, or evaluated through element-local operations followed by accumulation into global degrees of freedom. Matrix-free refers to the operator application, not to the absence of linear algebra.</p>
+    <p>A finite-element operator can be assembled into a global sparse matrix, or evaluated through element-local operations followed by accumulation into global degrees of freedom. Matrix-free operator actions can be used within iterative linear algebra solvers.</p>
     <div class="lab">
       <div class="lab-top"><span class="pill">Numerical identity</span><span>Three unit-stiffness bars · four nodes</span></div>
       <p>For a trial vector v, each element contributes [vᵢ − vⱼ, vⱼ − vᵢ]. Move one component and compare the two routes.</p>
@@ -148,10 +148,10 @@ element 1: nodes [1, 2]
 element 2: nodes [2, 3]
 sum shared-node contributions</pre><code id="matrixfree-result"></code></div></div>
       <div id="operator-check" class="readout" aria-live="polite"></div>
-      <p class="caption">A small exact operator example, not a fracture solve or a performance benchmark. Boundary conditions and preconditioning remain necessary in a complete solver.</p>
+      <p class="caption">Exact operator actions for three unit-stiffness bars. A full solve additionally specifies boundary conditions and linear-solver and preconditioning choices.</p>
     </div>
-    <div class="two-col"><div><h3>What tensors enable</h3><p>Batched element calculations, GPU execution where suitable, reusable automatic-differentiation operations, and convenient connections to neural-network libraries.</p></div><div><h3>What tensors do not guarantee</h3><p>Every algorithm is not automatically differentiable, memory-efficient, accurate or fast. Detached tensors, history maxima, active sets, adaptive control flow and iterative solves all require explicit derivative choices.</p></div></div>
-    <p>PyTorch offers a familiar ecosystem for tensors, automatic differentiation, optimisers and learned models. JAX also supports differentiable scientific computing. The appropriate comparison is between supported workflows, validation and complete costs—not a blanket ranking of the libraries.</p>
+    <div class="two-col"><div><h3>What tensors enable</h3><p>Batched element calculations, GPU execution where suitable, reusable automatic-differentiation operations, and convenient connections to neural-network libraries.</p></div><div><h3>Algorithmic choices and checks</h3><p>Accuracy, memory use, runtime and differentiability depend on the algorithm. Detached tensors, history maxima, active sets, adaptive control flow and iterative solves all require explicit derivative choices.</p></div></div>
+    <p>PyTorch offers a familiar ecosystem for tensors, automatic differentiation, optimisers and learned models. JAX also supports differentiable scientific computing. Compare libraries through supported workflows, validation and complete computational costs.</p>
   </section>
 
   <section id="first-run">
@@ -160,24 +160,24 @@ sum shared-node contributions</pre><code id="matrixfree-result"></code></div></d
     <div class="notebook-card featured">
       <div class="notebook-number">01</div><div><span class="pill">Real PhAST solve</span><h3>A tiny evolving-fracture problem</h3><p>Geometry and mesh → material and boundary conditions → load increments → damage, displacement and response interpretation.</p><p class="runtime">Measured local notebook: <strong data-runtime="01">76.3 s · local CPU</strong></p><div class="inline-links"><a href="notebooks/html/01_phast_tiny_evolving_fracture.html">Read executed notebook ↗</a><a href="notebooks/01_phast_tiny_evolving_fracture.ipynb" download>Download .ipynb ↓</a></div></div>
     </div>
-    <figure class="simulation-figure"><img src="assets/day2_forward/tiny_notched_tension_damage.png" alt="PhAST damage field at the locked precrack, first increment and final increment." loading="lazy"><figcaption>Computed damage fields from notebook 01. Read the notebook for the mesh, constitutive model, loading, convergence checks and limitations. This short run demonstrates damage evolution near a pre-existing notch, not complete specimen failure or branching.</figcaption></figure>
+    <figure class="simulation-figure"><img src="assets/day2_forward/tiny_notched_tension_damage.png" alt="PhAST damage field at the locked precrack, first increment and final increment." loading="lazy"><figcaption>Quasistatic damage evolution around a pre-existing notch, computed in notebook 01. Read the notebook for the mesh, constitutive model, loading, convergence checks and assumptions.</figcaption></figure>
     <div class="cell"><div class="cell-heading">Before running · prepare once</div><pre><code>1. Unzip the complete course package.
 2. Follow SETUP.md to create the Python environment.
 3. Keep notebooks/day2_helpers beside the notebooks.
 4. Open notebook 01 and run cells from the top.</code></pre></div>
-    <aside class="note"><b>The five-minute contract.</b> Published timings cover the complete notebook after environment setup. Downloading Python packages or solver source is separate. The included receipts identify the measured machine; Google Colab performance is not claimed without a fresh Colab execution.</aside>
-    <div class="question"><b>Observe</b><p>Where did damage increase? Does the displacement field agree with the applied constraints? What happens to the measured response as damage evolves?</p><details><summary>Interpret the result carefully</summary><p>Look at changes from the initial state, not only the maximum colour value. A pre-existing crack may already have d = 1. Check the load history and solution diagnostics; attractive contour plots alone do not demonstrate convergence.</p></details></div>
+    <aside class="note"><b>The five-minute contract.</b> Published timings cover the complete notebook after environment setup. Downloading Python packages or solver source is separate. The included receipts record local runtimes; measure Colab performance in a fresh runtime using the same setup and case.</aside>
+    <div class="question"><b>Observe</b><p>Where did damage increase? Does the displacement field agree with the applied constraints? What happens to the measured response as damage evolves?</p><details><summary>Interpret the result carefully</summary><p>Compare the initial and subsequent fields alongside the load history and numerical diagnostics. A pre-existing crack may already have d = 1; use increments to locate the evolving region.</p></details></div>
   </section>
 
   <section id="differentiate">
     <div class="section-number">07 / Sensitivities and inverse problems</div><h2>From a forward calculation to a useful derivative.</h2>
-    <p>A differentiable computation links model parameters to an observable and then to a loss. Automatic differentiation applies the chain rule through supported operations; it does not establish that the chosen inverse problem has a unique or stable solution.</p>
+    <p>A differentiable computation links model parameters to an observable and then to a loss. Automatic differentiation applies the chain rule through supported operations. Inverse uniqueness and stability depend on the observations, loading and parameterisation.</p>
     <div class="lab">
       <div class="lab-top"><span class="pill">Chain-rule explorer</span><span>Scalar illustrative model</span></div>
       <div class="controls"><label>Damage d <input id="ad-damage" type="range" min="0.05" max="0.95" step="0.01" value="0.3"><output id="ad-damage-value">0.30</output></label><button id="ad-direction" class="button secondary" aria-pressed="false">Show reverse pass</button></div>
       <div id="ad-graph" class="chain-graph"><div><small>Input</small><b>d</b><span id="ad-input"></span></div><span class="arrow">→</span><div><small>Stiffness factor</small><b>g = (1 − d)²</b><span id="ad-g"></span></div><span class="arrow">→</span><div><small>Prediction</small><b>y = 2g</b><span id="ad-y"></span></div><span class="arrow">→</span><div><small>Loss</small><b>L = ½(y − 1)²</b><span id="ad-loss"></span></div></div>
       <div id="ad-readout" class="readout" aria-live="polite"></div>
-      <p class="caption">The arithmetic here is exact for the displayed scalar model. It is not a derivative through the PhAST fracture calculation. Notebook 02 verifies a constitutive derivative; notebook 03 solves an expressly illustrative inverse problem.</p>
+      <p class="caption">The arithmetic here is exact for the displayed scalar model. Notebook 02 checks a local constitutive derivative; notebook 03 recovers an elastic-bar modulus.</p>
     </div>
     <div class="notebook-grid">
       <article class="notebook-card"><div class="notebook-number">02</div><div><h3>Check a derivative</h3><p>Analytic, autograd and finite differences for a degradation law.</p><p class="runtime" data-runtime="02">4.7 s · local CPU</p><a href="notebooks/html/02_degradation_autograd.html">Open executed notebook →</a></div></article>
@@ -188,25 +188,25 @@ sum shared-node contributions</pre><code id="matrixfree-result"></code></div></d
 
   <section id="learning">
     <div class="section-number">08 / Session C · Learned components</div><h2>A model makes a proposal. The numerical method assesses it.</h2>
-    <p class="lead">Modularity is a contract, not a file extension. A saved model needs compatible inputs, normalisation, geometry representation, output meaning, dtype and device.</p>
+    <p class="lead">A saved model's interface specifies compatible inputs, normalisation, geometry representation, output meaning, dtype and device.</p>
     <div class="lab">
       <div class="lab-top"><span class="pill">Assessment explorer</span><span>Illustrative damage update · scalar reference equation</span></div>
       <div class="controls"><label>Model proposal d̂ <input id="proposal-value" type="range" min="-0.2" max="1.2" step="0.01" value="0.8"><output id="proposal-output">0.80</output></label><label>Assessment tolerance <select id="assessment-tolerance"><option value="0.02">0.02</option><option value="0.1">0.10</option></select></label></div>
       <div class="flow-nodes model-flow"><div><small>1</small><b>Predict</b><span id="predicted-node"></span></div><div><small>2</small><b>Project</b><span>d ≥ d previous; 0 ≤ d ≤ 1</span></div><div><small>3</small><b>Assess</b><span id="residual-node"></span></div><div id="decision-node"><small>4</small><b>Accept or correct</b><span id="decision-text"></span></div></div>
       <div id="proposal-readout" class="readout" aria-live="polite"></div>
-      <p class="caption">For this illustration, d previous = 0.25 and the reference equation is r(d) = d − 0.60 = 0. PhAST's real assessment uses the configured damage operator and tolerances, not this scalar residual.</p>
+      <p class="caption">For this illustration, d previous = 0.25 and the reference equation is r(d) = d − 0.60 = 0. PhAST assessments use the configured damage operator and its tolerances.</p>
     </div>
-    <div class="two-col"><div><h3>Exchange an implementation</h3><p>An MLP and an RBF can share a contract when they use the same features and output definition. A CNN needs grid mappings; a GNN needs graph construction; an operator model needs its specified domain and query representation.</p></div><div><h3>Preserve the reference method</h3><p>Projecting bounds and irreversibility is not enough to establish equilibrium. Assess the appropriate physical residual and use a reference correction or fallback when the candidate fails.</p></div></div>
+    <div class="two-col"><div><h3>Exchange an implementation</h3><p>An MLP and an RBF can share a contract when they use the same features and output definition. A CNN needs grid mappings; a GNN needs graph construction; an operator model needs its specified domain and query representation.</p></div><div><h3>Preserve the reference method</h3><p>Projection enforces bounds and history. Equilibrium requires assessment of the appropriate physical residual, with a reference correction or fallback when the candidate fails.</p></div></div>
     <div class="cell"><div class="cell-heading">The public PhAST inference-adapter contract · conceptual outline</div><pre><code>factory(checkpoint, device, options) → predictor
 predictor.predict(context) → DamagePrediction or nodal damage tensor
 
 context → state, mesh, material information, device, dtype
 adapter → feature construction, normalisation, graph/grid mapping
 solver  → configured projection, assessment and correction/fallback</code></pre></div>
-    <p>The public adapter is an inference interface and can execute with detached state and gradients disabled. Training a model through a time-dependent simulation requires a separately supported differentiation route. Notebook 05 teaches the assessment principle in a small standalone example; it does not install a trained fracture model into PhAST.</p>
+    <p>The public adapter is an inference interface and can execute with detached state and gradients disabled. Training a model through a time-dependent simulation requires a separately supported differentiation route. Notebook 05 applies the assessment principle to a scalar Helmholtz teaching equation.</p>
     <h3>DAgger: learn from states your own model visits.</h3>
     <div class="dagger-flow"><span>Run the current model</span><i>→</i><span>Collect visited states</span><i>→</i><span>Ask the reference solver</span><i>→</i><span>Aggregate examples</span><i>→</i><span>Retrain &amp; evaluate</span></div>
-    <p>Dataset aggregation addresses the mismatch between training on reference trajectories and using a model on its own evolving states. Reference labels have a cost. Evaluate a new model on separate rollouts and count data generation, prediction, assessment and correction in any speed claim. A single aggregation round is an introduction, not a convergence guarantee.</p>
+    <p>Dataset aggregation addresses the mismatch between training on reference trajectories and using a model on its own evolving states. Reference labels have a cost. Evaluate a new model on separate rollouts and count data generation, prediction, assessment and correction in runtime comparisons. Assess successive aggregation rounds using fixed held-out rollouts to examine convergence.</p>
     <div class="notebook-grid">
       <article class="notebook-card"><div class="notebook-number">04</div><div><h3>Train, save, reload</h3><p>Fit small compatible models, preserve the metadata and inspect held-out predictions.</p><p class="runtime" data-runtime="04">9.5 s · local CPU</p><a href="notebooks/html/04_train_save_reload_adapter.html">Open executed notebook →</a></div></article>
       <article class="notebook-card"><div class="notebook-number">05</div><div><h3>Predict, assess, correct</h3><p>Reject an incompatible input and use a reference correction when a proposal fails.</p><p class="runtime" data-runtime="05">5.2 s · local CPU</p><a href="notebooks/html/05_hybrid_reference_correction.html">Open executed notebook →</a></div></article>
@@ -215,17 +215,17 @@ solver  → configured projection, assessment and correction/fallback</code></pr
 
   <section id="library">
     <div class="section-number">09 / Your course library</div><h2>Keep exploring after the school.</h2>
-    <p>Use the e-book for derivations, exercises and worked answers; the notebooks for experiments; and the slide deck for a visual route through the material. All browser explanations and executed notebook outputs are included locally.</p>
+    <p>Use the HTML chapters for derivations, exercises and worked answers; the notebooks for experiments; and the slide deck for a visual route through the material. All browser explanations and executed notebook outputs are included locally.</p>
     <div class="download-grid">
-      <a href="book/index.html"><small>READ</small><b>HTML e-book</b><span>Chapters, glossary and references ↗</span></a>
-      <a href="ebooks/phast-ukacm-course.pdf"><small>PRINT</small><b>PDF e-book</b><span>A complete take-away companion ↓</span></a>
+      <a href="book/index.html"><small>READ</small><b>HTML learning book</b><span>Chapters, glossary and references ↗</span></a>
+      <a href="notebooks/study/01_phast_tiny_evolving_fracture.ipynb" download><small>EXPLORE</small><b>PhAST practice notebook</b><span>Code, recorded outputs and exercises ↓</span></a>
       <a href="slides/phast_latex_sources.zip"><small>EDIT</small><b>LaTeX slide sources</b><span>Beamer text and Matplotlib plots ↓</span></a>
       <a href="slides/phast_autumn_school_2026.pdf"><small>PRESENT</small><b>Lecture slides</b><span>Academic LaTeX presentation ↓</span></a>
       <a href="SETUP.md"><small>RUN</small><b>Environment guide</b><span>Local setup and Colab guidance ↗</span></a>
       <a href="EXECUTION_REPORT.md"><small>CHECK</small><b>Execution record</b><span>Measured timings and limitations ↗</span></a>
     </div>
     <h3>Choose a small extension</h3>
-    <ol class="practice-list"><li>Change the mesh and compare fields and observables—not only runtime.</li><li>Compare two degradation laws and explain both their values and slopes.</li><li>Reduce the inverse problem's observations and discuss identifiability.</li><li>Exchange the learned predictor while preserving the adapter contract.</li><li>Record a failure case and propose a regression test or documentation improvement.</li></ol>
+    <ol class="practice-list"><li>Change the mesh and compare fields, observables and runtime.</li><li>Compare two degradation laws and explain both their values and slopes.</li><li>Reduce the inverse problem's observations and discuss identifiability.</li><li>Exchange the learned predictor while preserving the adapter contract.</li><li>Record a failure case and propose a regression test or documentation improvement.</li></ol>
     <p>For the solver, installation documentation, issue reporting and contribution guidance, visit <a href="https://github.com/CEMS-Lab/PhAST">CEMS-Lab/PhAST</a>. Include a minimal example, environment, expected behaviour and actual behaviour when reporting a problem. Cite the software and associated research using the repository's current citation guidance.</p>
     <p>For the larger benchmark and inverse-analysis context, read <a href="https://arxiv.org/abs/2606.23458">the public PhAST preprint by Ani and colleagues</a>. Its research calculations are separate from the small, timed classroom exercises in this package.</p>
     <details class="reading"><summary>Scientific sources and teaching influences</summary>
@@ -237,13 +237,13 @@ solver  → configured projection, assessment and correction/fallback</code></pr
         <li>Pham, Amor, Marigo &amp; Maurini (2011), <a href="https://doi.org/10.1177/1056789510386852">Gradient damage models and their use to approximate brittle fracture</a>.</li>
         <li>Ross, Gordon &amp; Bagnell (2011), <a href="https://proceedings.mlr.press/v15/ross11a.html">Dataset aggregation and imitation learning</a>.</li>
         <li><a href="https://docs.pytorch.org/tutorials/beginner/basics/saveloadrun_tutorial.html">PyTorch: saving and loading models</a>; <a href="https://github.com/CEMS-Lab/PhAST/tree/f6324f899f0701769810be117f27f1208f7a582e">PhAST source revision used for the course</a>.</li>
-        <li>Teaching influences: <a href="https://github.com/ScientificComputingCWI/SemesterProgramme-SciML">CWI Scientific Machine Learning programme</a> and <a href="https://github.com/agdestein/NeuralClosureTutorials">Neural Closure Tutorials</a>. The course adopts short prediction–computation–interpretation cycles and separates model-fitting from rollout assessment. Their slides and figures are not reproduced here.</li>
+        <li>Teaching influences: <a href="https://github.com/ScientificComputingCWI/SemesterProgramme-SciML">CWI Scientific Machine Learning programme</a> and <a href="https://github.com/agdestein/NeuralClosureTutorials">Neural Closure Tutorials</a>. The course adopts short prediction–computation–interpretation cycles and separates model-fitting from rollout assessment. Original course diagrams and examples use this teaching sequence.</li>
       </ul>
     </details>
   </section>
   <footer><b>PhAST · From cracks to computation</b><p>Autumn School 2026 · An educational companion to finite-element fracture modelling and scientific machine learning.</p><a href="#welcome">Back to top ↑</a></footer>
 </div>
 </main>
-<noscript><div class="noscript">Enable JavaScript for the interactive diagrams. The full <a href="book/index.html">HTML book</a>, <a href="ebooks/phast-ukacm-course.pdf">PDF book</a> and executed notebooks remain available without running any simulation.</div></noscript>
+<noscript><div class="noscript">Enable JavaScript for the interactive diagrams. The full <a href="book/index.html">HTML book</a> and executed notebooks remain available for reading.</div></noscript>
 </body>
 </html>

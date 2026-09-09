@@ -1,5 +1,6 @@
 """Assemble a self-contained notebook; numerical execution is a separate HPC step."""
 import ast
+import argparse
 import base64
 import hashlib
 import re
@@ -34,8 +35,13 @@ plots['history_rules'] = functions['plot_history_rules'] + "\n\nsave(plot_histor
 
 cells = []
 def md(text):
+    # Chapter metadata belongs to Sphinx, outside the notebook's teaching prose.
+    text = re.sub(r"\A---[ \t]*\n.*?\n---[ \t]*(?:\n|$)", "", text, count=1, flags=re.S)
     text = re.sub(r":::\{admonition\} (.*?)\n:class: dropdown\n", r"### \1\n", text)
     text = re.sub(r"^:::\s*$", "", text, flags=re.M)
+    # Optional visual chapters sit one level above the rendered notebook.
+    text = re.sub(r"\]\((03_history_visual|08_visual_lab)\.md\)",
+                  lambda match: f"](../{match.group(1)}.html)", text)
     cells.append(nbformat.v4.new_markdown_cell(text.strip()))
 
 def code(text):
@@ -52,16 +58,15 @@ answers are included below. External references are optional.
 
 Prerequisites: scalar differentiation, vectors and matrix multiplication.
 The examples are analytic and small linear-algebra models, adapted to
-questions that arise in fracture inversion. Their successful results do not
-constitute a new full fracture-inverse demonstration.
+questions that arise in fracture inversion. They isolate the geometry,
+observation and differentiation principles used in the later applications.
 
 ### Environment and execution
 
 Python 3.11, NumPy, PyTorch, Matplotlib 3.7 or newer, and IPython are required.
-Jupyter or another notebook reader displays the retained outputs. No local
-data files, helper modules, network downloads or course checkout are needed.
-Run the cells in order. This project's research executions use HPC.
-Installation and queue time are separate from whole-notebook execution time.
+Jupyter or another notebook reader displays the retained outputs. All inputs
+and helper functions are included in the notebook. Run the cells in order
+in the stated environment.
 Dependencies can be installed in an isolated environment with:
 
     python -m pip install numpy torch 'matplotlib>=3.7' ipython jupyter
@@ -73,7 +78,7 @@ Dependencies can be installed in an isolated environment with:
 3. Keep derivative correctness, recovered parameters and computational cost
    as separate questions.
 4. Full numerical arrays and check outcomes remain in the final cell's
-   in-memory dictionaries, including inconvenient or negative findings.
+   in-memory dictionaries, including the coincident-centre diagnostic.
 """)
 attachment = base64.b64encode((ROOT / "figures/inverse_workflow.png").read_bytes()).decode()
 cell = nbformat.v4.new_markdown_cell(
@@ -152,7 +157,7 @@ md("""# Inspect the results together
 
 The following summary is calculated from this notebook's own execution.
 The complete FD sweep and optimisation paths remain in `results`; the
-figures do not replace those arrays. The checks include the deliberately
+figures provide complementary views of those arrays. The checks include the deliberately
 retained zero separating gradient at coincident centres.
 """)
 code("""assert len(checks) == 26 and all(checks.values()), checks
@@ -176,13 +181,14 @@ md("""# Further reading and scope
 The original explanations and examples above are self-contained.
 [Advanced Deep Learning for Physics](https://tum-pbs.github.io/ADL4P/)
 informed the question--derivation--computation approach. Its lectures are
-additional perspectives, not prerequisites for reproducing this notebook.
+additional perspectives on the self-contained derivations above.
 
 The application protocols describe subsequent fracture research, GNNs,
 observation selection and probabilistic inference. These are distinguished
-from the seven computations actually executed here. In particular, the learned
-linear map is not a trained fracture GNN, and the linear Gaussian posterior
-is not a posterior for particle positions in a cracking specimen.
+from the seven computations executed here. The learned linear map illustrates
+solver initialisation; the linear Gaussian posterior illustrates uncertainty
+under a declared observation model. Fracture GNNs and particle-position
+posteriors require the application-specific data and models described above.
 """)
 notebook = nbformat.v4.new_notebook(cells=cells, metadata={
     "kernelspec": {"display_name": "Python 3", "language": "python", "name": "python3"},
@@ -197,5 +203,25 @@ notebook = nbformat.v4.new_notebook(cells=cells, metadata={
 })
 out = ROOT / "notebooks"
 out.mkdir(exist_ok=True)
-nbformat.write(notebook, out / "inverse_experiments_source.ipynb")
+parser = argparse.ArgumentParser(description=__doc__)
+parser.add_argument("--refresh-markdown", action="store_true",
+                    help="Refresh authored prose in both notebooks while retaining code and outputs.")
+args = parser.parse_args()
+if args.refresh_markdown:
+    targets = [out / "inverse_experiments_source.ipynb", out / "inverse_experiments.ipynb"]
+    revised = []
+    for target in targets:
+        retained = nbformat.read(target, as_version=4)
+        if [cell.cell_type for cell in retained.cells] != [cell.cell_type for cell in notebook.cells]:
+            raise ValueError(f"Cell structure differs: {target.name}")
+        for existing, authored in zip(retained.cells, notebook.cells):
+            if existing.cell_type == "code" and existing.source != authored.source:
+                raise ValueError(f"Code differs: {target.name}; obtain a new execution receipt.")
+            if existing.cell_type == "markdown":
+                existing.source = authored.source
+        revised.append((target, retained))
+    for target, retained in revised:
+        nbformat.write(retained, target)
+else:
+    nbformat.write(notebook, out / "inverse_experiments_source.ipynb")
 print(f"Assembled {len(cells)} cells; {sum(c.cell_type=='code' for c in cells)} code cells.")

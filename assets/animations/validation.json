@@ -1,0 +1,46 @@
+{
+  "caption_revision_receipt": "caption_render_receipt.json",
+  "record_context": "Original media validation; the linked caption revision records the current three-clip render and gallery checks.",
+  "scope": "Animation/video-player QA only, no fracture or training execution",
+  "video_codec_and_full_decode": "passed for all four clips",
+  "browser": [
+    {
+      "width": 1440,
+      "played_and_sought_clips": 4,
+      "errors": [],
+      "failed_non_cancelled_resources": [],
+      "media_seek_cancellations": 4,
+      "keyboard_answer": true,
+      "print_posters": 4,
+      "horizontal_overflow": false,
+      "external_requests": 0
+    },
+    {
+      "width": 390,
+      "played_and_sought_clips": 4,
+      "errors": [],
+      "failed_non_cancelled_resources": [],
+      "media_seek_cancellations": 4,
+      "keyboard_answer": true,
+      "print_posters": 4,
+      "horizontal_overflow": false,
+      "external_requests": 0
+    }
+  ],
+  "notebook_player": {
+    "passed": true,
+    "wall_seconds": 1.013,
+    "code_cells": 5,
+    "scope": "Local video player only; no solver or training execution"
+  },
+  "visual_review": "Root inspected all four temporal sheets and desktop/mobile gallery screenshots; scene authors reviewed full-size key frames",
+  "limits": [
+    "Not native PowerPoint playback validation",
+    "Not fresh Colab certification",
+    "Not integrated into the published v0.1.1 edition"
+  ],
+  "source_sha256": {
+    "source/animations/learning_scenes.py": "eb2f90a66464ef47e18d72ffdd948455002b8582339e8b952d776730b54ae019",
+    "source/animations/mechanics_scenes.py": "8611cf0e59b93f346cfaa6a307a8384ac63ee60cd6fb9ffe3e36b064c015e6b8"
+  }
+}

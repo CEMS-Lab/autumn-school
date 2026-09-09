@@ -26,8 +26,7 @@ def main():
     args = parser.parse_args()
     if args.output and (args.output.exists() or Path(str(args.output)+'.zip').exists()):
         raise FileExistsError('Choose a new edition path; existing editions are immutable')
-    for src, dst in [('.build/latex/phast-ukacm-course.pdf','ebooks/phast-ukacm-course.pdf'),
-                     ('.build/slides/phast_autumn_school_2026.pdf','slides/phast_autumn_school_2026.pdf'),
+    for src, dst in [('.build/slides/phast_autumn_school_2026.pdf','slides/phast_autumn_school_2026.pdf'),
                      ('.build/slides/phast_autumn_school_2026.pdf','source/slides/phast_autumn_school_2026.pdf')]:
         shutil.copy2(ROOT/src, ROOT/dst)
     names = ['00_course_map','01_methods_map','03_staggered_loop','04_fem_pipeline',
@@ -47,7 +46,7 @@ def main():
     files = sorted(set(s.decode() for s in raw.split(b'\0') if s))
     files = [f for f in files if f != 'MANIFEST.json' and (ROOT/f).is_file()]
     for f in files:
-        approved_extension = f.startswith(('source/book/research/', 'book/research/'))
+        approved_extension = f.startswith(('source/book/research/', 'book/research/', 'book/_sources/research/'))
         forbidden = {'.git','.build','reviews','jupyter_execute','_attachments'}
         if any(part in forbidden for part in Path(f).parts) or ('research' in Path(f).parts and not approved_extension):
             raise ValueError(f'Non-public build or draft path: {f}')
@@ -55,7 +54,10 @@ def main():
             raise ValueError(f'Non-local payload: {f}')
     manifest = json.loads((ROOT/'MANIFEST.json').read_text())
     manifest.update(version=args.version, date=date.today().isoformat(),
-                    change_scope='Original academic flowcharts; numerical code and receipts unchanged')
+                    change_scope='PhAST dark theme, integrated inverse and history lessons, academic prose, revised animations and current teaching slides',
+                    runtime_scope='Exact-source local rehearsal of six classroom notebooks, local diffusion run and retained HPC inverse receipts; authenticated Colab rehearsal tracked in delivery plan',
+                    delivery_formats=['HTML book', 'Jupyter notebooks', 'editable PowerPoint', 'native Keynote', 'slide PDFs', 'animation assets'],
+                    printable_book='archived by maintainer request')
     manifest['files'] = {f:sha(ROOT/f) for f in files}
     (ROOT/'MANIFEST.json').write_text(json.dumps(manifest,indent=2)+'\n')
     if args.output:

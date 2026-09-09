@@ -1,0 +1,67 @@
+{
+  "status": "passed",
+  "date": "2026-09-09",
+  "html_sha256": "c66a37d65684efc4e645b9f2f62b6015fdd8ba6e3c662ea2b3f358af9261c86a",
+  "cells": 36,
+  "code_cells": 20,
+  "display_equations": 10,
+  "inline_math_expressions": 74,
+  "embedded_images": 89,
+  "valid_math_svg_documents": 84,
+  "external_scripts": 0,
+  "all_images_embedded": true,
+  "raw_dollar_math_in_prose": false,
+  "worked_solutions": 4,
+  "worked_solutions_initially_collapsed": true,
+  "folded_supporting_sections": [
+    "Optional: timed Run-all watchdog",
+    "Saved results and diagnostics"
+  ],
+  "authorship_metadata_verified": {
+    "creator": "Allamaprabhu Ani",
+    "creator_visible_in_body": false,
+    "presenter": "Sathiskumar A. Ponnusami",
+    "presenter_affiliation": "Queen Mary University of London · CEMS-Lab"
+  },
+  "local_notebook_download_verified": true,
+  "colab_upload_homepage_link_verified": true,
+  "all_existing_math_expressions_preserved": true,
+  "diffusion_arrays_bitwise_equal": [
+    "x",
+    "initial_field",
+    "forward_states",
+    "target",
+    "initial_prediction",
+    "recovered_prediction",
+    "alpha_history",
+    "loss_history",
+    "fd_spacings",
+    "fd_values",
+    "fd_relative_errors",
+    "step_contributions"
+  ],
+  "diffusion_check_values_exactly_equal": true,
+  "only_changed_plot": "04_gradient_check.png",
+  "plot_visual_qa": "Updated gradient-comparison legend visually inspected; four other plots byte-identical to inspected originals.",
+  "learner_facing_phrase_sweep": {
+    "terms": [
+      "not PhAST",
+      "not a PhAST",
+      "not an aesthetic",
+      "not a physical",
+      "not another AD",
+      "not the trial",
+      "rather than",
+      "has not been",
+      "have not been",
+      "does not establish",
+      "does not validate",
+      "unverified",
+      "untested",
+      "nothing claimed",
+      "not claimed"
+    ],
+    "matches": []
+  },
+  "browser_visual_receipt": "evidence/differentiability_step_by_step.json#visual_qa"
+}

@@ -1,0 +1,82 @@
+{
+  "schema": "ukacm-diffusion-differentiability-v1",
+  "scope": "Original fixed-grid explicit 1D diffusion model with synthetic full-field observations",
+  "environment": {
+    "python": "3.10.18",
+    "python_executable_name": "python",
+    "torch": "2.8.0",
+    "numpy": "2.2.6",
+    "matplotlib": "3.10.8",
+    "platform": "macOS-27.0-arm64-arm-64bit",
+    "device": "cpu",
+    "dtype": "float64",
+    "threads": 1
+  },
+  "configuration": {
+    "intervals": 40,
+    "interior_nodes": 39,
+    "dx": 0.025,
+    "dt": 0.0010000000000000002,
+    "steps": 80,
+    "final_time": 0.08000000000000002,
+    "alpha_bounds": [
+      0.02,
+      0.25
+    ],
+    "alpha_probe": 0.07,
+    "alpha_true": 0.12,
+    "alpha_start": 0.21,
+    "optimisation_steps": 220,
+    "seed": 20260909,
+    "boundary_conditions": "q(0,t)=q(1,t)=0; interior degrees of freedom only",
+    "maximum_diffusion_ratio": 0.4,
+    "stability_bound": "0 <= alpha*dt/dx**2 <= 0.5",
+    "saved_forward_states_parameter": 0.07
+  },
+  "checks": {
+    "discrete_mode_max_error": 3.3306690738754696e-16,
+    "AD_gradient": -0.03938567022663596,
+    "manual_gradient": -0.039385670226635916,
+    "manual_AD_parameter_error": 4.163336342344337e-17,
+    "manual_AD_initial_state_error": 2.168404344971009e-19,
+    "terminal_seed_error": 2.168404344971009e-19,
+    "fd_spacings": [
+      0.02,
+      0.005,
+      0.001,
+      0.0001,
+      1e-05,
+      1e-06,
+      1e-07,
+      1e-08
+    ],
+    "fd_relative_errors": [
+      0.024806380309321314,
+      0.0015441879638219745,
+      6.175164834030066e-05,
+      6.175099828544354e-07,
+      6.1738383772457835e-09,
+      2.4395738631154178e-11,
+      6.850637427534905e-10,
+      3.086249447444846e-09
+    ],
+    "alpha_recovered": 0.12000003329024733,
+    "parameter_relative_error": 2.7741872780466065e-07,
+    "field_relative_error": 3.805854422723281e-08,
+    "initial_loss": 0.0016589281083251427,
+    "final_loss": 3.114936182172608e-16,
+    "array_reload_passed": true,
+    "all_assertions_passed": true
+  },
+  "cell_sequence_seconds_after_imports": 3.241456333984388,
+  "scientific_sequence_seconds_after_bootstrap_including_imports": 4.445852500008186,
+  "dependency_bootstrap": {
+    "seconds": 0.0009873750095721334,
+    "installed_packages": [],
+    "used_preinstalled_packages": true
+  },
+  "timed_run_all": true,
+  "watchdog_enabled": true,
+  "optimisation_seconds": 0.9386695419962052,
+  "timing_note": "Bootstrap measured separately. In interactive use, sequence elapsed time includes human pauses; only timed Run-all enforces the scientific watchdog. External receipt includes kernel startup/imports and subtracts dependency bootstrap."
+}

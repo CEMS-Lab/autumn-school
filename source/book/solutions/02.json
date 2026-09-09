@@ -1,19 +1,19 @@
 {
   "title": "02 — Differentiate a degradation law",
-  "objective": "Work with the exact normalised quadratic degradation law in the pinned public PhAST material object, and interpret an analytic/autograd/finite-difference agreement at the right scope.",
-  "prediction": "Predict whether the residual parameter $\\eta=10^{-7}$ makes $g(1)$ exactly zero, and whether a very small local finite-difference error alone proves a full coupled fracture calculation is differentiable.",
+  "objective": "Differentiate the normalised quadratic degradation law, compare analytic, automatic and finite-difference derivatives, and connect the calculation to a coupled parameter-to-loss map.",
+  "prediction": "Predict how the residual parameter $\\eta=10^{-7}$ affects $g(1)$ and the behaviour of the degradation law near the broken state.",
   "exercises": [
     {
       "title": "Evaluate the law, its slope, and its curvature",
       "question": "For\n\n$$\ng(d)=(1-\\eta)(1-d)^2+\\eta,\n\\qquad \\eta=10^{-7},\n$$\n\ncompute $g(0)$, $g(1)$, $g(0.25)$, $g'(0.25)$, and $g''(d)$. State whether $g$ is decreasing and whether it is convex on $0\\le d\\le1$.",
       "hint": "Differentiate the square before substituting numbers: $g'(d)=-2(1-\\eta)(1-d)$.",
-      "solution": "First,\n\n$$\ng'(d)=-2(1-\\eta)(1-d),\n\\qquad\ng''(d)=2(1-\\eta).\n$$\n\nAt the endpoints,\n\n$$\ng(0)=1,\n\\qquad\ng(1)=\\eta=10^{-7},\n$$\n\nso the implementation retains a small residual stiffness rather than setting the broken-state factor exactly to zero. At $d=0.25$,\n\n$$\ng(0.25)=(0.9999999)(0.75)^2+10^{-7}=0.56250004375,\n$$\n\nand\n\n$$\ng'(0.25)=-2(0.9999999)(0.75)=-1.49999985.\n$$\n\nFinally, $g''=1.9999998>0$, so the law is convex. For $d<1$, $g'(d)<0$, hence it is decreasing over the intact-to-broken interval. These values match the retained notebook output."
+      "solution": "First,\n\n$$\ng'(d)=-2(1-\\eta)(1-d),\n\\qquad\ng''(d)=2(1-\\eta).\n$$\n\nAt the endpoints,\n\n$$\ng(0)=1,\n\\qquad\ng(1)=\\eta=10^{-7},\n$$\n\nso a small residual stiffness remains in the broken state. At $d=0.25$,\n\n$$\ng(0.25)=(0.9999999)(0.75)^2+10^{-7}=0.56250004375,\n$$\n\nand\n\n$$\ng'(0.25)=-2(0.9999999)(0.75)=-1.49999985.\n$$\n\nFinally, $g''=1.9999998>0$, so the law is convex. For $d<1$, $g'(d)<0$, hence it is decreasing over the intact-to-broken interval. These values match the notebook output."
     },
     {
-      "title": "Read an AD/FD agreement without overclaiming",
-      "question": "At $d=0.25$, the notebook reports analytic and autograd derivatives of $-1.49999985$. Its centred finite difference uses $h=10^{-6}$ and gives $-1.4999998499964917$, with absolute error $3.5083\\times10^{-12}$.\n\n1. Write the centred-difference formula used here.\n2. Explain what this result checks.\n3. Name two features of a coupled fracture route that this local check does **not** automatically differentiate through.",
+      "title": "Interpret the derivative comparison",
+      "question": "At $d=0.25$, the notebook reports analytic and autograd derivatives of $-1.49999985$. Its centred finite difference uses $h=10^{-6}$ and gives $-1.4999998499964917$, with absolute error $3.5083\\times10^{-12}$.\n\n1. Write the centred-difference formula used here.\n2. Explain what this result checks.\n3. Name two additional operations whose derivatives enter a coupled fracture calculation.",
       "hint": "The finite difference perturbs only the scalar $d$ in the smooth material law. Follow the computational graph only as far as the scalar function actually evaluated.",
-      "solution": "1. The numerical estimate is\n\n$$\ng'_{\\mathrm{FD}}(d)=\\frac{g(d+h)-g(d-h)}{2h},\n\\qquad h=10^{-6}.\n$$\n\n2. Its agreement with the analytic and autograd values checks the local implementation of this smooth scalar degradation function at the chosen point and precision. The $3.5083\\times10^{-12}$ discrepancy is consistent with a well-resolved centred difference in **float64**.\n\n3. It does not by itself establish derivatives through, for example, a history maximum/irreversibility update, a convergence-dependent nonlinear solve, boundary treatment, a detach, or a clamp/active set. A coupled derivative claim must identify the selected solver route and verify the entire parameter-to-loss chain."
+      "solution": "1. The numerical estimate is\n\n$$\ng'_{\\mathrm{FD}}(d)=\\frac{g(d+h)-g(d-h)}{2h},\n\\qquad h=10^{-6}.\n$$\n\n2. Its agreement with the analytic and autograd values checks the local implementation of this smooth scalar degradation function at the chosen point and precision. The $3.5083\\times10^{-12}$ discrepancy is consistent with a well-resolved centred difference in **float64**.\n\n3. A coupled calculation also differentiates the selected boundary treatment, equilibrium solve and history or irreversibility update. Convergence-dependent iterations and active constraints affect this derivative. Trace each operation from the chosen parameter to the observation and scalar loss, then check the complete derivative."
     }
   ]
 }

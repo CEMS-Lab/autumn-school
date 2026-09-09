@@ -3,8 +3,12 @@
 A short, learn-by-doing course on phase-field fracture, finite elements,
 differentiation and learning around numerical solvers.
 
+The [delivery guide](MVP_DELIVERY.md) describes the three-hour lecture /
+three-hour exercise route. The book's topics follow three connected groups.
+See [current materials](CURRENT_DELIVERY.md) and [tomorrow's build checklist](TOMORROW.md).
+
 **[Read the interactive book](https://cems-lab.github.io/autumn-school/)** ·
-**[Download an edition](https://github.com/CEMS-Lab/autumn-school/releases)** ·
+**[Download the current course](https://github.com/CEMS-Lab/autumn-school/archive/refs/heads/main.zip)** ·
 **[Report an issue](https://github.com/CEMS-Lab/autumn-school/issues)**
 
 The book places explanations, equations, code, recorded outputs, exercises,
@@ -17,14 +21,13 @@ or notebooks with solutions when you want to run or modify a calculation.
 - Phase-field fracture fundamentals, degradation laws and solution methods.
 - A small public PhAST quasistatic calculation with generated geometry and mesh.
 - Derivative checks and a small elastic-bar inverse problem.
-- An optional inverse extension with an animated history lesson, a complete
-  teaching notebook, particle loss landscapes and retained FEM recovery films.
 - Train/save/reload and checked model proposals on a labelled toy field problem.
-- A printable e-book, 44-slide lecture deck and three two-hour teaching schedule.
+- An HTML learning book with notebook downloads, a 44-slide lecture deck and
+  three two-hour teaching schedule.
 
 Start with [the setup guide](SETUP.md) for execution, or open `index.html` in
 the complete downloaded folder to read offline. The book is static HTML:
-it shows recorded Python outputs; it does not run Python inside the browser.
+it shows recorded Python outputs. Download a notebook to execute its Python cells.
 The supplementary `explorations.html` page has browser-only visual controls.
 
 ## Runtime and scientific scope
@@ -33,28 +36,21 @@ All six unmodified notebooks completed in less than 90 seconds each on the
 reference Apple M4 Pro CPU after setup. Installation time is separate. See
 [the execution report](EXECUTION_REPORT.md),
 [the teaser receipt](evidence/teaser_runtime.json), and the per-file receipts.
-Fresh Colab and clean-environment timings remain to be measured; the local
-measurements are not a guarantee for another machine or edited problem.
+These measurements describe the reference environment. Repeat setup and timing
+on your chosen machine or Colab runtime before class.
 
-The real PhAST example demonstrates a small quasistatic damage calculation,
-not a validated branching demonstration. The inverse and learning activities
-are original teaching models, not full fracture inversion, a trained fracture
-accelerator or a completed DAgger cycle. These are explicit course development
-directions, not capabilities established by the included notebooks.
-
-The [optional inverse extension](https://cems-lab.github.io/autumn-school/book/research/index.html)
-adds seven small HPC-executed teaching examples and separately identified
-retained FEM visualizations. Its recorded fracture fields are not a new
-under-five-minute fracture-inverse notebook or a historical solver replay.
-The existing downloadable PDF and slides remain the earlier classroom edition;
-the new extension is currently in HTML and its downloadable notebooks/figures.
+The PhAST example follows quasistatic damage around a seeded notch. The
+elastic-bar inverse problem isolates parameter recovery, while the scalar
+Helmholtz example isolates training, reload and proposal assessment. The course
+connects these examples to questions of fracture-parameter identifiability,
+learned solver coupling and data aggregation.
 
 ## Source and maintenance
 
 The solver snapshot is the public [CEMS-Lab/PhAST](https://github.com/CEMS-Lab/PhAST)
 revision `f6324f899f0701769810be117f27f1208f7a582e` (v0.16.2), with its
-licence and file hashes in `vendor/PhAST/`. This repository has its own clean
-history and does not include the research-authoring worktree.
+licence and file hashes in `vendor/PhAST/`. This repository uses a dedicated
+course history and a bundled public solver snapshot.
 
 Editable book sources live in `source/book/`; canonical executed notebooks
 live in `notebooks/`; original exercise sources live in
@@ -70,8 +66,8 @@ Our teaching text, examples and solutions are original.
 See [attribution and content reuse](ATTRIBUTION.md) and
 [bundled component notices](THIRD_PARTY_NOTICES.md).
 
-This first edition is a course prerelease. Issues and reviewed improvements
-will guide its development before and after the school.
+Issues and reviewed improvements guide course development before and after
+the school.
 
 The [course plan](COURSE_PLAN.md) and
 [main planning issue](https://github.com/CEMS-Lab/autumn-school/issues/1)

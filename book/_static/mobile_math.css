@@ -1,6 +1,23 @@
+/* Inline mathematics needs its natural text baseline and visible glyph bounds.
+ * The theme's inline-flex/overflow:hidden wrapper clips MathJax italic glyphs
+ * and indices by several pixels even when the equation fits the text column.
+ * Leave font sizing and superscript/fraction layout to MathJax.
+ */
+.bd-article span.math {
+  display: inline;
+  overflow: visible;
+}
+
+/* Allow long inline source paths to wrap; preserve preformatted code blocks. */
+.bd-article :not(pre) > code.docutils.literal,
+.bd-article :not(pre) > code.docutils.literal > span.pre {
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
 /* Keep long display equations readable without widening a narrow viewport. */
-@media screen and (max-width: 600px) {
-  .md-typeset mjx-container[display="true"] {
+@media screen {
+  .bd-article mjx-container[display="true"] {
     box-sizing: border-box;
     max-width: 100%;
     overflow-x: auto;

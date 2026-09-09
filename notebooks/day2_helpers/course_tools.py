@@ -586,7 +586,7 @@ def make_toy_checkpoint(
         "normalisation_mean": mean.tolist(),
         "normalisation_scale": scale.tolist(),
         "splits": {name: [float(value) for value in values] for name, values in split_loads.items()},
-        "data_provenance": "course-owned ToyHelmholtzProblem; not PhAST or research data",
+        "data_provenance": "course-owned synthetic fields from the discrete ToyHelmholtzProblem",
         "seed": seed,
         "epochs": int(epochs),
     }
@@ -671,7 +671,7 @@ class ToyDamageAdapter:
             "toy_relative_residual": residual,
             "residual_limit": float(residual_limit),
             "accepted": bool(residual <= residual_limit),
-            "scope": "ToyHelmholtzProblem residual only; not a PhAST AT2 residual",
+            "scope": "Residual of the discrete ToyHelmholtzProblem",
         }
 
     def fallback(self, load_factor: float, d_previous: torch.Tensor | None = None) -> torch.Tensor:

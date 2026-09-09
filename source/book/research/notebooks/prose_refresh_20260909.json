@@ -1,0 +1,24 @@
+{
+  "date": "2026-09-09",
+  "scope": "Academic prose refresh; numerical code and retained outputs unchanged",
+  "new_numerical_execution": false,
+  "notebooks": {
+    "inverse_experiments_source.ipynb": {
+      "before_sha256": "be55a89d25a196a555c2f80eb4b1b8a5684f3f842cf0f1994372730f2220d30b",
+      "after_sha256": "4667a5f90519675d678e9beadf054025e78915ff518821c450d9aec8e432f9c5",
+      "code_cells_unchanged": 16,
+      "outputs_and_execution_counts_unchanged": true,
+      "metadata_unchanged": true,
+      "retained_code_cells_sha256": "05121b8e3342907d088880b4aeb258abd0504794142b23a8baf0ccbcd9e543ed"
+    },
+    "inverse_experiments.ipynb": {
+      "before_sha256": "19f1de8da869222ad652d4b715257cd6d41cc92802ef4fd6414ccfd5430a8bdc",
+      "after_sha256": "56aa4e35ab0012880e39a53fc37d881482a7456a325f6c52e1912d8bd8aa7741",
+      "code_cells_unchanged": 16,
+      "outputs_and_execution_counts_unchanged": true,
+      "metadata_unchanged": true,
+      "retained_code_cells_sha256": "b2eeffae2f0266522a3c56bd109b2f78e5ce7767714f45870f49419d29d1573b"
+    }
+  },
+  "generator_sha256": "5f4ccedf54880e84109faaaf02f76ba4037fe44b67fe192947a4131e946ddf0b"
+}

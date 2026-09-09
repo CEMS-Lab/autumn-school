@@ -75,8 +75,8 @@ rows='\n'.join(f'| {k.replace("_"," ")} | {"Pass" if v else "Fail"} |' for k,v i
 text=f'''# Retained computations and reproducibility
 
 The six numerical teaching experiments were executed on HPC. The figures in
-this extension are generated from their retained arrays, not from a new local
-execution. These checks concern the stated teaching models.
+this extension use their retained arrays. These checks concern the stated
+teaching models.
 
 ## Result card
 
@@ -93,8 +93,8 @@ execution. These checks concern the stated teaching models.
 {rows}
 
 The coincidence check intentionally records a zero separating gradient. A
-passing test here means that this behaviour was reproduced, not that coincident
-particles can be separated by that gradient.
+passing test reproduces that stationary configuration. Separating coincident
+particles requires a prescribed perturbation or another tested geometry rule.
 
 ## Reproduce and inspect
 

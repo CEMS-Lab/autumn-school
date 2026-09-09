@@ -1,0 +1,147 @@
+{
+  "scope": "Caption-only revision of three original Manim teaching animations and the local gallery",
+  "date": "2026-09-09",
+  "authoring_environment": {
+    "system": "Darwin",
+    "machine": "arm64",
+    "python": "3.10.18",
+    "manim": "0.19.1",
+    "renderer": "cairo"
+  },
+  "render_groups": [
+    {
+      "source": "source/animations/mechanics_scenes.py",
+      "scenes": [
+        "PhaseFieldBand",
+        "ExplicitImplicitStep"
+      ],
+      "wall_seconds": 24.78,
+      "output_directory": ".build/animations-caption-20260909/mechanics"
+    },
+    {
+      "source": "source/animations/learning_scenes.py",
+      "scenes": [
+        "CheckedLearnedProposal"
+      ],
+      "wall_seconds": 7.74,
+      "output_directory": ".build/animations-caption-20260909/learning"
+    }
+  ],
+  "editing_scope": [
+    "Visible captions and explanatory prose",
+    "Original scene diagrams, mathematics, update timing and solver notebooks preserved",
+    "ReverseAccumulation video, poster, temporal sheet and WebVTT retained byte-for-byte"
+  ],
+  "export": {
+    "codec": "h264",
+    "pixel_format": "yuv420p",
+    "width": 1280,
+    "height": 720,
+    "fps": 30,
+    "mp4_faststart": true,
+    "poster_seconds": {
+      "phase_field_band": 24,
+      "explicit_implicit_step": 26,
+      "checked_learned_proposal": 26
+    },
+    "contact_sheet_seconds": {
+      "phase_field_band": [
+        2,
+        8,
+        14,
+        19,
+        22,
+        24
+      ],
+      "explicit_implicit_step": [
+        2,
+        8,
+        14,
+        19,
+        22,
+        26
+      ],
+      "checked_learned_proposal": [
+        2,
+        8,
+        14,
+        19,
+        22,
+        26
+      ]
+    }
+  },
+  "validation": {
+    "all_four_videos_full_decode": "passed",
+    "durations_seconds": [
+      24.8,
+      26.5,
+      27.7,
+      26.5
+    ],
+    "browser": [
+      {
+        "width": 1440,
+        "all_four_played_and_sought": true,
+        "horizontal_overflow": false,
+        "missing_images": 0,
+        "keyboard_answer": true,
+        "print_posters": 4,
+        "external_requests": 0,
+        "errors": [],
+        "failed_resources": [],
+        "media_seek_cancellations": 4
+      },
+      {
+        "width": 390,
+        "all_four_played_and_sought": true,
+        "horizontal_overflow": false,
+        "missing_images": 0,
+        "keyboard_answer": true,
+        "print_posters": 4,
+        "external_requests": 0,
+        "errors": [],
+        "failed_resources": [],
+        "media_seek_cancellations": 4
+      }
+    ],
+    "notebook_player": {
+      "environment": "Local Python kernel",
+      "passed": true,
+      "wall_seconds": 2.033,
+      "code_cells": 5,
+      "scope": "Existing local video display"
+    },
+    "visual_review": "Inspected all three revised temporal sheets, all three full-size final posters, the full-size early learned-proposal caption and the mobile gallery screenshot; captions fit and diagram labels remain legible at native frame size.",
+    "playback_environment": "Local headless Brave browser and local notebook kernel",
+    "browser_detail": ".build/animation-review/browser.json"
+  },
+  "scientific_assumptions": [
+    "PhaseFieldBand varies an isolated analytic AT2 damage profile around a fixed crack centre.",
+    "ExplicitImplicitStep illustrates partitioned dynamic mechanics and implicit damage with acceptance checks.",
+    "ReverseAccumulation assumes differentiable maps, a fixed initial state and a final-state-only scalar loss.",
+    "Learned proposals and corrected states require the declared interface, admissibility and residual checks; cost comparisons include the complete route."
+  ],
+  "sha256": {
+    "source/animations/mechanics_scenes.py": "1e0041e72528632985a98673b793935925ce4b6bd63f1198c9df8ca0a88c2f8e",
+    "source/animations/learning_scenes.py": "68e23b168d0379473694a3bab0b1441811d343c8b6b2ece8547b8a9874dd447a",
+    "source/animations/build_gallery.py": "3b3bc3f3d14df14ee2aefce44988797963b3a96de56fcb9dbee66e97dbf5ab77",
+    "assets/animations/manifest.json": "c17ab9e05c13e41a00d8fe2e72a464092fb342fea487532e5de71b4ff144e67d",
+    "assets/animations/index.html": "4b2078129c11e1a4b1585aa24365f5deed30be91967e9ad2cfd0a55c8ee789fa",
+    "assets/animations/animation_gallery.ipynb": "5d5ba382ca7de5787c7deaac0f7b61cfe1ba0bbf1dc284fa3474a4320a144ebe",
+    "assets/animations/mechanics/phase_field_band.mp4": "8959b32226e1748f1686393ca9e8e4b2014d01f2a8b622886bffde1445d8aae8",
+    "assets/animations/mechanics/phase_field_band_poster.png": "d1199eceae5c6199ba02fa43c116acc394edbdca1c04076ddd34f024499ddc03",
+    "assets/animations/mechanics/phase_field_band_contact.png": "20e4db7aa66e1f04dc218be96ed94332a285d08da5209a5f886d1d112e473728",
+    "assets/animations/mechanics/explicit_implicit_step.mp4": "790cf324d9c8fe3b5bb65fbff8f02f172251b9a7a812a8c947831f345b95eb83",
+    "assets/animations/mechanics/explicit_implicit_step_poster.png": "5f45911366414387b3a3d319e25c27a500cd7f1c5d831fff0a7016dafd768bca",
+    "assets/animations/mechanics/explicit_implicit_step_contact.png": "dd1cb2e0afb4b7ef012655da692a4904bbfa53c98732b29c3d56b4b89a74fc71",
+    "assets/animations/learning/checked_learned_proposal.mp4": "6c60cbdc75d0c449997a101baf957b11a28c0c7611dfbeaf7ac5bc42c3e9775a",
+    "assets/animations/learning/checked_learned_proposal.png": "33d5750d465078796f4d30ce665a4db4c06d6995d95414b0255fefa4653c5c74",
+    "assets/animations/learning/checked_learned_proposal_contact.png": "1e9d93c42190f1e1272bf31eb106fdbf8564dc0a1cff1f43db44f5ae0956f0d0",
+    "assets/animations/learning/checked_learned_proposal.vtt": "a996bf4ccfe4d68d438bcc9c0b6e7e87ad1afc266b7f318f2c20ce231c9d5e14",
+    "assets/animations/learning/reverse_accumulation.mp4": "80e43933e41d009add9ad999a1fff070f6272e091849d052ac2ac4e52b0ace1e",
+    "assets/animations/learning/reverse_accumulation.png": "3ad9fe209f07f21d3841947643a042b9ce3a20ddd247ef18d4a720aa72c44e42",
+    "assets/animations/learning/reverse_accumulation_contact.png": "1279f63e74f66ef2c93d8ff7adb6e504b69120e4bd24dde61345e7093512234a",
+    "assets/animations/learning/reverse_accumulation.vtt": "68584fcf0b3c28f875089b157be2d9e9d4c547e1f04e0098da65b76a13aeee35"
+  }
+}

@@ -4,18 +4,29 @@ This script is intentionally checked in beside the notebooks so their compact,
 repeated setup cells and source-boundary statements can be regenerated without
 hand-editing JSON.  It does not execute notebooks; see ``reviews/notebook_runtime.md``
 for the executed outputs and receipts.
+
+Course material created by Allamaprabhu Ani; presented by Sathiskumar A. Ponnusami,
+CEMS-Lab, UKACM Autumn School 2026. Attribution does not replace bundled licences.
 """
 
 from __future__ import annotations
 
+import argparse
 from pathlib import Path
 from textwrap import dedent
 
 import nbformat as nbf
 
 
-COURSE = Path(__file__).resolve().parents[1]
+COURSE = Path(__file__).resolve().parents[2]
 NOTEBOOKS = COURSE / "notebooks"
+COURSE_ATTRIBUTION = {
+    "creator": "Allamaprabhu Ani",
+    "presenter": "Sathiskumar A. Ponnusami",
+    "presenter_affiliation": "Queen Mary University of London · CEMS-Lab",
+    "affiliation": "CEMS-Lab",
+    "course": "UKACM Autumn School 2026",
+}
 
 
 def markdown(text: str):
@@ -66,6 +77,7 @@ print({"course_layout": "teaching/ukacm_autumn_school_2026 located", "torch": to
 def write_notebook(filename: str, cells: list):
     notebook = nbf.v4.new_notebook(cells=cells)
     notebook.metadata = {
+        **COURSE_ATTRIBUTION,
         "kernelspec": {"display_name": "Python 3", "language": "python", "name": "python3"},
         "language_info": {"name": "python", "version": "3.10"},
         "ukacm_scope": "September 2026 day-two teaching companion",
@@ -80,27 +92,20 @@ def first_fracture():
             r'''
             # 01 — Public PhAST: a tiny evolving phase-field calculation
 
-            This is an actual **public PhAST** AT2 phase-field solve, run on a
-            CPU with a structured triangular mesh.  It makes a rectangle,
-            identifies its boundaries, applies symmetric tension, locks a
-            centreline precrack, and advances sixty **quasi-static load
-            increments**.  It is not a physical-time dynamic simulation and
-            it does not use XFEM.
+            This exercise solves an AT2 phase-field problem with PhAST on a
+            structured triangular mesh. A rectangular specimen undergoes
+            symmetric tension while a centreline precrack remains fixed.
+            Sixty **quasi-static load increments** trace its damage evolution;
+            the load factor parameterises the imposed displacement.
 
-            The execution pin is `CEMS-Lab/PhAST@f6324f899f0701769810be117f27f1208f7a582e`
-            (version 0.16.2).  The tested local route is source-first import:
-            `PYTHONPATH=<public-PhAST>/src python`.  The course bundle prefers
-            `vendor/PhAST/src` and verifies its manifest if Git metadata is not
-            present.  `python -m pip install ./vendor/PhAST` is a preparatory
-            setup option, not part of the recorded notebook timing.  The next
-            cell verifies that the public pin, rather than a neighbouring
-            private checkout, was imported.
+            The course bundle supplies PhAST 0.16.2. Follow the environment
+            setup guide before running the notebook; the opening cells load
+            the case configuration and identify the source revision.
 
             **What to look for.** `d=0` means intact-like and `d=1` means
-            fully broken.  The locked centreline is only the initial crack.
-            The calculation must show a positive increment of damage outside
-            that set as load increases; otherwise it is a setup check, not the
-            promised evolving-damage result.
+            fully broken. Compare the seeded, first-load and final damage
+            fields. Damage gained outside the locked centreline shows how
+            the diffuse damaged region evolves under increasing tension.
             '''
         ),
         code(BOOTSTRAP),
@@ -118,13 +123,12 @@ def first_fracture():
             r'''
             ## Geometry, mesh, labelled boundaries, material, and constraints
 
-            The next cell is the same transparent setup used by the runner.
-            It first generates the T3 mesh in memory, then saves and reloads a
-            small prepared **tensor-mesh** file.  This is a recovery/import
-            route for the course specimen—not a claim that an external mesh
-            file with physical groups was used.  `identify_boundaries()` makes
-            the `left`, `right`, `top`, and `bottom` node labels; the explicit
-            centreline mask labels the precrack.
+            The next cell illustrates the specimen setup by generating a T3 mesh
+            and saving and reopening its coordinate and connectivity arrays.
+            `identify_boundaries()` supplies the `left`, `right`, `top`, and
+            `bottom` node labels; a centreline mask selects the precrack.
+            The later solve constructs its inputs from the case configuration,
+            so use that configuration when changing the specimen or material.
             '''
         ),
         code(
@@ -182,15 +186,13 @@ def first_fracture():
             The selected mechanics route is `solver_type="quasi_static"` with
             the SciPy sparse-direct backend.  It performs a staggered update:
             mechanics → tensile/history update → phase-field damage → repeat
-            to the configured tolerance.  The public implementation contains
-            both assembled sparse and matrix-free element-operator paths; this
-            notebook demonstrates the assembled sparse-direct mechanics route,
-            so it does not claim that no matrices are constructed.
+            to the configured tolerance. The mechanics step assembles a sparse
+            matrix and solves the resulting linear system directly.
 
-            A quasi-Newton/Newton method would be a nonlinear **solution
-            algorithm**, while XFEM would be a crack **representation**.  The
-            present calculation instead uses a regularised phase-field
-            formulation on T3 elements.
+            A quasi-Newton/Newton method describes a nonlinear **solution
+            algorithm**, while XFEM describes a crack **representation**.
+            Here the crack is represented by a regularised phase field on T3
+            elements.
             '''
         ),
         code(
@@ -205,7 +207,7 @@ def first_fracture():
         ),
         code(
             r'''
-            # The checks describe the promised evidence, not an aesthetic judgement.
+            # Check convergence, irreversibility and damage evolution numerically.
             assert summary["solve_seconds"] < config["limits"]["solver_seconds_hard"]
             assert summary["incremental_damage_outside_sum"] > 1.0
             assert summary["incremental_damage_outside_max"] > 1.0e-3
@@ -281,17 +283,16 @@ def first_fracture():
             ## Interpret, then change one input
 
             The reaction plotted here is the sum of the internal force at the
-            top prescribed-displacement nodes; it is a compact response
-            diagnostic, not a calibrated experimental force.  The damage
-            fields and the increase outside the locked precrack are the key
-            evidence that the computation evolved.
+            top prescribed-displacement nodes. Read this response alongside
+            the damage fields to connect the imposed loading to the evolving
+            damaged region.
 
             Try changing only `Gc`, `l0`, the total displacement, or the mesh
             density in `configs/day2_forward/tiny_notched_tension.json`, then
-            rerun.  State both the observed change and a limitation: this is a
-            small plane problem with a hand-made mesh, a selected energy split,
-            and no mesh-convergence study.  Do not compare its wall time to a
-            dynamic impact example or to an unmeasured Colab run.
+            rerun. Explain the change using the model assumptions: a two-dimensional
+            specimen, a structured mesh and the selected energy split. Compare
+            successive mesh refinements before interpreting the calculated damage
+            pattern as independent of discretisation.
             '''
         ),
     ]
@@ -311,11 +312,11 @@ def degradation():
             g'(d)=-2(1-\eta)(1-d).
             $$
 
-            We use `d=0` for intact and `d=1` for broken, `eta=10^{-7}`, and
-            `float64`.  The comparison is deliberately local and smooth: it
-            is not a claim that every coupled fracture route is automatically
-            differentiable through history updates, convergence logic, clamps,
-            or active sets.
+            We use $d=0$ for intact and $d=1$ for broken, $\eta=10^{-7}$, and
+            `float64`. We compare analytic, automatic and finite-difference
+            derivatives of this smooth scalar material law. A coupled fracture
+            derivative also depends on history updates, constraints and the
+            solution procedure.
             '''
         ),
         code(BOOTSTRAP),
@@ -381,12 +382,11 @@ def degradation():
         ),
         markdown(
             r'''
-            **Why this matters.** PyTorch tensors make automatic differentiation
-            available for tensor operations that remain connected to a scalar
-            loss.  A full solver derivative additionally depends on the chosen
-            route: boundary treatment, linear/nonlinear solve, history update,
-            detaches, clipping, and convergence behaviour all matter.  The
-            next notebook keeps that chain visible in a small original bar toy.
+            **Why this matters.** Automatic differentiation follows the tensor
+            operations connected to a scalar loss. For a complete solver, trace
+            that connection through the boundary conditions, equilibrium solve,
+            history update and active constraints. The next exercise develops
+            this parameter-to-observation chain for an elastic bar.
             '''
         ),
     ]
@@ -396,13 +396,12 @@ def inverse_toy():
     return [
         markdown(
             r'''
-            # 03 — A tiny differentiable inverse exercise (course-owned toy)
+            # 03 — Recovering the stiffness of an elastic bar
 
-            This notebook is an original one-dimensional elastic-bar tensor
-            exercise.  It is **not a PhAST fracture inverse**, does not use
-            research data, and should not be used to infer the differentiability
-            of a history-dependent damage calculation.  It makes the chain
-            explicit: trainable modulus → stiffness tensor → linear solve →
+            We recover the elastic modulus of a one-dimensional bar from
+            synthetic displacement observations. Linear elasticity gives a
+            smooth parameter-to-observation map with an analytic sensitivity:
+            trainable modulus → stiffness tensor → linear solve →
             observed displacement → scalar loss.
             '''
         ),
@@ -490,12 +489,12 @@ def inverse_toy():
         ),
         markdown(
             r'''
-            The bar is intentionally simple enough that its exact sensitivity
-            is known.  In a fracture inverse exercise, nonsmooth history maxima,
-            irreversibility constraints, load path, solver tolerance, and the
-            observation design require additional verification.  This toy gives
-            learners a short place to diagnose AD versus finite differences
-            before encountering those complications.
+            Compare the recovered modulus and held-out displacement with their
+            reference values. The analytic bar sensitivity helps explain the
+            agreement between automatic differentiation and finite differences.
+            Extending the calculation to fracture introduces a load-dependent
+            history, irreversibility constraints and sensitivity to the chosen
+            observations and solver tolerance.
             '''
         ),
     ]
@@ -507,17 +506,15 @@ def training_reload():
             r'''
             # 04 — Train, save, reload, and compare a tiny field model
 
-            We train one small MLP on an original, course-owned
-            `ToyHelmholtzProblem`.  It is a fast field equation with a known
-            discrete residual, designed to demonstrate data splits, checkpoint
-            metadata, and a held-out field comparison.  It is **not PhAST
-            fracture data**, a trained public `learned_damage` model, or a
-            claim of fracture acceleration.
+            We train a small multilayer perceptron on solutions of
+            `ToyHelmholtzProblem`, a linear field equation with a known discrete
+            residual. This model problem lets us study data splits, saved model
+            metadata and predictions at held-out loads.
 
             Feature contract: nodewise `[x/L, y/H, load_factor]`, all
             dimensionless, in exactly that order; output: one nodewise
-            damage-like proposal in `[0,1]`.  Whole load cases—not individual
-            nodes—are separated into train/validation/test splits.
+            damage-like proposal in `[0,1]`. Training, validation and test sets
+            contain separate whole load cases, so each field belongs to one split.
             '''
         ),
         code(BOOTSTRAP),
@@ -569,7 +566,7 @@ def training_reload():
             weights = torch.exp(-squared_distance / 0.18)
             rbf_prediction = (weights @ train_targets).squeeze(1) / weights.sum(dim=1).clamp_min(1.0e-15)
             rbf_rmse = float(torch.sqrt(torch.mean((rbf_prediction - heldout_reference) ** 2)))
-            print({"MLP_heldout_RMSE": heldout_rmse, "RBF_heldout_RMSE": rbf_rmse, "RBF_scope": "same toy feature contract only"})
+            print({"MLP_heldout_RMSE": heldout_rmse, "RBF_heldout_RMSE": rbf_rmse, "RBF_scope": "shared nodewise feature contract for the discrete Helmholtz model"})
             '''
         ),
         code(
@@ -598,10 +595,10 @@ def training_reload():
             The checkpoint stores the architecture width, weight `state_dict`,
             feature order and units, normalisation, dtype/device, mesh
             signature, data provenance, splits, seed, and training duration.
-            An MLP and RBF can both consume this *toy* nodewise representation;
-            a CNN would require mesh-to-grid maps, and a GNN/GNO would require
-            connectivity/operator inputs.  A model name alone is not a
-            compatibility guarantee.
+            An MLP and an RBF interpolant can both consume this nodewise
+            representation. A CNN requires mesh-to-grid maps, while a GNN/GNO
+            requires connectivity or operator inputs. Define these mappings
+            explicitly when changing the model architecture.
             '''
         ),
     ]
@@ -613,18 +610,17 @@ def hybrid_adapter():
             r'''
             # 05 — A compatible proposal, residual check, and fallback
 
-            This notebook connects the checkpoint from notebook 04 to a
-            **course-owned teaching adapter**.  The adapter verifies its
+            This notebook connects the trained model from notebook 04 to an
+            adapter for the same linear field problem. The adapter verifies its
             feature order and mesh signature, predicts under `torch.no_grad()`,
             projects bounds and irreversibility, evaluates the discrete
             `ToyHelmholtzProblem` residual, and falls back to the reference
             solve when the proposal fails the gate.
 
-            The public PhAST learned-damage hook is an inference interface with
-            detached/no-gradient prediction.  This notebook does not train
-            through that hook and its residual is not a PhAST AT2 residual.
-            It teaches the reusable logic: proposal → compatibility →
-            constraint projection → assess → correction/record.
+            The residual measures agreement with the discrete Helmholtz-like
+            equation. Prediction takes place with fixed model weights, followed
+            by a reference solve when correction is needed:
+            proposal → compatibility → constraint projection → assess → correction.
             '''
         ),
         code(BOOTSTRAP),
@@ -720,11 +716,10 @@ def hybrid_adapter():
         ),
         code(
             r'''
-            # One correction record is a replay-style teaching artefact, not an
-            # end-to-end DAgger result. Reference-label cost remains part of any
-            # later retraining comparison.
+            # Save one proposal/reference pair for an offline replay dataset.
+            # Include reference-label cost in a later retraining comparison.
             replay_record = {
-                "scope": "course-owned ToyHelmholtzProblem; one offline correction record, not PhAST DAgger",
+                "scope": "course-owned ToyHelmholtzProblem; one offline proposal/reference correction record",
                 "load_factor": load_factor,
                 "feature_order": list(FEATURE_ORDER),
                 "normal_assessment": assessment,
@@ -739,17 +734,56 @@ def hybrid_adapter():
         ),
         markdown(
             r'''
-            A genuine offline DAgger cycle would collect model-induced states,
-            obtain reference labels, aggregate only training data, retrain, and
-            reassess a frozen held-out set.  The small record above is the
-            transparent first step, not evidence that such a loop has been run
-            for PhAST fracture or that a learned proposal accelerates it.
+            The saved correction record pairs a model proposal with its reference
+            solution. An offline DAgger extension uses such records in a repeated
+            cycle: collect states visited by the current model, obtain reference
+            labels, add those cases to the training data, retrain, and evaluate
+            on a fixed held-out set. Include the cost of reference solves when
+            assessing the computational benefit of that cycle.
             '''
         ),
     ]
 
 
+def export_previews():
+    """Render the six retained canonical notebooks with compact presenter credits."""
+    from nbconvert import HTMLExporter
+
+    destination = NOTEBOOKS / "html"
+    destination.mkdir(parents=True, exist_ok=True)
+    notebooks = sorted(NOTEBOOKS.glob("0[0-5]*.ipynb"))
+    if len(notebooks) != 6:
+        raise ValueError("Expected the six canonical course notebooks.")
+    exporter = HTMLExporter(template_name="lab")
+    for path in notebooks:
+        notebook = nbf.read(path, as_version=4)
+        nbf.validate(notebook)
+        body, _ = exporter.from_notebook_node(notebook)
+        credits = (
+            '<meta name="author" content="Allamaprabhu Ani">\n'
+            '<meta name="presenter" content="Sathiskumar A. Ponnusami">\n'
+            '<meta name="presenter-affiliation" content="Queen Mary University of London · CEMS-Lab">\n'
+        )
+        footer = (
+            '<footer style="max-width:1100px;margin:2rem auto;padding:1rem 2rem;'
+            'border-top:1px solid #b8c2cb;font:14px/1.6 system-ui,sans-serif">'
+            'Presented by Sathiskumar A. Ponnusami · Queen Mary University of London · CEMS-Lab'
+            '<br>© 2026 CEMS-Lab · UKACM Autumn School 2026</footer>'
+        )
+        body = body.replace("</head>", credits + "</head>", 1)
+        body = body.replace("</body>", footer + "</body>", 1)
+        (destination / (path.stem + ".html")).write_text(body, encoding="utf-8")
+    print("Exported six retained notebook previews to", destination)
+
+
 def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--previews-only", action="store_true",
+                        help="Render existing canonical notebooks to HTML while retaining their executions.")
+    args = parser.parse_args()
+    if args.previews_only:
+        export_previews()
+        return
     NOTEBOOKS.mkdir(parents=True, exist_ok=True)
     write_notebook("01_phast_tiny_evolving_fracture.ipynb", first_fracture())
     write_notebook("02_degradation_autograd.ipynb", degradation())

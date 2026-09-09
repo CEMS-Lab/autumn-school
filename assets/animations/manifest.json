@@ -1,0 +1,122 @@
+{
+  "kind": "Original Manim teaching diagrams and local media metadata",
+  "videos": [
+    {
+      "id": "phase-field",
+      "title": "A sharp crack and its diffuse representation",
+      "video": "mechanics/phase_field_band.mp4",
+      "poster": "mechanics/phase_field_band_poster.png",
+      "slot": "L1: energy and regularisation",
+      "description": "An isolated analytic AT2 profile connects the damage field to the regularisation length. Increasing the length spreads the band.",
+      "question": "If the regularisation length decreases, what must change in the mesh to resolve the damage band?",
+      "answer": "The mesh must be refined relative to the length scale and its adequacy checked. The animation varies the regularisation length of an analytic isolated AT2 profile.",
+      "steps": [
+        "A sharp crack marks a discontinuity.",
+        "A continuous damage field represents that crack.",
+        "The isolated AT2 profile decays away from the crack.",
+        "The regularisation length sets the width of the diffuse damage band."
+      ],
+      "limit": "Analytic isolated AT2 damage profile, with a fixed crack centre and varied regularisation length.",
+      "duration_seconds": 24.8,
+      "stream": {
+        "codec_name": "h264",
+        "codec_type": "video",
+        "width": 1280,
+        "height": 720,
+        "pix_fmt": "yuv420p",
+        "r_frame_rate": "30/1"
+      },
+      "video_sha256": "8959b32226e1748f1686393ca9e8e4b2014d01f2a8b622886bffde1445d8aae8",
+      "poster_sha256": "d1199eceae5c6199ba02fa43c116acc394edbdca1c04076ddd34f024499ddc03"
+    },
+    {
+      "id": "partitioned-step",
+      "title": "Explicit mechanics and implicit damage",
+      "video": "mechanics/explicit_implicit_step.mp4",
+      "poster": "mechanics/explicit_implicit_step_poster.png",
+      "slot": "L1: numerical solution",
+      "description": "One partitioned physical time step uses accepted damage for explicit mechanics, updates the driving quantity, and solves damage implicitly.",
+      "question": "Which stability requirement governs the explicit mechanics update?",
+      "answer": "Choose the mechanics timestep according to its explicit stability requirements. Accept the state after the stated checks pass; on failure, stop or reduce the timestep and restart from the accepted state.",
+      "steps": [
+        "Begin at an accepted time level.",
+        "Update mechanics with lagged damage.",
+        "Evaluate the tensile driving/history quantity.",
+        "Solve the implicit damage problem with irreversibility.",
+        "Check residuals, bounds and energy; accept or stop/reduce the timestep."
+      ],
+      "limit": "Dynamic splitting schematic. The PhAST classroom notebook uses quasistatic mechanics.",
+      "duration_seconds": 26.5,
+      "stream": {
+        "codec_name": "h264",
+        "codec_type": "video",
+        "width": 1280,
+        "height": 720,
+        "pix_fmt": "yuv420p",
+        "r_frame_rate": "30/1"
+      },
+      "video_sha256": "790cf324d9c8fe3b5bb65fbff8f02f172251b9a7a812a8c947831f345b95eb83",
+      "poster_sha256": "5f45911366414387b3a3d319e25c27a500cd7f1c5d831fff0a7016dafd768bca"
+    },
+    {
+      "id": "reverse-mode",
+      "title": "Backpropagation through several updates",
+      "video": "learning/reverse_accumulation.mp4",
+      "poster": "learning/reverse_accumulation.png",
+      "slot": "L2: the chain rule",
+      "description": "States move forward through two update maps. Adjoint sensitivities move backward and each use of the shared parameter contributes to its gradient.",
+      "question": "Why does the parameter gradient contain a contribution from each update?",
+      "answer": "The same parameter enters both maps. The chain rule adds both paths to the loss. Here the initial state is fixed and the loss depends on the final state. Parameter-dependent initial states or explicit parameter dependence in the loss contribute additional terms.",
+      "steps": [
+        "Specify a fixed initial state and a shared parameter.",
+        "Evaluate two differentiable update maps and a scalar final loss.",
+        "Propagate the final-state adjoint backward.",
+        "Sum the parameter contribution from every update.",
+        "An optimiser chooses a separate update using the resulting gradient."
+      ],
+      "limit": "Computational-graph schematic. Assumes differentiable maps, fixed initial state and a final-state-only loss.",
+      "duration_seconds": 27.7,
+      "stream": {
+        "codec_name": "h264",
+        "codec_type": "video",
+        "width": 1280,
+        "height": 720,
+        "pix_fmt": "yuv420p",
+        "r_frame_rate": "30/1"
+      },
+      "video_sha256": "80e43933e41d009add9ad999a1fff070f6272e091849d052ac2ac4e52b0ace1e",
+      "poster_sha256": "3ad9fe209f07f21d3841947643a042b9ce3a20ddd247ef18d4a720aa72c44e42"
+    },
+    {
+      "id": "learned-proposal",
+      "title": "A learned proposal and a checked correction",
+      "video": "learning/checked_learned_proposal.mp4",
+      "poster": "learning/checked_learned_proposal.png",
+      "slot": "L3 / P3: hybrid methods",
+      "description": "A compatible Radius-GNO or GNN produces a proposed damage field. Acceptance depends on declared bounds, residuals and constraints.",
+      "question": "When can a corrected proposal be accepted?",
+      "answer": "Accept the corrected state when it passes the declared checks. If correction fails, stop and report nonconvergence. Assess interface compatibility, field quality and complete computational cost for the chosen architecture.",
+      "steps": [
+        "Declare mesh/graph, feature ordering, units and normalisation.",
+        "Evaluate a compatible model and obtain a proposal.",
+        "Check bounds, irreversibility and the declared residual/constraint tolerance.",
+        "Accept a qualified state or use reference correction.",
+        "Recheck the correction and accept or report failure; include all overhead in any speed comparison."
+      ],
+      "limit": "Interface schematic for a compatible learned proposal, declared numerical checks and reference correction.",
+      "duration_seconds": 26.5,
+      "stream": {
+        "codec_name": "h264",
+        "codec_type": "video",
+        "width": 1280,
+        "height": 720,
+        "pix_fmt": "yuv420p",
+        "r_frame_rate": "30/1"
+      },
+      "video_sha256": "6c60cbdc75d0c449997a101baf957b11a28c0c7611dfbeaf7ac5bc42c3e9775a",
+      "poster_sha256": "33d5750d465078796f4d30ce665a4db4c06d6995d95414b0255fefa4653c5c74"
+    }
+  ],
+  "gallery_sha256": "4b2078129c11e1a4b1585aa24365f5deed30be91967e9ad2cfd0a55c8ee789fa",
+  "player_notebook_sha256": "5d5ba382ca7de5787c7deaac0f7b61cfe1ba0bbf1dc284fa3474a4320a144ebe"
+}

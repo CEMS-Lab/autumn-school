@@ -1,0 +1,48 @@
+{
+  "caption_revision_receipt": "../caption_render_receipt.json",
+  "record_context": "Original render receipt; the linked caption revision identifies current revised media.",
+  "scope": "Original schematic animations; no solver or model training executed",
+  "authoring_render_seconds": 11.39,
+  "authoring_environment": {
+    "system": "Darwin",
+    "machine": "arm64",
+    "python": "3.10.18",
+    "manim": "0.19.1"
+  },
+  "source": "source/animations/learning_scenes.py",
+  "source_sha256": "eb2f90a66464ef47e18d72ffdd948455002b8582339e8b952d776730b54ae019",
+  "records": [
+    {
+      "scene": "ReverseAccumulation",
+      "video": "assets/animations/learning/reverse_accumulation.mp4",
+      "sha256": "80e43933e41d009add9ad999a1fff070f6272e091849d052ac2ac4e52b0ace1e",
+      "duration_seconds": 27.7,
+      "video_stream": {
+        "codec_name": "h264",
+        "width": 1280,
+        "height": 720,
+        "pix_fmt": "yuv420p",
+        "r_frame_rate": "30/1"
+      }
+    },
+    {
+      "scene": "CheckedLearnedProposal",
+      "video": "assets/animations/learning/checked_learned_proposal.mp4",
+      "sha256": "8981fe6825d0c7b82652e586f7312b6b046b8be8a446d5a93ddb903eabec6f06",
+      "duration_seconds": 26.5,
+      "video_stream": {
+        "codec_name": "h264",
+        "width": 1280,
+        "height": 720,
+        "pix_fmt": "yuv420p",
+        "r_frame_rate": "30/1"
+      }
+    }
+  ],
+  "limitations": [
+    "Not a fracture calculation, full-path derivative test or accelerator benchmark",
+    "No fresh Google Colab or PowerPoint playback validation",
+    "Reverse graph assumes differentiable maps, fixed x0 and L = ell(x2)",
+    "Corrected proposals must pass the stated checks before acceptance"
+  ]
+}

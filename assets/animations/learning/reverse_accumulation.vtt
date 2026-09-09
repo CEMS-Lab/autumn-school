@@ -1,0 +1,25 @@
+WEBVTT
+
+00:00.000 --> 00:03.500
+Two differentiable update maps share one parameter theta.
+The initial state is fixed; the loss depends only on the final state.
+
+00:03.500 --> 00:08.800
+The blue forward route evaluates x0, then x1, then x2,
+and finally the scalar loss L.
+
+00:08.800 --> 00:14.200
+The terminal loss seeds lambda2. Orange arrows apply transposed
+state Jacobians to obtain lambda1 and lambda0 in reverse order.
+
+00:14.200 --> 00:16.900
+A is the local state Jacobian. B is the local parameter Jacobian.
+Reverse accumulation multiplies each next adjoint by A transpose.
+
+00:16.900 --> 00:22.900
+The total parameter gradient adds both local contributions:
+B0 transpose lambda1 plus B1 transpose lambda2.
+
+00:22.900 --> 00:27.700
+This is a gradient. An optimiser chooses a separate update.
+Other initial-state or direct-loss dependence requires extra terms.

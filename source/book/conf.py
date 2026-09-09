@@ -1,14 +1,18 @@
 """Sphinx configuration for the PhAST UKACM course companion."""
 
+from pathlib import Path
+from shutil import copytree
+
 project = "PhAST: Phase-field fracture with differentiable FEM"
-author = "UKACM Autumn School"
-copyright = "2026, UKACM Autumn School"
+author = "Allamaprabhu Ani"
+presenter = "Sathiskumar A. Ponnusami"
+presenter_affiliation = "Queen Mary University of London · CEMS-Lab"
+copyright = "2026, CEMS-Lab"
 release = "2026"
 
 extensions = [
     "myst_nb",
     "sphinx_copybutton",
-    "sphinx_immaterial",
 ]
 
 myst_enable_extensions = ["amsmath", "colon_fence", "deflist", "dollarmath"]
@@ -22,30 +26,59 @@ nb_ipywidgets_js = {}
 master_doc = "index"
 exclude_patterns = ["_build", "README.md", "solutions", "Thumbs.db", ".DS_Store",
                     "research/_build", "research/README.md", "research/REVIEW_STATUS.md",
+                    "research/VISUAL_CONTRACT.md",
                     "research/notebooks/inverse_experiments_source.ipynb"]
 numfig = True
 numfig_format = {"figure": "Figure %s"}
 
-html_theme = "sphinx_immaterial"
+html_theme = "sphinx_book_theme"
 html_title = project
+html_context = {
+    "default_mode": "dark",
+    "course_presenter": presenter,
+    "course_presenter_affiliation": presenter_affiliation,
+}
+html_theme_options = {
+    "home_page_in_toc": True,
+    "show_navbar_depth": 1,
+    "show_toc_level": 1,
+    "repository_url": "https://github.com/CEMS-Lab/autumn-school",
+    "use_repository_button": True,
+    # Lessons already link complete practice/solution notebooks and companions.
+    "use_download_button": False,
+    "footer_content_items": ["phast-credit.html", "phast-discoveries.html"],
+}
+templates_path = ["_templates"]
 html_static_path = ["_static"]
 html_css_files = ["mobile_math.css", "learning_book.css"]
 html_js_files = ["learning_book.js"]
+# The public repository retains this licensed local MathJax distribution.
 mathjax_path = "mathjax/tex-mml-chtml.js"
 
 
+def _copy_local_mathjax(app, exception):
+    """Reuse the licensed distribution for normal and fresh HTML builds."""
+    if exception is not None or app.builder.format != "html":
+        return
+    source = Path(__file__).resolve().parents[2] / "book/_static/mathjax"
+    target = Path(app.outdir) / "_static/mathjax"
+    if not (source / "tex-mml-chtml.js").is_file():
+        raise FileNotFoundError("Retain the tracked book/_static/mathjax distribution.")
+    if source.resolve() != target.resolve():
+        copytree(source, target, dirs_exist_ok=True)
+
+
 def setup(app):
-    """Load the Sphinx options object before the copy-button extension."""
-    app.add_js_file("documentation_options.js", priority=100)
-    # Reuse the extension's attachment handling; retain the course theme/controls.
-    from pathlib import Path
+    app.connect("build-finished", _copy_local_mathjax)
+    # Expand retained notebook attachments for the optional inverse laboratory.
     import runpy
     support = runpy.run_path(str(Path(__file__).parent / "research" / "conf.py"))
     app.connect("source-read", support["expand_notebook_attachments"])
 
 latex_engine = "xelatex"
+presenter_latex = presenter + r"\\[0.35em]{\large Queen Mary University of London · CEMS-Lab}"
 latex_documents = [
-    (master_doc, "phast-ukacm-course.tex", project, author, "manual"),
+    (master_doc, "phast-ukacm-course.tex", project, presenter_latex, "manual"),
 ]
 latex_elements = {
     "papersize": "a4paper",
@@ -55,6 +88,11 @@ latex_elements = {
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{booktabs}
+\usepackage{needspace}
+\usepackage{etoolbox}
+% Keep an admonition title with the opening lines of its worked explanation.
+\BeforeBeginEnvironment{sphinxadmonition}{\Needspace{6\baselineskip}}
 \setlength{\parskip}{0.35em}
+\AtBeginDocument{\hypersetup{pdfauthor={Allamaprabhu Ani},pdfsubject={Presented by Sathiskumar A. Ponnusami, Queen Mary University of London, CEMS-Lab; UKACM Autumn School 2026}}}
 """,
 }

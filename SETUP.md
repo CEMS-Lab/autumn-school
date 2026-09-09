@@ -1,8 +1,7 @@
 # Prepare once; run short experiments
 
-The HTML companion, PDF book and executed notebook pages can be read immediately
-without installing anything. To execute the notebooks, keep the full extracted
-course folder together.
+Read the HTML chapters and executed notebook pages immediately.
+To execute the notebooks, keep the full extracted course folder together.
 
 ## Local Python environment
 
@@ -19,13 +18,13 @@ python -m notebook notebooks
 
 On Windows, replace the activation command with
 `.venv\Scripts\activate`. Select the new environment as the notebook kernel.
-If the kernel cannot import a dependency, check its Python executable before
+For dependency import errors, check the kernel's Python executable before
 reinstalling packages.
 
-Installation downloads dependencies and is not part of the five-minute
-computation budget. The tested authoring environment was already provisioned;
-the exact execution versions and timings are in the execution report. A clean
-installation on every supported operating system has not been rehearsed.
+The five-minute computation budget starts after dependency installation.
+The execution report identifies the provisioned reference environment,
+package versions and timings. Reproduce setup on the target operating system
+before teaching.
 
 ## The source snapshot
 
@@ -33,11 +32,10 @@ installation on every supported operating system has not been rehearsed.
 `f6324f899f0701769810be117f27f1208f7a582e` (version 0.16.2), its licence,
 project metadata and a SHA-256 manifest. The notebook helper verifies that
 snapshot and prefers it over unrelated installed or development copies.
-No Git history or private solver checkout is needed.
+The bundled snapshot supplies the solver files used by the lessons.
 
-The exercises use a small generated structured triangular mesh and do not
-require an interactive meshing application or a GPU. Change parameters in the
-notebook/configuration, not inside the solver source.
+The exercises generate a small structured triangular mesh and run on a CPU.
+Set parameters in the notebook or configuration file.
 
 ## Run a single exercise with a hard time budget
 
@@ -56,10 +54,9 @@ The notebooks also write small figures, data and model artifacts under
 
 ## Google Colab
 
-The computational exercises are CPU-sized and do not require a paid GPU.
-The local timings are not a measurement of Google's current Colab service.
-Before teaching on Colab, rehearse the complete setup and all six notebooks
-in a fresh runtime; Python and package availability may change.
+Choose a CPU runtime for these small computational exercises. Before teaching
+on Colab, rehearse the complete setup and all six notebooks in a fresh runtime;
+Python and package availability may change.
 
 1. Upload and extract the complete ZIP into the Colab runtime, retaining its
    directory structure, including `vendor/`, `configs/` and `notebooks/`.
@@ -72,14 +69,14 @@ in a fresh runtime; Python and package availability may change.
    If the service is slow, use the included executed HTML for the discussion.
 
 The public course source is [CEMS-Lab/autumn-school](https://github.com/CEMS-Lab/autumn-school).
-Opening a single notebook on Colab does not also supply its local helpers and
-source snapshot: retain the complete course folder as described above. A fresh
-Colab rehearsal remains necessary before promising classroom runtimes.
+Retain the complete course folder to supply each notebook's local helpers and
+source snapshot. Use a fresh-runtime rehearsal to measure classroom runtimes.
 
 ## If something fails
 
-Read the first error and the notebook's expected checks. Do not remove
-convergence checks, disable source verification, or increase problem size merely
-to obtain a plot. Restart the kernel after changing environments. For a report,
+Read the first error and the notebook's expected checks. Keep convergence and
+source-verification checks active while diagnosing the problem. Start from the
+unmodified example and vary one setting at a time. Restart the kernel after
+changing environments. For a report,
 include Python/PyTorch versions, notebook name, changed parameters, full error,
 and whether the unmodified example reproduces the issue.

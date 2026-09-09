@@ -1,9 +1,29 @@
 # PhAST Autumn School: course plan and completion record
 
-This is the versioned plan for a coherent six-hour lecture series, supported
+This is the versioned plan for a coherent six-hour course, supported
 by one interactive book, executable notebooks, worked solutions and slides.
 The main planning issue links the topic issues; this file preserves the
 curriculum when issues are closed or reorganised.
+
+## Latest delivery decision: a minimum viable course
+
+The latest autumn-school discussion sets **three hours of lectures followed
+by three hours of interactive exercises**. Lecture 1 covers fracture,
+staggered solution and matrix-free operators and must already motivate
+differentiability and hybrid learning. Lecture 2 develops differentiability;
+lecture 3 develops hybrid approaches. The exercises revisit those questions
+in the same order.
+
+This is a local next-edition plan. Published v0.1.1 still has the earlier
+mixed two-hour sessions. The book, slide timings and overview must be rebuilt
+and reviewed before publishing this change. See [MVP_DELIVERY.md](MVP_DELIVERY.md)
+for the selected scope and [BUILD_AGENT_PROMPTS.md](BUILD_AGENT_PROMPTS.md)
+for bounded build assignments. Preserve the complete issue inventory below.
+
+Timing assumption: 360 minutes of contact time, with lunch and breaks outside
+that allocation. The previous edition had 330 contact minutes and 30 minutes
+of breaks. The schedule supplies a 330-minute fallback pending organiser
+confirmation; these allocations are not interchangeable.
 
 ## Purpose and audience
 
@@ -16,16 +36,17 @@ in the activities. Do not assume experience with phase-field fracture.
 The intended event is the UKACM Autumn School, 14–17 September 2026, with the
 organiser-led sessions on 15–16 September. Confirm room-level scheduling,
 speaker credits and programme wording with the organisers. This plan concerns
-the three two-hour phase-field/differentiable-computing sessions, not the
-entire event programme.
+the phase-field/differentiable-computing day, not the entire event programme.
+The organiser leads the other day's preparation. Support for it is a separate
+bounded assignment, not another full course inside this allocation.
 
 ## Learning sequence
 
-![Three two-hour sessions: understand the fracture model, compute and differentiate, then train and assess a learned component.](source/book/figures/00_course_map.svg)
-
-The overview is shared with the book; the linear sequence below preserves the
-full topic inventory. Figure construction and cross-format checks follow the
-[academic design standard](DESIGN_STANDARD.md).
+The new live route is L1 fracture/numerics → L2 derivatives → L3 hybrid
+methods, followed by P1 PhAST → P2 derivative/recovery exercises → P3
+training/proposal assessment. The current graphical overview belongs to the
+previous edition until rebuilt. The longer sequence below preserves the
+full book inventory. Figures follow the [academic design standard](DESIGN_STANDARD.md).
 
 ```text
 Opening prediction: can a learned average be inadmissible?
@@ -53,16 +74,17 @@ follows **predict → explain → compute → inspect → exercise → worked so
 Use a toy problem only after explicitly stating what it isolates and how the
 concept transfers to, or differs from, a fracture calculation.
 
-## Three two-hour sessions
+## Three lecture hours and three exercise hours
 
 | Session | Principal question | Student outcome |
 | --- | --- | --- |
-| A: model and numerical method | What represents a crack, and what do we solve? | Explain the energy, degradation and length scale; distinguish a formulation from a discretisation or nonlinear algorithm. |
-| B: computation and derivatives | How does an input affect the final result? | Run and interpret a small public PhAST case; trace a chain rule; compare analytic, autograd and finite-difference sensitivities. |
-| C: learning and model interfaces | What can a learned component replace or propose safely? | Train/save/reload a small model; inspect a model contract; accept, correct or reject a proposal using explicit checks. |
+| L1 then P1: model and numerical method | What represents a crack, what do we solve, and why make it differentiable or hybrid? | Explain the physical/numerical model and interpret one small public PhAST calculation. |
+| L2 then P2: derivatives and recovery | How does an input affect a stated observable or loss? | Trace a chain rule; check derivatives and parameter recovery in labelled teaching examples. |
+| L3 then P3: learning and model interfaces | What can a learned component propose safely? | Train/save/reload a small model; assess a compatible proposal and its correction. |
 
 The minute-by-minute allocation is in [TEACHING_SCHEDULE.md](TEACHING_SCHEDULE.md).
-The opening teaser fits inside the opening ten minutes, not on top of them.
+The opening uses one physical question within five minutes. A complete run of
+notebook 00 is optional preparation, not another required practical.
 Larger paper studies are optional extensions or explicitly replace an allocated
 slot. A 45-minute paper discussion is not silently added to a full six-hour day.
 
@@ -82,14 +104,17 @@ until a replacement passes the relevant gates.
 
 ### Workstream record
 
+These are the full course ambitions. The MVP checklist in MVP_DELIVERY.md
+selects the classroom subset without closing or deleting unfinished extensions.
+
 | ID | Workstream | First-edition position and next gate |
 | --- | --- | --- |
 | C01 | Phase-field foundations and comparisons | Explanations and figures exist. Review XFEM/cohesive trade-offs; do not call quasi-Newton a competing fracture formulation or claim universal phase-field superiority. |
 | C02 | Energy, degradation and damage morphology | Equations, derivative notebook and browser controls exist. Audit AT1/AT2 normalisation, profiles, continuity, mesh/length-scale effects and initiation/branching explanations. |
 | C03 | Solution algorithms and coupled physics | Staggering, static/dynamic and matrix-free concepts exist. Complete the transport/solid/damage operator narrative and distinguish physical time, load stepping and nonlinear iteration. |
-| C04 | First PhAST simulation | Public source, generated mesh, loads/BCs, fields and reaction checks run locally. Add a clear imported-mesh route and a better short propagating-crack example without weakening checks. |
+| C04 | First PhAST simulation | The existing public run is quasistatic with SciPy sparse-direct mechanics. The requested explicit-mechanics/implicit-damage, matrix-free demonstration needs a validated replacement or an explicit lecture-to-quasistatic-exercise bridge. Imported external meshes and short propagating-crack examples remain extensions. |
 | C05 | Backpropagation explained step by step | Explicit local derivatives, adjoint propagation, shared-parameter sums and a checked three-step algebraic example exist. Revised book/lecture diagrams distinguish observable, gradient and optimisation update; a toy derivative check is not a full fracture-path validation. |
-| C06 | Inverse recovery | The elastic-bar toy runs. The user-approved optional inverse extension adds seven checked teaching examples, history animation and retained FEM recovery visuals. A fresh under-five-minute actual fracture inverse activity with the full issue #7 checks remains open. |
+| C06 | Inverse recovery | The elastic-bar toy is the minimum classroom route. The separate inverse/history handoff remains unmerged pending source, timing and coherence review. Primitive/history checks do not establish full fracture recovery. A small actual fracture-parameter/inclusion recovery remains a separate task. |
 | C07 | Train, save, reload and interchangeable models | MLP/RBF toy field examples run. Define and validate fracture-compatible damage inputs/outputs and saved-model contracts; do not imply arbitrary architectures are interchangeable automatically. |
 | C08 | Hybrid correction and DAgger | Toy accept/reject/fallback runs; DAgger is explained. A complete model-induced rollout, reference labelling, aggregation, retraining and held-out evaluation remains to be built. |
 | C09 | Laptop/Colab execution | All six notebooks have local receipts below 90 seconds after setup. Fresh installation, fresh Colab and slower-laptop rehearsal remain open; all activities must stay below 300 seconds. |
@@ -101,6 +126,24 @@ until a replacement passes the relevant gates.
 | C15 | Release, credits and community | Public repository, Pages and downloadable editions are the delivery route. Confirm credits/content licence, contributor guidance, follow-up exercises and a public showcase before claiming a finished course release. |
 
 ## Evidence required before marking an issue complete
+
+### C10 theme update, 9 September 2026
+
+Use the same open-source Sphinx Book Theme as Physics-based Deep Learning,
+with dark mode initially selected, its original desktop column proportions,
+and the existing light/system switch. Preserve lessons, recorded outputs,
+notebook downloads and white-background scientific figures. This is a local
+HTML styling update, not a change to the six-hour schedule, numerical evidence
+or the white lecture/PDF design. Theme source and rebuild details are recorded
+in DESIGN_STANDARD.md; issue #11 remains the governing accessibility workstream.
+
+The requested PhAST orange/blue accent follow-up preserves those columns and
+dark surfaces. Use readable tints of the public logo/documentation colours for
+navigation, links and answer edges; never alter quantitative figure colours.
+Two optional footer discoveries are native, keyboard-operable details, with no
+automatic animation, sound, tracking or impact on lesson completion.
+Footer credit: created by Allamaprabhu Ani and Sathiskumar A. Ponnusami,
+CEMS-Lab; prepared for the UKACM Autumn School 2026. Preserve third-party credits.
 
 The [main planning issue #1](https://github.com/CEMS-Lab/autumn-school/issues/1)
 tracks these linked workstreams. They remain open until their full acceptance
@@ -142,8 +185,12 @@ fresh-runtime receipt exists.
 
 The first publication is an evolving **prerelease**. Publishing it does not
 close the full-fracture inverse, learned damage or DAgger implementation issues.
-The teaching-ready release requires the final coherence issue, public-content
-audit, fresh-environment rehearsal and rendered cross-format checks to pass.
+An MVP teaching release requires the scoped checklist in MVP_DELIVERY.md,
+public-content audit, fresh-environment rehearsal and rendered cross-format
+checks to pass. Retained outputs support participation when execution fails;
+they do not establish fresh Colab performance. Full curriculum completion also
+requires the outstanding extensions and final coherence issue. Keep the main
+and child issues open while their full acceptance criteria remain unmet.
 
 Maintain the plan and main issue together. New requests enter the coverage
 table and a linked issue before implementation. Do not delete unfinished

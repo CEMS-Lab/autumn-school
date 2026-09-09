@@ -1,0 +1,59 @@
+{
+  "date": "2026-09-09",
+  "scope": "HTML website, notebook downloads, current editable presentation files and animation assets",
+  "base_commit": "0b52b8af5945c76cb5e8c200af5bf6e5b6642d9c",
+  "html": {
+    "sphinx_warnings_as_errors": true,
+    "sphinx_pages": 30,
+    "standalone_html_payloads": 3,
+    "core_notebook_lessons": 6,
+    "local_asset_references": 934,
+    "local_target_errors": 0,
+    "theme": "Sphinx Book Theme, dark default with PhAST orange and blue accents"
+  },
+  "browser": {
+    "core_flowchart_pages": 7,
+    "viewports_px": [
+      1440,
+      390
+    ],
+    "checks_passed": 14,
+    "keyboard_vector_enlargement": true,
+    "external_requests_blocked": true,
+    "served_over_local_http": true,
+    "additional_visual_checks": [
+      "core learning lesson: dark theme, layout, equations, image loading",
+      "standalone diffusion lesson: introductory layout and explicit-update equation",
+      "inverse research pages at desktop/mobile and embedded history video"
+    ],
+    "mobile_fix": "Wrap long inline source paths; preserve inline mathematical glyph bounds and preformatted code blocks"
+  },
+  "notebooks": {
+    "core_local_rehearsal": "evidence/core_notebook_rehearsal_20260909.json",
+    "all_six_passed": true,
+    "longest_whole_process_after_setup_seconds": 70.19303070800379,
+    "standalone_diffusion_receipt": "evidence/differentiability_step_by_step.json",
+    "classroom_source_and_retained_outputs_preserved": true,
+    "colab_rehearsal": "Scheduled in TOMORROW.md; requires authenticated fresh runtime"
+  },
+  "presentation": {
+    "editable_powerpoint": "output/intro-lecture-20260909/phast_lecture_introduction_v7.pptx",
+    "native_keynote": "output/intro-lecture-20260909/phast_lecture_introduction_v7.key",
+    "intro_slides": 18,
+    "scientific_images_retained": 19,
+    "pdf_visual_comparison": "All 18 pages identical to the previously reviewed v6 export at 1600 by 900 pixels",
+    "keynote_native_open": "Passed from local disk copy; OneDrive reopening encountered a hydration timeout",
+    "lecture_resource_slides": 44,
+    "changed_visible_lecture_pages_reviewed": [
+      5,
+      12,
+      14,
+      20,
+      37,
+      38
+    ],
+    "animation_media": "assets/animations/caption_render_receipt.json"
+  },
+  "printable_book": "Archived outside the public repository at maintainer request",
+  "next_work": "TOMORROW.md"
+}

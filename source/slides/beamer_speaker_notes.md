@@ -2,13 +2,13 @@
 
 Primary source: `phast_autumn_school_2026.tex`. These are the same notes embedded in the Beamer source.
 
-Three 120-minute sections; each contains 110 minutes of instruction/activity and one 10-minute break. Relative teaching timings are not event-timetable claims or compute-runtime measurements.
+Three 120-minute sections; each contains 110 minutes of instruction/activity and one 10-minute break. Timings describe relative teaching allocations; notebook execution has separate runtime receipts.
 
 ## 1. From cracks to computation
 
 Timing: Opening
 
-Introduce the 2+2+2-hour design. Each section includes a ten-minute break. The event allocation is separate and must be agreed with the organiser. The title illustration is an original analytic-distance schematic, not a computed fracture field.
+Introduce the 2+2+2-hour design. Each section includes a ten-minute break. The event allocation is separate and must be agreed with the organiser. The title illustration shows an analytic distance-based representation of a crack.
 
 ## 2. Six hours: understand, compute, then learn
 
@@ -20,15 +20,15 @@ Introduce the companion book and notebook routes. Notebook 01 is a real PhAST da
 
 Timing: Session A / 00--10
 
-Ten-minute opening prediction activity. Ask where a centreline precrack in tension will localise damage. Damage is not displacement jump or crack opening. A schematic can support a hypothesis; an actual field and its loading history are needed to test it.
+Ten-minute opening prediction activity. Ask where a centreline precrack in tension will localise damage. Damage describes a diffuse material state. Displacement jumps and crack opening describe kinematics. A schematic can support a hypothesis; an actual field and its loading history are needed to test it.
 
 ## 4. Three descriptions of an evolving crack
 
 Timing: A 10--22 / 12 minutes
 
-Compare the same conceptual specimen. XFEM is an enrichment strategy and CZM a constitutive traction--separation law, not mutually exclusive rival generations. A phase-field-CZM exists. Discuss interface knowledge, path complexity, calibration and computational cost without claiming universal superiority. Discussion prompt: An adhesive interface? An unknown branching path?
+Compare the same conceptual specimen. XFEM enriches the approximation, while a cohesive law relates traction to separation. A phase-field-CZM exists. Discuss interface knowledge, path complexity, calibration and computational cost without claiming universal superiority. Discussion prompt: An adhesive interface? An unknown branching path?
 
-## 5. A model is not a solution algorithm
+## 5. Fracture models and solution algorithms
 
 Timing: A 22--25 / 3 minutes
 
@@ -38,19 +38,19 @@ Use the question for retrieval. Classify each term before describing advantages.
 
 Timing: A 25--37 / 12 minutes
 
-Build the two lines term by term. Define displacement u, small strain, damage d, toughness Gc and length ell. The normalisation is c0=4 integral from 0 to 1 of sqrt(w(s)) ds. This representative tension/compression split is not the unique phase-field model. Ask learners to identify storage reduction and crack cost. Discussion prompt: Which term favours damage? Which term resists it?
+Build the two lines term by term. Define displacement u, small strain, damage d, toughness Gc and length ell. The normalisation is c0=4 integral from 0 to 1 of sqrt(w(s)) ds. This representative model uses a tension/compression energy split. Ask learners to identify storage reduction and crack cost. Discussion prompt: Which term favours damage? Which term resists it?
 
 ## 7. AT1 and AT2 choose the crack-density term
 
 Timing: A 37--45 / 8 minutes
 
-Compute c0 for w=d and w=d squared. Note that onset also depends on degradation, split, loading, flaw, length and calibration. The statement about an elastic stage describes the standard idealisations, not every calibrated extension. Maintain the d=0 intact convention consistently.
+Compute c0 for w=d and w=d squared. Note that onset also depends on degradation, split, loading, flaw, length and calibration. The statement about an elastic stage applies to these standard idealisations. Maintain the d=0 intact convention consistently.
 
 ## 8. How quickly should stiffness be lost?
 
 Timing: A 45--53 / 8 minutes
 
-Predict before explaining. Quadratic law exactly matches the selected PhAST baseline. Cubic illustration: (1-eta)(1-3d squared+2d cubed)+eta. Rational illustration: (1-eta)(1-d) squared/[(1-d) squared+a d(1+d)]+eta, a=2. For a>0 its denominator is positive on [0,1]. These illustrations are not calibrated PF-CZM.
+Predict before explaining. Quadratic law exactly matches the selected PhAST baseline. Cubic illustration: (1-eta)(1-3d squared+2d cubed)+eta. Rational illustration: (1-eta)(1-d) squared/[(1-d) squared+a d(1+d)]+eta, a=2. For a>0 its denominator is positive on [0,1]. Use the cubic and rational curves as illustrative degradation choices.
 
 ## 9. A derivative measures the local energy response
 
@@ -62,25 +62,25 @@ Predict g prime at d=0.25. The illustrative plot uses eta=1e-6, giving -1.499998
 
 Timing: A 70--78 / 8 minutes
 
-Read the horizontal axis as x/ell. Explain exponential tail versus compact support and how ell scales both. These are crack-density minimisers, not measured crack openings, stress fields or full fracture solutions. Discussion prompt: Tail or compact support?
+Read the horizontal axis as x/ell. Explain exponential tail versus compact support and how ell scales both. These profiles minimise the isolated crack-density functional. Discussion prompt: Tail or compact support?
 
 ## 11. The mesh must resolve the chosen length
 
 Timing: A 78--85 / 7 minutes
 
-Ask whether one element across a band can describe it. Hold ell and physical parameters fixed while refining h. Compare full damage fields, load response and energies. Changing ell can alter nucleation/strength and requires separate calibration. Mesh visibility is not convergence. Discussion prompt: Refine $h$ at fixed $\ell$. What should you compare?
+Ask whether one element across a band can describe it. Hold ell and physical parameters fixed while refining h. Compare full damage fields, load response and energies. Changing ell can alter nucleation/strength and requires separate calibration. Assess mesh convergence through systematic refinement. Discussion prompt: Refine $h$ at fixed $\ell$. What should you compare?
 
-## 12. Initiation is not propagation or branching
+## 12. Crack initiation, propagation and branching
 
 Timing: A 85--90 / 5 minutes
 
-The initiation sketch is a shorter precrack; the other two are different conceptual states, not results from one run. Discuss flaw, strength, loading and regularisation. Dynamic branching requires a physical time history and a converged path-instability calculation. Notebook 01 demonstrates quasi-static damage evolution, not branching.
+The three sketches illustrate separate conceptual crack states. Discuss flaw, strength, loading and regularisation. Dynamic branching requires a physical time history and a converged path-instability calculation. Notebook 01 demonstrates quasistatic damage evolution.
 
 ## 13. A staggered step alternates coupled problems
 
 Timing: A 90--100 / 10 minutes
 
-Trace an outer load increment and inner staggered iterations. Mechanics uses current damage; the driving/history field depends on tensile energy; damage uses updated driving. Keep prescribed damage and irreversibility. Advance only under the chosen convergence checks. Analogy: a gradient term resembles a diffusion operator, but damage is not mass-conserving transport. Discussion prompt: Which field is held fixed in each subproblem?
+Trace an outer load increment and inner staggered iterations. Mechanics uses current damage; the driving/history field depends on tensile energy; damage uses updated driving. Keep prescribed damage and irreversibility. Advance only under the chosen convergence checks. The gradient term has a diffusion-like structure. Damage evolution additionally reflects fracture energy and irreversibility. Discussion prompt: Which field is held fixed in each subproblem?
 
 ## 14. Time integration and nonlinear iteration are different
 
@@ -92,13 +92,13 @@ Separate physical modelling, time discretisation, nonlinear solve and staggered 
 
 Timing: A 108--114 / 6 minutes
 
-Explain the action of gather/scatter operators A_e. Assembly, local kernels and boundary handling differ by route. Preconditioning and convergence remain important. Notebook 01 actually uses an assembled SciPy mechanics backend; it does not benchmark matrix-free acceleration. No speed claim is made here. Discussion prompt: What is avoided? What work remains?
+Explain the action of gather/scatter operators A_e. Assembly, local kernels and boundary handling differ by route. Preconditioning and convergence remain important. Notebook 01 uses assembled SciPy sparse-direct mechanics. Discussion prompt: What is avoided? What work remains?
 
 ## 16. Tensors still have physical locations
 
 Timing: A 114--120 / 6 minutes
 
-Retrieval: trace one element from connectivity through quadrature to global accumulation. Shapes alone do not identify units or location. Ask why a smooth damage band still needs spatial resolution and numerical convergence. Preview notebook 01. Discussion prompt: Which axes must agree before two tensors can interact?
+Retrieval: trace one element from connectivity through quadrature to global accumulation. Identify units and spatial location alongside tensor shapes. Ask why a smooth damage band still needs spatial resolution and numerical convergence. Preview notebook 01. Discussion prompt: Which axes must agree before two tensors can interact?
 
 ## 17. Build, run and differentiate
 
@@ -116,9 +116,9 @@ Run the source/version check. The helper gives the vendored manifest precedence 
 
 Timing: B 10--19 / 9 minutes
 
-Display the actual notebook mesh and node counts. It is a 4 by 2 rectangle, nx=128, ny=64, 8385 nodes and 16384 T3 elements. The precrack is damage Dirichlet data to x=0.8, not a cut-out geometric notch. The sketch illustrates a coarser T3 mesh with the same symmetric-opening convention as symmetric_tension_bcs. Geometry generation/import is an extension and must not be claimed as executed if not run.
+Display the actual notebook mesh and node counts. It is a 4 by 2 rectangle, nx=128, ny=64, 8385 nodes and 16384 T3 elements. Damage Dirichlet data prescribe the precrack to x=0.8. The sketch illustrates a coarser T3 mesh with the same symmetric-opening convention as symmetric_tension_bcs. The displayed mesh comes from the structured rectangle generator.
 
-## 20. A named boundary is not yet a boundary condition
+## 20. Boundary sets and prescribed values
 
 Timing: B 19--25 / 6 minutes
 
@@ -128,19 +128,19 @@ Ask learners to print the count and extent of each boundary set. Check support a
 
 Timing: B 25--33 / 8 minutes
 
-Read the configuration instead of copying slide values. The representative split energy in Session A is not the exact isotropic choice in this quick example. Point out ell=0.15, eta=1e-7 and stagger tolerance=1e-5. Solver tolerances and failure flags are part of provenance, not proof of discretisation convergence. Discussion prompt: Which of these choices changes physics? Which changes accuracy?
+Read the effective configuration used for the calculation. This quick example uses the isotropic energy form. Point out ell=0.15, eta=1e-7 and stagger tolerance=1e-5. Record solver tolerances and failure flags, then assess discretisation convergence through refinement. Discussion prompt: Which of these choices changes physics? Which changes accuracy?
 
 ## 22. Distinguish the seeded crack from new damage
 
 Timing: B 33--45 / 12 minutes
 
-Run the selected notebook or use saved output. These fields were replotted from the frozen NPZ result. First distinguish the locked seed from diffuse regularisation after the first solve, then compare first and final increments. The change beyond the seeded region is not merely initialisation, but the example does not demonstrate a long propagating or branched crack. Use the incremental field in the notebook for a more sensitive view. Compute target 60--120 seconds is a teaching target; receipts describe actual local timings. Discussion prompt: What changed after the first increment?
+Run the selected notebook or use saved output. These fields were replotted from the frozen NPZ result. First distinguish the locked seed from diffuse regularisation after the first solve, then compare first and final increments. The change beyond the seeded region shows the loading-induced evolution of the diffuse damage field. Use the incremental field in the notebook for a more sensitive view. Compute target 60--120 seconds is a teaching target; receipts describe actual local timings. Discussion prompt: What changed after the first increment?
 
 ## 23. Read response and numerical checks together
 
 Timing: B 45--55 / 10 minutes
 
-Read the reaction and recorded outer residual alongside the whole damage field. Inspect bounds, irreversibility and configured failure flags. Discuss why reaction, energy, mesh/load-step sensitivity and a relevant reference answer different questions. The record has no measured energy history; do not invent one from residuals. Discussion prompt: Does a small residual establish mesh convergence?
+Read the reaction and recorded outer residual alongside the whole damage field. Inspect bounds, irreversibility and configured failure flags. Discuss why reaction, energy, mesh/load-step sensitivity and a relevant reference answer different questions. The retained record supplies reaction, damage and convergence residuals. Discussion prompt: Does a small residual establish mesh convergence?
 
 ## 24. Change one input, then explain the difference
 
@@ -158,13 +158,13 @@ Trace connectivity, local basis gradients, material state, quadrature weights an
 
 Timing: B 78--85 / 7 minutes
 
-Trace two updates left to right and adjoints right to left. Define fixed C and the scalar final loss. Sum B0 transpose lambda1 and B1 transpose lambda2 because the parameter is shared; retain direct and initial-state terms when present. The gradient is not the optimizer update. The book chapter expands this to three numerical steps with hand/AD/FD checks. p and J here correspond to theta and loss notation elsewhere. Original diagram; visual inspiration: TUM ADL4P Differentiable Physics II, PDF page 5. PyTorch and JAX can support differentiable FEM; framework choice alone is not a gradient or performance guarantee. Discussion prompt: What could break or change this path?
+Trace two updates left to right and adjoints right to left. Define fixed C and the scalar final loss. Sum B0 transpose lambda1 and B1 transpose lambda2 because the parameter is shared; retain direct and initial-state terms when present. The optimizer uses the gradient to select an update. The book chapter expands this to three numerical steps with hand/AD/FD checks. p and J here correspond to theta and loss notation elsewhere. Original diagram; visual inspiration: TUM ADL4P Differentiable Physics II, PDF page 5. PyTorch and JAX support differentiable FEM through their automatic-differentiation systems. Check gradients and performance for the implemented computation. Discussion prompt: What could break or change this path?
 
 ## 27. Check a local derivative three ways
 
 Timing: B 85--97 / 12 minutes
 
-Execute notebook 02 and compare analytic, AD and central FD. For a quadratic, central FD is exact in real arithmetic; small-step cancellation remains. A nonquadratic smooth extension can demonstrate truncation error. Do not claim the usual U-shaped error must appear for this exact quadratic. Discussion prompt: Try several $\epsilon$ values. Report precision and error.
+Execute notebook 02 and compare analytic, AD and central FD. For a quadratic, central FD is exact in real arithmetic; small-step cancellation remains. A nonquadratic smooth extension can demonstrate truncation error. For this exact quadratic, central differences isolate roundoff effects. Discussion prompt: Try several $\epsilon$ values. Report precision and error.
 
 ## 28. Choose an informative inverse observation
 
@@ -176,25 +176,25 @@ Run the bar exercise, check du_tip/dE against the analytic expression -FL/(AE sq
 
 Timing: B 105--110 / 5 minutes
 
-Inspect actual observations, recovered response, held-out point and optimisation history. Ask for another initial guess where time permits. A locally valid gradient does not establish uniqueness or global recovery. The plotted training loss and validation absolute error have different meanings/scales. Discussion prompt: Check the parameter, the fit and an unused load case.
+Inspect actual observations, recovered response, held-out point and optimisation history. Ask for another initial guess where time permits. Inverse uniqueness and recovery depend on observation sensitivity, conditioning and initialisation. The plotted training loss and validation absolute error have different meanings/scales. Discussion prompt: Check the parameter, the fit and an unused load case.
 
 ## 30. Keep an experiment someone else can reproduce
 
 Timing: B 110--120 / 10 minutes
 
-Use the final lab block to finish the inverse exercise and hand-in. Record exact inputs, output figures and derivative check. Distinguish the real PhAST forward activity from the elastic-bar inverse toy. Do not report a fresh Colab pass without executing it. Discussion prompt: What did your experiment establish --- and what did it not?
+Use the final lab block to finish the inverse exercise and hand-in. Record exact inputs, output figures and derivative check. Distinguish the real PhAST forward activity from the elastic-bar inverse toy. Record the execution platform and measured runtime. Discussion prompt: Which conclusion follows from your experiment, and under which assumptions?
 
 ## 31. Train, save and assess a model
 
 Timing: Session C / 00--04
 
-Four-minute orientation to notebooks 04 and 05. These use an original Helmholtz-like finite-difference field problem, not PhAST fracture data or an existing public learned-damage checkpoint. One complete small model is the core learning exercise.
+Four-minute orientation to notebooks 04 and 05. These use synthetic fields from an original Helmholtz-like finite-difference problem. One complete small model is the core learning exercise.
 
 ## 32. The data card defines what learning means
 
 Timing: C 04--10 / 6 minutes
 
-Read the dataset card before architecture. Explain interpolation and extrapolation and why samples within a case are correlated. The toy supplies a real discrete residual for later assessment, but it is not an AT2 fracture equation. Fit normalisation using training data only. Discussion prompt: Why not split adjacent frames or individual nodes at random?
+Read the dataset card before architecture. Explain interpolation and extrapolation and why samples within a case are correlated. The teaching equation supplies its own discrete residual for assessment. Fit normalisation using training data only. Discussion prompt: How would correlations between adjacent frames affect a random split?
 
 ## 33. An MLP maps named features to a named target
 
@@ -212,7 +212,7 @@ Run short training, then read actual training/validation logs and the held-out i
 
 Timing: C 30--45 / 15 minutes
 
-Execute the actual checkpoint routine. Reconstruct a fresh instance, load weights and metadata, set evaluation mode and compare the same held-out input numerically. Record feature order, normalisation, mesh signature, seed and source. Do not load an unknown arbitrary checkpoint as trusted code. Discussion prompt: Same input. Fresh model. Same prediction.
+Execute the actual checkpoint routine. Reconstruct a fresh instance, load weights and metadata, set evaluation mode and compare the same held-out input numerically. Record feature order, normalisation, mesh signature, seed and source. Load checkpoints from a trusted source using the documented format. Discussion prompt: Same input. Fresh model. Same prediction.
 
 ## 36. A model swap requires compatible inputs
 
@@ -224,46 +224,46 @@ Compare the MLP with the compatible RBF and their held-out fields. Check feature
 
 Timing: C 70--78 / 8 minutes
 
-Read the adapter contract: feature order, mesh signature, bounds, output location, precision and scope. The actual public learned-damage hook also uses detached/no-gradient inference; do not confuse access to PyTorch with a fully connected training graph. The teaching adapter demonstrates assessment logic on its own equation. Discussion prompt: What exactly does the adapter promise?
+Read the adapter contract: feature order, mesh signature, bounds, output location, precision and scope. The public learned-damage hook uses detached inference. Training through a numerical response requires a connected computational graph. The teaching adapter demonstrates assessment logic on its own equation. Discussion prompt: What exactly does the adapter promise?
 
-## 38. Bounds are necessary but not equilibrium
+## 38. Admissibility and equilibrium
 
 Timing: C 78--85 / 7 minutes
 
-Explain the nested min/max operation and consistent boundary treatment. This algebraic projection can enforce simple bounds and irreversibility but not balance. A fracture active-set problem needs a suitable projected/KKT check; the toy has its own explicitly defined residual. Discussion prompt: Can a bounded field still be mechanically wrong?
+Explain the nested min/max operation and consistent boundary treatment. The algebraic projection enforces simple bounds and irreversibility. A separate residual assessment checks equilibrium. A fracture active-set problem needs a suitable projected/KKT check. The teaching equation has its own defined residual. Discussion prompt: Can a bounded field still be mechanically wrong?
 
 ## 39. Acceptance needs an explicit correction route
 
 Timing: C 85--90 / 5 minutes
 
-Run notebook 05 and read its useful/rejected proposal comparison and correction record. The deliberately corrupted input should trigger reference fallback. Include proposal, audit and correction in any timing comparison; do not compare inference time alone with a complete classical solve. Discussion prompt: Inspect one useful proposal and one rejected proposal.
+Run notebook 05 and read its useful/rejected proposal comparison and correction record. The deliberately corrupted input should trigger reference fallback. Include proposal, audit and correction in any timing comparison; compare complete computational routes at matched accuracy. Discussion prompt: Inspect one useful proposal and one rejected proposal.
 
 ## 40. DAgger learns from states the model visits
 
 Timing: C 90--105 / 15 minutes
 
-Explain Dataset Aggregation: roll out the learner, obtain expert/reference labels on learner-induced states, append training data, retrain and evaluate on unchanged held-out cases. Inspect the saved correction/replay record. The current notebook does not execute a full DAgger loop. Optional activity: design one controlled offline round and its cost/evaluation gates. Discussion prompt: How do visited states differ from teacher-provided states?
+Explain Dataset Aggregation: roll out the learner, obtain expert/reference labels on learner-induced states, append training data, retrain and evaluate on unchanged held-out cases. Inspect the saved correction/replay record. The notebook supplies a correction and replay record for discussing data aggregation. Optional activity: design one controlled offline round and its cost/evaluation gates. Discussion prompt: How do visited states differ from teacher-provided states?
 
 ## 41. Architectures encode different assumptions
 
 Timing: C 105--110 / 5 minutes
 
-Compare input construction and inductive assumptions. Moving from the small toy to fracture needs material/history/boundary representation and an appropriate data split. Neither a model name nor one good field proves transfer to new topology or crack paths. Discussion prompt: Which new load, material, mesh or topology has actually been tested?
+Compare input construction and inductive assumptions. Moving from the small toy to fracture needs material/history/boundary representation and an appropriate data split. Assess transfer using held-out topologies, loading cases and crack paths. Discussion prompt: Which new load, material, mesh or topology has actually been tested?
 
 ## 42. Read a research example through the same evidence
 
 Timing: C 110--115 / 5 minutes
 
-Use a course-lead-supplied permitted paper example if available. This preparation does not include an unpublished large inverse/hybrid result. Compare like accuracy, hardware and precision; include data/reference generation, training, prediction, audit and correction when relevant. No speedup is claimed by the deck. Discussion prompt: What has this example demonstrated, specifically?
+Use a course-lead-supplied permitted paper example if available. Use the approved public examples in the companion material. Compare like accuracy, hardware and precision; include data/reference generation, training, prediction, audit and correction when relevant. Use matched timings to evaluate computational cost. Discussion prompt: What has this example demonstrated, specifically?
 
 ## 43. A useful contribution starts with reproducibility
 
 Timing: C 115--118 / 3 minutes
 
-Suggest a documentation correction, exercise extension or minimal reproducible issue. Include environment/source, configuration, expected/actual behaviour and relevant output. This course creates no public issue, message or publication automatically. Discussion prompt: What is the smallest example another person could run?
+Suggest a documentation correction, exercise extension or minimal reproducible issue. Include environment/source, configuration, expected/actual behaviour and relevant output. Students can submit a reproducible issue or contribution through the repository. Discussion prompt: What is the smallest example another person could run?
 
 ## 44. Keep the chain from assumptions to evidence visible
 
 Timing: C 118--120 / 2 minutes
 
-Close with retrieval, not a new topic. The PDF is the teaching copy and the TeX/Matplotlib files are the editable source. Point to the companion book and all five notebooks. CWI inspired physical example-to-equation-to-code, a small complete training loop and model-induced-state assessment, not copied visual assets. Discussion prompt: Name one physical assumption, one check and one limitation.
+Close with retrieval of the main ideas. The PDF is the teaching copy and the TeX/Matplotlib files are the editable source. Point to the companion book and all five notebooks. The teaching sequence draws inspiration from CWI's physical examples, small training loops and model-induced-state assessment. The course visuals are original. Discussion prompt: Name one physical assumption, one check and one limitation.

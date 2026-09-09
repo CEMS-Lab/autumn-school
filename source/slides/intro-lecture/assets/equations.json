@@ -1,0 +1,20 @@
+{
+  "damage_convention": "d=0:\\ \\mathrm{intact}\\qquad\\qquad d=1:\\ \\mathrm{fully\\ damaged}",
+  "state_zero": "\\mathrm{Initial\\ state}\\quad z_0",
+  "state_one": "\\mathrm{Updated\\ state}\\quad z_1",
+  "state_final": "\\mathrm{Final\\ state}\\quad z_N",
+  "diffusion_glossary": "q:\\ \\mathrm{scalar}\\qquad\\alpha:\\ \\mathrm{diffusivity}\\qquad\\Delta t,\\Delta x:\\ \\mathrm{fixed\\ step\\ sizes}",
+  "energy": "\\Pi(u,d)=\\int_\\Omega g(d)\\,\\psi_0(\\varepsilon(u))\\,\\mathrm{d}x + G_c\\,\\Gamma_\\ell(d)-W_{\\mathrm{ext}}(u)",
+  "crack_cost": "\\Gamma_\\ell(d)=\\frac{1}{2}\\int_\\Omega\\left(\\frac{d^2}{\\ell}+\\ell\\,|\\nabla d|^2\\right)\\mathrm{d}x",
+  "degradation": "g(d)=(1-\\eta)(1-d)^2+\\eta",
+  "local_gradient": "g'(d)=-2(1-\\eta)(1-d)",
+  "state_step": "z_{n+1}=S_n(z_n,p),\\qquad J=\\frac{1}{2}\\|Cz_N-y_\\star\\|^2",
+  "diffusion": "q_i^{n+1}=q_i^n+\\frac{\\alpha\\,\\Delta t}{\\Delta x^2}\\left(q_{i-1}^n-2q_i^n+q_{i+1}^n\\right)",
+  "adjoint": "\\lambda_N=C^{\\mathsf{T}}(Cz_N-y_\\star),\\qquad\\lambda_n=A_n^{\\mathsf{T}}\\lambda_{n+1}",
+  "jacobians": "A_n=\\frac{\\partial S_n}{\\partial z_n},\\qquad B_n=\\frac{\\partial S_n}{\\partial p}",
+  "gradient_sum": "\\frac{\\mathrm{d}J}{\\mathrm{d}p}=\\sum_{n=0}^{N-1}B_n^{\\mathsf{T}}\\lambda_{n+1}",
+  "finite_difference": "\\frac{\\mathrm{d}J}{\\mathrm{d}p}\\approx\\frac{J(p+h)-J(p-h)}{2h}",
+  "implicit": "R(z,p)=0,\\quad R_z^{\\mathsf{T}}\\lambda=\\nabla_z J,\\quad\\nabla_p J_{\\mathrm{total}}=\\nabla_p J-R_p^{\\mathsf{T}}\\lambda",
+  "hybrid": "z_{n+1}=S\\!\\left(z_n,\\,f_\\theta(\\xi_n)\\right)",
+  "loading": "u_y^{\\mathrm{top}}=+0.02\\,\\lambda,\\qquad u_y^{\\mathrm{bottom}}=-0.02\\,\\lambda"
+}

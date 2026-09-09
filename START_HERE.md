@@ -11,7 +11,7 @@ computational lessons beside their theory chapters.
 
 Read the question, predict the result, then inspect the code and its recorded
 output. Try the exercises before opening a hint or worked solution. Answers
-are included in the printable PDF and remain readable without JavaScript.
+appear beside the lessons and in the downloadable solution notebooks.
 
 Each computational lesson offers two downloads:
 
@@ -23,9 +23,9 @@ not a Python execution service. Read **SETUP.md** before executing notebooks.
 Keep the entire folder together: solver source, helpers, meshes and model files
 are part of the reproducible example.
 
-## Other formats
+## Learning resources
 
-- **ebooks/phast-ukacm-course.pdf** — the integrated book, code and answers.
+- **book/index.html** — the HTML chapters, code, recorded outputs and answers.
 - **explorations.html** — interactive visual explanations of equations and algorithms.
 - **notebooks/study/** — practice downloads.
 - **notebooks/solutions/** — downloads including worked answers.

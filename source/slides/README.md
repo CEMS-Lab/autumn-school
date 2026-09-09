@@ -22,7 +22,7 @@ Numerical outputs and the three 120-minute allocations are unchanged.
 | 17–30 | B: PhAST forward, local derivative and inverse toy | 120 minutes, including 10-minute break |
 | 31–44 | C: training, reload, adapters and reference correction | 120 minutes, including 10-minute break |
 
-These are relative teaching allocations, not the published event timetable.
+These relative teaching allocations describe the deck's three-session route.
 Instruction/activity totals 330 minutes; breaks total 30 minutes.
 Detailed durations, exercise prompts and scope are in
 [beamer_speaker_notes.md](beamer_speaker_notes.md), generated from the same notes
@@ -49,9 +49,8 @@ latexmk -pdf -interaction=nonstopmode -halt-on-error phast_autumn_school_2026.te
 ```
 
 The checked build used Matplotlib 3.10.8 and TeX Live 2026. The figure generator
-does not install dependencies, access the internet, execute notebooks, train a
-model or solve fracture. It replots analytic curves and frozen course-owned data.
-The TeX source contains no absolute file paths.
+replots analytic curves and frozen course-owned data. The TeX source uses
+relative file paths.
 
 All figure dependencies are inside `latex_figures/`; the source directory is
 self-contained for building the PDF. In particular:
@@ -65,7 +64,7 @@ self-contained for building the PDF. In particular:
 `build_beamer_figures.py` produces PDF figures and PNG previews. Analytic line plots
 and schematics are editable through that source. Heatmaps/field shading are
 scientific raster layers inside their PDF figure containers; axes and labels
-remain vector text. No plot is a screenshot copied from a third-party talk.
+remain vector text. The plots use original course data and drawing code.
 
 Optional QA (requires `pypdf`, Pillow and Poppler's `pdftoppm`):
 
@@ -76,32 +75,33 @@ python render_beamer.py
 This renders all 44 pages to `latex_qa/slide-*.png`, creates eight contact sheets,
 extracts the speaker notes, and checks page/frame/notes counts, placeholders,
 missing-glyph warnings and overfull boxes. Inspect the rendered pages as well as
-the structural report. A structurally valid PDF alone is not visual QA.
+the structural report to check mathematical readability and layout.
 
 ## Scientific scope
 
 - Convention: `d=0` intact, `d=1` broken; irreversible growth where required.
-- The foundational energy is representative; the actual quick PhAST run selects
-  isotropic degradation, not the tension/compression split used to explain the energy.
+- The foundational energy illustrates a tension/compression split. The quick
+  PhAST run selects isotropic degradation.
 - The normalisation is `c0=4 integral_0^1 sqrt(w(s)) ds`: AT1 `w=d`, `c0=8/3`;
   AT2 `w=d²`, `c0=2`. Degradation is a separate choice.
 - The exact quadratic law is `(1-eta)(1-d)²+eta`. Illustrative plots use
   `eta=1e-6`; actual notebooks 01/02 use `eta=1e-7`.
 - The cubic illustration is `(1-eta)(1-3d²+2d³)+eta`; the rational illustration is
-  `(1-eta)(1-d)²/[(1-d)²+2d(1+d)]+eta`. These are not calibrated PF-CZM comparisons.
-- The profile plots are isolated 1D crack-density minimisers, not fracture solves.
+  `(1-eta)(1-d)²/[(1-d)²+2d(1+d)]+eta`. The curves illustrate constitutive choices.
+  A PF-CZM model requires consistent crack-density and degradation laws, strength
+  calibration and a suitable solution algorithm.
+- The profile plots are isolated 1D crack-density minimisers.
 - Actual notebook 01 fields show diffuse quasi-static damage evolution beyond a
-  prescribed precrack. They do not establish sharp crack-front propagation,
-  branching, physical-time dynamics or a matrix-free speedup.
-- The bar inverse and Helmholtz-like learning/adapter exercises are separate toys,
-  not full PhAST fracture inverse or trained learned-damage results.
+  prescribed precrack, using assembled sparse-direct mechanics.
+- The bar inverse isolates modulus recovery. The Helmholtz-like learning and
+  adapter exercises isolate field approximation and proposal assessment.
 - The field toy uses a positive discrete negative-Laplacian on interior nodes and
-  Dirichlet boundary rows; its residual is not a PhAST AT2 residual.
-- DAgger is explained; notebook 05 logs a replay record. A full aggregated
-  retraining loop is optional and is not claimed as executed.
-- No unmeasured speed claim, fresh-Colab certification or unpublished research
-  result is introduced by the slides. Geometry/Gmsh import and a larger paper
-  exhibit remain explicitly labelled extensions/discussion.
+  Dirichlet boundary rows. Its residual follows the displayed scalar field equation.
+- The DAgger diagram explains the data-aggregation cycle. Notebook 05 logs a
+  replay record for the scalar field example.
+- Compare complete computational costs alongside field quality. Measure runtime
+  in the target environment before class. Geometry/Gmsh import and larger paper
+  examples provide extension and discussion topics.
 
 ## Sources and reuse
 
@@ -127,10 +127,9 @@ the structural report. A structurally valid PDF alone is not visual QA.
 - [CWI SciML Autumn School material](https://github.com/ScientificComputingCWI/SemesterProgramme-SciML)
   informed the physical-example → equation → operation → exercise sequence and
   reference-corrected learning discussion. Representative Sanderse/Agdestein,
-  Rackauckas and Walther pages were visually inspected. No CWI slide or figure
-  was copied, and no redistribution licence for those archived slides was assumed.
+  Rackauckas and Walther pages were visually inspected. The course uses original
+  diagrams and retains these sources as pedagogical references.
 
 All new schematics and the plot code are original course preparation. Reuse of
-the complete course package follows its own licence and publication decision;
-this build does not grant a new licence over third-party references or publish
-private research assets.
+the complete course package follows its own licence and publication decision.
+Third-party references retain their respective licences and reuse conditions.

@@ -1,0 +1,144 @@
+{
+  "date": "2026-09-09",
+  "status": "passed",
+  "artifact": "ebooks/phast-ukacm-course.pdf",
+  "pdf_sha256": "f764c43e6153a98d6fbdf08bfce490fb55a7eada5b589968d0201bc295cfc9e6",
+  "pages": 71,
+  "metadata": {
+    "title": "PhAST: Phase-field fracture with differentiable FEM",
+    "author": "Allamaprabhu Ani",
+    "creator": "Allamaprabhu Ani",
+    "visible_presenter": "Sathiskumar A. Ponnusami",
+    "visible_presenter_affiliation": "Queen Mary University of London \u00b7 CEMS-Lab"
+  },
+  "backup": {
+    "path": ".build/book-language-20260909/backup/phast-ukacm-course.before-language-polish.pdf",
+    "sha256": "a26b113176436fcac87109250e6002e384e7bb63c497d1613433c2f5f0964b37"
+  },
+  "build": {
+    "python": "Reference local Python interpreter (path omitted for portable publication)",
+    "sphinx_html": "passed; book rebuilt from source with -E -a -W --keep-going",
+    "sphinx_latex": "passed; source/book to .build/book-language-20260909",
+    "latexmk_xelatex": "passed; 71 pages",
+    "warnings": [
+      "Package cmap Warning: pdftex not detected - exiting.",
+      "Underfull \\vbox (badness 10000) detected at line 550",
+      "Overfull \\vbox (0.90906pt too high) detected at line 1387",
+      "Overfull \\vbox (0.56421pt too high) detected at line 2541",
+      "Overfull \\vbox (1.58804pt too high) detected at line 2748",
+      "Overfull \\vbox (1.24727pt too high) detected at line 3651",
+      "Overfull \\vbox (0.90906pt too high) detected at line 3730",
+      "Overfull \\vbox (0.90906pt too high) detected at line 4744"
+    ],
+    "xdvipdfmx_warnings": [
+      "FontAwesome5Free-Solid-900.otf ToUnicode CMap creation/loading failed"
+    ],
+    "warning_visual_assessment": "Information icons, text, equations, code and figures rendered correctly; no clipping observed."
+  },
+  "visual_qa": {
+    "status": "passed",
+    "render": "Poppler pdftoppm; each page scaled to 1300 pixels on longest edge",
+    "initial_candidate_all_pages_inspected": {
+      "practical_sequence_audit": [
+        1,
+        35
+      ],
+      "ceyron_notebook_reference": [
+        36,
+        71
+      ]
+    },
+    "initial_candidate_pdf_sha256": "542d38f4b18df317c1dc0d1eafebc16ed1c1236e7a1a5b037a2dd099896b3337",
+    "final_changed_pages_reinspected": [
+      1,
+      19,
+      22,
+      23,
+      31,
+      32,
+      42,
+      64,
+      65
+    ],
+    "final_pixel_identical_to_inspected_pages": 62,
+    "blank_pages": 0,
+    "observed_math_clipping_or_overlap": false,
+    "worked_solution_heading_orphan": "resolved on pages 22\u201323 with source-configured Needspace",
+    "short_chapter_end_pages": "Retained as requested; pages 14 and 25 contain short closing sections."
+  },
+  "edits": [
+    "Residual-parameter sentence uses inline d and eta mathematics in canonical notebook and generator; numerical code and outputs preserved.",
+    "Sphinx LaTeX preamble reserves six baselines before admonitions to keep headings with opening lines.",
+    "Figure 6.1 caption positively states dependence of inverse uniqueness on observations, loading and parameterisation; regenerated from source.",
+    "Visible book title-page and HTML footer add Queen Mary University of London to the presenter affiliation, retaining CEMS-Lab and creator metadata."
+  ],
+  "all_six_lesson_code_and_output_parity": true,
+  "legacy_notebook_html_preview": {
+    "path": "notebooks/html/02_degradation_autograd.html",
+    "sha256": "4f35fb252fd5dcb60af376ed119356df0f8204a02d90b6effaabc098a031b9c4",
+    "export": "nbconvert --to html; no execution",
+    "warning": "One retained output image has no alternative text in canonical notebook metadata.",
+    "math_source_check": "d=0, d=1 and eta=10^-7 remain in inline MathJax delimiters, not code tags."
+  },
+  "numerical_execution": "No notebook or solver computations executed for this prose/math-layout rebuild.",
+  "publication": "Local artifacts only; nothing published.",
+  "source_file_sha256": {
+    "source/book/00_welcome_and_routes.md": "7b0dd2b350d5071c7f7022e94d041b021dd9606431d9ef84e0538a8294a4c3e4",
+    "source/book/01_crack_representations.md": "bb42c13569b35c3919a39e09c50e690e4281e86cf6e10fdd61bd9f6618658cd0",
+    "source/book/02_phase_field_energy.md": "17e362b9985ef5e67dc30bc2168f10a4fab7be2ee63df3ed341ddc6497664cbe",
+    "source/book/03_staggered_solution.md": "e11dd5847518304180c85681cf86366b685d92a956a441ff8befad4e6c9b02fa",
+    "source/book/04_fem_to_tensors.md": "d0d758c895c3bca2b7796201feb0b2e49b2ca1404237dd2c38ee96c3011bfc0f",
+    "source/book/05_differentiation_and_inverse.md": "d71417729dfc669f9fb540c3f56e7a2b1b18665e9c2df016a3984cc5c7791e64",
+    "source/book/05a_backpropagation_step_by_step.md": "7aad8cd9c1bba01d88452eb5c53dad79d3933bd662a5a353bbfd8f82ecd2f356",
+    "source/book/06_learning_adapter.md": "0fb6df3c517fafdce3423f1e2f16edb60c401a9e084b25aa9fc8bfb67139626a",
+    "source/book/07_practice_references.md": "d918d1586a47c115aaf6c31bfbc6a11a292dec965f91ea1aeccea6f1f3c72c10",
+    "source/book/_static/learning_book.css": "df83f2ac0a7eed932912a9ed1cae3f52cac86e2ac43a011a743d933525414c8a",
+    "source/book/_static/learning_book.js": "e559c8ea2f2ed99a1583a1aea6b96b3f78fec397782c82ef6fc00039e0a1e9f4",
+    "source/book/_static/mobile_math.css": "5f9f02ed1186d3c6e1c93e8885a8232e1499f78245a5367e6779f4475f331856",
+    "source/book/_templates/layout.html": "4ac856183febc118a0c950bcef086fe3d0117c7b601eb4a58d2f9f14f5f68592",
+    "source/book/_templates/phast-credit.html": "5d9f0b7035991b2758b30b28d8305797d74712c38966f2b21efce7845f66be8e",
+    "source/book/_templates/phast-discoveries.html": "6aea73a1050b8bf4613342dff9ceb90baca07f690d8b7c4220023843890afc31",
+    "source/book/conf.py": "172a357e0b58760ce22c63d2be5c6a0fff426fd7093fc130575335df87878e74",
+    "source/book/figures/00_course_map.pdf": "f711f1568caebfdb755dc71be0f0e8301e8dc5205c65bb4461e08b9f98589092",
+    "source/book/figures/00_course_map.png": "ee224509c8118f49f52c7dd26c6b7a1ab25377c6df626ecc4dc75287dca8c0ab",
+    "source/book/figures/00_course_map.svg": "759815936aff586fcf5c503fcd838d842f5a5e1cd15be2267772afc8f0f2bd87",
+    "source/book/figures/01_methods_map.pdf": "954b09124b7f06c1147744ff1fabaabd12d2328e618dc39b5e7b12178e7627d1",
+    "source/book/figures/01_methods_map.png": "6a05d250c160ecb0c54ef9cdabf1bda8ef15363f812bcad6a2a4c5e324259044",
+    "source/book/figures/01_methods_map.svg": "68322e2577eb19becce8d59f8f754b1e8cedc41f376ce88bff544584ad10e417",
+    "source/book/figures/02_energy_profiles.png": "86f8632bfac83013c0d4eadf08e09b33193aebaddd8614694906c443fc0cafca",
+    "source/book/figures/03_staggered_loop.pdf": "6c2a2736c8d42099dee72deae30a7fbc15137901c6a46173db70955f7a2df3c4",
+    "source/book/figures/03_staggered_loop.png": "513024a9735d083e659f88e0f0ed6d0273b0b7374b60a864ae8628f085c261bf",
+    "source/book/figures/03_staggered_loop.svg": "f0d9c73f1a8bd4cebbc476613ca2e03893f77861141fccedf17847e120560ed6",
+    "source/book/figures/04_fem_pipeline.pdf": "2a66cda15d7f52e5393d3190b59bf7a8321f420f3136a7118cbd5f98e038ec05",
+    "source/book/figures/04_fem_pipeline.png": "67823b9a0aa5605e31cd41ccffbe31c2af615101e81860427e95a22bb14f68ad",
+    "source/book/figures/04_fem_pipeline.svg": "10b6d437613ba265a49bee79482124b74a0cc52a584a4fcb0e28a5ac8a90f24c",
+    "source/book/figures/05_autograd_inverse.pdf": "bf8be98fe5de20b04b99ff08f7002b5bf129af4468feb0344abe8e66a8d7db65",
+    "source/book/figures/05_autograd_inverse.png": "837e974489060d9a668da6805bc8bebaf9eba381db39d3df987156fd1089b76d",
+    "source/book/figures/05_autograd_inverse.svg": "76ed698260caeeee99f8de2025eb0b2af1aa1e1fd104a2a4b98d4bde82a508f7",
+    "source/book/figures/05a_backpropagation.pdf": "b75d813a2bfe0fdb896be19603db1003332475f5b50a0766d7a75b603bf1e766",
+    "source/book/figures/05a_backpropagation.png": "6025d17ec4143cb3e4b634b9b4aa59ac7d9b5630667c563cc213e3c90ff91604",
+    "source/book/figures/05a_backpropagation.svg": "a6c8b72c27b505e6cffde65accc770d9345afd78d3a6575e14893c0e8973a13e",
+    "source/book/figures/06_learning_cycle.pdf": "3cf2923bf5d5218aa1209f021b597d710b4fa8b58ad21ea47c650907cbef5c49",
+    "source/book/figures/06_learning_cycle.png": "49a9822734f26e3b0f7ac4c3a7b595c72f437c37ced8d2e7fe53189012d33743",
+    "source/book/figures/06_learning_cycle.svg": "6b881f15dd1cd710bf9f4d15aa88a877057077d0ff08be22d5179ae551845626",
+    "source/book/index.md": "79fdd4431ac4875cdef094fae2b9500377d45b83726d47386d031220caeea54e",
+    "source/book/labs/00_why_average_predictions_can_fail.ipynb": "385c7bee5e67135058f6ca40927e120732c8b5f6255bc7af3338925dc5d77af1",
+    "source/book/labs/01_phast_tiny_evolving_fracture.ipynb": "40397320bbc230fae4b3cce28fd2b858a479a490b110535da396811ed4437a39",
+    "source/book/labs/02_degradation_autograd.ipynb": "1b67674e262172adac95c039c01ed41b269ae7f4564ec7cbac448bd806a90a88",
+    "source/book/labs/03_tiny_derivative_inverse_toy.ipynb": "ddee3f562a1350ad5079c9be3a5a2676d2118b0ac4be15100045197650137f91",
+    "source/book/labs/04_train_save_reload_adapter.ipynb": "59f1f54f44ee2e6baf3a58ee3188da943a52851d5605d00817d6b27995b5ef36",
+    "source/book/labs/05_hybrid_reference_correction.ipynb": "0585d0c059b6d613ba15b71c18c1a64de43ca45daffe030022a350093673bb59",
+    "source/book/scripts/build_backprop_example.py": "7cfa26e90afaed222e52d478e223d9281b8410c9e1b8b06b3c510df44c16232b",
+    "source/book/scripts/build_figures.py": "39c7a1293521ee0eb134fab92acbe84832fe0c080411f35d9008a83b5c945273",
+    "source/book/scripts/build_lab_pages.py": "d72842c16e6353f1d650d0f7044615d7308951adcc9a6bd87cca7b874984fb11",
+    "source/book/scripts/embed_svg_fonts.py": "4e4fb2e570dea61a407ebd9c9ff296e20578b11b384da98e17cd3e21d771fe2f",
+    "source/book/solutions/00.json": "281b1d9686d4f8661d54c884c3646dcdf6992dd3626f24da179a819af77457c9",
+    "source/book/solutions/01.json": "5e91f3ba7cf476a7aacf88d1dcc5850fb46b0eebb956da8d961d359b9cac2ade",
+    "source/book/solutions/02.json": "d5da311f2507c1105f11b82682446239d10516a67ad7512a3bd99bec9d286ea1",
+    "source/book/solutions/03.json": "a0bfe045eaeb21c1ab3744b3258cbdb974533c68021b13ea5f1b8c89074069cf",
+    "source/book/solutions/04.json": "48a75b46500763ef164ac30a6ac7c7547d620213b80111747b89a473543e583b",
+    "source/book/solutions/05.json": "8c0f68c17d04184b52977bb20f3e08634edea363e3257847a091cf3fa33827af",
+    "notebooks/02_degradation_autograd.ipynb": "892ecd4eb0f3290d81a844550f8d7e50be27a1aab0e29419ff6d71a9bcd53f7d",
+    "source/notebooks/build_day2_notebooks.py": "08cf2ca56a6c2667ec97ed0b928676423c4c08cea36fb47375caedc6484e6c0a"
+  }
+}

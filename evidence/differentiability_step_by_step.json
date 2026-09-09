@@ -1,0 +1,175 @@
+{
+  "receipt_schema": "ukacm-standalone-differentiability-execution-v1",
+  "status": "passed",
+  "execution_kind": "fresh local kernel; dependencies already installed",
+  "whole_notebook_seconds_after_setup": 6.934451707988046,
+  "process_timeout_seconds": 285,
+  "whole_process_seconds_including_dependency_bootstrap": 6.935439082997618,
+  "within_300_seconds": true,
+  "environment": {
+    "python": "3.10.18",
+    "machine": "arm64",
+    "platform": "macOS-27.0-arm64-arm-64bit",
+    "logical_cpus": 14
+  },
+  "fresh_install_tested": false,
+  "fresh_colab_tested": false,
+  "inspiration": {
+    "url": "https://github.com/Ceyron/hybridization-in-jax/blob/61ee2629f5800d92fba64492a0f81efe3a6a7c39/practical_session/first_data_assimilation.ipynb",
+    "commit": "61ee2629f5800d92fba64492a0f81efe3a6a7c39",
+    "use": "Pedagogical sequence only; original PyTorch diffusion code and figures"
+  },
+  "source": "source/notebook_lessons/differentiability_step_by_step.py",
+  "source_sha256": "a14c3209e79d1c400f0226a9af01f86aae67e672bdfe2f17095b4aa56a57309d",
+  "notebook": "notebooks/drafts/06_differentiability_step_by_step.ipynb",
+  "executed_notebook": "output/differentiability-step-by-step/06_differentiability_step_by_step.executed.ipynb",
+  "command": "python source/notebook_lessons/differentiability_step_by_step.py --execute",
+  "dependency_bootstrap_seconds": 0.0009873750095721334,
+  "result": {
+    "schema": "ukacm-diffusion-differentiability-v1",
+    "scope": "Original fixed-grid explicit 1D diffusion model with synthetic full-field observations",
+    "environment": {
+      "python": "3.10.18",
+      "python_executable_name": "python",
+      "torch": "2.8.0",
+      "numpy": "2.2.6",
+      "matplotlib": "3.10.8",
+      "platform": "macOS-27.0-arm64-arm-64bit",
+      "device": "cpu",
+      "dtype": "float64",
+      "threads": 1
+    },
+    "configuration": {
+      "intervals": 40,
+      "interior_nodes": 39,
+      "dx": 0.025,
+      "dt": 0.0010000000000000002,
+      "steps": 80,
+      "final_time": 0.08000000000000002,
+      "alpha_bounds": [
+        0.02,
+        0.25
+      ],
+      "alpha_probe": 0.07,
+      "alpha_true": 0.12,
+      "alpha_start": 0.21,
+      "optimisation_steps": 220,
+      "seed": 20260909,
+      "boundary_conditions": "q(0,t)=q(1,t)=0; interior degrees of freedom only",
+      "maximum_diffusion_ratio": 0.4,
+      "stability_bound": "0 <= alpha*dt/dx**2 <= 0.5",
+      "saved_forward_states_parameter": 0.07
+    },
+    "checks": {
+      "discrete_mode_max_error": 3.3306690738754696e-16,
+      "AD_gradient": -0.03938567022663596,
+      "manual_gradient": -0.039385670226635916,
+      "manual_AD_parameter_error": 4.163336342344337e-17,
+      "manual_AD_initial_state_error": 2.168404344971009e-19,
+      "terminal_seed_error": 2.168404344971009e-19,
+      "fd_spacings": [
+        0.02,
+        0.005,
+        0.001,
+        0.0001,
+        1e-05,
+        1e-06,
+        1e-07,
+        1e-08
+      ],
+      "fd_relative_errors": [
+        0.024806380309321314,
+        0.0015441879638219745,
+        6.175164834030066e-05,
+        6.175099828544354e-07,
+        6.1738383772457835e-09,
+        2.4395738631154178e-11,
+        6.850637427534905e-10,
+        3.086249447444846e-09
+      ],
+      "alpha_recovered": 0.12000003329024733,
+      "parameter_relative_error": 2.7741872780466065e-07,
+      "field_relative_error": 3.805854422723281e-08,
+      "initial_loss": 0.0016589281083251427,
+      "final_loss": 3.114936182172608e-16,
+      "array_reload_passed": true,
+      "all_assertions_passed": true
+    },
+    "cell_sequence_seconds_after_imports": 3.241456333984388,
+    "scientific_sequence_seconds_after_bootstrap_including_imports": 4.445852500008186,
+    "dependency_bootstrap": {
+      "seconds": 0.0009873750095721334,
+      "installed_packages": [],
+      "used_preinstalled_packages": true
+    },
+    "timed_run_all": true,
+    "watchdog_enabled": true,
+    "optimisation_seconds": 0.9386695419962052,
+    "timing_note": "Bootstrap measured separately. In interactive use, sequence elapsed time includes human pauses; only timed Run-all enforces the scientific watchdog. External receipt includes kernel startup/imports and subtracts dependency bootstrap."
+  },
+  "notebook_sha256": "2a557410439ef1317b6a717f536c535c76b2c7282729d11241be6da37edd0761",
+  "html": "output/differentiability-step-by-step/index.html",
+  "html_sha256": "c66a37d65684efc4e645b9f2f62b6015fdd8ba6e3c662ea2b3f358af9261c86a",
+  "visual_qa": "pending rendered inspection",
+  "previous_version_visual_qa": {
+    "status": "passed",
+    "date": "2026-09-09",
+    "reported_by": "main agent",
+    "scope": "Current HTML opening and PDE section physically inspected at the specified desktop viewport; DOM checked for broken images and document overflow",
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "broken_images": 0,
+    "document_overflow": false,
+    "checked_sections": [
+      "Opening, authorship information and notebook/Colab links",
+      "PDE and inline mathematics"
+    ],
+    "checked_html_sha256": "496ed3a9bc9623c9666d339af1170df4dcaf49a6b52347a3a4e46dc66215bdb2",
+    "checked_source_sha256": "c75a71e150bee1e64b3ce82860cdac79de7ab8348b643b528dd29514fd5817a5",
+    "scientific_plot_inspection": "Five saved plots previously inspected separately; subsequent prose refresh preserved all code and numerical outputs"
+  },
+  "live_colab": {
+    "status": "blocked",
+    "date": "2026-09-09",
+    "observed_by": "main agent",
+    "reason": "Colab opened in course browser on 2026-09-09; Google sign-in required before runtime execution.",
+    "runtime_started": false,
+    "fresh_colab_timing_seconds": null
+  },
+  "editorial_rerun": {
+    "reason": "Regenerate the revised gradient-plot legend from the unchanged numerical calculation.",
+    "all_existing_math_expressions_preserved": true,
+    "computational_ast_preserved_modulo_two_display_strings_and_colab_status_keys": true,
+    "array_names_bitwise_equal": [
+      "x",
+      "initial_field",
+      "forward_states",
+      "target",
+      "initial_prediction",
+      "recovered_prediction",
+      "alpha_history",
+      "loss_history",
+      "fd_spacings",
+      "fd_values",
+      "fd_relative_errors",
+      "step_contributions"
+    ],
+    "all_check_values_exactly_equal": true,
+    "source_sha256": "a14c3209e79d1c400f0226a9af01f86aae67e672bdfe2f17095b4aa56a57309d",
+    "notebook_sha256": "2a557410439ef1317b6a717f536c535c76b2c7282729d11241be6da37edd0761",
+    "html_sha256": "c66a37d65684efc4e645b9f2f62b6015fdd8ba6e3c662ea2b3f358af9261c86a",
+    "execution_receipt": "evidence/differentiability_step_by_step.json",
+    "original_receipt_sha256": "e4489ff4b80c6dab1f583fb4ee733181675e7d493d6b446165b87859ab386c10",
+    "original_execution_archive": ".build/notebook-language-20260909.2mRx0Q/original/output/differentiability-step-by-step",
+    "editorial_receipt": "evidence/notebook_editorial_wording_20260909.json"
+  },
+  "plot_visual_qa": {
+    "date": "2026-09-09",
+    "status": "passed",
+    "inspected_changed_plot": "diffusion_results/04_gradient_check.png",
+    "other_four_plot_files_byte_identical_to_previously_inspected": true
+  },
+  "html_structure_check": "output/differentiability-step-by-step/html_structure_check.json"
+}

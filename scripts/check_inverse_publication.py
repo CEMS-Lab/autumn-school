@@ -1,4 +1,4 @@
-"""Validate the approved inverse payload and refresh the rolling-main manifest."""
+"""Validate retained inverse evidence within the combined September course edition."""
 import argparse
 import hashlib
 import json
@@ -60,18 +60,35 @@ notebook = json.loads((BASE/"notebooks/inverse_experiments.ipynb").read_text())
 cells = [c for c in notebook["cells"] if c["cell_type"]=="code"]
 assert len(cells)==16 and all(c.get("execution_count") is not None for c in cells)
 assert not any(o.get("output_type")=="error" for c in cells for o in c.get("outputs",[]))
-report = {"scope":"User-authorised optional inverse HTML extension; frozen PDF/slides unchanged",
-          "date":"2026-09-09","source_commit":"4c79cd6",
+editorial = json.loads((BASE/"notebooks/prose_refresh_20260909.json").read_text())
+for name, record in editorial["notebooks"].items():
+    path = BASE/"notebooks"/name
+    assert sha(path) == record["after_sha256"], name
+    content = json.loads(path.read_text())
+    for cell in content["cells"]:
+        if cell["cell_type"] == "markdown":
+            assert not re.search(r"(?m)^myst:|^\s*all_links_external:", "".join(cell["source"])), name
+    retained = [cell for cell in content["cells"] if cell["cell_type"] == "code"]
+    assert hashlib.sha256(json.dumps(retained, sort_keys=True).encode()).hexdigest() == record["retained_code_cells_sha256"], name
+assert sha(BASE/"code/build_notebook.py") == editorial["generator_sha256"]
+assert sha(panel_dir/"history_plate_arrays.npz") == panel["prior_render_receipt"]["outputs"]["history_plate_arrays.npz"]
+report = {"scope":"Combined September web course: theme, course and inverse prose, current slides, and retained inverse numerical evidence",
+          "date":"2026-09-09","retained_inverse_source_commit":"4c79cd6",
+          "publication_base_commit":subprocess.check_output(["git","rev-parse","HEAD"],cwd=ROOT,text=True).strip(),
           "text_files_scanned":texts,"archive_inputs_verified":len(inputs),
           "visual_artifact_hashes_verified":verified,
           "history_primitive_checks":len(history["checks"]),
-          "interactive_source_commit":"bafb35e",
+          "retained_interactive_source_commit":"bafb35e",
           "interactive_source_and_output_hashes_verified":panel_verified,
           "retained_plate_frames":panel["frames"],
           "algorithm_animation_seconds":40,
           "retained_notebook_cells":len(cells),
-          "new_numerical_execution":False,
-          "classroom_notebooks_changed":False,
+          "audit_runs_numerics":False,
+          "inverse_numerical_execution":False,
+          "inverse_code_and_outputs_preserved":True,
+          "classroom_notebook_prose_updated":True,
+          "slides_updated":True,
+          "printable_book_delivery":"archived",
           "full_fracture_issue_7_closed":False,
           "private_paths_or_credential_markers_found":False}
 (ROOT/"evidence/inverse_publication.json").write_text(json.dumps(report,indent=2)+"\n")
@@ -84,9 +101,9 @@ if args.refresh_manifest:
         assert not p.is_symlink() and p.resolve().is_relative_to(ROOT), name
         assert not any(x in {".git",".build","reviews","jupyter_execute","_attachments"} for x in Path(name).parts), name
     manifest = json.loads((ROOT/"MANIFEST.json").read_text())
-    manifest.update(version="main-20260909-guided-history",date="2026-09-09",
-                    change_scope="Guided interactive history lesson and algorithm animation; frozen PDF/slides and numerical notebooks unchanged",
-                    runtime_scope="Earlier local classroom receipts plus separate HPC inverse teaching receipts; no new execution or fresh Colab claim")
+    manifest.update(version="main-20260909-combined-course",date="2026-09-09",
+                    change_scope="Combined web course theme, academic prose, inverse extension, current slides and standalone differentiation lesson",
+                    runtime_scope="Per-artifact local classroom and diffusion receipts, plus retained HPC inverse receipts; setup and execution evidence remain separate")
     manifest["files"]={name:sha(ROOT/name) for name in names}
     (ROOT/"MANIFEST.json").write_text(json.dumps(manifest,indent=2)+"\n")
 print(json.dumps(report,indent=2))

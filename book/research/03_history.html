@@ -1,1127 +1,365 @@
 
+<!DOCTYPE html>
 
 
-<!doctype html>
-<html lang="en" class="no-js">
+<html lang="en" data-content_root="../" data-theme="dark">
+
   <head>
-    
-      <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width,initial-scale=1">
-      
-      
-      
-      
-        <link rel="prev" href="03_history_visual.html">
-      
-      
-        <link rel="next" href="04_recovery.html">
-      
-      
-      <link rel="icon" href="">
-    
-    
-      
-        <title>Differentiating fracture: memory, switches and useful limits - PhAST: Phase-field fracture with differentiable FEM</title>
-      
-    
-    
-      
-      
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
+    <title>Differentiating fracture: memory, switches and useful limits &#8212; PhAST: Phase-field fracture with differentiable FEM</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "dark";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "dark";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
 
-    
-    
-      
-    
-    
-      
-        
-        
-        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
-      
-    
-        <link rel="stylesheet" type="text/css" href="../_static/sphinx_immaterial_theme.ad7809648a4561548.min.css?v=f290928c" />
-        <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
-        <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-        <link rel="stylesheet" type="text/css" href="../_static/mobile_math.css?v=1c40619e" />
-        <link rel="stylesheet" type="text/css" href="../_static/learning_book.css?v=6dcc5951" />
-    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
-    
-      
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    
-    
-    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mobile_math.css?v=acf5579e" />
+    <link rel="stylesheet" type="text/css" href="../_static/learning_book.css?v=ce3b4251" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=c22d28c4"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="../_static/mathjax/tex-mml-chtml.js?v=cadf963e"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'research/03_history';</script>
+    <script src="../_static/learning_book.js?v=7a62d495"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Why a correct gradient can give slow or ambiguous recovery" href="04_recovery.html" />
+    <link rel="prev" title="Why a fracture solver needs a memory-aware derivative" href="03_history_visual.html" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+<meta name="author" content="Allamaprabhu Ani">
+<meta name="presenter" content="Sathiskumar A. Ponnusami">
+<meta name="presenter-affiliation" content="Queen Mary University of London · CEMS-Lab">
+<meta name="course" content="CEMS-Lab · UKACM Autumn School 2026">
+
   </head>
   
   
-    <body dir="ltr">
-  
-    
-    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
-    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
-    <label class="md-overlay" for="__drawer"></label>
-    <div data-md-component="skip">
-      
-        
-        <a href="#what-is-the-derivative-of-a-simulation" class="md-skip">
-          Skip to content
-        </a>
-      
-    </div>
-    <div data-md-component="announce">
-      
-    </div>
-    
-    
-      
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="dark">
 
   
-
-<header class="md-header md-header--shadow" data-md-component="header">
-  <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../index.html" title="PhAST: Phase-field fracture with differentiable FEM" class="md-header__button md-logo" aria-label="PhAST: Phase-field fracture with differentiable FEM" data-md-component="logo">
-      
   
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
-    </a>
-    <label class="md-header__button md-icon" for="__drawer">
-      
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
-    </label>
-    <div class="md-header__title" data-md-component="header-title">
-      <div class="md-header__ellipsis">
-        <div class="md-header__topic">
-          <span class="md-ellipsis">
-            PhAST: Phase-field fracture with differentiable FEM
-          </span>
-        </div>
-        <div class="md-header__topic" data-md-component="header-topic">
-          <span class="md-ellipsis">
-            
-              Differentiating fracture: memory, switches and useful limits
-            
-          </span>
-        </div>
-      </div>
-    </div>
-    
-    
-      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
-    
-    
-    
-      <label class="md-header__button md-icon" for="__search">
-        
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
-      </label>
-      <div class="md-search" data-md-component="search" role="dialog">
-  <label class="md-search__overlay" for="__search"></label>
-  <div class="md-search__inner" role="search">
-    <form class="md-search__form" name="search">
-      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
-      <label class="md-search__icon md-icon" for="__search">
-        
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
-        
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
-      </label>
-      <nav class="md-search__options" aria-label="Search">
-        
-        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
-          
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
-        </button>
-      </nav>
-      
-    </form>
-    <div class="md-search__output">
-      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
-        <div class="md-search-result" data-md-component="search-result">
-          <div class="md-search-result__meta">
-            Initializing search
-          </div>
-          <ol class="md-search-result__list" role="presentation"></ol>
-        </div>
-      </div>
-    </div>
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
   </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
 </div>
-    
-    
-  </nav>
+
   
-</header>
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
     
-    <div class="md-container" data-md-component="container">
-      
-      
-      
-      
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">PhAST: Phase-field fracture with differentiable FEM</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
         
-          
-        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../index.html">
+                    PhAST: a learn-by-doing introduction to phase-field fracture
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../00_welcome_and_routes.html">1. From cracks to computation: learn by doing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../labs/00_why_average_predictions_can_fail.html">1.2.1. Why average predictions can fail</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../01_crack_representations.html">2. Crack representations: sharp, cohesive, and diffuse</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../02_phase_field_energy.html">3. Fracture energy: AT1, AT2, degradation, and width</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../labs/02_degradation_autograd.html">3.3.1. Differentiate a degradation law</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_staggered_solution.html">4. From solid mechanics to staggered damage updates</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../04_fem_to_tensors.html">5. Geometry, FEM, tensors, and matrix-free operators</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../labs/01_phast_tiny_evolving_fracture.html">5.8.1. Run and interpret a small PhAST fracture calculation</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../05_differentiation_and_inverse.html">6. Differentiation and an illustrative inverse problem</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../05a_backpropagation_step_by_step.html">6.3.1. Backpropagation through a stepped update</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../labs/03_tiny_derivative_inverse_toy.html">6.6.1. Differentiate and recover the elastic modulus</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../06_learning_adapter.html">7. Train, save, reload, adapters, and checked proposals</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../labs/04_train_save_reload_adapter.html">7.5.1. Train, save, reload, and compare a field model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../labs/05_hybrid_reference_correction.html">7.8.1. Assess a proposal and use a reference correction</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../07_practice_references.html">8. Practice, solutions, glossary, references, and contributing</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Optional inverse experiments</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">From gradients to reliable inverse experiments</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="01_geometry.html">Representing particles and testing their geometry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_observations.html">From measurements to a loss</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_derivatives.html">Verify a derivative before interpreting an update</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_history_visual.html">Why a fracture solver needs a memory-aware derivative</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Differentiating fracture: memory, switches and useful limits</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04_recovery.html">Why a correct gradient can give slow or ambiguous recovery</a></li>
+<li class="toctree-l2"><a class="reference internal" href="05_learning.html">A useful role for learning: propose, solve and check</a></li>
+<li class="toctree-l2"><a class="reference internal" href="06_applications.html">Designing a fracture-inverse research programme</a></li>
+<li class="toctree-l2"><a class="reference internal" href="08_visual_lab.html">Watch the particle, the crack and the loss</a></li>
+<li class="toctree-l2"><a class="reference internal" href="07_results.html">Retained computations and reproducibility</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/inverse_experiments.html">From gradients to reliable inverse experiments</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
       
-      <main class="md-main" data-md-component="main">
-        <div class="md-main__inner md-grid">
-          
-            
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
               
-              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
-                <div class="md-sidebar__scrollwrap">
-                  <div class="md-sidebar__inner">
-                    
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
 
 
+<a href="https://github.com/CEMS-Lab/autumn-school" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
 
-<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
-  <label class="md-nav__title" for="__drawer">
-    <a href="../index.html" title="PhAST: Phase-field fracture with differentiable FEM" class="md-nav__button md-logo" aria-label="PhAST: Phase-field fracture with differentiable FEM" data-md-component="logo">
-      
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
-    </a>
-    PhAST: Phase-field fracture with differentiable FEM
-  </label>
-  
-  <ul class="md-nav__list" data-md-scrollfix>
-    
-      
-      
-  
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../00_welcome_and_routes.html" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    <span>From cracks to computation:<wbr> learn by doing</span>
-    
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
   </span>
+
+</a>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
   
 
-      </a>
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../01_crack_representations.html" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    <span>Crack representations:<wbr> sharp, cohesive, and diffuse</span>
-    
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
   </span>
-  
 
-      </a>
-    </li>
-  
+</button>
 
-    
-      
-      
-  
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../02_phase_field_energy.html" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    <span>Fracture energy:<wbr> AT1, AT2, degradation, and width</span>
-    
-  </span>
-  
 
-      </a>
-    </li>
-  
 
-    
-      
-      
-  
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../03_staggered_solution.html" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    <span>From solid mechanics to staggered damage updates</span>
-    
-  </span>
-  
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
 
-      </a>
-    </li>
-  
 
-    
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
       
-      
+    </div>
   
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../04_fem_to_tensors.html" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    <span>Geometry, FEM, tensors, and matrix-<wbr>free operators</span>
-    
-  </span>
-  
+</div>
+</div>
+              
+              
 
-      </a>
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../05_differentiation_and_inverse.html" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    <span>Differentiation and an illustrative inverse problem</span>
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../06_learning_adapter.html" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    <span>Train, save, reload, adapters, and checked proposals</span>
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../07_practice_references.html" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    <span>Practice, solutions, glossary, references, and contributing</span>
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-    
-      
-      
-  
-  
-    
-  
-  
-  
-    
-    
-    
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" checked>
-        
-          
-          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Differentiating fracture: memory, switches and useful limits</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
             
-  
-  
-  <span class="md-ellipsis">
-    <span>Optional inverse experiments</span>
-    
-  </span>
-  
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-the-derivative-of-a-simulation">What is the derivative of a simulation?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#three-different-meanings-of-smoothness">Three different meanings of smoothness</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#memory-during-loading-and-unloading">Memory during loading and unloading</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-phast-actually-implements">What PhAST actually implements</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#smooth-forward-bias-is-part-of-the-choice">Smooth forward: bias is part of the choice</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hard-forward-with-a-custom-reverse-rule">Hard forward with a custom reverse rule</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-the-derivative-passes-through-a-damage-solve">How the derivative passes through a damage solve</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#where-useful-gradients-end-a-diagnostic-guide">Where useful gradients end: a diagnostic guide</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1-does-unloading-remove-the-gradient">Exercise 1: does unloading remove the gradient?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2-is-agreement-at-a-tie-enough">Exercise 2: is agreement at a tie enough?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-3-which-smoothing-changes-the-fracture-calculation">Exercise 3: which smoothing changes the fracture calculation?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#source-map-and-optional-perspectives">Source map and optional perspectives</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
 
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_9">
-            <span class="md-nav__icon md-icon"></span>
-            <span>Optional inverse experiments</span>
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
               
                 
-  
-  
-    
-  
-  
-  
-    
-    
-    
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9_1" checked>
-        
-          
-          <div class="md-nav__link md-nav__container">
-            <a href="index.html" class="md-nav__link ">
-              
-  
-  
-  <span class="md-ellipsis">
-    <span>From gradients to reliable inverse experiments</span>
-    
-  </span>
-  
-
-            </a>
-            
-              
-              <label class="md-nav__link " for="__nav_9_1" id="__nav_9_1_label" tabindex="0">
-                <span class="md-nav__icon md-icon"></span>
-              </label>
-            
-          </div>
-        
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_9_1_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_9_1">
-            <span class="md-nav__icon md-icon"></span>
-            <span>From gradients to reliable inverse experiments</span>
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-    
-  
-  
-  
-    
-    
-    
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9_1_1" checked>
-        
-          
-          <div class="md-nav__link md-nav__container">
-            <a href="index.html#a-reading-and-computation-route" class="md-nav__link ">
-              
-  
-  
-  <span class="md-ellipsis">
-    <span>A reading and computation route</span>
-    
-  </span>
-  
-
-            </a>
-            
-              
-              <label class="md-nav__link " for="__nav_9_1_1" id="__nav_9_1_1_label" tabindex="0">
-                <span class="md-nav__icon md-icon"></span>
-              </label>
-            
-          </div>
-        
-        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_9_1_1_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_9_1_1">
-            <span class="md-nav__icon md-icon"></span>
-            <span>A reading and computation route</span>
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="01_geometry.html" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    <span>Representing particles and testing their geometry</span>
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="02_observations.html" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    <span>From measurements to a loss</span>
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="03_derivatives.html" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    <span>Verify a derivative before interpreting an update</span>
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="03_history_visual.html" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    <span>Why a fracture solver needs a memory-<wbr>aware derivative</span>
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-    
-  
-    
-  
-  
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    <span>Differentiating fracture:<wbr> memory, switches and useful limits</span>
-    
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="#" class="md-nav__link md-nav__link--active">
-        
-  
-  
-  <span class="md-ellipsis">
-    <span>Differentiating fracture:<wbr> memory, switches and useful limits</span>
-    
-  </span>
-  
-
-      </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary">
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#what-is-the-derivative-of-a-simulation" class="md-nav__link">
-    
-    <span class="md-ellipsis">
-      <span>What is the derivative of a simulation?</span>
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#three-different-meanings-of-smoothness" class="md-nav__link">
-    
-    <span class="md-ellipsis">
-      <span>Three different meanings of smoothness</span>
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#memory-during-loading-and-unloading" class="md-nav__link">
-    
-    <span class="md-ellipsis">
-      <span>Memory during loading and unloading</span>
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#what-phast-actually-implements" class="md-nav__link">
-    
-    <span class="md-ellipsis">
-      <span>What Ph<wbr>AST actually implements</span>
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="What PhAST actually implements">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#smooth-forward-bias-is-part-of-the-choice" class="md-nav__link">
-    
-    <span class="md-ellipsis">
-      <span>Smooth forward:<wbr> bias is part of the choice</span>
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#hard-forward-with-a-custom-reverse-rule" class="md-nav__link">
-    
-    <span class="md-ellipsis">
-      <span>Hard forward with a custom reverse rule</span>
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#how-the-derivative-passes-through-a-damage-solve" class="md-nav__link">
-    
-    <span class="md-ellipsis">
-      <span>How the derivative passes through a damage solve</span>
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#where-useful-gradients-end-a-diagnostic-guide" class="md-nav__link">
-    
-    <span class="md-ellipsis">
-      <span>Where useful gradients end:<wbr> a diagnostic guide</span>
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#exercise-1-does-unloading-remove-the-gradient" class="md-nav__link">
-    
-    <span class="md-ellipsis">
-      <span>Exercise 1:<wbr> does unloading remove the gradient?</span>
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#exercise-2-is-agreement-at-a-tie-enough" class="md-nav__link">
-    
-    <span class="md-ellipsis">
-      <span>Exercise 2:<wbr> is agreement at a tie enough?</span>
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#exercise-3-which-smoothing-changes-the-fracture-calculation" class="md-nav__link">
-    
-    <span class="md-ellipsis">
-      <span>Exercise 3:<wbr> which smoothing changes the fracture calculation?</span>
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#source-map-and-optional-perspectives" class="md-nav__link">
-    
-    <span class="md-ellipsis">
-      <span>Source map and optional perspectives</span>
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="04_recovery.html" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    <span>Why a correct gradient can give slow or ambiguous recovery</span>
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="05_learning.html" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    <span>A useful role for learning:<wbr> propose, solve and check</span>
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="06_applications.html" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    <span>Designing a fracture-<wbr>inverse research programme</span>
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="08_visual_lab.html" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    <span>Watch the particle, the crack and the loss</span>
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="07_results.html" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    <span>Retained computations and reproducibility</span>
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="notebooks/inverse_experiments.html" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    <span>From gradients to reliable inverse experiments</span>
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-  
-
-    
-  </ul>
-</nav>
-                  </div>
-                </div>
-              </div>
-            
-            
-              
-              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
-                <div class="md-sidebar__scrollwrap">
-                  <div class="md-sidebar__inner">
-                    
-
-<nav class="md-nav md-nav--secondary">
-  
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#what-is-the-derivative-of-a-simulation" class="md-nav__link">
-    
-    <span class="md-ellipsis">
-      <span>What is the derivative of a simulation?</span>
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#three-different-meanings-of-smoothness" class="md-nav__link">
-    
-    <span class="md-ellipsis">
-      <span>Three different meanings of smoothness</span>
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#memory-during-loading-and-unloading" class="md-nav__link">
-    
-    <span class="md-ellipsis">
-      <span>Memory during loading and unloading</span>
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#what-phast-actually-implements" class="md-nav__link">
-    
-    <span class="md-ellipsis">
-      <span>What Ph<wbr>AST actually implements</span>
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="What PhAST actually implements">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#smooth-forward-bias-is-part-of-the-choice" class="md-nav__link">
-    
-    <span class="md-ellipsis">
-      <span>Smooth forward:<wbr> bias is part of the choice</span>
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#hard-forward-with-a-custom-reverse-rule" class="md-nav__link">
-    
-    <span class="md-ellipsis">
-      <span>Hard forward with a custom reverse rule</span>
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#how-the-derivative-passes-through-a-damage-solve" class="md-nav__link">
-    
-    <span class="md-ellipsis">
-      <span>How the derivative passes through a damage solve</span>
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#where-useful-gradients-end-a-diagnostic-guide" class="md-nav__link">
-    
-    <span class="md-ellipsis">
-      <span>Where useful gradients end:<wbr> a diagnostic guide</span>
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#exercise-1-does-unloading-remove-the-gradient" class="md-nav__link">
-    
-    <span class="md-ellipsis">
-      <span>Exercise 1:<wbr> does unloading remove the gradient?</span>
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#exercise-2-is-agreement-at-a-tie-enough" class="md-nav__link">
-    
-    <span class="md-ellipsis">
-      <span>Exercise 2:<wbr> is agreement at a tie enough?</span>
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#exercise-3-which-smoothing-changes-the-fracture-calculation" class="md-nav__link">
-    
-    <span class="md-ellipsis">
-      <span>Exercise 3:<wbr> which smoothing changes the fracture calculation?</span>
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#source-map-and-optional-perspectives" class="md-nav__link">
-    
-    <span class="md-ellipsis">
-      <span>Source map and optional perspectives</span>
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-                  </div>
-                </div>
-              </div>
-            
-          
-          
-            <div class="md-content" data-md-component="content">
-              <article class="md-content__inner md-typeset" role="main">
-                
-                
+<div id="searchbox"></div>
+                <article class="bd-article">
                   
-
-
-<h1 id="differentiating-fracture-memory-switches-and-useful-limits">Differentiating fracture: memory, switches and useful limits<a class="headerlink" href="#differentiating-fracture-memory-switches-and-useful-limits" title="Link to this heading">¶</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="differentiating-fracture-memory-switches-and-useful-limits">
+<h1>Differentiating fracture: memory, switches and useful limits<a class="headerlink" href="#differentiating-fracture-memory-switches-and-useful-limits" title="Link to this heading">#</a></h1>
 <p>Start with the <a class="reference internal" href="03_history_visual.html"><span class="std std-doc">short animated explanation</span></a> to see how
 loading, unloading and a new energy maximum change the reverse route.</p>
-<h2 id="what-is-the-derivative-of-a-simulation">What is the derivative of a simulation?<a class="headerlink" href="#what-is-the-derivative-of-a-simulation" title="Link to this heading">¶</a></h2>
+<section id="what-is-the-derivative-of-a-simulation">
+<h2>What is the derivative of a simulation?<a class="headerlink" href="#what-is-the-derivative-of-a-simulation" title="Link to this heading">#</a></h2>
 <p>Suppose we change a particle centre or a fracture-energy parameter by a small
 amount. We ask how the <strong>predicted observations and their mismatch</strong> change.
 For parameters <span class="math notranslate nohighlight">\(\theta\)</span>, states <span class="math notranslate nohighlight">\(z\)</span>, an observation operator <span class="math notranslate nohighlight">\(\mathcal O\)</span> and
@@ -1132,60 +370,67 @@ measured data <span class="math notranslate nohighlight">\(y\)</span>, the chain
 <p>Differentiability is a local property of this map with respect to specified
 inputs. It is different from continuity of a field in space. Every operation
 on the relevant parameter-to-loss path needs an appropriate derivative rule.
-Fixed mesh connectivity, logging and parameter-independent preprocessing do
-not themselves need derivatives. A custom implicit backward rule can cover
+Fixed mesh connectivity, logging and parameter-independent preprocessing
+remain outside that differentiated path. A custom implicit backward rule can cover
 an entire numerical solve without recording every inner iteration.</p>
 <p>Start with one spring: <span class="math notranslate nohighlight">\(ku=f\)</span>, <span class="math notranslate nohighlight">\(J=\frac12(u-y)^2\)</span>. Its derivative is
 <span class="math notranslate nohighlight">\(dJ/dk=-(u-y)u/k\)</span>. If <span class="math notranslate nohighlight">\(\theta=\log k\)</span>, the chain rule gives
 <span class="math notranslate nohighlight">\(dJ/d\theta=k\,dJ/dk\)</span>. The same principle applies to a finite-element solver;
 the difficult part is preserving every dependence and identifying switches.</p>
-<h2 id="three-different-meanings-of-smoothness">Three different meanings of smoothness<a class="headerlink" href="#three-different-meanings-of-smoothness" title="Link to this heading">¶</a></h2>
+</section>
+<section id="three-different-meanings-of-smoothness">
+<h2>Three different meanings of smoothness<a class="headerlink" href="#three-different-meanings-of-smoothness" title="Link to this heading">#</a></h2>
 <p><strong>Spatial regularisation.</strong> A sharp crack has a displacement jump. Phase-field
 fracture represents damage with a spatial field <span class="math notranslate nohighlight">\(d\in[0,1]\)</span> and a length scale
 <span class="math notranslate nohighlight">\(\ell_0\)</span>. For example, <span class="math notranslate nohighlight">\(d(x)=\exp(-|x|/\ell_0)\)</span> is an illustrative diffuse
-profile normal to a crack, not a newly computed PhAST solution. Increasing
-<span class="math notranslate nohighlight">\(\ell_0\)</span> changes the represented damage width and the model. It does not
-automatically smooth the parameter-to-observation map.</p>
-<p><strong>A kink in an update.</strong> <span class="math notranslate nohighlight">\(\max(a,b)\)</span> is continuous: approaching a tie does
-not produce a jump in its value. Its slope changes abruptly. A step function
+analytic profile normal to a crack. Increasing <span class="math notranslate nohighlight">\(\ell_0\)</span> changes the
+represented damage width and the model. Smoothness of the
+parameter-to-observation map is a separate property.</p>
+<p><strong>A kink in an update.</strong> <span class="math notranslate nohighlight">\(\max(a,b)\)</span> is continuous: its value approaches
+the tie continuously, while its slope changes abruptly. A step function
 is a different object, with a discontinuous value. Damage bounds, positive
 energy splits and history maxima introduce such nonsmooth choices even on a
 fixed mesh with a spatially diffuse crack.</p>
 <p><strong>A change of solution branch.</strong> Crack initiation, competing paths and
 instabilities can cause a parameter perturbation to follow a different
-evolution. The local derivative of the current numerical trajectory does
-not predict every alternative trajectory.</p>
+evolution. The local derivative describes the current numerical trajectory;
+alternative branches require their own forward evaluations.</p>
 <p>Some teaching fluid solvers have fixed grids, smooth operators and modest
 time horizons, which makes differentiation easier to demonstrate. Fluid
 mechanics also includes shocks, interfaces, flux limiters, changing contacts
-and chaotic long-time sensitivity. The useful comparison is between smooth,
-well-conditioned discrete maps and nonsmooth or unstable maps, rather than
-between fluids and solids as entire disciplines.</p>
-<h2 id="memory-during-loading-and-unloading">Memory during loading and unloading<a class="headerlink" href="#memory-during-loading-and-unloading" title="Link to this heading">¶</a></h2>
+and chaotic long-time sensitivity. Compare the smoothness and conditioning
+of the particular discrete maps used in each problem.</p>
+</section>
+<section id="memory-during-loading-and-unloading">
+<h2>Memory during loading and unloading<a class="headerlink" href="#memory-during-loading-and-unloading" title="Link to this heading">#</a></h2>
 <p>For the tensile-energy history formulation, each material sampling point
 retains its largest crack-driving energy:</p>
 <div class="math notranslate nohighlight">
 \[H_{n+1}=\max(H_n,\psi^+_{n+1}).\]</div>
-<p>Here <span class="math notranslate nohighlight">\(\psi^+\)</span> is the configured tensile driving energy density, not damage or
-strain itself. On unloading the current energy can fall, while <span class="math notranslate nohighlight">\(H\)</span> remembers
-the earlier maximum. PhAST also applies damage bounds; the history field
-alone should not be described as the complete bound-constrained algorithm.</p>
+<p>Here <span class="math notranslate nohighlight">\(\psi^+\)</span> is the configured tensile driving energy density, evaluated
+from the strain state. On unloading the current energy can fall, while <span class="math notranslate nohighlight">\(H\)</span> remembers
+the earlier maximum. PhAST combines this history update with explicit
+damage bounds in the complete constrained algorithm.</p>
 <p>Holding <span class="math notranslate nohighlight">\(H_n\)</span> fixed, <span class="math notranslate nohighlight">\(\partial H_{n+1}/\partial\psi^+\)</span> equals zero below
 <span class="math notranslate nohighlight">\(H_n\)</span> and one above it. At a tie there is generally no unique classical
 partial derivative. PyTorch’s elementwise maximum assigns half to each
-operand at equality. This is a differentiation convention, not a proof of
-smoothness. If both operands have identical parameter derivatives, their
+operand at equality. This is the selected differentiation convention at the
+kink. If both operands have identical parameter derivatives, their
 composition can still be differentiable at a tie.</p>
 <p>For a concrete unloading example, take <span class="math notranslate nohighlight">\(H_n(\theta)=2\theta\)</span> and
 <span class="math notranslate nohighlight">\(\psi^+_{n+1}(\theta)=\theta\)</span> near <span class="math notranslate nohighlight">\(\theta=1\)</span>. The old history wins, but
 <span class="math notranslate nohighlight">\(dH_{n+1}/d\theta=2\)</span>. Only the route through the <strong>current energy</strong> is
 inactive; sensitivity through the stored history remains. Detaching that
 history would remove a real contribution.</p>
-<h2 id="what-phast-actually-implements">What PhAST actually implements<a class="headerlink" href="#what-phast-actually-implements" title="Link to this heading">¶</a></h2>
+</section>
+<section id="what-phast-actually-implements">
+<h2>What PhAST actually implements<a class="headerlink" href="#what-phast-actually-implements" title="Link to this heading">#</a></h2>
 <p>The source provides several selectable history operators. A result must be
-identified by its effective configuration, not merely by the presence of an
-operator in the repository.</p>
-<table class="docutils data align-default">
+identified by its effective configuration and the operator that it selects.</p>
+<p>The configuration names are <code class="docutils literal notranslate"><span class="pre">hard_max</span></code> for the hard maximum, <code class="docutils literal notranslate"><span class="pre">softmax</span></code> for
+log-sum-exp, and <code class="docutils literal notranslate"><span class="pre">custom_subgrad</span></code> for the custom reverse rule. The scaled
+research variant is named <code class="docutils literal notranslate"><span class="pre">custom_subgrad_dimensionless</span></code>.</p>
+<div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>History choice</p></th>
 <th class="head"><p>Forward value</p></th>
@@ -1194,34 +439,35 @@ operator in the repository.</p>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">hard_max</span></code> without a legacy smoothing override</p></td>
+<tr class="row-even"><td><p>Hard maximum</p></td>
 <td><p><span class="math notranslate nohighlight">\(\max(a,b)\)</span></p></td>
 <td><p>Active branch; half at a tie</p></td>
-<td><p>Local hard-map derivative away from switches</p></td>
+<td><p>Exact local rule away from switches</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">softmax</span></code></p></td>
-<td><p><span class="math notranslate nohighlight">\(\beta^{-1}\log(e^{\beta a}+e^{\beta b})\)</span></p></td>
-<td><p>Derivative of this smooth forward</p></td>
+<tr class="row-odd"><td><p>Log-sum-exp</p></td>
+<td><p><span class="math notranslate nohighlight">\(S_\beta(a,b)\)</span></p></td>
+<td><p>Smooth-forward derivative</p></td>
 <td><p>Changes the history model</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">custom_subgrad</span></code></p></td>
+<tr class="row-even"><td><p>Custom reverse</p></td>
 <td><p><span class="math notranslate nohighlight">\(\max(a,b)\)</span></p></td>
-<td><p>Sigmoid-weighted rule</p></td>
-<td><p>Surrogate reverse derivative near a switch</p></td>
+<td><p>Sigmoid weights</p></td>
+<td><p>Surrogate near a switch</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">custom_subgrad_dimensionless</span></code> in the research worktree</p></td>
+<tr class="row-odd"><td><p>Scaled custom reverse</p></td>
 <td><p><span class="math notranslate nohighlight">\(\max(a,b)\)</span></p></td>
-<td><p>Sigmoid of a scaled energy difference</p></td>
-<td><p>Same distinction with explicit units</p></td>
+<td><p>Scaled sigmoid weights</p></td>
+<td><p>Surrogate with explicit energy units</p></td>
 </tr>
 </tbody>
 </table>
+</div>
 <p>The dispatcher also provides quadratic and log-domain smooth alternatives.
 There is a legacy detail: selecting <code class="docutils literal notranslate"><span class="pre">hard_max</span></code> with a positive
 <code class="docutils literal notranslate"><span class="pre">softmax_H_beta</span></code> invokes a softplus smooth maximum. Therefore both settings
-must be recorded. These are available routes, not evidence that every
-historical experiment used the same route.</p>
-<h3 id="smooth-forward-bias-is-part-of-the-choice">Smooth forward: bias is part of the choice<a class="headerlink" href="#smooth-forward-bias-is-part-of-the-choice" title="Link to this heading">¶</a></h3>
+must be recorded to identify the route used by each experiment.</p>
+<section id="smooth-forward-bias-is-part-of-the-choice">
+<h3>Smooth forward: bias is part of the choice<a class="headerlink" href="#smooth-forward-bias-is-part-of-the-choice" title="Link to this heading">#</a></h3>
 <p>The operator called <code class="docutils literal notranslate"><span class="pre">softmax</span></code> in this code is a scalar <strong>log-sum-exp smooth
 maximum</strong>. The usual softmax returns normalized weights; those weights are
 the derivatives of log-sum-exp. With <span class="math notranslate nohighlight">\(a=H_n\)</span> and <span class="math notranslate nohighlight">\(b=\psi^+\)</span>,</p>
@@ -1229,51 +475,56 @@ the derivatives of log-sum-exp. With <span class="math notranslate nohighlight">
 \[S_\beta(a,b)=\frac{1}{\beta}\log(e^{\beta a}+e^{\beta b}),
 \qquad \partial_b S_\beta=\sigma[\beta(b-a)],
 \qquad \sigma(q)=\frac{1}{1+e^{-q}}.\]</div>
-<p>Numerically use <code class="docutils literal notranslate"><span class="pre">logsumexp</span></code>, <code class="docutils literal notranslate"><span class="pre">logaddexp</span></code> or stable softplus, rather than
-forming potentially overflowing exponentials. Its one-update bias satisfies
+<p>Numerically use <code class="docutils literal notranslate"><span class="pre">logsumexp</span></code>, <code class="docutils literal notranslate"><span class="pre">logaddexp</span></code> or stable softplus to evaluate the
+exponential terms stably. Its one-update bias satisfies
 <span class="math notranslate nohighlight">\(0\le S_\beta-\max(a,b)\le\log(2)/\beta\)</span>. At equality this is
 <span class="math notranslate nohighlight">\(\log(2)/\beta\)</span>. Repeatedly updating against a constant energy <span class="math notranslate nohighlight">\(c\)</span>, starting
 from <span class="math notranslate nohighlight">\(H_0=c\)</span>, gives <span class="math notranslate nohighlight">\(H_n=c+\log(n+1)/\beta\)</span>. Artificial history growth can
-therefore occur without increased loading. A small local bias is not a
-guarantee of negligible trajectory error.</p>
-<h3 id="hard-forward-with-a-custom-reverse-rule">Hard forward with a custom reverse rule<a class="headerlink" href="#hard-forward-with-a-custom-reverse-rule" title="Link to this heading">¶</a></h3>
+therefore occur at constant loading. Assess its accumulated effect over the
+complete trajectory as well as its local magnitude.</p>
+</section>
+<section id="hard-forward-with-a-custom-reverse-rule">
+<h3>Hard forward with a custom reverse rule<a class="headerlink" href="#hard-forward-with-a-custom-reverse-rule" title="Link to this heading">#</a></h3>
 <p>The custom implementation saves the two operands and a scalar sharpness.
 It returns the exact hard maximum. Given an incoming loss sensitivity
 <span class="math notranslate nohighlight">\(\overline H=\partial J/\partial H_{n+1}\)</span>, it returns</p>
 <div class="math notranslate nohighlight">
 \[\overline a=\overline H\,\sigma[s(a-b)],\qquad
 \overline b=\overline H\,\sigma[s(b-a)].\]</div>
-<p>It saves neither a full Jacobian matrix nor a history of strain Jacobians.
-These products are the local vector–Jacobian product (VJP). Later backward
+<p>The two saved operands and sharpness suffice to evaluate these local
+vector–Jacobian products (VJPs). Later backward
 steps carry <span class="math notranslate nohighlight">\(\overline a\)</span> through the earlier history. Away from a tie, a
 finite-width sigmoid differs from the classical derivative of the hard
 forward. It is a <strong>surrogate gradient</strong>, even when it helps optimisation.
-Differentiating the smooth sibling validates the sigmoid formula; it does
-not validate that formula as an exact derivative of the hard forward.</p>
+Differentiating the smooth sibling verifies the sigmoid formula for that
+smooth map. Exact hard-forward derivatives use the hard branch rule.</p>
 <p>For example, set <span class="math notranslate nohighlight">\(a=1\)</span>, <span class="math notranslate nohighlight">\(b=0.99\)</span>, <span class="math notranslate nohighlight">\(s=10\)</span>. Small perturbations of <span class="math notranslate nohighlight">\(b\)</span> keep the
 hard output at 1, so the hard-map FD derivative is zero. The custom reverse
 rule gives <span class="math notranslate nohighlight">\(\sigma(-0.1)\simeq0.475\)</span>. Both numbers describe their respective
 rules correctly. The difference is retained in the computation below.</p>
 <p>The research variant uses <span class="math notranslate nohighlight">\(s=\widehat s/\psi_{\rm ref}\)</span>, so the sigmoid
 argument <span class="math notranslate nohighlight">\(\widehat s(a-b)/\psi_{\rm ref}\)</span> is dimensionless. The scale
-<span class="math notranslate nohighlight">\(\psi_{\rm ref}\)</span> is a fixed positive reference energy in this rule; its
-derivative is not included. Converting energy units requires converting that
+<span class="math notranslate nohighlight">\(\psi_{\rm ref}\)</span> is a fixed positive reference energy, held constant during
+differentiation. Converting energy units requires converting that
 reference too. Very sharp sigmoids can saturate to zero or one in finite
-precision, so a nonzero gradient on both branches is not guaranteed.</p>
+precision, producing a zero weight on one branch.</p>
 <figure class="align-default" id="id1">
 <a class="reference internal image-reference" href="../_images/history_rules.png"><img alt="Hard and smooth history values, their reverse slopes, time-history sensitivity routing, and repeated-update bias." src="../_images/history_rules.png" style="width: 100%;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Figure 7 </span><span class="caption-text"><span class="caption-text">
-Four views of the same distinction. (a) The custom rule shares the hard
+<p><span class="caption-number">Figure 7 </span><span class="caption-text">Four views of the same distinction. (a) The custom rule shares the hard
 forward; log-sum-exp changes its value. (b) The sigmoid is a smooth-forward
 derivative or a hard-forward surrogate, depending on the forward choice.
 (c) With distinct energy peaks, exact history sensitivity reaches the
 largest earlier peak; a finite-width surrogate redistributes it. (d) Repeated
 constant-energy updates reveal the smooth-forward bias. All quantities here
-are dimensionless teaching examples, not fitted fracture results.</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></figcaption>
+are dimensionless teaching examples of the history operators.</span><a class="headerlink" href="#id1" title="Link to this image">#</a></p>
+</figcaption>
 </figure>
-<h2 id="how-the-derivative-passes-through-a-damage-solve">How the derivative passes through a damage solve<a class="headerlink" href="#how-the-derivative-passes-through-a-damage-solve" title="Link to this heading">¶</a></h2>
+</section>
+</section>
+<section id="how-the-derivative-passes-through-a-damage-solve">
+<h2>How the derivative passes through a damage solve<a class="headerlink" href="#how-the-derivative-passes-through-a-damage-solve" title="Link to this heading">#</a></h2>
 <p>For an illustrative interior AT2 subproblem with fixed boundary data,</p>
 <div class="math notranslate nohighlight">
 \[R=A(H,G_c,\ell_0)\widetilde d-b(H,G_c,\ell_0)=0.\]</div>
@@ -1289,18 +540,20 @@ solver accuracy, assuming a locally invertible reduced operator.</p>
 sensitivity to <span class="math notranslate nohighlight">\(\widetilde d\)</span>. Strictly lower-active nodes route it to <span class="math notranslate nohighlight">\(d_n\)</span>;
 strictly upper-active nodes route none to either when the bound 1 is fixed.
 The adjoint right-hand side is masked accordingly. The operator derivative
-uses the pre-projection <span class="math notranslate nohighlight">\(\widetilde d\)</span>, not the clipped field. A different
+uses the pre-projection <span class="math notranslate nohighlight">\(\widetilde d\)</span> from the linear subproblem. A different
 projected iterative or constrained-equilibrium forward requires its own
 consistent backward derivation. We must establish which map was executed
 before applying this formula. Requested tolerances should be accompanied by
-measured residuals; an unattained request is not a tighter solved system.</p>
+measured residuals to establish the achieved solve accuracy.</p>
 <p>The time loop then composes mechanics, energy, history and damage VJPs using
 the preceding chapter’s reverse recurrence. Checkpointing recomputes saved
 segments to reduce memory; it must reproduce the same states and branches.
 Higher-order derivatives need additional verification, especially through
 custom backward routines implemented under <code class="docutils literal notranslate"><span class="pre">no_grad</span></code>.</p>
-<h2 id="where-useful-gradients-end-a-diagnostic-guide">Where useful gradients end: a diagnostic guide<a class="headerlink" href="#where-useful-gradients-end-a-diagnostic-guide" title="Link to this heading">¶</a></h2>
-<table class="docutils data align-default">
+</section>
+<section id="where-useful-gradients-end-a-diagnostic-guide">
+<h2>Where useful gradients end: a diagnostic guide<a class="headerlink" href="#where-useful-gradients-end-a-diagnostic-guide" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>Situation</p></th>
 <th class="head"><p>What to inspect</p></th>
@@ -1326,7 +579,7 @@ custom backward routines implemented under <code class="docutils literal notrans
 </tr>
 <tr class="row-even"><td><p>Gradient saturation or uninformative loading</p></td>
 <td><p>Observation sensitivity and individual gradient routes</p></td>
-<td><p>A correct zero derivative can be physical; consider richer observations/loading, not invented information</p></td>
+<td><p>A correct zero derivative can be physical; consider richer observations and loading</p></td>
 </tr>
 <tr class="row-odd"><td><p>Nearly singular mechanics/damage operator</p></td>
 <td><p>Measured residuals and conditioning</p></td>
@@ -1338,7 +591,7 @@ custom backward routines implemented under <code class="docutils literal notrans
 </tr>
 <tr class="row-odd"><td><p>Long trajectories or unstable time steps</p></td>
 <td><p>Gradient norm versus horizon, stability and replay agreement</p></td>
-<td><p>Products can vanish or amplify; checkpointing saves memory but does not cure instability</p></td>
+<td><p>Products can vanish or amplify; checkpointing addresses memory; stability needs a separate analysis</p></td>
 </tr>
 <tr class="row-even"><td><p>Broken dependency or stale solver state</p></td>
 <td><p>Detached tensors, overwritten caches, reset history and immutable solve data</p></td>
@@ -1346,39 +599,46 @@ custom backward routines implemented under <code class="docutils literal notrans
 </tr>
 <tr class="row-odd"><td><p>Non-identifiable parameters</p></td>
 <td><p>Observation-Jacobian rank and alternate parameter fits</p></td>
-<td><p>Correct derivatives do not establish uniqueness; add independent data or state the ambiguity</p></td>
+<td><p>Assess uniqueness using independent data and alternate fits alongside derivative checks</p></td>
 </tr>
 </tbody>
 </table>
+</div>
 <p>Finite-difference tests must reset histories and keep mesh, time steps,
 objective, loading, coordinates and bound treatment matched. For a normalized
 direction <span class="math notranslate nohighlight">\(v\)</span>, compare <span class="math notranslate nohighlight">\([J(\theta+hv)-J(\theta-hv)]/(2h)\)</span> with <span class="math notranslate nohighlight">\(g^Tv\)</span> over a
-range of <span class="math notranslate nohighlight">\(h\)</span>. If active-set memberships were not saved, aggregate count
-changes establish that some membership changed, but cannot locate it; equal
-counts do not prove equal memberships. A Taylor remainder with quadratic
-decay is evidence on a smooth, resolved interval, not across every branch.</p>
-<p>These are operational checks, not a universal threshold for how far a
-particle can be initialized from its target. Recovery depends on loading,
+range of <span class="math notranslate nohighlight">\(h\)</span>. Per-node active-set records locate branch changes. Aggregate
+counts provide a coarser diagnostic: differing counts imply changed memberships,
+while equal counts permit different memberships. A Taylor remainder with
+quadratic decay supports the derivative on the tested smooth, resolved interval.</p>
+<p>These operational checks apply at specified initializations and operating
+points. Recovery depends on loading,
 observability, parameterization, mesh and optimisation as well as derivatives.</p>
-<h2 id="exercise-1-does-unloading-remove-the-gradient">Exercise 1: does unloading remove the gradient?<a class="headerlink" href="#exercise-1-does-unloading-remove-the-gradient" title="Link to this heading">¶</a></h2>
+</section>
+<section id="exercise-1-does-unloading-remove-the-gradient">
+<h2>Exercise 1: does unloading remove the gradient?<a class="headerlink" href="#exercise-1-does-unloading-remove-the-gradient" title="Link to this heading">#</a></h2>
 <p>For <span class="math notranslate nohighlight">\(H_n=2\theta\)</span> and <span class="math notranslate nohighlight">\(\psi^+=\theta\)</span> at <span class="math notranslate nohighlight">\(\theta=1\)</span>, calculate the total
 derivative of the new history. What would detaching <span class="math notranslate nohighlight">\(H_n\)</span> do?</p>
 <div class="dropdown admonition">
 <p class="admonition-title">Worked solution</p>
 <p>The new history is <span class="math notranslate nohighlight">\(2\theta\)</span>, with derivative 2. Detaching it discards this
 route and returns zero locally, although the physical parameter affects the
-earlier loading. A zero current-energy partial derivative is not the same
-as a zero total parameter derivative.</p>
+earlier loading. The total parameter derivative includes the stored-history
+route as well as the current-energy route.</p>
 </div>
-<h2 id="exercise-2-is-agreement-at-a-tie-enough">Exercise 2: is agreement at a tie enough?<a class="headerlink" href="#exercise-2-is-agreement-at-a-tie-enough" title="Link to this heading">¶</a></h2>
+</section>
+<section id="exercise-2-is-agreement-at-a-tie-enough">
+<h2>Exercise 2: is agreement at a tie enough?<a class="headerlink" href="#exercise-2-is-agreement-at-a-tie-enough" title="Link to this heading">#</a></h2>
 <p>Central FD of <span class="math notranslate nohighlight">\(\max(0,q)\)</span> at <span class="math notranslate nohighlight">\(q=0\)</span> is one half. Does that prove smoothness?</p>
 <div class="dropdown admonition">
 <p class="admonition-title">Worked solution</p>
 <p>No. The left slope is zero and the right slope is one. Central FD averages
-the two. A matching software value at that point does not establish a
-unique classical derivative.</p>
+the two. The unequal one-sided slopes identify the kink even when the
+software convention matches this average.</p>
 </div>
-<h2 id="exercise-3-which-smoothing-changes-the-fracture-calculation">Exercise 3: which smoothing changes the fracture calculation?<a class="headerlink" href="#exercise-3-which-smoothing-changes-the-fracture-calculation" title="Link to this heading">¶</a></h2>
+</section>
+<section id="exercise-3-which-smoothing-changes-the-fracture-calculation">
+<h2>Exercise 3: which smoothing changes the fracture calculation?<a class="headerlink" href="#exercise-3-which-smoothing-changes-the-fracture-calculation" title="Link to this heading">#</a></h2>
 <p>Distinguish changing <span class="math notranslate nohighlight">\(\ell_0\)</span>, changing the history forward to log-sum-exp,
 and changing only the history backward to sigmoid weights.</p>
 <div class="dropdown admonition">
@@ -1387,19 +647,22 @@ and changing only the history backward to sigmoid weights.</p>
 width. Log-sum-exp changes the history values and can change damage evolution.
 The custom backward preserves hard history values for a fixed parameter
 trajectory but changes the inverse update direction; later optimizer
-iterates can therefore differ. None guarantees successful recovery.</p>
+iterates can therefore differ. Assess recovery for each selected model and
+reverse rule.</p>
 </div>
-<h2 id="source-map-and-optional-perspectives">Source map and optional perspectives<a class="headerlink" href="#source-map-and-optional-perspectives" title="Link to this heading">¶</a></h2>
+</section>
+<section id="source-map-and-optional-perspectives">
+<h2>Source map and optional perspectives<a class="headerlink" href="#source-map-and-optional-perspectives" title="Link to this heading">#</a></h2>
 <p>The implementation inspection covers <code class="docutils literal notranslate"><span class="pre">phast/physics/h_update.py</span></code>,
 <code class="docutils literal notranslate"><span class="pre">phast/physics/h_update_custom_subgrad.py</span></code>, <code class="docutils literal notranslate"><span class="pre">StaggeredSolver._H_update</span></code>, and
 the implicit functions in <code class="docutils literal notranslate"><span class="pre">phast/solvers/damage_solver.py</span></code>. The public teaching
 snapshot contains the dimensional custom rule; the explicit dimensionless
 variant is in the Particle Inverse research worktree. Its manuscript describes
-that variant for the single-particle study. This distinction is not transferred
-to unrelated runs without their configuration receipts.</p>
+that variant for the single-particle study. Configuration receipts identify
+the history rule for each other run.</p>
 <p>The accompanying teaching code is a minimal, self-contained illustration of
-the audited rules. It is not a replacement damage solver. The private source
-audit records exact files and hashes separately from these portable lessons.</p>
+the audited rules. It isolates history values and reverse weights; the
+source audit records the corresponding implementation files and hashes.</p>
 <p><a class="reference external" href="https://docs.pytorch.org/docs/2.14/notes/autograd.html#gradients-for-non-differentiable-functions">PyTorch’s autograd documentation</a>
 describes derivative conventions for nonsmooth primitives.
 <a class="reference external" href="https://physicsbaseddeeplearning.org/diffphys.html">Physics-based Deep Learning</a>
@@ -1409,73 +672,135 @@ products without storing full matrices.
 contains complementary explicit and implicit adjoint examples.
 <a class="reference external" href="https://tum-pbs.github.io/ADL4P/">ADL4P</a> provides the broader course context.
 All derivations required for this lesson appear above.</p>
+</section>
+</section>
 
 
+                </article>
+              
 
-
-
-
-
-  
-  
-
-
-
-
-
-
-                
-              </article>
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="03_history_visual.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Why a fracture solver needs a memory-aware derivative</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="04_recovery.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Why a correct gradient can give slow or ambiguous recovery</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
             </div>
-          
-          
-        </div>
-        
-      </main>
-      
-        <footer class="md-footer">
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-the-derivative-of-a-simulation">What is the derivative of a simulation?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#three-different-meanings-of-smoothness">Three different meanings of smoothness</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#memory-during-loading-and-unloading">Memory during loading and unloading</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-phast-actually-implements">What PhAST actually implements</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#smooth-forward-bias-is-part-of-the-choice">Smooth forward: bias is part of the choice</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hard-forward-with-a-custom-reverse-rule">Hard forward with a custom reverse rule</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-the-derivative-passes-through-a-damage-solve">How the derivative passes through a damage solve</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#where-useful-gradients-end-a-diagnostic-guide">Where useful gradients end: a diagnostic guide</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1-does-unloading-remove-the-gradient">Exercise 1: does unloading remove the gradient?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2-is-agreement-at-a-tie-enough">Exercise 2: is agreement at a tie enough?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-3-which-smoothing-changes-the-fracture-calculation">Exercise 3: which smoothing changes the fracture calculation?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#source-map-and-optional-perspectives">Source map and optional perspectives</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
   
+  <div class="footer-item">
+    <div class="phast-course-credit">
+  <!-- Course material created by Allamaprabhu Ani, CEMS-Lab, 2026. -->
+  <p class="phast-course-creators">Presented by <span>Sathiskumar A. Ponnusami · Queen Mary University of London · CEMS-Lab</span></p>
+  <p class="phast-course-purpose">© 2026
+    <a href="https://github.com/CEMS-Lab">CEMS-Lab</a>
+    <span aria-hidden="true"> · </span>
+    Prepared for the
+    <a href="https://www.ukacm-school.uk/home">UKACM Autumn School 2026</a>.
+  </p>
+</div>
+  </div>
   
-  
-  <div class="md-footer-meta md-typeset">
+  <div class="footer-item">
     
-    <div class="md-footer-meta__inner md-grid">
-      <div class="md-copyright">
-  
-    <div class="md-footer-copyright__highlight">
-        &#169; Copyright 2026, UKACM Autumn School.
-        
+<div class="phast-discoveries" aria-label="Optional PhAST discoveries">
+  <details class="phast-discovery" id="phast-gradient-discovery">
+    <summary aria-label="PhAST ∇: a gradient discovery">PhAST ∇</summary>
+    <div class="phast-discovery-body">
+      <p><strong>No neural network required.</strong></p>
+      <p>A differentiable simulation can provide parameter sensitivities on
+        its own. The chain rule was here before the neural network.</p>
     </div>
-  
-    Created using
-    <a href="https://www.sphinx-doc.org/" target="_blank" rel="noopener">Sphinx</a>
-    7.4.7.
-     and
-    <a href="https://github.com/jbms/sphinx-immaterial/" target="_blank" rel="noopener">Sphinx-Immaterial</a>
+  </details>
+  <details class="phast-discovery" id="phast-backward-discovery">
+    <summary><code>.backward()</code></summary>
+    <div class="phast-discovery-body">
+      <p><strong>A pocket chain rule.</strong></p>
+      <p>Let <var>q</var> = <var>θ</var><sup>2</sup> and
+        <var>L</var> = ½(<var>q</var> − 4)<sup>2</sup>.
+        At <var>θ</var> = 1, which way does the loss decrease locally?</p>
+      <details class="phast-pocket-answer">
+        <summary>Follow the derivative</summary>
+        <p>d<var>L</var>/d<var>θ</var> = (<var>q</var> − 4) · 2<var>θ</var> = −6.
+          A sufficiently small positive change in <var>θ</var> decreases
+          the loss. The gradient points uphill; a descent step goes against it.</p>
+      </details>
+    </div>
+  </details>
+</div>
+
+  </div>
   
 </div>
-      
+          </footer>
+        
+
+      </main>
     </div>
-    
   </div>
-</footer>
-      
-    </div>
-    <div class="md-dialog" data-md-component="dialog">
-      <div class="md-dialog__inner md-typeset"></div>
-    </div>
-    
-    
-    <script id="__config" type="application/json">{"base": "..", "features": [], "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
-    
-      
-        <script src="../_static/documentation_options.js?v=fc6fd62b"></script>
-        <script src="../_static/sphinx_immaterial_theme.32136f45f91ae6956.min.js?v=a7a9472a"></script>
-        <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
-        <script src="../_static/copybutton.js?v=f281be69"></script>
-        <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-        <script defer="defer" src="../_static/mathjax/tex-mml-chtml.js?v=cadf963e"></script>
-        <script src="../_static/learning_book.js?v=7a62d495"></script>
-    
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
   </body>
 </html>

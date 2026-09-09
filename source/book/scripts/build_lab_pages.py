@@ -1,6 +1,9 @@
 """Render-ready notebook chapters from reviewed computations and original solutions.
 
 This authoring step never executes Python cells or changes their code/outputs.
+
+Course material created by Allamaprabhu Ani; presented by Sathiskumar A. Ponnusami,
+CEMS-Lab, UKACM Autumn School 2026. Attribution does not replace bundled licences.
 """
 from __future__ import annotations
 
@@ -26,6 +29,12 @@ NAMES = (
     "04_train_save_reload_adapter",
     "05_hybrid_reference_correction",
 )
+COURSE_ATTRIBUTION = {
+    "creator": "Allamaprabhu Ani",
+    "presenter": "Sathiskumar A. Ponnusami",
+    "affiliation": "CEMS-Lab",
+    "course": "UKACM Autumn School 2026",
+}
 
 
 def computational_fingerprint(notebook) -> str:
@@ -72,9 +81,12 @@ def main():
     report = {"execution": "none; preserved reviewed code and outputs", "lessons": []}
     for name in NAMES:
         identifier = name[:2]
+        authored_path = ROOT / "notebooks" / (name + ".ipynb")
+        authored = nbformat.read(authored_path, as_version=4)
+        nbformat.validate(authored)
         source = ROOT / "notebooks/executed" / (name + ".ipynb")
         if not source.exists():
-            source = ROOT / "notebooks" / (name + ".ipynb")
+            source = authored_path
         original = nbformat.read(source, as_version=4)
         nbformat.validate(original)
         if any(out.output_type == "error" for cell in original.cells
@@ -89,6 +101,19 @@ def main():
                 if not exercise.get(key, "").strip():
                     raise ValueError("Incomplete exercise: " + name + "/" + key)
         content = copy.deepcopy(original)
+        # Use the current authored explanation alongside retained computations.
+        # A changed code cell requires a new execution before these can be paired.
+        if [cell.cell_type for cell in content.cells] != [
+            cell.cell_type for cell in authored.cells
+        ]:
+            raise ValueError("Authored/executed cell layout differs: " + name)
+        for cell, authored_cell in zip(content.cells, authored.cells):
+            if cell.cell_type == "code" and cell.source != authored_cell.source:
+                raise ValueError("Authored/executed code differs; rerun notebook: " + name)
+            if cell.cell_type == "markdown":
+                cell.source = authored_cell.source
+        # Standard notebook metadata stays out of the rendered lesson body.
+        content.metadata.update(COURSE_ATTRIBUTION)
         initial = content.cells.pop(0)
         assert initial.cell_type == "markdown"
         introduction = re.sub(r"^# [^\n]+\n+", "", initial.source, count=1)
@@ -96,11 +121,8 @@ def main():
             f"# {material['title']}\n\n"
             f"**Learning objective.** {material['objective']}\n\n"
             f"**Predict first.** {material['prediction']}\n\n"
-            f"**Recorded computation:** {measured[identifier]:.3f} seconds on the "
-            "reference local CPU after setup. This is not a fresh Colab timing.\n\n"
-            "Read the code and its recorded outputs in order. To change inputs and "
-            "run Python, download a notebook and use the course environment. "
-            "The static book does not execute these cells in the browser.\n\n"
+            "Follow the worked calculation, then use the downloadable notebook "
+            "to explore the exercises.\n\n"
         )
         book_links = (
             f"[Download practice notebook](../../notebooks/study/{name}.ipynb) · "
@@ -118,7 +140,7 @@ def main():
         for cell in book_notebook.cells:
             if any("image/png" in out.get("data", {}) for out in cell.get("outputs", [])):
                 cell.metadata["mystnb"] = {
-                    "image": {"alt": f"Recorded figure from {material['title']}"}
+                    "image": {"alt": f"Figure from {material['title']}"}
                 }
         for kind, answers in (("study", False), ("solutions", True)):
             downloadable = copy.deepcopy(content)
@@ -134,6 +156,7 @@ def main():
             "name": name,
             "code_and_outputs_sha256": computational_fingerprint(original),
             "source_sha256": hashlib.sha256(source.read_bytes()).hexdigest(),
+            "prose_source_sha256": hashlib.sha256(authored_path.read_bytes()).hexdigest(),
             "exercises": len(material["exercises"]),
             "code_cells": sum(c.cell_type == "code" for c in original.cells),
             "recorded_seconds": measured[identifier],

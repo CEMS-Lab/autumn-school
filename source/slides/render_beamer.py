@@ -86,7 +86,7 @@ report['missing_expected_figure_resources']=[
 (ROOT/'beamer_slide_manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')
 notes=['# Instructor notes — PhAST six-hour course',
     'Primary source: `phast_autumn_school_2026.tex`. These are the same notes embedded in the Beamer source.',
-    'Three 120-minute sections; each contains 110 minutes of instruction/activity and one 10-minute break. Relative teaching timings are not event-timetable claims or compute-runtime measurements.']
+    'Three 120-minute sections; each contains 110 minutes of instruction/activity and one 10-minute break. Timings describe relative teaching allocations; notebook execution has separate runtime receipts.']
 for m in manifest:
     notes.extend([f"## {m['slide']}. {m['title']}",f"Timing: {m['timing']}",m['notes']])
 (ROOT/'beamer_speaker_notes.md').write_text('\n\n'.join(notes)+'\n')

@@ -1,6 +1,7 @@
 sphinx==7.4.7
 myst-nb==1.4.0
-sphinx-immaterial==0.13.9
+sphinx-book-theme==1.1.4
+pydata-sphinx-theme==0.15.4
 sphinx-copybutton==0.5.2
 nbformat==5.10.4
 nbconvert==7.17.0

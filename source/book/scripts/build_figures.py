@@ -208,7 +208,7 @@ def methods_map():
     flow_arrow(ax, [(4.92, 3.19), (4.92, 2.62)],
                label="solve the discrete equations", label_at=(5.21, 2.90), align="left")
     flow_text(ax, 0.98, 0.43,
-              "Quasi-Newton is not a fracture model; XFEM is not a traction law.",
+              "Choose a fracture model, spatial approximation and solution algorithm.",
               14, FLOW_GREY)
     flow_save(fig, "01_methods_map")
 
@@ -281,7 +281,7 @@ def fem_pipeline():
 
 
 def autograd_inverse():
-    fig, ax = flow_canvas("A gradient is not an optimisation step", 8.1)
+    fig, ax = flow_canvas("Gradients and optimisation updates", 8.1)
     flow_text(ax, 0.25, 7.22, "FORWARD  ·  evaluate the stated computation", 14,
               FLOW_BLUE, weight="bold")
     for x, width, title, body in [
@@ -299,7 +299,7 @@ def autograd_inverse():
     flow_node(ax, 0.25, 3.10, 2.33, 1.48, "Input sensitivity",
               r"$\nabla_p J$", color=FLOW_ORANGE, body_size=20, title_size=16)
     flow_node(ax, 3.39, 3.10, 2.43, 1.48, "Reverse pass",
-              r"$(\partial y/\partial p)^T$" + "\nApply; do not invert.",
+              r"$(\partial y/\partial p)^T$" + "\nApply to the adjoint.",
               color=FLOW_ORANGE, body_size=14, title_size=16)
     flow_node(ax, 6.64, 3.10, 2.33, 1.48, "Loss sensitivity",
               r"$\nabla_yJ=y-y^\star$", color=FLOW_ORANGE, body_size=16, title_size=16)
@@ -318,7 +318,7 @@ def autograd_inverse():
     flow_text(ax, 2.01, 0.98, r"Optimise: $p_{\mathrm{new}}=p-\alpha\nabla_pJ$",
               18, FLOW_TEAL, va="center")
     flow_text(ax, 0.25, 0.34,
-              "A local derivative check does not establish a unique inverse solution.",
+              "Inverse uniqueness depends on the observations, loading and parameterisation.",
               14, FLOW_GREY)
     flow_save(fig, "05_autograd_inverse")
 

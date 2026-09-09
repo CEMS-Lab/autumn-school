@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Phase-field fracture: animated explanations</title>
+<style>
+:root{color-scheme:light}*{box-sizing:border-box}body{margin:0;color:#17212a;background:#fff;font:18px/1.6 Arial,sans-serif}
+main{max-width:1040px;margin:auto;padding:36px 24px 60px}h1{font-size:clamp(28px,4vw,42px);line-height:1.16;margin:0 0 18px}
+h2{font-size:clamp(23px,3vw,31px);line-height:1.2;margin:6px 0 12px}p{max-width:82ch}a{color:#245a81;text-underline-offset:3px}
+nav{display:flex;flex-wrap:wrap;gap:8px 20px;margin:24px 0}section{padding:32px 0;border-top:1px solid #d8e0e5}
+.placement,figcaption{color:#4f5b63;font-size:16px}figure{margin:20px 0 10px}video{display:block;width:100%;aspect-ratio:16/9;background:white}
+figcaption{padding-top:10px}.print-poster{display:none}.downloads{display:flex;gap:24px;flex-wrap:wrap}details{margin:16px 0}summary{cursor:pointer;color:#245a81}
+:focus-visible{outline:3px solid #087f82;outline-offset:4px}footer{border-top:1px solid #d8e0e5;padding-top:24px;font-size:16px}
+@media(max-width:480px){main{padding:22px 16px}body{font-size:17px}}
+@media print{video{display:none}.print-poster{display:block;width:100%}details{display:block}section{break-inside:avoid}nav,.downloads{display:none}}
+</style></head><body><main>
+<header><h1>Phase-field fracture: animated explanations</h1>
+<p>Four short animations connect fracture representation, numerical updates, sensitivities and learned proposals.
+Pause at each stage and explain the quantities before continuing.</p>
+<p>On a small screen, use fullscreen playback to read mathematical labels.</p>
+<p>All clips are silent, original teaching diagrams of an analytic profile and computational algorithms.</p>
+<p><a href="animation_gallery.ipynb" download>Download the player notebook with questions and worked answers</a></p>
+<nav aria-label="Animation topics"><a href="#phase-field">A sharp crack and its diffuse representation</a><a href="#partitioned-step">Explicit mechanics and implicit damage</a><a href="#reverse-mode">Backpropagation through several updates</a><a href="#learned-proposal">A learned proposal and a checked correction</a></nav></header>
+<section id="phase-field">
+  <p class="placement">L1: energy and regularisation · 24.8 seconds</p>
+  <h2>A sharp crack and its diffuse representation</h2>
+  <p>An isolated analytic AT2 profile connects the damage field to the regularisation length. Increasing the length spreads the band.</p>
+  <figure>
+    <video controls playsinline preload="metadata" poster="mechanics/phase_field_band_poster.png"
+      aria-label="A sharp crack and its diffuse representation" aria-describedby="phase-field-caption">
+      <source src="mechanics/phase_field_band.mp4" type="video/mp4">
+      
+      Use the MP4 download or still frame below for alternative playback and reading.
+    </video>
+    <img class="print-poster" src="mechanics/phase_field_band_poster.png" alt="A sharp crack and its diffuse representation. Analytic isolated AT2 damage profile, with a fixed crack centre and varied regularisation length.">
+    <figcaption id="phase-field-caption">Analytic isolated AT2 damage profile, with a fixed crack centre and varied regularisation length.</figcaption>
+  </figure>
+  <p class="downloads"><a href="mechanics/phase_field_band.mp4" download>Download MP4</a>
+    <a href="mechanics/phase_field_band_poster.png" download>Download still frame</a></p>
+  <p><strong>Question.</strong> If the regularisation length decreases, what must change in the mesh to resolve the damage band?</p>
+  <details><summary>Worked answer</summary><p>The mesh must be refined relative to the length scale and its adequacy checked. The animation varies the regularisation length of an analytic isolated AT2 profile.</p></details>
+  <details><summary>Text description of the animation</summary><ol><li>A sharp crack marks a discontinuity.</li><li>A continuous damage field represents that crack.</li><li>The isolated AT2 profile decays away from the crack.</li><li>The regularisation length sets the width of the diffuse damage band.</li></ol></details>
+</section>
+<section id="partitioned-step">
+  <p class="placement">L1: numerical solution · 26.5 seconds</p>
+  <h2>Explicit mechanics and implicit damage</h2>
+  <p>One partitioned physical time step uses accepted damage for explicit mechanics, updates the driving quantity, and solves damage implicitly.</p>
+  <figure>
+    <video controls playsinline preload="metadata" poster="mechanics/explicit_implicit_step_poster.png"
+      aria-label="Explicit mechanics and implicit damage" aria-describedby="partitioned-step-caption">
+      <source src="mechanics/explicit_implicit_step.mp4" type="video/mp4">
+      
+      Use the MP4 download or still frame below for alternative playback and reading.
+    </video>
+    <img class="print-poster" src="mechanics/explicit_implicit_step_poster.png" alt="Explicit mechanics and implicit damage. Dynamic splitting schematic. The PhAST classroom notebook uses quasistatic mechanics.">
+    <figcaption id="partitioned-step-caption">Dynamic splitting schematic. The PhAST classroom notebook uses quasistatic mechanics.</figcaption>
+  </figure>
+  <p class="downloads"><a href="mechanics/explicit_implicit_step.mp4" download>Download MP4</a>
+    <a href="mechanics/explicit_implicit_step_poster.png" download>Download still frame</a></p>
+  <p><strong>Question.</strong> Which stability requirement governs the explicit mechanics update?</p>
+  <details><summary>Worked answer</summary><p>Choose the mechanics timestep according to its explicit stability requirements. Accept the state after the stated checks pass; on failure, stop or reduce the timestep and restart from the accepted state.</p></details>
+  <details><summary>Text description of the animation</summary><ol><li>Begin at an accepted time level.</li><li>Update mechanics with lagged damage.</li><li>Evaluate the tensile driving/history quantity.</li><li>Solve the implicit damage problem with irreversibility.</li><li>Check residuals, bounds and energy; accept or stop/reduce the timestep.</li></ol></details>
+</section>
+<section id="reverse-mode">
+  <p class="placement">L2: the chain rule · 27.7 seconds</p>
+  <h2>Backpropagation through several updates</h2>
+  <p>States move forward through two update maps. Adjoint sensitivities move backward and each use of the shared parameter contributes to its gradient.</p>
+  <figure>
+    <video controls playsinline preload="metadata" poster="learning/reverse_accumulation.png"
+      aria-label="Backpropagation through several updates" aria-describedby="reverse-mode-caption">
+      <source src="learning/reverse_accumulation.mp4" type="video/mp4">
+      <track kind="captions" src="learning/reverse_accumulation.vtt" srclang="en" label="English">
+      Use the MP4 download or still frame below for alternative playback and reading.
+    </video>
+    <img class="print-poster" src="learning/reverse_accumulation.png" alt="Backpropagation through several updates. Computational-graph schematic. Assumes differentiable maps, fixed initial state and a final-state-only loss.">
+    <figcaption id="reverse-mode-caption">Computational-graph schematic. Assumes differentiable maps, fixed initial state and a final-state-only loss.</figcaption>
+  </figure>
+  <p class="downloads"><a href="learning/reverse_accumulation.mp4" download>Download MP4</a>
+    <a href="learning/reverse_accumulation.png" download>Download still frame</a></p>
+  <p><strong>Question.</strong> Why does the parameter gradient contain a contribution from each update?</p>
+  <details><summary>Worked answer</summary><p>The same parameter enters both maps. The chain rule adds both paths to the loss. Here the initial state is fixed and the loss depends on the final state. Parameter-dependent initial states or explicit parameter dependence in the loss contribute additional terms.</p></details>
+  <details><summary>Text description of the animation</summary><ol><li>Specify a fixed initial state and a shared parameter.</li><li>Evaluate two differentiable update maps and a scalar final loss.</li><li>Propagate the final-state adjoint backward.</li><li>Sum the parameter contribution from every update.</li><li>An optimiser chooses a separate update using the resulting gradient.</li></ol></details>
+</section>
+<section id="learned-proposal">
+  <p class="placement">L3 / P3: hybrid methods · 26.5 seconds</p>
+  <h2>A learned proposal and a checked correction</h2>
+  <p>A compatible Radius-GNO or GNN produces a proposed damage field. Acceptance depends on declared bounds, residuals and constraints.</p>
+  <figure>
+    <video controls playsinline preload="metadata" poster="learning/checked_learned_proposal.png"
+      aria-label="A learned proposal and a checked correction" aria-describedby="learned-proposal-caption">
+      <source src="learning/checked_learned_proposal.mp4" type="video/mp4">
+      <track kind="captions" src="learning/checked_learned_proposal.vtt" srclang="en" label="English">
+      Use the MP4 download or still frame below for alternative playback and reading.
+    </video>
+    <img class="print-poster" src="learning/checked_learned_proposal.png" alt="A learned proposal and a checked correction. Interface schematic for a compatible learned proposal, declared numerical checks and reference correction.">
+    <figcaption id="learned-proposal-caption">Interface schematic for a compatible learned proposal, declared numerical checks and reference correction.</figcaption>
+  </figure>
+  <p class="downloads"><a href="learning/checked_learned_proposal.mp4" download>Download MP4</a>
+    <a href="learning/checked_learned_proposal.png" download>Download still frame</a></p>
+  <p><strong>Question.</strong> When can a corrected proposal be accepted?</p>
+  <details><summary>Worked answer</summary><p>Accept the corrected state when it passes the declared checks. If correction fails, stop and report nonconvergence. Assess interface compatibility, field quality and complete computational cost for the chosen architecture.</p></details>
+  <details><summary>Text description of the animation</summary><ol><li>Declare mesh/graph, feature ordering, units and normalisation.</li><li>Evaluate a compatible model and obtain a proposal.</li><li>Check bounds, irreversibility and the declared residual/constraint tolerance.</li><li>Accept a qualified state or use reference correction.</li><li>Recheck the correction and accept or report failure; include all overhead in any speed comparison.</li></ol></details>
+</section><footer><p>For PowerPoint or Keynote, insert a local MP4 as a video and choose click-to-play.
+Keep its scope caption on the slide. Use the PNG still for print or unsupported playback.
+Rehearse playback in your presentation software before teaching.</p>
+<p>The complete animation kit includes editable Manim source, rebuild instructions and mathematical teaching notes.
+The clips use the course's original academic diagram style.</p></footer></main></body></html>
