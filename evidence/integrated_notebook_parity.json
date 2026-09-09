@@ -1,0 +1,59 @@
+{
+  "execution": "none; preserved reviewed code and outputs",
+  "lessons": [
+    {
+      "name": "00_why_average_predictions_can_fail",
+      "code_and_outputs_sha256": "81180c50489bac448f18cabd7c13ebcda477cc72e3a55b88848b26bbe5b0946a",
+      "source_sha256": "73765147965532edff992e0a17d96855cd0dfc16b2e60477ec5bd14e614b362b",
+      "exercises": 2,
+      "code_cells": 6,
+      "recorded_seconds": 6.381,
+      "code_and_output_parity": true
+    },
+    {
+      "name": "01_phast_tiny_evolving_fracture",
+      "code_and_outputs_sha256": "b25f43edf6614be46ca21fbb08256b2afa7deb86b4e4c798bc943939013587cc",
+      "source_sha256": "2bd017bc8ab9a088eb6fa6ffb232ac24bfd4dbdcd5e359383091a2b452cf3c92",
+      "exercises": 2,
+      "code_cells": 7,
+      "recorded_seconds": 76.301,
+      "code_and_output_parity": true
+    },
+    {
+      "name": "02_degradation_autograd",
+      "code_and_outputs_sha256": "447b89c43254c86f9c388868e5e9a3a0af39bcb36d5fbe25aa4a669191cf642a",
+      "source_sha256": "db090bdc61b6dfa03d49a572f2325730c2fe16ceea14bde1e29fcba9f2ebf275",
+      "exercises": 2,
+      "code_cells": 4,
+      "recorded_seconds": 4.721,
+      "code_and_output_parity": true
+    },
+    {
+      "name": "03_tiny_derivative_inverse_toy",
+      "code_and_outputs_sha256": "dbb3d16a259cb679e6b9f1d1ebf8258cfb477649fed1d5f8bdcfa86f23a6f551",
+      "source_sha256": "e1a317509ef5f9b7a397fd9b47291f398407ffe5cd5a3c758bec94e7033885a7",
+      "exercises": 2,
+      "code_cells": 4,
+      "recorded_seconds": 5.446,
+      "code_and_output_parity": true
+    },
+    {
+      "name": "04_train_save_reload_adapter",
+      "code_and_outputs_sha256": "9f0d7594f82cfe063dd8cdc45126bddec72768cd14d9791935efc88b6a9b5079",
+      "source_sha256": "5a879994ef60ba6a357c7d8ce5573778817065c76dbb52930c43c40b13f87d25",
+      "exercises": 2,
+      "code_cells": 5,
+      "recorded_seconds": 9.473,
+      "code_and_output_parity": true
+    },
+    {
+      "name": "05_hybrid_reference_correction",
+      "code_and_outputs_sha256": "0287d434333bbd017a026d9216cb6b94806397fa9b9f7bf2dd6b708ea3aa01b9",
+      "source_sha256": "8137fa26e05a468dbb8b05fb391b8a4c005395f7cf0edc0495e5c10ea6c59757",
+      "exercises": 2,
+      "code_cells": 6,
+      "recorded_seconds": 5.179,
+      "code_and_output_parity": true
+    }
+  ]
+}

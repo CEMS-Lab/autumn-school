@@ -1,0 +1,19 @@
+{
+  "title": "05 — Assess a proposal and use a reference correction",
+  "objective": "Apply the course-owned adapter contract: validate compatible inputs, project bounds and irreversibility, assess the ToyHelmholtz residual, and distinguish one correction record from an end-to-end DAgger result.",
+  "prediction": "Predict which of the retained proposals passes a residual limit of $0.30$, and whether a field with a lower residual than the limit should still be silently accepted when its feature order is incompatible.",
+  "exercises": [
+    {
+      "title": "Make the residual-gate decision",
+      "question": "At load factor $0.94$, the compatible proposal has relative residual $0.1940274787$ and the deliberately corrupted proposal has relative residual $1.1640088764$. The acceptance limit is $0.30$. The reference fallback has residual $2.9696\\times10^{-15}$.\n\n1. Decide accept or reject for each proposal.\n2. Compute the compatible proposal's margin below the limit and the corrupted proposal's excess above it.\n3. Explain why the reference result is still needed after a rejection.",
+      "hint": "The adapter accepts only when residual $\\le0.30$. Subtract in the direction that produces a positive margin or excess.",
+      "solution": "1. The compatible proposal is accepted because\n\n$$\n0.1940274787\\le0.30.\n$$\n\nThe corrupted proposal is rejected because\n\n$$\n1.1640088764>0.30.\n$$\n\n2. The accepted proposal's margin is\n\n$$\n0.30-0.1940274787=0.1059725213,\n$$\n\nwhereas the corrupted proposal exceeds the limit by\n\n$$\n1.1640088764-0.30=0.8640088764.\n$$\n\n3. On rejection, the adapter invokes the classical ToyHelmholtz reference solve, which has a near-machine-precision residual in the retained result. The decision is not a claim of a PhAST AT2 residual, formal safety, or a measured acceleration; it is a transparent toy fallback demonstration."
+    },
+    {
+      "title": "Project a field and identify what DAgger still requires",
+      "question": "For an interior node, the adapter first clamps a raw proposal to $[0,1]$ and then applies irreversibility with $\\max(d_{\\mathrm{proposal}},d_{\\mathrm{previous}})$. Finally it enforces zero on the ToyHelmholtz boundary.\n\n1. Compute the final value for each case: (a) raw $0.15$, previous $0.25$, interior; (b) raw $1.4$, previous $0.25$, interior; (c) raw $0.7$, previous $0.25$, boundary.\n2. Name two interface checks that must happen before this projection.\n3. The notebook writes one correction record. List the missing stages needed before it could be called an end-to-end offline DAgger cycle.",
+      "hint": "Apply the operations in order. The boundary rule is last, so it overrides an otherwise admissible projected value.",
+      "solution": "1. (a) Clamp leaves $0.15$, irreversibility gives $\\max(0.15,0.25)=0.25$, and the node is interior, so the final value is $0.25$. (b) Clamp maps $1.4$ to $1$, then $\\max(1,0.25)=1$, so the final value is $1$. (c) The interior-style projection would be $0.7$, but the boundary rule is applied last, so the final value is $0$.\n\n2. The adapter checks that all feature values are finite, that feature order is exactly $[x/L,y/H,\\mathrm{load\\ factor}]$, that the mesh signature matches $[25,13]$, and that the feature tensor shape is compatible. A feature-order mismatch or a NaN is rejected rather than silently reshaped.\n\n3. One record is only a replay-style teaching artefact. A real offline DAgger cycle would collect states induced by the current model over a defined rollout, obtain reference labels for those states, aggregate the new labelled cases with the training data, retrain, and reassess a frozen held-out evaluation set. It should also report the reference-label cost. This lesson uses inference under **torch.no_grad()** and a ToyHelmholtz residual, so it is neither gradient-based training through PhAST nor an executed PhAST DAgger cycle."
+    }
+  ]
+}

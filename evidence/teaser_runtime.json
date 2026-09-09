@@ -1,0 +1,84 @@
+{
+  "receipt_schema": "ukacm-teaser-runtime-v1",
+  "date": "2026-09-09",
+  "execution_kind": "local CPU receipt; not a fresh Google Colab receipt",
+  "command": "python notebooks/run_with_timeout.py notebooks/00_why_average_predictions_can_fail.ipynb --timeout 300",
+  "aggregate_timeout_seconds": 300,
+  "aggregate_wall_seconds": 6.381,
+  "notebook": {
+    "source": "notebooks/00_why_average_predictions_can_fail.ipynb",
+    "executed": "notebooks/executed/00_why_average_predictions_can_fail.ipynb",
+    "html": "notebooks/html/00_why_average_predictions_can_fail.html",
+    "aggregate_wall_seconds": 6.381,
+    "status": "completed",
+    "embedded_png_count": 1
+  },
+  "environment": {
+    "machine": "Apple M4 Pro",
+    "architecture": "arm64",
+    "logical_cpus": 14,
+    "operating_system": "macOS 27.0",
+    "python": "3.10.18",
+    "torch": "2.8.0",
+    "matplotlib": "3.10.8",
+    "nbconvert": "7.17.0",
+    "cuda_available": false,
+    "torch_threads": 1
+  },
+  "reduced_problem": {
+    "energy": "W(q;s)=(q^2-s)^2/4",
+    "control_interval": [
+      0.25,
+      1.0
+    ],
+    "reference_branches": [
+      "+sqrt(s)",
+      "-sqrt(s)"
+    ],
+    "explicit_selected_branch": "q=softplus(a)+1e-8 > 0"
+  },
+  "counts": {
+    "unique_training_controls": 96,
+    "balanced_supervised_rows": 192,
+    "reference_branches_per_control": 2,
+    "heldout_controls": 73,
+    "supervised_epochs": 800,
+    "positive_energy_epochs": 1000
+  },
+  "training_seconds": {
+    "supervised": 0.2126,
+    "positive_energy": 0.2239
+  },
+  "heldout_metrics": {
+    "supervised_max_abs_prediction": 0.0001623609215912064,
+    "supervised_mean_abs_residual": 0.6249999952779399,
+    "supervised_mean_energy": 0.10938147994308955,
+    "positive_min_prediction": 0.5136183526070731,
+    "positive_mean_abs_residual": 0.002002033038503439,
+    "positive_max_abs_residual": 0.00880381213480369,
+    "positive_mean_energy": 1.5331257738901223e-06,
+    "positive_branch_rmse": 0.001987931297689105
+  },
+  "stationary_point_check": {
+    "s": 0.64,
+    "q": 0.0,
+    "energy": 0.1024,
+    "residual": -0.64,
+    "dW_dq": 0.0
+  },
+  "assertions": {
+    "no_notebook_errors": true,
+    "supervised_mean_near_zero": true,
+    "supervised_residual_large": true,
+    "positive_branch_is_positive": true,
+    "positive_residual_small": true,
+    "positive_energy_lower_than_supervised": true,
+    "stationary_gradient_zero_with_nonzero_residual": true,
+    "whole_notebook_under_300_seconds": true
+  },
+  "artifacts": [
+    "assets/teaser/why_average_predictions_can_fail.png",
+    "assets/teaser/teaser_metrics.json"
+  ],
+  "scope_boundary": "Original reduced algebraic PyTorch toy. It is not PhAST fracture, an FE or AT2 residual, solver-in-loop differentiation, a generative multimodal model, or a speed claim. The positive energy model represents one explicitly selected branch only."
+}

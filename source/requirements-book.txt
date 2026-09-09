@@ -1,0 +1,7 @@
+sphinx==7.4.7
+myst-nb==1.4.0
+sphinx-immaterial==0.13.9
+sphinx-copybutton==0.5.2
+nbformat==5.10.4
+nbconvert==7.17.0
+nbclient==0.10.4

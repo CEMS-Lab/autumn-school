@@ -1,0 +1,162 @@
+{
+  "receipt_schema": "ukacm-day2-notebook-runtime-v1",
+  "date": "2026-09-09",
+  "execution_kind": "local CPU receipt; not a fresh Google Colab receipt",
+  "aggregate_timeout_seconds": 300,
+  "executor": {
+    "command": "python notebooks/run_with_timeout.py notebooks/<name>.ipynb --timeout 300",
+    "cell_timeout_seconds": 300,
+    "output_directory": "notebooks/executed"
+  },
+  "environment": {
+    "machine": "Apple M4 Pro",
+    "architecture": "arm64",
+    "logical_cpus": 14,
+    "operating_system": "macOS 27.0 (26A5425a)",
+    "python": "3.10.18",
+    "torch": "2.8.0",
+    "matplotlib": "3.10.8",
+    "nbconvert": "7.17.0",
+    "cuda_available": false
+  },
+  "public_phast": {
+    "repository": "https://github.com/CEMS-Lab/PhAST",
+    "revision": "f6324f899f0701769810be117f27f1208f7a582e",
+    "version": "0.16.2",
+    "resolved_source": "vendor/PhAST/src",
+    "verification": "COURSE_SOURCE_MANIFEST.json revision and every src-file SHA-256 verified before import",
+    "tested_import_route": "PYTHONPATH=<public-PhAST>/src python"
+  },
+  "notebooks": [
+    {
+      "id": "01",
+      "source": "notebooks/01_phast_tiny_evolving_fracture.ipynb",
+      "executed": "notebooks/executed/01_phast_tiny_evolving_fracture.ipynb",
+      "html": "notebooks/html/01_phast_tiny_evolving_fracture.html",
+      "aggregate_wall_seconds": 76.301,
+      "solver_setup_seconds": 0.01283,
+      "solver_seconds": 70.07502,
+      "within_aggregate_timeout": true,
+      "scope": "Actual public PhAST AT2 phase-field, quasi-static T3 calculation; SciPy sparse-direct mechanics route on CPU.",
+      "configuration": {
+        "nodes": 8385,
+        "elements": 16384,
+        "load_steps": 60,
+        "dtype": "float64",
+        "Gc": 0.0005,
+        "l0": 0.15,
+        "total_symmetric_vertical_displacement": 0.04,
+        "solver_type": "quasi_static",
+        "mechanics_backend": "scipy",
+        "failure_flags_enabled": true
+      },
+      "output_checks": {
+        "warnings": [],
+        "incremental_damage_outside_locked_precrack_sum": 967.4594747770745,
+        "incremental_damage_outside_locked_precrack_max": 0.33508128500651757,
+        "final_damage_outside_locked_precrack_max": 0.9827202060098374,
+        "assertions_passed": true
+      },
+      "artifacts": [
+        "assets/day2_forward/tiny_notched_tension_damage.png",
+        "assets/day2_forward/tiny_notched_tension_increment.png",
+        "assets/day2_forward/tiny_notched_tension_response.png",
+        "assets/day2_forward/tiny_notched_tension_fields.npz",
+        "assets/day2_forward/tiny_notched_tension_prepared_mesh.npz",
+        "assets/day2_forward/tiny_notched_tension_summary.json"
+      ],
+      "interpretation_boundary": "This selected converged case shows diffuse damage evolution beyond the locked precrack. It is not presented as verified sharp crack-front propagation, a dynamic simulation, or XFEM."
+    },
+    {
+      "id": "02",
+      "source": "notebooks/02_degradation_autograd.ipynb",
+      "executed": "notebooks/executed/02_degradation_autograd.ipynb",
+      "html": "notebooks/html/02_degradation_autograd.html",
+      "aggregate_wall_seconds": 4.721,
+      "within_aggregate_timeout": true,
+      "scope": "Exact public PhAST standard degradation law plus local analytic/autograd/finite-difference comparison.",
+      "output_checks": {
+        "d": 0.25,
+        "eta": 1e-07,
+        "ad_error": 0.0,
+        "finite_difference_error": 3.5083047578154947e-12,
+        "endpoint_and_derivative_assertions_passed": true
+      },
+      "artifacts": ["assets/day2_forward/degradation_autograd.png"]
+    },
+    {
+      "id": "03",
+      "source": "notebooks/03_tiny_derivative_inverse_toy.ipynb",
+      "executed": "notebooks/executed/03_tiny_derivative_inverse_toy.ipynb",
+      "html": "notebooks/html/03_tiny_derivative_inverse_toy.html",
+      "aggregate_wall_seconds": 5.446,
+      "within_aggregate_timeout": true,
+      "scope": "Original 1-D elastic-bar tensor inverse toy; not a PhAST fracture inverse or research workflow.",
+      "output_checks": {
+        "E_true": 2.4,
+        "E_fit": 2.400302387627723,
+        "heldout_observed": 0.562499999999992,
+        "heldout_prediction": 0.5624291368281488,
+        "analytic_autograd_finite_difference_assertions_passed": true
+      },
+      "artifacts": ["assets/day2_forward/tiny_inverse_bar.png"]
+    },
+    {
+      "id": "04",
+      "source": "notebooks/04_train_save_reload_adapter.ipynb",
+      "executed": "notebooks/executed/04_train_save_reload_adapter.ipynb",
+      "html": "notebooks/html/04_train_save_reload_adapter.html",
+      "aggregate_wall_seconds": 9.473,
+      "training_seconds": 1.3265216250001686,
+      "within_aggregate_timeout": true,
+      "scope": "Original ToyHelmholtzProblem MLP/RBF field exercise; not PhAST fracture data or a public PhAST learned-damage checkpoint.",
+      "output_checks": {
+        "whole_case_split": {"train": 12, "validation": 2, "test": 2},
+        "epochs": 400,
+        "checkpoint_reload_max_abs_difference": 0.0,
+        "heldout_mlp_rmse": 0.05636315718170472,
+        "heldout_rbf_rmse": 0.0997143167782659,
+        "reload_and_heldout_assertions_passed": true
+      },
+      "artifacts": [
+        "assets/day2_forward/models/tiny_damage_mlp.pt",
+        "assets/day2_forward/models/tiny_damage_mlp.metadata.json",
+        "assets/day2_forward/tiny_mlp_heldout_field.png",
+        "assets/day2_forward/tiny_mlp_heldout_arrays.npz"
+      ]
+    },
+    {
+      "id": "05",
+      "source": "notebooks/05_hybrid_reference_correction.ipynb",
+      "executed": "notebooks/executed/05_hybrid_reference_correction.ipynb",
+      "html": "notebooks/html/05_hybrid_reference_correction.html",
+      "aggregate_wall_seconds": 5.179,
+      "within_aggregate_timeout": true,
+      "scope": "Original teaching adapter and ToyHelmholtzProblem residual/fallback; not a PhAST AT2 residual or end-to-end DAgger result.",
+      "output_checks": {
+        "compatible_proposal_relative_residual": 0.19402747874051113,
+        "residual_limit": 0.3,
+        "compatible_proposal_accepted": true,
+        "corrupted_proposal_relative_residual": 1.164008876432137,
+        "corrupted_proposal_rejected": true,
+        "fallback_relative_residual": 2.969565304912253e-15,
+        "feature_order_and_nonfinite_input_rejected": true
+      },
+      "artifacts": [
+        "assets/day2_forward/toy_adapter_fallback.png",
+        "assets/day2_forward/toy_adapter_replay_record.json"
+      ]
+    }
+  ],
+  "not_selected_pilots": [
+    {
+      "configuration": "64x32 T3, 60 increments, Gc=0.0005, l0=0.15, total displacement=0.06",
+      "result": "staggered solve raised configured non-convergence after 28.1 seconds; no artifact retained"
+    },
+    {
+      "configuration": "64x32 T3, 60 increments, Gc=0.0005, l0=0.15, total displacement=0.05",
+      "result": "staggered solve raised configured non-convergence after about 30 seconds; no artifact retained"
+    }
+  ],
+  "portability_boundary": "No executed notebook contains an author-specific absolute path. The vendored public source is preferred; an external public Git checkout is accepted only when its revision matches the pin."
+}

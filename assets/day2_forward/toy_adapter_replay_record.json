@@ -1,0 +1,23 @@
+{
+  "scope": "course-owned ToyHelmholtzProblem; one offline correction record, not PhAST DAgger",
+  "load_factor": 0.94,
+  "feature_order": [
+    "x_over_L",
+    "y_over_H",
+    "load_factor"
+  ],
+  "normal_assessment": {
+    "toy_relative_residual": 0.19402747874051113,
+    "residual_limit": 0.3,
+    "accepted": true,
+    "scope": "ToyHelmholtzProblem residual only; not a PhAST AT2 residual"
+  },
+  "rejected_assessment": {
+    "toy_relative_residual": 1.164008876432137,
+    "residual_limit": 0.3,
+    "accepted": false,
+    "scope": "ToyHelmholtzProblem residual only; not a PhAST AT2 residual"
+  },
+  "correction": "classical ToyHelmholtzProblem reference solve",
+  "heldout_evaluation_frozen": true
+}

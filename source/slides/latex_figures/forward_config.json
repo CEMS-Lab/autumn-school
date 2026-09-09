@@ -1,0 +1,59 @@
+{
+  "title": "Tiny notched-tension AT2 phase-field demonstration",
+  "public_source": {
+    "repository": "https://github.com/CEMS-Lab/PhAST",
+    "revision": "f6324f899f0701769810be117f27f1208f7a582e",
+    "version": "0.16.2",
+    "tested_import": "PYTHONPATH=<public-PhAST>/src python",
+    "course_bundle_setup": "python -m pip install ./vendor/PhAST  # preparatory step; do not include it in notebook runtime"
+  },
+  "geometry": {
+    "width": 4.0,
+    "height": 2.0,
+    "notch_length": 0.8,
+    "description": "A rectangular specimen with a centreline phase-field Dirichlet precrack from x=0 to x=notch_length."
+  },
+  "mesh": {
+    "nx": 128,
+    "ny": 64,
+    "element_type": "T3",
+    "dtype": "float64"
+  },
+  "material": {
+    "E": 1.0,
+    "nu": 0.3,
+    "Gc": 0.0005,
+    "l0": 0.15,
+    "rho": 1.0,
+    "energy_split": "isotropic",
+    "pf_model": "AT2",
+    "eta_residual": 1e-07
+  },
+  "loading": {
+    "total_symmetric_vertical_displacement": 0.04,
+    "n_load_steps": 60,
+    "first_load_factor": 0.0125,
+    "last_load_factor": 1.0
+  },
+  "solver": {
+    "solver_type": "quasi_static",
+    "mechanics_backend": "scipy",
+    "damage_preconditioner": "jacobi",
+    "use_multigrid": false,
+    "static_tol": 1e-08,
+    "static_max_iter": 1000,
+    "damage_tol": 1e-08,
+    "damage_max_iter": 1000,
+    "stagger_tol": 1e-05,
+    "max_stagger": 200,
+    "fail_on_mechanics_nonconvergence": true,
+    "fail_on_stagger_nonconvergence": true
+  },
+  "limits": {
+    "solver_seconds_target_low": 60,
+    "solver_seconds_target_high": 120,
+    "solver_seconds_hard": 300,
+    "notebook_seconds_hard": 300
+  },
+  "seed": 20260909
+}

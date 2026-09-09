@@ -1,0 +1,987 @@
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="05_differentiation_and_inverse.html">
+      
+      
+        <link rel="next" href="labs/03_tiny_derivative_inverse_toy.html">
+      
+      
+      <link rel="icon" href="">
+    
+    
+      
+        <title>6.3.1. Backpropagation through a stepped update - PhAST: Phase-field fracture with differentiable FEM</title>
+      
+    
+    
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+        <link rel="stylesheet" type="text/css" href="_static/sphinx_immaterial_theme.ad7809648a4561548.min.css?v=f290928c" />
+        <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+        <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+        <link rel="stylesheet" type="text/css" href="_static/mobile_math.css?v=1c40619e" />
+        <link rel="stylesheet" type="text/css" href="_static/learning_book.css?v=6dcc5951" />
+    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#start-from-a-sequence-of-update-maps" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="index.html" title="PhAST: Phase-field fracture with differentiable FEM" class="md-header__button md-logo" aria-label="PhAST: Phase-field fracture with differentiable FEM" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            PhAST: Phase-field fracture with differentiable FEM
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              6.3.1. Backpropagation through a stepped update
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="index.html" title="PhAST: Phase-field fracture with differentiable FEM" class="md-nav__button md-logo" aria-label="PhAST: Phase-field fracture with differentiable FEM" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+    </a>
+    PhAST: Phase-field fracture with differentiable FEM
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="00_welcome_and_routes.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>From cracks to computation:<wbr> learn by doing</span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="01_crack_representations.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>Crack representations:<wbr> sharp, cohesive, and diffuse</span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="02_phase_field_energy.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>Fracture energy:<wbr> AT1, AT2, degradation, and width</span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="03_staggered_solution.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>From solid mechanics to staggered damage updates</span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="04_fem_to_tensors.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>Geometry, FEM, tensors, and matrix-<wbr>free operators</span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="05_differentiation_and_inverse.html" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    <span>Differentiation and an illustrative inverse problem</span>
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_6" id="__nav_6_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            <span>Differentiation and an illustrative inverse problem</span>
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_1" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="05_differentiation_and_inverse.html#follow-the-gradient-one-update-at-a-time" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    <span>Follow the gradient one update at a time</span>
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_6_1" id="__nav_6_1_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6_1">
+            <span class="md-nav__icon md-icon"></span>
+            <span>Follow the gradient one update at a time</span>
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    <span>Backpropagation through a stepped update</span>
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="#" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>Backpropagation through a stepped update</span>
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#start-from-a-sequence-of-update-maps" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>Start from a sequence of update maps</span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#a-three-step-scalar-calculation-that-can-be-checked-by-hand" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>A three-<wbr>step scalar calculation that can be checked by hand</span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#a-restricted-fixed-history-at2-connection" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>A restricted fixed-<wbr>history AT2 connection</span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#check-your-understanding" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>Check your understanding</span>
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="05_differentiation_and_inverse.html#computational-lesson-check-a-derivative-and-recover-a-positive-modulus" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>Computational lesson:<wbr> check a derivative and recover a positive modulus</span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+  
+
+    
+      
+      
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="06_learning_adapter.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>Train, save, reload, adapters, and checked proposals</span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="07_practice_references.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>Practice, solutions, glossary, references, and contributing</span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#start-from-a-sequence-of-update-maps" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>Start from a sequence of update maps</span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#a-three-step-scalar-calculation-that-can-be-checked-by-hand" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>A three-<wbr>step scalar calculation that can be checked by hand</span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#a-restricted-fixed-history-at2-connection" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>A restricted fixed-<wbr>history AT2 connection</span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#check-your-understanding" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>Check your understanding</span>
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset" role="main">
+                
+                
+                  
+
+
+<h1 id="backpropagation-through-a-stepped-update"><span class="section-number">6.3.1. </span>Backpropagation through a stepped update<a class="headerlink" href="#backpropagation-through-a-stepped-update" title="Link to this heading">¶</a></h1>
+<p>This original, small example makes the bookkeeping behind reverse-mode
+automatic differentiation visible. It is deliberately an algebraic recurrence,
+not a fracture calculation. For a complementary visual introduction to
+reverse-mode differentiation in physics, see the <a class="reference external" href="https://physicsbaseddeeplearning.org/diffphys.html">Physics-Based Deep Learning
+discussion of differentiable physics</a>.
+That link is a pedagogical reference only: no external code, figure, or
+derivation is reproduced here.</p>
+<figure class="align-default" id="fig-backpropagation-step-by-step">
+<a class="reference internal image-reference" href="_images/05a_backpropagation.png"><img alt="_images/05a_backpropagation.png" src="_images/05a_backpropagation.png" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Figure 6.2 </span><span class="caption-text"><span class="caption-text">
+One parameter can influence a final loss at every update. Reverse mode passes
+a cotangent backwards and adds one parameter contribution per use of that
+parameter.</span><a class="headerlink" href="#fig-backpropagation-step-by-step" title="Permalink to this image">¶</a></figcaption>
+</figure>
+<h2 id="start-from-a-sequence-of-update-maps"><span class="section-number">6.3.1.1. </span>Start from a sequence of update maps<a class="headerlink" href="#start-from-a-sequence-of-update-maps" title="Link to this heading">¶</a></h2>
+<p>Let a state evolve through <span class="math notranslate nohighlight">\(N\)</span> discrete updates,</p>
+<div class="math notranslate nohighlight">
+\[
+z_{n+1}=S_n(z_n,p),\qquad n=0,\ldots,N-1,
+\]</div>
+<p>where the same parameter vector <span class="math notranslate nohighlight">\(p\)</span> may appear in every <span class="math notranslate nohighlight">\(S_n\)</span>. A final field
+or state is observed by <span class="math notranslate nohighlight">\(y=Cz_N\)</span>, and a scalar loss is formed as</p>
+<div class="math notranslate nohighlight">
+\[
+J=\ell(y,p)=\ell(Cz_N,p).
+\]</div>
+<p>Here <span class="math notranslate nohighlight">\(C\)</span> is assumed fixed with respect to <span class="math notranslate nohighlight">\(p\)</span>. If an observation operator also
+depends on <span class="math notranslate nohighlight">\(p\)</span>, its derivative belongs in the direct parameter dependence of
+the final observable/loss.</p>
+<p>Define the local state and parameter derivatives</p>
+<div class="math notranslate nohighlight">
+\[
+A_n=\frac{\partial S_n}{\partial z_n},
+\qquad
+B_n=\frac{\partial S_n}{\partial p}.
+\]</div>
+<p>For a scalar loss, the terminal adjoint is the vector</p>
+<div class="math notranslate nohighlight">
+\[
+\lambda_N=C^\mathsf{T}\nabla_y\ell,
+\]</div>
+<p>and reverse accumulation is</p>
+<div class="math notranslate nohighlight">
+\[
+\lambda_n=A_n^\mathsf{T}\lambda_{n+1}
+\qquad (n=N-1,\ldots,0).
+\]</div>
+<p>The resulting <strong>total derivative</strong> is</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{dJ}{dp}
+=\frac{\partial\ell}{\partial p}
++\sum_{n=0}^{N-1}B_n^\mathsf{T}\lambda_{n+1}
++\left(\frac{\partial z_0}{\partial p}\right)^\mathsf{T}\lambda_0.
+\]</div>
+<p>This is <span class="math notranslate nohighlight">\(dJ/dp\)</span>, the gradient of the final scalar observable/loss with
+respect to the input parameter <span class="math notranslate nohighlight">\(p\)</span>. An optimisation algorithm uses that
+gradient in a <em>separate</em> choice such as</p>
+<div class="math notranslate nohighlight">
+\[
+p_{\mathrm{new}}=p-\alpha\,\frac{dJ}{dp},
+\]</div>
+<p>where the learning rate <span class="math notranslate nohighlight">\(\alpha\)</span> and any line search, regularisation, or
+constraint handling belong to the optimisation method rather than to reverse
+accumulation itself.</p>
+<p>If <span class="math notranslate nohighlight">\(z_N\)</span> is a field, <span class="math notranslate nohighlight">\(\lambda_N\)</span> has one entry per field degree of freedom.
+For a scalar loss, the loss fixes the seed. For a vector-valued output, choose
+a seed <span class="math notranslate nohighlight">\(v\)</span> to obtain a vector–Jacobian product <span class="math notranslate nohighlight">\(A_n^\mathsf{T}v\)</span>. Neither
+case requires forming a full Jacobian matrix. This is why a scalar
+<code class="docutils literal notranslate"><span class="pre">loss.backward()</span></code> can be economical even when the state is large.</p>
+<h2 id="a-three-step-scalar-calculation-that-can-be-checked-by-hand"><span class="section-number">6.3.1.2. </span>A three-step scalar calculation that can be checked by hand<a class="headerlink" href="#a-three-step-scalar-calculation-that-can-be-checked-by-hand" title="Link to this heading">¶</a></h2>
+<p>Use the explicit recurrence</p>
+<div class="math notranslate nohighlight">
+\[
+x_{n+1}=(1-\Delta t\,p)x_n+\Delta t\,f,
+\qquad
+J=\frac12(x_3-y_\star)^2.
+\]</div>
+<p>It is a relaxation/load <strong>analogue only</strong>, not PhAST, phase-field fracture, or
+a claim about a finite-element time integrator. The parameter <span class="math notranslate nohighlight">\(p\)</span> appears at
+every step, so it provides a clean miniature of the shared-parameter sum.
+For this scalar homogeneous relaxation, choosing <span class="math notranslate nohighlight">\(p&gt;0\)</span> and
+<span class="math notranslate nohighlight">\(0&lt;\Delta t\,p&lt;1\)</span> makes <span class="math notranslate nohighlight">\(0&lt;1-\Delta t\,p&lt;1\)</span>. That is a property of this one
+recurrence, not a universal CFL or solver-stability rule.</p>
+<p>Take</p>
+<div class="math notranslate nohighlight">
+\[
+\Delta t=0.2,\quad p=0.8,\quad f=1.5,\quad x_0=0.4,
+\quad y_\star=0.9.
+\]</div>
+<p>Then <span class="math notranslate nohighlight">\(A_n=\partial x_{n+1}/\partial x_n=1-\Delta t p=0.84\)</span> and
+<span class="math notranslate nohighlight">\(B_n=\partial x_{n+1}/\partial p=-\Delta t x_n\)</span>. The forward states and
+local parameter derivatives are:</p>
+<table class="docutils data align-default">
+<thead>
+<tr class="row-odd"><th class="head text-right"><p>step <span class="math notranslate nohighlight">\(n\)</span></p></th>
+<th class="head text-right"><p><span class="math notranslate nohighlight">\(x_n\)</span></p></th>
+<th class="head text-right"><p><span class="math notranslate nohighlight">\(x_{n+1}\)</span></p></th>
+<th class="head text-right"><p><span class="math notranslate nohighlight">\(B_n=-\Delta t x_n\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-right"><p>0</p></td>
+<td class="text-right"><p>0.400000</p></td>
+<td class="text-right"><p>0.636000</p></td>
+<td class="text-right"><p>-0.0800000</p></td>
+</tr>
+<tr class="row-odd"><td class="text-right"><p>1</p></td>
+<td class="text-right"><p>0.636000</p></td>
+<td class="text-right"><p>0.834240</p></td>
+<td class="text-right"><p>-0.1272000</p></td>
+</tr>
+<tr class="row-even"><td class="text-right"><p>2</p></td>
+<td class="text-right"><p>0.834240</p></td>
+<td class="text-right"><p>1.000762</p></td>
+<td class="text-right"><p>-0.1668480</p></td>
+</tr>
+</tbody>
+</table>
+<p>The terminal seed is <span class="math notranslate nohighlight">\(\lambda_3=x_3-y_\star=0.1007616\)</span>. Therefore</p>
+<div class="math notranslate nohighlight">
+\[
+\lambda_2=0.084639744,
+\qquad
+\lambda_1=0.07109738496,
+\qquad
+\lambda_0=0.0597218033664.
+\]</div>
+<p>The corresponding reverse contributions are:</p>
+<table class="docutils data align-default">
+<thead>
+<tr class="row-odd"><th class="head text-right"><p>step <span class="math notranslate nohighlight">\(n\)</span></p></th>
+<th class="head text-right"><p><span class="math notranslate nohighlight">\(\lambda_{n+1}\)</span></p></th>
+<th class="head text-right"><p><span class="math notranslate nohighlight">\(B_n\lambda_{n+1}\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-right"><p>0</p></td>
+<td class="text-right"><p>0.07109738</p></td>
+<td class="text-right"><p>-0.005687791</p></td>
+</tr>
+<tr class="row-odd"><td class="text-right"><p>1</p></td>
+<td class="text-right"><p>0.08463974</p></td>
+<td class="text-right"><p>-0.010766175</p></td>
+</tr>
+<tr class="row-even"><td class="text-right"><p>2</p></td>
+<td class="text-right"><p>0.10076160</p></td>
+<td class="text-right"><p>-0.016811871</p></td>
+</tr>
+</tbody>
+</table>
+<p>The displayed loss has no direct <span class="math notranslate nohighlight">\(p\)</span> dependence and <span class="math notranslate nohighlight">\(x_0\)</span> is fixed, so its
+two non-sum terms are zero. Adding the three entries in the last column gives</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{dJ}{dp}=-0.0332658376704.
+\]</div>
+<p>Those zero terms are a feature of this chosen calculation, not a general
+rule: a parameter-dependent observation/loss or parameter-dependent initial
+state contributes through the first or last term of the total-derivative
+formula.</p>
+<p>The accompanying script independently evaluates the same recurrence with
+PyTorch and a central finite difference. Its retained receipt records</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+\text{reverse accumulation} &amp;= -0.0332658376704,\\
+\text{PyTorch autograd} &amp;= -0.0332658376704,\\
+\text{central difference }(h=10^{-6}) &amp;= -0.0332658376618.
+\end{aligned}
+\end{split}\]</div>
+<p>The small finite-difference discrepancy is truncation and floating-point
+roundoff, not a new model effect. The complete check takes under five seconds
+on the recorded CPU and is reproducible with:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code>python<span class="w"> </span>source/book/scripts/build_backprop_example.py
+</code></pre></div>
+</div>
+<p>This command is written for the extracted public edition, from its package
+root; the script resolves <code class="docutils literal notranslate"><span class="pre">source/</span></code> as its course root and writes only its
+figure and review receipt there.</p>
+<p>The <a class="reference external" href="../evidence/backprop_example.json">machine-readable validation receipt</a>
+retains the measured runtime, all forward/reverse values, and the analytic,
+automatic-differentiation, and central-difference assertions used here.</p>
+<p>The check confirms this scalar recurrence and its stated arithmetic. It does
+not validate a fracture derivative or a complete optimisation workflow.</p>
+<h2 id="a-restricted-fixed-history-at2-connection"><span class="section-number">6.3.1.3. </span>A restricted fixed-history AT2 connection<a class="headerlink" href="#a-restricted-fixed-history-at2-connection" title="Link to this heading">¶</a></h2>
+<p>The packaged public PhAST source documents an AT2 damage weak form and an
+adjoint CG backward for selected damage-solve inputs in
+<code class="docutils literal notranslate"><span class="pre">vendor/PhAST/src/phast/solvers/damage_solver.py</span></code>. For an <strong>unconstrained
+interior solve</strong> (or a residual restricted to free damage degrees of freedom),
+with spatially constant <span class="math notranslate nohighlight">\(G_c\)</span> and no mesh-dependent <span class="math notranslate nohighlight">\(\gamma\)</span> correction, a
+useful <strong>fixed-history, fixed-mechanics reduced</strong> notation for that damage
+subproblem is</p>
+<div class="math notranslate nohighlight">
+\[
+R_d(d;G_c,H)
+=\left[\frac{G_c}{\ell}M+G_c\ell K+2M_H\right]d-2b_H=0,
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(M\)</span> and <span class="math notranslate nohighlight">\(K\)</span> are mass and stiffness assemblies, while <span class="math notranslate nohighlight">\(M_H\)</span> and <span class="math notranslate nohighlight">\(b_H\)</span>
+collect the history-weighted assembly. With <span class="math notranslate nohighlight">\(H\)</span>, mechanics, and <span class="math notranslate nohighlight">\(\ell\)</span> held
+fixed, let</p>
+<div class="math notranslate nohighlight">
+\[
+A=\frac{\partial R_d}{\partial d},
+\qquad
+A^\mathsf{T}\lambda=\frac{\partial J}{\partial d}.
+\]</div>
+<p>Implicit differentiation of this <em>reduced</em> residual gives</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{dJ}{dG_c}
+=\frac{\partial J}{\partial G_c}
+-\lambda^\mathsf{T}
+\left[\left(\frac{M}{\ell}+\ell K\right)d\right].
+\]</div>
+<p>The direct term remains only when the chosen loss explicitly depends on
+<span class="math notranslate nohighlight">\(G_c\)</span>. The minus sign follows from differentiating <span class="math notranslate nohighlight">\(R_d=0\)</span> and solving for
+<span class="math notranslate nohighlight">\(dd/dG_c\)</span>.</p>
+<p>This is intentionally narrower than an end-to-end fracture claim. In a full
+load history, mechanics can change <span class="math notranslate nohighlight">\(H\)</span>; an irreversibility update may use a
+non-smooth maximum; damage bounds can activate; and nonlinear/staggered
+iterations and stopping criteria matter. Active-set changes, history changes,
+and convergence failures must be accounted for by the selected differentiation
+rule. A discrete model change is not automatically differentiable merely
+because it is written in tensor operations.</p>
+<h2 id="check-your-understanding"><span class="section-number">6.3.1.4. </span>Check your understanding<a class="headerlink" href="#check-your-understanding" title="Link to this heading">¶</a></h2>
+<ol class="arabic simple">
+<li><p>In the scalar example, why are there three <span class="math notranslate nohighlight">\(B_n\lambda_{n+1}\)</span> terms even
+though there is only one scalar parameter <span class="math notranslate nohighlight">\(p\)</span>?</p></li>
+<li><p>Suppose <span class="math notranslate nohighlight">\(x_0=x_0(p)\)</span> instead of being fixed. Which term in the total
+derivative changes, and why is it propagated by <span class="math notranslate nohighlight">\(\lambda_0\)</span> rather than
+<span class="math notranslate nohighlight">\(\lambda_3\)</span>?</p></li>
+<li><p>Which assumptions must remain fixed before the displayed AT2 <span class="math notranslate nohighlight">\(G_c\)</span>
+identity can be treated as a reduced-subproblem calculation?</p></li>
+</ol>
+<div class="dropdown admonition">
+<p class="admonition-title">Short answers</p>
+<ol class="arabic simple">
+<li><p>The single parameter is used once in each of the three update maps. Each
+local use affects the final loss through the remaining steps, so reverse
+mode adds one local parameter contribution for each use.</p></li>
+<li><p>The initial-state term
+<span class="math notranslate nohighlight">\((\partial z_0/\partial p)^\mathsf{T}\lambda_0\)</span> becomes nonzero. The
+adjoint at step zero contains the sensitivity of the final loss to a
+perturbation of the initial state after every later update has been
+traversed backwards.</p></li>
+<li><p>The mechanics-dependent history field <span class="math notranslate nohighlight">\(H\)</span>, the mechanics state, and
+<span class="math notranslate nohighlight">\(\ell\)</span> are held fixed. The identity is not by itself a statement about
+history maxima, bounds/active sets, staggered convergence, or a total
+derivative through a full fracture load path.</p></li>
+</ol>
+</div>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  
+  
+  <div class="md-footer-meta md-typeset">
+    
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-footer-copyright__highlight">
+        &#169; Copyright 2026, UKACM Autumn School.
+        
+    </div>
+  
+    Created using
+    <a href="https://www.sphinx-doc.org/" target="_blank" rel="noopener">Sphinx</a>
+    7.4.7.
+     and
+    <a href="https://github.com/jbms/sphinx-immaterial/" target="_blank" rel="noopener">Sphinx-Immaterial</a>
+  
+</div>
+      
+    </div>
+    
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": ".", "features": [], "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+      
+        <script src="_static/documentation_options.js?v=fc6fd62b"></script>
+        <script src="_static/sphinx_immaterial_theme.32136f45f91ae6956.min.js?v=a7a9472a"></script>
+        <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="_static/copybutton.js?v=f281be69"></script>
+        <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script id="MathJax-script" src="_static/mathjax/tex-mml-chtml.js?v=cadf963e"></script>
+        <script src="_static/learning_book.js?v=7a62d495"></script>
+    
+  </body>
+</html>

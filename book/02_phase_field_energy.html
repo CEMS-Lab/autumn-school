@@ -1,0 +1,1083 @@
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="01_crack_representations.html">
+      
+      
+        <link rel="next" href="labs/02_degradation_autograd.html">
+      
+      
+      <link rel="icon" href="">
+    
+    
+      
+        <title>3. Fracture energy: AT1, AT2, degradation, and width - PhAST: Phase-field fracture with differentiable FEM</title>
+      
+    
+    
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+        <link rel="stylesheet" type="text/css" href="_static/sphinx_immaterial_theme.ad7809648a4561548.min.css?v=f290928c" />
+        <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+        <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+        <link rel="stylesheet" type="text/css" href="_static/mobile_math.css?v=1c40619e" />
+        <link rel="stylesheet" type="text/css" href="_static/learning_book.css?v=6dcc5951" />
+    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#a-common-energy-template" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="index.html" title="PhAST: Phase-field fracture with differentiable FEM" class="md-header__button md-logo" aria-label="PhAST: Phase-field fracture with differentiable FEM" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            PhAST: Phase-field fracture with differentiable FEM
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              3. Fracture energy: AT1, AT2, degradation, and width
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="index.html" title="PhAST: Phase-field fracture with differentiable FEM" class="md-nav__button md-logo" aria-label="PhAST: Phase-field fracture with differentiable FEM" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+    </a>
+    PhAST: Phase-field fracture with differentiable FEM
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="00_welcome_and_routes.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>From cracks to computation:<wbr> learn by doing</span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="01_crack_representations.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>Crack representations:<wbr> sharp, cohesive, and diffuse</span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+    
+  
+  
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__current-nested md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="#" class="md-nav__link md-nav__link--active">
+              
+  
+  
+  <span class="md-ellipsis">
+    <span>Fracture energy:<wbr> AT1, AT2, degradation, and width</span>
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link md-nav__link--active" for="__nav_3" id="__nav_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            <span>Fracture energy:<wbr> AT1, AT2, degradation, and width</span>
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="#computational-lesson-inspect-a-degradation-derivative" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    <span>Computational lesson:<wbr> inspect a degradation derivative</span>
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            <span>Computational lesson:<wbr> inspect a degradation derivative</span>
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="labs/02_degradation_autograd.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>Differentiate a degradation law</span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+  
+      
+    <li class="md-nav__item md-nav__item--active md-nav__current-toc">
+      
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    <span>Fracture energy:<wbr> AT1, AT2, degradation, and width</span>
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="#" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>Fracture energy:<wbr> AT1, AT2, degradation, and width</span>
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#a-common-energy-template" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>A common energy template</span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-damage-convention-and-degradation-derivative" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>The damage convention and degradation derivative</span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#computational-lesson-inspect-a-degradation-derivative" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>Computational lesson:<wbr> inspect a degradation derivative</span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Computational lesson: inspect a degradation derivative">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="labs/02_degradation_autograd.html" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>Differentiate a degradation law</span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#at2-and-at1-are-normalised-choices" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>AT2 and AT1 are normalised choices</span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="AT2 and AT1 are normalised choices">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#why-the-profiles-look-different" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>Why the profiles look different</span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deriving-the-strong-form-damage-residual" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>Deriving the strong-<wbr>form damage residual</span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#irreversibility-is-a-constraint-not-a-plot-style" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>Irreversibility is a constraint, not a plot style</span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#width-mesh-and-what-must-be-checked" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>Width, mesh, and what must be checked</span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercise-one-derivative-and-one-scale-argument" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>Exercise:<wbr> one derivative and one scale argument</span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sources-for-this-chapter" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>Sources for this chapter</span>
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="03_staggered_solution.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>From solid mechanics to staggered damage updates</span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="04_fem_to_tensors.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>Geometry, FEM, tensors, and matrix-<wbr>free operators</span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="05_differentiation_and_inverse.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>Differentiation and an illustrative inverse problem</span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="06_learning_adapter.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>Train, save, reload, adapters, and checked proposals</span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="07_practice_references.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>Practice, solutions, glossary, references, and contributing</span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#a-common-energy-template" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>A common energy template</span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-damage-convention-and-degradation-derivative" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>The damage convention and degradation derivative</span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#computational-lesson-inspect-a-degradation-derivative" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>Computational lesson:<wbr> inspect a degradation derivative</span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#at2-and-at1-are-normalised-choices" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>AT2 and AT1 are normalised choices</span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="AT2 and AT1 are normalised choices">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#why-the-profiles-look-different" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>Why the profiles look different</span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deriving-the-strong-form-damage-residual" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>Deriving the strong-<wbr>form damage residual</span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#irreversibility-is-a-constraint-not-a-plot-style" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>Irreversibility is a constraint, not a plot style</span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#width-mesh-and-what-must-be-checked" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>Width, mesh, and what must be checked</span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercise-one-derivative-and-one-scale-argument" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>Exercise:<wbr> one derivative and one scale argument</span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sources-for-this-chapter" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>Sources for this chapter</span>
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset" role="main">
+                
+                
+                  
+
+
+<h1 id="fracture-energy-at1-at2-degradation-and-width"><span class="section-number">3. </span>Fracture energy: AT1, AT2, degradation, and width<a class="headerlink" href="#fracture-energy-at1-at2-degradation-and-width" title="Link to this heading">¶</a></h1>
+<figure class="align-default" id="fig-energy-profiles">
+<a class="reference internal image-reference" href="_images/02_energy_profiles.png"><img alt="_images/02_energy_profiles.png" src="_images/02_energy_profiles.png" style="width: 96%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Figure 3.1 </span><span class="caption-text"><span class="caption-text">
+The crack-density choice and the degradation law are separate functions. The
+curves shown are mathematical profiles, not measured material data.</span><a class="headerlink" href="#fig-energy-profiles" title="Permalink to this image">¶</a></figcaption>
+</figure>
+<h2 id="a-common-energy-template"><span class="section-number">3.1. </span>A common energy template<a class="headerlink" href="#a-common-energy-template" title="Link to this heading">¶</a></h2>
+<p>For small-strain brittle fracture, a frequently used phase-field energy is</p>
+<div class="math notranslate nohighlight">
+\[
+\mathcal{E}_\ell(u,d)
+= \int_\Omega \left[
+g_\eta(d)\,\psi^+(\varepsilon(u))
++\psi^-(\varepsilon(u))
++\frac{G_c}{c_0}\left(
+\frac{w(d)}{\ell}+\ell|\nabla d|^2
+\right)\right]\mathrm{d}x
+-\mathcal{W}_{\mathrm{ext}}(u).
+\]</div>
+<p>The ingredients have different jobs:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\psi^+\)</span> is the part of elastic energy selected to drive fracture, often a
+tensile contribution;</p></li>
+<li><p><span class="math notranslate nohighlight">\(\psi^-\)</span> is retained rather than degraded in a tension–compression split;</p></li>
+<li><p><span class="math notranslate nohighlight">\(g_\eta(d)\)</span> reduces tensile stiffness as damage grows;</p></li>
+<li><p><span class="math notranslate nohighlight">\(G_c\)</span> sets the energy scale of fracture;</p></li>
+<li><p><span class="math notranslate nohighlight">\(w(d)\)</span> selects a crack-density family; and</p></li>
+<li><p><span class="math notranslate nohighlight">\(\ell\)</span> controls the regularised width of the damage band.</p></li>
+</ul>
+<p>This notation does not identify a unique model. Different spectral,
+volumetric–deviatoric, or other decompositions define <span class="math notranslate nohighlight">\(\psi^+\)</span> and <span class="math notranslate nohighlight">\(\psi^-\)</span>
+differently. State the split before interpreting compression, crack closure,
+or mixed-mode behaviour.</p>
+<h2 id="the-damage-convention-and-degradation-derivative"><span class="section-number">3.2. </span>The damage convention and degradation derivative<a class="headerlink" href="#the-damage-convention-and-degradation-derivative" title="Link to this heading">¶</a></h2>
+<p>This book uses <span class="math notranslate nohighlight">\(d=0\)</span> for intact material and <span class="math notranslate nohighlight">\(d=1\)</span> for fully broken material.
+A standard residual-stiffness degradation law is</p>
+<div class="math notranslate nohighlight">
+\[
+g_\eta(d) = (1-\eta_{\mathrm{res}})(1-d)^2+\eta_{\mathrm{res}},
+\qquad 0&lt;\eta_{\mathrm{res}}\ll1.
+\]</div>
+<p>It satisfies <span class="math notranslate nohighlight">\(g_\eta(0)=1\)</span> and <span class="math notranslate nohighlight">\(g_\eta(1)=\eta_{\mathrm{res}}\)</span>. The residual
+term helps prevent the elastic operator from becoming singular in a damaged
+zone. It should be reported because it affects the numerical problem and the
+post-peak response.</p>
+<p>For a hand calculation or a tensor implementation, differentiate explicitly:</p>
+<div class="math notranslate nohighlight">
+\[
+g_\eta'(d)=-2(1-\eta_{\mathrm{res}})(1-d),
+\qquad
+g_\eta''(d)=2(1-\eta_{\mathrm{res}}).
+\]</div>
+<p>The negative first derivative is meaningful: increasing <span class="math notranslate nohighlight">\(d\)</span> lowers the
+degraded tensile energy. It does <em>not</em> mean that damage is free to grow
+everywhere, because fracture density, gradients, boundary data, and
+irreversibility all enter the total variation.</p>
+<h2 id="computational-lesson-inspect-a-degradation-derivative"><span class="section-number">3.3. </span>Computational lesson: inspect a degradation derivative<a class="headerlink" href="#computational-lesson-inspect-a-degradation-derivative" title="Link to this heading">¶</a></h2>
+<p>Continue directly to the lesson below. Predict the sign of <span class="math notranslate nohighlight">\(g_\eta'(d)\)</span> at an
+interior damage value, then compare the analytic derivative with automatic
+differentiation and a central finite difference. The code calls the pinned
+public PhAST material law for this <em>local, smooth</em> check. It does not
+differentiate a full coupled fracture history, active constraint, or nonlinear
+solve.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="labs/02_degradation_autograd.html">3.3.1. Differentiate a degradation law</a></li>
+</ul>
+</div>
+<h2 id="at2-and-at1-are-normalised-choices"><span class="section-number">3.4. </span>AT2 and AT1 are normalised choices<a class="headerlink" href="#at2-and-at1-are-normalised-choices" title="Link to this heading">¶</a></h2>
+<p>The crack-density contribution is often written</p>
+<div class="math notranslate nohighlight">
+\[
+\Gamma_\ell(d)
+=\frac{1}{c_0}\int_\Omega
+\left(\frac{w(d)}{\ell}+\ell|\nabla d|^2\right)\mathrm{d}x,
+\qquad
+c_0=4\int_0^1\sqrt{w(s)}\,\mathrm{d}s.
+\]</div>
+<p>With this convention:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+\text{AT2:}\quad &amp; w(d)=d^2,\qquad c_0=2,\\
+\text{AT1:}\quad &amp; w(d)=d,\qquad c_0=\frac{8}{3}.
+\end{aligned}
+\end{split}\]</div>
+<p>The labels AT1 and AT2 are widely used, but coefficients in papers can look
+different because authors absorb factors into <span class="math notranslate nohighlight">\(G_c\)</span>, <span class="math notranslate nohighlight">\(c_0\)</span>, or the gradient
+term. Compare complete functionals, not a label alone.</p>
+<h3 id="why-the-profiles-look-different"><span class="section-number">3.4.1. </span>Why the profiles look different<a class="headerlink" href="#why-the-profiles-look-different" title="Link to this heading">¶</a></h3>
+<p>At a fully developed straight crack in an idealised one-dimensional setting,
+the AT2 profile has exponential tails,</p>
+<div class="math notranslate nohighlight">
+\[
+d_{\mathrm{AT2}}(x)=\exp(-|x|/\ell),
+\]</div>
+<p>whereas the corresponding AT1 profile is compactly supported,</p>
+<div class="math notranslate nohighlight">
+\[
+d_{\mathrm{AT1}}(x)
+=\left(1-\frac{|x|}{2\ell}\right)_+^2,
+\qquad (a)_+=\max(a,0).
+\]</div>
+<p>These ideal profiles explain the left panel of the preceding figure. They do
+not remove the need for a mesh-convergence study in a finite domain with
+boundary conditions and a particular loading path.</p>
+<p>In common one-dimensional analyses, AT1 exhibits a finite damage-initiation
+threshold, whereas AT2 can begin to reduce stiffness without a strictly
+elastic phase. That statement depends on the surrounding energy, loading, and
+history construction. It should not be shortened to “AT1 is always delayed”
+or “AT2 is always more brittle.”</p>
+<h2 id="deriving-the-strong-form-damage-residual"><span class="section-number">3.5. </span>Deriving the strong-form damage residual<a class="headerlink" href="#deriving-the-strong-form-damage-residual" title="Link to this heading">¶</a></h2>
+<p>Hold <span class="math notranslate nohighlight">\(u\)</span> fixed momentarily and take a virtual change <span class="math notranslate nohighlight">\(\delta d\)</span>. The
+damage-dependent part of the first variation is</p>
+<div class="math notranslate nohighlight">
+\[
+\delta_d\mathcal{E}_\ell
+=\int_\Omega\left[
+g_\eta'(d)\psi^+\,\delta d
++\frac{G_c}{c_0}\left(
+\frac{w'(d)}{\ell}\delta d
++2\ell\nabla d\cdot\nabla(\delta d)
+\right)\right]\mathrm{d}x.
+\]</div>
+<p>Integrating the gradient term by parts gives, away from active constraints,</p>
+<div class="math notranslate nohighlight">
+\[
+r_d
+=g_\eta'(d)\psi^+
++\frac{G_c}{c_0}\left(
+\frac{w'(d)}{\ell}-2\ell\Delta d
+\right)=0.
+\]</div>
+<p>A natural boundary condition for an unconstrained boundary is
+<span class="math notranslate nohighlight">\(\nabla d\cdot n=0\)</span>. The equation has three visible influences:</p>
+<ol class="arabic simple">
+<li><p><span class="math notranslate nohighlight">\(g_\eta'(d)\psi^+\)</span> drives damage where the selected elastic energy is high;</p></li>
+<li><p><span class="math notranslate nohighlight">\(w'(d)/\ell\)</span> penalises local damage; and</p></li>
+<li><p><span class="math notranslate nohighlight">\(-2\ell\Delta d\)</span> penalises abrupt spatial variation.</p></li>
+</ol>
+<p>The derivation also shows why a diffusion analogy is helpful but incomplete:
+the gradient term is diffusion-like, yet the mechanical driving energy and
+one-way damage history are essential.</p>
+<h2 id="irreversibility-is-a-constraint-not-a-plot-style"><span class="section-number">3.6. </span>Irreversibility is a constraint, not a plot style<a class="headerlink" href="#irreversibility-is-a-constraint-not-a-plot-style" title="Link to this heading">¶</a></h2>
+<p>For brittle damage, a common admissible set at load step <span class="math notranslate nohighlight">\(n\)</span> is</p>
+<div class="math notranslate nohighlight">
+\[
+d_n(x)\geq d_{n-1}(x), \qquad 0\leq d_n(x)\leq1.
+\]</div>
+<p>At a point where the lower bound is active, the unconstrained equation
+<span class="math notranslate nohighlight">\(r_d=0\)</span> need not hold. If only the lower bound is displayed, a local
+complementarity form is</p>
+<div class="math notranslate nohighlight">
+\[
+r_d-\lambda=0,\qquad
+\lambda\geq0,\qquad
+d-d_{n-1}\geq0,\qquad
+\lambda(d-d_{n-1})=0.
+\]</div>
+<p>The upper bound introduces a second multiplier. Implementations may instead
+use a history field, a constrained solver, or another equivalent strategy
+under stated assumptions. A colour map that happens to look monotone is not
+evidence that irreversibility was imposed correctly; check the stored
+constraint or history data.</p>
+<h2 id="width-mesh-and-what-must-be-checked"><span class="section-number">3.7. </span>Width, mesh, and what must be checked<a class="headerlink" href="#width-mesh-and-what-must-be-checked" title="Link to this heading">¶</a></h2>
+<p>The parameter <span class="math notranslate nohighlight">\(\ell\)</span> is a modelling and numerical length. It spreads the
+regularised crack and therefore interacts with mesh spacing <span class="math notranslate nohighlight">\(h\)</span>, geometry, and
+material calibration. A credible study reports <span class="math notranslate nohighlight">\(\ell\)</span>, the mesh, and a
+convergence or sensitivity check. There is no universal element-count slogan
+that replaces this check.</p>
+<p>Changing <span class="math notranslate nohighlight">\(\ell\)</span> can change:</p>
+<ul class="simple">
+<li><p>the apparent width of the damaged band;</p></li>
+<li><p>the peak load and softening response in a finite discretisation;</p></li>
+<li><p>the required mesh density and nonlinear conditioning; and</p></li>
+<li><p>the meaning of a comparison with an observed fracture process zone.</p></li>
+</ul>
+<p>The phase-field regularisation should not be described as a physical crack
+width unless that calibration has actually been established for the material
+and model.</p>
+<h2 id="exercise-one-derivative-and-one-scale-argument"><span class="section-number">3.8. </span>Exercise: one derivative and one scale argument<a class="headerlink" href="#exercise-one-derivative-and-one-scale-argument" title="Link to this heading">¶</a></h2>
+<ol class="arabic simple">
+<li><p>Evaluate <span class="math notranslate nohighlight">\(g_\eta(0)\)</span>, <span class="math notranslate nohighlight">\(g_\eta(1)\)</span>, and <span class="math notranslate nohighlight">\(g_\eta'(1)\)</span> for the law above.</p></li>
+<li><p>In the damage residual, which term becomes large when <span class="math notranslate nohighlight">\(\ell\)</span> is made small
+at fixed <span class="math notranslate nohighlight">\(d\)</span> and <span class="math notranslate nohighlight">\(\nabla d\)</span>?</p></li>
+<li><p>Why is it incomplete to infer mesh independence from an unchanged
+full-domain average of <span class="math notranslate nohighlight">\(d\)</span>?</p></li>
+</ol>
+<div class="dropdown admonition">
+<p class="admonition-title">Solution</p>
+<ol class="arabic simple">
+<li><p><span class="math notranslate nohighlight">\(g_\eta(0)=1\)</span>, <span class="math notranslate nohighlight">\(g_\eta(1)=\eta_{\mathrm{res}}\)</span>, and
+<span class="math notranslate nohighlight">\(g_\eta'(1)=0\)</span>. The derivative vanishes at the fully degraded endpoint for
+this quadratic law.</p></li>
+<li><p>The local crack-density contribution <span class="math notranslate nohighlight">\(w'(d)/\ell\)</span> scales inversely with
+<span class="math notranslate nohighlight">\(\ell\)</span>. The gradient and solution fields may also change, so this is a
+scale observation rather than a full solution argument.</p></li>
+<li><p>A spatial average can remain similar while the crack band moves, changes
+width, or is under-resolved. Compare fields, energies, and observables at
+stated refinements.</p></li>
+</ol>
+<p>In the computational lesson, the first result is a narrower check: it compares
+the analytic, automatic-differentiation, and finite-difference derivatives of
+the selected degradation law at one stated damage value. It is evidence about
+that scalar operation, not about the entire coupled fracture route.</p>
+</div>
+<h2 id="sources-for-this-chapter"><span class="section-number">3.9. </span>Sources for this chapter<a class="headerlink" href="#sources-for-this-chapter" title="Link to this heading">¶</a></h2>
+<p>The Ambrosio–Tortorelli regularisation idea underlies the AT terminology.
+For phase-field fracture derivations and comparisons, see
+<a class="reference external" href="https://doi.org/10.1002/nme.2861">Miehe, Welschinger, and Hofacker (2010)</a>,
+<a class="reference external" href="https://doi.org/10.1177/1056789510386852">Pham et al. (2011)</a>, and the
+review by <a class="reference external" href="https://doi.org/10.1098/rsta.2021.0021">Kristensen, Niordson, and Martínez-Pañeda
+(2021)</a>.</p>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  
+  
+  <div class="md-footer-meta md-typeset">
+    
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-footer-copyright__highlight">
+        &#169; Copyright 2026, UKACM Autumn School.
+        
+    </div>
+  
+    Created using
+    <a href="https://www.sphinx-doc.org/" target="_blank" rel="noopener">Sphinx</a>
+    7.4.7.
+     and
+    <a href="https://github.com/jbms/sphinx-immaterial/" target="_blank" rel="noopener">Sphinx-Immaterial</a>
+  
+</div>
+      
+    </div>
+    
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": ".", "features": [], "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+      
+        <script src="_static/documentation_options.js?v=fc6fd62b"></script>
+        <script src="_static/sphinx_immaterial_theme.32136f45f91ae6956.min.js?v=a7a9472a"></script>
+        <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="_static/copybutton.js?v=f281be69"></script>
+        <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script id="MathJax-script" src="_static/mathjax/tex-mml-chtml.js?v=cadf963e"></script>
+        <script src="_static/learning_book.js?v=7a62d495"></script>
+    
+  </body>
+</html>

@@ -1,0 +1,19 @@
+{
+  "title": "03 — Differentiate and recover a modulus in the bar toy",
+  "objective": "Derive the exact tip-displacement sensitivity of the course-owned elastic-bar exercise, then audit its positive modulus parameterisation and held-out recovery evidence.",
+  "prediction": "For a fixed positive load, predict the sign of $\\mathrm{d}u_{\\mathrm{tip}}/\\mathrm{d}E$. Also predict whether the notebook's $\\exp(\\mathrm{log\\_E})$ parameterisation imposes an upper bound on the modulus.",
+  "exercises": [
+    {
+      "title": "Derive the tip sensitivity",
+      "question": "The fixed-left, unit-length, unit-area bar has a tip load $F$ and a uniform modulus $E$.\n\n1. Derive $u_{\\mathrm{tip}}(E,F)$ and $\\mathrm{d}u_{\\mathrm{tip}}/\\mathrm{d}E$.\n2. Evaluate both at $E=1.8$ and $F=1.1$.\n3. Compare with the notebook's autograd and centred-FD values.",
+      "hint": "For a uniform axial bar, the series assembly gives $u_{\\mathrm{tip}}=FL/(EA)$. Here $L=A=1$.",
+      "solution": "1. With $L=A=1$, the assembled bar has\n\n$$\nu_{\\mathrm{tip}}=\\frac{F}{E}.\n$$\n\nDifferentiating gives\n\n$$\n\\frac{\\mathrm{d}u_{\\mathrm{tip}}}{\\mathrm{d}E}=-\\frac{F}{E^2}=-\\frac{u_{\\mathrm{tip}}}{E}.\n$$\n\n2. Therefore\n\n$$\nu_{\\mathrm{tip}}=\\frac{1.1}{1.8}=0.6111111111,\n\\qquad\n\\frac{\\mathrm{d}u_{\\mathrm{tip}}}{\\mathrm{d}E}=-\\frac{1.1}{1.8^2}=-0.3395061728.\n$$\n\n3. The retained autograd value is $-0.33950617283949214$, the centred-FD value is $-0.3395061727862192$, and the analytic value is $-0.3395061728395104$. The negative sign has the expected mechanics interpretation: a stiffer bar displaces less under the same load. This calculation is the course-owned bar toy, not a phase-field fracture sensitivity."
+    },
+    {
+      "title": "Audit the positive recovery parameterisation",
+      "question": "The optimiser holds **log_E** as its trainable parameter and computes $E_{\\mathrm{trial}}=\\exp(\\mathrm{log\\_E})$, starting from $E=0.9$. It reports $E_{\\mathrm{true}}=2.4$, $E_{\\mathrm{fit}}=2.4003023876$, held-out observed displacement $0.5625$, and held-out prediction $0.5624291368$.\n\n1. What values of $E$ can this parameterisation represent?\n2. Why is it incorrect to describe this code as a bounded-sigmoid parameterisation?\n3. Compute the absolute held-out displacement error and state one reason the held-out load is useful.",
+      "hint": "The exponential maps every real number to a strictly positive number. Compare the observed and predicted held-out displacements directly.",
+      "solution": "1. Since $\\exp(z)>0$ for every real $z$, the parameterisation enforces only $E>0$. It has no finite upper bound. The initial value is obtained because $\\exp(\\log(0.9))=0.9$.\n\n2. A sigmoid would constrain a raw parameter to $(0,1)$ before any explicit scaling. The canonical notebook uses $\\exp(\\mathrm{log\\_E})$, not a sigmoid, so it should be described as a positivity transform only.\n\n3. The held-out absolute error is\n\n$$\n|0.562499999999992-0.5624291368281488|\n=7.0863\\times10^{-5}.\n$$\n\nThe held-out load $1.35$ was not one of the four optimisation loads, so it checks whether the recovered scalar predicts a separate observation rather than merely reproducing the fitting points. It remains a deliberately simple inverse toy: a successful scalar recovery does not validate a history-dependent fracture inverse."
+    }
+  ]
+}

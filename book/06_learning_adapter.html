@@ -1,0 +1,1217 @@
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="labs/03_tiny_derivative_inverse_toy.html">
+      
+      
+        <link rel="next" href="labs/04_train_save_reload_adapter.html">
+      
+      
+      <link rel="icon" href="">
+    
+    
+      
+        <title>7. Train, save, reload, adapters, and checked proposals - PhAST: Phase-field fracture with differentiable FEM</title>
+      
+    
+    
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+        <link rel="stylesheet" type="text/css" href="_static/sphinx_immaterial_theme.ad7809648a4561548.min.css?v=f290928c" />
+        <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+        <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+        <link rel="stylesheet" type="text/css" href="_static/mobile_math.css?v=1c40619e" />
+        <link rel="stylesheet" type="text/css" href="_static/learning_book.css?v=6dcc5951" />
+    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#decide-what-is-being-learned" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="index.html" title="PhAST: Phase-field fracture with differentiable FEM" class="md-header__button md-logo" aria-label="PhAST: Phase-field fracture with differentiable FEM" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            PhAST: Phase-field fracture with differentiable FEM
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              7. Train, save, reload, adapters, and checked proposals
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="index.html" title="PhAST: Phase-field fracture with differentiable FEM" class="md-nav__button md-logo" aria-label="PhAST: Phase-field fracture with differentiable FEM" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+    </a>
+    PhAST: Phase-field fracture with differentiable FEM
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="00_welcome_and_routes.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>From cracks to computation:<wbr> learn by doing</span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="01_crack_representations.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>Crack representations:<wbr> sharp, cohesive, and diffuse</span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="02_phase_field_energy.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>Fracture energy:<wbr> AT1, AT2, degradation, and width</span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="03_staggered_solution.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>From solid mechanics to staggered damage updates</span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="04_fem_to_tensors.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>Geometry, FEM, tensors, and matrix-<wbr>free operators</span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="05_differentiation_and_inverse.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>Differentiation and an illustrative inverse problem</span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+    
+  
+  
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__current-nested md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="#" class="md-nav__link md-nav__link--active">
+              
+  
+  
+  <span class="md-ellipsis">
+    <span>Train, save, reload, adapters, and checked proposals</span>
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link md-nav__link--active" for="__nav_7" id="__nav_7_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            <span>Train, save, reload, adapters, and checked proposals</span>
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_1" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="#computational-lesson-train-save-reload-and-compare-a-toy-field-model" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    <span>Computational lesson:<wbr> train, save, reload, and compare a toy field model</span>
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_7_1" id="__nav_7_1_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_1">
+            <span class="md-nav__icon md-icon"></span>
+            <span>Computational lesson:<wbr> train, save, reload, and compare a toy field model</span>
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="labs/04_train_save_reload_adapter.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>Train, save, reload, and compare a field model</span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="#computational-lesson-accept-a-compatible-proposal-or-fall-back" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    <span>Computational lesson:<wbr> accept a compatible proposal or fall back</span>
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_7_2" id="__nav_7_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_2">
+            <span class="md-nav__icon md-icon"></span>
+            <span>Computational lesson:<wbr> accept a compatible proposal or fall back</span>
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="labs/05_hybrid_reference_correction.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>Assess a proposal and use a reference correction</span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+  
+      
+    <li class="md-nav__item md-nav__item--active md-nav__current-toc">
+      
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    <span>Train, save, reload, adapters, and checked proposals</span>
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="#" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>Train, save, reload, adapters, and checked proposals</span>
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#decide-what-is-being-learned" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>Decide what is being learned</span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#a-small-supervised-learning-contract" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>A small supervised-<wbr>learning contract</span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#where-does-the-training-gradient-travel" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>Where does the training gradient travel?</span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#train-save-and-reload-reproducibly" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>Train, save, and reload reproducibly</span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#computational-lesson-train-save-reload-and-compare-a-toy-field-model" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>Computational lesson:<wbr> train, save, reload, and compare a toy field model</span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Computational lesson: train, save, reload, and compare a toy field model">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="labs/04_train_save_reload_adapter.html" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>Train, save, reload, and compare a field model</span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-an-adapter-can-and-cannot-repair" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>What an adapter can and cannot repair</span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#from-a-proposal-to-a-checked-hybrid-calculation" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>From a proposal to a checked hybrid calculation</span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#computational-lesson-accept-a-compatible-proposal-or-fall-back" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>Computational lesson:<wbr> accept a compatible proposal or fall back</span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Computational lesson: accept a compatible proposal or fall back">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="labs/05_hybrid_reference_correction.html" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>Assess a proposal and use a reference correction</span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dagger-style-data-aggregation" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>DAgger-<wbr>style data aggregation</span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#evaluation-fields-quantities-and-failure-modes" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>Evaluation:<wbr> fields, quantities, and failure modes</span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercise-identify-the-missing-provenance" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>Exercise:<wbr> identify the missing provenance</span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sources-for-this-chapter" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>Sources for this chapter</span>
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="07_practice_references.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>Practice, solutions, glossary, references, and contributing</span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#decide-what-is-being-learned" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>Decide what is being learned</span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#a-small-supervised-learning-contract" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>A small supervised-<wbr>learning contract</span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#where-does-the-training-gradient-travel" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>Where does the training gradient travel?</span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#train-save-and-reload-reproducibly" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>Train, save, and reload reproducibly</span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#computational-lesson-train-save-reload-and-compare-a-toy-field-model" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>Computational lesson:<wbr> train, save, reload, and compare a toy field model</span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-an-adapter-can-and-cannot-repair" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>What an adapter can and cannot repair</span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#from-a-proposal-to-a-checked-hybrid-calculation" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>From a proposal to a checked hybrid calculation</span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#computational-lesson-accept-a-compatible-proposal-or-fall-back" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>Computational lesson:<wbr> accept a compatible proposal or fall back</span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dagger-style-data-aggregation" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>DAgger-<wbr>style data aggregation</span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#evaluation-fields-quantities-and-failure-modes" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>Evaluation:<wbr> fields, quantities, and failure modes</span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercise-identify-the-missing-provenance" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>Exercise:<wbr> identify the missing provenance</span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sources-for-this-chapter" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>Sources for this chapter</span>
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset" role="main">
+                
+                
+                  
+
+
+<h1 id="train-save-reload-adapters-and-checked-proposals"><span class="section-number">7. </span>Train, save, reload, adapters, and checked proposals<a class="headerlink" href="#train-save-reload-adapters-and-checked-proposals" title="Link to this heading">¶</a></h1>
+<figure class="align-default" id="fig-learning-cycle">
+<a class="reference internal image-reference" href="_images/06_learning_cycle.png"><img alt="_images/06_learning_cycle.png" src="_images/06_learning_cycle.png" style="width: 96%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Figure 7.1 </span><span class="caption-text"><span class="caption-text">
+A learning component is useful only when its inputs, outputs, and physics
+checks are stated as clearly as those of the reference calculation.</span><a class="headerlink" href="#fig-learning-cycle" title="Permalink to this image">¶</a></figcaption>
+</figure>
+<h2 id="decide-what-is-being-learned"><span class="section-number">7.1. </span>Decide what is being learned<a class="headerlink" href="#decide-what-is-being-learned" title="Link to this heading">¶</a></h2>
+<p>The phrase “use machine learning for fracture” hides several different tasks.
+Name the role precisely.</p>
+<ul class="simple">
+<li><p><strong>Surrogate:</strong> approximate a map from stated inputs to a stated output.</p></li>
+<li><p><strong>Proposal model:</strong> supply an initial damage field, displacement field, or
+parameter guess to a mechanics calculation.</p></li>
+<li><p><strong>Adapter:</strong> convert one data representation to another, such as a mesh
+ordering or normalised tensor layout.</p></li>
+<li><p><strong>Corrector:</strong> update a proposal using a residual, an iterative solve, or a
+trusted reference computation.</p></li>
+<li><p><strong>Emulator for an observable:</strong> approximate a scalar response while not
+necessarily reproducing a full field.</p></li>
+</ul>
+<p>These roles can be combined, but a label should not claim more than the
+interface actually supports. A model that predicts a useful initialisation is
+not automatically a replacement for a fracture solver.</p>
+<h2 id="a-small-supervised-learning-contract"><span class="section-number">7.2. </span>A small supervised-learning contract<a class="headerlink" href="#a-small-supervised-learning-contract" title="Link to this heading">¶</a></h2>
+<p>Let <span class="math notranslate nohighlight">\(x_i\)</span> be an input representation and <span class="math notranslate nohighlight">\(z_i\)</span> a reference target. A simple
+training objective is</p>
+<div class="math notranslate nohighlight">
+\[
+\mathcal{L}(\theta)
+=\frac{1}{N}\sum_{i=1}^N
+\left\|f_\theta(x_i)-z_i\right\|_2^2.
+\]</div>
+<p>Before training, write down:</p>
+<ol class="arabic simple">
+<li><p>what each channel of <span class="math notranslate nohighlight">\(x_i\)</span> means, including coordinates, parameters,
+fields, and units;</p></li>
+<li><p>what target <span class="math notranslate nohighlight">\(z_i\)</span> means and at which load step or time it is sampled;</p></li>
+<li><p>how meshes, nodes, or quadrature points are ordered;</p></li>
+<li><p>the training, validation, and test split rule; and</p></li>
+<li><p>the metric and physical diagnostic reported on each split.</p></li>
+</ol>
+<p>Normalisation belongs to this contract. If an input component is transformed
+as <span class="math notranslate nohighlight">\(\tilde x=(x-\mu)/s\)</span>, save <span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(s\)</span> with the model. A reloaded model
+without its preprocessing state is a different computational map.</p>
+<h2 id="where-does-the-training-gradient-travel"><span class="section-number">7.3. </span>Where does the training gradient travel?<a class="headerlink" href="#where-does-the-training-gradient-travel" title="Link to this heading">¶</a></h2>
+<p>Distinguish three computational graphs before choosing a learning method.</p>
+<p><strong>Supervised fitting</strong> compares a prediction with stored targets:</p>
+<div class="math notranslate nohighlight">
+\[
+\mathcal L_{\mathrm{sup}}=\|f_\theta(x)-z_{\mathrm{ref}}\|^2.
+\]</div>
+<p>A solver may have generated the targets offline. Its derivatives are not
+needed for this training graph.</p>
+<p><strong>Residual-based training</strong> evaluates a stated equation at the prediction:</p>
+<div class="math notranslate nohighlight">
+\[
+\mathcal L_{\mathrm{res}}=\|R(f_\theta(x);p)\|^2.
+\]</div>
+<p>The gradient passes through the residual evaluation. This does not necessarily
+differentiate a converged solve. Boundary conditions and branch selection still
+matter, as the opening algebraic teaser illustrates.</p>
+<p><strong>Solver-in-the-loop training</strong> evaluates the consequences of a prediction:</p>
+<div class="math notranslate nohighlight">
+\[
+z_0=f_\theta(x),\qquad z_{n+1}=S(z_n,p),\qquad
+\mathcal L=\|Cz_N-y_*\|^2.
+\]</div>
+<p>Here <span class="math notranslate nohighlight">\(C\)</span> extracts the observed quantity. With fixed <span class="math notranslate nohighlight">\(p\)</span> and a loss depending
+only on <span class="math notranslate nohighlight">\(z_N\)</span>, reverse propagation gives</p>
+<div class="math notranslate nohighlight">
+\[
+\bar z_N=2C^T(Cz_N-y_*),\qquad
+\bar z_n=\left(\frac{\partial S}{\partial z_n}\right)^T\bar z_{n+1},
+\qquad
+\nabla_\theta\mathcal L=
+\left(\frac{\partial f_\theta}{\partial\theta}\right)^T\bar z_0.
+\]</div>
+<p>These are vector–Jacobian products; the full Jacobians need not be stored.
+An implicit adjoint may replace differentiation through every solver iteration.
+The <a class="reference external" href="https://physicsbaseddeeplearning.org/diffphys.html">differentiable-physics introduction</a>
+develops this operator viewpoint. For fracture, history updates, active
+constraints, stopping tolerances and any detached arrays require explicit
+derivative conventions and checks.</p>
+<p>The following notebooks demonstrate supervised training and checked proposals
+on a toy field problem. They do not yet implement end-to-end training through
+the PhAST fracture solver.</p>
+<h2 id="train-save-and-reload-reproducibly"><span class="section-number">7.4. </span>Train, save, and reload reproducibly<a class="headerlink" href="#train-save-and-reload-reproducibly" title="Link to this heading">¶</a></h2>
+<p>A minimal saved model package should include:</p>
+<ul class="simple">
+<li><p>model weights and architecture configuration;</p></li>
+<li><p>input and target normalisation parameters;</p></li>
+<li><p>feature/channel names and tensor-shape convention;</p></li>
+<li><p>training data identifier and split definition;</p></li>
+<li><p>software/library version and numerical precision; and</p></li>
+<li><p>a small reload test that compares a saved prediction against the
+in-memory prediction for the same declared input.</p></li>
+</ul>
+<h2 id="computational-lesson-train-save-reload-and-compare-a-toy-field-model"><span class="section-number">7.5. </span>Computational lesson: train, save, reload, and compare a toy field model<a class="headerlink" href="#computational-lesson-train-save-reload-and-compare-a-toy-field-model" title="Link to this heading">¶</a></h2>
+<p>The lesson below makes the saved state visible: feature order, normalisation,
+mesh signature, data split, checkpoint metadata, and a reload comparison all
+appear beside the code and field plots. Begin by predicting which information
+must survive serialization for a newly created model object to reproduce the
+same output. The lesson uses an original <code class="docutils literal notranslate"><span class="pre">ToyHelmholtzProblem</span></code>, not PhAST
+fracture data or a trained fracture-damage model. It is an interface test, not
+evidence of a general fracture accelerator.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="labs/04_train_save_reload_adapter.html">7.5.1. Train, save, reload, and compare a field model</a></li>
+</ul>
+</div>
+<div class="tip admonition">
+<p class="admonition-title">Reload test</p>
+<p>Choose one fixed input record. Run the model before saving, reload into a new
+model object, run the same record, and compare the output after applying the
+same preprocessing. If the values differ, inspect normalisation, device/dtype,
+model mode, feature order, and serialised configuration before training
+again.</p>
+</div>
+<h2 id="what-an-adapter-can-and-cannot-repair"><span class="section-number">7.6. </span>What an adapter can and cannot repair<a class="headerlink" href="#what-an-adapter-can-and-cannot-repair" title="Link to this heading">¶</a></h2>
+<p>An adapter is a stated map between representations,</p>
+<div class="math notranslate nohighlight">
+\[
+a:\mathcal{X}_{\mathrm{source}}
+\longrightarrow\mathcal{X}_{\mathrm{target}}.
+\]</div>
+<p>For example, it may reorder nodes, concatenate a coordinate channel, project
+a cell-centred value to nodes, or convert units. These operations can be
+necessary and useful. They cannot manufacture missing information or correct
+a target whose physical meaning differs from the source.</p>
+<p>Ask four questions before accepting an adapter:</p>
+<ul class="simple">
+<li><p>Does it preserve the geometry and coordinate frame?</p></li>
+<li><p>Does it preserve the field meaning, units, and load/time index?</p></li>
+<li><p>Does it preserve or deliberately change interpolation order?</p></li>
+<li><p>Is there a small round-trip or reference example that checks the mapping?</p></li>
+</ul>
+<p>The word “adapter” should not conceal a change from one mesh, material
+parameterisation, or loading regime to another. That is a transfer assumption
+which needs its own evaluation.</p>
+<h2 id="from-a-proposal-to-a-checked-hybrid-calculation"><span class="section-number">7.7. </span>From a proposal to a checked hybrid calculation<a class="headerlink" href="#from-a-proposal-to-a-checked-hybrid-calculation" title="Link to this heading">¶</a></h2>
+<p>Suppose a learned model proposes <span class="math notranslate nohighlight">\(\widehat d\)</span> for a damage field. A
+conservative hybrid workflow is</p>
+<div class="math notranslate nohighlight">
+\[
+\text{input}\longrightarrow \widehat d
+\longrightarrow \text{bounds/residual checks}
+\longrightarrow \text{mechanics correction or fallback}
+\longrightarrow \text{reported output}.
+\]</div>
+<p>The checks might include damage bounds, irreversibility relative to the prior
+state, a mechanics residual, and a comparison to a reference solve on a
+predefined evaluation set. If a correction is used, report the cost and result
+of the full route, including prediction, conversion, checks, correction, and
+any fallback. Bypassing a solver stage is not automatically a wall-time
+improvement.</p>
+<h2 id="computational-lesson-accept-a-compatible-proposal-or-fall-back"><span class="section-number">7.8. </span>Computational lesson: accept a compatible proposal or fall back<a class="headerlink" href="#computational-lesson-accept-a-compatible-proposal-or-fall-back" title="Link to this heading">¶</a></h2>
+<p>The next lesson reuses the toy field-model contract to test a compatible
+proposal, reject a deliberately corrupted proposal by a stated residual gate,
+and fall back to the reference field. Read the compatibility and residual
+checks before treating the four field panels as evidence. The residual belongs
+to the course-owned <code class="docutils literal notranslate"><span class="pre">ToyHelmholtzProblem</span></code>; it is not a PhAST AT2 fracture
+residual. This is a teaching pattern for auditing a proposal, not a claim that
+a learned field is an admissible fracture solution in general.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="labs/05_hybrid_reference_correction.html">7.8.1. Assess a proposal and use a reference correction</a></li>
+</ul>
+</div>
+<h2 id="dagger-style-data-aggregation"><span class="section-number">7.9. </span>DAgger-style data aggregation<a class="headerlink" href="#dagger-style-data-aggregation" title="Link to this heading">¶</a></h2>
+<p>Distribution shift can appear when a learned proposal visits states absent
+from its original training records. Dataset Aggregation (often called DAgger)
+is one way to describe an iterative collection loop:</p>
+<ol class="arabic simple">
+<li><p>train a policy or proposal model on an initial reference dataset;</p></li>
+<li><p>let the current model visit stated inputs or intermediate states;</p></li>
+<li><p>query a trusted reference procedure for targets at those visited states;</p></li>
+<li><p>add the labelled records to the aggregate dataset; and</p></li>
+<li><p>retrain while retaining an evaluation set that was not relabelled for
+selection.</p></li>
+</ol>
+<p>This idea is useful when the model’s own trajectory changes the data it sees.
+It does not remove the need for a trusted labelling procedure, provenance, or
+a distinction between training data and final evaluation data. In mechanics,
+the reference procedure may itself fail or be inappropriate outside its
+assumptions; record that outcome rather than silently dropping difficult
+cases.</p>
+<h2 id="evaluation-fields-quantities-and-failure-modes"><span class="section-number">7.10. </span>Evaluation: fields, quantities, and failure modes<a class="headerlink" href="#evaluation-fields-quantities-and-failure-modes" title="Link to this heading">¶</a></h2>
+<p>Field error, reaction error, and residual are related but not interchangeable.
+For a candidate <span class="math notranslate nohighlight">\(\widehat d\)</span> and reference <span class="math notranslate nohighlight">\(d\)</span>, possible diagnostics include</p>
+<div class="math notranslate nohighlight">
+\[
+e_d=\frac{\|\widehat d-d\|_2}{\max(\|d\|_2,\epsilon)}
+\]</div>
+<p>alongside a damage-bound check and a mechanics residual after the candidate is
+used in the stated equation. A good evaluation card reports:</p>
+<ul class="simple">
+<li><p>the split and cases evaluated;</p></li>
+<li><p>the field metric and its weighting;</p></li>
+<li><p>at least one mechanics-relevant quantity;</p></li>
+<li><p>the frequency and criterion of correction/fallback, if applicable; and</p></li>
+<li><p>failures, out-of-distribution cases, or unresolved cases.</p></li>
+</ul>
+<p>A low average field error may coexist with a wrong local crack path. A good
+reaction curve may coexist with a poor spatial field. Inspect both.</p>
+<h2 id="exercise-identify-the-missing-provenance"><span class="section-number">7.11. </span>Exercise: identify the missing provenance<a class="headerlink" href="#exercise-identify-the-missing-provenance" title="Link to this heading">¶</a></h2>
+<p>A colleague shares a file called “best_model” and says it predicts damage on a
+new mesh. List four items you need before interpreting the output as a
+mechanics field.</p>
+<div class="dropdown admonition">
+<p class="admonition-title">Solution</p>
+<p>Any four of the following are essential: the architecture and weights; input
+feature definitions and ordering; normalisation state; source and target mesh
+representation; coordinate frame and units; load/time step represented; the
+training/validation/test split; a reload comparison; and the physical checks
+used on the proposed field. Without these, even a numerically well-formed
+tensor has unclear mechanical meaning. The two computational lessons provide
+a concrete version of this answer: the first records the model contract and
+reload check; the second refuses an incompatible feature order and performs a
+stated residual/fallback check.</p>
+</div>
+<h2 id="sources-for-this-chapter"><span class="section-number">7.12. </span>Sources for this chapter<a class="headerlink" href="#sources-for-this-chapter" title="Link to this heading">¶</a></h2>
+<p>The notebook practices draw on standard reproducible machine-learning ideas:
+separate evaluation data, explicit preprocessing, and persistent model state.
+For a practical notebook pattern with open exercises and solutions, see the
+<a class="reference external" href="https://inria.github.io/scikit-learn-mooc/">Inria scikit-learn MOOC</a>. For the
+tensor/autodiff ecosystem used in the companion activities, see the
+<a class="reference external" href="https://docs.pytorch.org/docs/stable/index.html">PyTorch documentation</a>.</p>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  
+  
+  <div class="md-footer-meta md-typeset">
+    
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-footer-copyright__highlight">
+        &#169; Copyright 2026, UKACM Autumn School.
+        
+    </div>
+  
+    Created using
+    <a href="https://www.sphinx-doc.org/" target="_blank" rel="noopener">Sphinx</a>
+    7.4.7.
+     and
+    <a href="https://github.com/jbms/sphinx-immaterial/" target="_blank" rel="noopener">Sphinx-Immaterial</a>
+  
+</div>
+      
+    </div>
+    
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": ".", "features": [], "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+      
+        <script src="_static/documentation_options.js?v=fc6fd62b"></script>
+        <script src="_static/sphinx_immaterial_theme.32136f45f91ae6956.min.js?v=a7a9472a"></script>
+        <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="_static/copybutton.js?v=f281be69"></script>
+        <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script id="MathJax-script" src="_static/mathjax/tex-mml-chtml.js?v=cadf963e"></script>
+        <script src="_static/learning_book.js?v=7a62d495"></script>
+    
+  </body>
+</html>

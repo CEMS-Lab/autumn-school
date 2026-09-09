@@ -1,0 +1,2230 @@
+{
+  "date": "2026-09-09",
+  "scope": "Unmodified font files identified in the generated book; paths are relative to the distributed course root. Font binary versions are read from their name tables, not inferred from current upstream releases.",
+  "files": [
+    {
+      "path": "book/_static/fonts/00254b3347f6117a719cec84ec0a8d0b.woff2",
+      "sha256": "00254b3347f6117a719cec84ec0a8d0bbc710723e9be8f8447766faf61447373",
+      "family": "Roboto Mono",
+      "version": "Version 3.001",
+      "copyright": "Copyright 2015 The Roboto Mono Project Authors (https://github.com/googlefonts/robotomono)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/0186ceb5dcf846e2266a24ffb1b7fe46.ttf",
+      "sha256": "0186ceb5dcf846e2266a24ffb1b7fe465e29f6c530f4d057078c2b6b433af1d7",
+      "family": "Roboto Black",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/0319fb12094703697f8543301dd6e133.woff2",
+      "sha256": "0319fb12094703697f8543301dd6e1339c1a098c4f4ed4cfa5d5f9038160d52b",
+      "family": "Roboto ExtraLight",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/04a4e747fa3f0133c028bd4d76ffcb4f.woff2",
+      "sha256": "04a4e747fa3f0133c028bd4d76ffcb4f14c60dccd8ab3fbec80db9f7e5766f68",
+      "family": "Roboto Mono",
+      "version": "Version 3.001",
+      "copyright": "Copyright 2015 The Roboto Mono Project Authors (https://github.com/googlefonts/robotomono)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/04ae2fa764d886b85410579faccf3e3e.woff2",
+      "sha256": "04ae2fa764d886b85410579faccf3e3e49ecfde420d3c41c9d3028cfc293b7a9",
+      "family": "Roboto Mono SemiBold",
+      "version": "Version 3.001",
+      "copyright": "Copyright 2015 The Roboto Mono Project Authors (https://github.com/googlefonts/robotomono)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/05411689f8649b9f3bb43a53890763a8.woff2",
+      "sha256": "05411689f8649b9f3bb43a53890763a82f5114c69e9cfb503f58b4beb1da8132",
+      "family": "Roboto Light",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/069dc90b8149d1b55e2b94e18c3c61f8.woff2",
+      "sha256": "069dc90b8149d1b55e2b94e18c3c61f8738feaf1b6fc4bb2a17c7e8e3d3f2cd8",
+      "family": "Roboto Thin",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/079db204eccfd1129698a5247c2e088b.woff2",
+      "sha256": "079db204eccfd1129698a5247c2e088b2122e345c255f1d76cd573c53680e378",
+      "family": "Roboto Mono",
+      "version": "Version 3.001",
+      "copyright": "Copyright 2015 The Roboto Mono Project Authors (https://github.com/googlefonts/robotomono)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/095c29466a32d3f1db374f6c27fdd6f6.woff2",
+      "sha256": "095c29466a32d3f1db374f6c27fdd6f64701a7d969b1c05730d137246275d72c",
+      "family": "Roboto ExtraBold",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/0991339551f58fb49d106c4b2a2beaf4.woff2",
+      "sha256": "0991339551f58fb49d106c4b2a2beaf403823c0cdd0ed99d1a38f1a8b20d1595",
+      "family": "Roboto Medium",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/0a81370a53f96f4892834c6f9ac2e126.woff2",
+      "sha256": "0a81370a53f96f4892834c6f9ac2e126b0a07f9f1d92df33abf0370028f03d87",
+      "family": "Roboto ExtraBold",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/0bf080b4cbce22785a90a3b464e34dc4.woff2",
+      "sha256": "0bf080b4cbce22785a90a3b464e34dc40aff29fcb9319ea993c122028b2d49ca",
+      "family": "Roboto Mono",
+      "version": "Version 3.001",
+      "copyright": "Copyright 2015 The Roboto Mono Project Authors (https://github.com/googlefonts/robotomono)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/0ce26f1dcce6574eae18cf76bef4e8d2.ttf",
+      "sha256": "0ce26f1dcce6574eae18cf76bef4e8d21869735ff95d8bf80911fe729fb325f0",
+      "family": "Roboto Medium",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/0d863880baebaf2d7d5048a0672e905b.woff2",
+      "sha256": "0d863880baebaf2d7d5048a0672e905b8f339ad8fdfc86b3e564a111d7f362ba",
+      "family": "Roboto ExtraBold",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/0ee2e6f8f9dcd2af7bc0c6b519c28395.woff2",
+      "sha256": "0ee2e6f8f9dcd2af7bc0c6b519c283954242824258b652cdb6017bc578e2c493",
+      "family": "Roboto Mono SemiBold",
+      "version": "Version 3.001",
+      "copyright": "Copyright 2015 The Roboto Mono Project Authors (https://github.com/googlefonts/robotomono)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/0feda7435983533516a4869176c31719.ttf",
+      "sha256": "0feda7435983533516a4869176c31719a42c6cc1b501f7cf53b880c1b6000f74",
+      "family": "Roboto Mono ExtraLight",
+      "version": "Version 3.001",
+      "copyright": "Copyright 2015 The Roboto Mono Project Authors (https://github.com/googlefonts/robotomono)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/10960c05ec695a3a5211d853528e1bda.woff2",
+      "sha256": "10960c05ec695a3a5211d853528e1bda50e850bc5a98b0c5d622b77265e0a08f",
+      "family": "Roboto SemiBold",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/114abf04f4d844118a016761021abb1e.woff2",
+      "sha256": "114abf04f4d844118a016761021abb1e560b3fa43d889c398d60e5055953f88b",
+      "family": "Roboto Black",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/117c76def7e509f636b6992214a3e006.woff2",
+      "sha256": "117c76def7e509f636b6992214a3e0067f94328d501ab0ccf6d547208f99f559",
+      "family": "Roboto Mono ExtraLight",
+      "version": "Version 3.001",
+      "copyright": "Copyright 2015 The Roboto Mono Project Authors (https://github.com/googlefonts/robotomono)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/117fa76afb2f349d9d3e898f24eb5263.woff2",
+      "sha256": "117fa76afb2f349d9d3e898f24eb526315170521ed74969cf16b9cf29d105308",
+      "family": "Roboto Mono Medium",
+      "version": "Version 3.001",
+      "copyright": "Copyright 2015 The Roboto Mono Project Authors (https://github.com/googlefonts/robotomono)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/11be202b6a030e79f7c2e84ee1b6133d.ttf",
+      "sha256": "11be202b6a030e79f7c2e84ee1b6133d290f78429fef51d1ab300c545b9554d0",
+      "family": "Roboto Light",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/1259425c1490dada80366c0a7973718c.woff2",
+      "sha256": "1259425c1490dada80366c0a7973718cf9dc3d2749a471b2fd8f825f3cd5d6e8",
+      "family": "Roboto ExtraLight",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/13a019687fdb60cb1ff759f2aa5a09c9.woff2",
+      "sha256": "13a019687fdb60cb1ff759f2aa5a09c92a2b495e1c51b4a8b8d2cd94075cc282",
+      "family": "Roboto Mono Light",
+      "version": "Version 3.001",
+      "copyright": "Copyright 2015 The Roboto Mono Project Authors (https://github.com/googlefonts/robotomono)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/1567c22e954336d26ec306a0dd756d19.woff2",
+      "sha256": "1567c22e954336d26ec306a0dd756d19bb5e62c67e597ce0b778fc312dc68176",
+      "family": "Roboto",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/15c77aed355b2ca99b34986268c33c67.woff2",
+      "sha256": "15c77aed355b2ca99b34986268c33c67107613a2987c71dd9e12e79bbd6f9e63",
+      "family": "Roboto Medium",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/18fb6b155b83334fd71800325dcc0230.woff2",
+      "sha256": "18fb6b155b83334fd71800325dcc0230e47095e77ca980753184b5d9cecdb754",
+      "family": "Roboto ExtraLight",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/1a0caa2eeb65bc20a75ff3a568c64e2b.woff2",
+      "sha256": "1a0caa2eeb65bc20a75ff3a568c64e2b399160ea1c03b7fdee6b8005014323ff",
+      "family": "Roboto ExtraLight",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/1a35ae0d4ce7da20107242fdfcfbff81.woff2",
+      "sha256": "1a35ae0d4ce7da20107242fdfcfbff81645d14d0c816e15c5dc93bbe18538566",
+      "family": "Roboto Mono Thin",
+      "version": "Version 3.001",
+      "copyright": "Copyright 2015 The Roboto Mono Project Authors (https://github.com/googlefonts/robotomono)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/1a4135aec8fa80001ecd6478b4023cd2.woff2",
+      "sha256": "1a4135aec8fa80001ecd6478b4023cd2a1863698e218d4ec1b88401a24e99de2",
+      "family": "Roboto Thin",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/1c351c643e997093f314f99ffb914f97.woff2",
+      "sha256": "1c351c643e997093f314f99ffb914f977eeb74747315e8367f11dbcc266e1050",
+      "family": "Roboto Thin",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/1e597a6e3b163200475089698be3427a.woff2",
+      "sha256": "1e597a6e3b163200475089698be3427ab1bb01553493d5b7d53694429948d8ec",
+      "family": "Roboto Medium",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/1e88ca8df7c8bfd43deab63817490110.woff2",
+      "sha256": "1e88ca8df7c8bfd43deab63817490110b302732a281984cdae74c8e424e5900b",
+      "family": "Roboto",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/1f06e2c7423640c4b3e4003b85c0fe36.woff2",
+      "sha256": "1f06e2c7423640c4b3e4003b85c0fe36a5c4f4437dc1e650c2c3b87b76f4a6b6",
+      "family": "Roboto Thin",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/1f149703dd15543c6b006e681cdc6760.woff2",
+      "sha256": "1f149703dd15543c6b006e681cdc6760590dc5e859e21efbb218194bd79d179f",
+      "family": "Roboto Mono",
+      "version": "Version 3.001",
+      "copyright": "Copyright 2015 The Roboto Mono Project Authors (https://github.com/googlefonts/robotomono)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/20bd7bc77b2ac0fbab2881a1c68db47a.woff2",
+      "sha256": "20bd7bc77b2ac0fbab2881a1c68db47a91421adec1433312acafaaf37b7be0e7",
+      "family": "Roboto Black",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/21eb25612d5c76e78c41bacf87adf6db.woff2",
+      "sha256": "21eb25612d5c76e78c41bacf87adf6dbb44f20e4ee7f75be6c260e512310c087",
+      "family": "Roboto Mono",
+      "version": "Version 3.001",
+      "copyright": "Copyright 2015 The Roboto Mono Project Authors (https://github.com/googlefonts/robotomono)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/237c47406e9e4a75786c423ab40d1a98.woff2",
+      "sha256": "237c47406e9e4a75786c423ab40d1a980f4ac15d562754e68135ffe08831b18a",
+      "family": "Roboto Mono",
+      "version": "Version 3.001",
+      "copyright": "Copyright 2015 The Roboto Mono Project Authors (https://github.com/googlefonts/robotomono)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/257557b5a7d85506f9ec1d43d6c56faf.woff2",
+      "sha256": "257557b5a7d85506f9ec1d43d6c56faf65e76c132f0637935ceebe05b927ee30",
+      "family": "Roboto Medium",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/25910e65ad4da1280d717a906bb4677b.woff2",
+      "sha256": "25910e65ad4da1280d717a906bb4677ba666405b3ca3a286f40e01f58fce24fb",
+      "family": "Roboto",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/25cbd5e1be78f502acf29243634d05c8.woff2",
+      "sha256": "25cbd5e1be78f502acf29243634d05c84cec129921e689e755c30795408b77ed",
+      "family": "Roboto ExtraLight",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/26d45c6882b664dbea7b47896d0c2bc8.woff2",
+      "sha256": "26d45c6882b664dbea7b47896d0c2bc816c9b2d7e9cfd6e70ac3f664ba2e368f",
+      "family": "Roboto Mono SemiBold",
+      "version": "Version 3.001",
+      "copyright": "Copyright 2015 The Roboto Mono Project Authors (https://github.com/googlefonts/robotomono)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/283fbef73f42c21722c5a3efc7a44b0c.woff2",
+      "sha256": "283fbef73f42c21722c5a3efc7a44b0c38aac1ada665602b2144c13ed58c0e99",
+      "family": "Roboto Mono",
+      "version": "Version 3.001",
+      "copyright": "Copyright 2015 The Roboto Mono Project Authors (https://github.com/googlefonts/robotomono)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/285b3016e191be6301a586eb597db483.woff2",
+      "sha256": "285b3016e191be6301a586eb597db48344e80944d7ccfbb3f1ebb156f57a6c10",
+      "family": "Roboto ExtraBold",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/28880a666aef5e786425ec9385ed3504.ttf",
+      "sha256": "28880a666aef5e786425ec9385ed3504ba4530a8a5117514593aa54e9111c121",
+      "family": "Roboto Thin",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/297d8ec23216497dff7cde23f9650393.woff2",
+      "sha256": "297d8ec23216497dff7cde23f9650393defabe1e0aa973c6931f3843090271a8",
+      "family": "Roboto Black",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/299f10a52fe1423dd5579ff7e83db8db.woff2",
+      "sha256": "299f10a52fe1423dd5579ff7e83db8dbea312f1e924f3e06e55839286b4d1c1d",
+      "family": "Roboto Light",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/29e30b731266d113c0fcc097e0a7b9f7.woff2",
+      "sha256": "29e30b731266d113c0fcc097e0a7b9f7d24d5ac4a81f5b96cb7306ad7604f0a7",
+      "family": "Roboto Thin",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/2ae735028a2bdd6e73c6aec996cf9ad9.woff2",
+      "sha256": "2ae735028a2bdd6e73c6aec996cf9ad9e8c3cfadfcaca34c4d933597a132230b",
+      "family": "Roboto Mono Medium",
+      "version": "Version 3.001",
+      "copyright": "Copyright 2015 The Roboto Mono Project Authors (https://github.com/googlefonts/robotomono)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/2d8aeba27ba214331a027de3a82fad58.woff2",
+      "sha256": "2d8aeba27ba214331a027de3a82fad587066fed3eeccf78e3a66ca7ba9d5bb65",
+      "family": "Roboto Thin",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/2eccf6c0d5b3656754d3d21cf62213ce.woff2",
+      "sha256": "2eccf6c0d5b3656754d3d21cf62213ce2733cef5c53febb391c1af77e9d41d86",
+      "family": "Roboto Mono ExtraLight",
+      "version": "Version 3.001",
+      "copyright": "Copyright 2015 The Roboto Mono Project Authors (https://github.com/googlefonts/robotomono)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/30e468e981986e6e665ea9c986054c7d.woff2",
+      "sha256": "30e468e981986e6e665ea9c986054c7d93963010b35344cead726e51461770ff",
+      "family": "Roboto Black",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/30fef08fbb3e1c99a5352c6de8bbe932.woff2",
+      "sha256": "30fef08fbb3e1c99a5352c6de8bbe932766378221b980307dabda7367cb680ec",
+      "family": "Roboto Black",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/312243bf680037e0578921eb0d99d507.woff2",
+      "sha256": "312243bf680037e0578921eb0d99d5079092fe767998c2327878eba6bd1fd993",
+      "family": "Roboto SemiBold",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/3128f62492065ac0b20b397b3c2eb517.woff2",
+      "sha256": "3128f62492065ac0b20b397b3c2eb517936440e46f393340b0513db7f6af8d1e",
+      "family": "Roboto Mono SemiBold",
+      "version": "Version 3.001",
+      "copyright": "Copyright 2015 The Roboto Mono Project Authors (https://github.com/googlefonts/robotomono)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/317182bf755079076a6310ce0e7fe1d4.woff2",
+      "sha256": "317182bf755079076a6310ce0e7fe1d405ab4a3d4483010498f3913944b69da2",
+      "family": "Roboto ExtraLight",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/33c710937ff2101c4067a2d03bcd6e58.woff2",
+      "sha256": "33c710937ff2101c4067a2d03bcd6e58395c859ed834f30878204bf548decca3",
+      "family": "Roboto Medium",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/34e65dc4e3deafe3d668d398a26c6a29.woff2",
+      "sha256": "34e65dc4e3deafe3d668d398a26c6a292730fe356a6a1f4303d5af3919a0e941",
+      "family": "Roboto",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/3548294b2458c1928f1578479a3254a1.woff2",
+      "sha256": "3548294b2458c1928f1578479a3254a18fa964d01ede22ce42907aeee6876618",
+      "family": "Roboto ExtraLight",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/362193de66077cdecea259d864fb6a32.woff2",
+      "sha256": "362193de66077cdecea259d864fb6a32166e764ed18ce56ec3564dd0bfbcb0dc",
+      "family": "Roboto Mono",
+      "version": "Version 3.001",
+      "copyright": "Copyright 2015 The Roboto Mono Project Authors (https://github.com/googlefonts/robotomono)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/36ad3d233422da0692b766d17b2cf840.woff2",
+      "sha256": "36ad3d233422da0692b766d17b2cf840314189b720763e1596433b1855b89b3e",
+      "family": "Roboto Mono Light",
+      "version": "Version 3.001",
+      "copyright": "Copyright 2015 The Roboto Mono Project Authors (https://github.com/googlefonts/robotomono)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/36e9bd3f335567f0cce30586f7701f4a.woff2",
+      "sha256": "36e9bd3f335567f0cce30586f7701f4aa5a1946d6b1e8ce5639e28aa97522c4c",
+      "family": "Roboto",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/372bcd16e99a6348b32aa173076a24b0.woff2",
+      "sha256": "372bcd16e99a6348b32aa173076a24b09b621dbdee8d6d7cc5f145015d742906",
+      "family": "Roboto Light",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/38253ce19704b241debee9931cace6fe.woff2",
+      "sha256": "38253ce19704b241debee9931cace6fe07ed5f351a2248206e6ea35f71ded970",
+      "family": "Roboto Thin",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/396a86833bb247070b487483b2ffee96.woff2",
+      "sha256": "396a86833bb247070b487483b2ffee961f75ad79d27c67eb61b50b6545c12dc9",
+      "family": "Roboto Mono SemiBold",
+      "version": "Version 3.001",
+      "copyright": "Copyright 2015 The Roboto Mono Project Authors (https://github.com/googlefonts/robotomono)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/3a4a8016f8daccc39a6f84a668aa96be.woff2",
+      "sha256": "3a4a8016f8daccc39a6f84a668aa96bef57031d50f326319a33f40dff6a3371b",
+      "family": "Roboto",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/3cacb4c77c955f56a94ddf8ec9af8a54.woff2",
+      "sha256": "3cacb4c77c955f56a94ddf8ec9af8a546d2f009696a5b710eaf4d9a8aa8b3d39",
+      "family": "Roboto",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/3d1e72bf2f7f579e5680e87a492bf14f.woff2",
+      "sha256": "3d1e72bf2f7f579e5680e87a492bf14f156c01d09da741d5bb657f2841787157",
+      "family": "Roboto Mono",
+      "version": "Version 3.001",
+      "copyright": "Copyright 2015 The Roboto Mono Project Authors (https://github.com/googlefonts/robotomono)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/3da92e22ed8b5a86d3cba6011ac25860.woff2",
+      "sha256": "3da92e22ed8b5a86d3cba6011ac25860eac54be7b1949e5c9ce1ec476dd148e0",
+      "family": "Roboto Mono Medium",
+      "version": "Version 3.001",
+      "copyright": "Copyright 2015 The Roboto Mono Project Authors (https://github.com/googlefonts/robotomono)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/3eac5e2f468629b4673394bb25a387ab.woff2",
+      "sha256": "3eac5e2f468629b4673394bb25a387aba117e0dfa646b7f371a2cbd2bbf91d87",
+      "family": "Roboto SemiBold",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/3eee96d15b9b10cad50b62dcaf72dae8.woff2",
+      "sha256": "3eee96d15b9b10cad50b62dcaf72dae8cda4fe0d073ee24fa6ceed0cee00df40",
+      "family": "Roboto Light",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/41e63fe77c08977713ad31884c564f5e.woff2",
+      "sha256": "41e63fe77c08977713ad31884c564f5e7c4767b7a1625d0753b6a39e0a0a93f4",
+      "family": "Roboto Medium",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/420106fda3528ff19100ff961bf017a5.woff2",
+      "sha256": "420106fda3528ff19100ff961bf017a5c249238bc50560da1470974abefe1697",
+      "family": "Roboto Mono Light",
+      "version": "Version 3.001",
+      "copyright": "Copyright 2015 The Roboto Mono Project Authors (https://github.com/googlefonts/robotomono)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/422db4f94eb2639310cc49eb0c5232f7.woff2",
+      "sha256": "422db4f94eb2639310cc49eb0c5232f7bb3100e3f27eedfce221fc5bcefd93e8",
+      "family": "Roboto Mono Thin",
+      "version": "Version 3.001",
+      "copyright": "Copyright 2015 The Roboto Mono Project Authors (https://github.com/googlefonts/robotomono)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/425c0713a8176f92273d378599c7eac5.woff2",
+      "sha256": "425c0713a8176f92273d378599c7eac57de7fafabd4bd0ed457b70eb8f80d371",
+      "family": "Roboto",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/430b8dc4bd5f9527c8e151a3d41e52f3.ttf",
+      "sha256": "430b8dc4bd5f9527c8e151a3d41e52f36e33f19271020200f8d251d98494e308",
+      "family": "Roboto",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/442508ca6b49e1c39559e6e3cc7e2815.woff2",
+      "sha256": "442508ca6b49e1c39559e6e3cc7e281533cbba6a5bd6a1540c082eea899872a8",
+      "family": "Roboto Mono Thin",
+      "version": "Version 3.001",
+      "copyright": "Copyright 2015 The Roboto Mono Project Authors (https://github.com/googlefonts/robotomono)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/444f9f930f0122656b8d397b30d3d91a.woff2",
+      "sha256": "444f9f930f0122656b8d397b30d3d91a386044a46ab0b1cb6cced18b74606ee8",
+      "family": "Roboto SemiBold",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/447a1085f742417d10c5662f9c0aa134.woff2",
+      "sha256": "447a1085f742417d10c5662f9c0aa134983b21d3440f97f3c1423b9a22f75805",
+      "family": "Roboto Black",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/450e0c66acb4c5377a4f30dd5dec8370.woff2",
+      "sha256": "450e0c66acb4c5377a4f30dd5dec8370152f5f9521c0bc452589b3586bd978eb",
+      "family": "Roboto",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/46097cf128244dfb1bd2419e3479dea0.woff2",
+      "sha256": "46097cf128244dfb1bd2419e3479dea02dbae63f25b02f5e0e27826fe7eb21f6",
+      "family": "Roboto Mono Light",
+      "version": "Version 3.001",
+      "copyright": "Copyright 2015 The Roboto Mono Project Authors (https://github.com/googlefonts/robotomono)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/465f2ba0417b6b16ef8718992301efd8.woff2",
+      "sha256": "465f2ba0417b6b16ef8718992301efd8e477c5c7d3bae3c851cf1604684dba82",
+      "family": "Roboto Mono Medium",
+      "version": "Version 3.001",
+      "copyright": "Copyright 2015 The Roboto Mono Project Authors (https://github.com/googlefonts/robotomono)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/46a3232baee194abff89b720a5644a6a.woff2",
+      "sha256": "46a3232baee194abff89b720a5644a6ab3eba54c28cb22b970f4a7146b693785",
+      "family": "Roboto Thin",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/490111bf759ba78929e8b30c3ee4589b.woff2",
+      "sha256": "490111bf759ba78929e8b30c3ee4589b37fbeaf9c54323eae66ae95ad621ede3",
+      "family": "Roboto Light",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/4945ed8f5d96d8d5f16acdc8a3e383d5.woff2",
+      "sha256": "4945ed8f5d96d8d5f16acdc8a3e383d56f7d82c9862b3e41a9e6c078f6b20ad8",
+      "family": "Roboto",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/4984943fb416d86430e08c11c95ea560.woff2",
+      "sha256": "4984943fb416d86430e08c11c95ea560da5b44aa06a3cbb390e70d72d8852516",
+      "family": "Roboto Mono ExtraLight",
+      "version": "Version 3.001",
+      "copyright": "Copyright 2015 The Roboto Mono Project Authors (https://github.com/googlefonts/robotomono)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/49c74907c16c7d2f6ca33c179506b9f2.woff2",
+      "sha256": "49c74907c16c7d2f6ca33c179506b9f2c13409a90521632db7fbc86cc30fedd2",
+      "family": "Roboto Light",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/4a1a773d1cd80d3dbdd2a16c31192899.woff2",
+      "sha256": "4a1a773d1cd80d3dbdd2a16c31192899a64e1fa09911a86c23364d108d74ef0a",
+      "family": "Roboto Medium",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/4a91a3f5b5892a43e491b614d30e3132.ttf",
+      "sha256": "4a91a3f5b5892a43e491b614d30e31322436262775ab8f0c508f796c79952ade",
+      "family": "Roboto Mono",
+      "version": "Version 3.001",
+      "copyright": "Copyright 2015 The Roboto Mono Project Authors (https://github.com/googlefonts/robotomono)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/4ac413e37db56eeeb4bb5cc1015ef5cb.ttf",
+      "sha256": "4ac413e37db56eeeb4bb5cc1015ef5cb853e9e2e7600d37ec93945c9490e061c",
+      "family": "Roboto Mono SemiBold",
+      "version": "Version 3.001",
+      "copyright": "Copyright 2015 The Roboto Mono Project Authors (https://github.com/googlefonts/robotomono)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/4b1c9b0ba29c3f32c0a04915792aeab9.woff2",
+      "sha256": "4b1c9b0ba29c3f32c0a04915792aeab9d614d147d8c695d955dc069c285b329e",
+      "family": "Roboto Mono",
+      "version": "Version 3.001",
+      "copyright": "Copyright 2015 The Roboto Mono Project Authors (https://github.com/googlefonts/robotomono)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/4b2353a9481e5e5ebcbd853f961417b7.woff2",
+      "sha256": "4b2353a9481e5e5ebcbd853f961417b7ec4487b72a4a759368b5a7f666099010",
+      "family": "Roboto Thin",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/4b5cf7040dcce875857cb8a2d792a1a0.woff2",
+      "sha256": "4b5cf7040dcce875857cb8a2d792a1a08ba05e0ffe6cb5de40da1cdfbf601010",
+      "family": "Roboto Thin",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/4c8752031eaedd31ccd7fa012490c647.woff2",
+      "sha256": "4c8752031eaedd31ccd7fa012490c647b3cf99382944468644e3757193628b70",
+      "family": "Roboto Thin",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/4d2765a0e0008da1d571566a55631207.ttf",
+      "sha256": "4d2765a0e0008da1d571566a55631207f7c56aab46bc965c567e904b7719fa3e",
+      "family": "Roboto Mono",
+      "version": "Version 3.001",
+      "copyright": "Copyright 2015 The Roboto Mono Project Authors (https://github.com/googlefonts/robotomono)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/4ecff013fb7c1c8fd4170c6e40d433db.woff2",
+      "sha256": "4ecff013fb7c1c8fd4170c6e40d433dba88d3823a87e54b99b36f588be51dd19",
+      "family": "Roboto",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/51114e51612d388b46a62bce05a3655f.woff2",
+      "sha256": "51114e51612d388b46a62bce05a3655f3a0bc21b89820634864abc32bb2bb2ec",
+      "family": "Roboto ExtraBold",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/5193a8c91a003cfe41866c6844be22d0.woff2",
+      "sha256": "5193a8c91a003cfe41866c6844be22d025a04bc84c16ee15e66fb840bcc91390",
+      "family": "Roboto Mono Light",
+      "version": "Version 3.001",
+      "copyright": "Copyright 2015 The Roboto Mono Project Authors (https://github.com/googlefonts/robotomono)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/5218617ae11a96879ea07060a9124ea4.woff2",
+      "sha256": "5218617ae11a96879ea07060a9124ea486813b43b71c2710ed087ff7dbac5087",
+      "family": "Roboto SemiBold",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/52d548b023a99019b1540895b1eeec9c.woff2",
+      "sha256": "52d548b023a99019b1540895b1eeec9cbb38aed0b4d6279e84d960a4a4bd9c2c",
+      "family": "Roboto Mono SemiBold",
+      "version": "Version 3.001",
+      "copyright": "Copyright 2015 The Roboto Mono Project Authors (https://github.com/googlefonts/robotomono)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/52f26ad27714b9352415641f6a2274e5.woff2",
+      "sha256": "52f26ad27714b9352415641f6a2274e54ca2001e16a7544f7c1c7021fb40928e",
+      "family": "Roboto Light",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/5317ff42c10ad2360d9f9c7f4da5b439.woff2",
+      "sha256": "5317ff42c10ad2360d9f9c7f4da5b4395c5c4321097837eb5275fb0c4b569e98",
+      "family": "Roboto Mono",
+      "version": "Version 3.001",
+      "copyright": "Copyright 2015 The Roboto Mono Project Authors (https://github.com/googlefonts/robotomono)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/53def881828820abab0f3c56c5db0526.woff2",
+      "sha256": "53def881828820abab0f3c56c5db052669533cb8e1a32dc98e6c254c5d4a667a",
+      "family": "Roboto ExtraBold",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/54dae5e8ef1a5aad1b61d8fd6d9cb6d0.woff2",
+      "sha256": "54dae5e8ef1a5aad1b61d8fd6d9cb6d0576114388efa5f5d5bdbc0fe443c6711",
+      "family": "Roboto Mono Light",
+      "version": "Version 3.001",
+      "copyright": "Copyright 2015 The Roboto Mono Project Authors (https://github.com/googlefonts/robotomono)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/54f508f48c14f3c65b2c03950fbd7292.woff2",
+      "sha256": "54f508f48c14f3c65b2c03950fbd7292853479f4bf9dcf85b19798e6c2788a30",
+      "family": "Roboto Black",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/56855d9e92b0b8a850988b32be3ee255.woff2",
+      "sha256": "56855d9e92b0b8a850988b32be3ee255677f0a1ce277ff7886f17e5d3166bb74",
+      "family": "Roboto ExtraLight",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/5725eacca97303d8bce26f76cfcaee43.woff2",
+      "sha256": "5725eacca97303d8bce26f76cfcaee4393295bbf93c1eb6c3e5e4f260b2da189",
+      "family": "Roboto",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/575c2a3fc4c2a726821a49bff46bd19e.woff2",
+      "sha256": "575c2a3fc4c2a726821a49bff46bd19e916bb24e485e3f8e433895ef1073f37f",
+      "family": "Roboto",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/587949fe8209a576beb1e92ac52ed188.woff2",
+      "sha256": "587949fe8209a576beb1e92ac52ed1885ae037027e40d13570c1777e6999e3bd",
+      "family": "Roboto Black",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/5ad9d4d628c4116f096309e993dfe2ab.ttf",
+      "sha256": "5ad9d4d628c4116f096309e993dfe2ab3e83b3c823a0a2c1371c5e51362f76da",
+      "family": "Roboto Light",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/5b14250dfa6a09ea197c8cc512dd5771.woff2",
+      "sha256": "5b14250dfa6a09ea197c8cc512dd577157fc5575e68d5c08c9a50489e8a0ed8d",
+      "family": "Roboto Black",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/5b432d767f3d5f8ff225506caf67bfea.woff2",
+      "sha256": "5b432d767f3d5f8ff225506caf67bfea71da46f0219c054b43914fbefd11556f",
+      "family": "Roboto Black",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/5bcc3aa180e7f26f643cd5b2621cd7c2.woff2",
+      "sha256": "5bcc3aa180e7f26f643cd5b2621cd7c2de193d0661d913a94afd3d4881a7a34b",
+      "family": "Roboto Medium",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/5c032390bf8eb86dc4e7cbe575174e63.woff2",
+      "sha256": "5c032390bf8eb86dc4e7cbe575174e63d34a55c3f0df16053fc3ec950ae196df",
+      "family": "Roboto Mono Thin",
+      "version": "Version 3.001",
+      "copyright": "Copyright 2015 The Roboto Mono Project Authors (https://github.com/googlefonts/robotomono)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/5cb4c667beadbfc8c324b04fcea15837.woff2",
+      "sha256": "5cb4c667beadbfc8c324b04fcea15837e253231e35ccc3d19b5e36e5280f92b4",
+      "family": "Roboto Medium",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/5d0e978b6560631da2504e1612e91ee1.woff2",
+      "sha256": "5d0e978b6560631da2504e1612e91ee1ff959c04adae245eb320ac90cad2ba2f",
+      "family": "Roboto",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/5d6d34398b5c396d5a57a899125fb9f5.woff2",
+      "sha256": "5d6d34398b5c396d5a57a899125fb9f5c6dae1c04c2b12cfbc248830114c2142",
+      "family": "Roboto",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/5db5459d303398575b403d22c21af5b6.woff2",
+      "sha256": "5db5459d303398575b403d22c21af5b644f032803702e51c536c4ba7c88900bd",
+      "family": "Roboto ExtraLight",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/5deb0b03027599395fa49424334c383b.woff2",
+      "sha256": "5deb0b03027599395fa49424334c383b39b01ebd0b66ad77ae5c863d13ba0b14",
+      "family": "Roboto Mono",
+      "version": "Version 3.001",
+      "copyright": "Copyright 2015 The Roboto Mono Project Authors (https://github.com/googlefonts/robotomono)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/610a462fdf6f78f73a3f2b4a203158e3.woff2",
+      "sha256": "610a462fdf6f78f73a3f2b4a203158e32172e8eb6d46084082d56605182d41e5",
+      "family": "Roboto ExtraLight",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/66cd4926f8b79b3df6d888564d4bddcc.woff2",
+      "sha256": "66cd4926f8b79b3df6d888564d4bddcc8d7b8fcdc6d7d362767d9b1502fab9cc",
+      "family": "Roboto Mono Light",
+      "version": "Version 3.001",
+      "copyright": "Copyright 2015 The Roboto Mono Project Authors (https://github.com/googlefonts/robotomono)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/682534463397d85ffd5965a4f70a947d.ttf",
+      "sha256": "682534463397d85ffd5965a4f70a947da9b5b5100c8a0691236262156721187f",
+      "family": "Roboto Mono Light",
+      "version": "Version 3.001",
+      "copyright": "Copyright 2015 The Roboto Mono Project Authors (https://github.com/googlefonts/robotomono)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/68cb71dc612f456d2a2ecbc2e36ac932.woff2",
+      "sha256": "68cb71dc612f456d2a2ecbc2e36ac9320e14615a3c9b77a85f9e27e2c81d0b08",
+      "family": "Roboto Light",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/6a4ff82a5aa9dc7bf5f1bb7997c82acb.ttf",
+      "sha256": "6a4ff82a5aa9dc7bf5f1bb7997c82acb368c9d6a21498e4a67213bfdbfde0717",
+      "family": "Roboto Thin",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/6ae318fb48664db81936182f961e5c32.woff2",
+      "sha256": "6ae318fb48664db81936182f961e5c326dc10228cec8d50f72be0f1da2fd5126",
+      "family": "Roboto Mono Medium",
+      "version": "Version 3.001",
+      "copyright": "Copyright 2015 The Roboto Mono Project Authors (https://github.com/googlefonts/robotomono)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/6bf499f36f403374a272b5adb80aefc3.woff2",
+      "sha256": "6bf499f36f403374a272b5adb80aefc3c1cf496e3f10ef4a5adf5ba7e9b589f9",
+      "family": "Roboto Mono ExtraLight",
+      "version": "Version 3.001",
+      "copyright": "Copyright 2015 The Roboto Mono Project Authors (https://github.com/googlefonts/robotomono)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/6bf7976c1f1c9f52a543650845e74a23.woff2",
+      "sha256": "6bf7976c1f1c9f52a543650845e74a2304a1f530ba1c5f537e5014a93b15c5bb",
+      "family": "Roboto Light",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/6c6a1c0a595735b92096a64feba801ab.woff2",
+      "sha256": "6c6a1c0a595735b92096a64feba801ab301fdc52586e0a529058cebe9310a5d9",
+      "family": "Roboto Mono Thin",
+      "version": "Version 3.001",
+      "copyright": "Copyright 2015 The Roboto Mono Project Authors (https://github.com/googlefonts/robotomono)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/6d6be3a7d40feb9b785e62c4b629a0e5.woff2",
+      "sha256": "6d6be3a7d40feb9b785e62c4b629a0e5949e50cbbbad06eea4800a4c311e9898",
+      "family": "Roboto",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/6f4518905ca4d482827db94334cf2ab1.woff2",
+      "sha256": "6f4518905ca4d482827db94334cf2ab199074f9db2ba97273e45c957e7c8c53f",
+      "family": "Roboto ExtraBold",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/6f93a718640e4084dd22b48e4c81d95a.ttf",
+      "sha256": "6f93a718640e4084dd22b48e4c81d95af174582df47bbc6c3d82ff6427ab8d55",
+      "family": "Roboto Mono ExtraLight",
+      "version": "Version 3.001",
+      "copyright": "Copyright 2015 The Roboto Mono Project Authors (https://github.com/googlefonts/robotomono)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/6fb289fea179641579de5b208600d490.woff2",
+      "sha256": "6fb289fea179641579de5b208600d490ee52177b347f83e92cf673afc419704e",
+      "family": "Roboto",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/7031e540f4a2dc07a28e6e9a9ee85359.woff2",
+      "sha256": "7031e540f4a2dc07a28e6e9a9ee85359d4bb691a974486d3d6f0208f99a126c0",
+      "family": "Roboto Mono Light",
+      "version": "Version 3.001",
+      "copyright": "Copyright 2015 The Roboto Mono Project Authors (https://github.com/googlefonts/robotomono)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/744355d2e804b1c537ad025b01de618d.woff2",
+      "sha256": "744355d2e804b1c537ad025b01de618d45ca6ad2ec4a2c3ca0169d8622bfcb1a",
+      "family": "Roboto Light",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/744c67913a224bb25485edf13d97ccd8.woff2",
+      "sha256": "744c67913a224bb25485edf13d97ccd88c62d84245dbc060fee9a185c86b0857",
+      "family": "Roboto Light",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/7523c0cc7f5c088ab663be51e111b942.woff2",
+      "sha256": "7523c0cc7f5c088ab663be51e111b9429a4f15681802a7e027eb658f497a26a8",
+      "family": "Roboto Black",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/756862a64fd70eb10d3b86667f6c1480.woff2",
+      "sha256": "756862a64fd70eb10d3b86667f6c148060ba779c574286ea920c146c604ccde6",
+      "family": "Roboto ExtraBold",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/7610e4fb410586bd05caf77d19526676.ttf",
+      "sha256": "7610e4fb410586bd05caf77d195266769e32f62410dd8c30022cab09a7a250d8",
+      "family": "Roboto ExtraBold",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/7673803a2d402018b1f726dded5bf2db.woff2",
+      "sha256": "7673803a2d402018b1f726dded5bf2dbf2be4307039e8718f4bea654d6eca249",
+      "family": "Roboto",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/76afb0e482ab569c50a1ca35dfd052da.woff2",
+      "sha256": "76afb0e482ab569c50a1ca35dfd052daa3d0f6d54d1b30865f6fea4c35c2b350",
+      "family": "Roboto",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/7c632ba05b03720375e7caf795836efb.woff2",
+      "sha256": "7c632ba05b03720375e7caf795836efbb5ffc71e1ea71935ad8605d17aaf557f",
+      "family": "Roboto Mono Thin",
+      "version": "Version 3.001",
+      "copyright": "Copyright 2015 The Roboto Mono Project Authors (https://github.com/googlefonts/robotomono)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/7f1139aae8dcbec5a0052b1658ffc3f1.woff2",
+      "sha256": "7f1139aae8dcbec5a0052b1658ffc3f1aad42c9007d80d5ea0a6a126d201a513",
+      "family": "Roboto Medium",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/7f369045e47f5b97f03e42274ad60201.woff2",
+      "sha256": "7f369045e47f5b97f03e42274ad60201ac046477874773967af656e851ed7441",
+      "family": "Roboto ExtraBold",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/801ba5a12568c43a3258a69f0f842af5.woff2",
+      "sha256": "801ba5a12568c43a3258a69f0f842af535a1c5d9771c7270e6bdf8acec54a785",
+      "family": "Roboto Medium",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/816d69e88bbf391d78f986dab84bf440.woff2",
+      "sha256": "816d69e88bbf391d78f986dab84bf4408279d80846d498da6af8b2e529e0b025",
+      "family": "Roboto SemiBold",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/82ea2dcb706db06dad121fce946cdd55.woff2",
+      "sha256": "82ea2dcb706db06dad121fce946cdd5551985e90f7b986a3c1ea390d9bdb4244",
+      "family": "Roboto SemiBold",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/82f2a44822f03cc5202ad3d8bfcac2d6.woff2",
+      "sha256": "82f2a44822f03cc5202ad3d8bfcac2d6f5df8e02395d9445303d0ce1947014d6",
+      "family": "Roboto",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/8458ffb1652db9f2f466c228153373bd.woff2",
+      "sha256": "8458ffb1652db9f2f466c228153373bda0b7be5a42a232b3ed2b8c03cbda7e9f",
+      "family": "Roboto Mono",
+      "version": "Version 3.001",
+      "copyright": "Copyright 2015 The Roboto Mono Project Authors (https://github.com/googlefonts/robotomono)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/84b502edbdb3fb25714c78ad3e33827c.woff2",
+      "sha256": "84b502edbdb3fb25714c78ad3e33827c39899111c35a14ba9c48ee56345004b0",
+      "family": "Roboto Mono ExtraLight",
+      "version": "Version 3.001",
+      "copyright": "Copyright 2015 The Roboto Mono Project Authors (https://github.com/googlefonts/robotomono)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/84c0cc91505e9e164f33026380ac6bb1.ttf",
+      "sha256": "84c0cc91505e9e164f33026380ac6bb12e560894e985f280b96f4f1aec021e72",
+      "family": "Roboto",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/858fdc48287ed646b82bfdf31ce60e5b.ttf",
+      "sha256": "858fdc48287ed646b82bfdf31ce60e5b81d8fe83634c8046b3d8f031eec03754",
+      "family": "Roboto Mono Medium",
+      "version": "Version 3.001",
+      "copyright": "Copyright 2015 The Roboto Mono Project Authors (https://github.com/googlefonts/robotomono)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/868a11959e0c21a053df779c3cdeaad1.woff2",
+      "sha256": "868a11959e0c21a053df779c3cdeaad1d2fd62b318d127e735a48fca22b3d910",
+      "family": "Roboto Mono ExtraLight",
+      "version": "Version 3.001",
+      "copyright": "Copyright 2015 The Roboto Mono Project Authors (https://github.com/googlefonts/robotomono)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/871d2e9fd0b24c64bb3bfba59560196a.ttf",
+      "sha256": "871d2e9fd0b24c64bb3bfba59560196a3cdd30301414cba76c971fcc1288ac97",
+      "family": "Roboto Mono Thin",
+      "version": "Version 3.001",
+      "copyright": "Copyright 2015 The Roboto Mono Project Authors (https://github.com/googlefonts/robotomono)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/8730fbb2bd23f078d299c923a31f6544.woff2",
+      "sha256": "8730fbb2bd23f078d299c923a31f6544dc8e9d7a0d7d517ae47e790338355159",
+      "family": "Roboto Black",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/873a68f0db47cfa19839d025924fa673.ttf",
+      "sha256": "873a68f0db47cfa19839d025924fa6731e968130491897c6aa9edbfaa7e52cbc",
+      "family": "Roboto",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/88c0fef59b53be2fe400bc83d10bea46.woff2",
+      "sha256": "88c0fef59b53be2fe400bc83d10bea46f691ac102185243eeb14bfc7b6216b9c",
+      "family": "Roboto Light",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/88da8bc3e87b6cb288ebb05f6cd62b21.woff2",
+      "sha256": "88da8bc3e87b6cb288ebb05f6cd62b2157745bd9fb704cf9c3cd1637dd4f8550",
+      "family": "Roboto Medium",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/89763ed7dbe10bb60589cc7ffb41738b.ttf",
+      "sha256": "89763ed7dbe10bb60589cc7ffb41738b78a3a3394f1cab73b2ead295e25afdfc",
+      "family": "Roboto Black",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/8ab596dcace8d7e1dc26b49b4fdbf7be.woff2",
+      "sha256": "8ab596dcace8d7e1dc26b49b4fdbf7be2611807c8846106ac27db7d592784d01",
+      "family": "Roboto Light",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/8e4db20cca6351c432553949aea7f47b.woff2",
+      "sha256": "8e4db20cca6351c432553949aea7f47b379d222b0cb843610ed3becee941fd51",
+      "family": "Roboto SemiBold",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/8f0b23da93d60488a6162d1ebe93431b.woff2",
+      "sha256": "8f0b23da93d60488a6162d1ebe93431bd379b48a15144b3598b04b0f719944a5",
+      "family": "Roboto Mono SemiBold",
+      "version": "Version 3.001",
+      "copyright": "Copyright 2015 The Roboto Mono Project Authors (https://github.com/googlefonts/robotomono)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/8f3dd654717149daea27dad82c649a7a.woff2",
+      "sha256": "8f3dd654717149daea27dad82c649a7aedee0705b6c1280cd71cffe43bc895a2",
+      "family": "Roboto Mono ExtraLight",
+      "version": "Version 3.001",
+      "copyright": "Copyright 2015 The Roboto Mono Project Authors (https://github.com/googlefonts/robotomono)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/90237ead9085efcdb757ba498a2d4646.woff2",
+      "sha256": "90237ead9085efcdb757ba498a2d46460e009c2907c83291ec56f59813976593",
+      "family": "Roboto Mono",
+      "version": "Version 3.001",
+      "copyright": "Copyright 2015 The Roboto Mono Project Authors (https://github.com/googlefonts/robotomono)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/917fc800a4cfb7ea65dac264d5a38eb6.ttf",
+      "sha256": "917fc800a4cfb7ea65dac264d5a38eb68556820740e973b46e97ce26f4b73011",
+      "family": "Roboto Mono Light",
+      "version": "Version 3.001",
+      "copyright": "Copyright 2015 The Roboto Mono Project Authors (https://github.com/googlefonts/robotomono)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/95710618ee04f961f3a72f0e55cbba71.woff2",
+      "sha256": "95710618ee04f961f3a72f0e55cbba7178e2fd21bd5e20325b9de8fb3bfcabbb",
+      "family": "Roboto Black",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/95b0665b5ada706945daa21a0cc41e63.woff2",
+      "sha256": "95b0665b5ada706945daa21a0cc41e637a452e6445d2d880dca4244519ce04ff",
+      "family": "Roboto ExtraBold",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/96246862b6453fb62d5ba6dcfa043c02.woff2",
+      "sha256": "96246862b6453fb62d5ba6dcfa043c027213d2405a1a6c8992f65e3e399a17ee",
+      "family": "Roboto Mono Medium",
+      "version": "Version 3.001",
+      "copyright": "Copyright 2015 The Roboto Mono Project Authors (https://github.com/googlefonts/robotomono)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/967224da947552a72bf04d5b71e1dc72.woff2",
+      "sha256": "967224da947552a72bf04d5b71e1dc72f80a6c3c244d68ae0a8bb4fdb47e53cb",
+      "family": "Roboto Light",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/96ff010e106cae30b33bbc2f4b6c3f60.woff2",
+      "sha256": "96ff010e106cae30b33bbc2f4b6c3f6043928d991b4ef4265c2cdb0771303b14",
+      "family": "Roboto Mono Medium",
+      "version": "Version 3.001",
+      "copyright": "Copyright 2015 The Roboto Mono Project Authors (https://github.com/googlefonts/robotomono)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/97bc75da499078ba9c8f0cee4ad2920a.woff2",
+      "sha256": "97bc75da499078ba9c8f0cee4ad2920a88bf57d4114a86b168da6aa5237110ee",
+      "family": "Roboto Mono Medium",
+      "version": "Version 3.001",
+      "copyright": "Copyright 2015 The Roboto Mono Project Authors (https://github.com/googlefonts/robotomono)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/98ad4f585b76c4e883b39c991192a77c.woff2",
+      "sha256": "98ad4f585b76c4e883b39c991192a77cb0417d4193bc3dbac68855aa4083afce",
+      "family": "Roboto Mono",
+      "version": "Version 3.001",
+      "copyright": "Copyright 2015 The Roboto Mono Project Authors (https://github.com/googlefonts/robotomono)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/9a70a7678eae9689a2e903377e3c259e.woff2",
+      "sha256": "9a70a7678eae9689a2e903377e3c259ee2ce0d4b178a7d98092ccf0572ad385c",
+      "family": "Roboto Mono ExtraLight",
+      "version": "Version 3.001",
+      "copyright": "Copyright 2015 The Roboto Mono Project Authors (https://github.com/googlefonts/robotomono)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/9e18b6efed0097acb77dd1db05426014.ttf",
+      "sha256": "9e18b6efed0097acb77dd1db05426014741f9d8a5475be25d553978adfcb32fa",
+      "family": "Roboto ExtraLight",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/9f4298525df3ac186471bfddbb352948.woff2",
+      "sha256": "9f4298525df3ac186471bfddbb3529482c8206b9d063bd07554bf4a39336ca22",
+      "family": "Roboto",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/9f8dec9e15435e26b10359950ee22fed.woff2",
+      "sha256": "9f8dec9e15435e26b10359950ee22fed346ef3a87206927ef7b2b49e19776953",
+      "family": "Roboto Mono Thin",
+      "version": "Version 3.001",
+      "copyright": "Copyright 2015 The Roboto Mono Project Authors (https://github.com/googlefonts/robotomono)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/a09a774dec656bd3df8b305388eb9aed.woff2",
+      "sha256": "a09a774dec656bd3df8b305388eb9aed4631d96269d7e91f8828495daff82e1f",
+      "family": "Roboto",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/a1fa19f89170d7580d17c2b8b8970ec4.woff2",
+      "sha256": "a1fa19f89170d7580d17c2b8b8970ec46916c69755c082cd7b5f42f8b29ce2cd",
+      "family": "Roboto Mono ExtraLight",
+      "version": "Version 3.001",
+      "copyright": "Copyright 2015 The Roboto Mono Project Authors (https://github.com/googlefonts/robotomono)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/a238290c7acf11b49c15aabda00c264d.woff2",
+      "sha256": "a238290c7acf11b49c15aabda00c264dfe343f79aab9d7c69a662a9d1a158fc7",
+      "family": "Roboto Black",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/a3efd151d530b9353dbb771102f217a9.woff2",
+      "sha256": "a3efd151d530b9353dbb771102f217a9c245fd27e0074dcc989e4915cf461da4",
+      "family": "Roboto Mono Medium",
+      "version": "Version 3.001",
+      "copyright": "Copyright 2015 The Roboto Mono Project Authors (https://github.com/googlefonts/robotomono)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/a50e7f2d64f85c2d81fe7be1da5c943f.woff2",
+      "sha256": "a50e7f2d64f85c2d81fe7be1da5c943fde45c4ac47d3147f9b5a56b705b97824",
+      "family": "Roboto",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/a58570b077f28746c23bcb12eb6348c8.woff2",
+      "sha256": "a58570b077f28746c23bcb12eb6348c8a26d9e97d2d1f4c3cf07eb4e9e04c787",
+      "family": "Roboto SemiBold",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/a6adbbd95e0f85b1477abd9041bea499.woff2",
+      "sha256": "a6adbbd95e0f85b1477abd9041bea49943cbd0e8b74f4e4c0f417e9743601c8f",
+      "family": "Roboto ExtraLight",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/a7154fd5751ce9ecefff336d398e457d.woff2",
+      "sha256": "a7154fd5751ce9ecefff336d398e457d88bb46d5ca83fa83b8a6c4f7dd0b9719",
+      "family": "Roboto Medium",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/a77dc0ac7d95f0f4254cc1a78f3c07db.woff2",
+      "sha256": "a77dc0ac7d95f0f4254cc1a78f3c07db02dee43229f7e8f6d1d489969b2a0cf1",
+      "family": "Roboto Mono Thin",
+      "version": "Version 3.001",
+      "copyright": "Copyright 2015 The Roboto Mono Project Authors (https://github.com/googlefonts/robotomono)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/a875ce2faf827acf96c74d348b861a09.woff2",
+      "sha256": "a875ce2faf827acf96c74d348b861a0960510d5a88b0255815c4ac8b8974d33e",
+      "family": "Roboto Mono",
+      "version": "Version 3.001",
+      "copyright": "Copyright 2015 The Roboto Mono Project Authors (https://github.com/googlefonts/robotomono)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/a99e7e70a82255915e42d35ddf434d94.woff2",
+      "sha256": "a99e7e70a82255915e42d35ddf434d94c4e61d3e5ea02654083c113d1b97692a",
+      "family": "Roboto Medium",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/ad66d13b1a82df14c8937a7c54780947.woff2",
+      "sha256": "ad66d13b1a82df14c8937a7c547809471a3a42e67b0fc06c0aa7955f37b6ece9",
+      "family": "Roboto",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/adb935c5967a09e2d4aaf12ed07414b6.woff2",
+      "sha256": "adb935c5967a09e2d4aaf12ed07414b60da7a13f3d987ad75a964cf58238b38f",
+      "family": "Roboto Thin",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/ae27acd70919dabef0e33d32812ccd3a.woff2",
+      "sha256": "ae27acd70919dabef0e33d32812ccd3a5ced588975d6fbaecb625758fef72fb3",
+      "family": "Roboto SemiBold",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/ae4c0081383f95289e776a828f29831c.woff2",
+      "sha256": "ae4c0081383f95289e776a828f29831c0465a8ef1a3b8fb56e6166005356231e",
+      "family": "Roboto Mono SemiBold",
+      "version": "Version 3.001",
+      "copyright": "Copyright 2015 The Roboto Mono Project Authors (https://github.com/googlefonts/robotomono)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/af6506d4509a9d54606c5e1c28dd6e46.woff2",
+      "sha256": "af6506d4509a9d54606c5e1c28dd6e4652e860619219293e4a4da059308d4aac",
+      "family": "Roboto ExtraLight",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/b054e90b2260ca3790dd89fc23d63f1a.woff2",
+      "sha256": "b054e90b2260ca3790dd89fc23d63f1a2dd7a446204dc2162f2a15a95811dec7",
+      "family": "Roboto Light",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/b078d17cfea0b0c47b499eeb79153746.ttf",
+      "sha256": "b078d17cfea0b0c47b499eeb79153746d5b2221718af8fdc8d26053fd9888585",
+      "family": "Roboto Mono Thin",
+      "version": "Version 3.001",
+      "copyright": "Copyright 2015 The Roboto Mono Project Authors (https://github.com/googlefonts/robotomono)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/b102408c91ba883969ee51dfc33cc371.woff2",
+      "sha256": "b102408c91ba883969ee51dfc33cc3716708a12c7bf3a3783f321e52aaba7137",
+      "family": "Roboto",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/b11130c54c74efd6daafe68f038f84db.woff2",
+      "sha256": "b11130c54c74efd6daafe68f038f84dbdac5a232207f1fc1a9c5664f42b41242",
+      "family": "Roboto Mono Light",
+      "version": "Version 3.001",
+      "copyright": "Copyright 2015 The Roboto Mono Project Authors (https://github.com/googlefonts/robotomono)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/b19fccc0afdc88735e6fa89268036933.woff2",
+      "sha256": "b19fccc0afdc88735e6fa8926803693364132b87ec8be98d0c85253e40abc527",
+      "family": "Roboto ExtraBold",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/b416392c7d8887a1a4f403e7f74c1003.woff2",
+      "sha256": "b416392c7d8887a1a4f403e7f74c10032d15dc3cb97acb39e08e584bf050d8e7",
+      "family": "Roboto Thin",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/b45c9d25516df09cf9fdfcd5816739b6.woff2",
+      "sha256": "b45c9d25516df09cf9fdfcd5816739b6b68a72970295e8a00959deff6919b760",
+      "family": "Roboto ExtraBold",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/b4767ac696ef23ce6a2666e831d3f6ea.woff2",
+      "sha256": "b4767ac696ef23ce6a2666e831d3f6ea7b7f8a4c8a4dbfaf9c4b2b544c28e6ad",
+      "family": "Roboto ExtraLight",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/b560528833481e301ca27e15fb2c2087.woff2",
+      "sha256": "b560528833481e301ca27e15fb2c208702dbaa4c4d355a50394695917cb31557",
+      "family": "Roboto",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/b5843bdfcb8683f34fb44444cf15d2a0.woff2",
+      "sha256": "b5843bdfcb8683f34fb44444cf15d2a03ad93d6b11934a55d059aae2b650bbfe",
+      "family": "Roboto Medium",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/b58d6e11d6157f55a1cf9fb251d2de0d.woff2",
+      "sha256": "b58d6e11d6157f55a1cf9fb251d2de0dfed9a823ffc04c1f7b2d3e63006ac914",
+      "family": "Roboto Black",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/b64aec59c2342a732ec9a766e0846692.woff2",
+      "sha256": "b64aec59c2342a732ec9a766e0846692dad652c571ca3bc7fd31bf53943887eb",
+      "family": "Roboto",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/b6ad9044551f31473dcc18158b0a3f64.woff2",
+      "sha256": "b6ad9044551f31473dcc18158b0a3f640ea7589cfb9e7e28b248f672623628a3",
+      "family": "Roboto",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/b89ebf50f35195132ecff30f6fcf4b66.woff2",
+      "sha256": "b89ebf50f35195132ecff30f6fcf4b66e705bded7f237b8d866a897270ac0a03",
+      "family": "Roboto Mono SemiBold",
+      "version": "Version 3.001",
+      "copyright": "Copyright 2015 The Roboto Mono Project Authors (https://github.com/googlefonts/robotomono)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/b8c4ea5f8dbfeb87cb22dbf744a54ea4.woff2",
+      "sha256": "b8c4ea5f8dbfeb87cb22dbf744a54ea449436156ed6101655721a7b36a82898f",
+      "family": "Roboto ExtraBold",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/b936ac97e1e2d7995714f3a4621606db.woff2",
+      "sha256": "b936ac97e1e2d7995714f3a4621606db5edc3534fc129707a4b68c7f85d498c9",
+      "family": "Roboto ExtraBold",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/b9d66d1708156f765ada51939bc24ed2.woff2",
+      "sha256": "b9d66d1708156f765ada51939bc24ed259dafa69eb631b36e443680fe9e15879",
+      "family": "Roboto",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/ba372cfb4c826907d9105566dfe7994a.woff2",
+      "sha256": "ba372cfb4c826907d9105566dfe7994a6662226169215ccd16e0ba923dd59b2f",
+      "family": "Roboto Thin",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/ba534299c2b72e3b905f313cc81dd4fa.woff2",
+      "sha256": "ba534299c2b72e3b905f313cc81dd4fa36f20a59fb9234f4c63fdc34a6b37f16",
+      "family": "Roboto Mono Thin",
+      "version": "Version 3.001",
+      "copyright": "Copyright 2015 The Roboto Mono Project Authors (https://github.com/googlefonts/robotomono)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/baeca165847f8f7a97662e5600e545d9.ttf",
+      "sha256": "baeca165847f8f7a97662e5600e545d970899f59ab4dea5cc11cff79d7d98581",
+      "family": "Roboto",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/bc16ee4bc227d15064256700361b84d9.ttf",
+      "sha256": "bc16ee4bc227d15064256700361b84d97f7856b24b692d1c0791e5162ba183a4",
+      "family": "Roboto ExtraLight",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/bc65abe41b621168458f550dd21f3e85.woff2",
+      "sha256": "bc65abe41b621168458f550dd21f3e853268208b132f8a6c4fc8beec8f860524",
+      "family": "Roboto Mono SemiBold",
+      "version": "Version 3.001",
+      "copyright": "Copyright 2015 The Roboto Mono Project Authors (https://github.com/googlefonts/robotomono)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/bc8794a87cc5967c7b71364fe27a9d5a.woff2",
+      "sha256": "bc8794a87cc5967c7b71364fe27a9d5a6de7b5d496567332fa8d8dd465a06d4e",
+      "family": "Roboto ExtraLight",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/bc91c7b3cd8813652cf03d5c4f0d206d.ttf",
+      "sha256": "bc91c7b3cd8813652cf03d5c4f0d206d69762d674e37afbf34273feb97e4c9b2",
+      "family": "Roboto Medium",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/bec340ec8c7ec4940533eeceadddb00a.woff2",
+      "sha256": "bec340ec8c7ec4940533eeceadddb00ac2da872c57c67b0c55e772c7c32dad4e",
+      "family": "Roboto",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/bed1ae716100031158b9972511ae1e29.woff2",
+      "sha256": "bed1ae716100031158b9972511ae1e2973bce388640f84dbf6ea7d6980e6a0ec",
+      "family": "Roboto",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/c0b55e2fa00cb3538e82dbb7d2f8dc66.ttf",
+      "sha256": "c0b55e2fa00cb3538e82dbb7d2f8dc669b7572ab702ccad50c49dd6d369cb37f",
+      "family": "Roboto Mono",
+      "version": "Version 3.001",
+      "copyright": "Copyright 2015 The Roboto Mono Project Authors (https://github.com/googlefonts/robotomono)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/c229c25aa6e622a5311ee5a50f9d7ce6.woff2",
+      "sha256": "c229c25aa6e622a5311ee5a50f9d7ce66d178a8a617ad62aa904350fb02f82b3",
+      "family": "Roboto Thin",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/c2334ab8e37b4157533df073cde78d63.woff2",
+      "sha256": "c2334ab8e37b4157533df073cde78d63b745a48ee202811e768bc8fdaabfc9aa",
+      "family": "Roboto Light",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/c312c9d19ad88a5f54a50520835c9296.woff2",
+      "sha256": "c312c9d19ad88a5f54a50520835c92968f1361db0d2f176baf918349baa35219",
+      "family": "Roboto Thin",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/c5d0a8d5e21d71fe4aed01ef6c6e904a.ttf",
+      "sha256": "c5d0a8d5e21d71fe4aed01ef6c6e904a0c1edf2708d4c71d657421a799617277",
+      "family": "Roboto Mono SemiBold",
+      "version": "Version 3.001",
+      "copyright": "Copyright 2015 The Roboto Mono Project Authors (https://github.com/googlefonts/robotomono)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/c71e1ed02ffd053fbc7f851cd79198f0.ttf",
+      "sha256": "c71e1ed02ffd053fbc7f851cd79198f0b099791f3f48550c9a11bf7564e8d38d",
+      "family": "Roboto Mono",
+      "version": "Version 3.001",
+      "copyright": "Copyright 2015 The Roboto Mono Project Authors (https://github.com/googlefonts/robotomono)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/c780beba9d1521f4930e8612ffb1535c.woff2",
+      "sha256": "c780beba9d1521f4930e8612ffb1535cb8e60c961a64aef13c75668cb94a7198",
+      "family": "Roboto Mono Light",
+      "version": "Version 3.001",
+      "copyright": "Copyright 2015 The Roboto Mono Project Authors (https://github.com/googlefonts/robotomono)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/c83910bc4d3664ec9f9b7ad5c9fa8939.woff2",
+      "sha256": "c83910bc4d3664ec9f9b7ad5c9fa893997d7569668470110218c633973f8e452",
+      "family": "Roboto Thin",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/cae3628561f4556983082484ee19f4d8.woff2",
+      "sha256": "cae3628561f4556983082484ee19f4d84fa5912662b0c0e4cf80ed6082c209b8",
+      "family": "Roboto ExtraBold",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/cc04783263e416f8ee2a218fde6ffd53.woff2",
+      "sha256": "cc04783263e416f8ee2a218fde6ffd532d6b81636d3187d30e39e4ad05736d5e",
+      "family": "Roboto",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/ccd24ea4a6eb7d7f2ad3d48078f64ffc.woff2",
+      "sha256": "ccd24ea4a6eb7d7f2ad3d48078f64ffceb623faad8b4a52943bd7569d995dbec",
+      "family": "Roboto Light",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/cdc3adef34f3d5d51ccbd1e93cee04e9.woff2",
+      "sha256": "cdc3adef34f3d5d51ccbd1e93cee04e902412e5e70b4ed7bbe224f8eefe79594",
+      "family": "Roboto Mono",
+      "version": "Version 3.001",
+      "copyright": "Copyright 2015 The Roboto Mono Project Authors (https://github.com/googlefonts/robotomono)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/ce31a3d939f25087b2b8b08f6b386523.woff2",
+      "sha256": "ce31a3d939f25087b2b8b08f6b386523f2ca159f4bdbd68c510a1492b640bced",
+      "family": "Roboto Mono Thin",
+      "version": "Version 3.001",
+      "copyright": "Copyright 2015 The Roboto Mono Project Authors (https://github.com/googlefonts/robotomono)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/ce7027efa5c894e8b244b0ca05ec121b.woff2",
+      "sha256": "ce7027efa5c894e8b244b0ca05ec121b6a85655957afd9c76c59b56910de7d4e",
+      "family": "Roboto Mono Medium",
+      "version": "Version 3.001",
+      "copyright": "Copyright 2015 The Roboto Mono Project Authors (https://github.com/googlefonts/robotomono)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/ce8ce842dd8f9d88c51de8585d2006c4.woff2",
+      "sha256": "ce8ce842dd8f9d88c51de8585d2006c4a904a59325b035e5c8f954e0af04ce14",
+      "family": "Roboto ExtraBold",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/cea798fe555ff5af2d024d2acab666ff.woff2",
+      "sha256": "cea798fe555ff5af2d024d2acab666ff7c8d158cab6809b2ed70557faf76e6b9",
+      "family": "Roboto ExtraLight",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/cf3d3ad1f62c3d40c7d4b1b4136d3c32.woff2",
+      "sha256": "cf3d3ad1f62c3d40c7d4b1b4136d3c32a8d4b3dd56c62272e6d5ef94268259ed",
+      "family": "Roboto ExtraLight",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/d617f59ab68b0f1d1b9052f248ea6ab3.woff2",
+      "sha256": "d617f59ab68b0f1d1b9052f248ea6ab3a9f4a169e1e4bb80e11eecf98d416bc6",
+      "family": "Roboto Black",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/d72a1a56c26a9395b06dc2a4b4d1b8c2.woff2",
+      "sha256": "d72a1a56c26a9395b06dc2a4b4d1b8c2e81f734edc9a5bbdf508287b8ed8dd1f",
+      "family": "Roboto SemiBold",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/d7c7c06d1be056d03709ceae2b003606.woff2",
+      "sha256": "d7c7c06d1be056d03709ceae2b0036064c0bf8f05c0ee88c5677be3c2486a6ed",
+      "family": "Roboto Mono SemiBold",
+      "version": "Version 3.001",
+      "copyright": "Copyright 2015 The Roboto Mono Project Authors (https://github.com/googlefonts/robotomono)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/d9cec3b5d4730022d9bfe5eeac0c864b.woff2",
+      "sha256": "d9cec3b5d4730022d9bfe5eeac0c864b993db9f8174a551dc89d5c493d1b778b",
+      "family": "Roboto Medium",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/daeaf53a3887e551d8212d225dd1ca63.woff2",
+      "sha256": "daeaf53a3887e551d8212d225dd1ca63b3a9eadda0290dc4a8814e1d439840ad",
+      "family": "Roboto Black",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/db1892e6e93b5eab90ce2c4688f77d23.woff2",
+      "sha256": "db1892e6e93b5eab90ce2c4688f77d230f5e7461587eae2bab3328dcecf53f04",
+      "family": "Roboto ExtraLight",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/dbcb7acd17899c70335fc7724aefcec8.woff2",
+      "sha256": "dbcb7acd17899c70335fc7724aefcec837a6133c0454aec2f0038c5d5f3c0f79",
+      "family": "Roboto Mono",
+      "version": "Version 3.001",
+      "copyright": "Copyright 2015 The Roboto Mono Project Authors (https://github.com/googlefonts/robotomono)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/de9d9d69c7140eb0ba951986b1181ff1.woff2",
+      "sha256": "de9d9d69c7140eb0ba951986b1181ff1725c14c79a9deffc13cc645cfd312a3e",
+      "family": "Roboto Mono",
+      "version": "Version 3.001",
+      "copyright": "Copyright 2015 The Roboto Mono Project Authors (https://github.com/googlefonts/robotomono)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/dff818b0f46cec5b567a2b73063db86e.woff2",
+      "sha256": "dff818b0f46cec5b567a2b73063db86e2b73d1eb05d712a5d09a729724664dd3",
+      "family": "Roboto SemiBold",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/e03013e0baa5690a803c188da2214d92.woff2",
+      "sha256": "e03013e0baa5690a803c188da2214d920c3245b25ad78421ecc8ae86cd842ae9",
+      "family": "Roboto Mono",
+      "version": "Version 3.001",
+      "copyright": "Copyright 2015 The Roboto Mono Project Authors (https://github.com/googlefonts/robotomono)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/e054cd94d81bcc9466c4d07e9f653524.ttf",
+      "sha256": "e054cd94d81bcc9466c4d07e9f653524db81f7a6ad015e7d981b30e7a780f647",
+      "family": "Roboto SemiBold",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/e292fab1fd855ecb017428bfe971f595.woff2",
+      "sha256": "e292fab1fd855ecb017428bfe971f595b0a721a2153f7e44a687167a7ace273c",
+      "family": "Roboto SemiBold",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/e3476a3f9c6b9343a3398c7b1d5c84eb.woff2",
+      "sha256": "e3476a3f9c6b9343a3398c7b1d5c84eba90df9fd8537ab4d126bde99c5581a1a",
+      "family": "Roboto Mono Light",
+      "version": "Version 3.001",
+      "copyright": "Copyright 2015 The Roboto Mono Project Authors (https://github.com/googlefonts/robotomono)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/e38070f61c248c215a19fee66f151635.woff2",
+      "sha256": "e38070f61c248c215a19fee66f1516350252a1a7a6dee241f5a71e35d3b29d9e",
+      "family": "Roboto Mono ExtraLight",
+      "version": "Version 3.001",
+      "copyright": "Copyright 2015 The Roboto Mono Project Authors (https://github.com/googlefonts/robotomono)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/e3e968bac28ee9a8a4e66d406faaf9c9.woff2",
+      "sha256": "e3e968bac28ee9a8a4e66d406faaf9c90691049949ddaed2668e06155b8387a9",
+      "family": "Roboto",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/e3e9abf60b61dbf89160e8ad6cbc60ba.woff2",
+      "sha256": "e3e9abf60b61dbf89160e8ad6cbc60ba0116a6d7297f5173c787aaeb6a6772dc",
+      "family": "Roboto Mono",
+      "version": "Version 3.001",
+      "copyright": "Copyright 2015 The Roboto Mono Project Authors (https://github.com/googlefonts/robotomono)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/e44efd49524d8b9ba8cb4b627aeac4aa.woff2",
+      "sha256": "e44efd49524d8b9ba8cb4b627aeac4aa34524e11d9bf67a57becf0740bb58d88",
+      "family": "Roboto Medium",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/e4a744be99f104ecbd224af9a91da2a7.woff2",
+      "sha256": "e4a744be99f104ecbd224af9a91da2a7cadd76e1b9cde550b26e341d2e465349",
+      "family": "Roboto Mono",
+      "version": "Version 3.001",
+      "copyright": "Copyright 2015 The Roboto Mono Project Authors (https://github.com/googlefonts/robotomono)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/e62e6d5e2b8ed9197b9d1d913ad85faf.woff2",
+      "sha256": "e62e6d5e2b8ed9197b9d1d913ad85faf6ef4feccde1c2a3854499d5dfb22285c",
+      "family": "Roboto Medium",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/e6bae3f6087387a22a5897fef44189b7.woff2",
+      "sha256": "e6bae3f6087387a22a5897fef44189b7b82a1ec752de37a81294cace61f36420",
+      "family": "Roboto Mono Medium",
+      "version": "Version 3.001",
+      "copyright": "Copyright 2015 The Roboto Mono Project Authors (https://github.com/googlefonts/robotomono)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/e8114fb69205d2e6cf1c26a817313149.woff2",
+      "sha256": "e8114fb69205d2e6cf1c26a81731314927733b6e4562ae243f047b5a76dfec94",
+      "family": "Roboto SemiBold",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/e967b155747e3f44357325ce1d3a539d.woff2",
+      "sha256": "e967b155747e3f44357325ce1d3a539d138f9e205dc18cd0f7a266203ca0f675",
+      "family": "Roboto",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/e9a3e9f5f5250477366117d455632fb8.woff2",
+      "sha256": "e9a3e9f5f5250477366117d455632fb8f450bb2a93a888856f30c131f962d2e0",
+      "family": "Roboto Mono",
+      "version": "Version 3.001",
+      "copyright": "Copyright 2015 The Roboto Mono Project Authors (https://github.com/googlefonts/robotomono)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/ebd19fdcf203b5fc2a40581184ed9fb1.woff2",
+      "sha256": "ebd19fdcf203b5fc2a40581184ed9fb168ceb2cf118a9d853f3e8feab89fb26b",
+      "family": "Roboto Black",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/ec52baba03c31dfa5c0d0bc6906ba425.woff2",
+      "sha256": "ec52baba03c31dfa5c0d0bc6906ba425c37fcb80c2b95c883ac7d6b25059022e",
+      "family": "Roboto Mono ExtraLight",
+      "version": "Version 3.001",
+      "copyright": "Copyright 2015 The Roboto Mono Project Authors (https://github.com/googlefonts/robotomono)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/ece5b03da01e96497a31f43f27857ac2.woff2",
+      "sha256": "ece5b03da01e96497a31f43f27857ac21202ed6dfd10498edcf3b88fe436fd9f",
+      "family": "Roboto ExtraLight",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/ef86aab7683624b94d5544d8268e50d8.woff2",
+      "sha256": "ef86aab7683624b94d5544d8268e50d8ce41bb87157791190caa1f521c45e0c2",
+      "family": "Roboto SemiBold",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/f04ac67be64e2ad4a8e0900f60287d6c.woff2",
+      "sha256": "f04ac67be64e2ad4a8e0900f60287d6c860a2a2be4447db3b923e6bdf0c474d1",
+      "family": "Roboto Mono ExtraLight",
+      "version": "Version 3.001",
+      "copyright": "Copyright 2015 The Roboto Mono Project Authors (https://github.com/googlefonts/robotomono)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/f0664f00ace97e38d6e5ba6ecbf1d10b.woff2",
+      "sha256": "f0664f00ace97e38d6e5ba6ecbf1d10b7e641379ac61f2cb0157ab928cc663c5",
+      "family": "Roboto SemiBold",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/f3063f73c3787cf4fed3e75e0b121c6c.woff2",
+      "sha256": "f3063f73c3787cf4fed3e75e0b121c6cfc0838d6785d47402d8959f40df907d7",
+      "family": "Roboto Light",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/f38f5947317e57e3c4cc20b55cf53710.woff2",
+      "sha256": "f38f5947317e57e3c4cc20b55cf53710fe259808261a3c1bf0663562af29bde0",
+      "family": "Roboto Mono SemiBold",
+      "version": "Version 3.001",
+      "copyright": "Copyright 2015 The Roboto Mono Project Authors (https://github.com/googlefonts/robotomono)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/f51cfffd7f9b3d46d051a5eba57ca871.woff2",
+      "sha256": "f51cfffd7f9b3d46d051a5eba57ca8711d173d13670b64f06dc2dd13702da9e9",
+      "family": "Roboto Thin",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/f5bc2d7f68c6f5aac5589a1e8f3f8638.ttf",
+      "sha256": "f5bc2d7f68c6f5aac5589a1e8f3f8638257a9d9bde6efa222d1c7b9e480cb37b",
+      "family": "Roboto SemiBold",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/f5eae6b0ac5ed02f8d5a9a35a51f7c74.ttf",
+      "sha256": "f5eae6b0ac5ed02f8d5a9a35a51f7c74bad5c5535aa8cbda8277b0374fc376ff",
+      "family": "Roboto Mono Medium",
+      "version": "Version 3.001",
+      "copyright": "Copyright 2015 The Roboto Mono Project Authors (https://github.com/googlefonts/robotomono)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/f6772188206a8277aa1dc3992ab3f5cc.ttf",
+      "sha256": "f6772188206a8277aa1dc3992ab3f5cc355d9df2164c75663054886259680961",
+      "family": "Roboto ExtraBold",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/f67cbe19918d1ea33e927a2b83dfc964.woff2",
+      "sha256": "f67cbe19918d1ea33e927a2b83dfc964a578b39e50be1004b61e37c9750f503a",
+      "family": "Roboto Mono Thin",
+      "version": "Version 3.001",
+      "copyright": "Copyright 2015 The Roboto Mono Project Authors (https://github.com/googlefonts/robotomono)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/f7dfc91a7d30361117bb362450fb53af.woff2",
+      "sha256": "f7dfc91a7d30361117bb362450fb53af8f6b255175df9d3894d3b485502681b6",
+      "family": "Roboto",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/f914d77fe113e14e83614de975d0e4ac.woff2",
+      "sha256": "f914d77fe113e14e83614de975d0e4ac8b10974ef0a5e79e0112c4e848926e23",
+      "family": "Roboto ExtraBold",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/f9943037d734ce0a3dca872da278a77c.woff2",
+      "sha256": "f9943037d734ce0a3dca872da278a77ccec005db721b764a7ff977e059426316",
+      "family": "Roboto Mono Medium",
+      "version": "Version 3.001",
+      "copyright": "Copyright 2015 The Roboto Mono Project Authors (https://github.com/googlefonts/robotomono)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/fa28925795ed8bb6ef48526d0b8ef251.woff2",
+      "sha256": "fa28925795ed8bb6ef48526d0b8ef2518223592351f49d0572e0df3ab59c531d",
+      "family": "Roboto SemiBold",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/fc99820d8ed762883e9110742948df21.woff2",
+      "sha256": "fc99820d8ed762883e9110742948df2106ad86407d9b6ee8abeb24ded6f64629",
+      "family": "Roboto SemiBold",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/fd2133ab2aba43ef040fad88322b695b.woff2",
+      "sha256": "fd2133ab2aba43ef040fad88322b695ba83cc8b77602718591088b64e6ebd912",
+      "family": "Roboto Mono Light",
+      "version": "Version 3.001",
+      "copyright": "Copyright 2015 The Roboto Mono Project Authors (https://github.com/googlefonts/robotomono)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/fd6422c0bd5296a0d10b36f570f96037.woff2",
+      "sha256": "fd6422c0bd5296a0d10b36f570f96037ab3080af1f1c503384e4655c304bc5a7",
+      "family": "Roboto ExtraBold",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/fe349e5377e88095a1b04b615bf5e745.woff2",
+      "sha256": "fe349e5377e88095a1b04b615bf5e745f1899556545383c348a007aab628815e",
+      "family": "Roboto",
+      "version": "Version 3.015; 2026",
+      "copyright": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)",
+      "licence_url": "https://openfontlicense.org"
+    },
+    {
+      "path": "book/_static/fonts/fe89051f65780458ad298ceb78c1812a.woff2",
+      "sha256": "fe89051f65780458ad298ceb78c1812a14cd15475615406206868752d90a59a6",
+      "family": "Roboto Mono Thin",
+      "version": "Version 3.001",
+      "copyright": "Copyright 2015 The Roboto Mono Project Authors (https://github.com/googlefonts/robotomono)",
+      "licence_url": "https://openfontlicense.org"
+    }
+  ]
+}

@@ -1,0 +1,62 @@
+{
+  "interface_version": "ukacm-toy-damage-v1",
+  "architecture": "TinyDamageMLP",
+  "width": 32,
+  "feature_order": [
+    "x_over_L",
+    "y_over_H",
+    "load_factor"
+  ],
+  "feature_location": "node",
+  "feature_units": [
+    "dimensionless x/L",
+    "dimensionless y/H",
+    "dimensionless"
+  ],
+  "output": "toy_damage_proposal at nodes; d=0 intact-like, d=1 saturated",
+  "dtype": "float64",
+  "device": "cpu",
+  "mesh_signature": [
+    25,
+    13
+  ],
+  "normalisation_mean": [
+    0.5,
+    0.5,
+    0.4400000000000001
+  ],
+  "normalisation_scale": [
+    0.3005011345450644,
+    0.3118447648923806,
+    0.20087244715634883
+  ],
+  "splits": {
+    "train": [
+      0.12,
+      0.17818181818181816,
+      0.23636363636363636,
+      0.29454545454545455,
+      0.3527272727272727,
+      0.4109090909090909,
+      0.4690909090909091,
+      0.5272727272727273,
+      0.5854545454545454,
+      0.6436363636363637,
+      0.7018181818181818,
+      0.76
+    ],
+    "validation": [
+      0.82,
+      0.88
+    ],
+    "test": [
+      0.94,
+      1.0
+    ]
+  },
+  "data_provenance": "course-owned ToyHelmholtzProblem; not PhAST or research data",
+  "seed": 20260909,
+  "epochs": 400,
+  "test_rmse": 0.049867531488768393,
+  "training_seconds": 1.3265216250001686
+}

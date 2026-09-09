@@ -1,0 +1,96 @@
+{
+  "date": "2026-09-09",
+  "scope": "Verbatim third-party licence files for the built HTML and notebook exports; not a new licence for course content.",
+  "files": [
+    {
+      "filename": "sphinx-7.4.7-LICENSE.rst",
+      "component": "Sphinx",
+      "version": "7.4.7",
+      "source_url": "https://github.com/sphinx-doc/sphinx/blob/v7.4.7/LICENSE.rst",
+      "source_kind": "verbatim licence shipped by the installed authoring distribution",
+      "sha256": "1dd64f50572641a2f248173d7cabd10b968e50d9312fd1b3e69cb4a7a5c60e4e"
+    },
+    {
+      "filename": "sphinx-immaterial-0.13.9-LICENSE.txt",
+      "component": "Sphinx Immaterial",
+      "version": "0.13.9",
+      "source_url": "https://github.com/jbms/sphinx-immaterial",
+      "source_kind": "verbatim licence shipped by the installed authoring distribution",
+      "sha256": "66b07b2806d53a99e18e4851ef0e410f61feea80f72c4942e127cf67f4e60d8a"
+    },
+    {
+      "filename": "sphinx-copybutton-0.5.2-LICENSE.txt",
+      "component": "sphinx-copybutton",
+      "version": "0.5.2",
+      "source_url": "https://github.com/executablebooks/sphinx-copybutton/blob/v0.5.2/LICENSE",
+      "source_kind": "verbatim licence shipped by the installed authoring distribution",
+      "sha256": "6bbda9d2e8e339e9ef31556f437fbc95ef2d1ed3679618f63f0142f95c9b3705"
+    },
+    {
+      "filename": "myst-nb-1.4.0-LICENSE.txt",
+      "component": "MyST-NB",
+      "version": "1.4.0",
+      "source_url": "https://github.com/executablebooks/MyST-NB/blob/v1.4.0/LICENSE",
+      "source_kind": "verbatim licence shipped by the installed authoring distribution",
+      "sha256": "6961deba3e9b6ab4bc8cfca41b3e8fe38f56a47d5016b0a8eef94496c3aca1be"
+    },
+    {
+      "filename": "nbconvert-7.17.0-LICENSE.txt",
+      "component": "nbconvert",
+      "version": "7.17.0",
+      "source_url": "https://github.com/jupyter/nbconvert",
+      "source_kind": "verbatim licence shipped by the installed authoring distribution",
+      "sha256": "5ca74e4d2eeb9330b0d129c25f874d3544a13413bc62ae8d367819100d095072"
+    },
+    {
+      "filename": "pygments-2.20.0-LICENSE.txt",
+      "component": "Pygments",
+      "version": "2.20.0",
+      "source_url": "https://github.com/pygments/pygments/blob/2.20.0/LICENSE",
+      "source_kind": "verbatim licence shipped by the installed authoring distribution",
+      "sha256": "a9d66f1d526df02e29dce73436d34e56e8632f46c275bbdffc70569e882f9f17"
+    },
+    {
+      "filename": "jupyterlab-pygments-0.3.0-LICENSE.txt",
+      "component": "jupyterlab-pygments",
+      "version": "0.3.0",
+      "source_url": "https://github.com/jupyterlab/jupyterlab_pygments",
+      "source_kind": "verbatim licence shipped by the installed authoring distribution",
+      "sha256": "e5ac2be30b2bcefe330ee9e5ad7fe5b0d1156fecb3555fcaaa908a8d29f9fded"
+    },
+    {
+      "filename": "mathjax-3.2.2-LICENSE.txt",
+      "component": "MathJax",
+      "version": "3.2.2",
+      "source_url": "https://github.com/mathjax/MathJax/blob/3.2.2/LICENSE",
+      "source_kind": "verbatim licence shipped by the installed authoring distribution",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+    },
+    {
+      "filename": "roboto-OFL.txt",
+      "component": "Roboto",
+      "version": "SIL OFL 1.1; copyright matches bundled font metadata",
+      "upstream_license_commit": "b994996f00b2f7165ad3dfc59afe97567e21f431",
+      "source_url": "https://github.com/googlefonts/roboto-3-classic/blob/b994996f00b2f7165ad3dfc59afe97567e21f431/OFL.txt",
+      "source_kind": "official upstream licence fetched 2026-09-09",
+      "sha256": "061402327a96aadb0bfb694a960ed289ecd38d383e396243831ab81feb109c41"
+    },
+    {
+      "filename": "roboto-mono-OFL.txt",
+      "component": "Roboto Mono",
+      "version": "SIL OFL 1.1; copyright matches bundled font metadata",
+      "upstream_license_commit": "086dca623163602ee5f75b8d8ae5534a1863a40f",
+      "source_url": "https://github.com/googlefonts/RobotoMono/blob/086dca623163602ee5f75b8d8ae5534a1863a40f/OFL.txt",
+      "source_kind": "official upstream licence fetched 2026-09-09",
+      "sha256": "50ab8dd54680d3473f649c9db86fece88434d097c7834475c1c72d2f8c429215"
+    },
+    {
+      "filename": "clipboard-2.0.8-LICENSE.txt",
+      "component": "clipboard.js",
+      "version": "2.0.8",
+      "source_url": "https://github.com/zenorocha/clipboard.js/blob/v2.0.8/LICENSE",
+      "source_kind": "official upstream licence at the version in the bundled JS header",
+      "sha256": "a798e7b5fa604117d52d607e05f1cbac3b2fa5da087837f412a1a3c866b4b748"
+    }
+  ]
+}

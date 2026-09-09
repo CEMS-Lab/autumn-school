@@ -1,0 +1,1042 @@
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="03_staggered_solution.html">
+      
+      
+        <link rel="next" href="labs/01_phast_tiny_evolving_fracture.html">
+      
+      
+      <link rel="icon" href="">
+    
+    
+      
+        <title>5. Geometry, FEM, tensors, and matrix-free operators - PhAST: Phase-field fracture with differentiable FEM</title>
+      
+    
+    
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+        <link rel="stylesheet" type="text/css" href="_static/sphinx_immaterial_theme.ad7809648a4561548.min.css?v=f290928c" />
+        <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+        <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+        <link rel="stylesheet" type="text/css" href="_static/mobile_math.css?v=1c40619e" />
+        <link rel="stylesheet" type="text/css" href="_static/learning_book.css?v=6dcc5951" />
+    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#start-with-a-boundary-value-problem" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="index.html" title="PhAST: Phase-field fracture with differentiable FEM" class="md-header__button md-logo" aria-label="PhAST: Phase-field fracture with differentiable FEM" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            PhAST: Phase-field fracture with differentiable FEM
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              5. Geometry, FEM, tensors, and matrix-free operators
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="index.html" title="PhAST: Phase-field fracture with differentiable FEM" class="md-nav__button md-logo" aria-label="PhAST: Phase-field fracture with differentiable FEM" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+    </a>
+    PhAST: Phase-field fracture with differentiable FEM
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="00_welcome_and_routes.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>From cracks to computation:<wbr> learn by doing</span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="01_crack_representations.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>Crack representations:<wbr> sharp, cohesive, and diffuse</span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="02_phase_field_energy.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>Fracture energy:<wbr> AT1, AT2, degradation, and width</span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="03_staggered_solution.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>From solid mechanics to staggered damage updates</span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+    
+  
+  
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__current-nested md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="#" class="md-nav__link md-nav__link--active">
+              
+  
+  
+  <span class="md-ellipsis">
+    <span>Geometry, FEM, tensors, and matrix-<wbr>free operators</span>
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link md-nav__link--active" for="__nav_5" id="__nav_5_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            <span>Geometry, FEM, tensors, and matrix-<wbr>free operators</span>
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_1" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="#computational-lesson-follow-a-public-phast-calculation" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    <span>Computational lesson:<wbr> follow a public Ph<wbr>AST calculation</span>
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5_1" id="__nav_5_1_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_1">
+            <span class="md-nav__icon md-icon"></span>
+            <span>Computational lesson:<wbr> follow a public Ph<wbr>AST calculation</span>
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="labs/01_phast_tiny_evolving_fracture.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>Run and interpret a small Ph<wbr>AST fracture calculation</span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+  
+      
+    <li class="md-nav__item md-nav__item--active md-nav__current-toc">
+      
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    <span>Geometry, FEM, tensors, and matrix-<wbr>free operators</span>
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="#" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>Geometry, FEM, tensors, and matrix-<wbr>free operators</span>
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#start-with-a-boundary-value-problem" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>Start with a boundary-<wbr>value problem</span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#from-cells-to-fields" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>From cells to fields</span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tensor-shapes-are-part-of-the-model-contract" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>Tensor shapes are part of the model contract</span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#assembled-and-matrix-free-routes" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>Assembled and matrix-<wbr>free routes</span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#static-and-dynamic-arrays" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>Static and dynamic arrays</span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#where-automatic-differentiation-fits" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>Where automatic differentiation fits</span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#inspecting-results-four-views-one-interpretation" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>Inspecting results:<wbr> four views, one interpretation</span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#computational-lesson-follow-a-public-phast-calculation" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>Computational lesson:<wbr> follow a public Ph<wbr>AST calculation</span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Computational lesson: follow a public PhAST calculation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="labs/01_phast_tiny_evolving_fracture.html" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>Run and interpret a small Ph<wbr>AST fracture calculation</span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercise-identify-a-silent-shape-error" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>Exercise:<wbr> identify a silent shape error</span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#take-away" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>Take-<wbr>away</span>
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="05_differentiation_and_inverse.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>Differentiation and an illustrative inverse problem</span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="06_learning_adapter.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>Train, save, reload, adapters, and checked proposals</span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="07_practice_references.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>Practice, solutions, glossary, references, and contributing</span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#start-with-a-boundary-value-problem" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>Start with a boundary-<wbr>value problem</span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#from-cells-to-fields" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>From cells to fields</span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tensor-shapes-are-part-of-the-model-contract" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>Tensor shapes are part of the model contract</span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#assembled-and-matrix-free-routes" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>Assembled and matrix-<wbr>free routes</span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#static-and-dynamic-arrays" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>Static and dynamic arrays</span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#where-automatic-differentiation-fits" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>Where automatic differentiation fits</span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#inspecting-results-four-views-one-interpretation" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>Inspecting results:<wbr> four views, one interpretation</span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#computational-lesson-follow-a-public-phast-calculation" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>Computational lesson:<wbr> follow a public Ph<wbr>AST calculation</span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercise-identify-a-silent-shape-error" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>Exercise:<wbr> identify a silent shape error</span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#take-away" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>Take-<wbr>away</span>
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset" role="main">
+                
+                
+                  
+
+
+<h1 id="geometry-fem-tensors-and-matrix-free-operators"><span class="section-number">5. </span>Geometry, FEM, tensors, and matrix-free operators<a class="headerlink" href="#geometry-fem-tensors-and-matrix-free-operators" title="Link to this heading">¶</a></h1>
+<figure class="align-default" id="fig-fem-pipeline">
+<a class="reference internal image-reference" href="_images/04_fem_pipeline.png"><img alt="_images/04_fem_pipeline.png" src="_images/04_fem_pipeline.png" style="width: 97%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Figure 5.1 </span><span class="caption-text"><span class="caption-text">
+Finite-element data can be expressed as tensors without changing the need to
+define geometry, interpolation, quadrature, loads, and checks.</span><a class="headerlink" href="#fig-fem-pipeline" title="Permalink to this image">¶</a></figcaption>
+</figure>
+<h2 id="start-with-a-boundary-value-problem"><span class="section-number">5.1. </span>Start with a boundary-value problem<a class="headerlink" href="#start-with-a-boundary-value-problem" title="Link to this heading">¶</a></h2>
+<p>A computational fracture result should be traceable to a boundary-value
+problem, not merely a tensor shape. State:</p>
+<ul class="simple">
+<li><p>the domain <span class="math notranslate nohighlight">\(\Omega\)</span>, notch or initial damaged region, and material regions;</p></li>
+<li><p>the displacement boundary <span class="math notranslate nohighlight">\(\Gamma_u\)</span> and traction boundary <span class="math notranslate nohighlight">\(\Gamma_t\)</span>;</p></li>
+<li><p>prescribed displacement <span class="math notranslate nohighlight">\(\bar u\)</span>, traction <span class="math notranslate nohighlight">\(\bar t\)</span>, and body force <span class="math notranslate nohighlight">\(b\)</span>;</p></li>
+<li><p>the phase-field convention and initial value <span class="math notranslate nohighlight">\(d_0\)</span>;</p></li>
+<li><p>the mesh, finite-element interpolation, quadrature, and load increments;
+and</p></li>
+<li><p>the scalar quantities and fields that will be plotted.</p></li>
+</ul>
+<p>In standard notation,</p>
+<div class="math notranslate nohighlight">
+\[
+u=\bar u \text{ on }\Gamma_u,\qquad
+\sigma n=\bar t \text{ on }\Gamma_t.
+\]</div>
+<p>If a notch is represented through a prescribed initial damage field rather
+than a literal geometric cut, say so. These choices can produce visually
+similar pictures but encode different computational objects.</p>
+<h2 id="from-cells-to-fields"><span class="section-number">5.2. </span>From cells to fields<a class="headerlink" href="#from-cells-to-fields" title="Link to this heading">¶</a></h2>
+<p>For a two-dimensional mesh, common arrays are:</p>
+<ul class="simple">
+<li><p>coordinates <span class="math notranslate nohighlight">\(X\in\mathbb{R}^{N_{\mathrm{node}}\times2}\)</span>;</p></li>
+<li><p>cell connectivity
+<span class="math notranslate nohighlight">\(C\in\{0,\ldots,N_{\mathrm{node}}-1\}^{N_{\mathrm{cell}}\times n_e}\)</span>;</p></li>
+<li><p>nodal displacement
+<span class="math notranslate nohighlight">\(U\in\mathbb{R}^{N_{\mathrm{node}}\times2}\)</span>; and</p></li>
+<li><p>nodal damage <span class="math notranslate nohighlight">\(D\in\mathbb{R}^{N_{\mathrm{node}}}\)</span>.</p></li>
+</ul>
+<p>The cell connectivity does not contain the field values. It tells the program
+which rows of <span class="math notranslate nohighlight">\(X\)</span>, <span class="math notranslate nohighlight">\(U\)</span>, and <span class="math notranslate nohighlight">\(D\)</span> belong to each element. For an element <span class="math notranslate nohighlight">\(e\)</span> with
+local nodes <span class="math notranslate nohighlight">\(a\)</span>, finite-element interpolation takes the form</p>
+<div class="math notranslate nohighlight">
+\[
+u_h(x)=\sum_{a=1}^{n_e}N_a(x)u_a,\qquad
+d_h(x)=\sum_{a=1}^{n_e}N_a(x)d_a.
+\]</div>
+<p>Differentiating the shape functions maps nodal displacement to strain. In
+matrix notation at one quadrature point,</p>
+<div class="math notranslate nohighlight">
+\[
+\varepsilon_h=B_e u_e.
+\]</div>
+<p>The element residual is computed by integrating the weak form. A schematic
+mechanical contribution is</p>
+<div class="math notranslate nohighlight">
+\[
+r_e(u,d)=\int_{\Omega_e}B_e^\mathsf{T}\sigma(u_h,d_h)\,\mathrm{d}x
+-f^{\mathrm{ext}}_e.
+\]</div>
+<p>Assembly scatters each local residual into the appropriate entries of the
+global residual. The same operation can be expressed with index operations,
+scatter-adds, or framework-specific sparse primitives.</p>
+<h2 id="tensor-shapes-are-part-of-the-model-contract"><span class="section-number">5.3. </span>Tensor shapes are part of the model contract<a class="headerlink" href="#tensor-shapes-are-part-of-the-model-contract" title="Link to this heading">¶</a></h2>
+<p>Write expected shapes next to a tensor operation. For example, with batched
+cells and quadrature points, an implementation might use:</p>
+<ul class="simple">
+<li><p>cell coordinates: <span class="math notranslate nohighlight">\((N_{\mathrm{cell}}, n_e, 2)\)</span>;</p></li>
+<li><p>shape-function gradients:
+<span class="math notranslate nohighlight">\((N_{\mathrm{cell}}, N_q, n_e, 2)\)</span>;</p></li>
+<li><p>gathered displacement:
+<span class="math notranslate nohighlight">\((N_{\mathrm{cell}}, n_e, 2)\)</span>;</p></li>
+<li><p>strain or stress:
+<span class="math notranslate nohighlight">\((N_{\mathrm{cell}}, N_q, n_{\varepsilon})\)</span>; and</p></li>
+<li><p>quadrature weights: <span class="math notranslate nohighlight">\((N_{\mathrm{cell}}, N_q)\)</span>.</p></li>
+</ul>
+<p>The exact ordering is a convention. A transpose that preserves the total
+number of entries can still mix components, cells, and quadrature points. Use
+small assertions and one element-level hand calculation before relying on a
+large field plot.</p>
+<div class="tip admonition">
+<p class="admonition-title">Indexing check</p>
+<p>Select one cell and one quadrature point. Write the gathered nodal values,
+shape gradients, strain, stress, and residual contribution on paper. If those
+five objects agree with the tensor code, then vectorising over cells has a
+clear reference calculation.</p>
+</div>
+<h2 id="assembled-and-matrix-free-routes"><span class="section-number">5.4. </span>Assembled and matrix-free routes<a class="headerlink" href="#assembled-and-matrix-free-routes" title="Link to this heading">¶</a></h2>
+<p>For a linearised subproblem, an assembled finite-element method forms a global
+matrix</p>
+<div class="math notranslate nohighlight">
+\[
+K=\sum_e A_e^\mathsf{T}K_eA_e
+\]</div>
+<p>and solves <span class="math notranslate nohighlight">\(Kx=b\)</span> or a linearised residual equation. <span class="math notranslate nohighlight">\(A_e\)</span> symbolically
+represents the local-to-global map.</p>
+<p>A matrix-free method instead implements the action</p>
+<div class="math notranslate nohighlight">
+\[
+v\longmapsto K v
+\]</div>
+<p>by gathering <span class="math notranslate nohighlight">\(v\)</span> to elements, applying local operations, and scattering
+contributions back. An iterative Krylov solver can use this action without
+storing every entry of <span class="math notranslate nohighlight">\(K\)</span>.</p>
+<p>Matrix-free does <strong>not</strong> mean “no matrix mathematics,” “no memory cost,” or
+“automatically faster.” It moves attention to the correctness and efficiency
+of residual/Jacobian actions, preconditioning, data movement, and stopping
+criteria. Compare methods at matched physics, mesh, tolerance, and reported
+observable.</p>
+<h2 id="static-and-dynamic-arrays"><span class="section-number">5.5. </span>Static and dynamic arrays<a class="headerlink" href="#static-and-dynamic-arrays" title="Link to this heading">¶</a></h2>
+<p>In a quasistatic calculation, the state often consists primarily of <span class="math notranslate nohighlight">\(U\)</span> and
+<span class="math notranslate nohighlight">\(D\)</span>. A dynamic calculation adds at least velocity and acceleration or their
+time-integration equivalents. A schematic time step must then track</p>
+<div class="math notranslate nohighlight">
+\[
+(U_n,V_n,A_n,D_n)\longrightarrow
+(U_{n+1},V_{n+1},A_{n+1},D_{n+1}).
+\]</div>
+<p>The extra arrays are not bookkeeping only: their update rule expresses
+inertia and affects the computed path. Do not label a code dynamic merely
+because it loops over a sequence of prescribed displacements.</p>
+<h2 id="where-automatic-differentiation-fits"><span class="section-number">5.6. </span>Where automatic differentiation fits<a class="headerlink" href="#where-automatic-differentiation-fits" title="Link to this heading">¶</a></h2>
+<p>PyTorch provides tensors and a reverse-mode automatic-differentiation system;
+it is not, by itself, a fracture finite-element formulation. The user or a
+library still defines mesh data, interpolation, constitutive response,
+residuals, boundary conditions, and solver behaviour.</p>
+<p>JAX likewise provides array transformations such as differentiation,
+compilation, and vectorisation. JAX-FEM is an additional finite-element
+library built on that ecosystem and includes worked mechanics examples. Neither
+ecosystem is universally superior for this course: a suitable choice depends
+on the existing solver, device support, reproducibility needs, and whether the
+relevant operations are differentiable in the intended computation.</p>
+<p>See the official <a class="reference external" href="https://docs.pytorch.org/docs/stable/autograd.html">PyTorch autograd
+documentation</a>, the
+<a class="reference external" href="https://docs.jax.dev/en/latest/automatic-differentiation.html">JAX automatic-differentiation
+guide</a>, and
+the <a class="reference external" href="https://deepmodeling.github.io/jax-fem/guide/Quickstart.html">JAX-FEM quickstart</a>.</p>
+<h2 id="inspecting-results-four-views-one-interpretation"><span class="section-number">5.7. </span>Inspecting results: four views, one interpretation<a class="headerlink" href="#inspecting-results-four-views-one-interpretation" title="Link to this heading">¶</a></h2>
+<p>For a tiny evolving-fracture run, inspect at least:</p>
+<ol class="arabic simple">
+<li><p>the geometry, mesh, and loading direction;</p></li>
+<li><p>displacement or deformed configuration with a stated scale factor;</p></li>
+<li><p>damage field with a labelled colour range and the <span class="math notranslate nohighlight">\(d=0\)</span>/<span class="math notranslate nohighlight">\(d=1\)</span> convention;
+and</p></li>
+<li><p>a scalar observation such as reaction force, energy term, or residual.</p></li>
+</ol>
+<h2 id="computational-lesson-follow-a-public-phast-calculation"><span class="section-number">5.8. </span>Computational lesson: follow a public PhAST calculation<a class="headerlink" href="#computational-lesson-follow-a-public-phast-calculation" title="Link to this heading">¶</a></h2>
+<p>The lesson below is the book’s small public PhAST example. It defines a
+rectangular T3 mesh, labelled boundaries, a locked centreline precrack, and
+symmetric displacement loading before showing the damage fields, response
+trace, and stagger-iteration trace. Read the case card before interpreting the
+plots. The route is quasistatic and uses an assembled sparse-direct mechanics
+solve; it is neither a dynamic calculation nor a demonstration that no
+matrices are constructed.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="labs/01_phast_tiny_evolving_fracture.html">5.8.1. Run and interpret a small PhAST fracture calculation</a></li>
+</ul>
+</div>
+<p>Interpret each image using the case definition; do not crop away a boundary,
+notch, colourbar, or load increment that makes the result intelligible. The
+lesson’s retained result card belongs to its recorded environment. If you
+download it for execution, record a new result card for your own environment.</p>
+<h2 id="exercise-identify-a-silent-shape-error"><span class="section-number">5.9. </span>Exercise: identify a silent shape error<a class="headerlink" href="#exercise-identify-a-silent-shape-error" title="Link to this heading">¶</a></h2>
+<p>A tensor containing displacement at cell nodes has shape
+<span class="math notranslate nohighlight">\((N_{\mathrm{cell}},n_e,2)\)</span>. A tensor of shape-function gradients has shape
+<span class="math notranslate nohighlight">\((N_{\mathrm{cell}},N_q,n_e,2)\)</span>. Which new axes must be aligned or introduced
+before forming a displacement gradient at every quadrature point, and what
+physical quantity should you recover for an affine displacement field?</p>
+<div class="dropdown admonition">
+<p class="admonition-title">Solution</p>
+<p>The nodal displacement needs a quadrature axis, for example by treating it as
+<span class="math notranslate nohighlight">\((N_{\mathrm{cell}},1,n_e,2)\)</span>, so that it aligns with the <span class="math notranslate nohighlight">\(N_q\)</span> axis of the
+shape gradients. Contract the local-node axis and preserve the displacement
+component and spatial-derivative axes according to the chosen convention. For
+an affine displacement field, the displacement gradient and its symmetric
+strain should be constant across all elements and quadrature points (up to
+round-off). This is an excellent first unit test. The PhAST lesson makes the
+mesh, nodal fields, and boundary labels visible; this one-element affine test
+remains the right additional check before treating a vectorised tensor route
+as trustworthy.</p>
+</div>
+<h2 id="take-away"><span class="section-number">5.10. </span>Take-away<a class="headerlink" href="#take-away" title="Link to this heading">¶</a></h2>
+<p>Tensors make data movement and differentiation explicit. They do not replace
+the finite-element questions: what is interpolated, where it is integrated,
+how boundary conditions are enforced, and how the resulting field is checked.</p>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  
+  
+  <div class="md-footer-meta md-typeset">
+    
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-footer-copyright__highlight">
+        &#169; Copyright 2026, UKACM Autumn School.
+        
+    </div>
+  
+    Created using
+    <a href="https://www.sphinx-doc.org/" target="_blank" rel="noopener">Sphinx</a>
+    7.4.7.
+     and
+    <a href="https://github.com/jbms/sphinx-immaterial/" target="_blank" rel="noopener">Sphinx-Immaterial</a>
+  
+</div>
+      
+    </div>
+    
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": ".", "features": [], "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+      
+        <script src="_static/documentation_options.js?v=fc6fd62b"></script>
+        <script src="_static/sphinx_immaterial_theme.32136f45f91ae6956.min.js?v=a7a9472a"></script>
+        <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="_static/copybutton.js?v=f281be69"></script>
+        <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script id="MathJax-script" src="_static/mathjax/tex-mml-chtml.js?v=cadf963e"></script>
+        <script src="_static/learning_book.js?v=7a62d495"></script>
+    
+  </body>
+</html>

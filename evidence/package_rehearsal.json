@@ -1,0 +1,31 @@
+{
+  "scope": "Independent execution from assembled course directory, no PHAST_PUBLIC_SRC",
+  "notebooks": [
+    {
+      "notebook": 1,
+      "wall_seconds": 88.3510772499867,
+      "exit_code": 0
+    },
+    {
+      "notebook": 2,
+      "wall_seconds": 5.04378545799409,
+      "exit_code": 0
+    },
+    {
+      "notebook": 3,
+      "wall_seconds": 4.851398958009668,
+      "exit_code": 0
+    },
+    {
+      "notebook": 4,
+      "wall_seconds": 5.798407291003969,
+      "exit_code": 0
+    },
+    {
+      "notebook": 5,
+      "wall_seconds": 4.262913291997393,
+      "exit_code": 0
+    }
+  ],
+  "passed": true
+}

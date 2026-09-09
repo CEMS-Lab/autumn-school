@@ -1,0 +1,880 @@
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="labs/02_degradation_autograd.html">
+      
+      
+        <link rel="next" href="04_fem_to_tensors.html">
+      
+      
+      <link rel="icon" href="">
+    
+    
+      
+        <title>4. From solid mechanics to staggered damage updates - PhAST: Phase-field fracture with differentiable FEM</title>
+      
+    
+    
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+        <link rel="stylesheet" type="text/css" href="_static/sphinx_immaterial_theme.ad7809648a4561548.min.css?v=f290928c" />
+        <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+        <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+        <link rel="stylesheet" type="text/css" href="_static/mobile_math.css?v=1c40619e" />
+        <link rel="stylesheet" type="text/css" href="_static/learning_book.css?v=6dcc5951" />
+    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#the-mechanical-subproblem" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="index.html" title="PhAST: Phase-field fracture with differentiable FEM" class="md-header__button md-logo" aria-label="PhAST: Phase-field fracture with differentiable FEM" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            PhAST: Phase-field fracture with differentiable FEM
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              4. From solid mechanics to staggered damage updates
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="index.html" title="PhAST: Phase-field fracture with differentiable FEM" class="md-nav__button md-logo" aria-label="PhAST: Phase-field fracture with differentiable FEM" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+    </a>
+    PhAST: Phase-field fracture with differentiable FEM
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="00_welcome_and_routes.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>From cracks to computation:<wbr> learn by doing</span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="01_crack_representations.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>Crack representations:<wbr> sharp, cohesive, and diffuse</span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="02_phase_field_energy.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>Fracture energy:<wbr> AT1, AT2, degradation, and width</span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    <span>From solid mechanics to staggered damage updates</span>
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="#" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>From solid mechanics to staggered damage updates</span>
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#the-mechanical-subproblem" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>The mechanical subproblem</span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#why-the-damage-equation-resembles-diffusion" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>Why the damage equation resembles diffusion</span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#one-load-increment-two-coupled-updates" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>One load increment, two coupled updates</span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#staggered-monolithic-newton-and-quasi-newton" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>Staggered, monolithic, Newton, and quasi-<wbr>Newton</span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#static-and-dynamic-fracture" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>Static and dynamic fracture</span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#acceptance-checks" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>Acceptance checks</span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#predict-before-the-public-calculation" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>Predict before the public calculation</span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercise-write-the-update-before-reading-the-code" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>Exercise:<wbr> write the update before reading the code</span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sources-for-this-chapter" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>Sources for this chapter</span>
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="04_fem_to_tensors.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>Geometry, FEM, tensors, and matrix-<wbr>free operators</span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="05_differentiation_and_inverse.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>Differentiation and an illustrative inverse problem</span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="06_learning_adapter.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>Train, save, reload, adapters, and checked proposals</span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="07_practice_references.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>Practice, solutions, glossary, references, and contributing</span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#the-mechanical-subproblem" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>The mechanical subproblem</span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#why-the-damage-equation-resembles-diffusion" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>Why the damage equation resembles diffusion</span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#one-load-increment-two-coupled-updates" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>One load increment, two coupled updates</span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#staggered-monolithic-newton-and-quasi-newton" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>Staggered, monolithic, Newton, and quasi-<wbr>Newton</span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#static-and-dynamic-fracture" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>Static and dynamic fracture</span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#acceptance-checks" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>Acceptance checks</span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#predict-before-the-public-calculation" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>Predict before the public calculation</span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercise-write-the-update-before-reading-the-code" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>Exercise:<wbr> write the update before reading the code</span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sources-for-this-chapter" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>Sources for this chapter</span>
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset" role="main">
+                
+                
+                  
+
+
+<h1 id="from-solid-mechanics-to-staggered-damage-updates"><span class="section-number">4. </span>From solid mechanics to staggered damage updates<a class="headerlink" href="#from-solid-mechanics-to-staggered-damage-updates" title="Link to this heading">¶</a></h1>
+<figure class="align-default" id="fig-staggered-loop">
+<a class="reference internal image-reference" href="_images/03_staggered_loop.png"><img alt="_images/03_staggered_loop.png" src="_images/03_staggered_loop.png" style="width: 96%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Figure 4.1 </span><span class="caption-text"><span class="caption-text">
+A staggered solve does not make the mechanics and damage independent; it
+chooses an order in which to update their coupled fields.</span><a class="headerlink" href="#fig-staggered-loop" title="Permalink to this image">¶</a></figcaption>
+</figure>
+<h2 id="the-mechanical-subproblem"><span class="section-number">4.1. </span>The mechanical subproblem<a class="headerlink" href="#the-mechanical-subproblem" title="Link to this heading">¶</a></h2>
+<p>For a quasistatic small-strain body, balance of linear momentum is</p>
+<div class="math notranslate nohighlight">
+\[
+\nabla\cdot\sigma(u,d)+b=0 \quad \text{in }\Omega,
+\]</div>
+<p>with displacement or traction boundary conditions on complementary portions
+of the boundary. The strain is</p>
+<div class="math notranslate nohighlight">
+\[
+\varepsilon(u)=\frac12\left(\nabla u+\nabla u^\mathsf{T}\right).
+\]</div>
+<p>In a phase-field model the stress depends on damage through the selected
+energy split. A representative relation is</p>
+<div class="math notranslate nohighlight">
+\[
+\sigma(u,d)
+=g_\eta(d)\frac{\partial\psi^+}{\partial\varepsilon}
++\frac{\partial\psi^-}{\partial\varepsilon}.
+\]</div>
+<p>Holding <span class="math notranslate nohighlight">\(d\)</span> fixed makes the mechanical problem easier to state, but it does
+not make it a generic linear solve: material laws, finite strain, contact, and
+boundary conditions may all add nonlinearity.</p>
+<p>The weak form asks for a displacement <span class="math notranslate nohighlight">\(u\)</span> such that, for all admissible test
+fields <span class="math notranslate nohighlight">\(v\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[
+\int_\Omega \sigma(u,d):\varepsilon(v)\,\mathrm{d}x
+=\int_\Omega b\cdot v\,\mathrm{d}x
++\int_{\Gamma_t}\bar t\cdot v\,\mathrm{d}s.
+\]</div>
+<p>This is the bridge from a continuum equation to finite elements. Shape
+functions turn <span class="math notranslate nohighlight">\(u\)</span> and <span class="math notranslate nohighlight">\(v\)</span> into finite vectors of degrees of freedom; an
+assembly or matrix-free operation then evaluates the residual.</p>
+<h2 id="why-the-damage-equation-resembles-diffusion"><span class="section-number">4.2. </span>Why the damage equation resembles diffusion<a class="headerlink" href="#why-the-damage-equation-resembles-diffusion" title="Link to this heading">¶</a></h2>
+<p>From Chapter 2, the unconstrained damage residual contains</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{w'(d)}{\ell}-2\ell\Delta d.
+\]</div>
+<p>The Laplacian has the same mathematical form as a diffusion operator. Compare
+the steady heat equation</p>
+<div class="math notranslate nohighlight">
+\[
+-\nabla\cdot(k\nabla T)=q
+\]</div>
+<p>with a schematic fixed-mechanics damage equation</p>
+<div class="math notranslate nohighlight">
+\[
+-2\ell\Delta d+\frac{w'(d)}{\ell}
+=-\frac{c_0}{G_c}g_\eta'(d)\psi^+.
+\]</div>
+<p>Both equations spread a field through a gradient penalty or conductivity-like
+term. The analogy helps explain why boundary conditions and element gradients
+matter. It is not a physical equivalence:</p>
+<ul class="simple">
+<li><p>the right-hand side is coupled to displacement and a selected tensile
+energy;</p></li>
+<li><p><span class="math notranslate nohighlight">\(d\)</span> is constrained by a one-way damage history rather than freely
+diffusing; and</p></li>
+<li><p>the coefficients and source can change during nonlinear iteration.</p></li>
+</ul>
+<p>Treating damage as an ordinary heat field can therefore hide the very
+constraint that represents irreversible fracture.</p>
+<h2 id="one-load-increment-two-coupled-updates"><span class="section-number">4.3. </span>One load increment, two coupled updates<a class="headerlink" href="#one-load-increment-two-coupled-updates" title="Link to this heading">¶</a></h2>
+<p>At load increment <span class="math notranslate nohighlight">\(n\)</span>, start with the previously accepted damage
+<span class="math notranslate nohighlight">\(d_{n-1}\)</span>. A simple staggered pattern is:</p>
+<ol class="arabic simple">
+<li><p>initialise <span class="math notranslate nohighlight">\(d_n^{(0)}=d_{n-1}\)</span>;</p></li>
+<li><p>solve the mechanics problem for <span class="math notranslate nohighlight">\(u_n^{(k+1)}\)</span> with <span class="math notranslate nohighlight">\(d_n^{(k)}\)</span> fixed;</p></li>
+<li><p>construct the specified damage-driving quantity from
+<span class="math notranslate nohighlight">\(u_n^{(k+1)}\)</span>;</p></li>
+<li><p>solve the constrained damage problem for <span class="math notranslate nohighlight">\(d_n^{(k+1)}\)</span>;</p></li>
+<li><p>test convergence of both fields and the relevant residuals; and</p></li>
+<li><p>either repeat at this load level or accept the increment.</p></li>
+</ol>
+<p>The figure above is a visual version of this algorithm. A history-field
+implementation may use, for example,</p>
+<div class="math notranslate nohighlight">
+\[
+H_n(x)=\max\bigl(H_{n-1}(x),\psi^+(\varepsilon(u_n(x)))\bigr)
+\]</div>
+<p>to prevent loss of the tensile driving force on unloading. That is one
+commonly used construction, not the definition of all phase-field models.
+Other approaches impose <span class="math notranslate nohighlight">\(d_n\geq d_{n-1}\)</span> directly in the damage solve.</p>
+<h2 id="staggered-monolithic-newton-and-quasi-newton"><span class="section-number">4.4. </span>Staggered, monolithic, Newton, and quasi-Newton<a class="headerlink" href="#staggered-monolithic-newton-and-quasi-newton" title="Link to this heading">¶</a></h2>
+<p>These terms answer different algorithmic questions.</p>
+<p><strong>Staggered solve.</strong> Update <span class="math notranslate nohighlight">\(u\)</span> and <span class="math notranslate nohighlight">\(d\)</span> in blocks. It can be easier to
+implement and diagnose because each subproblem has a recognisable role. It
+may need several block iterations per load step and can be sensitive to
+coupling strength and stopping criteria.</p>
+<p><strong>Monolithic solve.</strong> Solve for the coupled state <span class="math notranslate nohighlight">\((u,d)\)</span> together. This can
+better represent strong coupling, but requires a larger coupled residual,
+Jacobians or Jacobian actions, and careful treatment of inequality
+constraints.</p>
+<p><strong>Newton method.</strong> Linearise a residual around the current state using its
+Jacobian. Quadratic local convergence is a useful ideal, not an unconditional
+observed property of a fracture calculation.</p>
+<p><strong>Quasi-Newton method.</strong> Update an approximate Jacobian or inverse Jacobian
+from changes in residuals and states. BFGS is a well-known example for
+optimisation. Quasi-Newton therefore names a nonlinear solve strategy; it is
+neither a fracture energy nor an XFEM enrichment.</p>
+<p>No single label supplies a convergence proof. Record the block iteration
+count, tolerance, residual definition, and accepted load increments.</p>
+<h2 id="static-and-dynamic-fracture"><span class="section-number">4.5. </span>Static and dynamic fracture<a class="headerlink" href="#static-and-dynamic-fracture" title="Link to this heading">¶</a></h2>
+<p>The quasistatic balance above neglects inertia. A dynamic model instead uses</p>
+<div class="math notranslate nohighlight">
+\[
+\rho\ddot u-\nabla\cdot\sigma(u,d)=b.
+\]</div>
+<p>Now time integration, mass treatment, wave propagation, damping choices, and
+time-step size affect the numerical result. A dynamic calculation may show a
+different crack path or timing from a quasistatic calculation even with the
+same stored energy, because the kinetic-energy and loading-rate terms differ.</p>
+<p>The phrase “dynamic phase field” should therefore be accompanied by the time
+integrator, time step, inertia/damping assumptions, and the quantity used to
+enforce or approximate irreversibility.</p>
+<h2 id="acceptance-checks"><span class="section-number">4.6. </span>Acceptance checks<a class="headerlink" href="#acceptance-checks" title="Link to this heading">¶</a></h2>
+<p>At an accepted increment, consider at least the following checks:</p>
+<ul class="simple">
+<li><p><strong>mechanical balance:</strong> a stated residual norm, reaction balance, or weak
+form defect;</p></li>
+<li><p><strong>damage update:</strong> a stated residual or constrained-solver criterion;</p></li>
+<li><p><strong>irreversibility:</strong> verify <span class="math notranslate nohighlight">\(d_n\geq d_{n-1}\)</span> within the documented
+numerical tolerance;</p></li>
+<li><p><strong>bounds:</strong> inspect whether <span class="math notranslate nohighlight">\(d\)</span> respects the intended interval;</p></li>
+<li><p><strong>energy interpretation:</strong> report the terms and sign convention before
+claiming energy balance; and</p></li>
+<li><p><strong>field inspection:</strong> view <span class="math notranslate nohighlight">\(u\)</span>, <span class="math notranslate nohighlight">\(d\)</span>, and the driving quantity, not only a
+scalar convergence history.</p></li>
+</ul>
+<p>An iteration count without the residual definition is weak evidence. A
+decreasing residual without field inspection can still conceal a wrong
+boundary condition, a flipped damage convention, or an under-resolved band.</p>
+<h2 id="predict-before-the-public-calculation"><span class="section-number">4.7. </span>Predict before the public calculation<a class="headerlink" href="#predict-before-the-public-calculation" title="Link to this heading">¶</a></h2>
+<p>The integrated PhAST lesson in the next chapter uses a quasistatic staggered
+route. Before reading its code or retained plots, predict which two traces
+should change as the load is increased: one trace should describe the evolving
+damage outside the locked precrack, and another should record how many coupled
+updates were needed at each load level. Neither trace alone is a residual norm
+or proof of mesh convergence; use the case card and field plots as well.</p>
+<h2 id="exercise-write-the-update-before-reading-the-code"><span class="section-number">4.8. </span>Exercise: write the update before reading the code<a class="headerlink" href="#exercise-write-the-update-before-reading-the-code" title="Link to this heading">¶</a></h2>
+<p>Suppose a notched specimen is loaded in displacement control. Put the
+following actions in a sensible order and identify the action that enforces
+one-way damage:</p>
+<ul class="simple">
+<li><p>solve for displacement;</p></li>
+<li><p>accept the new load step;</p></li>
+<li><p>update the damage-driving quantity;</p></li>
+<li><p>check field/residual changes;</p></li>
+<li><p>solve for damage;</p></li>
+<li><p>initialise from the previous accepted damage.</p></li>
+</ul>
+<div class="dropdown admonition">
+<p class="admonition-title">Solution</p>
+<p>Start by initialising from the previous accepted damage. Solve displacement at
+the current trial damage, update the stated driving quantity, and solve the
+damage subproblem subject to its irreversibility rule. Then check residuals
+and field changes; only after the checks pass should the load step be
+accepted. The lower-bound constraint <span class="math notranslate nohighlight">\(d_n\geq d_{n-1}\)</span>, or a history
+construction designed to enforce its effect, is the one-way component.</p>
+<p>This ordering is the interpretation key for the later computational lesson.
+The lesson’s stagger-iteration trace describes the configured block-update
+route; it should not be mistaken for a universal convergence guarantee.</p>
+</div>
+<h2 id="sources-for-this-chapter"><span class="section-number">4.9. </span>Sources for this chapter<a class="headerlink" href="#sources-for-this-chapter" title="Link to this heading">¶</a></h2>
+<p>For a variational phase-field treatment and a staggered implementation route,
+see <a class="reference external" href="https://doi.org/10.1002/nme.2861">Miehe, Welschinger, and Hofacker
+(2010)</a>. A discussion of numerical
+formulations and length-scale effects is provided by
+<a class="reference external" href="https://doi.org/10.1016/j.cma.2019.05.038">Gerasimov and De Lorenzis (2019)</a>.</p>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  
+  
+  <div class="md-footer-meta md-typeset">
+    
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-footer-copyright__highlight">
+        &#169; Copyright 2026, UKACM Autumn School.
+        
+    </div>
+  
+    Created using
+    <a href="https://www.sphinx-doc.org/" target="_blank" rel="noopener">Sphinx</a>
+    7.4.7.
+     and
+    <a href="https://github.com/jbms/sphinx-immaterial/" target="_blank" rel="noopener">Sphinx-Immaterial</a>
+  
+</div>
+      
+    </div>
+    
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": ".", "features": [], "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+      
+        <script src="_static/documentation_options.js?v=fc6fd62b"></script>
+        <script src="_static/sphinx_immaterial_theme.32136f45f91ae6956.min.js?v=a7a9472a"></script>
+        <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="_static/copybutton.js?v=f281be69"></script>
+        <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script id="MathJax-script" src="_static/mathjax/tex-mml-chtml.js?v=cadf963e"></script>
+        <script src="_static/learning_book.js?v=7a62d495"></script>
+    
+  </body>
+</html>

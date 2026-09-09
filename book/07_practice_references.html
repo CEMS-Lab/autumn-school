@@ -1,0 +1,914 @@
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="labs/05_hybrid_reference_correction.html">
+      
+      
+      
+      <link rel="icon" href="">
+    
+    
+      
+        <title>8. Practice, solutions, glossary, references, and contributing - PhAST: Phase-field fracture with differentiable FEM</title>
+      
+    
+    
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+        <link rel="stylesheet" type="text/css" href="_static/sphinx_immaterial_theme.ad7809648a4561548.min.css?v=f290928c" />
+        <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+        <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+        <link rel="stylesheet" type="text/css" href="_static/mobile_math.css?v=1c40619e" />
+        <link rel="stylesheet" type="text/css" href="_static/learning_book.css?v=6dcc5951" />
+    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#a-six-part-learn-by-doing-sequence" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="index.html" title="PhAST: Phase-field fracture with differentiable FEM" class="md-header__button md-logo" aria-label="PhAST: Phase-field fracture with differentiable FEM" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            PhAST: Phase-field fracture with differentiable FEM
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              8. Practice, solutions, glossary, references, and contributing
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="index.html" title="PhAST: Phase-field fracture with differentiable FEM" class="md-nav__button md-logo" aria-label="PhAST: Phase-field fracture with differentiable FEM" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+    </a>
+    PhAST: Phase-field fracture with differentiable FEM
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="00_welcome_and_routes.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>From cracks to computation:<wbr> learn by doing</span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="01_crack_representations.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>Crack representations:<wbr> sharp, cohesive, and diffuse</span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="02_phase_field_energy.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>Fracture energy:<wbr> AT1, AT2, degradation, and width</span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="03_staggered_solution.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>From solid mechanics to staggered damage updates</span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="04_fem_to_tensors.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>Geometry, FEM, tensors, and matrix-<wbr>free operators</span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="05_differentiation_and_inverse.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>Differentiation and an illustrative inverse problem</span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="06_learning_adapter.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>Train, save, reload, adapters, and checked proposals</span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    <span>Practice, solutions, glossary, references, and contributing</span>
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="#" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>Practice, solutions, glossary, references, and contributing</span>
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#a-six-part-learn-by-doing-sequence" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>A six-<wbr>part learn-<wbr>by-<wbr>doing sequence</span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quickstart-checklist" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>Quickstart checklist</span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#worked-consolidation-exercise" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>Worked consolidation exercise</span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#glossary" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>Glossary</span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#contributing-a-new-course-activity" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>Contributing a new course activity</span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reference-trail" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>Reference trail</span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Reference trail">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#further-interactive-study" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>Further interactive study</span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scientific-references" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>Scientific references</span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#final-checklist" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>Final checklist</span>
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#a-six-part-learn-by-doing-sequence" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>A six-<wbr>part learn-<wbr>by-<wbr>doing sequence</span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quickstart-checklist" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>Quickstart checklist</span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#worked-consolidation-exercise" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>Worked consolidation exercise</span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#glossary" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>Glossary</span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#contributing-a-new-course-activity" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>Contributing a new course activity</span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reference-trail" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>Reference trail</span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Reference trail">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#further-interactive-study" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>Further interactive study</span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scientific-references" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>Scientific references</span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#final-checklist" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>Final checklist</span>
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset" role="main">
+                
+                
+                  
+
+
+<h1 id="practice-solutions-glossary-references-and-contributing"><span class="section-number">8. </span>Practice, solutions, glossary, references, and contributing<a class="headerlink" href="#practice-solutions-glossary-references-and-contributing" title="Link to this heading">¶</a></h1>
+<h2 id="a-six-part-learn-by-doing-sequence"><span class="section-number">8.1. </span>A six-part learn-by-doing sequence<a class="headerlink" href="#a-six-part-learn-by-doing-sequence" title="Link to this heading">¶</a></h2>
+<p>The book can be read in order or used as a companion to six teaching blocks.
+Each block should leave a visible artefact: a written prediction, a derived
+equation, a labelled field, a result card, or a checked derivative. Where a
+computational lesson appears in the table of contents beneath its chapter,
+read the prompt and retained output before downloading code to execute.</p>
+<ol class="arabic simple">
+<li><p><strong>Represent a crack.</strong> Separate sharp cracks, cohesive interfaces, phase
+fields, XFEM enrichment, and nonlinear solvers.</p></li>
+<li><p><strong>Read the energy.</strong> Identify <span class="math notranslate nohighlight">\(G_c\)</span>, <span class="math notranslate nohighlight">\(\ell\)</span>, <span class="math notranslate nohighlight">\(w(d)\)</span>, <span class="math notranslate nohighlight">\(g(d)\)</span>, the
+tension–compression split, and the damage convention.</p></li>
+<li><p><strong>Follow an update.</strong> Sketch a staggered mechanics/damage loop and locate
+the irreversibility rule.</p></li>
+<li><p><strong>Trace data.</strong> Start with geometry and boundary conditions; end with
+fields and observables; write tensor shapes at the interface.</p></li>
+<li><p><strong>Check a derivative.</strong> Define a scalar loss, select a direction, and
+compare automatic differentiation with a finite difference.</p></li>
+<li><p><strong>Audit a learned proposal.</strong> Save state, reload it, define the adapter,
+and separate a proposal from a corrected mechanics result.</p></li>
+</ol>
+<p>The computational exercises are intentionally small. Their code, retained
+outputs, hints, and worked solutions belong to the same reading route as the
+theory. Use the timing record in the lesson rather than transferring a runtime
+result to a different device or software version.</p>
+<h2 id="quickstart-checklist"><span class="section-number">8.2. </span>Quickstart checklist<a class="headerlink" href="#quickstart-checklist" title="Link to this heading">¶</a></h2>
+<p>Before an activity:</p>
+<ul class="simple">
+<li><p>read the problem definition and prediction prompt;</p></li>
+<li><p>record the phase-field convention, mesh/array dimensions, and parameters;</p></li>
+<li><p>identify the quantity that will be checked; and</p></li>
+<li><p>read the corresponding integrated computational lesson; download its
+notebook only if you intend to execute cells in a suitable environment.</p></li>
+</ul>
+<p>During an activity:</p>
+<ul class="simple">
+<li><p>change one named input at a time;</p></li>
+<li><p>retain the original result card when making a comparison;</p></li>
+<li><p>inspect a field, an observable, and a numerical check; and</p></li>
+<li><p>stop and diagnose if bounds, residuals, or tensor shapes are unexpected.</p></li>
+</ul>
+<p>After an activity:</p>
+<ul class="simple">
+<li><p>state what was observed;</p></li>
+<li><p>state which assumption or numerical choice could change that observation;</p></li>
+<li><p>link the output to its lesson and case definition; and</p></li>
+<li><p>write one limitation rather than promoting a small illustration to a
+general material claim.</p></li>
+</ul>
+<h2 id="worked-consolidation-exercise"><span class="section-number">8.3. </span>Worked consolidation exercise<a class="headerlink" href="#worked-consolidation-exercise" title="Link to this heading">¶</a></h2>
+<p>Consider a two-dimensional notched specimen represented by displacement <span class="math notranslate nohighlight">\(u\)</span>
+and damage <span class="math notranslate nohighlight">\(d\)</span>. The calculation uses a length scale <span class="math notranslate nohighlight">\(\ell\)</span>, a residual
+stiffness <span class="math notranslate nohighlight">\(\eta_{\mathrm{res}}\)</span>, and a displacement-controlled load increment.</p>
+<ol class="arabic simple">
+<li><p>Give the three terms in the fracture density that regularise a sharp crack.</p></li>
+<li><p>Write the qualitative order of a staggered update.</p></li>
+<li><p>Name two visual outputs and one scalar output you would retain.</p></li>
+<li><p>A learned model proposes <span class="math notranslate nohighlight">\(d\)</span>. Name two checks required before using it as a
+starting point for a mechanics update.</p></li>
+<li><p>State one conclusion that the exercise could support and one conclusion it
+could not support.</p></li>
+</ol>
+<div class="dropdown admonition">
+<p class="admonition-title">Solution</p>
+<ol class="arabic simple">
+<li><p>The fracture part uses a local crack-density term <span class="math notranslate nohighlight">\(w(d)/\ell\)</span>, a gradient
+term <span class="math notranslate nohighlight">\(\ell|\nabla d|^2\)</span>, and the fracture energy scale <span class="math notranslate nohighlight">\(G_c/c_0\)</span>.</p></li>
+<li><p>Start from accepted prior damage; solve mechanics with damage fixed; update
+the stated tensile driving quantity; solve damage subject to
+irreversibility; then check and accept or repeat.</p></li>
+<li><p>Retain the geometry/mesh with loading direction, a damage field with a
+colour scale, and a displacement/deformed-field view. A suitable scalar is
+reaction force, an energy contribution, or a stated residual.</p></li>
+<li><p>Check the damage bounds/irreversibility and a stated mechanics residual or
+correction step. The precise checks depend on the proposal’s intended use.</p></li>
+<li><p>The result can support a statement about this defined discretisation and
+load path. It cannot alone establish a calibrated material law, a
+mesh-independent crack path, or a general acceleration claim.</p></li>
+</ol>
+</div>
+<h2 id="glossary"><span class="section-number">8.4. </span>Glossary<a class="headerlink" href="#glossary" title="Link to this heading">¶</a></h2>
+<dl class="simple myst">
+<dt><strong>Adapter</strong></dt><dd><p>A declared map that changes a data representation, for example node order,
+units, or tensor layout. It does not automatically preserve physical
+meaning.</p>
+</dd>
+<dt><strong>Automatic differentiation (AD)</strong></dt><dd><p>A method for evaluating derivatives of a program by applying the chain rule
+to its recorded operations. Its result concerns the executed computation.</p>
+</dd>
+<dt><strong>Cohesive-zone model (CZM)</strong></dt><dd><p>A fracture/interface formulation based on a traction–separation law.</p>
+</dd>
+<dt><strong>Crack-density function <span class="math notranslate nohighlight">\(w(d)\)</span></strong></dt><dd><p>The local part of a phase-field fracture regularisation. AT1 and AT2 use
+different choices.</p>
+</dd>
+<dt><strong>Damage field <span class="math notranslate nohighlight">\(d\)</span></strong></dt><dd><p>A scalar field used here with <span class="math notranslate nohighlight">\(d=0\)</span> intact and <span class="math notranslate nohighlight">\(d=1\)</span> fully broken.</p>
+</dd>
+<dt><strong>DAgger-style aggregation</strong></dt><dd><p>Iterative collection of reference labels at states visited by the current
+proposal/policy, followed by retraining on the aggregate data.</p>
+</dd>
+<dt><strong>Degradation function <span class="math notranslate nohighlight">\(g(d)\)</span></strong></dt><dd><p>A function that reduces selected elastic energy as damage grows.</p>
+</dd>
+<dt><strong>Finite difference</strong></dt><dd><p>A derivative approximation from nearby function evaluations; useful as an
+independent local check.</p>
+</dd>
+<dt><strong>Irreversibility</strong></dt><dd><p>The condition that brittle damage does not decrease over the stated loading
+history.</p>
+</dd>
+<dt><strong>Matrix-free action</strong></dt><dd><p>An implementation of <span class="math notranslate nohighlight">\(v\mapsto Kv\)</span> or a Jacobian action without explicitly
+storing every global matrix entry.</p>
+</dd>
+<dt><strong>Phase-field fracture</strong></dt><dd><p>A regularised fracture formulation in which a diffuse scalar field
+approximates a sharp crack surface.</p>
+</dd>
+<dt><strong>Quadrature</strong></dt><dd><p>Numerical integration on an element using selected points and weights.</p>
+</dd>
+<dt><strong>Quasi-Newton method</strong></dt><dd><p>A nonlinear optimisation/solution strategy that updates an approximate
+Jacobian or inverse Jacobian. It is not a fracture model.</p>
+</dd>
+<dt><strong>Residual</strong></dt><dd><p>The imbalance in a stated discrete equation. A residual norm is meaningful
+only with its definition, scaling, tolerance, and field context.</p>
+</dd>
+<dt><strong>XFEM</strong></dt><dd><p>Extended finite elements: an enriched finite-element approximation for
+discontinuities or near-tip features.</p>
+</dd>
+</dl>
+<h2 id="contributing-a-new-course-activity"><span class="section-number">8.5. </span>Contributing a new course activity<a class="headerlink" href="#contributing-a-new-course-activity" title="Link to this heading">¶</a></h2>
+<p>An activity is easier for others to reuse when it has a narrow learning
+objective and an inspectable result. Include:</p>
+<ol class="arabic simple">
+<li><p>a one-sentence question and the prerequisite chapter;</p></li>
+<li><p>a complete case definition: geometry, parameter choices, boundary
+conditions, and initial state;</p></li>
+<li><p>a short prediction prompt before code is executed;</p></li>
+<li><p>labelled figures or data products with original provenance;</p></li>
+<li><p>a numerical or physical check appropriate to the task;</p></li>
+<li><p>a solution or interpretation note; and</p></li>
+<li><p>a limitation that prevents an over-broad claim.</p></li>
+</ol>
+<p>Place the explanation, code, retained output, learner exercise, hint, and
+worked solution in that order. A standalone code download is useful for
+execution, but it should not become the only place where a reader can see the
+case definition or interpret the result.</p>
+<p>Do not reuse a paper figure, dataset panel, or code fragment merely because it
+is publicly reachable. Check its licence and attribution requirements. The
+schematic figures in this book were authored for the course; cited papers and
+documentation are linked for reading rather than reproduced.</p>
+<h2 id="reference-trail"><span class="section-number">8.6. </span>Reference trail<a class="headerlink" href="#reference-trail" title="Link to this heading">¶</a></h2>
+<h3 id="further-interactive-study"><span class="section-number">8.6.1. </span>Further interactive study<a class="headerlink" href="#further-interactive-study" title="Link to this heading">¶</a></h3>
+<p><a class="reference external" href="https://d2l.ai/index.html">Dive into Deep Learning</a> combines exposition,
+mathematics, computational examples and exercises in one reading sequence.
+For a physics-oriented progression, <a class="reference external" href="https://tum-pbs.github.io/ADL4P/">Advanced Deep Learning for
+Physics</a> connects numerical simulation,
+sensitivity analysis and learning through longer assignments. These resources
+informed the teaching format; the exercises and worked answers in this book
+were written specifically for the PhAST course.</p>
+<h3 id="scientific-references"><span class="section-number">8.6.2. </span>Scientific references<a class="headerlink" href="#scientific-references" title="Link to this heading">¶</a></h3>
+<p>The following sources support the formulation boundaries and teaching
+conventions used here.</p>
+<ul class="simple">
+<li><p>A. A. Griffith, “The phenomena of rupture and flow in solids,”
+<em>Philosophical Transactions of the Royal Society A</em> 221 (1921),
+<a class="reference external" href="https://doi.org/10.1098/rsta.1921.0006">DOI: 10.1098/rsta.1921.0006</a>.</p></li>
+<li><p>G. A. Francfort and J.-J. Marigo, “Revisiting brittle fracture as an
+energy minimization problem,” <em>Journal of the Mechanics and Physics of
+Solids</em> 46 (1998),
+<a class="reference external" href="https://doi.org/10.1016/S0022-5096(98)00034-9">DOI: 10.1016/S0022-5096(98)00034-9</a>.</p></li>
+<li><p>B. Bourdin, G. A. Francfort, and J.-J. Marigo, “Numerical experiments in
+revisited brittle fracture,” <em>Journal of the Mechanics and Physics of
+Solids</em> 48 (2000),
+<a class="reference external" href="https://doi.org/10.1016/S0022-5096(99)00028-9">DOI: 10.1016/S0022-5096(99)00028-9</a>.</p></li>
+<li><p>C. Miehe, F. Welschinger, and M. Hofacker, “Thermodynamically consistent
+phase-field models of fracture: Variational principles and multi-field FE
+implementations,” <em>International Journal for Numerical Methods in
+Engineering</em> 83 (2010),
+<a class="reference external" href="https://doi.org/10.1002/nme.2861">DOI: 10.1002/nme.2861</a>.</p></li>
+<li><p>K. Pham, H. Amor, J.-J. Marigo, and C. Maurini, “Gradient damage models
+and their use to approximate brittle fracture,” <em>International Journal of
+Damage Mechanics</em> 20 (2011),
+<a class="reference external" href="https://doi.org/10.1177/1056789510386852">DOI: 10.1177/1056789510386852</a>.</p></li>
+<li><p>N. Moes, J. Dolbow, and T. Belytschko, “A finite element method for crack
+growth without remeshing,” <em>International Journal for Numerical Methods in
+Engineering</em> 46 (1999),
+<a class="reference external" href="https://doi.org/10.1002/(SICI)1097-0207(19990910)46:1%3C131::AID-NME726%3E3.0.CO;2-J">DOI: 10.1002/(SICI)1097-0207(19990910)46:1%3C131::AID-NME726%3E3.0.CO;2-J</a>.</p></li>
+<li><p>X.-P. Xu and A. Needleman, “Numerical simulations of fast crack growth in
+brittle solids,” <em>Journal of the Mechanics and Physics of Solids</em> 42
+(1994), <a class="reference external" href="https://doi.org/10.1016/0022-5096(94)90003-5">DOI: 10.1016/0022-5096(94)90003-5</a>.</p></li>
+<li><p>P. K. Kristensen, C. F. Niordson, and E. Martínez-Pañeda, “An assessment
+of phase field fracture: crack initiation and growth,” <em>Philosophical
+Transactions of the Royal Society A</em> 379 (2021),
+<a class="reference external" href="https://doi.org/10.1098/rsta.2021.0021">DOI: 10.1098/rsta.2021.0021</a>.</p></li>
+<li><p>PyTorch contributors, <a class="reference external" href="https://docs.pytorch.org/docs/stable/autograd.html">Autograd documentation</a>.</p></li>
+<li><p>JAX contributors, <a class="reference external" href="https://docs.jax.dev/en/latest/automatic-differentiation.html">Automatic differentiation guide</a>.</p></li>
+<li><p>JAX-FEM contributors, <a class="reference external" href="https://deepmodeling.github.io/jax-fem/guide/Quickstart.html">Quickstart and examples</a>.</p></li>
+</ul>
+<h2 id="final-checklist"><span class="section-number">8.7. </span>Final checklist<a class="headerlink" href="#final-checklist" title="Link to this heading">¶</a></h2>
+<p>Before sharing an educational fracture result, make the reader able to answer:</p>
+<ul class="simple">
+<li><p>What is the crack representation?</p></li>
+<li><p>Which energy, convention, and constraint are used?</p></li>
+<li><p>Which mesh, boundary conditions, and fields are solved?</p></li>
+<li><p>Which quantity was observed and which check was applied?</p></li>
+<li><p>What is the scope of the conclusion?</p></li>
+</ul>
+<p>If these answers are visible, the result is useful even when it is small.</p>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  
+  
+  <div class="md-footer-meta md-typeset">
+    
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-footer-copyright__highlight">
+        &#169; Copyright 2026, UKACM Autumn School.
+        
+    </div>
+  
+    Created using
+    <a href="https://www.sphinx-doc.org/" target="_blank" rel="noopener">Sphinx</a>
+    7.4.7.
+     and
+    <a href="https://github.com/jbms/sphinx-immaterial/" target="_blank" rel="noopener">Sphinx-Immaterial</a>
+  
+</div>
+      
+    </div>
+    
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": ".", "features": [], "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+      
+        <script src="_static/documentation_options.js?v=fc6fd62b"></script>
+        <script src="_static/sphinx_immaterial_theme.32136f45f91ae6956.min.js?v=a7a9472a"></script>
+        <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="_static/copybutton.js?v=f281be69"></script>
+        <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script id="MathJax-script" src="_static/mathjax/tex-mml-chtml.js?v=cadf963e"></script>
+        <script src="_static/learning_book.js?v=7a62d495"></script>
+    
+  </body>
+</html>

@@ -1,0 +1,92 @@
+{
+  "schema_version": 1,
+  "title": "Three-step reverse accumulation teaching example",
+  "execution": {
+    "aggregate_wall_seconds": 1.5172569589922205,
+    "device": "cpu",
+    "python": "3.10.18",
+    "torch": "2.8.0",
+    "matplotlib": "3.10.8",
+    "platform": "macOS-27.0-arm64-arm-64bit",
+    "machine": "arm64",
+    "timeout_contract_seconds": 300.0
+  },
+  "recurrence": {
+    "equation": "x_next = (1 - dt*p)*x + dt*f",
+    "n_steps": 3,
+    "dt": 0.2,
+    "p": 0.8,
+    "f": 1.5,
+    "x0": 0.4,
+    "target": 0.9,
+    "stability_condition_checked": "0 < dt*p < 1",
+    "states": [
+      0.4,
+      0.6360000000000001,
+      0.8342400000000001,
+      1.0007616000000001
+    ],
+    "loss": 0.005076450017280012
+  },
+  "reverse_table": [
+    {
+      "step": 0,
+      "x_n": 0.4,
+      "x_next": 0.6360000000000001,
+      "A_n_dxnext_dx": 0.84,
+      "B_n_dxnext_dp": -0.08000000000000002,
+      "lambda_next": 0.07109738496000008,
+      "B_transpose_lambda_next": -0.005687790796800008
+    },
+    {
+      "step": 1,
+      "x_n": 0.6360000000000001,
+      "x_next": 0.8342400000000001,
+      "A_n_dxnext_dx": 0.84,
+      "B_n_dxnext_dp": -0.12720000000000004,
+      "lambda_next": 0.0846397440000001,
+      "B_transpose_lambda_next": -0.010766175436800016
+    },
+    {
+      "step": 2,
+      "x_n": 0.8342400000000001,
+      "x_next": 1.0007616000000001,
+      "A_n_dxnext_dx": 0.84,
+      "B_n_dxnext_dp": -0.16684800000000002,
+      "lambda_next": 0.10076160000000012,
+      "B_transpose_lambda_next": -0.016811871436800022
+    }
+  ],
+  "gradients": {
+    "reverse_accumulation": -0.03326583767040005,
+    "forward_tangent": -0.03326583767040004,
+    "torch_autograd": -0.03326583767040005,
+    "central_difference": -0.033265837661757,
+    "central_difference_step": 1e-06,
+    "reverse_vs_forward_abs_error": 6.938893903907228e-18,
+    "reverse_vs_autograd_abs_error": 0.0,
+    "reverse_vs_central_difference_abs_error": 8.64304461334342e-12,
+    "direct_loss_partial_p": 0.0,
+    "initial_state_partial_p": 0.0
+  },
+  "assertions": {
+    "stable_scalar_relaxation_0_lt_dt_p_lt_1": true,
+    "reverse_matches_forward_tangent": true,
+    "reverse_matches_torch_autograd": true,
+    "reverse_matches_central_difference": true
+  },
+  "artifacts": {
+    "figure": "book/figures/05a_backpropagation.png",
+    "figure_sha256": "bbf74b7b38296097f4f7abb6eb85f7de6b73a5383aa5556db94efc89a615cced",
+    "script": "book/scripts/build_backprop_example.py"
+  },
+  "scope": {
+    "is": "original scalar explicit-relaxation teaching example",
+    "is_not": [
+      "a PhAST fracture solve",
+      "an AT2 or full finite-element residual execution",
+      "a solver-in-the-loop differentiability claim",
+      "a universal stability result"
+    ]
+  }
+}

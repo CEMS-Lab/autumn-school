@@ -1,0 +1,979 @@
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="index.html">
+      
+      
+        <link rel="next" href="labs/00_why_average_predictions_can_fail.html">
+      
+      
+      <link rel="icon" href="">
+    
+    
+      
+        <title>1. From cracks to computation: learn by doing - PhAST: Phase-field fracture with differentiable FEM</title>
+      
+    
+    
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+        <link rel="stylesheet" type="text/css" href="_static/sphinx_immaterial_theme.ad7809648a4561548.min.css?v=f290928c" />
+        <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+        <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+        <link rel="stylesheet" type="text/css" href="_static/mobile_math.css?v=1c40619e" />
+        <link rel="stylesheet" type="text/css" href="_static/learning_book.css?v=6dcc5951" />
+    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#what-this-course-is-for" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="index.html" title="PhAST: Phase-field fracture with differentiable FEM" class="md-header__button md-logo" aria-label="PhAST: Phase-field fracture with differentiable FEM" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            PhAST: Phase-field fracture with differentiable FEM
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              1. From cracks to computation: learn by doing
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="index.html" title="PhAST: Phase-field fracture with differentiable FEM" class="md-nav__button md-logo" aria-label="PhAST: Phase-field fracture with differentiable FEM" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+    </a>
+    PhAST: Phase-field fracture with differentiable FEM
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+    
+  
+    
+  
+  
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__current-nested md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="#" class="md-nav__link md-nav__link--active">
+              
+  
+  
+  <span class="md-ellipsis">
+    <span>From cracks to computation:<wbr> learn by doing</span>
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link md-nav__link--active" for="__nav_1" id="__nav_1_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            <span>From cracks to computation:<wbr> learn by doing</span>
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_1" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="#opening-experiment-can-a-good-average-be-a-bad-prediction" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    <span>Opening experiment:<wbr> can a good average be a bad prediction?</span>
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_1_1" id="__nav_1_1_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_1_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_1">
+            <span class="md-nav__icon md-icon"></span>
+            <span>Opening experiment:<wbr> can a good average be a bad prediction?</span>
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="labs/00_why_average_predictions_can_fail.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>Why average predictions can fail</span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+  
+      
+    <li class="md-nav__item md-nav__item--active md-nav__current-toc">
+      
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    <span>From cracks to computation:<wbr> learn by doing</span>
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="#" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>From cracks to computation:<wbr> learn by doing</span>
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#what-this-course-is-for" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>What this course is for</span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#opening-experiment-can-a-good-average-be-a-bad-prediction" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>Opening experiment:<wbr> can a good average be a bad prediction?</span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Opening experiment: can a good average be a bad prediction?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="labs/00_why_average_predictions_can_fail.html" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>Why average predictions can fail</span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reading-and-running-the-book" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>Reading and running the book</span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-result-card" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>The result card</span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The result card">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#minimum-result-card" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>Minimum result card</span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#a-vocabulary-for-careful-claims" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>A vocabulary for careful claims</span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#a-first-prediction-before-a-first-computational-lesson" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>A first prediction before a first computational lesson</span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercise-label-the-layers" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>Exercise:<wbr> label the layers</span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-to-carry-into-chapter-1" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>What to carry into Chapter 1</span>
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="01_crack_representations.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>Crack representations:<wbr> sharp, cohesive, and diffuse</span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="02_phase_field_energy.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>Fracture energy:<wbr> AT1, AT2, degradation, and width</span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="03_staggered_solution.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>From solid mechanics to staggered damage updates</span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="04_fem_to_tensors.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>Geometry, FEM, tensors, and matrix-<wbr>free operators</span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="05_differentiation_and_inverse.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>Differentiation and an illustrative inverse problem</span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="06_learning_adapter.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>Train, save, reload, adapters, and checked proposals</span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="07_practice_references.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>Practice, solutions, glossary, references, and contributing</span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#what-this-course-is-for" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>What this course is for</span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#opening-experiment-can-a-good-average-be-a-bad-prediction" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>Opening experiment:<wbr> can a good average be a bad prediction?</span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reading-and-running-the-book" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>Reading and running the book</span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-result-card" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>The result card</span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The result card">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#minimum-result-card" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>Minimum result card</span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#a-vocabulary-for-careful-claims" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>A vocabulary for careful claims</span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#a-first-prediction-before-a-first-computational-lesson" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>A first prediction before a first computational lesson</span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercise-label-the-layers" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>Exercise:<wbr> label the layers</span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-to-carry-into-chapter-1" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>What to carry into Chapter 1</span>
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset" role="main">
+                
+                
+                  
+
+
+<h1 id="from-cracks-to-computation-learn-by-doing"><span class="section-number">1. </span>From cracks to computation: learn by doing<a class="headerlink" href="#from-cracks-to-computation-learn-by-doing" title="Link to this heading">¶</a></h1>
+<h2 id="what-this-course-is-for"><span class="section-number">1.1. </span>What this course is for<a class="headerlink" href="#what-this-course-is-for" title="Link to this heading">¶</a></h2>
+<p>Fracture simulations can look persuasive long before they are understood. A
+colour map may show a thin damaged band, a reaction curve may soften, and a
+notebook may differentiate an objective. None of those observations alone
+identifies the model, the discretisation, or the numerical assumptions that
+produced them. This course develops a habit of naming each layer.</p>
+<p>By the end of the day, you should be able to:</p>
+<ul class="simple">
+<li><p>distinguish a fracture <em>formulation</em> from a finite-element
+<em>discretisation</em> and a nonlinear <em>solution method</em>;</p></li>
+<li><p>write a common phase-field energy and explain the role of its length scale;</p></li>
+<li><p>trace a computation from geometry and boundary conditions to arrays, fields,
+and observable quantities;</p></li>
+<li><p>use automatic differentiation for a stated computational graph, and compare
+one directional derivative with a finite-difference estimate; and</p></li>
+<li><p>describe what a learned proposal, adapter, or correction is allowed to
+claim in a mechanics workflow.</p></li>
+</ul>
+<p>The examples are deliberately small. Their purpose is to make assumptions
+inspectable, not to establish a material prediction or a benchmark. Each
+computational lesson follows the same rhythm: predict, derive or identify the
+relevant quantity, inspect the code and retained output, then test your
+interpretation against a worked solution.</p>
+<h2 id="opening-experiment-can-a-good-average-be-a-bad-prediction"><span class="section-number">1.2. </span>Opening experiment: can a good average be a bad prediction?<a class="headerlink" href="#opening-experiment-can-a-good-average-be-a-bad-prediction" title="Link to this heading">¶</a></h2>
+<p>Suppose an input admits two valid states. Will a single learned average be
+valid too? The short opening experiment compares balanced supervised fitting
+with an explicitly selected energy-minimising branch. Predict the answer
+before opening the plots; return to its gradient calculation after the
+differentiation chapter.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="labs/00_why_average_predictions_can_fail.html">1.2.1. Why average predictions can fail</a></li>
+</ul>
+</div>
+<p>This original algebraic activity is inspired by the
+<a class="reference external" href="https://physicsbaseddeeplearning.org/intro-teaser.html">Physics-based Deep Learning teaser</a>.
+It is not a phase-field fracture model. It introduces a recurring question:
+does the objective measure the property that we actually want?</p>
+<h2 id="reading-and-running-the-book"><span class="section-number">1.3. </span>Reading and running the book<a class="headerlink" href="#reading-and-running-the-book" title="Link to this heading">¶</a></h2>
+<p>The primary route is contained in this book. Read a theory section, continue
+to its computational lesson in the local table of contents, and return to the
+next theory section with one observation in hand.</p>
+<p><strong>Read and predict.</strong> Read the figures and worked equations first. Before a
+code cell, state what sign, field pattern, or check you expect to see.</p>
+<p><strong>Inspect and explain.</strong> The five integrated lessons pair the reviewed code
+with its retained figures and result cards: a degradation derivative, a public
+PhAST notched-tension calculation, a differentiable elastic-bar toy, a saved
+toy field model, and a checked toy proposal with fallback. Use the exercise and
+solution in each lesson to distinguish what the output shows from what it does
+not establish.</p>
+<p><strong>Execute optionally.</strong> Download a lesson notebook only when you want to alter
+an input or repeat the calculation in a Jupyter environment. Read its recorded
+result card before running it. The record belongs to the environment in which
+it was measured; it is not a portable runtime prediction.</p>
+<p><strong>Extend a local solver deliberately.</strong> Install and document a solver
+environment only when you need to alter the physics, mesh, or algorithm. The public
+<a class="reference external" href="https://github.com/CEMS-Lab/PhAST">PhAST source repository</a> is a useful
+starting point for source and release information. A local run should record
+the software revision, numerical settings, and output location alongside the
+physical parameters.</p>
+<h2 id="the-result-card"><span class="section-number">1.4. </span>The result card<a class="headerlink" href="#the-result-card" title="Link to this heading">¶</a></h2>
+<p>For every computational activity, write a compact result card. It separates
+what was specified from what was observed.</p>
+<h3 id="minimum-result-card"><span class="section-number">1.4.1. </span>Minimum result card<a class="headerlink" href="#minimum-result-card" title="Link to this heading">¶</a></h3>
+<ol class="arabic simple">
+<li><p><strong>Case:</strong> geometry, material regions, and boundary/loading conditions.</p></li>
+<li><p><strong>Numerics:</strong> mesh or nodal layout, quadrature convention, load steps,
+tolerances, and the phase-field length <span class="math notranslate nohighlight">\(\ell\)</span>.</p></li>
+<li><p><strong>Environment:</strong> software version, device, precision, and seed where a
+random process is used.</p></li>
+<li><p><strong>Observation:</strong> the selected field, scalar quantity, and a labelled plot.</p></li>
+<li><p><strong>Check:</strong> a named equilibrium, residual, constraint, or derivative check.</p></li>
+<li><p><strong>Limit:</strong> one sentence describing what the check does <em>not</em> establish.</p></li>
+</ol>
+<p>For example, a monotone increase in <span class="math notranslate nohighlight">\(d\)</span> at one node is consistent with a
+damage-irreversibility rule, but it does not by itself demonstrate mesh
+objectivity. A close directional derivative match at one parameter value
+checks a local calculation, not the uniqueness of an inverse recovery.</p>
+<h2 id="a-vocabulary-for-careful-claims"><span class="section-number">1.5. </span>A vocabulary for careful claims<a class="headerlink" href="#a-vocabulary-for-careful-claims" title="Link to this heading">¶</a></h2>
+<p>Use the following three sentence patterns when describing a numerical result.</p>
+<ul class="simple">
+<li><p><strong>Specified:</strong> “The calculation used <span class="math notranslate nohighlight">\(d=0\)</span> as intact, <span class="math notranslate nohighlight">\(d=1\)</span> as broken, a
+stated regularisation length <span class="math notranslate nohighlight">\(\ell\)</span>, and the listed boundary conditions.”</p></li>
+<li><p><strong>Observed:</strong> “For this discretisation and load increment, the plotted
+damage field localised near the prescribed notch.”</p></li>
+<li><p><strong>Not inferred:</strong> “This observation alone does not identify a physical crack
+path at all mesh resolutions or loading rates.”</p></li>
+</ul>
+<p>This is not cautious wording for its own sake. It tells another reader which
+part of a conclusion they can reproduce, challenge, or extend.</p>
+<h2 id="a-first-prediction-before-a-first-computational-lesson"><span class="section-number">1.6. </span>A first prediction before a first computational lesson<a class="headerlink" href="#a-first-prediction-before-a-first-computational-lesson" title="Link to this heading">¶</a></h2>
+<p>Before reading the first computational lesson, make a prediction in words. If the tensile energy
+driving damage is high near a notch and the loading increases, where should a
+phase-field model first permit the damage variable to grow? What quantity
+would you plot to distinguish a narrow diffuse band from a broadly distributed
+reduction in stiffness?</p>
+<p>After the run, return to the prediction. A useful explanation has four parts:</p>
+<ol class="arabic simple">
+<li><p>the location and shape actually observed;</p></li>
+<li><p>the terms in the energy that encourage or resist that shape;</p></li>
+<li><p>the numerical choice that may influence it; and</p></li>
+<li><p>one test that would make the explanation stronger.</p></li>
+</ol>
+<p>This pattern will be used throughout the book.</p>
+<h2 id="exercise-label-the-layers"><span class="section-number">1.7. </span>Exercise: label the layers<a class="headerlink" href="#exercise-label-the-layers" title="Link to this heading">¶</a></h2>
+<p>Classify each statement as a fracture formulation, spatial discretisation,
+solution/sensitivity method, or observable.</p>
+<ol class="arabic simple">
+<li><p>“Use a scalar damage field and a gradient penalty.”</p></li>
+<li><p>“Add a discontinuous enrichment near a crack.”</p></li>
+<li><p>“Alternate displacement and damage subproblems.”</p></li>
+<li><p>“Compare reaction force against imposed displacement.”</p></li>
+<li><p>“Differentiate a scalar loss with respect to a material multiplier.”</p></li>
+</ol>
+<div class="dropdown admonition">
+<p class="admonition-title">Solution</p>
+<ol class="arabic simple">
+<li><p>A phase-field <strong>fracture formulation</strong>. The scalar field and gradient
+penalty define a regularised crack representation.</p></li>
+<li><p><strong>Spatial discretisation</strong>: this describes the central idea of XFEM.</p></li>
+<li><p>A <strong>solution method</strong>: staggered solution can be applied to a chosen
+formulation and discretisation.</p></li>
+<li><p>An <strong>observable</strong> derived from the computed state and boundary data.</p></li>
+<li><p>A <strong>sensitivity method/task</strong>. Automatic differentiation or an adjoint
+may compute the derivative; neither is itself a fracture formulation.</p></li>
+</ol>
+</div>
+<h2 id="what-to-carry-into-chapter-1"><span class="section-number">1.8. </span>What to carry into Chapter 1<a class="headerlink" href="#what-to-carry-into-chapter-1" title="Link to this heading">¶</a></h2>
+<p>Keep two questions visible: <em>what object represents the crack?</em> and <em>what
+exactly is solved?</em> The next chapter places phase field, XFEM, and cohesive
+models next to one another without treating them as interchangeable labels.</p>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  
+  
+  <div class="md-footer-meta md-typeset">
+    
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-footer-copyright__highlight">
+        &#169; Copyright 2026, UKACM Autumn School.
+        
+    </div>
+  
+    Created using
+    <a href="https://www.sphinx-doc.org/" target="_blank" rel="noopener">Sphinx</a>
+    7.4.7.
+     and
+    <a href="https://github.com/jbms/sphinx-immaterial/" target="_blank" rel="noopener">Sphinx-Immaterial</a>
+  
+</div>
+      
+    </div>
+    
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": ".", "features": [], "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+      
+        <script src="_static/documentation_options.js?v=fc6fd62b"></script>
+        <script src="_static/sphinx_immaterial_theme.32136f45f91ae6956.min.js?v=a7a9472a"></script>
+        <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="_static/copybutton.js?v=f281be69"></script>
+        <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script id="MathJax-script" src="_static/mathjax/tex-mml-chtml.js?v=cadf963e"></script>
+        <script src="_static/learning_book.js?v=7a62d495"></script>
+    
+  </body>
+</html>

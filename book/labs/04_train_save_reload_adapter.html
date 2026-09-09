@@ -1,0 +1,949 @@
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../06_learning_adapter.html">
+      
+      
+        <link rel="next" href="05_hybrid_reference_correction.html">
+      
+      
+      <link rel="icon" href="">
+    
+    
+      
+        <title>7.5.1. Train, save, reload, and compare a field model - PhAST: Phase-field fracture with differentiable FEM</title>
+      
+    
+    
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+        <link rel="stylesheet" type="text/css" href="../_static/sphinx_immaterial_theme.ad7809648a4561548.min.css?v=f290928c" />
+        <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+        <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+        <link rel="stylesheet" type="text/css" href="../_static/mobile_math.css?v=1c40619e" />
+        <link rel="stylesheet" type="text/css" href="../_static/learning_book.css?v=6dcc5951" />
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#exercises" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../index.html" title="PhAST: Phase-field fracture with differentiable FEM" class="md-header__button md-logo" aria-label="PhAST: Phase-field fracture with differentiable FEM" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            PhAST: Phase-field fracture with differentiable FEM
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              7.5.1. Train, save, reload, and compare a field model
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../index.html" title="PhAST: Phase-field fracture with differentiable FEM" class="md-nav__button md-logo" aria-label="PhAST: Phase-field fracture with differentiable FEM" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+    </a>
+    PhAST: Phase-field fracture with differentiable FEM
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../00_welcome_and_routes.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>From cracks to computation:<wbr> learn by doing</span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_crack_representations.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>Crack representations:<wbr> sharp, cohesive, and diffuse</span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_phase_field_energy.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>Fracture energy:<wbr> AT1, AT2, degradation, and width</span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_staggered_solution.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>From solid mechanics to staggered damage updates</span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_fem_to_tensors.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>Geometry, FEM, tensors, and matrix-<wbr>free operators</span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05_differentiation_and_inverse.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>Differentiation and an illustrative inverse problem</span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../06_learning_adapter.html" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    <span>Train, save, reload, adapters, and checked proposals</span>
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_7" id="__nav_7_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            <span>Train, save, reload, adapters, and checked proposals</span>
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_1" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../06_learning_adapter.html#computational-lesson-train-save-reload-and-compare-a-toy-field-model" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    <span>Computational lesson:<wbr> train, save, reload, and compare a toy field model</span>
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_7_1" id="__nav_7_1_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_7_1">
+            <span class="md-nav__icon md-icon"></span>
+            <span>Computational lesson:<wbr> train, save, reload, and compare a toy field model</span>
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    <span>Train, save, reload, and compare a field model</span>
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="#" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>Train, save, reload, and compare a field model</span>
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#exercises" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>Exercises</span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Exercises">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exercise-1-count-examples-without-leaking-a-load-case" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>Exercise 1:<wbr> Count examples without leaking a load case</span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exercise-2-interpret-reload-agreement-and-the-mlp-rbf-comparison" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>Exercise 2:<wbr> Interpret reload agreement and the MLP/RBF comparison</span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06_learning_adapter.html#computational-lesson-accept-a-compatible-proposal-or-fall-back" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>Computational lesson:<wbr> accept a compatible proposal or fall back</span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+  
+
+    
+      
+      
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07_practice_references.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>Practice, solutions, glossary, references, and contributing</span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#exercises" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>Exercises</span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Exercises">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exercise-1-count-examples-without-leaking-a-load-case" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>Exercise 1:<wbr> Count examples without leaking a load case</span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exercise-2-interpret-reload-agreement-and-the-mlp-rbf-comparison" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span>Exercise 2:<wbr> Interpret reload agreement and the MLP/RBF comparison</span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset" role="main">
+                
+                
+                  
+
+
+<h1 id="train-save-reload-and-compare-a-field-model"><span class="section-number">7.5.1. </span>Train, save, reload, and compare a field model<a class="headerlink" href="#train-save-reload-and-compare-a-field-model" title="Link to this heading">¶</a></h1>
+<p><strong>Learning objective.</strong> Use the course-owned ToyHelmholtz field example to reason about whole-case data splits, checkpoint metadata, exact reload agreement, held-out fields, and architecture compatibility.</p>
+<p><strong>Predict first.</strong> Predict why splitting individual nodes rather than whole load cases can leak information, and whether a successful reload proves that an MLP checkpoint is automatically compatible with a CNN, GNN, or GNO.</p>
+<p><strong>Recorded computation:</strong> 9.473 seconds on the reference local CPU after setup. This is not a fresh Colab timing.</p>
+<p>Read the code and its recorded outputs in order. To change inputs and run Python, download a notebook and use the course environment. The static book does not execute these cells in the browser.</p>
+<p><a class="reference external" href="../../notebooks/study/04_train_save_reload_adapter.ipynb">Download practice notebook</a> · <a class="reference external" href="../../notebooks/solutions/04_train_save_reload_adapter.ipynb">Download with worked solutions</a> · <a class="reference external" href="../../SETUP.md">Environment setup</a></p>
+<p>We train one small MLP on an original, course-owned
+<code class="docutils literal notranslate"><span class="pre">ToyHelmholtzProblem</span></code>.  It is a fast field equation with a known
+discrete residual, designed to demonstrate data splits, checkpoint
+metadata, and a held-out field comparison.  It is <strong>not PhAST
+fracture data</strong>, a trained public <code class="docutils literal notranslate"><span class="pre">learned_damage</span></code> model, or a
+claim of fracture acceleration.</p>
+<p>Feature contract: nodewise <code class="docutils literal notranslate"><span class="pre">[x/L,</span> <span class="pre">y/H,</span> <span class="pre">load_factor]</span></code>, all
+dimensionless, in exactly that order; output: one nodewise
+damage-like proposal in <code class="docutils literal notranslate"><span class="pre">[0,1]</span></code>.  Whole load cases—not individual
+nodes—are separated into train/validation/test splits.</p>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">locate_course_root</span><span class="p">():</span>
+    <span class="k">for</span> <span class="n">base</span> <span class="ow">in</span> <span class="p">(</span><span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">(),</span> <span class="o">*</span><span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">()</span><span class="o">.</span><span class="n">parents</span><span class="p">,</span> <span class="n">Path</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span><span class="o">.</span><span class="n">parent</span> <span class="k">if</span> <span class="s2">&quot;__file__&quot;</span> <span class="ow">in</span> <span class="nb">globals</span><span class="p">()</span> <span class="k">else</span> <span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">()):</span>
+        <span class="n">direct</span> <span class="o">=</span> <span class="n">base</span> <span class="o">/</span> <span class="s2">&quot;teaching&quot;</span> <span class="o">/</span> <span class="s2">&quot;ukacm_autumn_school_2026&quot;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">direct</span> <span class="o">/</span> <span class="s2">&quot;notebooks&quot;</span> <span class="o">/</span> <span class="s2">&quot;day2_helpers&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">is_dir</span><span class="p">():</span>
+            <span class="k">return</span> <span class="n">direct</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">base</span> <span class="o">/</span> <span class="s2">&quot;notebooks&quot;</span> <span class="o">/</span> <span class="s2">&quot;day2_helpers&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">is_dir</span><span class="p">():</span>
+            <span class="k">return</span> <span class="n">base</span>
+    <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span><span class="s2">&quot;Could not find teaching/ukacm_autumn_school_2026.&quot;</span><span class="p">)</span>
+
+<span class="n">COURSE_ROOT</span> <span class="o">=</span> <span class="n">locate_course_root</span><span class="p">()</span>
+<span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="n">COURSE_ROOT</span> <span class="o">/</span> <span class="s2">&quot;notebooks&quot;</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="p">:</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">COURSE_ROOT</span> <span class="o">/</span> <span class="s2">&quot;notebooks&quot;</span><span class="p">))</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">io</span><span class="w"> </span><span class="kn">import</span> <span class="n">BytesIO</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">Image</span><span class="p">,</span> <span class="n">display</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">day2_helpers</span><span class="w"> </span><span class="kn">import</span> <span class="n">assets_dir</span>
+
+<span class="n">torch</span><span class="o">.</span><span class="n">set_default_dtype</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">display_figure</span><span class="p">(</span><span class="n">figure</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">150</span><span class="p">,</span> <span class="n">alt</span><span class="o">=</span><span class="s2">&quot;Rendered teaching figure&quot;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Embed a PNG even when nbclient uses a non-interactive Agg backend.&quot;&quot;&quot;</span>
+    <span class="n">buffer</span> <span class="o">=</span> <span class="n">BytesIO</span><span class="p">()</span>
+    <span class="n">figure</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;png&quot;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="n">dpi</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s2">&quot;tight&quot;</span><span class="p">)</span>
+    <span class="n">display</span><span class="p">(</span><span class="n">Image</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">buffer</span><span class="o">.</span><span class="n">getvalue</span><span class="p">(),</span> <span class="n">alt</span><span class="o">=</span><span class="n">alt</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">({</span><span class="s2">&quot;course_layout&quot;</span><span class="p">:</span> <span class="s2">&quot;teaching/ukacm_autumn_school_2026 located&quot;</span><span class="p">,</span> <span class="s2">&quot;torch&quot;</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">__version__</span><span class="p">,</span> <span class="s2">&quot;device&quot;</span><span class="p">:</span> <span class="s2">&quot;cpu&quot;</span><span class="p">,</span> <span class="s2">&quot;dtype&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">get_default_dtype</span><span class="p">())})</span>
+</code></pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><code>{&#39;course_layout&#39;: &#39;teaching/ukacm_autumn_school_2026 located&#39;, &#39;torch&#39;: &#39;2.8.0&#39;, &#39;device&#39;: &#39;cpu&#39;, &#39;dtype&#39;: &#39;torch.float64&#39;}
+</code></pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">day2_helpers.course_tools</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">FEATURE_ORDER</span><span class="p">,</span> <span class="n">TinyDamageMLP</span><span class="p">,</span> <span class="n">ToyHelmholtzProblem</span><span class="p">,</span>
+    <span class="n">load_toy_model</span><span class="p">,</span> <span class="n">make_toy_checkpoint</span><span class="p">,</span> <span class="n">normalise_features</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">checkpoint_path</span> <span class="o">=</span> <span class="n">assets_dir</span><span class="p">()</span> <span class="o">/</span> <span class="s2">&quot;models&quot;</span> <span class="o">/</span> <span class="s2">&quot;tiny_damage_mlp.pt&quot;</span>
+<span class="n">checkpoint</span> <span class="o">=</span> <span class="n">make_toy_checkpoint</span><span class="p">(</span><span class="n">checkpoint_path</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="mi">400</span><span class="p">,</span> <span class="n">force</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">metadata</span> <span class="o">=</span> <span class="n">checkpoint</span><span class="p">[</span><span class="s2">&quot;metadata&quot;</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">({</span><span class="s2">&quot;checkpoint&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">checkpoint_path</span><span class="o">.</span><span class="n">relative_to</span><span class="p">(</span><span class="n">COURSE_ROOT</span><span class="p">)),</span> <span class="s2">&quot;metadata&quot;</span><span class="p">:</span> <span class="n">metadata</span><span class="p">,</span> <span class="s2">&quot;history&quot;</span><span class="p">:</span> <span class="n">checkpoint</span><span class="p">[</span><span class="s2">&quot;history&quot;</span><span class="p">],</span> <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="n">checkpoint</span><span class="p">[</span><span class="s2">&quot;metrics&quot;</span><span class="p">]})</span>
+</code></pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><code>{&#39;checkpoint&#39;: &#39;assets/day2_forward/models/tiny_damage_mlp.pt&#39;, &#39;metadata&#39;: {&#39;interface_version&#39;: &#39;ukacm-toy-damage-v1&#39;, &#39;architecture&#39;: &#39;TinyDamageMLP&#39;, &#39;width&#39;: 32, &#39;feature_order&#39;: [&#39;x_over_L&#39;, &#39;y_over_H&#39;, &#39;load_factor&#39;], &#39;feature_location&#39;: &#39;node&#39;, &#39;feature_units&#39;: [&#39;dimensionless x/L&#39;, &#39;dimensionless y/H&#39;, &#39;dimensionless&#39;], &#39;output&#39;: &#39;toy_damage_proposal at nodes; d=0 intact-like, d=1 saturated&#39;, &#39;dtype&#39;: &#39;float64&#39;, &#39;device&#39;: &#39;cpu&#39;, &#39;mesh_signature&#39;: [25, 13], &#39;normalisation_mean&#39;: [0.5, 0.5, 0.4400000000000001], &#39;normalisation_scale&#39;: [0.3005011345450644, 0.3118447648923806, 0.20087244715634883], &#39;splits&#39;: {&#39;train&#39;: [0.12, 0.17818181818181816, 0.23636363636363636, 0.29454545454545455, 0.3527272727272727, 0.4109090909090909, 0.4690909090909091, 0.5272727272727273, 0.5854545454545454, 0.6436363636363637, 0.7018181818181818, 0.76], &#39;validation&#39;: [0.82, 0.88], &#39;test&#39;: [0.94, 1.0]}, &#39;data_provenance&#39;: &#39;course-owned ToyHelmholtzProblem; not PhAST or research data&#39;, &#39;seed&#39;: 20260909, &#39;epochs&#39;: 400}, &#39;history&#39;: [{&#39;epoch&#39;: 1.0, &#39;train_mse&#39;: 0.1517765063048665, &#39;validation_mse&#39;: 0.07862736928885466}, {&#39;epoch&#39;: 25.0, &#39;train_mse&#39;: 0.009012028414098669, &#39;validation_mse&#39;: 0.0252641187641007}, {&#39;epoch&#39;: 100.0, &#39;train_mse&#39;: 0.0012914382086734117, &#39;validation_mse&#39;: 0.005490918863171005}, {&#39;epoch&#39;: 400.0, &#39;train_mse&#39;: 0.0001303170500437651, &#39;validation_mse&#39;: 0.0007892991355557108}], &#39;metrics&#39;: {&#39;test_rmse&#39;: 0.049867531488768393, &#39;training_seconds&#39;: 1.3265216250001686}}
+</code></pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="c1"># Reload into a fresh model instance; compare the two predictions exactly.</span>
+<span class="n">problem</span> <span class="o">=</span> <span class="n">ToyHelmholtzProblem</span><span class="p">()</span>
+<span class="n">heldout_load</span> <span class="o">=</span> <span class="mf">1.00</span>
+<span class="n">heldout_features</span> <span class="o">=</span> <span class="n">problem</span><span class="o">.</span><span class="n">features</span><span class="p">(</span><span class="n">heldout_load</span><span class="p">)</span>
+<span class="n">heldout_reference</span> <span class="o">=</span> <span class="n">problem</span><span class="o">.</span><span class="n">reference_field</span><span class="p">(</span><span class="n">heldout_load</span><span class="p">)</span>
+<span class="n">mean</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">metadata</span><span class="p">[</span><span class="s2">&quot;normalisation_mean&quot;</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+<span class="n">scale</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">metadata</span><span class="p">[</span><span class="s2">&quot;normalisation_scale&quot;</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+<span class="n">original</span> <span class="o">=</span> <span class="n">TinyDamageMLP</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="n">metadata</span><span class="p">[</span><span class="s2">&quot;width&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+<span class="n">original</span><span class="o">.</span><span class="n">load_state_dict</span><span class="p">(</span><span class="n">checkpoint</span><span class="p">[</span><span class="s2">&quot;state_dict&quot;</span><span class="p">])</span>
+<span class="n">original</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
+<span class="n">reloaded</span><span class="p">,</span> <span class="n">reloaded_metadata</span> <span class="o">=</span> <span class="n">load_toy_model</span><span class="p">(</span><span class="n">checkpoint_path</span><span class="p">)</span>
+<span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
+    <span class="n">prediction_before</span> <span class="o">=</span> <span class="n">original</span><span class="p">(</span><span class="n">normalise_features</span><span class="p">(</span><span class="n">heldout_features</span><span class="p">,</span> <span class="n">mean</span><span class="p">,</span> <span class="n">scale</span><span class="p">))</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">prediction_after</span> <span class="o">=</span> <span class="n">reloaded</span><span class="p">(</span><span class="n">normalise_features</span><span class="p">(</span><span class="n">heldout_features</span><span class="p">,</span> <span class="n">mean</span><span class="p">,</span> <span class="n">scale</span><span class="p">))</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">reload_difference</span> <span class="o">=</span> <span class="nb">float</span><span class="p">((</span><span class="n">prediction_before</span> <span class="o">-</span> <span class="n">prediction_after</span><span class="p">)</span><span class="o">.</span><span class="n">abs</span><span class="p">()</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
+<span class="n">heldout_rmse</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">mean</span><span class="p">((</span><span class="n">prediction_after</span> <span class="o">-</span> <span class="n">heldout_reference</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">({</span><span class="s2">&quot;reload_max_abs_difference&quot;</span><span class="p">:</span> <span class="n">reload_difference</span><span class="p">,</span> <span class="s2">&quot;heldout_rmse&quot;</span><span class="p">:</span> <span class="n">heldout_rmse</span><span class="p">,</span> <span class="s2">&quot;feature_order&quot;</span><span class="p">:</span> <span class="n">reloaded_metadata</span><span class="p">[</span><span class="s2">&quot;feature_order&quot;</span><span class="p">]})</span>
+<span class="k">assert</span> <span class="n">reload_difference</span> <span class="o">&lt;</span> <span class="mf">1.0e-12</span>
+<span class="k">assert</span> <span class="n">heldout_rmse</span> <span class="o">&lt;</span> <span class="mf">0.07</span>
+</code></pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><code>{&#39;reload_max_abs_difference&#39;: 0.0, &#39;heldout_rmse&#39;: 0.05636315718170472, &#39;feature_order&#39;: [&#39;x_over_L&#39;, &#39;y_over_H&#39;, &#39;load_factor&#39;]}
+</code></pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="c1"># A compatible RBF reference alternative shares the same nodewise features,</span>
+<span class="c1"># but is a distinct architecture with its own resolution/data assumptions.</span>
+<span class="n">train_loads</span> <span class="o">=</span> <span class="n">metadata</span><span class="p">[</span><span class="s2">&quot;splits&quot;</span><span class="p">][</span><span class="s2">&quot;train&quot;</span><span class="p">]</span>
+<span class="n">train_features</span><span class="p">,</span> <span class="n">train_targets</span> <span class="o">=</span> <span class="n">problem</span><span class="o">.</span><span class="n">case_tensor</span><span class="p">(</span><span class="n">train_loads</span><span class="p">)</span>
+<span class="n">z_train</span> <span class="o">=</span> <span class="n">normalise_features</span><span class="p">(</span><span class="n">train_features</span><span class="p">,</span> <span class="n">mean</span><span class="p">,</span> <span class="n">scale</span><span class="p">)</span>
+<span class="n">z_test</span> <span class="o">=</span> <span class="n">normalise_features</span><span class="p">(</span><span class="n">heldout_features</span><span class="p">,</span> <span class="n">mean</span><span class="p">,</span> <span class="n">scale</span><span class="p">)</span>
+<span class="n">squared_distance</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cdist</span><span class="p">(</span><span class="n">z_test</span><span class="p">,</span> <span class="n">z_train</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>
+<span class="n">weights</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">squared_distance</span> <span class="o">/</span> <span class="mf">0.18</span><span class="p">)</span>
+<span class="n">rbf_prediction</span> <span class="o">=</span> <span class="p">(</span><span class="n">weights</span> <span class="o">@</span> <span class="n">train_targets</span><span class="p">)</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="n">weights</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">clamp_min</span><span class="p">(</span><span class="mf">1.0e-15</span><span class="p">)</span>
+<span class="n">rbf_rmse</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">mean</span><span class="p">((</span><span class="n">rbf_prediction</span> <span class="o">-</span> <span class="n">heldout_reference</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">({</span><span class="s2">&quot;MLP_heldout_RMSE&quot;</span><span class="p">:</span> <span class="n">heldout_rmse</span><span class="p">,</span> <span class="s2">&quot;RBF_heldout_RMSE&quot;</span><span class="p">:</span> <span class="n">rbf_rmse</span><span class="p">,</span> <span class="s2">&quot;RBF_scope&quot;</span><span class="p">:</span> <span class="s2">&quot;same toy feature contract only&quot;</span><span class="p">})</span>
+</code></pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><code>{&#39;MLP_heldout_RMSE&#39;: 0.05636315718170472, &#39;RBF_heldout_RMSE&#39;: 0.0997143167782659, &#39;RBF_scope&#39;: &#39;same toy feature contract only&#39;}
+</code></pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">field_image</span><span class="p">(</span><span class="n">values</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">values</span><span class="o">.</span><span class="n">detach</span><span class="p">()</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">problem</span><span class="o">.</span><span class="n">ny</span><span class="p">,</span> <span class="n">problem</span><span class="o">.</span><span class="n">nx</span><span class="p">)</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+
+<span class="n">error</span> <span class="o">=</span> <span class="n">prediction_after</span> <span class="o">-</span> <span class="n">heldout_reference</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mf">3.2</span><span class="p">),</span> <span class="n">constrained_layout</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">ax</span><span class="p">,</span> <span class="n">values</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">cmap</span><span class="p">,</span> <span class="n">limits</span> <span class="ow">in</span> <span class="p">(</span>
+    <span class="p">(</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">heldout_reference</span><span class="p">,</span> <span class="s2">&quot;held-out toy reference&quot;</span><span class="p">,</span> <span class="s2">&quot;magma&quot;</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)),</span>
+    <span class="p">(</span><span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">prediction_after</span><span class="p">,</span> <span class="s2">&quot;reloaded MLP&quot;</span><span class="p">,</span> <span class="s2">&quot;magma&quot;</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)),</span>
+    <span class="p">(</span><span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">rbf_prediction</span><span class="p">,</span> <span class="s2">&quot;compatible RBF baseline&quot;</span><span class="p">,</span> <span class="s2">&quot;magma&quot;</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)),</span>
+    <span class="p">(</span><span class="n">axes</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">error</span><span class="p">,</span> <span class="s2">&quot;MLP − reference&quot;</span><span class="p">,</span> <span class="s2">&quot;coolwarm&quot;</span><span class="p">,</span> <span class="p">(</span><span class="o">-</span><span class="mf">0.15</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">)),</span>
+<span class="p">):</span>
+    <span class="n">image</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">field_image</span><span class="p">(</span><span class="n">values</span><span class="p">),</span> <span class="n">origin</span><span class="o">=</span><span class="s2">&quot;lower&quot;</span><span class="p">,</span> <span class="n">extent</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cmap</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="n">limits</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">vmax</span><span class="o">=</span><span class="n">limits</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="n">title</span><span class="p">,</span> <span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;x/L&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;y/H&quot;</span><span class="p">,</span> <span class="n">aspect</span><span class="o">=</span><span class="s2">&quot;equal&quot;</span><span class="p">)</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">shrink</span><span class="o">=</span><span class="mf">0.78</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">assets_dir</span><span class="p">()</span> <span class="o">/</span> <span class="s2">&quot;tiny_mlp_heldout_field.png&quot;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">160</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s2">&quot;tight&quot;</span><span class="p">)</span>
+<span class="n">display_figure</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">alt</span><span class="o">=</span><span class="s2">&quot;Held-out toy reference, reloaded MLP field, compatible RBF field, and MLP error.&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
+</code></pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="Recorded figure from Train, save, reload, and compare a field model" src="../_images/b33df6a921d9ca12dbf3b926fc65d7801e249569b623a554a117372266277b01.png" />
+</div>
+</div>
+<p>The checkpoint stores the architecture width, weight <code class="docutils literal notranslate"><span class="pre">state_dict</span></code>,
+feature order and units, normalisation, dtype/device, mesh
+signature, data provenance, splits, seed, and training duration.
+An MLP and RBF can both consume this <em>toy</em> nodewise representation;
+a CNN would require mesh-to-grid maps, and a GNN/GNO would require
+connectivity/operator inputs.  A model name alone is not a
+compatibility guarantee.</p>
+<h2 id="exercises"><span class="section-number">7.5.1.1. </span>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">¶</a></h2>
+<p>Try each question before opening the hint or worked solution. Keep the original calculation as your reference.</p>
+<h3 id="exercise-1-count-examples-without-leaking-a-load-case"><span class="section-number">7.5.1.1.1. </span>Exercise 1: Count examples without leaking a load case<a class="headerlink" href="#exercise-1-count-examples-without-leaking-a-load-case" title="Link to this heading">¶</a></h3>
+<p>The toy grid has mesh signature <span class="math notranslate nohighlight">\(25\times13\)</span>. The checkpoint uses 12 whole load cases for training, 2 for validation, and 2 for testing. Each case supplies one nodewise feature vector <span class="math notranslate nohighlight">\([x/L,y/H,\mathrm{load\ factor}]\)</span> at every node.</p>
+<ol class="arabic simple">
+<li><p>Count the nodes per load case and the nodewise rows in each split.</p></li>
+<li><p>Explain why the split is made by whole load case rather than by individual node.</p></li>
+<li><p>Is the held-out field at load factor <span class="math notranslate nohighlight">\(1.00\)</span> a training example in this receipt?</p></li>
+</ol>
+<div class="dropdown course-hint admonition">
+<p class="admonition-title">Hint 1</p>
+<p>Multiply the grid dimensions first. Then multiply the result by the number of cases in each split. Check the metadata: the test loads are <span class="math notranslate nohighlight">\(0.94\)</span> and <span class="math notranslate nohighlight">\(1.00\)</span>.</p>
+</div>
+<div class="dropdown course-solution admonition">
+<p class="admonition-title">Worked solution 1</p>
+<ol class="arabic simple">
+<li><p>One field has</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[
+25\times13=325
+\]</div>
+<p>nodes. Therefore the training split has <span class="math notranslate nohighlight">\(12\times325=3900\)</span> nodewise rows, while validation and test each have <span class="math notranslate nohighlight">\(2\times325=650\)</span> rows.</p>
+<ol class="arabic simple" start="2">
+<li><p>Nodes from one load case share the same field and load context. If some nodes from a field appeared in training while other nodes from that same field appeared in test, the measured test error would partly reflect interpolation within a seen case rather than generalisation to an unseen load case. The canonical exercise therefore keeps entire loads together.</p></li>
+<li><p>No. The checkpoint metadata lists test loads <span class="math notranslate nohighlight">\(0.94\)</span> and <span class="math notranslate nohighlight">\(1.00\)</span>, so the notebook’s held-out comparison at <span class="math notranslate nohighlight">\(1.00\)</span> uses a test case. This still concerns a tiny course-owned field problem, not fracture data.</p></li>
+</ol>
+</div>
+<h3 id="exercise-2-interpret-reload-agreement-and-the-mlp-rbf-comparison"><span class="section-number">7.5.1.1.2. </span>Exercise 2: Interpret reload agreement and the MLP/RBF comparison<a class="headerlink" href="#exercise-2-interpret-reload-agreement-and-the-mlp-rbf-comparison" title="Link to this heading">¶</a></h3>
+<p>The retained output gives reload maximum absolute difference <span class="math notranslate nohighlight">\(0\)</span>, held-out MLP RMSE <span class="math notranslate nohighlight">\(0.0563631572\)</span>, and held-out RBF RMSE <span class="math notranslate nohighlight">\(0.0997143168\)</span>.</p>
+<ol class="arabic simple">
+<li><p>Compute the RMSE improvement of the MLP over the RBF on this held-out field.</p></li>
+<li><p>List four checkpoint/interface facts that must be checked before inference.</p></li>
+<li><p>State what reload difference <span class="math notranslate nohighlight">\(0\)</span> verifies, and one thing it does not verify.</p></li>
+</ol>
+<div class="dropdown course-hint admonition">
+<p class="admonition-title">Hint 2</p>
+<p>Subtract the two RMSE values for the absolute gap. Read the metadata card: it records architecture, feature order, normalisation, and mesh information.</p>
+</div>
+<div class="dropdown course-solution admonition">
+<p class="admonition-title">Worked solution 2</p>
+<ol class="arabic simple">
+<li><p>The absolute held-out RMSE gap is</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[
+0.0997143168-0.0563631572=0.0433511596.
+\]</div>
+<p>For this one toy held-out field, the MLP has the lower RMSE. It is not a comparison of fracture accuracy or wall-clock acceleration.</p>
+<ol class="arabic simple" start="2">
+<li><p>Examples of required facts are: the architecture identifier and width; the <strong>state_dict</strong> weights; exact feature order <span class="math notranslate nohighlight">\([x/L,y/H,\mathrm{load\ factor}]\)</span> and units; normalisation mean and scale; nodewise feature location; dtype/device; mesh signature <span class="math notranslate nohighlight">\([25,13]\)</span>; the training-data provenance and supported scope. Four is the minimum here, not an exhaustive list.</p></li>
+<li><p>A reload difference of <span class="math notranslate nohighlight">\(0\)</span> verifies that a fresh instance reconstructed from the saved metadata and weights produced the same prediction for this tested input. It does not establish robustness on other meshes, physical correctness, a compatible CNN/GNN/GNO representation, or a speedup. A CNN needs explicit mesh-to-grid and grid-to-mesh maps; a GNN/GNO needs graph or operator information.</p></li>
+</ol>
+</div>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  
+  
+  <div class="md-footer-meta md-typeset">
+    
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-footer-copyright__highlight">
+        &#169; Copyright 2026, UKACM Autumn School.
+        
+    </div>
+  
+    Created using
+    <a href="https://www.sphinx-doc.org/" target="_blank" rel="noopener">Sphinx</a>
+    7.4.7.
+     and
+    <a href="https://github.com/jbms/sphinx-immaterial/" target="_blank" rel="noopener">Sphinx-Immaterial</a>
+  
+</div>
+      
+    </div>
+    
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": [], "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+      
+        <script src="../_static/documentation_options.js?v=fc6fd62b"></script>
+        <script src="../_static/sphinx_immaterial_theme.32136f45f91ae6956.min.js?v=a7a9472a"></script>
+        <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../_static/copybutton.js?v=f281be69"></script>
+        <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script id="MathJax-script" src="../_static/mathjax/tex-mml-chtml.js?v=cadf963e"></script>
+        <script src="../_static/learning_book.js?v=7a62d495"></script>
+    
+  </body>
+</html>

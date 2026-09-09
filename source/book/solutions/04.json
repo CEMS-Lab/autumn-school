@@ -1,0 +1,19 @@
+{
+  "title": "04 — Train, save, reload, and compare a field model",
+  "objective": "Use the course-owned ToyHelmholtz field example to reason about whole-case data splits, checkpoint metadata, exact reload agreement, held-out fields, and architecture compatibility.",
+  "prediction": "Predict why splitting individual nodes rather than whole load cases can leak information, and whether a successful reload proves that an MLP checkpoint is automatically compatible with a CNN, GNN, or GNO.",
+  "exercises": [
+    {
+      "title": "Count examples without leaking a load case",
+      "question": "The toy grid has mesh signature $25\\times13$. The checkpoint uses 12 whole load cases for training, 2 for validation, and 2 for testing. Each case supplies one nodewise feature vector $[x/L,y/H,\\mathrm{load\\ factor}]$ at every node.\n\n1. Count the nodes per load case and the nodewise rows in each split.\n2. Explain why the split is made by whole load case rather than by individual node.\n3. Is the held-out field at load factor $1.00$ a training example in this receipt?",
+      "hint": "Multiply the grid dimensions first. Then multiply the result by the number of cases in each split. Check the metadata: the test loads are $0.94$ and $1.00$.",
+      "solution": "1. One field has\n\n$$\n25\\times13=325\n$$\n\nnodes. Therefore the training split has $12\\times325=3900$ nodewise rows, while validation and test each have $2\\times325=650$ rows.\n\n2. Nodes from one load case share the same field and load context. If some nodes from a field appeared in training while other nodes from that same field appeared in test, the measured test error would partly reflect interpolation within a seen case rather than generalisation to an unseen load case. The canonical exercise therefore keeps entire loads together.\n\n3. No. The checkpoint metadata lists test loads $0.94$ and $1.00$, so the notebook's held-out comparison at $1.00$ uses a test case. This still concerns a tiny course-owned field problem, not fracture data."
+    },
+    {
+      "title": "Interpret reload agreement and the MLP/RBF comparison",
+      "question": "The retained output gives reload maximum absolute difference $0$, held-out MLP RMSE $0.0563631572$, and held-out RBF RMSE $0.0997143168$.\n\n1. Compute the RMSE improvement of the MLP over the RBF on this held-out field.\n2. List four checkpoint/interface facts that must be checked before inference.\n3. State what reload difference $0$ verifies, and one thing it does not verify.",
+      "hint": "Subtract the two RMSE values for the absolute gap. Read the metadata card: it records architecture, feature order, normalisation, and mesh information.",
+      "solution": "1. The absolute held-out RMSE gap is\n\n$$\n0.0997143168-0.0563631572=0.0433511596.\n$$\n\nFor this one toy held-out field, the MLP has the lower RMSE. It is not a comparison of fracture accuracy or wall-clock acceleration.\n\n2. Examples of required facts are: the architecture identifier and width; the **state_dict** weights; exact feature order $[x/L,y/H,\\mathrm{load\\ factor}]$ and units; normalisation mean and scale; nodewise feature location; dtype/device; mesh signature $[25,13]$; the training-data provenance and supported scope. Four is the minimum here, not an exhaustive list.\n\n3. A reload difference of $0$ verifies that a fresh instance reconstructed from the saved metadata and weights produced the same prediction for this tested input. It does not establish robustness on other meshes, physical correctness, a compatible CNN/GNN/GNO representation, or a speedup. A CNN needs explicit mesh-to-grid and grid-to-mesh maps; a GNN/GNO needs graph or operator information."
+    }
+  ]
+}
