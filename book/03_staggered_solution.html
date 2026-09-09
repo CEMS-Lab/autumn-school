@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>4. From solid mechanics to staggered damage updates &#8212; PhAST: Phase-field fracture with differentiable FEM</title>
+    <title>4. The Staggered Solution Algorithm: Alternating Mechanics and Damage &#8212; PhAST: Phase-field fracture with differentiable FEM</title>
   
   
   
@@ -33,7 +33,7 @@
     <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="_static/mobile_math.css?v=acf5579e" />
-    <link rel="stylesheet" type="text/css" href="_static/learning_book.css?v=d8208df1" />
+    <link rel="stylesheet" type="text/css" href="_static/learning_book.css?v=37e7f39f" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -52,8 +52,8 @@
     <script src="_static/learning_book.js?v=7a62d495"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="5. Geometry, FEM, tensors, and matrix-free operators" href="04_fem_to_tensors.html" />
-    <link rel="prev" title="3.3.1. Differentiating Material Degradation: Analytical, Autograd, and Finite Differences" href="labs/02_degradation_autograd.html" />
+    <link rel="next" title="5. From Weak Forms to Discrete Tensors: The PhAST Pipeline" href="04_fem_to_tensors.html" />
+    <link rel="prev" title="3. Fracture Energy: AT1, AT2, Degradation, and Bandwidth" href="02_phase_field_energy.html" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -171,32 +171,31 @@
                 </a>
             </li>
         </ul>
-        <ul class="current nav bd-sidenav">
-<li class="toctree-l1 has-children"><a class="reference internal" href="00_welcome_and_routes.html">1. From Cracks to Computation: Learn by Doing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="labs/00_why_average_predictions_can_fail.html">1.2.1. Branch Selection and Energy-Based Objectives in Physics-Informed Learning</a></li>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Theory &amp; Methods</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="00_welcome_and_routes.html">1. From Cracks to Computation: Learn by Doing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="01_crack_representations.html">2. Crack Representations: Sharp, Cohesive, and Diffuse</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_phase_field_energy.html">3. Fracture Energy: AT1, AT2, Degradation, and Bandwidth</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">4. The Staggered Solution Algorithm: Alternating Mechanics and Damage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_fem_to_tensors.html">5. From Weak Forms to Discrete Tensors: The PhAST Pipeline</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="05_differentiation_and_inverse.html">6. Differentiable Mechanics and Inverse Parameter Discovery</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="05a_backpropagation_step_by_step.html">6.4.1. Backpropagation through a stepped update</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1"><a class="reference internal" href="01_crack_representations.html">2. Crack representations: sharp, cohesive, and diffuse</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="02_phase_field_energy.html">3. Fracture energy: AT1, AT2, degradation, and width</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="labs/02_degradation_autograd.html">3.3.1. Differentiating Material Degradation: Analytical, Autograd, and Finite Differences</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_learning_adapter.html">7. Train, save, reload, adapters, and checked proposals</a></li>
 </ul>
-</details></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">4. From solid mechanics to staggered damage updates</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="04_fem_to_tensors.html">5. Geometry, FEM, tensors, and matrix-free operators</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="labs/01_phast_tiny_evolving_fracture.html">5.8.1. End-to-End Simulation: Running Phase-Field Fracture in PhAST</a></li>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Hands-On Computational Labs</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="labs/00_why_average_predictions_can_fail.html">Lab 00: Branch Selection &amp; Energy-Based Objectives in Physics-Informed Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="labs/01_phast_tiny_evolving_fracture.html">Lab 01: End-to-End Simulation with PhAST (Notched Tension)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="labs/02_degradation_autograd.html">Lab 02: Differentiating Degradation: Analytical, Autograd, &amp; Finite Differences</a></li>
+<li class="toctree-l1"><a class="reference internal" href="labs/03_tiny_derivative_inverse_toy.html">Lab 03: Differentiable Mechanics &amp; Inverse Parameter Identification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="labs/04_train_save_reload_adapter.html">Lab 04: Neural Field Adapters (Training, Checkpointing, &amp; Reloading)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="labs/05_hybrid_reference_correction.html">Lab 05: Hybrid Physics-AI: Residual-Gated Proposals &amp; Solver Correction</a></li>
 </ul>
-</details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="05_differentiation_and_inverse.html">6. Differentiation and an illustrative inverse problem</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="05a_backpropagation_step_by_step.html">6.3.1. Backpropagation through a stepped update</a></li>
-<li class="toctree-l2"><a class="reference internal" href="labs/03_tiny_derivative_inverse_toy.html">6.6.1. Differentiable Mechanics and Inverse Parameter Identification</a></li>
-</ul>
-</details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="06_learning_adapter.html">7. Train, save, reload, adapters, and checked proposals</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="labs/04_train_save_reload_adapter.html">7.5.1. Training, Saving, and Reloading Neural Field Adapters</a></li>
-<li class="toctree-l2"><a class="reference internal" href="labs/05_hybrid_reference_correction.html">7.8.1. Hybrid Physics-AI: Residual-Gated Model Proposals and Solver Correction</a></li>
-</ul>
-</details></li>
-<li class="toctree-l1"><a class="reference internal" href="07_practice_references.html">8. Practice, Solutions, Glossary, and References</a></li>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Review &amp; Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="07_practice_references.html">Practice, Solutions, Glossary, and References</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Optional inverse experiments</span></p>
 <ul class="nav bd-sidenav">
@@ -399,7 +398,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>From solid mechanics to staggered damage updates</h1>
+    <h1>The Staggered Solution Algorithm: Alternating Mechanics and Damage</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -409,15 +408,16 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-mechanical-subproblem">4.1. The mechanical subproblem</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-the-damage-equation-resembles-diffusion">4.2. Why the damage equation resembles diffusion</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#one-load-increment-two-coupled-updates">4.3. One load increment, two coupled updates</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#staggered-monolithic-newton-and-quasi-newton">4.4. Staggered, monolithic, Newton, and quasi-Newton</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#static-and-dynamic-fracture">4.5. Static and dynamic fracture</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#acceptance-checks">4.6. Acceptance checks</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#looking-ahead-running-the-phast-staggered-solver">4.7. Looking Ahead: Running the PhAST Staggered Solver</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-write-the-update-before-reading-the-code">4.8. Exercise: write the update before reading the code</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sources-for-this-chapter">4.9. Sources for this chapter</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-divide-and-conquer-strategy">4.1. The Divide-and-Conquer Strategy</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-mechanical-subproblem">4.2. The Mechanical Subproblem</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-the-damage-equation-resembles-diffusion">4.3. Why the damage equation resembles diffusion</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#one-load-increment-two-coupled-updates">4.4. One load increment, two coupled updates</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#staggered-monolithic-newton-and-quasi-newton">4.5. Staggered, monolithic, Newton, and quasi-Newton</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#static-and-dynamic-fracture">4.6. Static and dynamic fracture</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#acceptance-checks">4.7. Acceptance checks</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#looking-ahead-running-the-phast-staggered-solver">4.8. Looking Ahead: Running the PhAST Staggered Solver</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-write-the-update-before-reading-the-code">4.9. Exercise: write the update before reading the code</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sources-for-this-chapter">4.10. Sources for this chapter</a></li>
 </ul>
             </nav>
         </div>
@@ -429,19 +429,37 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="from-solid-mechanics-to-staggered-damage-updates">
-<h1><span class="section-number">4. </span>From solid mechanics to staggered damage updates<a class="headerlink" href="#from-solid-mechanics-to-staggered-damage-updates" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="the-staggered-solution-algorithm-alternating-mechanics-and-damage">
+<h1><span class="section-number">4. </span>The Staggered Solution Algorithm: Alternating Mechanics and Damage<a class="headerlink" href="#the-staggered-solution-algorithm-alternating-mechanics-and-damage" title="Link to this heading">#</a></h1>
 <figure class="align-default" id="fig-staggered-loop">
 <a class="reference internal image-reference" href="_images/03_staggered_loop.svg"><img alt="At a fixed load increment, update mechanics, the driving field and damage, then check convergence. Repeat until the convergence criteria pass, then accept and advance the load." src="_images/03_staggered_loop.svg" style="width: 96%;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Figure 4.1 </span><span class="caption-text">A staggered solve updates the coupled mechanics and damage fields in a
-chosen order.</span><a class="headerlink" href="#fig-staggered-loop" title="Link to this image">#</a></p>
+<p><span class="caption-number">Figure 4.1 </span><span class="caption-text">Within each load increment, the staggered scheme alternates between updating displacement with damage fixed, and updating damage with displacement fixed, until equilibrium residuals converge.</span><a class="headerlink" href="#fig-staggered-loop" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
+<section id="the-divide-and-conquer-strategy">
+<h2><span class="section-number">4.1. </span>The Divide-and-Conquer Strategy<a class="headerlink" href="#the-divide-and-conquer-strategy" title="Link to this heading">#</a></h2>
+<p>Solving for displacement <span class="math notranslate nohighlight">\(u(x)\)</span> and phase-field damage <span class="math notranslate nohighlight">\(d(x)\)</span> simultaneously is a formidable challenge:</p>
+<ul class="simple">
+<li><p>Stretching the solid increases strain energy, which drives damage growth.</p></li>
+<li><p>As damage grows, stiffness degrades (<span class="math notranslate nohighlight">\(g(d) \to 0\)</span>), which relaxes the stress and redistributes loads to neighboring intact elements.</p></li>
+</ul>
+<p>Because the total potential energy is non-convex in <span class="math notranslate nohighlight">\((u, d)\)</span> jointly, a monolithic Newton–Raphson solver can suffer from loss of positive definiteness, small convergence basins, or numerical instability.</p>
+<p>To overcome this, computational mechanics uses the <strong>staggered alternating minimization scheme</strong> (Bourdin et al., 2000). The philosophy is simple: <strong>divide and conquer</strong>:</p>
+<ol class="arabic simple">
+<li><p><strong>Step 1: Freeze Damage (<span class="math notranslate nohighlight">\(d\)</span> fixed), Solve for Displacement <span class="math notranslate nohighlight">\(u\)</span>:</strong><br />
+With the damage field fixed, the mechanical subproblem reduces to a standard, well-conditioned linear elasticity problem.</p></li>
+<li><p><strong>Step 2: Freeze Displacement (<span class="math notranslate nohighlight">\(u\)</span> fixed), Solve for Damage <span class="math notranslate nohighlight">\(d\)</span>:</strong><br />
+With displacements fixed, the damage subproblem is strictly convex and mathematically mirrors a steady-state diffusion problem with a source term.</p></li>
+<li><p><strong>Step 3: Check Residuals and Iterate:</strong><br />
+Alternate between the two subproblems until both mechanical and damage residuals fall below specified tolerance criteria, then advance to the next load increment.</p></li>
+</ol>
+</section>
+<hr class="docutils" />
 <section id="the-mechanical-subproblem">
-<h2><span class="section-number">4.1. </span>The mechanical subproblem<a class="headerlink" href="#the-mechanical-subproblem" title="Link to this heading">#</a></h2>
-<p>For a quasistatic small-strain body, balance of linear momentum is</p>
+<h2><span class="section-number">4.2. </span>The Mechanical Subproblem<a class="headerlink" href="#the-mechanical-subproblem" title="Link to this heading">#</a></h2>
+<p>For a quasistatic, small-strain continuum body, the balance of linear momentum requires:</p>
 <div class="math notranslate nohighlight">
 \[
 \nabla\cdot\sigma(u,d)+b=0 \quad \text{in }\Omega,
@@ -475,7 +493,7 @@ functions turn <span class="math notranslate nohighlight">\(u\)</span> and <span
 assembly or matrix-free operation then evaluates the residual.</p>
 </section>
 <section id="why-the-damage-equation-resembles-diffusion">
-<h2><span class="section-number">4.2. </span>Why the damage equation resembles diffusion<a class="headerlink" href="#why-the-damage-equation-resembles-diffusion" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">4.3. </span>Why the damage equation resembles diffusion<a class="headerlink" href="#why-the-damage-equation-resembles-diffusion" title="Link to this heading">#</a></h2>
 <p>From the fracture-energy chapter, the unconstrained damage residual contains</p>
 <div class="math notranslate nohighlight">
 \[
@@ -506,7 +524,7 @@ energy;</p></li>
 interpretation.</p>
 </section>
 <section id="one-load-increment-two-coupled-updates">
-<h2><span class="section-number">4.3. </span>One load increment, two coupled updates<a class="headerlink" href="#one-load-increment-two-coupled-updates" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">4.4. </span>One load increment, two coupled updates<a class="headerlink" href="#one-load-increment-two-coupled-updates" title="Link to this heading">#</a></h2>
 <p>At load increment <span class="math notranslate nohighlight">\(n\)</span>, start with the previously accepted damage
 <span class="math notranslate nohighlight">\(d_{n-1}\)</span>. A simple staggered pattern is:</p>
 <ol class="arabic simple">
@@ -529,7 +547,7 @@ commonly used history construction.
 Other approaches impose <span class="math notranslate nohighlight">\(d_n\geq d_{n-1}\)</span> directly in the damage solve.</p>
 </section>
 <section id="staggered-monolithic-newton-and-quasi-newton">
-<h2><span class="section-number">4.4. </span>Staggered, monolithic, Newton, and quasi-Newton<a class="headerlink" href="#staggered-monolithic-newton-and-quasi-newton" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">4.5. </span>Staggered, monolithic, Newton, and quasi-Newton<a class="headerlink" href="#staggered-monolithic-newton-and-quasi-newton" title="Link to this heading">#</a></h2>
 <p>These terms answer different algorithmic questions.</p>
 <p><strong>Staggered solve.</strong> Update <span class="math notranslate nohighlight">\(u\)</span> and <span class="math notranslate nohighlight">\(d\)</span> in blocks. It can be easier to
 implement and diagnose because each subproblem has a recognisable role. It
@@ -550,7 +568,7 @@ to the chosen fracture formulation and spatial approximation.</p>
 definition, and accepted load increments.</p>
 </section>
 <section id="static-and-dynamic-fracture">
-<h2><span class="section-number">4.5. </span>Static and dynamic fracture<a class="headerlink" href="#static-and-dynamic-fracture" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">4.6. </span>Static and dynamic fracture<a class="headerlink" href="#static-and-dynamic-fracture" title="Link to this heading">#</a></h2>
 <p>The quasistatic balance above neglects inertia. A dynamic model includes it:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -565,7 +583,7 @@ integrator, time step, inertia/damping assumptions, and the quantity used to
 enforce or approximate irreversibility.</p>
 </section>
 <section id="acceptance-checks">
-<h2><span class="section-number">4.6. </span>Acceptance checks<a class="headerlink" href="#acceptance-checks" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">4.7. </span>Acceptance checks<a class="headerlink" href="#acceptance-checks" title="Link to this heading">#</a></h2>
 <p>At an accepted increment, consider at least the following checks:</p>
 <ul class="simple">
 <li><p><strong>mechanical balance:</strong> a stated residual norm, reaction balance, or weak
@@ -584,7 +602,7 @@ inspection helps identify an incorrect boundary condition, a flipped damage
 convention, or an under-resolved band even when the residual decreases.</p>
 </section>
 <section id="looking-ahead-running-the-phast-staggered-solver">
-<h2><span class="section-number">4.7. </span>Looking Ahead: Running the PhAST Staggered Solver<a class="headerlink" href="#looking-ahead-running-the-phast-staggered-solver" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">4.8. </span>Looking Ahead: Running the PhAST Staggered Solver<a class="headerlink" href="#looking-ahead-running-the-phast-staggered-solver" title="Link to this heading">#</a></h2>
 <p>In the next chapter, we put this staggered solution strategy into action using PhAST on a notched specimen loaded in tension. As you step through the simulation, pay close attention to two physical features:</p>
 <ol class="arabic simple">
 <li><p><strong>The Damage Evolution:</strong> Notice how damage remains concentrated near the precrack during initial elastic loading, then rapidly localizes and forms a propagating crack band once the critical fracture threshold is reached.</p></li>
@@ -592,7 +610,7 @@ convention, or an under-resolved band even when the residual decreases.</p>
 </ol>
 </section>
 <section id="exercise-write-the-update-before-reading-the-code">
-<h2><span class="section-number">4.8. </span>Exercise: write the update before reading the code<a class="headerlink" href="#exercise-write-the-update-before-reading-the-code" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">4.9. </span>Exercise: write the update before reading the code<a class="headerlink" href="#exercise-write-the-update-before-reading-the-code" title="Link to this heading">#</a></h2>
 <p>Suppose a notched specimen is loaded in displacement control. Put the
 following actions in a sensible order and identify the action that enforces
 one-way damage:</p>
@@ -618,7 +636,7 @@ route and is interpreted alongside the residual and field checks.</p>
 </div>
 </section>
 <section id="sources-for-this-chapter">
-<h2><span class="section-number">4.9. </span>Sources for this chapter<a class="headerlink" href="#sources-for-this-chapter" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">4.10. </span>Sources for this chapter<a class="headerlink" href="#sources-for-this-chapter" title="Link to this heading">#</a></h2>
 <p>For a variational phase-field treatment and a staggered implementation route,
 see <a class="reference external" href="https://doi.org/10.1002/nme.2861">Miehe, Welschinger, and Hofacker
 (2010)</a>. A discussion of numerical
@@ -639,12 +657,12 @@ formulations and length-scale effects is provided by
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="labs/02_degradation_autograd.html"
+       href="02_phase_field_energy.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">3.3.1. </span>Differentiating Material Degradation: Analytical, Autograd, and Finite Differences</p>
+        <p class="prev-next-title"><span class="section-number">3. </span>Fracture Energy: AT1, AT2, Degradation, and Bandwidth</p>
       </div>
     </a>
     <a class="right-next"
@@ -652,7 +670,7 @@ formulations and length-scale effects is provided by
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">5. </span>Geometry, FEM, tensors, and matrix-free operators</p>
+        <p class="prev-next-title"><span class="section-number">5. </span>From Weak Forms to Discrete Tensors: The PhAST Pipeline</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -672,15 +690,16 @@ formulations and length-scale effects is provided by
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-mechanical-subproblem">4.1. The mechanical subproblem</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-the-damage-equation-resembles-diffusion">4.2. Why the damage equation resembles diffusion</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#one-load-increment-two-coupled-updates">4.3. One load increment, two coupled updates</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#staggered-monolithic-newton-and-quasi-newton">4.4. Staggered, monolithic, Newton, and quasi-Newton</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#static-and-dynamic-fracture">4.5. Static and dynamic fracture</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#acceptance-checks">4.6. Acceptance checks</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#looking-ahead-running-the-phast-staggered-solver">4.7. Looking Ahead: Running the PhAST Staggered Solver</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-write-the-update-before-reading-the-code">4.8. Exercise: write the update before reading the code</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sources-for-this-chapter">4.9. Sources for this chapter</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-divide-and-conquer-strategy">4.1. The Divide-and-Conquer Strategy</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-mechanical-subproblem">4.2. The Mechanical Subproblem</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-the-damage-equation-resembles-diffusion">4.3. Why the damage equation resembles diffusion</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#one-load-increment-two-coupled-updates">4.4. One load increment, two coupled updates</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#staggered-monolithic-newton-and-quasi-newton">4.5. Staggered, monolithic, Newton, and quasi-Newton</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#static-and-dynamic-fracture">4.6. Static and dynamic fracture</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#acceptance-checks">4.7. Acceptance checks</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#looking-ahead-running-the-phast-staggered-solver">4.8. Looking Ahead: Running the PhAST Staggered Solver</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-write-the-update-before-reading-the-code">4.9. Exercise: write the update before reading the code</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sources-for-this-chapter">4.10. Sources for this chapter</a></li>
 </ul>
   </nav></div>
 

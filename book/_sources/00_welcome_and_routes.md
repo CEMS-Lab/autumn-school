@@ -21,11 +21,19 @@ By the end of this workshop, you will be able to:
 
 Many non-linear physical systems exhibit multiple stable equilibrium states for a given set of boundary conditions. In our opening tutorial, we explore what happens when we train a learning model on data generated from multiple solution branches.
 
-```{toctree}
-:maxdepth: 1
+:::{admonition} Hands-On Tutorial: Lab 00 (Branch Selection & Energy Landscapes)
+:class: tip
 
-labs/00_why_average_predictions_can_fail
-```
+**Ready to try this in practice?**  
+Explore the interactive tutorial: **{doc}`labs/00_why_average_predictions_can_fail`**.  
+You can read through the worked derivations and energy plots directly here in the book, or run it interactively in **Google Colab** with one click:
+
+<div class="badge-row">
+  <a class="badge-colab" href="https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/study/00_why_average_predictions_can_fail.ipynb" target="_blank"><img src="_static/colab-badge.svg" alt="Open In Colab"/></a>
+  <a class="badge-link" href="../notebooks/study/00_why_average_predictions_can_fail.ipynb"><i class="fa-solid fa-download"></i> Download Practice Notebook</a>
+  <a class="badge-link" href="../notebooks/solutions/00_why_average_predictions_can_fail.ipynb"><i class="fa-solid fa-check-circle"></i> Download Worked Solutions</a>
+</div>
+:::
 
 We compare two fundamental approaches:
 - **Supervised Regression (Mean Squared Error):** Which naturally converges to conditional averages.

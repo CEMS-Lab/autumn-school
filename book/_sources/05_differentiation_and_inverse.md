@@ -1,25 +1,39 @@
-# Differentiation and an illustrative inverse problem
-
-The {doc}`animated history lesson <research/03_history_visual>` follows the
-history variable through loading and unloading and connects the forward
-trajectory to its derivative route.
+# Differentiable Mechanics and Inverse Parameter Discovery
 
 :::{figure} figures/05_autograd_inverse.*
 :name: fig-autograd-inverse
 :width: 96%
 :alt: Parameters enter a supported forward computation and a scalar loss. Reverse sensitivities return a gradient, checked against a directional finite difference. An optional optimizer uses that gradient in a separate parameter update.
 
-Automatic differentiation follows the stated computational graph. A derivative
-check asks whether that graph implements the derivative you intended.
+In differentiable mechanics, parameters flow through the forward solver graph to produce an observation. Reverse-mode automatic differentiation computes the sensitivity gradient, which guides an optimizer to discover unknown physical properties.
 :::
 
-## Define the forward map before differentiating it
+## The Detective Story: Solving Inverse Problems with Differentiable Mechanics
 
-Let $p$ denote one scalar parameter, such as a bounded multiplier of a
-material field. A forward computation maps it to a state and an observable:
+Imagine you are an engineer in a materials testing laboratory. You place a specimen of an unknown advanced alloy into a tensile testing machine, apply incremental stretch, and record the reaction forces and surface displacement fields using digital cameras (digital image correlation).
+
+Now comes the fundamental scientific puzzle:
+*What are the true underlying material properties—such as Young's modulus $E$, Poisson's ratio $\nu$, or fracture toughness $G_c$—that gave rise to these experimental measurements?*
+
+In traditional engineering, solving this **inverse problem** required expensive brute-force guessing: pick a trial parameter, run a forward finite element simulation, see how far off the prediction is, and guess again.
+
+With **differentiable mechanics**, the simulation itself calculates the road map!
+Because our finite element equations are assembled into a differentiable computational graph in PyTorch, reverse-mode automatic differentiation (`autograd`) uses the chain rule to backpropagate the error between simulation and observation all the way back to the input material parameters:
 
 $$
-p \longmapsto (u(p),d(p)) \longmapsto y(p).
+\frac{\partial J}{\partial p} = \frac{\partial J}{\partial y} \cdot \frac{\partial y}{\partial u} \cdot \frac{\partial u}{\partial p}.
+$$
+
+With this exact sensitivity gradient in hand, standard optimization algorithms (`torch.optim.Adam` or L-BFGS) can systematically navigate the parameter landscape and pinpoint the true material properties.
+
+---
+
+## Formulating the Forward and Inverse Maps
+
+Let $p$ denote the physical parameter we wish to discover (for example, Young's modulus $E > 0$). The forward computational graph maps the parameter to a physical state, and then to a measurable observation:
+
+$$
+p \longmapsto (u(p), d(p)) \longmapsto y(p).
 $$
 
 With a target observation $y^\star$, an illustrative least-squares objective
@@ -160,11 +174,19 @@ In the accompanying computational lesson, you will implement a complete differen
 2. **Derivative Verification:** Compute sensitivities of an observation with respect to the elastic modulus using analytical formulas, automatic differentiation (`loss.backward()`), and central finite differences.
 3. **Inverse Identification:** Use gradient descent to automatically recover the unknown ground-truth stiffness from synthetic displacement measurements.
 
-```{toctree}
-:maxdepth: 1
+:::{admonition} Hands-On Tutorial: Lab 03 (Differentiable Mechanics & Inverse Recovery)
+:class: tip
 
-labs/03_tiny_derivative_inverse_toy
-```
+**Ready to try this in practice?**  
+Explore the interactive tutorial: **{doc}`labs/03_tiny_derivative_inverse_toy`**.  
+You can read through the worked autograd graph and parameter recovery trajectories directly here in the book, or run it interactively in **Google Colab** with one click:
+
+<div class="badge-row">
+  <a class="badge-colab" href="https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/study/03_tiny_derivative_inverse_toy.ipynb" target="_blank"><img src="_static/colab-badge.svg" alt="Open In Colab"/></a>
+  <a class="badge-link" href="../notebooks/study/03_tiny_derivative_inverse_toy.ipynb"><i class="fa-solid fa-download"></i> Download Practice Notebook</a>
+  <a class="badge-link" href="../notebooks/solutions/03_tiny_derivative_inverse_toy.ipynb"><i class="fa-solid fa-check-circle"></i> Download Worked Solutions</a>
+</div>
+:::
 
 ## Directional Derivative Verification
 

@@ -1,16 +1,35 @@
-# Fracture energy: AT1, AT2, degradation, and width
+# Fracture Energy: AT1, AT2, Degradation, and Bandwidth
 
 :::{figure} figures/02_energy_profiles.png
 :name: fig-energy-profiles
 :width: 96%
 
-The crack-density choice and the degradation law are separate functions. The
-curves shown are idealised mathematical profiles of the stated functions.
+The crack-density choice and the stiffness degradation law are independent mathematical functions. Together, they govern how damage nucleates, diffuses, and softens the solid.
 :::
 
-## A common energy template
+## The Energy Balance: Why Do Materials Break?
 
-For small-strain brittle fracture, a frequently used phase-field energy is
+When an engineer pulls on a solid bar, work is done to stretch the atomic bonds. This energy is stored elastically inside the material. If a tiny defect or notch exists, stress concentrates intensely near the notch tip.
+
+At some critical point, the solid faces a fundamental thermodynamic choice:
+*Is it energetically cheaper to keep stretching the heavily strained atomic bonds, or to break them and create two free crack surfaces?*
+
+In 1921, A. A. Griffith discovered that a crack propagates whenever the rate of elastic strain energy released equals the energy required to create new fracture surface:
+$$
+G = -\frac{\partial \Pi}{\partial A} = G_c
+$$
+where $G_c$ is the **fracture toughness** (critical energy release rate, measured in $\mathrm{J/m^2}$ or $\mathrm{N/m}$).
+
+In phase-field fracture modeling, we approximate Griffith's surface energy balance by introducing a continuous scalar damage field $d(x) \in [0, 1]$ across the entire solid domain $\Omega$:
+- **$d = 0$ (Intact Material):** The material is completely undamaged, fully elastic, and bears its full load capacity.
+- **$d = 1$ (Fractured Material):** The material is completely broken, its tensile stiffness has vanished, and crack surfaces are formed.
+- **$0 < d < 1$ (Diffuse Crack Band):** A smooth transition zone of characteristic half-width governed by the regularisation length scale $\ell$.
+
+---
+
+## The Phase-Field Energy Functional
+
+For small-strain brittle fracture, the total potential energy of the coupled displacement-damage system is formulated as:
 
 $$
 \mathcal{E}_\ell(u,d)
@@ -72,11 +91,19 @@ In the accompanying computational lesson, you will implement this quadratic degr
 - **Automatically:** Using PyTorch's automatic differentiation engine (`torch.autograd`).
 - **Numerically:** Using central finite differences with varying perturbation step sizes.
 
-```{toctree}
-:maxdepth: 1
+:::{admonition} Hands-On Tutorial: Lab 02 (Autograd vs. Finite Differences for Degradation)
+:class: tip
 
-labs/02_degradation_autograd
-```
+**Ready to try this in practice?**  
+Explore the interactive tutorial: **{doc}`labs/02_degradation_autograd`**.  
+You can read through the worked derivatives and Taylor tests directly here in the book, or run it interactively in **Google Colab** with one click:
+
+<div class="badge-row">
+  <a class="badge-colab" href="https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/study/02_degradation_autograd.ipynb" target="_blank"><img src="_static/colab-badge.svg" alt="Open In Colab"/></a>
+  <a class="badge-link" href="../notebooks/study/02_degradation_autograd.ipynb"><i class="fa-solid fa-download"></i> Download Practice Notebook</a>
+  <a class="badge-link" href="../notebooks/solutions/02_degradation_autograd.ipynb"><i class="fa-solid fa-check-circle"></i> Download Worked Solutions</a>
+</div>
+:::
 
 This exercise demonstrates the core mechanic of automatic differentiation: computing exact programmatic derivatives through the operations defined in your code.
 

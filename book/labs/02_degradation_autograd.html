@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>3.3.1. Differentiating Material Degradation: Analytical, Autograd, and Finite Differences &#8212; PhAST: Phase-field fracture with differentiable FEM</title>
+    <title>Lab 02: Differentiating Degradation: Analytical, Autograd, &amp; Finite Differences &#8212; PhAST: Phase-field fracture with differentiable FEM</title>
   
   
   
@@ -52,8 +52,8 @@
     <script src="../_static/learning_book.js?v=7a62d495"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="4. From solid mechanics to staggered damage updates" href="../03_staggered_solution.html" />
-    <link rel="prev" title="3. Fracture energy: AT1, AT2, degradation, and width" href="../02_phase_field_energy.html" />
+    <link rel="next" title="Lab 03: Differentiable Mechanics &amp; Inverse Parameter Identification" href="03_tiny_derivative_inverse_toy.html" />
+    <link rel="prev" title="Lab 01: End-to-End Simulation with PhAST (Notched Tension)" href="01_phast_tiny_evolving_fracture.html" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -171,32 +171,31 @@
                 </a>
             </li>
         </ul>
-        <ul class="current nav bd-sidenav">
-<li class="toctree-l1 has-children"><a class="reference internal" href="../00_welcome_and_routes.html">1. From Cracks to Computation: Learn by Doing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="00_why_average_predictions_can_fail.html">1.2.1. Branch Selection and Energy-Based Objectives in Physics-Informed Learning</a></li>
-</ul>
-</details></li>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Theory &amp; Methods</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../00_welcome_and_routes.html">1. From Cracks to Computation: Learn by Doing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../01_crack_representations.html">2. Crack representations: sharp, cohesive, and diffuse</a></li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="../02_phase_field_energy.html">3. Fracture energy: AT1, AT2, degradation, and width</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">3.3.1. Differentiating Material Degradation: Analytical, Autograd, and Finite Differences</a></li>
-</ul>
-</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_phase_field_energy.html">3. Fracture energy: AT1, AT2, degradation, and width</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../03_staggered_solution.html">4. From solid mechanics to staggered damage updates</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../04_fem_to_tensors.html">5. Geometry, FEM, tensors, and matrix-free operators</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="01_phast_tiny_evolving_fracture.html">5.8.1. End-to-End Simulation: Running Phase-Field Fracture in PhAST</a></li>
-</ul>
-</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_fem_to_tensors.html">5. Geometry, FEM, tensors, and matrix-free operators</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../05_differentiation_and_inverse.html">6. Differentiation and an illustrative inverse problem</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../05a_backpropagation_step_by_step.html">6.3.1. Backpropagation through a stepped update</a></li>
-<li class="toctree-l2"><a class="reference internal" href="03_tiny_derivative_inverse_toy.html">6.6.1. Differentiable Mechanics and Inverse Parameter Identification</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../06_learning_adapter.html">7. Train, save, reload, adapters, and checked proposals</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="04_train_save_reload_adapter.html">7.5.1. Training, Saving, and Reloading Neural Field Adapters</a></li>
-<li class="toctree-l2"><a class="reference internal" href="05_hybrid_reference_correction.html">7.8.1. Hybrid Physics-AI: Residual-Gated Model Proposals and Solver Correction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06_learning_adapter.html">7. Train, save, reload, adapters, and checked proposals</a></li>
 </ul>
-</details></li>
-<li class="toctree-l1"><a class="reference internal" href="../07_practice_references.html">8. Practice, Solutions, Glossary, and References</a></li>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Hands-On Computational Labs</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="00_why_average_predictions_can_fail.html">Lab 00: Branch Selection &amp; Energy-Based Objectives in Physics-Informed Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="01_phast_tiny_evolving_fracture.html">Lab 01: End-to-End Simulation with PhAST (Notched Tension)</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Lab 02: Differentiating Degradation: Analytical, Autograd, &amp; Finite Differences</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_tiny_derivative_inverse_toy.html">Lab 03: Differentiable Mechanics &amp; Inverse Parameter Identification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_train_save_reload_adapter.html">Lab 04: Neural Field Adapters (Training, Checkpointing, &amp; Reloading)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_hybrid_reference_correction.html">Lab 05: Hybrid Physics-AI: Residual-Gated Proposals &amp; Solver Correction</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Review &amp; Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../07_practice_references.html">Practice, Solutions, Glossary, and References</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Optional inverse experiments</span></p>
 <ul class="nav bd-sidenav">
@@ -430,7 +429,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Differentiating Material Degradation: Analytical, Autograd, and Finite Differences</h1>
+    <h1>Lab 02: Differentiating Degradation: Analytical, Autograd, & Finite Differences</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -440,9 +439,9 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">3.3.1.1. Exercises</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1-evaluate-the-law-its-slope-and-its-curvature">3.3.1.1.1. Exercise 1: Evaluate the law, its slope, and its curvature</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2-understanding-finite-difference-accuracy-and-truncation-error">3.3.1.1.2. Exercise 2: Understanding Finite-Difference Accuracy and Truncation Error</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1-evaluate-the-law-its-slope-and-its-curvature">Exercise 1: Evaluate the law, its slope, and its curvature</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2-understanding-finite-difference-accuracy-and-truncation-error">Exercise 2: Understanding Finite-Difference Accuracy and Truncation Error</a></li>
 </ul>
 </li>
 </ul>
@@ -456,8 +455,8 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="differentiating-material-degradation-analytical-autograd-and-finite-differences">
-<h1><span class="section-number">3.3.1. </span>Differentiating Material Degradation: Analytical, Autograd, and Finite Differences<a class="headerlink" href="#differentiating-material-degradation-analytical-autograd-and-finite-differences" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="lab-02-differentiating-degradation-analytical-autograd-finite-differences">
+<h1>Lab 02: Differentiating Degradation: Analytical, Autograd, &amp; Finite Differences<a class="headerlink" href="#lab-02-differentiating-degradation-analytical-autograd-finite-differences" title="Link to this heading">#</a></h1>
 <p><strong>Learning Objective:</strong> Implement a quadratic degradation function in PyTorch, compute its derivative using analytical calculus, automatic differentiation (<code class="docutils literal notranslate"><span class="pre">torch.autograd</span></code>), and central finite differences, and explore the numerical precision properties of gradient evaluation.</p>
 <div class="badge-row">
   <a class="badge-colab" href="https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/study/02_degradation_autograd.ipynb" target="_blank"><img src="../_static/colab-badge.svg" alt="Open In Colab"/></a>
@@ -624,10 +623,10 @@ that connection through the boundary conditions, equilibrium solve,
 history update and active constraints. The next exercise develops
 this parameter-to-observation chain for an elastic bar.</p>
 <section id="exercises">
-<h2><span class="section-number">3.3.1.1. </span>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
+<h2>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
 <p>Try each question before opening the hint or worked solution. Keep the original calculation as your reference.</p>
 <section id="exercise-1-evaluate-the-law-its-slope-and-its-curvature">
-<h3><span class="section-number">3.3.1.1.1. </span>Exercise 1: Evaluate the law, its slope, and its curvature<a class="headerlink" href="#exercise-1-evaluate-the-law-its-slope-and-its-curvature" title="Link to this heading">#</a></h3>
+<h3>Exercise 1: Evaluate the law, its slope, and its curvature<a class="headerlink" href="#exercise-1-evaluate-the-law-its-slope-and-its-curvature" title="Link to this heading">#</a></h3>
 <p>For</p>
 <div class="math notranslate nohighlight">
 \[
@@ -669,7 +668,7 @@ g'(0.25)=-2(0.9999999)(0.75)=-1.49999985.
 </div>
 </section>
 <section id="exercise-2-understanding-finite-difference-accuracy-and-truncation-error">
-<h3><span class="section-number">3.3.1.1.2. </span>Exercise 2: Understanding Finite-Difference Accuracy and Truncation Error<a class="headerlink" href="#exercise-2-understanding-finite-difference-accuracy-and-truncation-error" title="Link to this heading">#</a></h3>
+<h3>Exercise 2: Understanding Finite-Difference Accuracy and Truncation Error<a class="headerlink" href="#exercise-2-understanding-finite-difference-accuracy-and-truncation-error" title="Link to this heading">#</a></h3>
 <ol class="arabic simple">
 <li><p>The central finite-difference approximation is defined by:
 <div class="math notranslate nohighlight">
@@ -726,20 +725,20 @@ Thus, the leading error term is proportional to <span class="math notranslate no
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../02_phase_field_energy.html"
+       href="01_phast_tiny_evolving_fracture.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">3. </span>Fracture energy: AT1, AT2, degradation, and width</p>
+        <p class="prev-next-title">Lab 01: End-to-End Simulation with PhAST (Notched Tension)</p>
       </div>
     </a>
     <a class="right-next"
-       href="../03_staggered_solution.html"
+       href="03_tiny_derivative_inverse_toy.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">4. </span>From solid mechanics to staggered damage updates</p>
+        <p class="prev-next-title">Lab 03: Differentiable Mechanics &amp; Inverse Parameter Identification</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -759,9 +758,9 @@ Thus, the leading error term is proportional to <span class="math notranslate no
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">3.3.1.1. Exercises</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1-evaluate-the-law-its-slope-and-its-curvature">3.3.1.1.1. Exercise 1: Evaluate the law, its slope, and its curvature</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2-understanding-finite-difference-accuracy-and-truncation-error">3.3.1.1.2. Exercise 2: Understanding Finite-Difference Accuracy and Truncation Error</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1-evaluate-the-law-its-slope-and-its-curvature">Exercise 1: Evaluate the law, its slope, and its curvature</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2-understanding-finite-difference-accuracy-and-truncation-error">Exercise 2: Understanding Finite-Difference Accuracy and Truncation Error</a></li>
 </ul>
 </li>
 </ul>

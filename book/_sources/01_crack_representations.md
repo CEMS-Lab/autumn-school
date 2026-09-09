@@ -1,20 +1,30 @@
-# Crack representations: sharp, cohesive, and diffuse
+# Crack Representations: Sharp, Cohesive, and Diffuse
 
 :::{figure} figures/01_methods_map.*
 :name: fig-methods-map
 :width: 96%
 :alt: Three separate choices: fracture formulation, spatial discretisation and nonlinear solution algorithm. Phase field, XFEM and quasi-Newton answer different questions.
 
-Three different questions are often compressed into one phrase such as
-“the fracture method.” Keeping them separate prevents misleading comparisons.
+A complete computational simulation requires three distinct engineering choices: the fracture formulation, the spatial discretization, and the nonlinear solver. Keeping these layers modular makes comparing methods clear and straightforward.
 :::
 
-## The starting point: a sharp crack
+## How Should We Represent a Crack?
 
-In classical brittle fracture, a crack is a lower-dimensional set
-$\Gamma$ inside a body $\Omega$. A Griffith-type idealisation balances bulk
-elastic energy, external work, and an energy proportional to newly created
-crack surface:
+Imagine dropping a ceramic cup or watching a car windshield crack after being struck by a pebble. In the real physical world, fracture is an abrupt geometric split: atomic bonds stretch until they snap, creating two brand-new surfaces.
+
+When engineers attempt to model this on a computer, they face a classic dilemma:
+*Should we represent the crack as a razor-sharp geometric boundary that literally slices our mesh in two, or can we represent the damaged material smoothly, like a continuous field of damage density?*
+
+In this chapter, we explore the three major ways computational mechanics represents cracking:
+1. **Sharp Interface Models (Classical LEFM):** Treating the crack as an exact lower-dimensional boundary $\Gamma$.
+2. **Cohesive-Zone Models (CZM):** Treating the crack as a traction–separation law along prescribed interfaces.
+3. **Phase-Field Models (PFM):** Regularising the crack as a continuous, diffuse damage band over a characteristic length $\ell$.
+
+---
+
+## The Starting Point: A Sharp Crack
+
+In classical linear elastic fracture mechanics (LEFM), a crack is modeled as an exact lower-dimensional geometric boundary $\Gamma$ embedded inside a solid body $\Omega$. A Griffith-type energy balance compares the bulk elastic strain energy, external work, and the energy required to create new crack surface:
 
 $$
 \mathcal{E}(u,\Gamma)
@@ -23,17 +33,15 @@ $$
     -\mathcal{W}_{\mathrm{ext}}(u).
 $$
 
-Here $u$ is displacement, $\psi$ is elastic energy density, $G_c$ is fracture
-toughness, and $\mathcal{H}^{d-1}(\Gamma)$ measures crack length in two
-dimensions or area in three. The attractive feature is conceptual clarity:
-the model makes a literal discontinuity. The difficult feature is that the
-unknown crack geometry may advance, branch, or meet another crack during the
-calculation.
+Here:
+- $u$ is the displacement field,
+- $\psi(\varepsilon(u))$ is the elastic strain energy density,
+- $G_c$ is the critical energy release rate (fracture toughness), and
+- $\mathcal{H}^{d-1}(\Gamma)$ measures the crack surface area (or crack length in 2D).
 
-The energy criterion is associated with
-[Griffith (1921)](https://doi.org/10.1098/rsta.1921.0006) and the
-variational treatment of evolving cracks by
-[Francfort and Marigo (1998)](https://doi.org/10.1016/S0022-5096(98)00034-9).
+The key advantage of the sharp crack approach is conceptual clarity: it represents a literal physical discontinuity. However, simulating evolving cracks with sharp models is numerically challenging: as the crack propagates, branches, or kinks, the finite-element mesh must be continuously updated and remeshed to conform to the moving geometric interface.
+
+The energy balance principle originated with [Griffith (1921)](https://doi.org/10.1098/rsta.1921.0006) and was given its modern variational formulation for evolving cracks by [Francfort and Marigo (1998)](https://doi.org/10.1016/S0022-5096(98)00034-9).
 
 ## Cohesive-zone models: separation on an interface
 

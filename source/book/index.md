@@ -39,14 +39,14 @@ The workshop is designed for a **six-hour curriculum**, divided into two complem
 
 Every computational chapter pairs with a self-contained, executable Jupyter notebook. You can run each lab with a single click in **Google Colab** (using free cloud CPU/GPU runtimes), download the blank practice notebooks for hands-on assignments, or inspect the worked solutions:
 
-| Lab & Pillar | Focus & Key Concepts | One-Click Run | Practice Notebook | Worked Solutions | In-Book Lesson |
+| Lab Tutorial & Pillar | Focus & Key Concepts | Launch in Colab | Practice Notebook | Worked Solutions | Relevant Theory |
 | :--- | :--- | :---: | :---: | :---: | :---: |
-| **Lab 00**<br>*(Pillars 1 & 4)* | **Branch Selection & Energy Objectives**<br>Multi-valued systems, conditional MSE averaging vs. energy minimization | [![Open In Colab](_static/colab-badge.svg)](https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/study/00_why_average_predictions_can_fail.ipynb) | [Practice .ipynb](https://github.com/CEMS-Lab/autumn-school/blob/main/notebooks/study/00_why_average_predictions_can_fail.ipynb) | [Solutions .ipynb](https://github.com/CEMS-Lab/autumn-school/blob/main/notebooks/solutions/00_why_average_predictions_can_fail.ipynb) | {doc}`00_welcome_and_routes` |
-| **Lab 01**<br>*(Pillar 2)* | **End-to-End PhAST Simulation**<br>T3 meshing, displacement BCs, staggered Newton solver, load curves | [![Open In Colab](_static/colab-badge.svg)](https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/study/01_phast_tiny_evolving_fracture.ipynb) | [Practice .ipynb](https://github.com/CEMS-Lab/autumn-school/blob/main/notebooks/study/01_phast_tiny_evolving_fracture.ipynb) | [Solutions .ipynb](https://github.com/CEMS-Lab/autumn-school/blob/main/notebooks/solutions/01_phast_tiny_evolving_fracture.ipynb) | {doc}`04_fem_to_tensors` |
-| **Lab 02**<br>*(Pillar 3)* | **Autograd vs. Finite Differences**<br>Taylor test, central differences, truncation vs. roundoff, autograd sensitivity | [![Open In Colab](_static/colab-badge.svg)](https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/study/02_degradation_autograd.ipynb) | [Practice .ipynb](https://github.com/CEMS-Lab/autumn-school/blob/main/notebooks/study/02_degradation_autograd.ipynb) | [Solutions .ipynb](https://github.com/CEMS-Lab/autumn-school/blob/main/notebooks/solutions/02_degradation_autograd.ipynb) | {doc}`02_phase_field_energy` |
-| **Lab 03**<br>*(Pillar 3)* | **Inverse Parameter Discovery**<br>Adjoint backpropagation, synthetic displacement data, Young's modulus recovery | [![Open In Colab](_static/colab-badge.svg)](https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/study/03_tiny_derivative_inverse_toy.ipynb) | [Practice .ipynb](https://github.com/CEMS-Lab/autumn-school/blob/main/notebooks/study/03_tiny_derivative_inverse_toy.ipynb) | [Solutions .ipynb](https://github.com/CEMS-Lab/autumn-school/blob/main/notebooks/solutions/03_tiny_derivative_inverse_toy.ipynb) | {doc}`05_differentiation_and_inverse` |
-| **Lab 04**<br>*(Pillar 4)* | **Neural Field Adapter**<br>PyTorch MLP surrogate, feature normalization, checkpointing, reload verification | [![Open In Colab](_static/colab-badge.svg)](https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/study/04_train_save_reload_adapter.ipynb) | [Practice .ipynb](https://github.com/CEMS-Lab/autumn-school/blob/main/notebooks/study/04_train_save_reload_adapter.ipynb) | [Solutions .ipynb](https://github.com/CEMS-Lab/autumn-school/blob/main/notebooks/solutions/04_train_save_reload_adapter.ipynb) | {doc}`06_learning_adapter` |
-| **Lab 05**<br>*(Pillar 4)* | **Residual Evaluation & Hybrid Correction**<br>Equilibrium residual scoring, gating threshold, solver-in-the-loop hybrid steps | [![Open In Colab](_static/colab-badge.svg)](https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/study/05_hybrid_reference_correction.ipynb) | [Practice .ipynb](https://github.com/CEMS-Lab/autumn-school/blob/main/notebooks/study/05_hybrid_reference_correction.ipynb) | [Solutions .ipynb](https://github.com/CEMS-Lab/autumn-school/blob/main/notebooks/solutions/05_hybrid_reference_correction.ipynb) | {doc}`06_learning_adapter` |
+| **{doc}`Lab 00 <labs/00_why_average_predictions_can_fail>`**<br>*(Pillars 1 & 4)* | **Branch Selection & Energy Objectives**<br>Multi-valued systems, conditional MSE averaging vs. energy minimization | [![Open In Colab](_static/colab-badge.svg)](https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/study/00_why_average_predictions_can_fail.ipynb) | [Practice .ipynb](https://github.com/CEMS-Lab/autumn-school/blob/main/notebooks/study/00_why_average_predictions_can_fail.ipynb) | [Solutions .ipynb](https://github.com/CEMS-Lab/autumn-school/blob/main/notebooks/solutions/00_why_average_predictions_can_fail.ipynb) | {doc}`00_welcome_and_routes` |
+| **{doc}`Lab 01 <labs/01_phast_tiny_evolving_fracture>`**<br>*(Pillar 2)* | **End-to-End PhAST Simulation**<br>T3 meshing, displacement BCs, staggered Newton solver, load curves | [![Open In Colab](_static/colab-badge.svg)](https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/study/01_phast_tiny_evolving_fracture.ipynb) | [Practice .ipynb](https://github.com/CEMS-Lab/autumn-school/blob/main/notebooks/study/01_phast_tiny_evolving_fracture.ipynb) | [Solutions .ipynb](https://github.com/CEMS-Lab/autumn-school/blob/main/notebooks/solutions/01_phast_tiny_evolving_fracture.ipynb) | {doc}`04_fem_to_tensors` |
+| **{doc}`Lab 02 <labs/02_degradation_autograd>`**<br>*(Pillar 3)* | **Autograd vs. Finite Differences**<br>Taylor test, central differences, truncation vs. roundoff, autograd sensitivity | [![Open In Colab](_static/colab-badge.svg)](https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/study/02_degradation_autograd.ipynb) | [Practice .ipynb](https://github.com/CEMS-Lab/autumn-school/blob/main/notebooks/study/02_degradation_autograd.ipynb) | [Solutions .ipynb](https://github.com/CEMS-Lab/autumn-school/blob/main/notebooks/solutions/02_degradation_autograd.ipynb) | {doc}`02_phase_field_energy` |
+| **{doc}`Lab 03 <labs/03_tiny_derivative_inverse_toy>`**<br>*(Pillar 3)* | **Inverse Parameter Discovery**<br>Adjoint backpropagation, synthetic displacement data, Young's modulus recovery | [![Open In Colab](_static/colab-badge.svg)](https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/study/03_tiny_derivative_inverse_toy.ipynb) | [Practice .ipynb](https://github.com/CEMS-Lab/autumn-school/blob/main/notebooks/study/03_tiny_derivative_inverse_toy.ipynb) | [Solutions .ipynb](https://github.com/CEMS-Lab/autumn-school/blob/main/notebooks/solutions/03_tiny_derivative_inverse_toy.ipynb) | {doc}`05_differentiation_and_inverse` |
+| **{doc}`Lab 04 <labs/04_train_save_reload_adapter>`**<br>*(Pillar 4)* | **Neural Field Adapter**<br>PyTorch MLP surrogate, feature normalization, checkpointing, reload verification | [![Open In Colab](_static/colab-badge.svg)](https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/study/04_train_save_reload_adapter.ipynb) | [Practice .ipynb](https://github.com/CEMS-Lab/autumn-school/blob/main/notebooks/study/04_train_save_reload_adapter.ipynb) | [Solutions .ipynb](https://github.com/CEMS-Lab/autumn-school/blob/main/notebooks/solutions/04_train_save_reload_adapter.ipynb) | {doc}`06_learning_adapter` |
+| **{doc}`Lab 05 <labs/05_hybrid_reference_correction>`**<br>*(Pillar 4)* | **Residual Evaluation & Hybrid Correction**<br>Equilibrium residual scoring, gating threshold, solver-in-the-loop hybrid steps | [![Open In Colab](_static/colab-badge.svg)](https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/study/05_hybrid_reference_correction.ipynb) | [Practice .ipynb](https://github.com/CEMS-Lab/autumn-school/blob/main/notebooks/study/05_hybrid_reference_correction.ipynb) | [Solutions .ipynb](https://github.com/CEMS-Lab/autumn-school/blob/main/notebooks/solutions/05_hybrid_reference_correction.ipynb) | {doc}`06_learning_adapter` |
 
 ```{admonition} How to Use This Tutorial Guide
 :class: tip
@@ -62,6 +62,7 @@ For visual experiments alongside the text, explore the [interactive visual explo
 ```{toctree}
 :maxdepth: 2
 :numbered:
+:caption: Theory & Methods
 
 00_welcome_and_routes
 01_crack_representations
@@ -70,6 +71,24 @@ For visual experiments alongside the text, explore the [interactive visual explo
 04_fem_to_tensors
 05_differentiation_and_inverse
 06_learning_adapter
+```
+
+```{toctree}
+:maxdepth: 2
+:caption: Hands-On Computational Labs
+
+labs/00_why_average_predictions_can_fail
+labs/01_phast_tiny_evolving_fracture
+labs/02_degradation_autograd
+labs/03_tiny_derivative_inverse_toy
+labs/04_train_save_reload_adapter
+labs/05_hybrid_reference_correction
+```
+
+```{toctree}
+:maxdepth: 2
+:caption: Review & Reference
+
 07_practice_references
 ```
 

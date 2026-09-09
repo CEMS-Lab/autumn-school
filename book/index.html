@@ -172,32 +172,31 @@
                 </a>
             </li>
         </ul>
-        <ul class="nav bd-sidenav">
-<li class="toctree-l1 has-children"><a class="reference internal" href="00_welcome_and_routes.html">1. From Cracks to Computation: Learn by Doing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="labs/00_why_average_predictions_can_fail.html">1.2.1. Branch Selection and Energy-Based Objectives in Physics-Informed Learning</a></li>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Theory &amp; Methods</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="00_welcome_and_routes.html">1. From Cracks to Computation: Learn by Doing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="01_crack_representations.html">2. Crack Representations: Sharp, Cohesive, and Diffuse</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_phase_field_energy.html">3. Fracture Energy: AT1, AT2, Degradation, and Bandwidth</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_staggered_solution.html">4. The Staggered Solution Algorithm: Alternating Mechanics and Damage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_fem_to_tensors.html">5. From Weak Forms to Discrete Tensors: The PhAST Pipeline</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="05_differentiation_and_inverse.html">6. Differentiable Mechanics and Inverse Parameter Discovery</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="05a_backpropagation_step_by_step.html">6.4.1. Backpropagation through a stepped update</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1"><a class="reference internal" href="01_crack_representations.html">2. Crack representations: sharp, cohesive, and diffuse</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="02_phase_field_energy.html">3. Fracture energy: AT1, AT2, degradation, and width</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="labs/02_degradation_autograd.html">3.3.1. Differentiating Material Degradation: Analytical, Autograd, and Finite Differences</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_learning_adapter.html">7. Train, save, reload, adapters, and checked proposals</a></li>
 </ul>
-</details></li>
-<li class="toctree-l1"><a class="reference internal" href="03_staggered_solution.html">4. From solid mechanics to staggered damage updates</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="04_fem_to_tensors.html">5. Geometry, FEM, tensors, and matrix-free operators</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="labs/01_phast_tiny_evolving_fracture.html">5.8.1. End-to-End Simulation: Running Phase-Field Fracture in PhAST</a></li>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Hands-On Computational Labs</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="labs/00_why_average_predictions_can_fail.html">Lab 00: Branch Selection &amp; Energy-Based Objectives in Physics-Informed Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="labs/01_phast_tiny_evolving_fracture.html">Lab 01: End-to-End Simulation with PhAST (Notched Tension)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="labs/02_degradation_autograd.html">Lab 02: Differentiating Degradation: Analytical, Autograd, &amp; Finite Differences</a></li>
+<li class="toctree-l1"><a class="reference internal" href="labs/03_tiny_derivative_inverse_toy.html">Lab 03: Differentiable Mechanics &amp; Inverse Parameter Identification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="labs/04_train_save_reload_adapter.html">Lab 04: Neural Field Adapters (Training, Checkpointing, &amp; Reloading)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="labs/05_hybrid_reference_correction.html">Lab 05: Hybrid Physics-AI: Residual-Gated Proposals &amp; Solver Correction</a></li>
 </ul>
-</details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="05_differentiation_and_inverse.html">6. Differentiation and an illustrative inverse problem</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="05a_backpropagation_step_by_step.html">6.3.1. Backpropagation through a stepped update</a></li>
-<li class="toctree-l2"><a class="reference internal" href="labs/03_tiny_derivative_inverse_toy.html">6.6.1. Differentiable Mechanics and Inverse Parameter Identification</a></li>
-</ul>
-</details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="06_learning_adapter.html">7. Train, save, reload, adapters, and checked proposals</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="labs/04_train_save_reload_adapter.html">7.5.1. Training, Saving, and Reloading Neural Field Adapters</a></li>
-<li class="toctree-l2"><a class="reference internal" href="labs/05_hybrid_reference_correction.html">7.8.1. Hybrid Physics-AI: Residual-Gated Model Proposals and Solver Correction</a></li>
-</ul>
-</details></li>
-<li class="toctree-l1"><a class="reference internal" href="07_practice_references.html">8. Practice, Solutions, Glossary, and References</a></li>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Review &amp; Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="07_practice_references.html">Practice, Solutions, Glossary, and References</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Optional inverse experiments</span></p>
 <ul class="nav bd-sidenav">
@@ -412,7 +411,9 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#four-core-workshop-pillars">Four Core Workshop Pillars</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#course-schedule-hands-on-labs">Course Schedule &amp; Hands-On Labs</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interactive-computational-labs-google-colab">Interactive Computational Labs &amp; Google Colab</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interactive-computational-labs-google-colab">Interactive Computational Labs &amp; Google Colab</a><ul class="nav section-nav flex-column">
+</ul>
+</li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#optional-inverse-experiments">Optional inverse experiments</a></li>
@@ -466,51 +467,51 @@ We examine how neural networks and operator learning interface with physics solv
 <p>Every computational chapter pairs with a self-contained, executable Jupyter notebook. You can run each lab with a single click in <strong>Google Colab</strong> (using free cloud CPU/GPU runtimes), download the blank practice notebooks for hands-on assignments, or inspect the worked solutions:</p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
-<tr class="row-odd"><th class="head text-left"><p>Lab &amp; Pillar</p></th>
+<tr class="row-odd"><th class="head text-left"><p>Lab Tutorial &amp; Pillar</p></th>
 <th class="head text-left"><p>Focus &amp; Key Concepts</p></th>
-<th class="head text-center"><p>One-Click Run</p></th>
+<th class="head text-center"><p>Launch in Colab</p></th>
 <th class="head text-center"><p>Practice Notebook</p></th>
 <th class="head text-center"><p>Worked Solutions</p></th>
-<th class="head text-center"><p>In-Book Lesson</p></th>
+<th class="head text-center"><p>Relevant Theory</p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td class="text-left"><p><strong>Lab 00</strong><br><em>(Pillars 1 &amp; 4)</em></p></td>
+<tr class="row-even"><td class="text-left"><p><strong><a class="reference internal" href="labs/00_why_average_predictions_can_fail.html"><span class="doc">Lab 00</span></a></strong><br><em>(Pillars 1 &amp; 4)</em></p></td>
 <td class="text-left"><p><strong>Branch Selection &amp; Energy Objectives</strong><br>Multi-valued systems, conditional MSE averaging vs. energy minimization</p></td>
 <td class="text-center"><p><a class="reference external" href="https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/study/00_why_average_predictions_can_fail.ipynb"><img alt="Open In Colab" src="_images/colab-badge.svg" /></a></p></td>
 <td class="text-center"><p><a class="reference external" href="https://github.com/CEMS-Lab/autumn-school/blob/main/notebooks/study/00_why_average_predictions_can_fail.ipynb">Practice .ipynb</a></p></td>
 <td class="text-center"><p><a class="reference external" href="https://github.com/CEMS-Lab/autumn-school/blob/main/notebooks/solutions/00_why_average_predictions_can_fail.ipynb">Solutions .ipynb</a></p></td>
 <td class="text-center"><p><a class="reference internal" href="00_welcome_and_routes.html"><span class="doc">From Cracks to Computation: Learn by Doing</span></a></p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><strong>Lab 01</strong><br><em>(Pillar 2)</em></p></td>
+<tr class="row-odd"><td class="text-left"><p><strong><a class="reference internal" href="labs/01_phast_tiny_evolving_fracture.html"><span class="doc">Lab 01</span></a></strong><br><em>(Pillar 2)</em></p></td>
 <td class="text-left"><p><strong>End-to-End PhAST Simulation</strong><br>T3 meshing, displacement BCs, staggered Newton solver, load curves</p></td>
 <td class="text-center"><p><a class="reference external" href="https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/study/01_phast_tiny_evolving_fracture.ipynb"><img alt="Open In Colab" src="_images/colab-badge.svg" /></a></p></td>
 <td class="text-center"><p><a class="reference external" href="https://github.com/CEMS-Lab/autumn-school/blob/main/notebooks/study/01_phast_tiny_evolving_fracture.ipynb">Practice .ipynb</a></p></td>
 <td class="text-center"><p><a class="reference external" href="https://github.com/CEMS-Lab/autumn-school/blob/main/notebooks/solutions/01_phast_tiny_evolving_fracture.ipynb">Solutions .ipynb</a></p></td>
-<td class="text-center"><p><a class="reference internal" href="04_fem_to_tensors.html"><span class="doc">Geometry, FEM, tensors, and matrix-free operators</span></a></p></td>
+<td class="text-center"><p><a class="reference internal" href="04_fem_to_tensors.html"><span class="doc">From Weak Forms to Discrete Tensors: The PhAST Pipeline</span></a></p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p><strong>Lab 02</strong><br><em>(Pillar 3)</em></p></td>
+<tr class="row-even"><td class="text-left"><p><strong><a class="reference internal" href="labs/02_degradation_autograd.html"><span class="doc">Lab 02</span></a></strong><br><em>(Pillar 3)</em></p></td>
 <td class="text-left"><p><strong>Autograd vs. Finite Differences</strong><br>Taylor test, central differences, truncation vs. roundoff, autograd sensitivity</p></td>
 <td class="text-center"><p><a class="reference external" href="https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/study/02_degradation_autograd.ipynb"><img alt="Open In Colab" src="_images/colab-badge.svg" /></a></p></td>
 <td class="text-center"><p><a class="reference external" href="https://github.com/CEMS-Lab/autumn-school/blob/main/notebooks/study/02_degradation_autograd.ipynb">Practice .ipynb</a></p></td>
 <td class="text-center"><p><a class="reference external" href="https://github.com/CEMS-Lab/autumn-school/blob/main/notebooks/solutions/02_degradation_autograd.ipynb">Solutions .ipynb</a></p></td>
-<td class="text-center"><p><a class="reference internal" href="02_phase_field_energy.html"><span class="doc">Fracture energy: AT1, AT2, degradation, and width</span></a></p></td>
+<td class="text-center"><p><a class="reference internal" href="02_phase_field_energy.html"><span class="doc">Fracture Energy: AT1, AT2, Degradation, and Bandwidth</span></a></p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><strong>Lab 03</strong><br><em>(Pillar 3)</em></p></td>
+<tr class="row-odd"><td class="text-left"><p><strong><a class="reference internal" href="labs/03_tiny_derivative_inverse_toy.html"><span class="doc">Lab 03</span></a></strong><br><em>(Pillar 3)</em></p></td>
 <td class="text-left"><p><strong>Inverse Parameter Discovery</strong><br>Adjoint backpropagation, synthetic displacement data, Young’s modulus recovery</p></td>
 <td class="text-center"><p><a class="reference external" href="https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/study/03_tiny_derivative_inverse_toy.ipynb"><img alt="Open In Colab" src="_images/colab-badge.svg" /></a></p></td>
 <td class="text-center"><p><a class="reference external" href="https://github.com/CEMS-Lab/autumn-school/blob/main/notebooks/study/03_tiny_derivative_inverse_toy.ipynb">Practice .ipynb</a></p></td>
 <td class="text-center"><p><a class="reference external" href="https://github.com/CEMS-Lab/autumn-school/blob/main/notebooks/solutions/03_tiny_derivative_inverse_toy.ipynb">Solutions .ipynb</a></p></td>
-<td class="text-center"><p><a class="reference internal" href="05_differentiation_and_inverse.html"><span class="doc">Differentiation and an illustrative inverse problem</span></a></p></td>
+<td class="text-center"><p><a class="reference internal" href="05_differentiation_and_inverse.html"><span class="doc">Differentiable Mechanics and Inverse Parameter Discovery</span></a></p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p><strong>Lab 04</strong><br><em>(Pillar 4)</em></p></td>
+<tr class="row-even"><td class="text-left"><p><strong><a class="reference internal" href="labs/04_train_save_reload_adapter.html"><span class="doc">Lab 04</span></a></strong><br><em>(Pillar 4)</em></p></td>
 <td class="text-left"><p><strong>Neural Field Adapter</strong><br>PyTorch MLP surrogate, feature normalization, checkpointing, reload verification</p></td>
 <td class="text-center"><p><a class="reference external" href="https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/study/04_train_save_reload_adapter.ipynb"><img alt="Open In Colab" src="_images/colab-badge.svg" /></a></p></td>
 <td class="text-center"><p><a class="reference external" href="https://github.com/CEMS-Lab/autumn-school/blob/main/notebooks/study/04_train_save_reload_adapter.ipynb">Practice .ipynb</a></p></td>
 <td class="text-center"><p><a class="reference external" href="https://github.com/CEMS-Lab/autumn-school/blob/main/notebooks/solutions/04_train_save_reload_adapter.ipynb">Solutions .ipynb</a></p></td>
 <td class="text-center"><p><a class="reference internal" href="06_learning_adapter.html"><span class="doc">Train, save, reload, adapters, and checked proposals</span></a></p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><strong>Lab 05</strong><br><em>(Pillar 4)</em></p></td>
+<tr class="row-odd"><td class="text-left"><p><strong><a class="reference internal" href="labs/05_hybrid_reference_correction.html"><span class="doc">Lab 05</span></a></strong><br><em>(Pillar 4)</em></p></td>
 <td class="text-left"><p><strong>Residual Evaluation &amp; Hybrid Correction</strong><br>Equilibrium residual scoring, gating threshold, solver-in-the-loop hybrid steps</p></td>
 <td class="text-center"><p><a class="reference external" href="https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/study/05_hybrid_reference_correction.ipynb"><img alt="Open In Colab" src="_images/colab-badge.svg" /></a></p></td>
 <td class="text-center"><p><a class="reference external" href="https://github.com/CEMS-Lab/autumn-school/blob/main/notebooks/study/05_hybrid_reference_correction.ipynb">Practice .ipynb</a></p></td>
@@ -531,6 +532,7 @@ We examine how neural networks and operator learning interface with physics solv
 </div>
 <p>For visual experiments alongside the text, explore the <a class="reference external" href="../explorations.html">interactive visual explorations</a> or follow the <a class="reference external" href="../SETUP.md">environment setup guide</a>. Practice and solution notebooks are provided for each computational chapter.</p>
 <div class="toctree-wrapper compound">
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Theory &amp; Methods</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="00_welcome_and_routes.html">1. From Cracks to Computation: Learn by Doing</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="00_welcome_and_routes.html#motivation-and-learning-goals">1.1. Motivation and Learning Goals</a></li>
@@ -542,91 +544,137 @@ We examine how neural networks and operator learning interface with physics solv
 <li class="toctree-l2"><a class="reference internal" href="00_welcome_and_routes.html#what-to-carry-into-the-crack-representation-chapter">1.7. What to carry into the crack-representation chapter</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="01_crack_representations.html">2. Crack representations: sharp, cohesive, and diffuse</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="01_crack_representations.html#the-starting-point-a-sharp-crack">2.1. The starting point: a sharp crack</a></li>
-<li class="toctree-l2"><a class="reference internal" href="01_crack_representations.html#cohesive-zone-models-separation-on-an-interface">2.2. Cohesive-zone models: separation on an interface</a></li>
-<li class="toctree-l2"><a class="reference internal" href="01_crack_representations.html#xfem-enrich-an-approximation-space">2.3. XFEM: enrich an approximation space</a></li>
-<li class="toctree-l2"><a class="reference internal" href="01_crack_representations.html#phase-field-replace-a-surface-by-a-narrow-band">2.4. Phase field: replace a surface by a narrow band</a></li>
-<li class="toctree-l2"><a class="reference internal" href="01_crack_representations.html#comparing-crack-representations">2.5. Comparing Crack Representations</a></li>
-<li class="toctree-l2"><a class="reference internal" href="01_crack_representations.html#separating-formulation-discretization-and-solver">2.6. Separating Formulation, Discretization, and Solver</a></li>
-<li class="toctree-l2"><a class="reference internal" href="01_crack_representations.html#exercise-identifying-the-computational-layers">2.7. Exercise: Identifying the Computational Layers</a></li>
-<li class="toctree-l2"><a class="reference internal" href="01_crack_representations.html#summary-of-key-concepts">2.8. Summary of Key Concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="01_crack_representations.html">2. Crack Representations: Sharp, Cohesive, and Diffuse</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="01_crack_representations.html#how-should-we-represent-a-crack">2.1. How Should We Represent a Crack?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="01_crack_representations.html#the-starting-point-a-sharp-crack">2.2. The Starting Point: A Sharp Crack</a></li>
+<li class="toctree-l2"><a class="reference internal" href="01_crack_representations.html#cohesive-zone-models-separation-on-an-interface">2.3. Cohesive-zone models: separation on an interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="01_crack_representations.html#xfem-enrich-an-approximation-space">2.4. XFEM: enrich an approximation space</a></li>
+<li class="toctree-l2"><a class="reference internal" href="01_crack_representations.html#phase-field-replace-a-surface-by-a-narrow-band">2.5. Phase field: replace a surface by a narrow band</a></li>
+<li class="toctree-l2"><a class="reference internal" href="01_crack_representations.html#comparing-crack-representations">2.6. Comparing Crack Representations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="01_crack_representations.html#separating-formulation-discretization-and-solver">2.7. Separating Formulation, Discretization, and Solver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="01_crack_representations.html#exercise-identifying-the-computational-layers">2.8. Exercise: Identifying the Computational Layers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="01_crack_representations.html#summary-of-key-concepts">2.9. Summary of Key Concepts</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="02_phase_field_energy.html">3. Fracture energy: AT1, AT2, degradation, and width</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="02_phase_field_energy.html#a-common-energy-template">3.1. A common energy template</a></li>
-<li class="toctree-l2"><a class="reference internal" href="02_phase_field_energy.html#the-damage-convention-and-degradation-derivative">3.2. The damage convention and degradation derivative</a></li>
-<li class="toctree-l2"><a class="reference internal" href="02_phase_field_energy.html#hands-on-lab-verifying-the-degradation-derivative">3.3. Hands-On Lab: Verifying the Degradation Derivative</a></li>
-<li class="toctree-l2"><a class="reference internal" href="02_phase_field_energy.html#at2-and-at1-are-normalised-choices">3.4. AT2 and AT1 are normalised choices</a></li>
-<li class="toctree-l2"><a class="reference internal" href="02_phase_field_energy.html#deriving-the-strong-form-damage-residual">3.5. Deriving the strong-form damage residual</a></li>
-<li class="toctree-l2"><a class="reference internal" href="02_phase_field_energy.html#enforcing-irreversibility">3.6. Enforcing irreversibility</a></li>
-<li class="toctree-l2"><a class="reference internal" href="02_phase_field_energy.html#width-mesh-and-what-must-be-checked">3.7. Width, mesh, and what must be checked</a></li>
-<li class="toctree-l2"><a class="reference internal" href="02_phase_field_energy.html#exercise-one-derivative-and-one-scale-argument">3.8. Exercise: one derivative and one scale argument</a></li>
-<li class="toctree-l2"><a class="reference internal" href="02_phase_field_energy.html#sources-for-this-chapter">3.9. Sources for this chapter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_phase_field_energy.html">3. Fracture Energy: AT1, AT2, Degradation, and Bandwidth</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="02_phase_field_energy.html#the-energy-balance-why-do-materials-break">3.1. The Energy Balance: Why Do Materials Break?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_phase_field_energy.html#the-phase-field-energy-functional">3.2. The Phase-Field Energy Functional</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_phase_field_energy.html#the-damage-convention-and-degradation-derivative">3.3. The damage convention and degradation derivative</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_phase_field_energy.html#hands-on-lab-verifying-the-degradation-derivative">3.4. Hands-On Lab: Verifying the Degradation Derivative</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_phase_field_energy.html#at2-and-at1-are-normalised-choices">3.5. AT2 and AT1 are normalised choices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_phase_field_energy.html#deriving-the-strong-form-damage-residual">3.6. Deriving the strong-form damage residual</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_phase_field_energy.html#enforcing-irreversibility">3.7. Enforcing irreversibility</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_phase_field_energy.html#width-mesh-and-what-must-be-checked">3.8. Width, mesh, and what must be checked</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_phase_field_energy.html#exercise-one-derivative-and-one-scale-argument">3.9. Exercise: one derivative and one scale argument</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_phase_field_energy.html#sources-for-this-chapter">3.10. Sources for this chapter</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="03_staggered_solution.html">4. From solid mechanics to staggered damage updates</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="03_staggered_solution.html#the-mechanical-subproblem">4.1. The mechanical subproblem</a></li>
-<li class="toctree-l2"><a class="reference internal" href="03_staggered_solution.html#why-the-damage-equation-resembles-diffusion">4.2. Why the damage equation resembles diffusion</a></li>
-<li class="toctree-l2"><a class="reference internal" href="03_staggered_solution.html#one-load-increment-two-coupled-updates">4.3. One load increment, two coupled updates</a></li>
-<li class="toctree-l2"><a class="reference internal" href="03_staggered_solution.html#staggered-monolithic-newton-and-quasi-newton">4.4. Staggered, monolithic, Newton, and quasi-Newton</a></li>
-<li class="toctree-l2"><a class="reference internal" href="03_staggered_solution.html#static-and-dynamic-fracture">4.5. Static and dynamic fracture</a></li>
-<li class="toctree-l2"><a class="reference internal" href="03_staggered_solution.html#acceptance-checks">4.6. Acceptance checks</a></li>
-<li class="toctree-l2"><a class="reference internal" href="03_staggered_solution.html#looking-ahead-running-the-phast-staggered-solver">4.7. Looking Ahead: Running the PhAST Staggered Solver</a></li>
-<li class="toctree-l2"><a class="reference internal" href="03_staggered_solution.html#exercise-write-the-update-before-reading-the-code">4.8. Exercise: write the update before reading the code</a></li>
-<li class="toctree-l2"><a class="reference internal" href="03_staggered_solution.html#sources-for-this-chapter">4.9. Sources for this chapter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_staggered_solution.html">4. The Staggered Solution Algorithm: Alternating Mechanics and Damage</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="03_staggered_solution.html#the-divide-and-conquer-strategy">4.1. The Divide-and-Conquer Strategy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_staggered_solution.html#the-mechanical-subproblem">4.2. The Mechanical Subproblem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_staggered_solution.html#why-the-damage-equation-resembles-diffusion">4.3. Why the damage equation resembles diffusion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_staggered_solution.html#one-load-increment-two-coupled-updates">4.4. One load increment, two coupled updates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_staggered_solution.html#staggered-monolithic-newton-and-quasi-newton">4.5. Staggered, monolithic, Newton, and quasi-Newton</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_staggered_solution.html#static-and-dynamic-fracture">4.6. Static and dynamic fracture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_staggered_solution.html#acceptance-checks">4.7. Acceptance checks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_staggered_solution.html#looking-ahead-running-the-phast-staggered-solver">4.8. Looking Ahead: Running the PhAST Staggered Solver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_staggered_solution.html#exercise-write-the-update-before-reading-the-code">4.9. Exercise: write the update before reading the code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_staggered_solution.html#sources-for-this-chapter">4.10. Sources for this chapter</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="04_fem_to_tensors.html">5. Geometry, FEM, tensors, and matrix-free operators</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="04_fem_to_tensors.html#start-with-a-boundary-value-problem">5.1. Start with a boundary-value problem</a></li>
-<li class="toctree-l2"><a class="reference internal" href="04_fem_to_tensors.html#from-cells-to-fields">5.2. From cells to fields</a></li>
-<li class="toctree-l2"><a class="reference internal" href="04_fem_to_tensors.html#tensor-shapes-are-part-of-the-model-contract">5.3. Tensor shapes are part of the model contract</a></li>
-<li class="toctree-l2"><a class="reference internal" href="04_fem_to_tensors.html#assembled-and-matrix-free-routes">5.4. Assembled and matrix-free routes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="04_fem_to_tensors.html#static-and-dynamic-arrays">5.5. Static and dynamic arrays</a></li>
-<li class="toctree-l2"><a class="reference internal" href="04_fem_to_tensors.html#where-automatic-differentiation-fits">5.6. Where automatic differentiation fits</a></li>
-<li class="toctree-l2"><a class="reference internal" href="04_fem_to_tensors.html#inspecting-results-four-views-one-interpretation">5.7. Inspecting results: four views, one interpretation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="04_fem_to_tensors.html#hands-on-lab-running-an-end-to-end-phast-fracture-simulation">5.8. Hands-On Lab: Running an End-to-End PhAST Fracture Simulation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="04_fem_to_tensors.html#exercise-identify-a-silent-shape-error">5.9. Exercise: identify a silent shape error</a></li>
-<li class="toctree-l2"><a class="reference internal" href="04_fem_to_tensors.html#take-away">5.10. Take-away</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_fem_to_tensors.html">5. From Weak Forms to Discrete Tensors: The PhAST Pipeline</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="04_fem_to_tensors.html#why-tensors-bridging-traditional-fem-with-modern-computing">5.1. Why Tensors? Bridging Traditional FEM with Modern Computing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04_fem_to_tensors.html#defining-the-boundary-value-problem">5.2. Defining the Boundary-Value Problem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04_fem_to_tensors.html#from-cells-to-fields">5.3. From cells to fields</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04_fem_to_tensors.html#tensor-shapes-are-part-of-the-model-contract">5.4. Tensor shapes are part of the model contract</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04_fem_to_tensors.html#assembled-and-matrix-free-routes">5.5. Assembled and matrix-free routes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04_fem_to_tensors.html#static-and-dynamic-arrays">5.6. Static and dynamic arrays</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04_fem_to_tensors.html#where-automatic-differentiation-fits">5.7. Where automatic differentiation fits</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04_fem_to_tensors.html#inspecting-results-four-views-one-interpretation">5.8. Inspecting results: four views, one interpretation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04_fem_to_tensors.html#hands-on-lab-running-an-end-to-end-phast-fracture-simulation">5.9. Hands-On Lab: Running an End-to-End PhAST Fracture Simulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04_fem_to_tensors.html#exercise-identify-a-silent-shape-error">5.10. Exercise: identify a silent shape error</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04_fem_to_tensors.html#take-away">5.11. Take-away</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="05_differentiation_and_inverse.html">6. Differentiation and an illustrative inverse problem</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="05_differentiation_and_inverse.html#define-the-forward-map-before-differentiating-it">6.1. Define the forward map before differentiating it</a></li>
-<li class="toctree-l2"><a class="reference internal" href="05_differentiation_and_inverse.html#three-ways-to-obtain-a-sensitivity">6.2. Three ways to obtain a sensitivity</a></li>
-<li class="toctree-l2"><a class="reference internal" href="05_differentiation_and_inverse.html#follow-the-gradient-one-update-at-a-time">6.3. Follow the gradient one update at a time</a></li>
-<li class="toctree-l2"><a class="reference internal" href="05_differentiation_and_inverse.html#a-bounded-parameterisation">6.4. A bounded parameterisation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="05_differentiation_and_inverse.html#a-minimal-inverse-experiment">6.5. A minimal inverse experiment</a></li>
-<li class="toctree-l2"><a class="reference internal" href="05_differentiation_and_inverse.html#hands-on-lab-differentiating-mechanics-and-parameter-recovery">6.6. Hands-On Lab: Differentiating Mechanics and Parameter Recovery</a></li>
-<li class="toctree-l2"><a class="reference internal" href="05_differentiation_and_inverse.html#directional-derivative-verification">6.7. Directional Derivative Verification</a></li>
-<li class="toctree-l2"><a class="reference internal" href="05_differentiation_and_inverse.html#why-inverse-recovery-can-be-difficult">6.8. Why inverse recovery can be difficult</a></li>
-<li class="toctree-l2"><a class="reference internal" href="05_differentiation_and_inverse.html#exercise-interpret-a-gradient-result">6.9. Exercise: interpret a gradient result</a></li>
-<li class="toctree-l2"><a class="reference internal" href="05_differentiation_and_inverse.html#sources-for-this-chapter">6.10. Sources for this chapter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_differentiation_and_inverse.html">6. Differentiable Mechanics and Inverse Parameter Discovery</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="05_differentiation_and_inverse.html#the-detective-story-solving-inverse-problems-with-differentiable-mechanics">6.1. The Detective Story: Solving Inverse Problems with Differentiable Mechanics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="05_differentiation_and_inverse.html#formulating-the-forward-and-inverse-maps">6.2. Formulating the Forward and Inverse Maps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="05_differentiation_and_inverse.html#three-ways-to-obtain-a-sensitivity">6.3. Three ways to obtain a sensitivity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="05_differentiation_and_inverse.html#follow-the-gradient-one-update-at-a-time">6.4. Follow the gradient one update at a time</a></li>
+<li class="toctree-l2"><a class="reference internal" href="05_differentiation_and_inverse.html#a-bounded-parameterisation">6.5. A bounded parameterisation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="05_differentiation_and_inverse.html#a-minimal-inverse-experiment">6.6. A minimal inverse experiment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="05_differentiation_and_inverse.html#hands-on-lab-differentiating-mechanics-and-parameter-recovery">6.7. Hands-On Lab: Differentiating Mechanics and Parameter Recovery</a></li>
+<li class="toctree-l2"><a class="reference internal" href="05_differentiation_and_inverse.html#directional-derivative-verification">6.8. Directional Derivative Verification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="05_differentiation_and_inverse.html#why-inverse-recovery-can-be-difficult">6.9. Why inverse recovery can be difficult</a></li>
+<li class="toctree-l2"><a class="reference internal" href="05_differentiation_and_inverse.html#exercise-interpret-a-gradient-result">6.10. Exercise: interpret a gradient result</a></li>
+<li class="toctree-l2"><a class="reference internal" href="05_differentiation_and_inverse.html#sources-for-this-chapter">6.11. Sources for this chapter</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="06_learning_adapter.html">7. Train, save, reload, adapters, and checked proposals</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="06_learning_adapter.html#decide-what-is-being-learned">7.1. Decide what is being learned</a></li>
-<li class="toctree-l2"><a class="reference internal" href="06_learning_adapter.html#a-small-supervised-learning-contract">7.2. A small supervised-learning contract</a></li>
-<li class="toctree-l2"><a class="reference internal" href="06_learning_adapter.html#where-does-the-training-gradient-travel">7.3. Where does the training gradient travel?</a></li>
-<li class="toctree-l2"><a class="reference internal" href="06_learning_adapter.html#train-save-and-reload-reproducibly">7.4. Train, save, and reload reproducibly</a></li>
-<li class="toctree-l2"><a class="reference internal" href="06_learning_adapter.html#computational-lesson-train-save-reload-and-compare-a-toy-field-model">7.5. Computational lesson: train, save, reload, and compare a toy field model</a></li>
-<li class="toctree-l2"><a class="reference internal" href="06_learning_adapter.html#mapping-between-representations">7.6. Mapping between representations</a></li>
-<li class="toctree-l2"><a class="reference internal" href="06_learning_adapter.html#from-a-proposal-to-a-checked-hybrid-calculation">7.7. From a proposal to a checked hybrid calculation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="06_learning_adapter.html#computational-lesson-accept-a-compatible-proposal-or-fall-back">7.8. Computational lesson: accept a compatible proposal or fall back</a></li>
-<li class="toctree-l2"><a class="reference internal" href="06_learning_adapter.html#dagger-style-data-aggregation">7.9. DAgger-style data aggregation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="06_learning_adapter.html#evaluation-physical-metrics-and-model-validation">7.10. Evaluation: Physical Metrics and Model Validation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="06_learning_adapter.html#exercise-identify-the-missing-provenance">7.11. Exercise: identify the missing provenance</a></li>
-<li class="toctree-l2"><a class="reference internal" href="06_learning_adapter.html#sources-for-this-chapter">7.12. Sources for this chapter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="06_learning_adapter.html#the-best-of-both-worlds-fast-ai-proposals-physics-truth">7.1. The Best of Both Worlds: Fast AI Proposals &amp; Physics Truth</a></li>
+<li class="toctree-l2"><a class="reference internal" href="06_learning_adapter.html#decide-what-is-being-learned">7.2. Decide What is Being Learned</a></li>
+<li class="toctree-l2"><a class="reference internal" href="06_learning_adapter.html#a-small-supervised-learning-contract">7.3. A small supervised-learning contract</a></li>
+<li class="toctree-l2"><a class="reference internal" href="06_learning_adapter.html#where-does-the-training-gradient-travel">7.4. Where does the training gradient travel?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="06_learning_adapter.html#train-save-and-reload-reproducibly">7.5. Train, save, and reload reproducibly</a></li>
+<li class="toctree-l2"><a class="reference internal" href="06_learning_adapter.html#computational-lesson-train-save-reload-and-compare-a-toy-field-model">7.6. Computational lesson: train, save, reload, and compare a toy field model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="06_learning_adapter.html#mapping-between-representations">7.7. Mapping between representations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="06_learning_adapter.html#from-a-proposal-to-a-checked-hybrid-calculation">7.8. From a proposal to a checked hybrid calculation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="06_learning_adapter.html#computational-lesson-accept-a-compatible-proposal-or-fall-back">7.9. Computational lesson: accept a compatible proposal or fall back</a></li>
+<li class="toctree-l2"><a class="reference internal" href="06_learning_adapter.html#dagger-style-data-aggregation">7.10. DAgger-style data aggregation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="06_learning_adapter.html#evaluation-physical-metrics-and-model-validation">7.11. Evaluation: Physical Metrics and Model Validation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="06_learning_adapter.html#exercise-identify-the-missing-provenance">7.12. Exercise: identify the missing provenance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="06_learning_adapter.html#sources-for-this-chapter">7.13. Sources for this chapter</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="07_practice_references.html">8. Practice, Solutions, Glossary, and References</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="07_practice_references.html#workshop-synthesis-the-four-core-milestones">8.1. Workshop Synthesis: The Four Core Milestones</a></li>
-<li class="toctree-l2"><a class="reference internal" href="07_practice_references.html#best-practices-for-computational-exploration">8.2. Best Practices for Computational Exploration</a></li>
-<li class="toctree-l2"><a class="reference internal" href="07_practice_references.html#complete-notebook-index-google-colab-links">8.3. Complete Notebook Index &amp; Google Colab Links</a></li>
-<li class="toctree-l2"><a class="reference internal" href="07_practice_references.html#worked-consolidation-exercise">8.4. Worked consolidation exercise</a></li>
-<li class="toctree-l2"><a class="reference internal" href="07_practice_references.html#glossary">8.5. Glossary</a></li>
-<li class="toctree-l2"><a class="reference internal" href="07_practice_references.html#contributing-a-new-course-activity">8.6. Contributing a new course activity</a></li>
-<li class="toctree-l2"><a class="reference internal" href="07_practice_references.html#reference-trail">8.7. Reference trail</a></li>
-<li class="toctree-l2"><a class="reference internal" href="07_practice_references.html#final-checklist">8.8. Final checklist</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Hands-On Computational Labs</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="labs/00_why_average_predictions_can_fail.html">Lab 00: Branch Selection &amp; Energy-Based Objectives in Physics-Informed Learning</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="labs/00_why_average_predictions_can_fail.html#balanced-supervision-versus-an-energy-objective">Balanced supervision versus an energy objective</a></li>
+<li class="toctree-l2"><a class="reference internal" href="labs/00_why_average_predictions_can_fail.html#stationary-points-and-reference-branches">Stationary points and reference branches</a></li>
+<li class="toctree-l2"><a class="reference internal" href="labs/00_why_average_predictions_can_fail.html#physical-interpretation">Physical Interpretation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="labs/00_why_average_predictions_can_fail.html#exercises">Exercises</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="labs/01_phast_tiny_evolving_fracture.html">Lab 01: End-to-End Simulation with PhAST (Notched Tension)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="labs/01_phast_tiny_evolving_fracture.html#geometry-mesh-labelled-boundaries-material-and-constraints">Geometry, mesh, labelled boundaries, material, and constraints</a></li>
+<li class="toctree-l2"><a class="reference internal" href="labs/01_phast_tiny_evolving_fracture.html#route-and-representation">Route and representation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="labs/01_phast_tiny_evolving_fracture.html#physical-interpretation-and-load-displacement-response">Physical Interpretation and Load-Displacement Response</a></li>
+<li class="toctree-l2"><a class="reference internal" href="labs/01_phast_tiny_evolving_fracture.html#exercises">Exercises</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="labs/02_degradation_autograd.html">Lab 02: Differentiating Degradation: Analytical, Autograd, &amp; Finite Differences</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="labs/02_degradation_autograd.html#exercises">Exercises</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="labs/03_tiny_derivative_inverse_toy.html">Lab 03: Differentiable Mechanics &amp; Inverse Parameter Identification</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="labs/03_tiny_derivative_inverse_toy.html#exercises">Exercises</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="labs/04_train_save_reload_adapter.html">Lab 04: Neural Field Adapters (Training, Checkpointing, &amp; Reloading)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="labs/04_train_save_reload_adapter.html#exercises">Exercises</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="labs/05_hybrid_reference_correction.html">Lab 05: Hybrid Physics-AI: Residual-Gated Proposals &amp; Solver Correction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="labs/05_hybrid_reference_correction.html#exercises">Exercises</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Review &amp; Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="07_practice_references.html">Practice, Solutions, Glossary, and References</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="07_practice_references.html#workshop-synthesis-the-four-core-milestones">Workshop Synthesis: The Four Core Milestones</a></li>
+<li class="toctree-l2"><a class="reference internal" href="07_practice_references.html#best-practices-for-computational-exploration">Best Practices for Computational Exploration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="07_practice_references.html#complete-notebook-index-google-colab-links">Complete Notebook Index &amp; Google Colab Links</a></li>
+<li class="toctree-l2"><a class="reference internal" href="07_practice_references.html#worked-consolidation-exercise">Worked consolidation exercise</a></li>
+<li class="toctree-l2"><a class="reference internal" href="07_practice_references.html#glossary">Glossary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="07_practice_references.html#contributing-a-new-course-activity">Contributing a new course activity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="07_practice_references.html#reference-trail">Reference trail</a></li>
+<li class="toctree-l2"><a class="reference internal" href="07_practice_references.html#final-checklist">Final checklist</a></li>
 </ul>
 </li>
 </ul>
@@ -688,7 +736,9 @@ and animations accompany the downloadable notebooks and figures.</p>
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#four-core-workshop-pillars">Four Core Workshop Pillars</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#course-schedule-hands-on-labs">Course Schedule &amp; Hands-On Labs</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interactive-computational-labs-google-colab">Interactive Computational Labs &amp; Google Colab</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interactive-computational-labs-google-colab">Interactive Computational Labs &amp; Google Colab</a><ul class="nav section-nav flex-column">
+</ul>
+</li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#optional-inverse-experiments">Optional inverse experiments</a></li>

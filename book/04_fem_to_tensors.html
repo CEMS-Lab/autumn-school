@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>5. Geometry, FEM, tensors, and matrix-free operators &#8212; PhAST: Phase-field fracture with differentiable FEM</title>
+    <title>5. From Weak Forms to Discrete Tensors: The PhAST Pipeline &#8212; PhAST: Phase-field fracture with differentiable FEM</title>
   
   
   
@@ -52,8 +52,8 @@
     <script src="_static/learning_book.js?v=7a62d495"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="5.8.1. End-to-End Simulation: Running Phase-Field Fracture in PhAST" href="labs/01_phast_tiny_evolving_fracture.html" />
-    <link rel="prev" title="4. From solid mechanics to staggered damage updates" href="03_staggered_solution.html" />
+    <link rel="next" title="6. Differentiable Mechanics and Inverse Parameter Discovery" href="05_differentiation_and_inverse.html" />
+    <link rel="prev" title="4. The Staggered Solution Algorithm: Alternating Mechanics and Damage" href="03_staggered_solution.html" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -171,32 +171,31 @@
                 </a>
             </li>
         </ul>
-        <ul class="current nav bd-sidenav">
-<li class="toctree-l1 has-children"><a class="reference internal" href="00_welcome_and_routes.html">1. From Cracks to Computation: Learn by Doing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="labs/00_why_average_predictions_can_fail.html">1.2.1. Branch Selection and Energy-Based Objectives in Physics-Informed Learning</a></li>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Theory &amp; Methods</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="00_welcome_and_routes.html">1. From Cracks to Computation: Learn by Doing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="01_crack_representations.html">2. Crack Representations: Sharp, Cohesive, and Diffuse</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_phase_field_energy.html">3. Fracture Energy: AT1, AT2, Degradation, and Bandwidth</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_staggered_solution.html">4. The Staggered Solution Algorithm: Alternating Mechanics and Damage</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">5. From Weak Forms to Discrete Tensors: The PhAST Pipeline</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="05_differentiation_and_inverse.html">6. Differentiable Mechanics and Inverse Parameter Discovery</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="05a_backpropagation_step_by_step.html">6.4.1. Backpropagation through a stepped update</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1"><a class="reference internal" href="01_crack_representations.html">2. Crack representations: sharp, cohesive, and diffuse</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="02_phase_field_energy.html">3. Fracture energy: AT1, AT2, degradation, and width</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="labs/02_degradation_autograd.html">3.3.1. Differentiating Material Degradation: Analytical, Autograd, and Finite Differences</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_learning_adapter.html">7. Train, save, reload, adapters, and checked proposals</a></li>
 </ul>
-</details></li>
-<li class="toctree-l1"><a class="reference internal" href="03_staggered_solution.html">4. From solid mechanics to staggered damage updates</a></li>
-<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">5. Geometry, FEM, tensors, and matrix-free operators</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="labs/01_phast_tiny_evolving_fracture.html">5.8.1. End-to-End Simulation: Running Phase-Field Fracture in PhAST</a></li>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Hands-On Computational Labs</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="labs/00_why_average_predictions_can_fail.html">Lab 00: Branch Selection &amp; Energy-Based Objectives in Physics-Informed Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="labs/01_phast_tiny_evolving_fracture.html">Lab 01: End-to-End Simulation with PhAST (Notched Tension)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="labs/02_degradation_autograd.html">Lab 02: Differentiating Degradation: Analytical, Autograd, &amp; Finite Differences</a></li>
+<li class="toctree-l1"><a class="reference internal" href="labs/03_tiny_derivative_inverse_toy.html">Lab 03: Differentiable Mechanics &amp; Inverse Parameter Identification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="labs/04_train_save_reload_adapter.html">Lab 04: Neural Field Adapters (Training, Checkpointing, &amp; Reloading)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="labs/05_hybrid_reference_correction.html">Lab 05: Hybrid Physics-AI: Residual-Gated Proposals &amp; Solver Correction</a></li>
 </ul>
-</details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="05_differentiation_and_inverse.html">6. Differentiation and an illustrative inverse problem</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="05a_backpropagation_step_by_step.html">6.3.1. Backpropagation through a stepped update</a></li>
-<li class="toctree-l2"><a class="reference internal" href="labs/03_tiny_derivative_inverse_toy.html">6.6.1. Differentiable Mechanics and Inverse Parameter Identification</a></li>
-</ul>
-</details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="06_learning_adapter.html">7. Train, save, reload, adapters, and checked proposals</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="labs/04_train_save_reload_adapter.html">7.5.1. Training, Saving, and Reloading Neural Field Adapters</a></li>
-<li class="toctree-l2"><a class="reference internal" href="labs/05_hybrid_reference_correction.html">7.8.1. Hybrid Physics-AI: Residual-Gated Model Proposals and Solver Correction</a></li>
-</ul>
-</details></li>
-<li class="toctree-l1"><a class="reference internal" href="07_practice_references.html">8. Practice, Solutions, Glossary, and References</a></li>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Review &amp; Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="07_practice_references.html">Practice, Solutions, Glossary, and References</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Optional inverse experiments</span></p>
 <ul class="nav bd-sidenav">
@@ -399,7 +398,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Geometry, FEM, tensors, and matrix-free operators</h1>
+    <h1>From Weak Forms to Discrete Tensors: The PhAST Pipeline</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -409,16 +408,17 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#start-with-a-boundary-value-problem">5.1. Start with a boundary-value problem</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#from-cells-to-fields">5.2. From cells to fields</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tensor-shapes-are-part-of-the-model-contract">5.3. Tensor shapes are part of the model contract</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#assembled-and-matrix-free-routes">5.4. Assembled and matrix-free routes</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#static-and-dynamic-arrays">5.5. Static and dynamic arrays</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#where-automatic-differentiation-fits">5.6. Where automatic differentiation fits</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inspecting-results-four-views-one-interpretation">5.7. Inspecting results: four views, one interpretation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hands-on-lab-running-an-end-to-end-phast-fracture-simulation">5.8. Hands-On Lab: Running an End-to-End PhAST Fracture Simulation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-identify-a-silent-shape-error">5.9. Exercise: identify a silent shape error</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#take-away">5.10. Take-away</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-tensors-bridging-traditional-fem-with-modern-computing">5.1. Why Tensors? Bridging Traditional FEM with Modern Computing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#defining-the-boundary-value-problem">5.2. Defining the Boundary-Value Problem</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#from-cells-to-fields">5.3. From cells to fields</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tensor-shapes-are-part-of-the-model-contract">5.4. Tensor shapes are part of the model contract</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#assembled-and-matrix-free-routes">5.5. Assembled and matrix-free routes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#static-and-dynamic-arrays">5.6. Static and dynamic arrays</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#where-automatic-differentiation-fits">5.7. Where automatic differentiation fits</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inspecting-results-four-views-one-interpretation">5.8. Inspecting results: four views, one interpretation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hands-on-lab-running-an-end-to-end-phast-fracture-simulation">5.9. Hands-On Lab: Running an End-to-End PhAST Fracture Simulation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-identify-a-silent-shape-error">5.10. Exercise: identify a silent shape error</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#take-away">5.11. Take-away</a></li>
 </ul>
             </nav>
         </div>
@@ -430,40 +430,48 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="geometry-fem-tensors-and-matrix-free-operators">
-<h1><span class="section-number">5. </span>Geometry, FEM, tensors, and matrix-free operators<a class="headerlink" href="#geometry-fem-tensors-and-matrix-free-operators" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="from-weak-forms-to-discrete-tensors-the-phast-pipeline">
+<h1><span class="section-number">5. </span>From Weak Forms to Discrete Tensors: The PhAST Pipeline<a class="headerlink" href="#from-weak-forms-to-discrete-tensors-the-phast-pipeline" title="Link to this heading">#</a></h1>
 <figure class="align-default" id="fig-fem-pipeline">
 <a class="reference internal image-reference" href="_images/04_fem_pipeline.svg"><img alt="Geometry, mesh, fields and boundary data define finite-element operators. Assemble a global matrix or evaluate element-local actions; both routes include a solution and numerical checks." src="_images/04_fem_pipeline.svg" style="width: 97%;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Figure 5.1 </span><span class="caption-text">Tensor representations of finite-element data specify geometry, interpolation,
-quadrature, loads, and checks explicitly.</span><a class="headerlink" href="#fig-fem-pipeline" title="Link to this image">#</a></p>
+<p><span class="caption-number">Figure 5.1 </span><span class="caption-text">The finite element pipeline translates physical boundary-value problems into discrete tensor operations, connecting continuous weak forms to PyTorch data structures.</span><a class="headerlink" href="#fig-fem-pipeline" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
-<section id="start-with-a-boundary-value-problem">
-<h2><span class="section-number">5.1. </span>Start with a boundary-value problem<a class="headerlink" href="#start-with-a-boundary-value-problem" title="Link to this heading">#</a></h2>
-<p>A computational fracture result begins with a boundary-value problem. State:</p>
+<section id="why-tensors-bridging-traditional-fem-with-modern-computing">
+<h2><span class="section-number">5.1. </span>Why Tensors? Bridging Traditional FEM with Modern Computing<a class="headerlink" href="#why-tensors-bridging-traditional-fem-with-modern-computing" title="Link to this heading">#</a></h2>
+<p>In traditional finite element analysis, code is organized around nested loops: iterating over thousands of elements, evaluating shape function gradients at each Gauss quadrature point, and accumulating element matrices into a global sparse system. In Python, explicit nested loops over large meshes are notoriously slow.</p>
+<p>Modern scientific machine learning replaces element loops with <strong>batched multi-dimensional tensor operations</strong> in PyTorch:</p>
 <ul class="simple">
-<li><p>the domain <span class="math notranslate nohighlight">\(\Omega\)</span>, notch or initial damaged region, and material regions;</p></li>
-<li><p>the displacement boundary <span class="math notranslate nohighlight">\(\Gamma_u\)</span> and traction boundary <span class="math notranslate nohighlight">\(\Gamma_t\)</span>;</p></li>
-<li><p>prescribed displacement <span class="math notranslate nohighlight">\(\bar u\)</span>, traction <span class="math notranslate nohighlight">\(\bar t\)</span>, and body force <span class="math notranslate nohighlight">\(b\)</span>;</p></li>
-<li><p>the phase-field convention and initial value <span class="math notranslate nohighlight">\(d_0\)</span>;</p></li>
-<li><p>the mesh, finite-element interpolation, quadrature, and load increments;
-and</p></li>
-<li><p>the scalar quantities and fields that will be plotted.</p></li>
+<li><p><strong>Nodal Coordinates:</strong> A tensor of shape <span class="math notranslate nohighlight">\((N_{\mathrm{node}}, 2)\)</span> defining the physical position <span class="math notranslate nohighlight">\((x, y)\)</span> of every mesh node.</p></li>
+<li><p><strong>Element Connectivity:</strong> An integer index tensor of shape <span class="math notranslate nohighlight">\((N_{\mathrm{elem}}, 3)\)</span> grouping node IDs into linear triangular (T3) elements.</p></li>
+<li><p><strong>Shape Function Gradients:</strong> A tensor of shape <span class="math notranslate nohighlight">\((N_{\mathrm{elem}}, N_q, 3, 2)\)</span> holding the spatial derivatives <span class="math notranslate nohighlight">\(\nabla N_i\)</span> at all <span class="math notranslate nohighlight">\(N_q\)</span> quadrature points.</p></li>
+<li><p><strong>Element Strains &amp; Stresses:</strong> Evaluated across the entire mesh simultaneously using tensor contractions (<code class="docutils literal notranslate"><span class="pre">torch.einsum</span></code>), running seamlessly on multi-core CPUs and GPUs!</p></li>
 </ul>
-<p>In standard notation,</p>
+<p>By representing the continuum problem as a computational tensor graph, the simulation pipeline becomes fast, vectorized, and inherently differentiable.</p>
+</section>
+<hr class="docutils" />
+<section id="defining-the-boundary-value-problem">
+<h2><span class="section-number">5.2. </span>Defining the Boundary-Value Problem<a class="headerlink" href="#defining-the-boundary-value-problem" title="Link to this heading">#</a></h2>
+<p>Every computational mechanics simulation begins with a well-posed boundary-value problem:</p>
+<ul class="simple">
+<li><p><strong>Domain Geometry (<span class="math notranslate nohighlight">\(\Omega\)</span>):</strong> The specimen dimensions, material boundaries, and initial notch geometry.</p></li>
+<li><p><strong>Boundary Conditions:</strong> Prescribed displacements <span class="math notranslate nohighlight">\(\bar{u}\)</span> on Dirichlet boundaries <span class="math notranslate nohighlight">\(\Gamma_u\)</span>, and applied tractions <span class="math notranslate nohighlight">\(\bar{t}\)</span> on Neumann boundaries <span class="math notranslate nohighlight">\(\Gamma_t\)</span>:
 <div class="math notranslate nohighlight">
 \[
-u=\bar u \text{ on }\Gamma_u,\qquad
-\sigma n=\bar t \text{ on }\Gamma_t.
+u = \bar{u} \quad \text{on } \Gamma_u, \qquad \boldsymbol{\sigma}\cdot\mathbf{n} = \bar{t} \quad \text{on } \Gamma_t.
 \]</div>
+</p></li>
+<li><p><strong>Precrack Representation:</strong> Whether a notch is modeled as a geometric cut or an initial seeded damage field (<span class="math notranslate nohighlight">\(d_0 = 1\)</span> along the notch line).</p></li>
+<li><p><strong>Physical Discretization:</strong> The characteristic element size <span class="math notranslate nohighlight">\(h\)</span>, ensuring the mesh can resolve the phase-field regularisation width (<span class="math notranslate nohighlight">\(h &lt; \ell\)</span>).</p></li>
+</ul>
 <p>State how the notch is represented: a prescribed initial damage field or a
 geometric cut. These choices encode different computational objects and can
 produce visually similar pictures.</p>
 </section>
 <section id="from-cells-to-fields">
-<h2><span class="section-number">5.2. </span>From cells to fields<a class="headerlink" href="#from-cells-to-fields" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">5.3. </span>From cells to fields<a class="headerlink" href="#from-cells-to-fields" title="Link to this heading">#</a></h2>
 <p>For a two-dimensional mesh, common arrays are:</p>
 <ul class="simple">
 <li><p>coordinates <span class="math notranslate nohighlight">\(X\in\mathbb{R}^{N_{\mathrm{node}}\times2}\)</span>;</p></li>
@@ -499,7 +507,7 @@ global residual. The same operation can be expressed with index operations,
 scatter-adds, or framework-specific sparse primitives.</p>
 </section>
 <section id="tensor-shapes-are-part-of-the-model-contract">
-<h2><span class="section-number">5.3. </span>Tensor shapes are part of the model contract<a class="headerlink" href="#tensor-shapes-are-part-of-the-model-contract" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">5.4. </span>Tensor shapes are part of the model contract<a class="headerlink" href="#tensor-shapes-are-part-of-the-model-contract" title="Link to this heading">#</a></h2>
 <p>Write expected shapes next to a tensor operation. For example, with batched
 cells and quadrature points, an implementation might use:</p>
 <ul class="simple">
@@ -525,7 +533,7 @@ clear reference calculation.</p>
 </div>
 </section>
 <section id="assembled-and-matrix-free-routes">
-<h2><span class="section-number">5.4. </span>Assembled and matrix-free routes<a class="headerlink" href="#assembled-and-matrix-free-routes" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">5.5. </span>Assembled and matrix-free routes<a class="headerlink" href="#assembled-and-matrix-free-routes" title="Link to this heading">#</a></h2>
 <p>For a linearised subproblem, an assembled finite-element method forms a global
 matrix</p>
 <div class="math notranslate nohighlight">
@@ -548,7 +556,7 @@ preconditioning, data movement, and stopping criteria. Compare memory use and
 runtime at matched physics, mesh, tolerance, and reported observable.</p>
 </section>
 <section id="static-and-dynamic-arrays">
-<h2><span class="section-number">5.5. </span>Static and dynamic arrays<a class="headerlink" href="#static-and-dynamic-arrays" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">5.6. </span>Static and dynamic arrays<a class="headerlink" href="#static-and-dynamic-arrays" title="Link to this heading">#</a></h2>
 <p>In a quasistatic calculation, the state often consists primarily of <span class="math notranslate nohighlight">\(U\)</span> and
 <span class="math notranslate nohighlight">\(D\)</span>. A dynamic calculation adds at least velocity and acceleration or their
 time-integration equivalents. A schematic time step must then track</p>
@@ -562,7 +570,7 @@ path. A sequence of prescribed displacement increments represents load
 stepping; a dynamic calculation also evolves the inertial state.</p>
 </section>
 <section id="where-automatic-differentiation-fits">
-<h2><span class="section-number">5.6. </span>Where automatic differentiation fits<a class="headerlink" href="#where-automatic-differentiation-fits" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">5.7. </span>Where automatic differentiation fits<a class="headerlink" href="#where-automatic-differentiation-fits" title="Link to this heading">#</a></h2>
 <p>PyTorch provides tensors and a reverse-mode automatic-differentiation system.
 The user or a library defines mesh data, interpolation, constitutive response,
 residuals, boundary conditions, and solver behaviour.</p>
@@ -578,7 +586,7 @@ guide</a>, and
 the <a class="reference external" href="https://deepmodeling.github.io/jax-fem/guide/Quickstart.html">JAX-FEM quickstart</a>.</p>
 </section>
 <section id="inspecting-results-four-views-one-interpretation">
-<h2><span class="section-number">5.7. </span>Inspecting results: four views, one interpretation<a class="headerlink" href="#inspecting-results-four-views-one-interpretation" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">5.8. </span>Inspecting results: four views, one interpretation<a class="headerlink" href="#inspecting-results-four-views-one-interpretation" title="Link to this heading">#</a></h2>
 <p>For a tiny evolving-fracture run, inspect at least:</p>
 <ol class="arabic simple">
 <li><p>the geometry, mesh, and loading direction;</p></li>
@@ -589,7 +597,7 @@ and</p></li>
 </ol>
 </section>
 <section id="hands-on-lab-running-an-end-to-end-phast-fracture-simulation">
-<h2><span class="section-number">5.8. </span>Hands-On Lab: Running an End-to-End PhAST Fracture Simulation<a class="headerlink" href="#hands-on-lab-running-an-end-to-end-phast-fracture-simulation" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">5.9. </span>Hands-On Lab: Running an End-to-End PhAST Fracture Simulation<a class="headerlink" href="#hands-on-lab-running-an-end-to-end-phast-fracture-simulation" title="Link to this heading">#</a></h2>
 <p>In the accompanying computational notebook, you will execute a complete phase-field fracture calculation using the PhAST solver:</p>
 <ol class="arabic simple">
 <li><p><strong>Geometry &amp; Meshing:</strong> Generate a two-dimensional rectangular specimen and discretize it with structured triangular (T3) finite elements.</p></li>
@@ -597,15 +605,21 @@ and</p></li>
 <li><p><strong>Solver Execution:</strong> Run the staggered displacement-damage solver over 60 incremental load steps.</p></li>
 <li><p><strong>Post-Processing &amp; Field Visualization:</strong> Extract the global load-displacement curve, observe peak softening, and render the localized diffuse damage field.</p></li>
 </ol>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="labs/01_phast_tiny_evolving_fracture.html">5.8.1. End-to-End Simulation: Running Phase-Field Fracture in PhAST</a></li>
-</ul>
+<div class="tip admonition">
+<p class="admonition-title">Hands-On Tutorial: Lab 01 (End-to-End PhAST Fracture Simulation)</p>
+<p><strong>Ready to try this in practice?</strong><br />
+Explore the interactive tutorial: <strong><a class="reference internal" href="labs/01_phast_tiny_evolving_fracture.html"><span class="doc">Lab 01: End-to-End Simulation with PhAST (Notched Tension)</span></a></strong>.<br />
+You can read through the full simulation pipeline and damage field plots directly here in the book, or run it interactively in <strong>Google Colab</strong> with one click:</p>
+<div class="badge-row">
+  <a class="badge-colab" href="https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/study/01_phast_tiny_evolving_fracture.ipynb" target="_blank"><img src="_static/colab-badge.svg" alt="Open In Colab"/></a>
+  <a class="badge-link" href="../notebooks/study/01_phast_tiny_evolving_fracture.ipynb"><i class="fa-solid fa-download"></i> Download Practice Notebook</a>
+  <a class="badge-link" href="../notebooks/solutions/01_phast_tiny_evolving_fracture.ipynb"><i class="fa-solid fa-check-circle"></i> Download Worked Solutions</a>
+</div>
 </div>
 <p>This notebook serves as our reference simulation pipeline throughout the course. You will see how tensor representations map directly to physical finite element fields.</p>
 </section>
 <section id="exercise-identify-a-silent-shape-error">
-<h2><span class="section-number">5.9. </span>Exercise: identify a silent shape error<a class="headerlink" href="#exercise-identify-a-silent-shape-error" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">5.10. </span>Exercise: identify a silent shape error<a class="headerlink" href="#exercise-identify-a-silent-shape-error" title="Link to this heading">#</a></h2>
 <p>A tensor containing displacement at cell nodes has shape
 <span class="math notranslate nohighlight">\((N_{\mathrm{cell}},n_e,2)\)</span>. A tensor of shape-function gradients has shape
 <span class="math notranslate nohighlight">\((N_{\mathrm{cell}},N_q,n_e,2)\)</span>. Which new axes must be aligned or introduced
@@ -626,7 +640,7 @@ as trustworthy.</p>
 </div>
 </section>
 <section id="take-away">
-<h2><span class="section-number">5.10. </span>Take-away<a class="headerlink" href="#take-away" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">5.11. </span>Take-away<a class="headerlink" href="#take-away" title="Link to this heading">#</a></h2>
 <p>Tensors make data movement and differentiation explicit. The finite-element
 description specifies what is interpolated, where it is integrated,
 how boundary conditions are enforced, and how the resulting field is checked.</p>
@@ -650,15 +664,15 @@ how boundary conditions are enforced, and how the resulting field is checked.</p
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">4. </span>From solid mechanics to staggered damage updates</p>
+        <p class="prev-next-title"><span class="section-number">4. </span>The Staggered Solution Algorithm: Alternating Mechanics and Damage</p>
       </div>
     </a>
     <a class="right-next"
-       href="labs/01_phast_tiny_evolving_fracture.html"
+       href="05_differentiation_and_inverse.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">5.8.1. </span>End-to-End Simulation: Running Phase-Field Fracture in PhAST</p>
+        <p class="prev-next-title"><span class="section-number">6. </span>Differentiable Mechanics and Inverse Parameter Discovery</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -678,16 +692,17 @@ how boundary conditions are enforced, and how the resulting field is checked.</p
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#start-with-a-boundary-value-problem">5.1. Start with a boundary-value problem</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#from-cells-to-fields">5.2. From cells to fields</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tensor-shapes-are-part-of-the-model-contract">5.3. Tensor shapes are part of the model contract</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#assembled-and-matrix-free-routes">5.4. Assembled and matrix-free routes</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#static-and-dynamic-arrays">5.5. Static and dynamic arrays</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#where-automatic-differentiation-fits">5.6. Where automatic differentiation fits</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inspecting-results-four-views-one-interpretation">5.7. Inspecting results: four views, one interpretation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hands-on-lab-running-an-end-to-end-phast-fracture-simulation">5.8. Hands-On Lab: Running an End-to-End PhAST Fracture Simulation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-identify-a-silent-shape-error">5.9. Exercise: identify a silent shape error</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#take-away">5.10. Take-away</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-tensors-bridging-traditional-fem-with-modern-computing">5.1. Why Tensors? Bridging Traditional FEM with Modern Computing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#defining-the-boundary-value-problem">5.2. Defining the Boundary-Value Problem</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#from-cells-to-fields">5.3. From cells to fields</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tensor-shapes-are-part-of-the-model-contract">5.4. Tensor shapes are part of the model contract</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#assembled-and-matrix-free-routes">5.5. Assembled and matrix-free routes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#static-and-dynamic-arrays">5.6. Static and dynamic arrays</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#where-automatic-differentiation-fits">5.7. Where automatic differentiation fits</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inspecting-results-four-views-one-interpretation">5.8. Inspecting results: four views, one interpretation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hands-on-lab-running-an-end-to-end-phast-fracture-simulation">5.9. Hands-On Lab: Running an End-to-End PhAST Fracture Simulation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-identify-a-silent-shape-error">5.10. Exercise: identify a silent shape error</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#take-away">5.11. Take-away</a></li>
 </ul>
   </nav></div>
 

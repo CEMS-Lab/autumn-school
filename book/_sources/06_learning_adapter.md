@@ -9,7 +9,22 @@ A learning component has defined inputs, outputs, and physics checks, just as
 the reference calculation does.
 :::
 
-## Decide what is being learned
+## The Best of Both Worlds: Fast AI Proposals & Physics Truth
+
+Why combine deep learning with numerical mechanics solvers in fracture simulation?
+
+Traditional finite element solvers are exact, rigorous, and trustworthy: they enforce mechanical equilibrium, respect conservation laws, and satisfy boundary conditions. However, for non-linear problems like crack propagation, solving large coupled linear systems over dozens or hundreds of quasi-static load increments is computationally expensive.
+
+On the other hand, modern deep learning models (such as neural networks and neural operators) are extraordinarily fast: once trained, evaluating a forward pass takes just a fraction of a millisecond. Yet, on their own, purely data-driven models can produce unphysical predictions: they can predict negative damage ($d < 0$), exceed physical bounds ($d > 1$), or violate momentum balance when tested outside their immediate training distribution.
+
+The solution is a **hybrid physics-AI architecture**:
+1. **Fast Neural Proposal:** A neural surrogate rapidly suggests a trial displacement or damage field $\widehat{d}$.
+2. **Physics-Based Gating:** We substitute the proposal into the physical PDE weak form to evaluate its equilibrium residual $\|R(\widehat{d})\|$.
+3. **Selective Solver Refinement:** If the residual is small, we accept the proposal immediately. If the residual is high, the neural prediction serves as an initial guess for a trusted numerical solver (like PhAST's staggered solver), cutting iteration count while guaranteeing physical accuracy.
+
+In this chapter, we explore how to build and evaluate these learning components: defining clear data contracts, serializing and reloading model checkpoints reproducibly, evaluating physical residuals, and building robust hybrid workflows.
+
+## Decide What is Being Learned
 
 The phrase “use machine learning for fracture” hides several different tasks.
 Name the role precisely.
@@ -124,11 +139,19 @@ must survive serialization for a newly created model object to reproduce the
 same output. The lesson uses an original `ToyHelmholtzProblem` to examine
 the saved-model interface and prediction accuracy on a scalar field.
 
-```{toctree}
-:maxdepth: 1
+:::{admonition} Hands-On Tutorial: Lab 04 (Neural Field Adapter: Training & Checkpointing)
+:class: tip
 
-labs/04_train_save_reload_adapter
-```
+**Ready to try this in practice?**  
+Explore the interactive tutorial: **{doc}`labs/04_train_save_reload_adapter`**.  
+You can read through the MLP training loops and checkpoint verification directly here in the book, or run it interactively in **Google Colab** with one click:
+
+<div class="badge-row">
+  <a class="badge-colab" href="https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/study/04_train_save_reload_adapter.ipynb" target="_blank"><img src="_static/colab-badge.svg" alt="Open In Colab"/></a>
+  <a class="badge-link" href="../notebooks/study/04_train_save_reload_adapter.ipynb"><i class="fa-solid fa-download"></i> Download Practice Notebook</a>
+  <a class="badge-link" href="../notebooks/solutions/04_train_save_reload_adapter.ipynb"><i class="fa-solid fa-check-circle"></i> Download Worked Solutions</a>
+</div>
+:::
 
 :::{admonition} Reload test
 :class: tip
@@ -192,11 +215,19 @@ checks when interpreting the four field panels. The residual is defined by
 the scalar `ToyHelmholtzProblem`. Applying this pattern to fracture requires
 the fracture residual and its damage admissibility conditions.
 
-```{toctree}
-:maxdepth: 1
+:::{admonition} Hands-On Tutorial: Lab 05 (Residual Evaluation & Hybrid Correction)
+:class: tip
 
-labs/05_hybrid_reference_correction
-```
+**Ready to try this in practice?**  
+Explore the interactive tutorial: **{doc}`labs/05_hybrid_reference_correction`**.  
+You can read through the residual gating logic and solver correction steps directly here in the book, or run it interactively in **Google Colab** with one click:
+
+<div class="badge-row">
+  <a class="badge-colab" href="https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/study/05_hybrid_reference_correction.ipynb" target="_blank"><img src="_static/colab-badge.svg" alt="Open In Colab"/></a>
+  <a class="badge-link" href="../notebooks/study/05_hybrid_reference_correction.ipynb"><i class="fa-solid fa-download"></i> Download Practice Notebook</a>
+  <a class="badge-link" href="../notebooks/solutions/05_hybrid_reference_correction.ipynb"><i class="fa-solid fa-check-circle"></i> Download Worked Solutions</a>
+</div>
+:::
 
 ## DAgger-style data aggregation
 

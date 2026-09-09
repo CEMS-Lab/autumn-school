@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>7.5.1. Training, Saving, and Reloading Neural Field Adapters &#8212; PhAST: Phase-field fracture with differentiable FEM</title>
+    <title>Lab 04: Neural Field Adapters (Training, Checkpointing, &amp; Reloading) &#8212; PhAST: Phase-field fracture with differentiable FEM</title>
   
   
   
@@ -52,8 +52,8 @@
     <script src="../_static/learning_book.js?v=7a62d495"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="7.8.1. Hybrid Physics-AI: Residual-Gated Model Proposals and Solver Correction" href="05_hybrid_reference_correction.html" />
-    <link rel="prev" title="7. Train, save, reload, adapters, and checked proposals" href="../06_learning_adapter.html" />
+    <link rel="next" title="Lab 05: Hybrid Physics-AI: Residual-Gated Proposals &amp; Solver Correction" href="05_hybrid_reference_correction.html" />
+    <link rel="prev" title="Lab 03: Differentiable Mechanics &amp; Inverse Parameter Identification" href="03_tiny_derivative_inverse_toy.html" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -171,32 +171,31 @@
                 </a>
             </li>
         </ul>
-        <ul class="current nav bd-sidenav">
-<li class="toctree-l1 has-children"><a class="reference internal" href="../00_welcome_and_routes.html">1. From Cracks to Computation: Learn by Doing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="00_why_average_predictions_can_fail.html">1.2.1. Branch Selection and Energy-Based Objectives in Physics-Informed Learning</a></li>
-</ul>
-</details></li>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Theory &amp; Methods</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../00_welcome_and_routes.html">1. From Cracks to Computation: Learn by Doing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../01_crack_representations.html">2. Crack representations: sharp, cohesive, and diffuse</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../02_phase_field_energy.html">3. Fracture energy: AT1, AT2, degradation, and width</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="02_degradation_autograd.html">3.3.1. Differentiating Material Degradation: Analytical, Autograd, and Finite Differences</a></li>
-</ul>
-</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_phase_field_energy.html">3. Fracture energy: AT1, AT2, degradation, and width</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../03_staggered_solution.html">4. From solid mechanics to staggered damage updates</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../04_fem_to_tensors.html">5. Geometry, FEM, tensors, and matrix-free operators</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="01_phast_tiny_evolving_fracture.html">5.8.1. End-to-End Simulation: Running Phase-Field Fracture in PhAST</a></li>
-</ul>
-</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_fem_to_tensors.html">5. Geometry, FEM, tensors, and matrix-free operators</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../05_differentiation_and_inverse.html">6. Differentiation and an illustrative inverse problem</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../05a_backpropagation_step_by_step.html">6.3.1. Backpropagation through a stepped update</a></li>
-<li class="toctree-l2"><a class="reference internal" href="03_tiny_derivative_inverse_toy.html">6.6.1. Differentiable Mechanics and Inverse Parameter Identification</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="../06_learning_adapter.html">7. Train, save, reload, adapters, and checked proposals</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">7.5.1. Training, Saving, and Reloading Neural Field Adapters</a></li>
-<li class="toctree-l2"><a class="reference internal" href="05_hybrid_reference_correction.html">7.8.1. Hybrid Physics-AI: Residual-Gated Model Proposals and Solver Correction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06_learning_adapter.html">7. Train, save, reload, adapters, and checked proposals</a></li>
 </ul>
-</details></li>
-<li class="toctree-l1"><a class="reference internal" href="../07_practice_references.html">8. Practice, Solutions, Glossary, and References</a></li>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Hands-On Computational Labs</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="00_why_average_predictions_can_fail.html">Lab 00: Branch Selection &amp; Energy-Based Objectives in Physics-Informed Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="01_phast_tiny_evolving_fracture.html">Lab 01: End-to-End Simulation with PhAST (Notched Tension)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_degradation_autograd.html">Lab 02: Differentiating Degradation: Analytical, Autograd, &amp; Finite Differences</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_tiny_derivative_inverse_toy.html">Lab 03: Differentiable Mechanics &amp; Inverse Parameter Identification</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Lab 04: Neural Field Adapters (Training, Checkpointing, &amp; Reloading)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_hybrid_reference_correction.html">Lab 05: Hybrid Physics-AI: Residual-Gated Proposals &amp; Solver Correction</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Review &amp; Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../07_practice_references.html">Practice, Solutions, Glossary, and References</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Optional inverse experiments</span></p>
 <ul class="nav bd-sidenav">
@@ -430,7 +429,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Training, Saving, and Reloading Neural Field Adapters</h1>
+    <h1>Lab 04: Neural Field Adapters (Training, Checkpointing, & Reloading)</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -440,9 +439,9 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">7.5.1.1. Exercises</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1-count-examples-without-leaking-a-load-case">7.5.1.1.1. Exercise 1: Count examples without leaking a load case</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2-interpret-reload-agreement-and-the-mlp-rbf-comparison">7.5.1.1.2. Exercise 2: Interpret reload agreement and the MLP/RBF comparison</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1-count-examples-without-leaking-a-load-case">Exercise 1: Count examples without leaking a load case</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2-interpret-reload-agreement-and-the-mlp-rbf-comparison">Exercise 2: Interpret reload agreement and the MLP/RBF comparison</a></li>
 </ul>
 </li>
 </ul>
@@ -456,8 +455,8 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="training-saving-and-reloading-neural-field-adapters">
-<h1><span class="section-number">7.5.1. </span>Training, Saving, and Reloading Neural Field Adapters<a class="headerlink" href="#training-saving-and-reloading-neural-field-adapters" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="lab-04-neural-field-adapters-training-checkpointing-reloading">
+<h1>Lab 04: Neural Field Adapters (Training, Checkpointing, &amp; Reloading)<a class="headerlink" href="#lab-04-neural-field-adapters-training-checkpointing-reloading" title="Link to this heading">#</a></h1>
 <p><strong>Learning Objective:</strong> Build a clean PyTorch neural network to approximate a physical field, normalize features properly, save and reload model checkpoints with complete metadata, and verify numerical agreement between in-memory and reloaded models.</p>
 <div class="badge-row">
   <a class="badge-colab" href="https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/study/04_train_save_reload_adapter.ipynb" target="_blank"><img src="../_static/colab-badge.svg" alt="Open In Colab"/></a>
@@ -640,10 +639,10 @@ representation. A CNN requires mesh-to-grid maps, while a GNN/GNO
 requires connectivity or operator inputs. Define these mappings
 explicitly when changing the model architecture.</p>
 <section id="exercises">
-<h2><span class="section-number">7.5.1.1. </span>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
+<h2>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
 <p>Try each question before opening the hint or worked solution. Keep the original calculation as your reference.</p>
 <section id="exercise-1-count-examples-without-leaking-a-load-case">
-<h3><span class="section-number">7.5.1.1.1. </span>Exercise 1: Count examples without leaking a load case<a class="headerlink" href="#exercise-1-count-examples-without-leaking-a-load-case" title="Link to this heading">#</a></h3>
+<h3>Exercise 1: Count examples without leaking a load case<a class="headerlink" href="#exercise-1-count-examples-without-leaking-a-load-case" title="Link to this heading">#</a></h3>
 <p>The field grid has mesh signature <span class="math notranslate nohighlight">\(25\times13\)</span>. The checkpoint uses 12 whole load cases for training, 2 for validation, and 2 for testing. Each case supplies one nodewise feature vector <span class="math notranslate nohighlight">\([x/L,y/H,\mathrm{load\ factor}]\)</span> at every node.</p>
 <ol class="arabic simple">
 <li><p>Count the nodes per load case and the nodewise rows in each split.</p></li>
@@ -671,7 +670,7 @@ explicitly when changing the model architecture.</p>
 </div>
 </section>
 <section id="exercise-2-interpret-reload-agreement-and-the-mlp-rbf-comparison">
-<h3><span class="section-number">7.5.1.1.2. </span>Exercise 2: Interpret reload agreement and the MLP/RBF comparison<a class="headerlink" href="#exercise-2-interpret-reload-agreement-and-the-mlp-rbf-comparison" title="Link to this heading">#</a></h3>
+<h3>Exercise 2: Interpret reload agreement and the MLP/RBF comparison<a class="headerlink" href="#exercise-2-interpret-reload-agreement-and-the-mlp-rbf-comparison" title="Link to this heading">#</a></h3>
 <p>The output gives reload maximum absolute difference <span class="math notranslate nohighlight">\(0\)</span>, held-out MLP RMSE <span class="math notranslate nohighlight">\(0.0563631572\)</span>, and held-out RBF RMSE <span class="math notranslate nohighlight">\(0.0997143168\)</span>.</p>
 <ol class="arabic simple">
 <li><p>Compute the RMSE improvement of the MLP over the RBF on this held-out field.</p></li>
@@ -713,12 +712,12 @@ explicitly when changing the model architecture.</p>
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../06_learning_adapter.html"
+       href="03_tiny_derivative_inverse_toy.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">7. </span>Train, save, reload, adapters, and checked proposals</p>
+        <p class="prev-next-title">Lab 03: Differentiable Mechanics &amp; Inverse Parameter Identification</p>
       </div>
     </a>
     <a class="right-next"
@@ -726,7 +725,7 @@ explicitly when changing the model architecture.</p>
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">7.8.1. </span>Hybrid Physics-AI: Residual-Gated Model Proposals and Solver Correction</p>
+        <p class="prev-next-title">Lab 05: Hybrid Physics-AI: Residual-Gated Proposals &amp; Solver Correction</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -746,9 +745,9 @@ explicitly when changing the model architecture.</p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">7.5.1.1. Exercises</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1-count-examples-without-leaking-a-load-case">7.5.1.1.1. Exercise 1: Count examples without leaking a load case</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2-interpret-reload-agreement-and-the-mlp-rbf-comparison">7.5.1.1.2. Exercise 2: Interpret reload agreement and the MLP/RBF comparison</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1-count-examples-without-leaking-a-load-case">Exercise 1: Count examples without leaking a load case</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2-interpret-reload-agreement-and-the-mlp-rbf-comparison">Exercise 2: Interpret reload agreement and the MLP/RBF comparison</a></li>
 </ul>
 </li>
 </ul>

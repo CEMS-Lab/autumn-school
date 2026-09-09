@@ -1,17 +1,35 @@
-# From solid mechanics to staggered damage updates
+# The Staggered Solution Algorithm: Alternating Mechanics and Damage
 
 :::{figure} figures/03_staggered_loop.*
 :name: fig-staggered-loop
 :width: 96%
 :alt: At a fixed load increment, update mechanics, the driving field and damage, then check convergence. Repeat until the convergence criteria pass, then accept and advance the load.
 
-A staggered solve updates the coupled mechanics and damage fields in a
-chosen order.
+Within each load increment, the staggered scheme alternates between updating displacement with damage fixed, and updating damage with displacement fixed, until equilibrium residuals converge.
 :::
 
-## The mechanical subproblem
+## The Divide-and-Conquer Strategy
 
-For a quasistatic small-strain body, balance of linear momentum is
+Solving for displacement $u(x)$ and phase-field damage $d(x)$ simultaneously is a formidable challenge:
+- Stretching the solid increases strain energy, which drives damage growth.
+- As damage grows, stiffness degrades ($g(d) \to 0$), which relaxes the stress and redistributes loads to neighboring intact elements.
+
+Because the total potential energy is non-convex in $(u, d)$ jointly, a monolithic Newton–Raphson solver can suffer from loss of positive definiteness, small convergence basins, or numerical instability.
+
+To overcome this, computational mechanics uses the **staggered alternating minimization scheme** (Bourdin et al., 2000). The philosophy is simple: **divide and conquer**:
+
+1. **Step 1: Freeze Damage ($d$ fixed), Solve for Displacement $u$:**  
+   With the damage field fixed, the mechanical subproblem reduces to a standard, well-conditioned linear elasticity problem.
+2. **Step 2: Freeze Displacement ($u$ fixed), Solve for Damage $d$:**  
+   With displacements fixed, the damage subproblem is strictly convex and mathematically mirrors a steady-state diffusion problem with a source term.
+3. **Step 3: Check Residuals and Iterate:**  
+   Alternate between the two subproblems until both mechanical and damage residuals fall below specified tolerance criteria, then advance to the next load increment.
+
+---
+
+## The Mechanical Subproblem
+
+For a quasistatic, small-strain continuum body, the balance of linear momentum requires:
 
 $$
 \nabla\cdot\sigma(u,d)+b=0 \quad \text{in }\Omega,

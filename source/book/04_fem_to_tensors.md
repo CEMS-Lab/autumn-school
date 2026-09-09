@@ -1,32 +1,38 @@
-# Geometry, FEM, tensors, and matrix-free operators
+# From Weak Forms to Discrete Tensors: The PhAST Pipeline
 
 :::{figure} figures/04_fem_pipeline.*
 :name: fig-fem-pipeline
 :width: 97%
 :alt: Geometry, mesh, fields and boundary data define finite-element operators. Assemble a global matrix or evaluate element-local actions; both routes include a solution and numerical checks.
 
-Tensor representations of finite-element data specify geometry, interpolation,
-quadrature, loads, and checks explicitly.
+The finite element pipeline translates physical boundary-value problems into discrete tensor operations, connecting continuous weak forms to PyTorch data structures.
 :::
 
-## Start with a boundary-value problem
+## Why Tensors? Bridging Traditional FEM with Modern Computing
 
-A computational fracture result begins with a boundary-value problem. State:
+In traditional finite element analysis, code is organized around nested loops: iterating over thousands of elements, evaluating shape function gradients at each Gauss quadrature point, and accumulating element matrices into a global sparse system. In Python, explicit nested loops over large meshes are notoriously slow.
 
-- the domain $\Omega$, notch or initial damaged region, and material regions;
-- the displacement boundary $\Gamma_u$ and traction boundary $\Gamma_t$;
-- prescribed displacement $\bar u$, traction $\bar t$, and body force $b$;
-- the phase-field convention and initial value $d_0$;
-- the mesh, finite-element interpolation, quadrature, and load increments;
-  and
-- the scalar quantities and fields that will be plotted.
+Modern scientific machine learning replaces element loops with **batched multi-dimensional tensor operations** in PyTorch:
+- **Nodal Coordinates:** A tensor of shape $(N_{\mathrm{node}}, 2)$ defining the physical position $(x, y)$ of every mesh node.
+- **Element Connectivity:** An integer index tensor of shape $(N_{\mathrm{elem}}, 3)$ grouping node IDs into linear triangular (T3) elements.
+- **Shape Function Gradients:** A tensor of shape $(N_{\mathrm{elem}}, N_q, 3, 2)$ holding the spatial derivatives $\nabla N_i$ at all $N_q$ quadrature points.
+- **Element Strains & Stresses:** Evaluated across the entire mesh simultaneously using tensor contractions (`torch.einsum`), running seamlessly on multi-core CPUs and GPUs!
 
-In standard notation,
+By representing the continuum problem as a computational tensor graph, the simulation pipeline becomes fast, vectorized, and inherently differentiable.
 
-$$
-u=\bar u \text{ on }\Gamma_u,\qquad
-\sigma n=\bar t \text{ on }\Gamma_t.
-$$
+---
+
+## Defining the Boundary-Value Problem
+
+Every computational mechanics simulation begins with a well-posed boundary-value problem:
+
+- **Domain Geometry ($\Omega$):** The specimen dimensions, material boundaries, and initial notch geometry.
+- **Boundary Conditions:** Prescribed displacements $\bar{u}$ on Dirichlet boundaries $\Gamma_u$, and applied tractions $\bar{t}$ on Neumann boundaries $\Gamma_t$:
+  $$
+  u = \bar{u} \quad \text{on } \Gamma_u, \qquad \boldsymbol{\sigma}\cdot\mathbf{n} = \bar{t} \quad \text{on } \Gamma_t.
+  $$
+- **Precrack Representation:** Whether a notch is modeled as a geometric cut or an initial seeded damage field ($d_0 = 1$ along the notch line).
+- **Physical Discretization:** The characteristic element size $h$, ensuring the mesh can resolve the phase-field regularisation width ($h < \ell$).
 
 State how the notch is represented: a prescribed initial damage field or a
 geometric cut. These choices encode different computational objects and can
@@ -178,11 +184,19 @@ In the accompanying computational notebook, you will execute a complete phase-fi
 3. **Solver Execution:** Run the staggered displacement-damage solver over 60 incremental load steps.
 4. **Post-Processing & Field Visualization:** Extract the global load-displacement curve, observe peak softening, and render the localized diffuse damage field.
 
-```{toctree}
-:maxdepth: 1
+:::{admonition} Hands-On Tutorial: Lab 01 (End-to-End PhAST Fracture Simulation)
+:class: tip
 
-labs/01_phast_tiny_evolving_fracture
-```
+**Ready to try this in practice?**  
+Explore the interactive tutorial: **{doc}`labs/01_phast_tiny_evolving_fracture`**.  
+You can read through the full simulation pipeline and damage field plots directly here in the book, or run it interactively in **Google Colab** with one click:
+
+<div class="badge-row">
+  <a class="badge-colab" href="https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/study/01_phast_tiny_evolving_fracture.ipynb" target="_blank"><img src="_static/colab-badge.svg" alt="Open In Colab"/></a>
+  <a class="badge-link" href="../notebooks/study/01_phast_tiny_evolving_fracture.ipynb"><i class="fa-solid fa-download"></i> Download Practice Notebook</a>
+  <a class="badge-link" href="../notebooks/solutions/01_phast_tiny_evolving_fracture.ipynb"><i class="fa-solid fa-check-circle"></i> Download Worked Solutions</a>
+</div>
+:::
 
 This notebook serves as our reference simulation pipeline throughout the course. You will see how tensor representations map directly to physical finite element fields.
 

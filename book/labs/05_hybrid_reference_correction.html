@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>7.8.1. Hybrid Physics-AI: Residual-Gated Model Proposals and Solver Correction &#8212; PhAST: Phase-field fracture with differentiable FEM</title>
+    <title>Lab 05: Hybrid Physics-AI: Residual-Gated Proposals &amp; Solver Correction &#8212; PhAST: Phase-field fracture with differentiable FEM</title>
   
   
   
@@ -52,8 +52,8 @@
     <script src="../_static/learning_book.js?v=7a62d495"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="8. Practice, Solutions, Glossary, and References" href="../07_practice_references.html" />
-    <link rel="prev" title="7.5.1. Training, Saving, and Reloading Neural Field Adapters" href="04_train_save_reload_adapter.html" />
+    <link rel="next" title="Practice, Solutions, Glossary, and References" href="../07_practice_references.html" />
+    <link rel="prev" title="Lab 04: Neural Field Adapters (Training, Checkpointing, &amp; Reloading)" href="04_train_save_reload_adapter.html" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -171,32 +171,31 @@
                 </a>
             </li>
         </ul>
-        <ul class="current nav bd-sidenav">
-<li class="toctree-l1 has-children"><a class="reference internal" href="../00_welcome_and_routes.html">1. From Cracks to Computation: Learn by Doing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="00_why_average_predictions_can_fail.html">1.2.1. Branch Selection and Energy-Based Objectives in Physics-Informed Learning</a></li>
-</ul>
-</details></li>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Theory &amp; Methods</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../00_welcome_and_routes.html">1. From Cracks to Computation: Learn by Doing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../01_crack_representations.html">2. Crack representations: sharp, cohesive, and diffuse</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../02_phase_field_energy.html">3. Fracture energy: AT1, AT2, degradation, and width</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="02_degradation_autograd.html">3.3.1. Differentiating Material Degradation: Analytical, Autograd, and Finite Differences</a></li>
-</ul>
-</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_phase_field_energy.html">3. Fracture energy: AT1, AT2, degradation, and width</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../03_staggered_solution.html">4. From solid mechanics to staggered damage updates</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../04_fem_to_tensors.html">5. Geometry, FEM, tensors, and matrix-free operators</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="01_phast_tiny_evolving_fracture.html">5.8.1. End-to-End Simulation: Running Phase-Field Fracture in PhAST</a></li>
-</ul>
-</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_fem_to_tensors.html">5. Geometry, FEM, tensors, and matrix-free operators</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../05_differentiation_and_inverse.html">6. Differentiation and an illustrative inverse problem</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../05a_backpropagation_step_by_step.html">6.3.1. Backpropagation through a stepped update</a></li>
-<li class="toctree-l2"><a class="reference internal" href="03_tiny_derivative_inverse_toy.html">6.6.1. Differentiable Mechanics and Inverse Parameter Identification</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="../06_learning_adapter.html">7. Train, save, reload, adapters, and checked proposals</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="04_train_save_reload_adapter.html">7.5.1. Training, Saving, and Reloading Neural Field Adapters</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">7.8.1. Hybrid Physics-AI: Residual-Gated Model Proposals and Solver Correction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06_learning_adapter.html">7. Train, save, reload, adapters, and checked proposals</a></li>
 </ul>
-</details></li>
-<li class="toctree-l1"><a class="reference internal" href="../07_practice_references.html">8. Practice, Solutions, Glossary, and References</a></li>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Hands-On Computational Labs</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="00_why_average_predictions_can_fail.html">Lab 00: Branch Selection &amp; Energy-Based Objectives in Physics-Informed Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="01_phast_tiny_evolving_fracture.html">Lab 01: End-to-End Simulation with PhAST (Notched Tension)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_degradation_autograd.html">Lab 02: Differentiating Degradation: Analytical, Autograd, &amp; Finite Differences</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_tiny_derivative_inverse_toy.html">Lab 03: Differentiable Mechanics &amp; Inverse Parameter Identification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_train_save_reload_adapter.html">Lab 04: Neural Field Adapters (Training, Checkpointing, &amp; Reloading)</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Lab 05: Hybrid Physics-AI: Residual-Gated Proposals &amp; Solver Correction</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Review &amp; Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../07_practice_references.html">Practice, Solutions, Glossary, and References</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Optional inverse experiments</span></p>
 <ul class="nav bd-sidenav">
@@ -430,7 +429,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Hybrid Physics-AI: Residual-Gated Model Proposals and Solver Correction</h1>
+    <h1>Lab 05: Hybrid Physics-AI: Residual-Gated Proposals & Solver Correction</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -440,9 +439,9 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">7.8.1.1. Exercises</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1-make-the-residual-gate-decision">7.8.1.1.1. Exercise 1: Make the residual-gate decision</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2-project-a-field-and-extend-the-correction-cycle">7.8.1.1.2. Exercise 2: Project a field and extend the correction cycle</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1-make-the-residual-gate-decision">Exercise 1: Make the residual-gate decision</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2-project-a-field-and-extend-the-correction-cycle">Exercise 2: Project a field and extend the correction cycle</a></li>
 </ul>
 </li>
 </ul>
@@ -456,8 +455,8 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="hybrid-physics-ai-residual-gated-model-proposals-and-solver-correction">
-<h1><span class="section-number">7.8.1. </span>Hybrid Physics-AI: Residual-Gated Model Proposals and Solver Correction<a class="headerlink" href="#hybrid-physics-ai-residual-gated-model-proposals-and-solver-correction" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="lab-05-hybrid-physics-ai-residual-gated-proposals-solver-correction">
+<h1>Lab 05: Hybrid Physics-AI: Residual-Gated Proposals &amp; Solver Correction<a class="headerlink" href="#lab-05-hybrid-physics-ai-residual-gated-proposals-solver-correction" title="Link to this heading">#</a></h1>
 <p><strong>Learning Objective:</strong> Implement a hybrid solver loop where a fast neural network proposes a trial solution, an admissibility gate evaluates the physical residual, and a trusted numerical solver corrects or refines the state when needed.</p>
 <div class="badge-row">
   <a class="badge-colab" href="https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/study/05_hybrid_reference_correction.ipynb" target="_blank"><img src="../_static/colab-badge.svg" alt="Open In Colab"/></a>
@@ -683,10 +682,10 @@ labels, add those cases to the training data, retrain, and evaluate
 on a fixed held-out set. Include the cost of reference solves when
 assessing the computational benefit of that cycle.</p>
 <section id="exercises">
-<h2><span class="section-number">7.8.1.1. </span>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
+<h2>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
 <p>Try each question before opening the hint or worked solution. Keep the original calculation as your reference.</p>
 <section id="exercise-1-make-the-residual-gate-decision">
-<h3><span class="section-number">7.8.1.1.1. </span>Exercise 1: Make the residual-gate decision<a class="headerlink" href="#exercise-1-make-the-residual-gate-decision" title="Link to this heading">#</a></h3>
+<h3>Exercise 1: Make the residual-gate decision<a class="headerlink" href="#exercise-1-make-the-residual-gate-decision" title="Link to this heading">#</a></h3>
 <p>At load factor <span class="math notranslate nohighlight">\(0.94\)</span>, the compatible proposal has relative residual <span class="math notranslate nohighlight">\(0.1940274787\)</span> and the deliberately corrupted proposal has relative residual <span class="math notranslate nohighlight">\(1.1640088764\)</span>. The acceptance limit is <span class="math notranslate nohighlight">\(0.30\)</span>. The reference fallback has residual <span class="math notranslate nohighlight">\(2.9696\times10^{-15}\)</span>.</p>
 <ol class="arabic simple">
 <li><p>Decide accept or reject for each proposal.</p></li>
@@ -729,7 +728,7 @@ assessing the computational benefit of that cycle.</p>
 </div>
 </section>
 <section id="exercise-2-project-a-field-and-extend-the-correction-cycle">
-<h3><span class="section-number">7.8.1.1.2. </span>Exercise 2: Project a field and extend the correction cycle<a class="headerlink" href="#exercise-2-project-a-field-and-extend-the-correction-cycle" title="Link to this heading">#</a></h3>
+<h3>Exercise 2: Project a field and extend the correction cycle<a class="headerlink" href="#exercise-2-project-a-field-and-extend-the-correction-cycle" title="Link to this heading">#</a></h3>
 <p>For an interior node, the adapter first clamps a raw proposal to <span class="math notranslate nohighlight">\([0,1]\)</span> and then applies irreversibility with <span class="math notranslate nohighlight">\(\max(d_{\mathrm{proposal}},d_{\mathrm{previous}})\)</span>. Finally it enforces zero on the ToyHelmholtz boundary.</p>
 <ol class="arabic simple">
 <li><p>Compute the final value for each case: (a) raw <span class="math notranslate nohighlight">\(0.15\)</span>, previous <span class="math notranslate nohighlight">\(0.25\)</span>, interior; (b) raw <span class="math notranslate nohighlight">\(1.4\)</span>, previous <span class="math notranslate nohighlight">\(0.25\)</span>, interior; (c) raw <span class="math notranslate nohighlight">\(0.7\)</span>, previous <span class="math notranslate nohighlight">\(0.25\)</span>, boundary.</p></li>
@@ -769,7 +768,7 @@ assessing the computational benefit of that cycle.</p>
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">7.5.1. </span>Training, Saving, and Reloading Neural Field Adapters</p>
+        <p class="prev-next-title">Lab 04: Neural Field Adapters (Training, Checkpointing, &amp; Reloading)</p>
       </div>
     </a>
     <a class="right-next"
@@ -777,7 +776,7 @@ assessing the computational benefit of that cycle.</p>
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">8. </span>Practice, Solutions, Glossary, and References</p>
+        <p class="prev-next-title">Practice, Solutions, Glossary, and References</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -797,9 +796,9 @@ assessing the computational benefit of that cycle.</p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">7.8.1.1. Exercises</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1-make-the-residual-gate-decision">7.8.1.1.1. Exercise 1: Make the residual-gate decision</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2-project-a-field-and-extend-the-correction-cycle">7.8.1.1.2. Exercise 2: Project a field and extend the correction cycle</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1-make-the-residual-gate-decision">Exercise 1: Make the residual-gate decision</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2-project-a-field-and-extend-the-correction-cycle">Exercise 2: Project a field and extend the correction cycle</a></li>
 </ul>
 </li>
 </ul>

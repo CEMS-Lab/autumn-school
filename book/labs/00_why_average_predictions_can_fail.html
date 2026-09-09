@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>1.2.1. Branch Selection and Energy-Based Objectives in Physics-Informed Learning &#8212; PhAST: Phase-field fracture with differentiable FEM</title>
+    <title>Lab 00: Branch Selection &amp; Energy-Based Objectives in Physics-Informed Learning &#8212; PhAST: Phase-field fracture with differentiable FEM</title>
   
   
   
@@ -52,8 +52,8 @@
     <script src="../_static/learning_book.js?v=7a62d495"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="2. Crack representations: sharp, cohesive, and diffuse" href="../01_crack_representations.html" />
-    <link rel="prev" title="1. From Cracks to Computation: Learn by Doing" href="../00_welcome_and_routes.html" />
+    <link rel="next" title="Lab 01: End-to-End Simulation with PhAST (Notched Tension)" href="01_phast_tiny_evolving_fracture.html" />
+    <link rel="prev" title="7. Train, save, reload, adapters, and checked proposals" href="../06_learning_adapter.html" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -171,32 +171,31 @@
                 </a>
             </li>
         </ul>
-        <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="../00_welcome_and_routes.html">1. From Cracks to Computation: Learn by Doing</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">1.2.1. Branch Selection and Energy-Based Objectives in Physics-Informed Learning</a></li>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Theory &amp; Methods</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../00_welcome_and_routes.html">1. From Cracks to Computation: Learn by Doing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01_crack_representations.html">2. Crack Representations: Sharp, Cohesive, and Diffuse</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_phase_field_energy.html">3. Fracture Energy: AT1, AT2, Degradation, and Bandwidth</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_staggered_solution.html">4. The Staggered Solution Algorithm: Alternating Mechanics and Damage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_fem_to_tensors.html">5. From Weak Forms to Discrete Tensors: The PhAST Pipeline</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../05_differentiation_and_inverse.html">6. Differentiable Mechanics and Inverse Parameter Discovery</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../05a_backpropagation_step_by_step.html">6.4.1. Backpropagation through a stepped update</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1"><a class="reference internal" href="../01_crack_representations.html">2. Crack representations: sharp, cohesive, and diffuse</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../02_phase_field_energy.html">3. Fracture energy: AT1, AT2, degradation, and width</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="02_degradation_autograd.html">3.3.1. Differentiating Material Degradation: Analytical, Autograd, and Finite Differences</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06_learning_adapter.html">7. Train, save, reload, adapters, and checked proposals</a></li>
 </ul>
-</details></li>
-<li class="toctree-l1"><a class="reference internal" href="../03_staggered_solution.html">4. From solid mechanics to staggered damage updates</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../04_fem_to_tensors.html">5. Geometry, FEM, tensors, and matrix-free operators</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="01_phast_tiny_evolving_fracture.html">5.8.1. End-to-End Simulation: Running Phase-Field Fracture in PhAST</a></li>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Hands-On Computational Labs</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Lab 00: Branch Selection &amp; Energy-Based Objectives in Physics-Informed Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="01_phast_tiny_evolving_fracture.html">Lab 01: End-to-End Simulation with PhAST (Notched Tension)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_degradation_autograd.html">Lab 02: Differentiating Degradation: Analytical, Autograd, &amp; Finite Differences</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_tiny_derivative_inverse_toy.html">Lab 03: Differentiable Mechanics &amp; Inverse Parameter Identification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_train_save_reload_adapter.html">Lab 04: Neural Field Adapters (Training, Checkpointing, &amp; Reloading)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_hybrid_reference_correction.html">Lab 05: Hybrid Physics-AI: Residual-Gated Proposals &amp; Solver Correction</a></li>
 </ul>
-</details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../05_differentiation_and_inverse.html">6. Differentiation and an illustrative inverse problem</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../05a_backpropagation_step_by_step.html">6.3.1. Backpropagation through a stepped update</a></li>
-<li class="toctree-l2"><a class="reference internal" href="03_tiny_derivative_inverse_toy.html">6.6.1. Differentiable Mechanics and Inverse Parameter Identification</a></li>
-</ul>
-</details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../06_learning_adapter.html">7. Train, save, reload, adapters, and checked proposals</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="04_train_save_reload_adapter.html">7.5.1. Training, Saving, and Reloading Neural Field Adapters</a></li>
-<li class="toctree-l2"><a class="reference internal" href="05_hybrid_reference_correction.html">7.8.1. Hybrid Physics-AI: Residual-Gated Model Proposals and Solver Correction</a></li>
-</ul>
-</details></li>
-<li class="toctree-l1"><a class="reference internal" href="../07_practice_references.html">8. Practice, Solutions, Glossary, and References</a></li>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Review &amp; Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../07_practice_references.html">Practice, Solutions, Glossary, and References</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Optional inverse experiments</span></p>
 <ul class="nav bd-sidenav">
@@ -430,7 +429,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Branch Selection and Energy-Based Objectives in Physics-Informed Learning</h1>
+    <h1>Lab 00: Branch Selection & Energy-Based Objectives in Physics-Informed Learning</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -440,12 +439,12 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#balanced-supervision-versus-an-energy-objective">1.2.1.1. Balanced supervision versus an energy objective</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stationary-points-and-reference-branches">1.2.1.2. Stationary points and reference branches</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#physical-interpretation">1.2.1.3. Physical Interpretation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">1.2.1.4. Exercises</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1-conditional-mean-vs-physical-branch-minimization">1.2.1.4.1. Exercise 1: Conditional Mean vs. Physical Branch Minimization</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2-physical-significance-of-multi-valued-predictions">1.2.1.4.2. Exercise 2: Physical Significance of Multi-Valued Predictions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#balanced-supervision-versus-an-energy-objective">Balanced supervision versus an energy objective</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stationary-points-and-reference-branches">Stationary points and reference branches</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#physical-interpretation">Physical Interpretation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1-conditional-mean-vs-physical-branch-minimization">Exercise 1: Conditional Mean vs. Physical Branch Minimization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2-physical-significance-of-multi-valued-predictions">Exercise 2: Physical Significance of Multi-Valued Predictions</a></li>
 </ul>
 </li>
 </ul>
@@ -459,8 +458,8 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="branch-selection-and-energy-based-objectives-in-physics-informed-learning">
-<h1><span class="section-number">1.2.1. </span>Branch Selection and Energy-Based Objectives in Physics-Informed Learning<a class="headerlink" href="#branch-selection-and-energy-based-objectives-in-physics-informed-learning" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="lab-00-branch-selection-energy-based-objectives-in-physics-informed-learning">
+<h1>Lab 00: Branch Selection &amp; Energy-Based Objectives in Physics-Informed Learning<a class="headerlink" href="#lab-00-branch-selection-energy-based-objectives-in-physics-informed-learning" title="Link to this heading">#</a></h1>
 <p><strong>Learning Objective:</strong> In physical systems with multi-valued equilibrium solutions (such as post-buckling or symmetric crack paths), understand why standard supervised regression converges to unphysical conditional averages, and how physics-informed energy minimization guides models toward valid physical branches.</p>
 <div class="badge-row">
   <a class="badge-colab" href="https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/study/00_why_average_predictions_can_fail.ipynb" target="_blank"><img src="../_static/colab-badge.svg" alt="Open In Colab"/></a>
@@ -468,18 +467,20 @@ document.write(`
   <a class="badge-link" href="../../notebooks/solutions/00_why_average_predictions_can_fail.ipynb"><i class="fa-solid fa-check-circle"></i> Download Worked Solutions</a>
   <a class="badge-link" href="../../SETUP.md"><i class="fa-solid fa-gear"></i> Environment Setup</a>
 </div>
-<p>Consider a scalar physical system governed by a double-well potential energy. For a control parameter  \in [0.25, 1]$, define the potential energy:</p>
-<p>29159
-W(q; s) = rac{(q^2 - s)^2}{4}.
-29159</p>
-<p>For any control value  &gt; 0$, the system admits two zero-energy equilibrium states:</p>
-<p>29159
-q_+(s) = +\sqrt{s} \quad 	ext{and} \quad q_-(s) = -\sqrt{s}.
-29159</p>
+<p>Consider a scalar physical system governed by a double-well potential energy. For a control parameter <span class="math notranslate nohighlight">\(s \in [0.25, 1]\)</span>, define the potential energy:</p>
+<div class="math notranslate nohighlight">
+\[
+W(q; s) = \frac{(q^2 - s)^2}{4}.
+\]</div>
+<p>For any control value <span class="math notranslate nohighlight">\(s &gt; 0\)</span>, the system admits two zero-energy equilibrium states:</p>
+<div class="math notranslate nohighlight">
+\[
+q_+(s) = +\sqrt{s} \quad \text{and} \quad q_-(s) = -\sqrt{s}.
+\]</div>
 <p>In this tutorial, we contrast two learning paradigms:</p>
 <ol class="arabic simple">
 <li><p><strong>Supervised Regression (Mean Squared Error):</strong> Trained on balanced observations from both branches.</p></li>
-<li><p><strong>Physics-Informed Energy Minimization:</strong> Guided directly by the potential energy functional with a positive branch parameterisation ( = \operatorname{softplus}(a) &gt; 0$).</p></li>
+<li><p><strong>Physics-Informed Energy Minimization:</strong> Guided directly by the potential energy functional with a positive branch parameterisation (<span class="math notranslate nohighlight">\(q = \operatorname{softplus}(a) &gt; 0\)</span>).</p></li>
 </ol>
 <div class="cell tag_hide-input docutils container">
 <details class="admonition hide above-input">
@@ -544,7 +545,7 @@ q_+(s) = +\sqrt{s} \quad 	ext{and} \quad q_-(s) = -\sqrt{s}.
 </div>
 </div>
 <section id="balanced-supervision-versus-an-energy-objective">
-<h2><span class="section-number">1.2.1.1. </span>Balanced supervision versus an energy objective<a class="headerlink" href="#balanced-supervision-versus-an-energy-objective" title="Link to this heading">#</a></h2>
+<h2>Balanced supervision versus an energy objective<a class="headerlink" href="#balanced-supervision-versus-an-energy-objective" title="Link to this heading">#</a></h2>
 <p>The training inputs are repeated so that every <span class="math notranslate nohighlight">\(s\)</span> has one positive and
 one negative target.  Under squared error, the best single deterministic
 prediction is their conditional mean, <span class="math notranslate nohighlight">\(0\)</span>.  That point is between the
@@ -640,7 +641,7 @@ two reference branches and has nonzero residual <span class="math notranslate no
 </div>
 </section>
 <section id="stationary-points-and-reference-branches">
-<h2><span class="section-number">1.2.1.2. </span>Stationary points and reference branches<a class="headerlink" href="#stationary-points-and-reference-branches" title="Link to this heading">#</a></h2>
+<h2>Stationary points and reference branches<a class="headerlink" href="#stationary-points-and-reference-branches" title="Link to this heading">#</a></h2>
 <p>The energy derivative is</p>
 <div class="math notranslate nohighlight">
 \[
@@ -787,7 +788,7 @@ output. This explicit branch selection determines which solution it learns.</p>
 </div>
 </section>
 <section id="physical-interpretation">
-<h2><span class="section-number">1.2.1.3. </span>Physical Interpretation<a class="headerlink" href="#physical-interpretation" title="Link to this heading">#</a></h2>
+<h2>Physical Interpretation<a class="headerlink" href="#physical-interpretation" title="Link to this heading">#</a></h2>
 <p>The results highlight a fundamental distinction between standard data regression and physical energy minimization:</p>
 <ul class="simple">
 <li><p><strong>Supervised Regression:</strong> Under a squared-error loss, the optimal point prediction for equally balanced target branches is their conditional expectation, <span class="math notranslate nohighlight">\(\mathbb{E}[q|s] = 0\)</span>. Although this minimises the statistical MSE loss, =0<span class="math notranslate nohighlight">\( is not a physical equilibrium state—it has high potential energy (0; s) = s^2/4\)</span> and a non-zero residual  = 0^2 - s = -s$.</p></li>
@@ -796,10 +797,10 @@ output. This explicit branch selection determines which solution it learns.</p>
 <p>In physical modeling, predicting the conditional average of two valid configurations (such as an uncracked state between two symmetric crack paths) is often unphysical. Incorporating physical energy functions or branch conditioning ensures that learned models produce physically admissible states.</p>
 </section>
 <section id="exercises">
-<h2><span class="section-number">1.2.1.4. </span>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
+<h2>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
 <p>Try each question before opening the hint or worked solution. Keep the original calculation as your reference.</p>
 <section id="exercise-1-conditional-mean-vs-physical-branch-minimization">
-<h3><span class="section-number">1.2.1.4.1. </span>Exercise 1: Conditional Mean vs. Physical Branch Minimization<a class="headerlink" href="#exercise-1-conditional-mean-vs-physical-branch-minimization" title="Link to this heading">#</a></h3>
+<h3>Exercise 1: Conditional Mean vs. Physical Branch Minimization<a class="headerlink" href="#exercise-1-conditional-mean-vs-physical-branch-minimization" title="Link to this heading">#</a></h3>
 <p>At a fixed control parameter  &gt; 0<span class="math notranslate nohighlight">\(, let  = \sqrt{s}\)</span>. Suppose the training data contains equally balanced observations from both branches, 0<span class="math notranslate nohighlight">\( and 569Xa\)</span>.</p>
 <ol class="arabic simple">
 <li><p>Prove analytically that the standard Mean Squared Error loss is minimised uniquely at  = 0$.</p></li>
@@ -836,7 +837,7 @@ r=-0.64,
 </div>
 </section>
 <section id="exercise-2-physical-significance-of-multi-valued-predictions">
-<h3><span class="section-number">1.2.1.4.2. </span>Exercise 2: Physical Significance of Multi-Valued Predictions<a class="headerlink" href="#exercise-2-physical-significance-of-multi-valued-predictions" title="Link to this heading">#</a></h3>
+<h3>Exercise 2: Physical Significance of Multi-Valued Predictions<a class="headerlink" href="#exercise-2-physical-significance-of-multi-valued-predictions" title="Link to this heading">#</a></h3>
 <ol class="arabic simple">
 <li><p>Compare the validation metrics between the supervised regression model and the energy-minimized model. Which model accurately tracks the positive equilibrium branch, and what physical metric confirms this?</p></li>
 <li><p>In a continuum mechanics setting (such as crack propagation or structural buckling), what is the physical consequence if a neural network predicts the average of two bifurcated branches?</p></li>
@@ -876,20 +877,20 @@ r=-0.64,
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../00_welcome_and_routes.html"
+       href="../06_learning_adapter.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">1. </span>From Cracks to Computation: Learn by Doing</p>
+        <p class="prev-next-title"><span class="section-number">7. </span>Train, save, reload, adapters, and checked proposals</p>
       </div>
     </a>
     <a class="right-next"
-       href="../01_crack_representations.html"
+       href="01_phast_tiny_evolving_fracture.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">2. </span>Crack representations: sharp, cohesive, and diffuse</p>
+        <p class="prev-next-title">Lab 01: End-to-End Simulation with PhAST (Notched Tension)</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -909,12 +910,12 @@ r=-0.64,
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#balanced-supervision-versus-an-energy-objective">1.2.1.1. Balanced supervision versus an energy objective</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stationary-points-and-reference-branches">1.2.1.2. Stationary points and reference branches</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#physical-interpretation">1.2.1.3. Physical Interpretation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">1.2.1.4. Exercises</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1-conditional-mean-vs-physical-branch-minimization">1.2.1.4.1. Exercise 1: Conditional Mean vs. Physical Branch Minimization</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2-physical-significance-of-multi-valued-predictions">1.2.1.4.2. Exercise 2: Physical Significance of Multi-Valued Predictions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#balanced-supervision-versus-an-energy-objective">Balanced supervision versus an energy objective</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stationary-points-and-reference-branches">Stationary points and reference branches</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#physical-interpretation">Physical Interpretation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1-conditional-mean-vs-physical-branch-minimization">Exercise 1: Conditional Mean vs. Physical Branch Minimization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2-physical-significance-of-multi-valued-predictions">Exercise 2: Physical Significance of Multi-Valued Predictions</a></li>
 </ul>
 </li>
 </ul>

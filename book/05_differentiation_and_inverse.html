@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>6. Differentiation and an illustrative inverse problem &#8212; PhAST: Phase-field fracture with differentiable FEM</title>
+    <title>6. Differentiable Mechanics and Inverse Parameter Discovery &#8212; PhAST: Phase-field fracture with differentiable FEM</title>
   
   
   
@@ -52,8 +52,8 @@
     <script src="_static/learning_book.js?v=7a62d495"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="6.3.1. Backpropagation through a stepped update" href="05a_backpropagation_step_by_step.html" />
-    <link rel="prev" title="5.8.1. End-to-End Simulation: Running Phase-Field Fracture in PhAST" href="labs/01_phast_tiny_evolving_fracture.html" />
+    <link rel="next" title="6.4.1. Backpropagation through a stepped update" href="05a_backpropagation_step_by_step.html" />
+    <link rel="prev" title="5. From Weak Forms to Discrete Tensors: The PhAST Pipeline" href="04_fem_to_tensors.html" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -171,32 +171,31 @@
                 </a>
             </li>
         </ul>
-        <ul class="current nav bd-sidenav">
-<li class="toctree-l1 has-children"><a class="reference internal" href="00_welcome_and_routes.html">1. From Cracks to Computation: Learn by Doing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="labs/00_why_average_predictions_can_fail.html">1.2.1. Branch Selection and Energy-Based Objectives in Physics-Informed Learning</a></li>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Theory &amp; Methods</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="00_welcome_and_routes.html">1. From Cracks to Computation: Learn by Doing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="01_crack_representations.html">2. Crack Representations: Sharp, Cohesive, and Diffuse</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_phase_field_energy.html">3. Fracture Energy: AT1, AT2, Degradation, and Bandwidth</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_staggered_solution.html">4. The Staggered Solution Algorithm: Alternating Mechanics and Damage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_fem_to_tensors.html">5. From Weak Forms to Discrete Tensors: The PhAST Pipeline</a></li>
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">6. Differentiable Mechanics and Inverse Parameter Discovery</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="05a_backpropagation_step_by_step.html">6.4.1. Backpropagation through a stepped update</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1"><a class="reference internal" href="01_crack_representations.html">2. Crack representations: sharp, cohesive, and diffuse</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="02_phase_field_energy.html">3. Fracture energy: AT1, AT2, degradation, and width</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="labs/02_degradation_autograd.html">3.3.1. Differentiating Material Degradation: Analytical, Autograd, and Finite Differences</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_learning_adapter.html">7. Train, save, reload, adapters, and checked proposals</a></li>
 </ul>
-</details></li>
-<li class="toctree-l1"><a class="reference internal" href="03_staggered_solution.html">4. From solid mechanics to staggered damage updates</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="04_fem_to_tensors.html">5. Geometry, FEM, tensors, and matrix-free operators</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="labs/01_phast_tiny_evolving_fracture.html">5.8.1. End-to-End Simulation: Running Phase-Field Fracture in PhAST</a></li>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Hands-On Computational Labs</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="labs/00_why_average_predictions_can_fail.html">Lab 00: Branch Selection &amp; Energy-Based Objectives in Physics-Informed Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="labs/01_phast_tiny_evolving_fracture.html">Lab 01: End-to-End Simulation with PhAST (Notched Tension)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="labs/02_degradation_autograd.html">Lab 02: Differentiating Degradation: Analytical, Autograd, &amp; Finite Differences</a></li>
+<li class="toctree-l1"><a class="reference internal" href="labs/03_tiny_derivative_inverse_toy.html">Lab 03: Differentiable Mechanics &amp; Inverse Parameter Identification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="labs/04_train_save_reload_adapter.html">Lab 04: Neural Field Adapters (Training, Checkpointing, &amp; Reloading)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="labs/05_hybrid_reference_correction.html">Lab 05: Hybrid Physics-AI: Residual-Gated Proposals &amp; Solver Correction</a></li>
 </ul>
-</details></li>
-<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">6. Differentiation and an illustrative inverse problem</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="05a_backpropagation_step_by_step.html">6.3.1. Backpropagation through a stepped update</a></li>
-<li class="toctree-l2"><a class="reference internal" href="labs/03_tiny_derivative_inverse_toy.html">6.6.1. Differentiable Mechanics and Inverse Parameter Identification</a></li>
-</ul>
-</details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="06_learning_adapter.html">7. Train, save, reload, adapters, and checked proposals</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="labs/04_train_save_reload_adapter.html">7.5.1. Training, Saving, and Reloading Neural Field Adapters</a></li>
-<li class="toctree-l2"><a class="reference internal" href="labs/05_hybrid_reference_correction.html">7.8.1. Hybrid Physics-AI: Residual-Gated Model Proposals and Solver Correction</a></li>
-</ul>
-</details></li>
-<li class="toctree-l1"><a class="reference internal" href="07_practice_references.html">8. Practice, Solutions, Glossary, and References</a></li>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Review &amp; Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="07_practice_references.html">Practice, Solutions, Glossary, and References</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Optional inverse experiments</span></p>
 <ul class="nav bd-sidenav">
@@ -399,7 +398,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Differentiation and an illustrative inverse problem</h1>
+    <h1>Differentiable Mechanics and Inverse Parameter Discovery</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -409,21 +408,22 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#define-the-forward-map-before-differentiating-it">6.1. Define the forward map before differentiating it</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#three-ways-to-obtain-a-sensitivity">6.2. Three ways to obtain a sensitivity</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#finite-differences">6.2.1. Finite differences</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unrolled-automatic-differentiation">6.2.2. Unrolled automatic differentiation</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#implicit-differentiation">6.2.3. Implicit differentiation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-detective-story-solving-inverse-problems-with-differentiable-mechanics">6.1. The Detective Story: Solving Inverse Problems with Differentiable Mechanics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#formulating-the-forward-and-inverse-maps">6.2. Formulating the Forward and Inverse Maps</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#three-ways-to-obtain-a-sensitivity">6.3. Three ways to obtain a sensitivity</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#finite-differences">6.3.1. Finite differences</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unrolled-automatic-differentiation">6.3.2. Unrolled automatic differentiation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#implicit-differentiation">6.3.3. Implicit differentiation</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#follow-the-gradient-one-update-at-a-time">6.3. Follow the gradient one update at a time</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-bounded-parameterisation">6.4. A bounded parameterisation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-minimal-inverse-experiment">6.5. A minimal inverse experiment</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hands-on-lab-differentiating-mechanics-and-parameter-recovery">6.6. Hands-On Lab: Differentiating Mechanics and Parameter Recovery</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#directional-derivative-verification">6.7. Directional Derivative Verification</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-inverse-recovery-can-be-difficult">6.8. Why inverse recovery can be difficult</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-interpret-a-gradient-result">6.9. Exercise: interpret a gradient result</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sources-for-this-chapter">6.10. Sources for this chapter</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#follow-the-gradient-one-update-at-a-time">6.4. Follow the gradient one update at a time</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-bounded-parameterisation">6.5. A bounded parameterisation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-minimal-inverse-experiment">6.6. A minimal inverse experiment</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hands-on-lab-differentiating-mechanics-and-parameter-recovery">6.7. Hands-On Lab: Differentiating Mechanics and Parameter Recovery</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#directional-derivative-verification">6.8. Directional Derivative Verification</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-inverse-recovery-can-be-difficult">6.9. Why inverse recovery can be difficult</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-interpret-a-gradient-result">6.10. Exercise: interpret a gradient result</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sources-for-this-chapter">6.11. Sources for this chapter</a></li>
 </ul>
             </nav>
         </div>
@@ -435,26 +435,36 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="differentiation-and-an-illustrative-inverse-problem">
-<h1><span class="section-number">6. </span>Differentiation and an illustrative inverse problem<a class="headerlink" href="#differentiation-and-an-illustrative-inverse-problem" title="Link to this heading">#</a></h1>
-<p>The <a class="reference internal" href="research/03_history_visual.html"><span class="doc">animated history lesson</span></a> follows the
-history variable through loading and unloading and connects the forward
-trajectory to its derivative route.</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="differentiable-mechanics-and-inverse-parameter-discovery">
+<h1><span class="section-number">6. </span>Differentiable Mechanics and Inverse Parameter Discovery<a class="headerlink" href="#differentiable-mechanics-and-inverse-parameter-discovery" title="Link to this heading">#</a></h1>
 <figure class="align-default" id="fig-autograd-inverse">
 <a class="reference internal image-reference" href="_images/05_autograd_inverse.svg"><img alt="Parameters enter a supported forward computation and a scalar loss. Reverse sensitivities return a gradient, checked against a directional finite difference. An optional optimizer uses that gradient in a separate parameter update." src="_images/05_autograd_inverse.svg" style="width: 96%;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Figure 6.1 </span><span class="caption-text">Automatic differentiation follows the stated computational graph. A derivative
-check asks whether that graph implements the derivative you intended.</span><a class="headerlink" href="#fig-autograd-inverse" title="Link to this image">#</a></p>
+<p><span class="caption-number">Figure 6.1 </span><span class="caption-text">In differentiable mechanics, parameters flow through the forward solver graph to produce an observation. Reverse-mode automatic differentiation computes the sensitivity gradient, which guides an optimizer to discover unknown physical properties.</span><a class="headerlink" href="#fig-autograd-inverse" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
-<section id="define-the-forward-map-before-differentiating-it">
-<h2><span class="section-number">6.1. </span>Define the forward map before differentiating it<a class="headerlink" href="#define-the-forward-map-before-differentiating-it" title="Link to this heading">#</a></h2>
-<p>Let <span class="math notranslate nohighlight">\(p\)</span> denote one scalar parameter, such as a bounded multiplier of a
-material field. A forward computation maps it to a state and an observable:</p>
+<section id="the-detective-story-solving-inverse-problems-with-differentiable-mechanics">
+<h2><span class="section-number">6.1. </span>The Detective Story: Solving Inverse Problems with Differentiable Mechanics<a class="headerlink" href="#the-detective-story-solving-inverse-problems-with-differentiable-mechanics" title="Link to this heading">#</a></h2>
+<p>Imagine you are an engineer in a materials testing laboratory. You place a specimen of an unknown advanced alloy into a tensile testing machine, apply incremental stretch, and record the reaction forces and surface displacement fields using digital cameras (digital image correlation).</p>
+<p>Now comes the fundamental scientific puzzle:
+<em>What are the true underlying material properties—such as Young’s modulus <span class="math notranslate nohighlight">\(E\)</span>, Poisson’s ratio <span class="math notranslate nohighlight">\(\nu\)</span>, or fracture toughness <span class="math notranslate nohighlight">\(G_c\)</span>—that gave rise to these experimental measurements?</em></p>
+<p>In traditional engineering, solving this <strong>inverse problem</strong> required expensive brute-force guessing: pick a trial parameter, run a forward finite element simulation, see how far off the prediction is, and guess again.</p>
+<p>With <strong>differentiable mechanics</strong>, the simulation itself calculates the road map!
+Because our finite element equations are assembled into a differentiable computational graph in PyTorch, reverse-mode automatic differentiation (<code class="docutils literal notranslate"><span class="pre">autograd</span></code>) uses the chain rule to backpropagate the error between simulation and observation all the way back to the input material parameters:</p>
 <div class="math notranslate nohighlight">
 \[
-p \longmapsto (u(p),d(p)) \longmapsto y(p).
+\frac{\partial J}{\partial p} = \frac{\partial J}{\partial y} \cdot \frac{\partial y}{\partial u} \cdot \frac{\partial u}{\partial p}.
+\]</div>
+<p>With this exact sensitivity gradient in hand, standard optimization algorithms (<code class="docutils literal notranslate"><span class="pre">torch.optim.Adam</span></code> or L-BFGS) can systematically navigate the parameter landscape and pinpoint the true material properties.</p>
+</section>
+<hr class="docutils" />
+<section id="formulating-the-forward-and-inverse-maps">
+<h2><span class="section-number">6.2. </span>Formulating the Forward and Inverse Maps<a class="headerlink" href="#formulating-the-forward-and-inverse-maps" title="Link to this heading">#</a></h2>
+<p>Let <span class="math notranslate nohighlight">\(p\)</span> denote the physical parameter we wish to discover (for example, Young’s modulus <span class="math notranslate nohighlight">\(E &gt; 0\)</span>). The forward computational graph maps the parameter to a physical state, and then to a measurable observation:</p>
+<div class="math notranslate nohighlight">
+\[
+p \longmapsto (u(p), d(p)) \longmapsto y(p).
 \]</div>
 <p>With a target observation <span class="math notranslate nohighlight">\(y^\star\)</span>, an illustrative least-squares objective
 is</p>
@@ -476,9 +486,9 @@ conditions, and chosen parameterisation.</p>
 <p>These choices define the mathematical map being differentiated.</p>
 </section>
 <section id="three-ways-to-obtain-a-sensitivity">
-<h2><span class="section-number">6.2. </span>Three ways to obtain a sensitivity<a class="headerlink" href="#three-ways-to-obtain-a-sensitivity" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">6.3. </span>Three ways to obtain a sensitivity<a class="headerlink" href="#three-ways-to-obtain-a-sensitivity" title="Link to this heading">#</a></h2>
 <section id="finite-differences">
-<h3><span class="section-number">6.2.1. </span>Finite differences<a class="headerlink" href="#finite-differences" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">6.3.1. </span>Finite differences<a class="headerlink" href="#finite-differences" title="Link to this heading">#</a></h3>
 <p>A directional central difference uses a chosen direction <span class="math notranslate nohighlight">\(q\)</span> and step <span class="math notranslate nohighlight">\(h\)</span>:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -491,7 +501,7 @@ nonlinear curvature, while a very small <span class="math notranslate nohighligh
 tolerance effects.</p>
 </section>
 <section id="unrolled-automatic-differentiation">
-<h3><span class="section-number">6.2.2. </span>Unrolled automatic differentiation<a class="headerlink" href="#unrolled-automatic-differentiation" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">6.3.2. </span>Unrolled automatic differentiation<a class="headerlink" href="#unrolled-automatic-differentiation" title="Link to this heading">#</a></h3>
 <p>If a program executes a fixed differentiable sequence of operations, reverse
 mode can differentiate the sequence actually run. For example, unrolling <span class="math notranslate nohighlight">\(K\)</span>
 iterations gives</p>
@@ -505,7 +515,7 @@ it. Memory cost can also increase when many states are retained for a reverse
 pass.</p>
 </section>
 <section id="implicit-differentiation">
-<h3><span class="section-number">6.2.3. </span>Implicit differentiation<a class="headerlink" href="#implicit-differentiation" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">6.3.3. </span>Implicit differentiation<a class="headerlink" href="#implicit-differentiation" title="Link to this heading">#</a></h3>
 <p>Suppose a converged state is defined by a residual</p>
 <div class="math notranslate nohighlight">
 \[
@@ -527,19 +537,19 @@ choices require particular care.</p>
 </section>
 </section>
 <section id="follow-the-gradient-one-update-at-a-time">
-<h2><span class="section-number">6.3. </span>Follow the gradient one update at a time<a class="headerlink" href="#follow-the-gradient-one-update-at-a-time" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">6.4. </span>Follow the gradient one update at a time<a class="headerlink" href="#follow-the-gradient-one-update-at-a-time" title="Link to this heading">#</a></h2>
 <p>The worked section below expands the chain rule into local derivatives,
 backward-propagated sensitivities and the sum of all uses of a shared
 parameter. Work through the three scalar updates before interpreting an
 autograd call as a derivative of a fracture calculation.</p>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="05a_backpropagation_step_by_step.html">6.3.1. Backpropagation through a stepped update</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05a_backpropagation_step_by_step.html">6.4.1. Backpropagation through a stepped update</a></li>
 </ul>
 </div>
 </section>
 <section id="a-bounded-parameterisation">
-<h2><span class="section-number">6.4. </span>A bounded parameterisation<a class="headerlink" href="#a-bounded-parameterisation" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">6.5. </span>A bounded parameterisation<a class="headerlink" href="#a-bounded-parameterisation" title="Link to this heading">#</a></h2>
 <p>An unconstrained update can turn a positive material multiplier negative. One
 simple way to enforce a scalar interval is to optimise an unconstrained
 variable <span class="math notranslate nohighlight">\(\theta\)</span> and map it to</p>
@@ -562,7 +572,7 @@ the sigmoid derivative becomes small. The choice of transform therefore
 affects the conditioning of the optimisation problem.</p>
 </section>
 <section id="a-minimal-inverse-experiment">
-<h2><span class="section-number">6.5. </span>A minimal inverse experiment<a class="headerlink" href="#a-minimal-inverse-experiment" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">6.6. </span>A minimal inverse experiment<a class="headerlink" href="#a-minimal-inverse-experiment" title="Link to this heading">#</a></h2>
 <p>For a first experiment, choose one parameter, one geometry, one loading
 protocol, and one stated observable. For example:</p>
 <ol class="arabic simple">
@@ -580,21 +590,27 @@ model and specified noise assumptions. Experimental recovery additionally
 requires assessment of measurement noise and model discrepancy.</p>
 </section>
 <section id="hands-on-lab-differentiating-mechanics-and-parameter-recovery">
-<h2><span class="section-number">6.6. </span>Hands-On Lab: Differentiating Mechanics and Parameter Recovery<a class="headerlink" href="#hands-on-lab-differentiating-mechanics-and-parameter-recovery" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">6.7. </span>Hands-On Lab: Differentiating Mechanics and Parameter Recovery<a class="headerlink" href="#hands-on-lab-differentiating-mechanics-and-parameter-recovery" title="Link to this heading">#</a></h2>
 <p>In the accompanying computational lesson, you will implement a complete differentiable mechanics problem in PyTorch:</p>
 <ol class="arabic simple">
 <li><p><strong>Forward Solution:</strong> Solve deformation in a one-dimensional elastic bar under tensile loading.</p></li>
 <li><p><strong>Derivative Verification:</strong> Compute sensitivities of an observation with respect to the elastic modulus using analytical formulas, automatic differentiation (<code class="docutils literal notranslate"><span class="pre">loss.backward()</span></code>), and central finite differences.</p></li>
 <li><p><strong>Inverse Identification:</strong> Use gradient descent to automatically recover the unknown ground-truth stiffness from synthetic displacement measurements.</p></li>
 </ol>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="labs/03_tiny_derivative_inverse_toy.html">6.6.1. Differentiable Mechanics and Inverse Parameter Identification</a></li>
-</ul>
+<div class="tip admonition">
+<p class="admonition-title">Hands-On Tutorial: Lab 03 (Differentiable Mechanics &amp; Inverse Recovery)</p>
+<p><strong>Ready to try this in practice?</strong><br />
+Explore the interactive tutorial: <strong><a class="reference internal" href="labs/03_tiny_derivative_inverse_toy.html"><span class="doc">Lab 03: Differentiable Mechanics &amp; Inverse Parameter Identification</span></a></strong>.<br />
+You can read through the worked autograd graph and parameter recovery trajectories directly here in the book, or run it interactively in <strong>Google Colab</strong> with one click:</p>
+<div class="badge-row">
+  <a class="badge-colab" href="https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/study/03_tiny_derivative_inverse_toy.ipynb" target="_blank"><img src="_static/colab-badge.svg" alt="Open In Colab"/></a>
+  <a class="badge-link" href="../notebooks/study/03_tiny_derivative_inverse_toy.ipynb"><i class="fa-solid fa-download"></i> Download Practice Notebook</a>
+  <a class="badge-link" href="../notebooks/solutions/03_tiny_derivative_inverse_toy.ipynb"><i class="fa-solid fa-check-circle"></i> Download Worked Solutions</a>
+</div>
 </div>
 </section>
 <section id="directional-derivative-verification">
-<h2><span class="section-number">6.7. </span>Directional Derivative Verification<a class="headerlink" href="#directional-derivative-verification" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">6.8. </span>Directional Derivative Verification<a class="headerlink" href="#directional-derivative-verification" title="Link to this heading">#</a></h2>
 <p>To verify that reverse-mode automatic differentiation yields the true gradient, we compare the directional derivative obtained from autograd with a numerical central difference:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -612,7 +628,7 @@ D_hJ(p;q) = \frac{J(p+hq)-J(p-hq)}{2h} \quad\approx\quad g^\mathsf{T}q.
 </div>
 </section>
 <section id="why-inverse-recovery-can-be-difficult">
-<h2><span class="section-number">6.8. </span>Why inverse recovery can be difficult<a class="headerlink" href="#why-inverse-recovery-can-be-difficult" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">6.9. </span>Why inverse recovery can be difficult<a class="headerlink" href="#why-inverse-recovery-can-be-difficult" title="Link to this heading">#</a></h2>
 <p>Several different parameter fields can produce similar limited observations.
 This non-uniqueness can arise from insufficient loading diversity, a coarse
 observable, parameter correlation, regularisation choices, or weak sensitivity
@@ -631,7 +647,7 @@ coefficient <span class="math notranslate nohighlight">\(\beta\)</span> controls
 penalising spatial variation.</p>
 </section>
 <section id="exercise-interpret-a-gradient-result">
-<h2><span class="section-number">6.9. </span>Exercise: interpret a gradient result<a class="headerlink" href="#exercise-interpret-a-gradient-result" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">6.10. </span>Exercise: interpret a gradient result<a class="headerlink" href="#exercise-interpret-a-gradient-result" title="Link to this heading">#</a></h2>
 <p>An implementation reports a small central-difference discrepancy for one
 direction <span class="math notranslate nohighlight">\(q\)</span> at a parameter <span class="math notranslate nohighlight">\(p\)</span>. Which conclusions below are supported?</p>
 <ol class="arabic simple">
@@ -655,7 +671,7 @@ observable.</p>
 </div>
 </section>
 <section id="sources-for-this-chapter">
-<h2><span class="section-number">6.10. </span>Sources for this chapter<a class="headerlink" href="#sources-for-this-chapter" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">6.11. </span>Sources for this chapter<a class="headerlink" href="#sources-for-this-chapter" title="Link to this heading">#</a></h2>
 <p>The <a class="reference external" href="https://docs.pytorch.org/docs/stable/autograd.html">PyTorch autograd documentation</a>
 and <a class="reference external" href="https://docs.jax.dev/en/latest/automatic-differentiation.html">JAX automatic-differentiation guide</a>
 describe their respective differentiation systems. For a finite-element
@@ -676,12 +692,12 @@ example of implicit gradient computation, see the
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="labs/01_phast_tiny_evolving_fracture.html"
+       href="04_fem_to_tensors.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">5.8.1. </span>End-to-End Simulation: Running Phase-Field Fracture in PhAST</p>
+        <p class="prev-next-title"><span class="section-number">5. </span>From Weak Forms to Discrete Tensors: The PhAST Pipeline</p>
       </div>
     </a>
     <a class="right-next"
@@ -689,7 +705,7 @@ example of implicit gradient computation, see the
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">6.3.1. </span>Backpropagation through a stepped update</p>
+        <p class="prev-next-title"><span class="section-number">6.4.1. </span>Backpropagation through a stepped update</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -709,21 +725,22 @@ example of implicit gradient computation, see the
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#define-the-forward-map-before-differentiating-it">6.1. Define the forward map before differentiating it</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#three-ways-to-obtain-a-sensitivity">6.2. Three ways to obtain a sensitivity</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#finite-differences">6.2.1. Finite differences</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unrolled-automatic-differentiation">6.2.2. Unrolled automatic differentiation</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#implicit-differentiation">6.2.3. Implicit differentiation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-detective-story-solving-inverse-problems-with-differentiable-mechanics">6.1. The Detective Story: Solving Inverse Problems with Differentiable Mechanics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#formulating-the-forward-and-inverse-maps">6.2. Formulating the Forward and Inverse Maps</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#three-ways-to-obtain-a-sensitivity">6.3. Three ways to obtain a sensitivity</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#finite-differences">6.3.1. Finite differences</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unrolled-automatic-differentiation">6.3.2. Unrolled automatic differentiation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#implicit-differentiation">6.3.3. Implicit differentiation</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#follow-the-gradient-one-update-at-a-time">6.3. Follow the gradient one update at a time</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-bounded-parameterisation">6.4. A bounded parameterisation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-minimal-inverse-experiment">6.5. A minimal inverse experiment</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hands-on-lab-differentiating-mechanics-and-parameter-recovery">6.6. Hands-On Lab: Differentiating Mechanics and Parameter Recovery</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#directional-derivative-verification">6.7. Directional Derivative Verification</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-inverse-recovery-can-be-difficult">6.8. Why inverse recovery can be difficult</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-interpret-a-gradient-result">6.9. Exercise: interpret a gradient result</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sources-for-this-chapter">6.10. Sources for this chapter</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#follow-the-gradient-one-update-at-a-time">6.4. Follow the gradient one update at a time</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-bounded-parameterisation">6.5. A bounded parameterisation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-minimal-inverse-experiment">6.6. A minimal inverse experiment</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hands-on-lab-differentiating-mechanics-and-parameter-recovery">6.7. Hands-On Lab: Differentiating Mechanics and Parameter Recovery</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#directional-derivative-verification">6.8. Directional Derivative Verification</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-inverse-recovery-can-be-difficult">6.9. Why inverse recovery can be difficult</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-interpret-a-gradient-result">6.10. Exercise: interpret a gradient result</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sources-for-this-chapter">6.11. Sources for this chapter</a></li>
 </ul>
   </nav></div>
 
