@@ -1,0 +1,103 @@
+const fs=require("fs"),path=require("path"),assert=require("assert/strict");
+const {pathToFileURL}=require("url"),{chromium}=require("playwright");
+const {PNG}=require("pngjs");
+(async()=>{
+ const input=path.resolve(process.argv[2]),output=path.resolve(process.argv[3]);
+ fs.mkdirSync(output,{recursive:true});
+ const browser=await chromium.launch({headless:true,executablePath:"/Applications/Brave Browser.app/Contents/MacOS/Brave Browser"});
+ const records=[];
+ try{
+ for(const width of [1280,390]){
+  const page=await browser.newPage({viewport:{width,height:1100},offline:true,reducedMotion:"reduce"});
+  const errors=[];page.on("pageerror",e=>errors.push(e.message));
+  await page.goto(pathToFileURL(input).href);
+  await page.evaluate(async()=>{const urls=[...document.querySelectorAll("image")].map(i=>i.getAttribute("href"));await Promise.all(urls.map(src=>new Promise((res,rej)=>{const i=new Image();i.onload=res;i.onerror=rej;i.src=src;})));});
+  const frame0=await page.locator("#history-panel").getAttribute("data-frame");
+  await page.locator("#scenario").selectOption("loading");
+  assert.equal(await page.locator("#updated").textContent(),"1.25");
+  assert.equal(await page.locator("#energy-weight").textContent(),"1.000");
+  assert.equal(await page.locator("#history-panel").getAttribute("data-frame"),frame0);
+  await page.locator("#remember").click();
+  assert.equal(await page.locator("#old-out").textContent(),"1.25");
+  assert.equal(await page.locator("#energy-weight").textContent(),"0.500");
+  await page.locator("#reset").click();
+  assert.equal(await page.locator("#energy-weight").textContent(),"0.000");
+  await page.locator("#rule").selectOption("surrogate");
+  const before=+(await page.locator("#history-panel").getAttribute("data-weight"));
+  assert.ok(before>0&&before<.01);
+  await page.locator("#sharpness").evaluate(e=>{e.value=2;e.dispatchEvent(new Event("input",{bubbles:true}));});
+  assert.ok(+(await page.locator("#history-panel").getAttribute("data-weight"))>before);
+  await page.locator("#scenario").selectOption("tie");
+  assert.equal(await page.locator("#energy-weight").textContent(),"0.500");
+  await page.locator("#energy").focus();await page.keyboard.press("ArrowRight");
+  assert.equal(await page.locator("#energy-out").textContent(),"1.01");
+  await page.locator("#reset").click();
+  await page.locator("#frame").evaluate(e=>{e.value=0;e.dispatchEvent(new Event("input",{bubbles:true}));});
+  assert.ok(await page.locator("#previous").isDisabled());
+  const first=+(await page.locator("#history-panel").getAttribute("data-damage"));
+  await page.locator("#plate-chart").screenshot({path:path.join(output,width+"-plate-first.png")});
+  await page.locator("#frame").evaluate(e=>{e.value=e.max;e.dispatchEvent(new Event("input",{bubbles:true}));});
+  const last=+(await page.locator("#history-panel").getAttribute("data-damage"));
+  assert.ok(last>first+.01);
+  assert.ok(await page.locator("#next").isDisabled());
+  await page.locator("#plate-chart").screenshot({path:path.join(output,width+"-plate-last.png")});
+  const finalImage=await page.locator("#plate-image").getAttribute("href");
+  await page.locator("#colour").selectOption("damage");
+  assert.notEqual(await page.locator("#plate-image").getAttribute("href"),finalImage);
+  await page.locator("#plate-chart").screenshot({path:path.join(output,width+"-colour.png")});
+  await page.locator("#colour").selectOption("plate");
+  await page.locator("#probe-x").fill("5");await page.locator("#probe-y").fill("35");
+  await page.locator("#probe-y").press("Tab");
+  const node=await page.locator("#history-panel").getAttribute("data-node");
+  assert.ok(+(await page.locator("#history-panel").getAttribute("data-damage"))<.1);
+  await page.locator("#plate-image").scrollIntoViewIfNeeded();
+  const plate=await page.locator("#plate-image").boundingBox();
+  await page.mouse.click(plate.x+plate.width*.65,plate.y+plate.height*.52);
+  assert.notEqual(await page.locator("#history-panel").getAttribute("data-node"),node);
+  await page.locator("#show-particle").check();
+  await page.locator("#show-probe").uncheck();
+  await page.locator("#play").click();
+  await page.waitForTimeout(920);
+  assert.ok(+(await page.locator("#history-panel").getAttribute("data-frame"))>=1);
+  await page.locator("#play").click();
+  const paused=await page.locator("#history-panel").getAttribute("data-frame");
+  await page.waitForTimeout(950);
+  assert.equal(await page.locator("#history-panel").getAttribute("data-frame"),paused);
+  await page.locator("#frame").evaluate(e=>{e.value=e.max-1;e.dispatchEvent(new Event("input",{bubbles:true}));});
+  await page.locator("#play").click();await page.waitForTimeout(950);
+  assert.equal(await page.locator("#play").textContent(),"Play");
+  const panes=await page.locator(".pane").evaluateAll(e=>e.map(x=>{const r=x.getBoundingClientRect();return {x:r.x,y:r.y,bottom:r.bottom};}));
+  if(width>620)assert.ok(panes[1].x>panes[0].x+200);else assert.ok(panes[1].y>=panes[0].bottom);
+  assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));
+  assert.deepEqual(errors,[]);
+  const a=PNG.sync.read(fs.readFileSync(path.join(output,width+"-plate-first.png")));
+  const b=PNG.sync.read(fs.readFileSync(path.join(output,width+"-plate-last.png")));
+  let delta=0;for(let k=0;k<a.data.length;k+=4)delta+=Math.abs(a.data[k]-b.data[k]);
+  assert.ok(delta/(a.data.length/4)>.1);
+  await page.screenshot({path:path.join(output,width+"-panel.png"),fullPage:true});
+  records.push({width,passed:true,firstProbeDamage:first,lastProbeDamage:last,meanImageChange:delta/(a.data.length/4)});
+  await page.close();
+ }
+ if(process.argv[4]){
+  for(const width of [1280,390]){
+   const page=await browser.newPage({viewport:{width,height:1000},offline:true});
+   await page.goto(pathToFileURL(path.resolve(process.argv[4])).href);
+   const embedded=page.frameLocator("#history-explorer");
+   await embedded.locator("#plate-image").waitFor();
+   await page.waitForTimeout(500);
+   assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));
+   const height=await embedded.locator("main").evaluate(e=>Math.ceil(e.getBoundingClientRect().height));
+   const iframe=await page.locator("#history-explorer").boundingBox();
+   assert.ok(iframe.height>=height&&iframe.height<=height+8);
+   const href=await page.locator("#history-panel-open").getAttribute("href");
+   assert.ok(href.endsWith("/history_plate.html"));
+   await embedded.locator("#frame").evaluate(e=>{e.value=e.max;e.dispatchEvent(new Event("input",{bubbles:true}));});
+   await embedded.locator("#plate-chart").screenshot({path:path.join(output,width+"-embedded-plate.png")});
+   await page.screenshot({path:path.join(output,width+"-book.png"),fullPage:true});
+   await page.close();
+  }
+ }
+ fs.writeFileSync(path.join(output,"report.json"),JSON.stringify({passed:true,records,embedded:!!process.argv[4]},null,2));
+ console.log(JSON.stringify({passed:true,viewports:records.length}));
+ }finally{await browser.close();}
+})().catch(e=>{console.error(e);process.exit(1)});

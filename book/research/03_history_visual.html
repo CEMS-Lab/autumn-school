@@ -64,7 +64,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#watch-the-switch" class="md-skip">
+        <a href="#explore-the-switch-beside-a-real-crack" class="md-skip">
           Skip to content
         </a>
       
@@ -625,10 +625,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#watch-the-switch" class="md-nav__link">
+  <a href="#explore-the-switch-beside-a-real-crack" class="md-nav__link">
     
     <span class="md-ellipsis">
-      <span>Watch the switch</span>
+      <span>Explore the switch beside a real crack</span>
     </span>
   </a>
   
@@ -891,10 +891,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#watch-the-switch" class="md-nav__link">
+  <a href="#explore-the-switch-beside-a-real-crack" class="md-nav__link">
     
     <span class="md-ellipsis">
-      <span>Watch the switch</span>
+      <span>Explore the switch beside a real crack</span>
     </span>
   </a>
   
@@ -951,7 +951,33 @@
 material point, the solver asks: <em>is the current crack-driving energy larger
 than anything this point has experienced before?</em> This short lesson follows
 that decision through loading, unloading and backpropagation.</p>
-<h2 id="watch-the-switch">Watch the switch<a class="headerlink" href="#watch-the-switch" title="Link to this heading">¶</a></h2>
+<h2 id="explore-the-switch-beside-a-real-crack">Explore the switch beside a real crack<a class="headerlink" href="#explore-the-switch-beside-a-real-crack" title="Link to this heading">¶</a></h2>
+<p>Change the previous maximum and current energy, then compare the hard branch
+with the sigmoid reverse rule. Beside that calculation, scrub through the
+recorded fracture sequence and select a point to inspect its damage history.
+The default view shows a dark crack in a light plate; the colour view uses
+the same complete damage field.</p>
+<p><a id="history-panel-open" target="_blank" rel="noopener">Open the full interactive panel</a></p>
+<iframe id="history-explorer" title="Interactive history rule and recorded crack propagation in a plate" allow="fullscreen" allowfullscreen style="display:block;width:100%;height:1080px;border:1px solid #cbd4d8;border-radius:4px;background:white"></iframe><p><a class="reference download internal" download="" href="../_downloads/58d729853ab111885c4abe37dca0b95b/history_plate.html"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">the</span> <span class="pre">self-contained</span> <span class="pre">interactive</span> <span class="pre">panel</span></code></a>.
+The controls run in the browser, without a notebook kernel or installation.</p>
+<p>The two panes answer different questions: the left is a dimensionless history
+example, while the right contains retained PhAST damage fields. Matching
+energy/history snapshots were not saved, so the panel does not infer an energy
+history from the crack or claim that its sliders rerun the fracture solver.</p>
+<p>The plate sequence contains 12 recorded frames on the full 40 mm square
+specimen (5,149 nodes and 9,990 triangular elements). The dark band is the
+computed phase-field crack: its finite width comes from the diffuse damage
+representation. The initial notch extends from the left edge. A particle
+boundary can be displayed to relate the subsequent deflection to the inclusion.
+Both renderings preserve the complete damage range, <span class="math notranslate nohighlight">\(0\leq d\leq1\)</span>.</p>
+<p>The <a class="reference download internal" download="" href="../_downloads/fd6f407726272e4f0d95c1a5998acc2c/history_plate_arrays.npz"><code class="xref download docutils literal notranslate"><span class="pre">retained</span> <span class="pre">mesh</span> <span class="pre">and</span> <span class="pre">damage</span> <span class="pre">arrays</span></code></a>,
+<a class="reference download internal" download="" href="../_downloads/2e88bf1ae48d6a8fce5931f407952d25/history_plate_manifest.json"><code class="xref download docutils literal notranslate"><span class="pre">export</span> <span class="pre">receipt</span></code></a>, and
+<a class="reference download internal" download="" href="../_downloads/cb6ae7c56da4c7f78f2294229ea56330/build_history_panel.py"><code class="xref download docutils literal notranslate"><span class="pre">Matplotlib</span> <span class="pre">exporter</span></code></a> accompany the panel.
+Four frames agree exactly with the previously retained inverse target data.
+The browser’s compact damage arrays introduce a maximum rounding difference
+below <span class="math notranslate nohighlight">\(3\times10^{-8}\)</span>; the downloadable arrays preserve the original precision.</p>
+<div class="dropdown admonition">
+<p class="admonition-title">Original animated explanation</p>
 <p>Press play. Blue is the current tensile energy; orange is its remembered
 maximum. On unloading, the blue curve falls while the orange history stays.
 The lower panels show the history update and its reverse weight at that step.</p>
@@ -969,6 +995,7 @@ a unique classical derivative there.</span><a class="headerlink" href="#fig-hist
 Each frame is one history update; playback is slowed for reading.
 The open blue point marks the half-weight convention at equality; the green
 curve shows the surrogate reverse weight. Energy values are dimensionless.</p>
+</div>
 <h2 id="remember-the-largest-energy">1. Remember the largest energy<a class="headerlink" href="#remember-the-largest-energy" title="Link to this heading">¶</a></h2>
 <div class="math notranslate nohighlight">
 \[H_{n+1}=\max(H_n,\psi^+_{n+1}).\]</div>
@@ -1022,6 +1049,16 @@ the <a class="reference download internal" download="" href="../_downloads/84c31
 The receipt retains the example where a hard-map finite difference is zero
 and the surrogate weight is approximately <span class="math notranslate nohighlight">\(0.475\)</span>.</p>
 <script>
+const panel = document.getElementById('history-explorer');
+const panelLink = Array.from(document.querySelectorAll('a[href]')).find(a => a.getAttribute('href').endsWith('/history_plate.html'));
+if (panelLink) {
+  panel.src = panelLink.href;
+  document.getElementById('history-panel-open').href = panelLink.href;
+}
+window.addEventListener('message', event => {
+  if (event.source !== panel.contentWindow || event.data?.type !== 'phast-history-panel-size') return;
+  if (Number.isFinite(event.data.height)) panel.style.height = Math.max(640, Math.min(2600, event.data.height + 4)) + 'px';
+});
 document.querySelectorAll('video[data-visual-film]').forEach(video => {
   const name = video.dataset.visualFilm;
   const link = Array.from(document.querySelectorAll('a[href]')).find(a => a.getAttribute('href').endsWith('/' + name));

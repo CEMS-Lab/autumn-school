@@ -57,3 +57,23 @@ It is integrated as an optional HTML reading route; earlier v0.1.0/v0.1.1
 release assets and the classroom numerical notebooks remain unchanged.
 The standalone preview reuses the published book's MathJax/static assets;
 these are not duplicated in this source subtree.
+
+## Interactive history and plate revision
+
+The follow-up on `teaching/interactive-history` adds an offline interactive
+panel to the short history lesson. It preserves the original movie as a
+collapsible alternative. The left pane demonstrates the hard-forward history
+rule and its optional sigmoid surrogate; the independent right pane shows 12
+retained FEM damage frames in the full plate. It includes time scrubbing,
+play/pause, nearest-node damage probing, a grayscale/colour toggle and an
+optional particle boundary. Matching energy/history fields were not retained.
+
+CPU export 127849 reused the existing fields without a new fracture solve.
+All four retained inverse target frames match exactly; browser float32 damage
+rounding is below 3e-8. Four source/output hashes match the retained receipt.
+The panel passed offline desktop/mobile interaction and embedded-height tests.
+The complete research book passed 24 page checks with 24 expandable answers;
+the original history movie passed two viewport/playback checks. The full
+Sphinx build passed with warnings treated as errors. No shared theme,
+manuscript or notebook numerical cell was changed. This follow-up is a local
+preview pending the next publication decision.

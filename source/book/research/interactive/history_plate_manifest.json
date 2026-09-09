@@ -1,0 +1,31 @@
+{
+  "scope": "Retained PhAST FEM damage; no new forward solve",
+  "job": "127849",
+  "frames": 12,
+  "nodes": 5149,
+  "elements": 9990,
+  "selected_frame_difference": 0.0,
+  "float32_maximum_error": 2.9770636400527906e-08,
+  "minimum_recorded_damage_increment": 0.0,
+  "energy_and_history_fields_retained": false,
+  "rendering": "Full d in [0,1]; linear FEM colour interpolation; no masking or artificial crack line",
+  "source_hashes": {
+    "build_history_panel.py": "ee92128160b5e7c6a00fded2ef8dd4b64123e6a7beea3a6b07bcc6ff2583d36d",
+    "history_plate.template.html": "29cf2919e82357cbeb8eeb9fd5fcd4abfde8a6c8950a01212ab9083262ccd193"
+  },
+  "input_hashes": {
+    "blind_temporal_iter_pred_steps.npy": "6e6de9006c1d21f2b34aecce600484623647f59d78f7ee117801e11f95bcc91a",
+    "blind_temporal_target_snapshots.npy": "9dae687e28c526a86b0ba3247e12c309b1f926cdd04a104efe658db5e1c21168",
+    "mesh_elements.npy": "f6cc972d43ae150c1296954abbb95f2c42c4cd51adc6e26ac0ac1fe78cb7194b",
+    "mesh_nodes.npy": "556363e1b116c30e520a6eedd949e86a2dcad624b44d3ed34af978058dbffb71",
+    "particle_params.json": "2b1a2df0db26c9753f49df7b473db2dde86357f2a4b0275f961e79359681ac02",
+    "truth_damage_snapshots.npz": "eb051455ddc234ae2750cf4a5f4dd083d75458e99af858a43880cee2b6b36ce4"
+  },
+  "outputs": {
+    "history_plate.html": "e1dc70ead77b302eee66b7f504be988f5120b895012ac2eb34d0e77595d0844a",
+    "history_plate_arrays.npz": "e6d19babd2760540f81be749d25134e2c3e430b97a48a2ba2176127ef0c4fd4d"
+  },
+  "seconds": 2.446317291003652,
+  "numpy": "2.4.2",
+  "matplotlib": "3.10.8"
+}
