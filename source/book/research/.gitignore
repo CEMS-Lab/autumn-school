@@ -1,0 +1,5 @@
+_build/
+__pycache__/
+notebooks/_attachments/
+*.aux
+*.log
