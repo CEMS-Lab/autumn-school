@@ -1,0 +1,38 @@
+{
+  "scope": "Dimensionless history primitive; not a new fracture solve",
+  "job_id": "127821",
+  "sources": {
+    "history_animation.py": "ecb346c5ac0abcb015ecea4844c15ffc61a2b7d2d0dbd462a3cfbdbd3ffb9b51",
+    "history_lesson.py": "31ff14e34294ad33ef469f8940a13605226ebfbab248abdac053d072fec8827d"
+  },
+  "checks": {
+    "history_custom_forward_exact": true,
+    "history_hard_tie_halves": true,
+    "history_old_route_retained": true,
+    "history_hard_losing_branch_zero": true,
+    "history_surrogate_mismatch_preserved": true,
+    "history_smooth_sibling_fd": true,
+    "history_smooth_bias_bound": true,
+    "history_repeat_bias_formula": true,
+    "history_exact_peak_route": true,
+    "history_unit_invariance": true,
+    "history_sigmoid_saturation_retained": true,
+    "history_never_falls": true,
+    "history_contains_current": true,
+    "reverse_weights_sum_to_one": true
+  },
+  "hard_fd": 0.0,
+  "surrogate_reverse": 0.47502081252106,
+  "smooth_sibling_fd": 0.4750208125514633,
+  "frames": 9,
+  "playback_seconds": 18,
+  "teaching_sigmoid_scale": 12,
+  "matplotlib": "3.10.8",
+  "numpy": "2.4.2",
+  "artifacts": {
+    "history_animation_arrays.npz": "d48d9af0f5c65ee2bb8e94374bb3ef39e0b6bd196921d679e57d9f71958a474d",
+    "history_switch.mp4": "dacb3085e9d561eca8ff6071a2324f0baeece548677b5d3ede3538e75cecc41d",
+    "history_switch.pdf": "b74ae226e647ae72655e3fb3a63f790404c1690625b390b22e78f820bd462eeb",
+    "history_switch.png": "19434462f9fa90fdb8ed526ff20584cd1daebc8acc2051fe5680e67c3e95f59d"
+  }
+}

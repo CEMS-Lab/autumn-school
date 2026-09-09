@@ -9,7 +9,7 @@ const {chromium} = require("playwright");
   const output = path.resolve(process.argv[3]);
   fs.mkdirSync(output, {recursive:true});
   const names = ["index", "01_geometry", "02_observations", "03_derivatives",
-    "03_history", "04_recovery", "05_learning", "06_applications", "07_results",
+    "03_history", "03_history_visual", "04_recovery", "05_learning", "06_applications", "08_visual_lab", "07_results",
     "notebooks/inverse_experiments"];
   const browser = await chromium.launch({headless:true,
     executablePath:"/Applications/Brave Browser.app/Contents/MacOS/Brave Browser"});
@@ -53,6 +53,13 @@ const {chromium} = require("playwright");
         }
         assert.deepEqual(record.images, [], name+" images");
         assert.equal(record.mathErrors, 0, name+" math");
+        if (name === "03_history_visual") {
+          const fits = await page.locator('mjx-container[display="true"]').evaluateAll(
+            els => els.every(el => el.scrollWidth <= el.clientWidth + 2));
+          assert.ok(fits, "History lesson equation needs a line break");
+          assert.equal(await page.locator("figure:visible").count(), 0,
+            "Animation poster should not be duplicated as a visible static figure");
+        }
         assert.ok(record.scrollWidth<=width+1, name+" horizontal overflow");
         assert.deepEqual(errors, [], name+" JS errors");
         assert.deepEqual(failed, [], name+" offline resources");
@@ -63,7 +70,7 @@ const {chromium} = require("playwright");
           await page.screenshot({path:path.join(output,"notebook-output-"+width+".png")});
         }
         await page.screenshot({path:path.join(output,slug+"-"+width+".png"),fullPage:true});
-        const figure = page.locator("figure").first();
+        const figure = page.locator("figure:visible").first();
         if (await figure.count()) {
           await figure.scrollIntoViewIfNeeded();
           await page.screenshot({path:path.join(output,slug+"-figure-"+width+".png")});

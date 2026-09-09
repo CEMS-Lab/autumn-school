@@ -4,8 +4,10 @@ Related course issues: #11 and #13. Actual fracture-inverse work remains #7.
 
 This topic branch preserves the existing published course and its main
 navigation. It adds an isolated inverse teaching extension for review.
-No private paper source, solver modifications or private fracture arrays are
-included. The notebook contains original explanations, all numerical/plotting
+The original notebook payload contains no private paper source, solver
+modifications or fracture arrays. The later visual-laboratory candidate adds
+an allowlisted numerical FEM bundle for the lead's publication review.
+The notebook contains original explanations, all numerical/plotting
 code, 20 worked answers and eight freshly executed plot outputs.
 
 ## Current verification
@@ -21,6 +23,22 @@ code, 20 worked answers and eight freshly executed plot outputs.
   are outside the executed teaching-example scope.
 
 ## Before integration
+
+The isolated visual laboratory adds five Matplotlib figure sets, three native-
+control MP4 animations and an inspectable numerical-input bundle. The dense
+geometry landscape is a teaching calculation; the 25-point fracture landscape
+and the four-frame inverse trajectory reuse distinct retained FEM studies.
+The original seven-example executable notebook remains unchanged. The visual
+chapter supplies its own complete renderer and data; it is not silently
+counted as another executed cell in the older notebook receipt.
+
+The expanded preview passed 24 desktop/mobile page checks with 23 worked
+answers. The visual laboratory passed six video/viewport playback checks.
+The short history page adds one 18-second animation and 14 passing HPC
+primitive/data checks, including the preserved hard-FD/surrogate mismatch.
+Shared theme,
+static assets, manuscripts and public releases remain unchanged. Course lead
+owns later theme alignment, notebook integration and release review.
 
 The application chapter now explains weak multi-particle sensitivities,
 normalized window fusion, temporary block freezing with cumulative correction,

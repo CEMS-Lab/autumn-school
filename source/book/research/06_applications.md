@@ -1,5 +1,9 @@
 # Designing a fracture-inverse research programme
 
+Start with the [visual laboratory](08_visual_lab.md) to connect particle
+geometry, a loss surface and recorded crack fields. Its animations distinguish
+physical time from inverse updates before we generalize to multiple particles.
+
 ## Application 1: three particles ahead of a crack
 
 We prescribe a notched plate, three stiff circular inclusions, material

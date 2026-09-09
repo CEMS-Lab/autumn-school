@@ -1,5 +1,8 @@
 # Differentiating fracture: memory, switches and useful limits
 
+Start with the [short animated explanation](03_history_visual.md) to see how
+loading, unloading and a new energy maximum change the reverse route.
+
 ## What is the derivative of a simulation?
 
 Suppose we change a particle centre or a fracture-energy parameter by a small

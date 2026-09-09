@@ -54,16 +54,24 @@ algebra models**. They isolate specific questions; none is presented as a new
 phase-field fracture recovery. The application chapter explains how to repeat
 the checks with PhAST and how to keep those results separate.
 
+The [visual laboratory](08_visual_lab.md) adds computed loss surfaces and
+three animations. It pairs an explicit geometry-observation toy with retained
+FEM samples and a recorded particle recovery, keeping their objectives and
+provenance separate. Begin there for a visual connection between the plate,
+the particle estimate and the objective.
+
 ```{toctree}
 :maxdepth: 1
 
 01_geometry
 02_observations
 03_derivatives
+03_history_visual
 03_history
 04_recovery
 05_learning
 06_applications
+08_visual_lab
 07_results
 notebooks/inverse_experiments
 ```
