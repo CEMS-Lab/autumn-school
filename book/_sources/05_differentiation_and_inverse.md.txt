@@ -1,8 +1,9 @@
 # Differentiation and an illustrative inverse problem
 
-:::{figure} figures/05_autograd_inverse.png
+:::{figure} figures/05_autograd_inverse.*
 :name: fig-autograd-inverse
 :width: 96%
+:alt: Parameters enter a supported forward computation and a scalar loss. Reverse sensitivities return a gradient, checked against a directional finite difference. An optional optimizer uses that gradient in a separate parameter update.
 
 Automatic differentiation follows the stated computational graph. A derivative
 check asks whether that graph implements the derivative you intended.

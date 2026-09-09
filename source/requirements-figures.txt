@@ -1,0 +1,8 @@
+# Optional authoring environment for original course diagrams and PDF review.
+# Notebook execution requirements are documented separately in SETUP.md.
+matplotlib==3.10.8
+numpy==2.2.6
+fonttools==4.61.1
+brotli==1.2.0
+pillow==12.2.0
+pypdf>=5,<7

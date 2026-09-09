@@ -3,12 +3,21 @@
 \documentclass[aspectratio=169,12pt]{beamer}
 \usepackage[T1]{fontenc}
 \usepackage{lmodern,amsmath,amssymb,booktabs,graphicx,tikz,listings,array}
-\usetikzlibrary{arrows.meta,positioning,calc}
+\usetikzlibrary{arrows.meta,positioning,calc,shapes.geometric}
 \usefonttheme[onlymath]{serif}
 \definecolor{navy}{HTML}{20364D}
 \definecolor{teal}{HTML}{087F82}
 \definecolor{muted}{HTML}{67737D}
 \definecolor{rust}{HTML}{BD5435}
+\definecolor{forward}{HTML}{245A81}
+\definecolor{reverse}{HTML}{B85C20}
+\tikzset{process/.style={draw=forward,fill=forward!4,minimum height=9mm,
+  text width=2.1cm,align=center,font=\normalsize,inner sep=3mm},
+  state/.style={circle,draw=forward,fill=white,minimum size=9mm,inner sep=2mm},
+  flow/.style={-{Latex[length=2.5mm]},draw=forward,line width=1pt},
+  backflow/.style={-{Latex[length=2.5mm]},draw=reverse,line width=1pt},
+  decision/.style={diamond,aspect=2.1,draw=navy,fill=white,align=center,
+    inner sep=1mm,font=\small}}
 \setbeamercolor{normal text}{fg=black,bg=white}
 \setbeamercolor{frametitle}{fg=black,bg=white}
 \setbeamercolor{structure}{fg=teal}
@@ -61,14 +70,21 @@
 \timing{Opening}{Introduce the 2+2+2-hour design. Each section includes a ten-minute break. The event allocation is separate and must be agreed with the organiser. The title illustration is an original analytic-distance schematic, not a computed fracture field.}
 \end{frame}
 
-\begin{frame}{One specimen. Three learning questions.}
-\vspace{4mm}
-\begin{tabular}{@{}L{.10\textwidth}L{.82\textwidth}@{}}
-\color{teal}\Large A & \Large Why does a crack grow?\\[7mm]
-\color{teal}\Large B & \Large How do we compute and differentiate it?\\[7mm]
-\color{teal}\Large C & \Large When can a learned proposal be useful?\\
-\end{tabular}
-\vspace{6mm}
+\begin{frame}{Six hours: understand, compute, then learn}
+\begin{center}\begin{tikzpicture}[>=Latex]
+\foreach \x/\letter/\label in {0/A/Understand,4.4/B/Compute,8.8/C/Learn}{
+  \node[font=\Large\bfseries,text=forward] at (\x,1.6) {\letter};
+  \node[font=\large] at (\x,.95) {\label};
+  \draw[forward,line width=1pt] (\x-1.75,.45)--(\x+1.75,.45);
+  \node[muted,font=\small] at (\x,-2.15) {120 minutes};}
+\node[align=center,text width=3.7cm,font=\small] at (0,-.45) {Crack models\\Energy laws\\FEM and tensors};
+\node[align=center,text width=3.7cm,font=\small] at (4.4,-.45) {Set up a mesh\\Run PhAST\\Check gradients};
+\node[align=center,text width=3.7cm,font=\small] at (8.8,-.45) {Train and reload\\Swap models\\Check proposals};
+\node[teal,font=\small] at (0,-1.55) {Notebook 00};
+\node[teal,font=\small] at (4.4,-1.55) {Notebooks 01--03};
+\node[teal,font=\small] at (8.8,-1.55) {Notebooks 04--05};
+\draw[flow] (1.8,.95)--(2.6,.95);\draw[flow] (6.2,.95)--(7,.95);
+\end{tikzpicture}\end{center}
 \question{Take away one executed notebook and one comparison sheet.}
 \source{Six-hour course design: 330 minutes of teaching/activity + 30 minutes of breaks. Not a claim about the published event timetable.}
 \timing{Orientation}{Introduce the companion book and notebook routes. Notebook 01 is a real PhAST damage-evolution solve; notebooks 02--05 teach local differentiation, an elastic-bar inverse toy and a Helmholtz-like field model/adapter. The distinctions remain visible throughout.}
@@ -197,11 +213,18 @@ AT1\[d=\left[1-\frac{|x|}{2\ell}\right]_+^2\]
 \end{frame}
 
 \begin{frame}{A staggered step alternates coupled problems}
-\flowfour{Mechanics\\$u^{k+1}$}{Driving field\\$\mathcal H^{k+1}$}{Damage\\$d^{k+1}$}{Check\\convergence}
-\vspace{4mm}
+\tagline{Fix the load increment $n$; iterate the coupled fields with index $k$}
 \begin{center}\begin{tikzpicture}[>=Latex]
-\draw[->,teal,thick] (11,0)--(11,-.55)--(0,-.55)--(0,0);
-\node[muted] at (5.5,-1.0) {repeat within one load/time increment};
+\node[process] (u) at (0,0) {Mechanics\\$u^{k+1}$};
+\node[process] (h) at (3.25,0) {Driving field\\$\mathcal H^{k+1}$};
+\node[process] (d) at (6.5,0) {Damage\\$d^{k+1}$};
+\node[decision] (q) at (9.6,0) {Converged?};
+\draw[flow] (u)--(h);\draw[flow] (h)--(d);\draw[flow] (d)--(q);
+\node[muted,font=\small] at (0,1) {hold $d^k$ fixed};
+\node[muted,font=\small] at (6.5,1) {enforce irreversibility};
+\draw[backflow] (q.south)--(9.6,-1.45)--node[below,font=\small]{No: update $k$, repeat mechanics}(0,-1.45)--(u.south);
+\draw[flow] (q.north)--(9.6,1.05);
+\node[anchor=south,align=center,font=\small,text=forward] at (9.6,1.05) {Yes: accept\\increment};
 \end{tikzpicture}\end{center}
 \question{Which field is held fixed in each subproblem?}
 \source{History-field notation is representative; irreversibility and the convergence criterion depend on the selected formulation. \miehe}
@@ -225,8 +248,14 @@ Newton/quasi-Newton & Iterations for a nonlinear system, not a time discretisati
 \[\mathbf y=\mathbf K\mathbf v
 \quad\longleftrightarrow\quad
 \mathbf y=\sum_e\mathbf A_e^{\mathsf T}\mathbf K_e\mathbf A_e\mathbf v\]
-\vspace{4mm}
-\flowfour{Gather\\local values}{Apply\\local physics}{Accumulate\\global result}{Iterate\\with checks}
+\begin{center}\begin{tikzpicture}[>=Latex]
+\node[process,text width=2.2cm] (in) at (0,0) {Same mesh,\\physics and BCs};
+\node[process,text width=3.8cm] (asm) at (5,1) {Assemble and store $\mathbf K$\\then solve $\mathbf K\mathbf x=\mathbf b$};
+\node[process,text width=3.8cm,draw=teal,fill=teal!4] (mf) at (5,-1) {Provide $\mathbf v\mapsto\mathbf K\mathbf v$\\to an iterative solver};
+\node[process,text width=1.9cm] (out) at (10,0) {Solution\\and checks};
+\draw[flow] (in.east)--(2,0)|-(asm.west);\draw[flow] (in.east)--(2,0)|-(mf.west);
+\draw[flow] (asm.east)--(8,1)|-(out.west);\draw[flow] (mf.east)--(8,-1)|-(out.west);
+\end{tikzpicture}\end{center}
 \question{What is avoided? What work remains?}
 \source{Conceptual linearised FE operator. Matrix-free avoids storing an assembled global matrix, not all storage or all solver cost. \phast}
 \timing{A 108--114 / 6 minutes}{Explain the action of gather/scatter operators A_e. Assembly, local kernels and boundary handling differ by route. Preconditioning and convergence remain important. Notebook 01 actually uses an assembled SciPy mechanics backend; it does not benchmark matrix-free acceleration. No speed claim is made here.}
@@ -348,15 +377,24 @@ Gather\par\vspace{4mm}Local physics\par\vspace{4mm}Weighted quadrature\par\vspac
 \end{frame}
 
 \begin{frame}{A gradient follows a specific computational path}
-\flowfour{Parameter\\$\theta$}{Supported\\solve}{Observation\\$y(\theta)$}{Scalar loss\\$\mathcal L$}
-\vspace{3mm}
+\tagline{$z_{n+1}=S_n(z_n,p)$; $A_n=\partial S_n/\partial z_n$, $B_n=\partial S_n/\partial p$}
 \begin{center}\begin{tikzpicture}[>=Latex]
-\draw[<-,teal,thick] (0,0)--(11,0);
-\node[teal] at (5.5,-.6) {backward: $\partial\mathcal L/\partial\theta$};
+\foreach \x/\n in {0/0,3/1,6/2}{
+ \node[state] (z\n) at (\x,0) {$z_\n$};
+ \node[text=reverse,font=\large] (l\n) at (\x,-1.3) {$\lambda_\n$};}
+\node[process,text width=2.9cm] (J) at (10,0) {$J=\ell(Cz_2,p)$};
+\draw[flow] (z0)--node[above]{$S_0$}(z1);\draw[flow] (z1)--node[above]{$S_1$}(z2);\draw[flow] (z2)--(J);
+\node[teal,font=\small] at (3,1.05) {the same $p$ enters each update};
+\draw[backflow] (l2)--node[below]{$A_1^{\mathsf T}$}(l1);\draw[backflow] (l1)--node[below]{$A_0^{\mathsf T}$}(l0);
+\node[text=reverse] (terminal) at (10,-1.3) {$\lambda_2=C^{\mathsf T}\nabla_y\ell$};
+\draw[backflow] (J.south)--(terminal.north);\draw[backflow] (terminal)--(l2);
 \end{tikzpicture}\end{center}
+\vspace{-2mm}
+\[\frac{dJ}{dp}=\underbrace{B_0^{\mathsf T}\lambda_1+B_1^{\mathsf T}\lambda_2}_{\text{add every use of }p}
++\underbrace{\partial_p\ell+(\partial_p z_0)^{\mathsf T}\lambda_0}_{\text{direct and initial-state dependence}}\]
 \question{What could break or change this path?}
 \source{Custom solves, convergence, boundary treatment, detach, clamps, history maxima and active sets matter. \ad}
-\timing{B 78--85 / 7 minutes}{Explain backpropagation as chain-rule accumulation through a supported graph. PyTorch and JAX are frameworks; PhAST and JAX-FEM are solver projects. Both ecosystems can support differentiable FEM. Framework choice alone is not a gradient or performance guarantee.}
+\timing{B 78--85 / 7 minutes}{Trace two updates left to right and adjoints right to left. Define fixed C and the scalar final loss. Sum B0 transpose lambda1 and B1 transpose lambda2 because the parameter is shared; retain direct and initial-state terms when present. The gradient is not the optimizer update. The book chapter expands this to three numerical steps with hand/AD/FD checks. p and J here correspond to theta and loss notation elsewhere. Original diagram; visual inspiration: TUM ADL4P Differentiable Physics II, PDF page 5. PyTorch and JAX can support differentiable FEM; framework choice alone is not a gradient or performance guarantee.}
 \end{frame}
 
 \begin{frame}[fragile]{Check a local derivative three ways}
@@ -515,12 +553,15 @@ Are prescribed values consistent?
 \end{frame}
 
 \begin{frame}{Acceptance needs an explicit correction route}
-\begin{center}\begin{tikzpicture}[>=Latex,every node/.style={align=center},thick]
-\node (p) at (0,0) {assessed\\proposal};
-\node[teal] (a) at (7,1.1) {accept\\record and advance};
-\node[navy] (r) at (7,-1.1) {reference correction\\record why};
-\draw[->,teal] (p)--node[above,sloped,font=\small]{passes stated gate}(a);
-\draw[->,navy] (p)--node[below,sloped,font=\small]{fails stated gate}(r);
+\begin{center}\begin{tikzpicture}[>=Latex]
+\node[process] (p) at (0,0) {Projected\\proposal};
+\node[decision] (q) at (3.9,0) {Passes\\stated gate?};
+\node[process,draw=teal,fill=teal!4,text width=3cm] (a) at (9,1.35) {Accept proposal\\record and advance};
+\node[process,draw=reverse,fill=reverse!4,text width=3cm] (r) at (9,-1.35) {Reference\\correction\\and recheck};
+\draw[flow] (p)--(q);
+\draw[flow] (q.north)|-node[above,pos=.7]{Yes}(a.west);
+\draw[backflow] (q.south)|-node[below,pos=.7]{No}(r.west);
+\node[font=\small,muted] at (5.5,-2.75) {If correction also fails: stop and diagnose.};
 \end{tikzpicture}\end{center}
 \question{Inspect one useful proposal and one rejected proposal.}
 \source{Log proposal, projection, residual, decision, correction and total cost. A successful toy gate is not a universal reliability or acceleration claim.}
@@ -528,11 +569,15 @@ Are prescribed values consistent?
 \end{frame}
 
 \begin{frame}{DAgger learns from states the model visits}
-\flowfour{Visit\\model states}{Query\\reference}{Aggregate\\labelled data}{Retrain\\and reassess}
-\vspace{4mm}
+\tagline{Conceptual extension: the current notebook saves one replay record}
 \begin{center}\begin{tikzpicture}[>=Latex]
-\draw[->,teal,thick] (11,0)--(11,-.6)--(0,-.6)--(0,0);
-\node[muted] at (5.5,-1.05) {fixed held-out evaluation; reference queries have a cost};
+\node[process] (v) at (0,0) {Visit states\\with the learner};
+\node[process] (q) at (3.3,0) {Query\\the reference};
+\node[process] (a) at (6.6,0) {Aggregate\\labelled records};
+\node[process] (t) at (9.9,0) {Retrain\\the learner};
+\draw[flow] (v)--(q);\draw[flow] (q)--(a);\draw[flow] (a)--(t);
+\draw[backflow,dashed] (t.south)--(9.9,-1.5)--node[below,font=\small]{new learner; repeat on learner-visited states}(0,-1.5)--(v.south);
+\node[muted,font=\small] at (4.95,1.4) {Keep held-out evaluation separate from the aggregated training data.};
 \end{tikzpicture}\end{center}
 \question{How do visited states differ from teacher-provided states?}
 \source{\daggerref\quad Notebook 05 logs a replay record; a full aggregated retraining round is optional, not claimed as executed.}

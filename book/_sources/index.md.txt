@@ -1,10 +1,13 @@
 # PhAST: a learn-by-doing introduction to phase-field fracture
 
-```{figure} figures/00_course_map.png
+```{figure} figures/00_course_map.*
 :name: fig-course-map
-:width: 94%
+:width: 100%
+:alt: Three 120-minute sessions: understand fracture and FEM with notebook 00; run PhAST and check derivatives with notebooks 01 to 03; train and assess learned proposals with notebooks 04 and 05. Each session includes a ten-minute break.
 
-The course route: make each modelling and computational choice visible.
+The six-hour route combines explanation, discussion and notebook activities.
+Each two-hour session includes a ten-minute break; computation time is measured
+separately.
 ```
 
 This short textbook develops a reproducible way to reason about phase-field
@@ -42,6 +45,11 @@ For visual experiments alongside the text, open the
 lessons, use the [environment guide](../SETUP.md). The
 [printable edition](../ebooks/phast-ukacm-course.pdf) includes the code,
 recorded figures and complete worked solutions.
+
+:::{only} html
+Select a diagram to open its full-size vector view. On a small screen, enlarge
+that view to follow the equation labels and feedback arrows.
+:::
 
 ```{toctree}
 :maxdepth: 2

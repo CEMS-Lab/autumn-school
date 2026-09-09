@@ -51,6 +51,8 @@ Editable book sources live in `source/book/`; canonical executed notebooks
 live in `notebooks/`; original exercise sources live in
 `source/book/solutions/`. See [contributor guidance](CONTRIBUTING.md) and
 [edition notes](INTEGRATED_EDITION.md) before editing generated pages.
+The [academic diagram standard](DESIGN_STANDARD.md) records the inspected
+Delft, TUM and ETH references and the original course-wide visual grammar.
 
 The reading design is informed by [D2L](https://d2l.ai/),
 [ADL4P](https://tum-pbs.github.io/ADL4P/) and

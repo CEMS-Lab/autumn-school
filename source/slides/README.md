@@ -6,6 +6,13 @@ It has 44 slides in 16:9 format. The visual style is plain white,
 black academic titles, real LaTeX equations, large scientific plots and short
 source/scope footers. Discussion prompts and detailed limitations are in the notes.
 
+The v0.1.1 revision updates the six-hour overview, staggered loop,
+assembled/matrix-free comparison, reverse-accumulation diagram, correction
+branch and conceptual DAgger loop. The diagrams are original editable TikZ,
+with a blue forward path and labelled orange reverse/retry path. See the
+course-root `DESIGN_STANDARD.md` for inspected Delft, TUM and ETH references.
+Numerical outputs and the three 120-minute allocations are unchanged.
+
 ## Teaching route
 
 | Slides | Session | Scheduled teaching time |

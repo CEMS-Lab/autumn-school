@@ -180,6 +180,15 @@ were written specifically for the PhAST course.
 
 ### Scientific references
 
+The original diagrams also draw visual-design inspiration from the
+[TU Delft surrogate-model explanation](https://teachbooks.tudelft.nl/computational-modelling/advanced_topics/multiscale/surrogate.html),
+[TUM's differentiable-physics lecture](https://tum-pbs.github.io/ADL4P/slides/ADL4P%203%20-%20Differentiable%20Physics%20II.pdf)
+and the [ETH Zurich SPCL DaCeML research presentation](https://spcl.inf.ethz.ch/Publications/.pdf/daceml-slides.pdf).
+These sources illustrate labelled physical interfaces, aligned forward and
+reverse paths, and overview-to-detail explanations. Their graphics are not
+reproduced here. The diagrams use the notation and scientific scope of this
+course.
+
 The following sources support the formulation boundaries and teaching
 conventions used here.
 

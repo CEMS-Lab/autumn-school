@@ -5,6 +5,7 @@ reviews/
 __pycache__/
 .ipynb_checkpoints/
 .DS_Store
+jupyter_execute/
 *.pyc
 book/.doctrees/
 book/.buildinfo

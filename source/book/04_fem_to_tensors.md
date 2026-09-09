@@ -1,8 +1,9 @@
 # Geometry, FEM, tensors, and matrix-free operators
 
-:::{figure} figures/04_fem_pipeline.png
+:::{figure} figures/04_fem_pipeline.*
 :name: fig-fem-pipeline
 :width: 97%
+:alt: Geometry, mesh, fields and boundary data define finite-element operators. Either assemble the matrix or apply its action without global storage; both routes require a solution and numerical checks.
 
 Finite-element data can be expressed as tensors without changing the need to
 define geometry, interpolation, quadrature, loads, and checks.

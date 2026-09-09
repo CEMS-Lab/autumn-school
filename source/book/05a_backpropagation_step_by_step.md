@@ -8,9 +8,10 @@ discussion of differentiable physics](https://physicsbaseddeeplearning.org/diffp
 That link is a pedagogical reference only: no external code, figure, or
 derivation is reproduced here.
 
-:::{figure} figures/05a_backpropagation.png
+:::{figure} figures/05a_backpropagation.*
 :name: fig-backpropagation-step-by-step
 :width: 100%
+:alt: Three updates propagate states forward. The terminal loss seeds adjoints, which propagate backwards through transposed state Jacobians. Add each shared-parameter contribution plus direct-loss and initial-state terms to obtain the total gradient; optimisation is a separate step.
 
 One parameter can influence a final loss at every update. Reverse mode passes
 a cotangent backwards and adds one parameter contribution per use of that

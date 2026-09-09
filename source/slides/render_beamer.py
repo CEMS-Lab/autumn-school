@@ -3,6 +3,7 @@
 Requires pypdf, Pillow and Poppler's pdftoppm. Does not execute course notebooks.
 """
 from pathlib import Path
+import argparse
 import hashlib
 import json
 import re
@@ -11,9 +12,13 @@ from PIL import Image, ImageDraw
 from pypdf import PdfReader
 
 ROOT=Path(__file__).resolve().parent
-OUT=ROOT/'latex_qa';OUT.mkdir(exist_ok=True)
+parser=argparse.ArgumentParser(description=__doc__)
+parser.add_argument('--build-dir',type=Path,default=ROOT,help='Directory containing the compiled PDF and log')
+parser.add_argument('--output',type=Path,default=ROOT/'latex_qa',help='Private review output directory')
+options=parser.parse_args()
+OUT=options.output.resolve();OUT.mkdir(parents=True,exist_ok=True)
 TEX=ROOT/'phast_autumn_school_2026.tex'
-PDF=ROOT/'phast_autumn_school_2026.pdf'
+PDF=options.build_dir.resolve()/'phast_autumn_school_2026.pdf'
 text=TEX.read_text()
 body=text.split(r'\begin{document}',1)[1]
 
@@ -61,7 +66,7 @@ for first in range(0,len(rendered),6):
         sheet.paste(im,(x,y));draw.text((x,y-20),f'Slide {first+j+1:02}',fill='#20364D')
     sheet.save(OUT/f'contact-{first//6+1:02}.png')
 texts=[p.extract_text() or '' for p in reader.pages]
-log=(ROOT/'phast_autumn_school_2026.log').read_text()
+log=(options.build_dir.resolve()/'phast_autumn_school_2026.log').read_text()
 report={
     'format':'LaTeX Beamer, 16:9','renderer':'Poppler pdftoppm','source_frames':len(manifest),
     'pdf_pages':len(reader.pages),'rendered_pages':len(rendered),

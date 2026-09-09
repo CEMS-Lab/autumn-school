@@ -1,8 +1,9 @@
 # From solid mechanics to staggered damage updates
 
-:::{figure} figures/03_staggered_loop.png
+:::{figure} figures/03_staggered_loop.*
 :name: fig-staggered-loop
 :width: 96%
+:alt: At a fixed load increment, update mechanics, the driving field and damage, then check convergence. Repeat mechanics if not converged; otherwise accept and advance the load.
 
 A staggered solve does not make the mechanics and damage independent; it
 chooses an order in which to update their coupled fields.

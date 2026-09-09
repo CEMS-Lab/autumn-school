@@ -2,116 +2,34 @@
 
 The figures are deliberately schematic: they teach relationships between
 models, fields, and computational steps without reproducing a published
-result.  Run from the book directory with the course Python environment.
+result. Run with the course Python environment. Use --flowcharts-only to
+preserve the separate scientific energy plot byte for byte.
 """
 
 from __future__ import annotations
 
+import argparse
 from pathlib import Path
 
 import matplotlib.pyplot as plt
-from matplotlib.patches import FancyArrowPatch, FancyBboxPatch, Polygon, Rectangle
+from matplotlib.patches import FancyArrowPatch, Rectangle
 import numpy as np
+
+from embed_svg_fonts import embed_svg_fonts
 
 
 OUT = Path(__file__).resolve().parents[1] / "figures"
 OUT.mkdir(parents=True, exist_ok=True)
 
 INK = "#17233c"
-NAVY = "#244c77"
-BLUE = "#5f9ed1"
 TEAL = "#3c9d9b"
 GOLD = "#d69e2e"
 CORAL = "#d4645c"
-PALE = "#eef4f9"
-GREY = "#687383"
-
-
-def canvas(width: float = 10.5, height: float = 5.8):
-    fig, ax = plt.subplots(figsize=(width, height), constrained_layout=True)
-    ax.set_xlim(0, 10)
-    ax.set_ylim(0, 6)
-    ax.axis("off")
-    return fig, ax
-
-
-def box(ax, xy, width, height, title, body, color=BLUE, *, fontsize=10):
-    x, y = xy
-    ax.add_patch(
-        FancyBboxPatch(
-            (x, y), width, height,
-            boxstyle="round,pad=0.08,rounding_size=0.12",
-            linewidth=1.5, edgecolor=color, facecolor="white",
-        )
-    )
-    ax.text(x + 0.15, y + height - 0.28, title, color=INK, fontsize=fontsize + 1,
-            weight="bold", va="top")
-    ax.text(x + 0.15, y + height - 0.72, body, color=GREY, fontsize=fontsize,
-            va="top", linespacing=1.35)
-
-
-def arrow(ax, start, end, color=NAVY, *, label=None, label_offset=(0, 0.14)):
-    ax.add_patch(FancyArrowPatch(start, end, arrowstyle="-|>", mutation_scale=14,
-                                 linewidth=1.6, color=color))
-    if label:
-        mx = (start[0] + end[0]) / 2 + label_offset[0]
-        my = (start[1] + end[1]) / 2 + label_offset[1]
-        ax.text(mx, my, label, ha="center", color=GREY, fontsize=9)
 
 
 def save(fig, name):
     fig.savefig(OUT / name, dpi=220, bbox_inches="tight", facecolor="white")
     plt.close(fig)
-
-
-def course_map():
-    fig, ax = canvas(10.8, 5.5)
-    ax.text(0.2, 5.7, "One day: from a crack description to a reproducible computation",
-            fontsize=16, weight="bold", color=INK)
-    labels = [
-        ("Represent", "sharp, cohesive,\nor diffuse crack", BLUE),
-        ("Regularise", "energy, length scale,\nand constraints", TEAL),
-        ("Discretise", "mesh, quadrature,\nand unknown fields", GOLD),
-        ("Differentiate", "tensors, AD,\nand inverse tasks", CORAL),
-    ]
-    for i, (head, body, color) in enumerate(labels):
-        x = 0.35 + 2.42 * i
-        box(ax, (x, 2.15), 1.93, 1.65, head, body, color, fontsize=9)
-        if i < len(labels) - 1:
-            arrow(ax, (x + 1.98, 2.96), (x + 2.36, 2.96))
-    ax.text(5.0, 0.90,
-            "Every chapter returns to the same question: what is represented,\n"
-            "what is approximated, and what is checked?",
-            ha="center", va="center", fontsize=12, color=NAVY,
-            bbox=dict(boxstyle="round,pad=0.45", fc=PALE, ec="none"))
-    save(fig, "00_course_map.png")
-
-
-def methods_map():
-    fig, ax = canvas(11.0, 6.2)
-    ax.text(0.2, 5.75, "Keep the modelling choices separate", fontsize=16,
-            weight="bold", color=INK)
-    box(ax, (0.35, 3.25), 2.25, 1.45, "Fracture formulation",
-        "What energy or traction law\nrepresents separation?", TEAL)
-    box(ax, (3.75, 3.25), 2.25, 1.45, "Spatial discretisation",
-        "How are fields represented\non a mesh?", BLUE)
-    box(ax, (7.15, 3.25), 2.25, 1.45, "Nonlinear solution",
-        "How are equilibrium and\nirreversibility solved?", GOLD)
-    arrow(ax, (2.65, 3.98), (3.65, 3.98), label="then approximate")
-    arrow(ax, (6.05, 3.98), (7.05, 3.98), label="then solve")
-    ax.text(1.48, 2.65, "Griffith / phase field\ncohesive-zone law", ha="center",
-            fontsize=10, color=INK, weight="bold")
-    ax.text(4.88, 2.65, "standard FEM / XFEM\nmesh refinement", ha="center",
-            fontsize=10, color=INK, weight="bold")
-    ax.text(8.28, 2.65, "staggered / Newton\nquasi-Newton", ha="center",
-            fontsize=10, color=INK, weight="bold")
-    ax.text(5.0, 1.35,
-            "Phase field is a regularised fracture formulation.  XFEM enriches a\n"
-            "discretisation.  A cohesive-zone model prescribes an interface law.\n"
-            "Quasi-Newton names an optimisation strategy, not a crack model.",
-            ha="center", va="center", fontsize=11, color=NAVY,
-            bbox=dict(boxstyle="round,pad=0.55", fc="#fff8e8", ec="#f0c45e"))
-    save(fig, "01_methods_map.png")
 
 
 def energy_profiles():
@@ -145,124 +63,314 @@ def energy_profiles():
     save(fig, "02_energy_profiles.png")
 
 
-def staggered_loop():
-    fig, ax = canvas(10.8, 5.8)
-    ax.text(0.2, 5.45, "A staggered update reuses two smaller problems", fontsize=16,
-            weight="bold", color=INK)
-    box(ax, (0.45, 2.4), 2.0, 1.55, "Load increment $n$",
-        "known $d_{n-1}$ and\nboundary/loading data", NAVY)
-    box(ax, (3.25, 3.55), 2.15, 1.4, "Mechanics step",
-        "solve for displacement $u$\nwith damage held fixed", BLUE)
-    box(ax, (3.25, 1.20), 2.15, 1.4, "Damage step",
-        "solve for $d$ with $u$ fixed\nand enforce $d\geq d_{n-1}$", TEAL)
-    box(ax, (7.05, 2.40), 2.35, 1.55, "Accept or repeat",
-        "check residual/change;\nadvance the load only when ready", GOLD)
-    arrow(ax, (2.55, 3.2), (3.12, 4.15))
-    arrow(ax, (5.48, 4.0), (6.92, 3.35), label="stored tensile driving force")
-    arrow(ax, (7.02, 2.75), (5.48, 1.9), label="not converged", label_offset=(0, -0.28))
-    arrow(ax, (5.48, 1.85), (6.92, 2.75), label="updated damage", label_offset=(0, 0.18))
-    arrow(ax, (9.47, 3.15), (10.05, 3.15), label="next increment")
-    ax.text(5.0, 0.42,
-            "The diffusion analogy helps explain the gradient term, but fracture has\n"
-            "a one-way history constraint and is coupled to elastic equilibrium.",
-            ha="center", fontsize=10.5, color=GREY)
-    save(fig, "03_staggered_loop.png")
-
-
-def fem_pipeline():
-    fig, ax = canvas(11.1, 5.9)
-    ax.text(0.2, 5.50, "The same finite-element idea can be written as tensors", fontsize=16,
-            weight="bold", color=INK)
-    stages = [
-        ("Geometry", "points, notch,\nmaterial regions", BLUE),
-        ("Mesh", "cells, facets,\nquadrature", TEAL),
-        ("Fields", "$u$ and $d$ at\nnodal degrees of freedom", GOLD),
-        ("Operators", "strain, stress,\nresidual, action", CORAL),
-        ("Results", "reaction, energy,\nfield plots", NAVY),
-    ]
-    for i, (title, body, color) in enumerate(stages):
-        x = 0.25 + 1.96 * i
-        box(ax, (x, 2.75), 1.66, 1.45, title, body, color, fontsize=8.7)
-        if i < len(stages) - 1:
-            arrow(ax, (x + 1.72, 3.47), (x + 1.88, 3.47))
-    ax.text(2.7, 1.35,
-            "assembled route\nform a sparse matrix $K$\nand solve $Kx=b$",
-            ha="center", va="center", fontsize=10.5, color=INK,
-            bbox=dict(boxstyle="round,pad=0.40", fc=PALE, ec=BLUE))
-    ax.text(7.25, 1.35,
-            "matrix-free route\nprovide the action $v\mapsto K v$\nto an iterative solver",
-            ha="center", va="center", fontsize=10.5, color=INK,
-            bbox=dict(boxstyle="round,pad=0.40", fc="#eef8f7", ec=TEAL))
-    arrow(ax, (4.15, 2.70), (3.05, 1.90), color=BLUE)
-    arrow(ax, (5.80, 2.70), (6.85, 1.90), color=TEAL)
-    ax.text(5.0, 0.28, "Matrix-free means avoiding an explicitly stored global matrix; it does not remove the need for a valid residual or boundary conditions.",
-            ha="center", fontsize=9.2, color=GREY)
-    save(fig, "04_fem_pipeline.png")
-
-
-def autograd_inverse():
-    fig, ax = canvas(10.8, 5.9)
-    ax.text(0.2, 5.45, "Differentiate a defined computation, then test the derivative", fontsize=16,
-            weight="bold", color=INK)
-    box(ax, (0.4, 2.55), 1.75, 1.42, "Parameter $p$",
-        "for example a bounded\nmaterial multiplier", GOLD)
-    box(ax, (3.0, 2.55), 1.95, 1.42, "Forward map",
-        "geometry + fields +\nsolver operations", BLUE)
-    box(ax, (5.85, 2.55), 1.75, 1.42, "Loss $J$",
-        "compare a stated\nobservable", TEAL)
-    box(ax, (8.45, 2.55), 1.18, 1.42, "Update",
-        r"$p\leftarrow p-\alpha\nabla_p J$", CORAL, fontsize=8.5)
-    arrow(ax, (2.22, 3.25), (2.90, 3.25))
-    arrow(ax, (5.05, 3.25), (5.75, 3.25))
-    arrow(ax, (7.70, 3.25), (8.35, 3.25))
-    arrow(ax, (9.04, 2.45), (1.28, 2.10), color=CORAL,
-          label="repeat after a bounded update", label_offset=(0, -0.22))
-    ax.text(5.0, 1.08,
-            r"Directional check: $\frac{J(p+hq)-J(p-hq)}{2h}\;\approx\;\nabla_pJ(p)\cdot q$",
-            ha="center", va="center", fontsize=15, color=NAVY,
-            bbox=dict(boxstyle="round,pad=0.42", fc=PALE, ec="none"))
-    ax.text(5.0, 0.35,
-            "A small directional discrepancy checks one local derivative; it is not evidence that an inverse problem is globally identifiable.",
-            ha="center", fontsize=9.4, color=GREY)
-    save(fig, "05_autograd_inverse.png")
-
-
-def learning_cycle():
-    fig, ax = canvas(11.0, 6.1)
-    ax.text(0.2, 5.60, "A learned proposal remains part of a checked mechanics workflow", fontsize=16,
-            weight="bold", color=INK)
-    box(ax, (0.35, 3.15), 2.0, 1.42, "Reference records",
-        "inputs, fields, metadata,\nand split definition", BLUE)
-    box(ax, (3.05, 3.15), 1.75, 1.42, "Train",
-        "fit on training cases;\nkeep validation separate", TEAL)
-    box(ax, (5.50, 3.15), 1.75, 1.42, "Save + reload",
-        "state, normalisation,\nversion, and device", GOLD)
-    box(ax, (7.95, 3.15), 1.75, 1.42, "Proposal",
-        "suggest a field or\ninitialisation", CORAL)
-    for x in [2.45, 4.90, 7.35]:
-        arrow(ax, (x, 3.85), (x + 0.48, 3.85))
-    box(ax, (3.05, 0.95), 2.1, 1.35, "Physics check",
-        "constraints, residuals,\nand a reference comparison", NAVY)
-    box(ax, (6.10, 0.95), 2.1, 1.35, "Adapt / collect",
-        "record difficult cases\nwithout relabelling them", TEAL)
-    arrow(ax, (8.82, 3.05), (7.22, 2.38), color=CORAL, label="audit first")
-    arrow(ax, (6.1, 1.62), (5.25, 1.62))
-    arrow(ax, (3.0, 1.62), (1.35, 3.02), color=TEAL,
-          label="optional DAgger-style data loop", label_offset=(0.1, -0.25))
-    ax.text(5.0, 0.30,
-            "An adapter changes the interface between representations; it is not a certificate that a proposal is physically correct.",
-            ha="center", fontsize=9.7, color=GREY)
-    save(fig, "06_learning_cycle.png")
-
-
 def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        "--flowcharts-only", action="store_true",
+        help="Rebuild the six diagrams without touching the scientific energy plot.",
+    )
+    args = parser.parse_args()
     course_map()
     methods_map()
-    energy_profiles()
+    if not args.flowcharts_only:
+        energy_profiles()
     staggered_loop()
     fem_pipeline()
     autograd_inverse()
     learning_cycle()
+
+
+# The energy plot above retains its original palette and generation path.
+# The six diagram builders below use a separate, local style so a cosmetic
+# flowchart revision cannot alter scientific plots or numerical results.
+FLOW_INK = "#17212B"
+FLOW_BLUE = "#245A81"
+FLOW_TEAL = "#087F82"
+FLOW_ORANGE = "#B85C20"
+FLOW_GREY = "#58636D"
+FLOW_LINE = "#D4DADE"
+
+
+def flow_canvas(title, height=7.3):
+    fig, ax = plt.subplots(figsize=(9.2, height))
+    fig.subplots_adjust(left=0.012, right=0.988, bottom=0.018, top=0.982)
+    ax.set(xlim=(0, 9.2), ylim=(0, height))
+    ax.axis("off")
+    ax.text(0.18, height - 0.18, title, fontsize=22, weight="bold",
+            color=FLOW_INK, va="top", linespacing=1.15)
+    return fig, ax
+
+
+def flow_text(ax, x, y, text, size=14, color=FLOW_INK, **kwargs):
+    return ax.text(x, y, text, fontsize=size, color=color,
+                   linespacing=1.3, **kwargs)
+
+
+def flow_node(ax, x, y, width, height, title, body="", *, color=FLOW_BLUE,
+              title_size=17, body_size=14):
+    """A flat process rectangle; colour denotes role rather than decoration."""
+    ax.add_patch(Rectangle((x, y), width, height, facecolor="white",
+                           edgecolor=FLOW_LINE, linewidth=0.9))
+    ax.plot([x, x + width], [y + height, y + height], color=color, lw=2.6,
+            solid_capstyle="butt")
+    flow_text(ax, x + 0.15, y + height - 0.17, title, title_size,
+              color, weight="bold", va="top")
+    if body:
+        flow_text(ax, x + 0.15, y + height - 0.59, body, body_size,
+                  va="top")
+
+
+def flow_arrow(ax, points, *, color=FLOW_BLUE, dashed=False, label=None,
+               label_at=None, label_size=14, align="center"):
+    """Orthogonal connectors avoid ambiguous crossings and duplicate edges."""
+    style = (0, (4, 3)) if dashed else "solid"
+    if len(points) > 2:
+        xs, ys = zip(*points[:-1])
+        ax.plot(xs, ys, color=color, linewidth=1.7, linestyle=style,
+                solid_capstyle="butt", dash_capstyle="butt")
+    ax.add_patch(FancyArrowPatch(points[-2], points[-1], arrowstyle="-|>",
+                                 mutation_scale=15, linewidth=1.7,
+                                 color=color, linestyle=style,
+                                 shrinkA=0, shrinkB=1.5))
+    if label:
+        flow_text(ax, *label_at, label, label_size, color, ha=align,
+                  va="center", bbox=dict(fc="white", ec="none", pad=1.6))
+
+
+def flow_save(fig, name):
+    # Keep SVG labels editable/searchable; PDF embeds TrueType text. These
+    # settings are scoped to this export, not to the pre-existing energy plot.
+    with plt.rc_context({"svg.fonttype": "none", "pdf.fonttype": 42,
+                         "font.family": "DejaVu Sans", "mathtext.fontset": "dejavusans"}):
+        for suffix in ("png", "svg", "pdf"):
+            fig.savefig(OUT / f"{name}.{suffix}", dpi=220,
+                        bbox_inches="tight", pad_inches=0.08,
+                        facecolor="white")
+            if suffix == "svg":
+                embed_svg_fonts(OUT / f"{name}.svg")
+    plt.close(fig)
+
+
+def course_map():
+    fig, ax = flow_canvas("Six hours: understand, compute, then learn", 7.1)
+    flow_text(ax, 0.2, 6.37,
+              "Three 120-minute sessions, each including a 10-minute break.",
+              color=FLOW_GREY)
+    rows = [
+        ("A", 5.96, "Model & numerical method", FLOW_BLUE,
+         "Crack representations → energy & damage → FEM",
+         "Explain what the model represents and what the method approximates.",
+         "Notebook 00  ·  Opening prediction (algebraic teaser)"),
+        ("B", 4.08, "Computation & derivatives", FLOW_BLUE,
+         "Geometry & loads → PhAST result → checked gradient",
+         "Run a small case, interpret its fields, and test a local sensitivity.",
+         "Notebooks 01–03  ·  PhAST, degradation, elastic-bar inverse toy"),
+        ("C", 2.20, "Learning & model interfaces", FLOW_TEAL,
+         "Train & reload → compatible proposal → physics check",
+         "Evaluate a learned component and explain when correction is needed.",
+         "Notebooks 04–05  ·  Toy field training and checked fallback"),
+    ]
+    for index, top, title, colour, route, outcome, notebooks in rows:
+        flow_text(ax, 0.22, top - 0.05, index, 24, colour,
+                  weight="bold", va="top")
+        flow_text(ax, 0.95, top, title, 18, colour,
+                  weight="bold", va="top")
+        flow_text(ax, 8.82, top - 0.03, "120 min", 15, FLOW_GREY,
+                  ha="right", va="top")
+        flow_text(ax, 0.95, top - 0.48, route, 15, va="top")
+        flow_text(ax, 0.95, top - 0.89, outcome, 14, va="top")
+        flow_text(ax, 0.95, top - 1.30, notebooks, 14, FLOW_GREY, va="top")
+        ax.plot([0.95, 8.93], [top - 1.64, top - 1.64],
+                color=FLOW_LINE, lw=0.8)
+    for top in (5.96, 4.08):
+        flow_arrow(ax, [(0.38, top - 0.61), (0.38, top - 1.68)],
+                   color=FLOW_GREY)
+    flow_save(fig, "00_course_map")
+
+
+def methods_map():
+    fig, ax = flow_canvas("Three choices, three different questions", 7.4)
+    stages = [
+        (5.23, "1", "Fracture formulation", "What represents separation?",
+         "A phase-field energy or a cohesive traction–separation law.", FLOW_TEAL),
+        (3.20, "2", "Spatial discretisation", "How are the fields approximated?",
+         "Standard finite elements, XFEM enrichment, mesh resolution.", FLOW_BLUE),
+        (1.17, "3", "Solution algorithm", "How is the discrete problem solved?",
+         "Staggered or monolithic updates; Newton or quasi-Newton.", FLOW_BLUE),
+    ]
+    for y, number, title, question, examples, colour in stages:
+        flow_text(ax, 0.23, y + 1.07, number, 25, colour, weight="bold")
+        flow_node(ax, 0.98, y, 7.91, 1.42, title, question,
+                  color=colour, body_size=15)
+        flow_text(ax, 1.13, y + 0.25, examples, 14, color=FLOW_GREY)
+    flow_arrow(ax, [(4.92, 5.22), (4.92, 4.65)],
+               label="discretise the chosen equations", label_at=(5.21, 4.93), align="left")
+    flow_arrow(ax, [(4.92, 3.19), (4.92, 2.62)],
+               label="solve the discrete equations", label_at=(5.21, 2.90), align="left")
+    flow_text(ax, 0.98, 0.43,
+              "Quasi-Newton is not a fracture model; XFEM is not a traction law.",
+              14, FLOW_GREY)
+    flow_save(fig, "01_methods_map")
+
+
+def staggered_loop():
+    fig, ax = flow_canvas("Alternate fields at one load level", 8.0)
+    flow_text(ax, 0.75, 7.12,
+              r"Load increment $n$: initialise $d^{(0)}=d_{n-1}$; iteration $k=0$.",
+              15, FLOW_GREY)
+    flow_node(ax, 0.75, 4.82, 3.57, 1.50, "1  Mechanics",
+              "Hold damage fixed.\n" + r"Solve for $u^{(k+1)}$.")
+    flow_node(ax, 5.16, 4.82, 3.57, 1.50, "2  Driving quantity",
+              "Construct the tensile history\nor stated damage source.")
+    flow_node(ax, 5.16, 2.63, 3.57, 1.50, "3  Damage",
+              "Hold mechanics fixed.\n" + r"Enforce $d^{(k+1)}\geq d_{n-1}$.",
+              color=FLOW_TEAL)
+    flow_node(ax, 0.75, 2.63, 3.57, 1.50, "4  Converged?",
+              "Check both residuals\nand field changes.")
+    flow_node(ax, 0.75, 0.57, 3.57, 1.25, "Accept increment",
+              "Advance the load: " + r"$n\leftarrow n+1$.", color=FLOW_TEAL)
+    flow_arrow(ax, [(2.54, 6.86), (2.54, 6.34)])
+    flow_arrow(ax, [(4.33, 5.57), (5.14, 5.57)],
+               label=r"$u^{(k+1)}$", label_at=(4.74, 5.93))
+    flow_arrow(ax, [(6.95, 4.80), (6.95, 4.15)],
+               label=r"$H$ or $\psi^+$", label_at=(7.81, 4.48))
+    flow_arrow(ax, [(5.14, 3.38), (4.34, 3.38)],
+               label=r"$d^{(k+1)}$", label_at=(4.74, 3.74))
+    flow_arrow(ax, [(2.54, 2.61), (2.54, 1.84)], color=FLOW_TEAL,
+               label="yes", label_at=(2.95, 2.24))
+    flow_arrow(ax, [(0.73, 3.37), (0.28, 3.37), (0.28, 5.57), (0.73, 5.57)],
+               color=FLOW_ORANGE)
+    flow_text(ax, 0.81, 4.47, r"no: repeat with $k\leftarrow k+1$", 14,
+              FLOW_ORANGE, ha="left", va="center")
+    flow_text(ax, 5.17, 1.43, "Repeat at the same load.\n"
+              "A history construction and a\n"
+              "direct irreversibility constraint\n"
+              "are distinct modelling choices.", 14, FLOW_GREY, va="center")
+    flow_save(fig, "03_staggered_loop")
+
+
+def fem_pipeline():
+    fig, ax = flow_canvas("One FEM model, two operator routes", 8.2)
+    for x, title, body in [
+        (0.22, "Domain & mesh", "Coordinates, cells,\nquadrature."),
+        (3.36, "Material & state", r"Properties, $u$, $d$," + "\ninitial conditions."),
+        (6.50, "Loads & BCs", "Forces, prescribed\nvalues, boundaries."),
+    ]:
+        flow_node(ax, x, 5.87, 2.50, 1.47, title, body, title_size=16)
+    # Three inputs meet before the element operations; neither linear-solver
+    # branch is permitted to bypass geometry, material data, or constraints.
+    for centre in (1.47, 4.61, 7.75):
+        flow_arrow(ax, [(centre, 5.85), (centre, 5.46), (4.61, 5.46), (4.61, 5.03)])
+    flow_node(ax, 2.04, 3.53, 5.15, 1.48, "Element tensor operations",
+              r"$u_e\;\longrightarrow\;\varepsilon_q\;\longrightarrow\;\sigma_q\;\longrightarrow\;r_e$",
+              body_size=18)
+    flow_text(ax, 4.61, 3.70, "Gather → evaluate → scatter", 14,
+              FLOW_GREY, ha="center")
+    flow_node(ax, 0.39, 1.48, 3.75, 1.34, "Assembled route",
+              r"Store $K$; solve $Kx=b$.", body_size=15)
+    flow_node(ax, 5.07, 1.48, 3.75, 1.34, "Matrix-free route",
+              r"Apply $v\mapsto Kv$ in Krylov." + "\nNo stored global matrix.",
+              color=FLOW_BLUE, body_size=14)
+    flow_arrow(ax, [(3.01, 3.51), (3.01, 3.18), (2.27, 3.18), (2.27, 2.84)])
+    flow_arrow(ax, [(6.21, 3.51), (6.21, 3.18), (6.95, 3.18), (6.95, 2.84)])
+    flow_arrow(ax, [(2.27, 1.46), (2.27, 1.03), (4.61, 1.03), (4.61, 0.69)])
+    flow_arrow(ax, [(6.95, 1.46), (6.95, 1.03), (4.61, 1.03), (4.61, 0.69)])
+    flow_text(ax, 4.61, 0.42, "Inspect fields, reactions and residuals", 17,
+              FLOW_TEAL, ha="center", va="center", weight="bold")
+    flow_save(fig, "04_fem_pipeline")
+
+
+def autograd_inverse():
+    fig, ax = flow_canvas("A gradient is not an optimisation step", 8.1)
+    flow_text(ax, 0.25, 7.22, "FORWARD  ·  evaluate the stated computation", 14,
+              FLOW_BLUE, weight="bold")
+    for x, width, title, body in [
+        (0.25, 2.33, "Parameter", r"Chosen input $p$" + "\nOther inputs fixed."),
+        (3.39, 2.43, "Forward map", r"$z=S(p)$" + "\n" + r"Observable $y=Cz$"),
+        (6.64, 2.33, "Scalar loss", r"$J=\frac{1}{2}\|y-y^\star\|^2$"),
+    ]:
+        flow_node(ax, x, 5.41, width, 1.48, title, body, body_size=14)
+    flow_arrow(ax, [(2.60, 6.15), (3.37, 6.15)],
+               label=r"$p$", label_at=(2.98, 6.48))
+    flow_arrow(ax, [(5.84, 6.15), (6.62, 6.15)],
+               label=r"$y$", label_at=(6.23, 6.48))
+    flow_text(ax, 0.25, 4.93, "REVERSE  ·  accumulate vector–Jacobian products", 14,
+              FLOW_ORANGE, weight="bold")
+    flow_node(ax, 0.25, 3.10, 2.33, 1.48, "Input sensitivity",
+              r"$\nabla_p J$", color=FLOW_ORANGE, body_size=20, title_size=16)
+    flow_node(ax, 3.39, 3.10, 2.43, 1.48, "Reverse pass",
+              r"$(\partial y/\partial p)^T$" + "\nApply; do not invert.",
+              color=FLOW_ORANGE, body_size=14, title_size=16)
+    flow_node(ax, 6.64, 3.10, 2.33, 1.48, "Loss sensitivity",
+              r"$\nabla_yJ=y-y^\star$", color=FLOW_ORANGE, body_size=16, title_size=16)
+    flow_arrow(ax, [(7.805, 5.39), (7.805, 4.60)], color=FLOW_ORANGE)
+    flow_arrow(ax, [(6.62, 3.84), (5.84, 3.84)], color=FLOW_ORANGE)
+    flow_arrow(ax, [(3.37, 3.84), (2.60, 3.84)], color=FLOW_ORANGE)
+    flow_text(ax, 4.61, 2.54,
+              r"$\nabla_pJ=(\partial y/\partial p)^T\nabla_yJ$",
+              20, FLOW_ORANGE, ha="center", va="center")
+    ax.plot([0.25, 8.97], [2.12, 2.12], color=FLOW_LINE, lw=0.8)
+    flow_text(ax, 0.25, 1.72, "CHECK", 14, FLOW_INK, weight="bold")
+    flow_text(ax, 2.01, 1.75,
+              r"$\frac{J(p+hq)-J(p-hq)}{2h}\;\approx\;(\nabla_pJ)^Tq$",
+              18, FLOW_INK, va="center")
+    flow_text(ax, 0.25, 0.95, "OPTIONAL", 14, FLOW_TEAL, weight="bold")
+    flow_text(ax, 2.01, 0.98, r"Optimise: $p_{\mathrm{new}}=p-\alpha\nabla_pJ$",
+              18, FLOW_TEAL, va="center")
+    flow_text(ax, 0.25, 0.34,
+              "A local derivative check does not establish a unique inverse solution.",
+              14, FLOW_GREY)
+    flow_save(fig, "05_autograd_inverse")
+
+
+def learning_cycle():
+    fig, ax = flow_canvas("Learn a proposal; retain a checked solution", 9.3)
+    flow_text(ax, 0.25, 8.47, "OFFLINE  ·  fit and preserve the model contract", 14,
+              FLOW_TEAL, weight="bold")
+    for x, title, body in [
+        (0.25, "Reference data", "Inputs, targets,\nheld-out split."),
+        (3.39, "Train", r"Fit $f_\theta$; evaluate" + "\non unseen cases."),
+        (6.53, "Save & reload", "Weights, scaling,\nshapes, metadata."),
+    ]:
+        flow_node(ax, x, 6.70, 2.43, 1.45, title, body,
+                  color=FLOW_TEAL, title_size=16)
+    flow_arrow(ax, [(2.70, 7.43), (3.37, 7.43)], color=FLOW_TEAL)
+    flow_arrow(ax, [(5.84, 7.43), (6.51, 7.43)], color=FLOW_TEAL)
+    flow_arrow(ax, [(7.745, 6.68), (7.745, 6.16), (1.465, 6.16), (1.465, 5.30)],
+               color=FLOW_TEAL, label="deploy model + preprocessing",
+               label_at=(4.64, 6.16))
+    flow_text(ax, 2.07, 5.65, "ONLINE  ·  assess each proposed state", 14,
+              FLOW_BLUE, weight="bold")
+    flow_node(ax, 0.25, 3.81, 2.43, 1.47, "Proposal",
+              r"$\widehat z=f_\theta(x)$" + "\nDeclared interface.")
+    flow_node(ax, 3.39, 3.81, 2.43, 1.47, "Checks pass?",
+              "Bounds, history,\nstated residual.")
+    flow_node(ax, 6.53, 3.81, 2.43, 1.47, "Accept state",
+              "Record diagnostics\nand total cost.", color=FLOW_TEAL, title_size=16)
+    flow_arrow(ax, [(2.70, 4.55), (3.37, 4.55)])
+    flow_arrow(ax, [(5.84, 4.55), (6.51, 4.55)], color=FLOW_TEAL,
+               label="yes", label_at=(6.175, 4.93))
+    flow_node(ax, 3.39, 1.56, 2.43, 1.47, "Correct / fallback",
+              "Use the reference\nprocedure; recheck.", color=FLOW_ORANGE, title_size=15)
+    flow_arrow(ax, [(4.605, 3.79), (4.605, 3.05)], color=FLOW_ORANGE,
+               label="no", label_at=(5.02, 3.42))
+    flow_arrow(ax, [(5.84, 2.30), (7.745, 2.30), (7.745, 3.79)],
+               color=FLOW_BLUE, label="if checks pass",
+               label_at=(6.73, 3.42))
+    flow_node(ax, 0.25, 1.56, 2.43, 1.47, "Reference labels",
+              "Visited inputs +\ntrusted targets.", color=FLOW_GREY, title_size=16)
+    flow_arrow(ax, [(3.37, 2.30), (2.70, 2.30)], color=FLOW_ORANGE, dashed=True)
+    # Deliberately dashed: this is the optional conceptual aggregation loop,
+    # not a claim that the current toy notebooks perform full DAgger training.
+    flow_arrow(ax, [(1.465, 1.54), (1.465, 1.20), (0.08, 1.20),
+                   (0.08, 7.42), (0.23, 7.42)], color=FLOW_ORANGE, dashed=True)
+    flow_text(ax, 0.25, 0.77,
+              "Dashed loop: aggregate reference-labelled visited states and retrain.",
+              14, FLOW_ORANGE)
+    flow_text(ax, 0.25, 0.30,
+              "A conceptual DAgger extension; notebooks 04–05 demonstrate toy components.",
+              14, FLOW_GREY)
+    flow_save(fig, "06_learning_cycle")
 
 
 if __name__ == "__main__":

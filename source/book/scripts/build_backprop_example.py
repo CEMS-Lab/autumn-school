@@ -27,6 +27,8 @@ import matplotlib.pyplot as plt
 from matplotlib.patches import FancyBboxPatch
 import torch
 
+from embed_svg_fonts import embed_svg_fonts
+
 
 BOOK = Path(__file__).resolve().parents[1]
 ROOT = next(
@@ -96,276 +98,128 @@ def arrow(ax, start, stop, *, color="#293241", linewidth=1.4, style="->"):
 
 
 def build_figure(output_path: Path) -> None:
-    """Draw a full-width forward/reverse VJP schematic on a white canvas."""
-    navy = "#dce9f6"
-    navy_edge = "#2f5d8a"
-    green = "#dff2e4"
-    green_edge = "#2d7a46"
-    gold = "#fff0cf"
-    gold_edge = "#a76500"
-    violet = "#eee6f8"
-    violet_edge = "#6b4c9a"
-    grey = "#f5f6f8"
-    grey_edge = "#697386"
+    """Draw aligned forward, adjoint and shared-parameter accumulation bands.
 
-    fig, ax = plt.subplots(figsize=(14.6, 7.15), constrained_layout=True)
-    fig.patch.set_facecolor("white")
-    ax.set_facecolor("white")
-    ax.set_xlim(0, 15)
-    ax.set_ylim(0, 10)
-    ax.axis("off")
+    This original schematic uses the chapter's three-step notation. Its
+    printable vector exports preserve text; it does not execute the example
+    or make a new numerical-validation claim.
+    """
+    from matplotlib.patches import Circle, Rectangle
 
-    ax.text(
-        0.35,
-        9.63,
-        "Forward states and one shared parameter",
-        fontsize=15,
-        fontweight="bold",
-        color="#14213d",
-    )
-    ax.text(
-        0.35,
-        5.64,
-        "Reverse accumulation: vector--Jacobian products, not full Jacobians",
-        fontsize=14,
-        fontweight="bold",
-        color="#14213d",
-    )
-    ax.text(
-        0.35,
-        1.70,
-        "Parameter contributions are added once for every use of $p$",
-        fontsize=13.5,
-        fontweight="bold",
-        color="#14213d",
-    )
+    blue, orange, teal = "#245A81", "#B85C20", "#087F82"
+    ink, muted, rule = "#17252E", "#536571", "#DDE5EA"
+    with plt.rc_context(
+        {
+            "font.family": "DejaVu Sans",
+            "mathtext.fontset": "dejavusans",
+            "svg.fonttype": "none",
+            "pdf.fonttype": 42,
+            "savefig.facecolor": "white",
+        }
+    ):
+        fig, ax = plt.subplots(figsize=(9, 7.2))
+        fig.subplots_adjust(left=0, right=1, top=1, bottom=0)
+        fig.patch.set_facecolor("white")
+        ax.set(xlim=(0, 9), ylim=(0, 7.2), aspect="equal")
+        ax.axis("off")
 
-    # Forward row.
-    state_y, op_y, h = 7.30, 7.30, 0.78
-    state_w, op_w = 0.84, 1.10
-    x_state = [0.45, 3.10, 5.75, 8.40]
-    x_op = [1.57, 4.22, 6.87]
-    for index, xpos in enumerate(x_state):
-        draw_box(
-            ax,
-            xpos,
-            state_y,
-            state_w,
-            h,
-            rf"$z_{index}$",
-            face=navy,
-            edge=navy_edge,
-            fontsize=12,
-        )
-    for index, xpos in enumerate(x_op):
-        draw_box(
-            ax,
-            xpos,
-            op_y,
-            op_w,
-            h,
-            rf"$S_{index}$",
-            face=green,
-            edge=green_edge,
-            fontsize=12,
-        )
-        arrow(ax, (x_state[index] + state_w, state_y + h / 2), (xpos, op_y + h / 2))
-        arrow(ax, (xpos + op_w, op_y + h / 2), (x_state[index + 1], state_y + h / 2))
+        def text(x, y, label, *, size=16, color=ink, weight="normal", align="left"):
+            return ax.text(
+                x, y, label, fontsize=size, color=color, fontweight=weight,
+                ha=align, va="center",
+            )
 
-    draw_box(
-        ax,
-        10.25,
-        7.20,
-        2.35,
-        0.98,
-        r"$y=Cz_N$" "\n" r"$J=\ell(y,p)$",
-        face=grey,
-        edge=grey_edge,
-        fontsize=11,
-    )
-    arrow(ax, (x_state[-1] + state_w, state_y + h / 2), (10.25, 7.69))
-    draw_box(
-        ax,
-        13.10,
-        7.30,
-        1.25,
-        h,
-        "$J$",
-        face=grey,
-        edge=grey_edge,
-        fontsize=13,
-    )
-    arrow(ax, (12.60, 7.69), (13.10, 7.69))
+        def node(x, y, label, color, fill):
+            ax.add_patch(Circle((x, y), 0.29, facecolor=fill, edgecolor=color, lw=1.4))
+            text(x, y, label, size=20, color=color, align="center")
 
-    draw_box(
-        ax,
-        5.37,
-        8.72,
-        1.08,
-        0.62,
-        "shared $p$",
-        face=green,
-        edge=green_edge,
-        fontsize=10.4,
-    )
-    for xpos in x_op:
-        ax.plot(
-            [5.91, xpos + op_w / 2],
-            [8.72, op_y + h],
-            color=green_edge,
-            linewidth=1.1,
-            linestyle=(0, (3, 3)),
-            zorder=0,
-        )
+        def directed(start, stop, color, width=1.65):
+            ax.annotate(
+                "", xy=stop, xytext=start,
+                arrowprops={"arrowstyle": "-|>", "color": color,
+                            "lw": width, "mutation_scale": 12,
+                            "shrinkA": 0, "shrinkB": 0},
+            )
 
-    # Backward row.  Arrows run from the terminal seed towards the initial state.
-    backward_y = 3.50
-    lambda_positions = x_state
-    adjoint_positions = x_op
-    for index, xpos in enumerate(lambda_positions):
-        draw_box(
-            ax,
-            xpos,
-            backward_y,
-            state_w,
-            h,
-            rf"$\lambda_{index}$",
-            face=gold,
-            edge=gold_edge,
-            fontsize=12,
-        )
-    for index, xpos in enumerate(adjoint_positions):
-        draw_box(
-            ax,
-            xpos,
-            backward_y,
-            op_w,
-            h,
-            rf"$A_{index}^\mathsf{{T}}$",
-            face=gold,
-            edge=gold_edge,
-            fontsize=11.5,
-        )
-        arrow(
-            ax,
-            (lambda_positions[index + 1], backward_y + h / 2),
-            (xpos + op_w, backward_y + h / 2),
-            color=gold_edge,
-        )
-        arrow(
-            ax,
-            (xpos, backward_y + h / 2),
-            (lambda_positions[index] + state_w, backward_y + h / 2),
-            color=gold_edge,
-        )
-    arrow(ax, (11.43, 7.20), (8.82, backward_y + h), color=gold_edge)
-    ax.text(
-        10.02,
-        5.74,
-        r"terminal seed $\lambda_N=C^\mathsf{T}\nabla_y\ell$",
-        ha="center",
-        va="center",
-        color=gold_edge,
-        fontsize=10.2,
-    )
+        def rectangular(x, y, width, height, label, color, fill, size=16):
+            ax.add_patch(Rectangle((x, y), width, height,
+                                   facecolor=fill, edgecolor=color, lw=1.3))
+            text(x + width / 2, y + height / 2, label,
+                 size=size, color=color, align="center")
 
-    # Contribution row.
-    card_y, card_w, card_h = 0.35, 2.00, 0.79
-    contribution_x = [0.35, 2.75, 5.15]
-    labels = [
-        r"$B_0^\mathsf{T}\lambda_1$",
-        r"$B_1^\mathsf{T}\lambda_2$",
-        r"$B_2^\mathsf{T}\lambda_3$",
-    ]
-    for xpos, label in zip(contribution_x, labels):
-        draw_box(
-            ax,
-            xpos,
-            card_y,
-            card_w,
-            card_h,
-            label,
-            face=violet,
-            edge=violet_edge,
-            fontsize=11.4,
-        )
-    draw_box(
-        ax,
-        7.55,
-        card_y,
-        2.35,
-        card_h,
-        r"direct: $\partial_p\ell$" "\n" r"initial: $(\partial_p z_0)^\mathsf{T}\lambda_0$",
-        face=violet,
-        edge=violet_edge,
-        fontsize=9.8,
-    )
-    draw_box(
-        ax,
-        10.22,
-        card_y,
-        0.65,
-        card_h,
-        r"$\sum$",
-        face=violet,
-        edge=violet_edge,
-        fontsize=15,
-    )
-    draw_box(
-        ax,
-        11.17,
-        card_y,
-        1.38,
-        card_h,
-        "$dJ/dp$",
-        face=violet,
-        edge=violet_edge,
-        fontsize=11.8,
-    )
-    draw_box(
-        ax,
-        12.85,
-        card_y,
-        1.80,
-        card_h,
-        r"$p_{\rm new}$" "\n" r"$=p-\alpha\,dJ/dp$",
-        face=grey,
-        edge=grey_edge,
-        fontsize=9.7,
-    )
-    for xpos in (2.55, 4.95, 7.35):
-        ax.text(
-            xpos,
-            card_y + card_h / 2,
-            "+",
-            ha="center",
-            va="center",
-            color=violet_edge,
-            fontsize=15,
-            fontweight="bold",
-        )
-    arrow(ax, (9.90, card_y + card_h / 2), (10.22, card_y + card_h / 2), color=violet_edge)
-    arrow(ax, (10.87, card_y + card_h / 2), (11.17, card_y + card_h / 2), color=violet_edge)
-    arrow(ax, (12.55, card_y + card_h / 2), (12.85, card_y + card_h / 2))
+        text(0.38, 6.91, "Backpropagation through three updates", size=22, weight="bold")
 
-    ax.text(
-        0.35,
-        2.47,
-        r"$\lambda_n=A_n^\mathsf{T}\lambda_{n+1}$",
-        fontsize=11.7,
-        color=gold_edge,
-    )
-    ax.text(
-        10.72,
-        2.47,
-        r"$B_n=\partial S_n/\partial p$",
-        fontsize=11.1,
-        color=violet_edge,
-    )
+        # The state and adjoint columns line up: only the direction changes.
+        states = [0.80, 2.55, 4.30, 6.05]
+        operators = [(left + right) / 2 for left, right in zip(states, states[1:])]
+        forward_y, reverse_y = 5.15, 3.36
 
-    output_path.parent.mkdir(parents=True, exist_ok=True)
-    fig.savefig(output_path, dpi=190, facecolor="white")
-    plt.close(fig)
+        text(0.38, 6.40, "1   Evolve the state", color=blue, weight="bold")
+        text(8.62, 6.40, r"$z_{n+1}=S_n(z_n,p)$", size=17, color=blue, align="right")
+        text(0.42, 5.96, "shared $p$", size=14, color=teal)
+        ax.plot([1.47, operators[-1]], [5.96, 5.96], color=teal, lw=1.4)
+        for xpos in operators:
+            directed((xpos, 5.96), (xpos, 5.66), teal, width=1.3)
+        for index, xpos in enumerate(states):
+            node(xpos, forward_y, rf"$z_{index}$", blue, "#EDF4F8")
+        for index, xpos in enumerate(operators):
+            directed((states[index] + 0.33, forward_y),
+                     (states[index + 1] - 0.33, forward_y), blue)
+            text(xpos, 5.48, rf"$S_{index}$", size=18, color=blue, align="center")
+        rectangular(6.79, 4.86, 1.85, 0.58, r"$J=\ell(Cz_3,p)$", blue, "#EDF4F8", size=17)
+        directed((6.38, forward_y), (6.74, forward_y), blue)
+        text(7.715, 5.66, "scalar objective", size=14, color=muted, align="center")
+
+        # The right-hand turn seeds the reverse sweep from the final scalar.
+        ax.plot([0.38, 6.61], [4.52, 4.52], color=rule, lw=1)
+        text(0.38, 4.23, "2   Pass adjoints backwards", color=orange, weight="bold")
+        rectangular(6.79, 3.07, 1.85, 0.58, r"$C^\mathsf{T}\nabla_y\ell$",
+                    orange, "#FCF2E9", size=18)
+        directed((7.715, 4.79), (7.715, 3.70), orange)
+        text(8.03, 4.13, "seed", size=14, color=orange)
+        directed((6.74, reverse_y), (6.38, reverse_y), orange)
+        for index, xpos in enumerate(states):
+            node(xpos, reverse_y, rf"$\lambda_{index}$", orange, "#FCF2E9")
+        for index, xpos in enumerate(operators):
+            directed((states[index + 1] - 0.33, reverse_y),
+                     (states[index] + 0.33, reverse_y), orange)
+            text(xpos, 3.74, rf"$A_{index}^\mathsf{{T}}$", size=17,
+                 color=orange, align="center")
+        text(0.44, 2.84, r"$A_n=\partial S_n/\partial z_n$", size=15, color=orange)
+        text(4.47, 2.84, r"$B_n=\partial S_n/\partial p$", size=15, color=teal)
+
+        # The sum includes every use of p; direct and initial terms are retained.
+        ax.plot([0.38, 8.62], [2.57, 2.57], color=rule, lw=1)
+        text(0.38, 2.27, "3   Add every parameter contribution", color=teal, weight="bold")
+        text(0.43, 1.80, "from updates", size=14, color=muted)
+        text(4.90, 1.80,
+             r"$B_0^\mathsf{T}\lambda_1\; +\; B_1^\mathsf{T}\lambda_2\; +\; B_2^\mathsf{T}\lambda_3$",
+             size=19, color=teal, align="center")
+        directed((4.85, 1.55), (4.85, 1.37), teal, width=1.4)
+
+        # Separate text spans give each term a readable caption without using
+        # coloured equation screenshots or shrinking a long all-in-one formula.
+        term_y = 1.03
+        text(0.52, term_y, r"$\frac{dJ}{dp}\;=$", size=21)
+        text(2.12, term_y, r"$\frac{\partial\ell}{\partial p}$", size=21, align="center")
+        text(2.97, term_y, "+", size=21, align="center")
+        text(4.44, term_y, r"$\sum_{n=0}^{2} B_n^\mathsf{T}\lambda_{n+1}$",
+             size=21, color=teal, align="center")
+        text(5.94, term_y, "+", size=21, align="center")
+        text(7.36, term_y, r"$\left(\frac{\partial z_0}{\partial p}\right)^\mathsf{T}\lambda_0$",
+             size=21, align="center")
+        text(2.12, 0.43, "direct loss", size=14, color=muted, align="center")
+        text(4.44, 0.43, "all three updates", size=14, color=teal, align="center")
+        text(7.36, 0.43, "initial state", size=14, color=muted, align="center")
+        text(0.43, 0.12, "The gradient is an input to a separate optimisation step.",
+             size=14, color=muted)
+
+        output_path.parent.mkdir(parents=True, exist_ok=True)
+        fig.savefig(output_path, dpi=220, facecolor="white")
+        fig.savefig(output_path.with_suffix(".svg"), facecolor="white")
+        embed_svg_fonts(output_path.with_suffix(".svg"))
+        fig.savefig(output_path.with_suffix(".pdf"), facecolor="white")
+        plt.close(fig)
 
 
 def main() -> None:
@@ -498,4 +352,16 @@ def main() -> None:
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    import argparse
+
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        "--figure-only", action="store_true",
+        help="Redraw PNG/SVG/PDF without executing the example or writing a receipt.",
+    )
+    args = parser.parse_args()
+    if args.figure_only:
+        build_figure(BOOK / "figures" / "05a_backpropagation.png")
+        print("Redrew 05a_backpropagation.{png,svg,pdf}; numerical receipts unchanged.")
+    else:
+        sys.exit(main())

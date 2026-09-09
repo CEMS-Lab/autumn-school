@@ -1,8 +1,9 @@
 # Crack representations: sharp, cohesive, and diffuse
 
-:::{figure} figures/01_methods_map.png
+:::{figure} figures/01_methods_map.*
 :name: fig-methods-map
 :width: 96%
+:alt: Three separate choices: fracture formulation, spatial discretisation and nonlinear solution algorithm. Phase field, XFEM and quasi-Newton answer different questions.
 
 Three different questions are often compressed into one phrase such as
 “the fracture method.” Keeping them separate prevents misleading comparisons.

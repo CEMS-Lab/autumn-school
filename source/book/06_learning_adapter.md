@@ -1,8 +1,9 @@
 # Train, save, reload, adapters, and checked proposals
 
-:::{figure} figures/06_learning_cycle.png
+:::{figure} figures/06_learning_cycle.*
 :name: fig-learning-cycle
 :width: 96%
+:alt: Offline reference data support training and checkpoint reload. Online model proposals are checked, then accepted or corrected by the reference solver. A dashed conceptual feedback path collects labelled states for another training round.
 
 A learning component is useful only when its inputs, outputs, and physics
 checks are stated as clearly as those of the reference calculation.

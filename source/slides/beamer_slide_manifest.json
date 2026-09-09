@@ -7,7 +7,7 @@
   },
   {
     "slide": 2,
-    "title": "One specimen. Three learning questions.",
+    "title": "Six hours: understand, compute, then learn",
     "timing": "Orientation",
     "notes": "Introduce the companion book and notebook routes. Notebook 01 is a real PhAST damage-evolution solve; notebooks 02--05 teach local differentiation, an elastic-bar inverse toy and a Helmholtz-like field model/adapter. The distinctions remain visible throughout. Discussion prompt: Take away one executed notebook and one comparison sheet."
   },
@@ -153,7 +153,7 @@
     "slide": 26,
     "title": "A gradient follows a specific computational path",
     "timing": "B 78--85 / 7 minutes",
-    "notes": "Explain backpropagation as chain-rule accumulation through a supported graph. PyTorch and JAX are frameworks; PhAST and JAX-FEM are solver projects. Both ecosystems can support differentiable FEM. Framework choice alone is not a gradient or performance guarantee. Discussion prompt: What could break or change this path?"
+    "notes": "Trace two updates left to right and adjoints right to left. Define fixed C and the scalar final loss. Sum B0 transpose lambda1 and B1 transpose lambda2 because the parameter is shared; retain direct and initial-state terms when present. The gradient is not the optimizer update. The book chapter expands this to three numerical steps with hand/AD/FD checks. p and J here correspond to theta and loss notation elsewhere. Original diagram; visual inspiration: TUM ADL4P Differentiable Physics II, PDF page 5. PyTorch and JAX can support differentiable FEM; framework choice alone is not a gradient or performance guarantee. Discussion prompt: What could break or change this path?"
   },
   {
     "slide": 27,

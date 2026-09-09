@@ -91,6 +91,22 @@
       "source_url": "https://github.com/zenorocha/clipboard.js/blob/v2.0.8/LICENSE",
       "source_kind": "official upstream licence at the version in the bundled JS header",
       "sha256": "a798e7b5fa604117d52d607e05f1cbac3b2fa5da087837f412a1a3c866b4b748"
+    },
+    {
+      "filename": "dejavu-matplotlib-3.10.8-LICENSE.txt",
+      "component": "DejaVu fonts bundled with Matplotlib",
+      "version": "Matplotlib 3.10.8 bundled notice",
+      "source_url": "https://github.com/matplotlib/matplotlib/tree/v3.10.8/lib/matplotlib/mpl-data/fonts/ttf",
+      "source_kind": "verbatim licence shipped by the installed authoring distribution; matching byte hash verified",
+      "sha256": "d75938dec098f06f0ac3c00853065d94f020be1c3c62ef1dc2975ba15b4d9b0e"
+    },
+    {
+      "filename": "stix-matplotlib-3.10.8-LICENSE.txt",
+      "component": "STIX fonts bundled with Matplotlib",
+      "version": "Matplotlib 3.10.8 bundled notice",
+      "source_url": "https://github.com/matplotlib/matplotlib/tree/v3.10.8/lib/matplotlib/mpl-data/fonts/ttf",
+      "source_kind": "verbatim licence shipped by the installed authoring distribution; matching byte hash verified",
+      "sha256": "bab3d31dfef07f483624f2f65f2711e76065b8e7273278b1c071ede1041c9959"
     }
   ]
 }

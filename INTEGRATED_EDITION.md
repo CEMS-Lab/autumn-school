@@ -18,8 +18,27 @@ Solution downloads add the corresponding hints and worked answers. The exercise
 answers explain calculations and interpretation; they do not add an unmeasured
 full-fracture inverse, learned-damage coupling or DAgger training cycle.
 
-The first PhAST course package remains a separate edition. This revision does
-not change its numerical examples or the lecture-slide design.
+The first PhAST course package remains a separate edition. The v0.1.1 visual
+revision changes seven book diagrams and six corresponding lecture slides,
+but does not change numerical examples or their retained execution evidence.
+The frozen v0.1.0 release remains available unchanged.
+
+## Visual revision v0.1.1
+
+The course map now explicitly covers three two-hour sessions. Staggered
+iteration, assembled/matrix-free alternatives, reverse accumulation and
+learned-proposal correction use labelled, spatially separated paths. The
+book uses original SVG diagrams for HTML and vector PDF diagrams for print;
+the 44-slide deck uses editable LaTeX/TikZ. The printable book has 71 pages.
+See [DESIGN_STANDARD.md](DESIGN_STANDARD.md) for inspected Delft, TUM and ETH
+references, attribution boundaries and the cross-format review procedure.
+
+This revision is not a new numerical rehearsal. Historical receipts, including
+the backpropagation example's original figure hash, describe their original
+execution and graphics. The current visual assets are identified by this
+edition's manifest. Fresh Colab timing, a full fracture inverse activity,
+learned fracture coupling and a complete DAgger training round remain separate
+open requirements.
 
 ## Authoring and reproducibility
 

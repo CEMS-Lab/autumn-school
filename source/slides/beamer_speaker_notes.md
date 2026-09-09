@@ -10,7 +10,7 @@ Timing: Opening
 
 Introduce the 2+2+2-hour design. Each section includes a ten-minute break. The event allocation is separate and must be agreed with the organiser. The title illustration is an original analytic-distance schematic, not a computed fracture field.
 
-## 2. One specimen. Three learning questions.
+## 2. Six hours: understand, compute, then learn
 
 Timing: Orientation
 
@@ -158,7 +158,7 @@ Trace connectivity, local basis gradients, material state, quadrature weights an
 
 Timing: B 78--85 / 7 minutes
 
-Explain backpropagation as chain-rule accumulation through a supported graph. PyTorch and JAX are frameworks; PhAST and JAX-FEM are solver projects. Both ecosystems can support differentiable FEM. Framework choice alone is not a gradient or performance guarantee. Discussion prompt: What could break or change this path?
+Trace two updates left to right and adjoints right to left. Define fixed C and the scalar final loss. Sum B0 transpose lambda1 and B1 transpose lambda2 because the parameter is shared; retain direct and initial-state terms when present. The gradient is not the optimizer update. The book chapter expands this to three numerical steps with hand/AD/FD checks. p and J here correspond to theta and loss notation elsewhere. Original diagram; visual inspiration: TUM ADL4P Differentiable Physics II, PDF page 5. PyTorch and JAX can support differentiable FEM; framework choice alone is not a gradient or performance guarantee. Discussion prompt: What could break or change this path?
 
 ## 27. Check a local derivative three ways
 

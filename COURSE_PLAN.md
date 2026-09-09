@@ -21,6 +21,12 @@ entire event programme.
 
 ## Learning sequence
 
+![Three two-hour sessions: understand the fracture model, compute and differentiate, then train and assess a learned component.](source/book/figures/00_course_map.svg)
+
+The overview is shared with the book; the linear sequence below preserves the
+full topic inventory. Figure construction and cross-format checks follow the
+[academic design standard](DESIGN_STANDARD.md).
+
 ```text
 Opening prediction: can a learned average be inadmissible?
         ↓
@@ -62,13 +68,27 @@ slot. A 45-minute paper discussion is not silently added to a full six-hour day.
 
 ## Coverage and remaining work
 
+### Coordination and ownership
+
+The course integration lead owns the full six-hour curriculum, lecture deck,
+notebook sequence, common visual language, book integration and publication.
+The inverse-extension contributor owns only the separately reviewed inverse
+teaching material. That extension must not replace the fundamentals, forward
+simulation or model-learning blocks, change their shared styles, or silently
+expand the six-hour allocation. Integration requires its source, full-run
+receipt, figures, solutions and scientific-scope review; draft status is not
+publication readiness. The existing inverse toy remains the classroom route
+until a replacement passes the relevant gates.
+
+### Workstream record
+
 | ID | Workstream | First-edition position and next gate |
 | --- | --- | --- |
 | C01 | Phase-field foundations and comparisons | Explanations and figures exist. Review XFEM/cohesive trade-offs; do not call quasi-Newton a competing fracture formulation or claim universal phase-field superiority. |
 | C02 | Energy, degradation and damage morphology | Equations, derivative notebook and browser controls exist. Audit AT1/AT2 normalisation, profiles, continuity, mesh/length-scale effects and initiation/branching explanations. |
 | C03 | Solution algorithms and coupled physics | Staggering, static/dynamic and matrix-free concepts exist. Complete the transport/solid/damage operator narrative and distinguish physical time, load stepping and nonlinear iteration. |
 | C04 | First PhAST simulation | Public source, generated mesh, loads/BCs, fields and reaction checks run locally. Add a clear imported-mesh route and a better short propagating-crack example without weakening checks. |
-| C05 | Backpropagation explained step by step | Add explicit local derivatives, adjoint propagation, shared-parameter sums, numerical checks and a clean diagram; distinguish observable, gradient and optimisation update. |
+| C05 | Backpropagation explained step by step | Explicit local derivatives, adjoint propagation, shared-parameter sums and a checked three-step algebraic example exist. Revised book/lecture diagrams distinguish observable, gradient and optimisation update; a toy derivative check is not a full fracture-path validation. |
 | C06 | Inverse recovery | The elastic-bar toy runs. A small actual fracture-parameter/inclusion recovery remains a separate implementation and validation task using approved public material. |
 | C07 | Train, save, reload and interchangeable models | MLP/RBF toy field examples run. Define and validate fracture-compatible damage inputs/outputs and saved-model contracts; do not imply arbitrary architectures are interchangeable automatically. |
 | C08 | Hybrid correction and DAgger | Toy accept/reject/fallback runs; DAgger is explained. A complete model-induced rollout, reference labelling, aggregation, retraining and held-out evaluation remains to be built. |
@@ -76,7 +96,7 @@ slot. A 45-minute paper discussion is not silently added to a full six-hour day.
 | C10 | Integrated book and accessibility | Native code/output chapters, practice/solution downloads, HTML/PDF and visual explorations exist. Review offline/mobile/keyboard/print behaviour and all links after every edition change. |
 | C11 | Coherent lecture slides and animations | A clean 44-slide LaTeX deck exists. Align the new teaser and explicit backpropagation sequence; review pacing, readable equations and original animations against the final book. |
 | C12 | Paper-based extension studies | Select approved public papers and reproducible retained results, with one question and one limitation per study. Do not publish private worktrees or unapproved checkpoints. |
-| C13 | Teaching references and design standard | D2L, PBDL, ADL4P and programme materials inform the design. Complete the source inventory for any remaining supplied Instagram/PDF repository lists; do not imply inaccessible material was inspected. |
+| C13 | Teaching references and design standard | D2L/PBDL inform the book. The design standard records inspected Delft textbook, TUM lecture and ETH research-presentation visuals; original flowcharts apply those patterns. Remaining supplied Instagram/PDF repository lists still need a complete inventory; do not imply inaccessible material was inspected. |
 | C14 | Final coherence and completeness | Perform a learning-objective, notation, prerequisite, example, cross-format and timing audit; map every requested topic to a deliverable or an explicit open issue. |
 | C15 | Release, credits and community | Public repository, Pages and downloadable editions are the delivery route. Confirm credits/content licence, contributor guidance, follow-up exercises and a public showcase before claiming a finished course release. |
 
