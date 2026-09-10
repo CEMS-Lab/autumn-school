@@ -4,7 +4,7 @@
 
 All 18 repository issues and their comments were read against revision `077d43d87c55b4fdea720808fc24f040e957e1ea`. Issues #17–18 govern the current undergraduate teaching style, notebook anatomy and visuals. Preserve numerical assumptions and checks while explaining them constructively.
 
-The route is three lecture hours followed by three practical hours. Organisers must confirm breaks and event clock times. Deliver the web book, executable notebook downloads and editable animated slides. The printable book stays archived. The old timetable graphic has been removed from the book opening; its reusable source assets are retained. The reviewed update is live on GitHub Pages at content revision `3d9739c736fffc104a805c8b74cd9296cab1137c`; live-page and download verification is recorded in the [publication receipt](evidence/publication_20260910.json).
+The route is three lecture hours followed by three practical hours. Organisers must confirm breaks and event clock times. Deliver the web book, executable notebook downloads and editable animated slides. The printable book stays archived. The old timetable graphic has been removed from the book opening; its reusable source assets are retained. The mesh-and-documentation update is live on GitHub Pages at content revision `674760cbb1f00faeca6b41d1147b088fadb4b7e5`; live-page and download verification is recorded in the [current publication receipt](evidence/publication_mesh_20260910.json).
 
 ## Batch ownership and acceptance
 
@@ -63,11 +63,11 @@ See [today's delivery evidence](evidence/course_delivery_20260910.md) for comman
 
 The subsequent mesh and propagation discussion is tracked in issue #19. The
 release/documentation task owns upstream tutorial edits; course integration
-owns classroom changes. The reviewed update is authorised for publication;
-source revisions and deployment checks are recorded in issue #19.
+owns classroom changes. The reviewed course update is published and verified;
+both repositories' source revisions and deployment checks are recorded in issue #19.
 
 - [x] Publish the approved revision and verify the Pages deployment, prepared-by book credits, local assets and notebook downloads from the live site.
-- [x] Simplify the first practical's mesh cell to three lines, preserve exact arrays/checks, rerun both cases in 92.2464 seconds and review desktop/mobile HTML. See [mesh readability evidence](evidence/mesh_readability_20260910.md); publication is authorised and tracked in issue #19.
+- [x] Simplify the first practical's mesh cell to three lines, preserve exact arrays/checks, rerun both cases in 92.2464 seconds and review desktop/mobile HTML. See [mesh readability evidence](evidence/mesh_readability_20260910.md); the published pages and downloads are verified in the current receipt and issue #19.
 - [ ] Add a tested Gmsh import route following the [mesh usability plan](source/planning/MESH_USABILITY_REVIEW_20260910.md); assess original PhAST propagation examples through issue #19.
 - [ ] Run all six lessons and the optional diffusion companion from public links in fresh authenticated Colab CPU sessions. Record setup and computation separately.
 - [ ] Rehearse the three lecture hours and three practical hours using the animated introduction and mapped 44-slide resource. Confirm breaks, transitions, pause questions and the presentation machine.

@@ -14,7 +14,7 @@
     "BUILD_AGENT_PROMPTS.md": "6fabea2204d724b35604843e4dcaedaaf8f3793a53d8cb69f159dd48eb5830bd",
     "CONTRIBUTING.md": "fb242d047d8731f6decb955ebbf01595b65f2d8dd60e43b3a983087c0e1a20e9",
     "COURSE_PLAN.md": "1fb496c25a27c1484c39bb1b70b93260324b8020efb04bea4cffd234a2572a04",
-    "CURRENT_DELIVERY.md": "76470edb3ad948f4b50da4b05af075d9800ab160455b135d315ab0eedc182f1e",
+    "CURRENT_DELIVERY.md": "28f6ff222ad36adff423b140fa2aa48ac67cfd986387f478e6c127854664ef83",
     "DESIGN_DIRECTIVES.md": "cc8f5c1cb339b01e314d3693ba785dc6cedfa96d358daac6343287721c0c62c7",
     "DESIGN_STANDARD.md": "3c1a021ab113184d024a2f2295a73cbc6ea8e0fbb43123a45e88d70d54351fef",
     "DIFFERENTIABLE_SOLVER_TEACHING_NOTES.md": "6700d7f8d827dc25861fe7cab1c272427734fa2b4422d9ec708a703e32b6d4cd",
@@ -28,7 +28,7 @@
     "START_HERE.md": "7e0c459483fd4e82b23ab512015f9a39a5e09cae11abbfb80ea607aca25c85fb",
     "TEACHING_SCHEDULE.md": "4b2c14d2cafea7e6fd54cb77a42eebfe68d716b14f748b5b947fe1a5b1339adb",
     "THIRD_PARTY_NOTICES.md": "35c4a10ab737c594d7e59501e60b8f51bde88937914a9d4eb06ac54fe23002f3",
-    "TODAY.md": "df4d37732c3a3f2a71b4add86976edd89ea45f4ab8bf7848b85c9bc84251ce6b",
+    "TODAY.md": "1cceeccdd0c851bc3f9640aed0960cacbb500d61858f6456c5b4187fb8d45134",
     "TOMORROW.md": "d3f06e88f0576565f31b61299eb9dafff1713cd7ea7ad549a5d2d8a1a0e507b1",
     "assets/animations/animation_gallery.ipynb": "5d5ba382ca7de5787c7deaac0f7b61cfe1ba0bbf1dc284fa3474a4320a144ebe",
     "assets/animations/caption_render_receipt.json": "c2d1619078a2202878c37ec282a11c38877f372e35e242a8fad4c242c1161b8a",
@@ -477,6 +477,7 @@
     "evidence/notebook_runtime_current.json": "b50c353858a056aff2a4ce6686f4a65236d17c6c936bcf9664b7efb1786f4cd1",
     "evidence/package_rehearsal.json": "b8ae0201fd004af7c210f98efcf79caa8d98721736d3a2fe5242bd0f5b5475c0",
     "evidence/publication_20260910.json": "20027ab7724c488c8141aeac0c8fb035be794a53377eb2b3c407826287c4c21b",
+    "evidence/publication_mesh_20260910.json": "753351c4a76da04319abdd169727ff1a817ae457f8ccdc97c50241e092754f45",
     "evidence/slides_20260910.md": "2eb384eb9e0cfa97f6a61bf2790f2706dbdf35f8bca90cef16b7376f9f234292",
     "evidence/teaser_runtime.json": "025f464928050d8dd8d974e71bc309826f907d23a4199d4d0947590cb2590e30",
     "evidence/visual_revision_v0.1.1.md": "a6adfb577c54c2b4a016315dbc1bc8be60c4baae8a274cc388d91cb3f07a7bf1",
@@ -979,6 +980,6 @@
     "prior_runtime_scope": "Exact-source local rehearsal of six classroom notebooks, local diffusion run and retained HPC inverse receipts; authenticated Colab rehearsal tracked in delivery plan",
     "hpc_inverse_status": "Previously retained HPC inverse receipts retain their original provenance; this packaging step executes no HPC work."
   },
-  "base_git_revision": "6254c050f1af34efd10ddf1df7c5e80aa8302d40",
-  "delivery_status": "reviewed source edition approved for publication; deployment verification tracked in course issue #19"
+  "base_git_revision": "674760cbb1f00faeca6b41d1147b088fadb4b7e5",
+  "delivery_status": "published web edition; live verification in evidence/publication_mesh_20260910.json"
 }

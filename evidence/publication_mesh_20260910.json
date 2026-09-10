@@ -1,0 +1,147 @@
+{
+  "content_commit": "674760cbb1f00faeca6b41d1147b088fadb4b7e5",
+  "checked_at": "2026-09-10T13:13:39.552Z",
+  "pages_build": {
+    "status": "built",
+    "commit": "674760cbb1f00faeca6b41d1147b088fadb4b7e5",
+    "updated_at": "2026-09-10T13:12:52Z",
+    "error": null
+  },
+  "book_url": "https://cems-lab.github.io/autumn-school/book/index.html",
+  "scope": "Live Pages HTML/download integrity and browser rendering; notebook execution retains separate local receipts",
+  "html": [
+    {
+      "path": "book/index.html",
+      "sha256": "67a072bced8e2b2686e33fd2d34804adaa35f32b4fcee06e723a01e0b5581263",
+      "matched": true
+    },
+    {
+      "path": "book/07_practice_references.html",
+      "sha256": "d71b0cbc2e4037c10a3449b0eadf8775b37629dfd089c0f01e98af338e08ba7c",
+      "matched": true
+    },
+    {
+      "path": "book/labs/00_why_average_predictions_can_fail.html",
+      "sha256": "6d249d052f8411759b056df670aa6cba49f4b5792056af3871096efc178dc317",
+      "matched": true
+    },
+    {
+      "path": "book/labs/01_phast_tiny_evolving_fracture.html",
+      "sha256": "89b1c853fc1e88cfd66a8122687f19e2f63f42999802f6faa7382afbd977ccf2",
+      "matched": true
+    },
+    {
+      "path": "book/labs/02_degradation_autograd.html",
+      "sha256": "dfa70381693a7a81c5e913cf01d738ae991951996b9a8b1799f41ed6ea93f6c5",
+      "matched": true
+    },
+    {
+      "path": "book/labs/03_tiny_derivative_inverse_toy.html",
+      "sha256": "85c022eccb38c92dddf812de75e93784194afda7f2a4da833541685ec8852b60",
+      "matched": true
+    },
+    {
+      "path": "book/labs/04_train_save_reload_adapter.html",
+      "sha256": "fe36cd87c2a83fda06c48116ecff0ae1b0a804e7712cdcb66d15266fcdbc72a5",
+      "matched": true
+    },
+    {
+      "path": "book/labs/05_hybrid_reference_correction.html",
+      "sha256": "0e988aa5504e248e384b690015d35d986df4a2d44e6907f8a19f1c78a147b248",
+      "matched": true
+    }
+  ],
+  "notebooks": [
+    {
+      "path": "notebooks/study/00_why_average_predictions_can_fail.ipynb",
+      "sha256": "9417f4eb2fb9c01edf28a81ec29e28a0cae35197452cb1aaaadf794494980c0a",
+      "matched": true
+    },
+    {
+      "path": "notebooks/study/01_phast_tiny_evolving_fracture.ipynb",
+      "sha256": "2ac7fd36b51610573776cda80848fc1c96813c7461d392de542bfacd97dbe324",
+      "matched": true
+    },
+    {
+      "path": "notebooks/study/02_degradation_autograd.ipynb",
+      "sha256": "b874ff7a433b1f0a6528c7474d541c21c2743f0bf17ff8e9c6dfd1124cd1afa4",
+      "matched": true
+    },
+    {
+      "path": "notebooks/study/03_tiny_derivative_inverse_toy.ipynb",
+      "sha256": "dd2f84839b791d285cfc0d26bc57579bff4fc0b113f8181dfa50d901a8067f86",
+      "matched": true
+    },
+    {
+      "path": "notebooks/study/04_train_save_reload_adapter.ipynb",
+      "sha256": "8b9b0a46b189eed9a0d9c0d313e6498247d39caff727ffd467b7bb7f84815828",
+      "matched": true
+    },
+    {
+      "path": "notebooks/study/05_hybrid_reference_correction.ipynb",
+      "sha256": "7d094f864ff7106b9675dd62dfdac023364abce35abdc29dd8293bc0fa6655c3",
+      "matched": true
+    },
+    {
+      "path": "notebooks/solutions/00_why_average_predictions_can_fail.ipynb",
+      "sha256": "f58f15c8b2d450576703dca6ade3588a04867bdddc4b224f305d9d56839d9c78",
+      "matched": true
+    },
+    {
+      "path": "notebooks/solutions/01_phast_tiny_evolving_fracture.ipynb",
+      "sha256": "8471ce77460b44e86d76de03f05e89ce04c35c0787e4b0979e9101d38948152c",
+      "matched": true
+    },
+    {
+      "path": "notebooks/solutions/02_degradation_autograd.ipynb",
+      "sha256": "115d2403a332a29bedf34814c42ec395d039e28657fc703f432c129c4c178e05",
+      "matched": true
+    },
+    {
+      "path": "notebooks/solutions/03_tiny_derivative_inverse_toy.ipynb",
+      "sha256": "c6b24e28c5315e9f5799b189d76bfd6ba8ea8a38afc3e339f5bae7be6133adbc",
+      "matched": true
+    },
+    {
+      "path": "notebooks/solutions/04_train_save_reload_adapter.ipynb",
+      "sha256": "35b7d8f986025bd0874304d2b23b1772b8002a50368128cdc556d138a4af6a6e",
+      "matched": true
+    },
+    {
+      "path": "notebooks/solutions/05_hybrid_reference_correction.ipynb",
+      "sha256": "8638fddbcefb6183aaf823d39e20eab7127adc8284a529b7196e909519cae151",
+      "matched": true
+    }
+  ],
+  "decks": [
+    {
+      "path": "output/lecture-20260910/phast_lecture_animated.pptx",
+      "status": 200
+    },
+    {
+      "path": "output/lecture-20260910/phast_lecture_animated.key",
+      "status": 200
+    }
+  ],
+  "browser": [
+    {
+      "width": 1440,
+      "math": 62,
+      "mathErrors": 0,
+      "overflow": false,
+      "credit": "Prepared by Allamaprabhu Ani and Sathiskumar A. Ponnusami",
+      "brokenImages": 0,
+      "passed": true
+    },
+    {
+      "width": 390,
+      "math": 62,
+      "mathErrors": 0,
+      "overflow": false,
+      "credit": "Prepared by Allamaprabhu Ani and Sathiskumar A. Ponnusami",
+      "brokenImages": 0,
+      "passed": true
+    }
+  ],
+  "passed": true
+}

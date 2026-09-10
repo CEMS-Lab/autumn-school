@@ -34,7 +34,7 @@ five movies. See [today's compatibility evidence](evidence/slides_20260910.md)
 for exact checks and the remaining presentation-machine rehearsal.
 
 The reviewed 10 September web edition is [live on GitHub Pages](https://cems-lab.github.io/autumn-school/book/index.html).
-The [publication receipt](evidence/publication_20260910.json) verifies the published
+The [current publication receipt](evidence/publication_mesh_20260910.json) verifies the published
 HTML and notebook hashes, shared prepared-by credits, mathematical rendering,
 mobile/desktop layout and editable slide download endpoints. Fresh authenticated
 Colab execution is the next environment check. The [mesh usability plan](source/planning/MESH_USABILITY_REVIEW_20260910.md)
@@ -59,6 +59,7 @@ tracks the generated-versus-retained mesh discrepancy. The [canonical-example re
 records a separate 17.6787-second CPU propagation candidate and its remaining
 residual, resolution and whole-notebook acceptance checks.
 
-Publication of the reviewed update was authorised on 10 September. Source
-revisions and live deployment checks are recorded in
+The reviewed update is published from course revision `674760c` and its live
+pages and downloads match the source. Both repositories' source revisions
+and live deployment checks are recorded in
 [course issue #19](https://github.com/CEMS-Lab/autumn-school/issues/19).
