@@ -22,9 +22,10 @@ class Page(HTMLParser):
         source = path.read_text()
         self.source = source
         self.credit_present = (
-            'name="author" content="Allamaprabhu Ani"' in source
-            and "Presented by <span>Sathiskumar A. Ponnusami · Queen Mary University of London · CEMS-Lab</span>" in source
-            and 'name="presenter-affiliation" content="Queen Mary University of London · CEMS-Lab"' in source
+            'name="author" content="Allamaprabhu Ani and Sathiskumar A. Ponnusami"' in source
+            and "Prepared by <span>Allamaprabhu Ani and Sathiskumar A. Ponnusami</span>" in source
+            and 'name="prepared-by" content="Allamaprabhu Ani and Sathiskumar A. Ponnusami"' in source
+            and "Presented by <span>" not in source
             and "CEMS-Lab" in source and "UKACM Autumn School 2026" in source
         )
         self.details = {}
@@ -141,4 +142,3 @@ print(json.dumps({
     "errors": errors,
 }, indent=2))
 raise SystemExit(bool(errors))
-

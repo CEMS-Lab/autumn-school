@@ -1,0 +1,319 @@
+{
+  "source_deck": "output/intro-lecture-20260909/phast_lecture_introduction_v7.pptx",
+  "source_sha256": "58f9726cf7d78c745e7dfcb3e06f437faab19daa0aa6703c2a6bb1820979e8bf",
+  "candidate": "output/lecture-20260910/phast_lecture_animated.pptx",
+  "candidate_sha256": "619a681653b26d7408c96ab5f5491a5312a27152f624737acef12a9d559d2cc8",
+  "slides": 23,
+  "media_count": 5,
+  "mapping": [
+    {
+      "slide": 1,
+      "section": "L1",
+      "title": "Numerical methods\nand deep learning",
+      "original_v7_slide": 1,
+      "clip": null
+    },
+    {
+      "slide": 2,
+      "section": "L1",
+      "title": "The six-hour learning sequence",
+      "original_v7_slide": 5,
+      "clip": null
+    },
+    {
+      "slide": 3,
+      "section": "L1",
+      "title": "A crack represented by a damage field",
+      "original_v7_slide": 6,
+      "clip": null
+    },
+    {
+      "slide": 4,
+      "section": "L1",
+      "title": "The length scale controls the crack band",
+      "original_v7_slide": null,
+      "clip": "phase_field_band"
+    },
+    {
+      "slide": 5,
+      "section": "L1",
+      "title": "How damage changes stiffness",
+      "original_v7_slide": 7,
+      "clip": null
+    },
+    {
+      "slide": 6,
+      "section": "L1",
+      "title": "The staggered solution",
+      "original_v7_slide": 8,
+      "clip": null
+    },
+    {
+      "slide": 7,
+      "section": "L1",
+      "title": "Follow one partitioned dynamic update",
+      "original_v7_slide": null,
+      "clip": "explicit_implicit_step"
+    },
+    {
+      "slide": 8,
+      "section": "L1",
+      "title": "Finite elements as tensor operations",
+      "original_v7_slide": 9,
+      "clip": null
+    },
+    {
+      "slide": 9,
+      "section": "L1",
+      "title": "A mesh, a prescribed notch and boundary values",
+      "original_v7_slide": 15,
+      "clip": null
+    },
+    {
+      "slide": 10,
+      "section": "L1",
+      "title": "Read the field as well as the response",
+      "original_v7_slide": 16,
+      "clip": null
+    },
+    {
+      "slide": 11,
+      "section": "L2",
+      "title": "From an input to a final observation",
+      "original_v7_slide": 10,
+      "clip": null
+    },
+    {
+      "slide": 12,
+      "section": "L2",
+      "title": "The backward pass through time steps",
+      "original_v7_slide": 11,
+      "clip": null
+    },
+    {
+      "slide": 13,
+      "section": "L2",
+      "title": "Every use of a parameter contributes",
+      "original_v7_slide": null,
+      "clip": "reverse_accumulation"
+    },
+    {
+      "slide": 14,
+      "section": "L2",
+      "title": "Implicit differentiation of a solved equation",
+      "original_v7_slide": 12,
+      "clip": null
+    },
+    {
+      "slide": 15,
+      "section": "L2",
+      "title": "Stored history selects the active sensitivity",
+      "original_v7_slide": null,
+      "clip": "history_switch"
+    },
+    {
+      "slide": 16,
+      "section": "L2",
+      "title": "Check the derivative before using it",
+      "original_v7_slide": 13,
+      "clip": null
+    },
+    {
+      "slide": 17,
+      "section": "L2",
+      "title": "A small time-stepping notebook",
+      "original_v7_slide": 14,
+      "clip": null
+    },
+    {
+      "slide": 18,
+      "section": "L3 / practical bridge",
+      "title": "What learning can contribute",
+      "original_v7_slide": 2,
+      "clip": null
+    },
+    {
+      "slide": 19,
+      "section": "L3 / practical bridge",
+      "title": "What a prediction must satisfy",
+      "original_v7_slide": 3,
+      "clip": null
+    },
+    {
+      "slide": 20,
+      "section": "L3 / practical bridge",
+      "title": "Coupling a network and a solver",
+      "original_v7_slide": 4,
+      "clip": null
+    },
+    {
+      "slide": 21,
+      "section": "L3 / practical bridge",
+      "title": "A learned field enters a checked interface",
+      "original_v7_slide": null,
+      "clip": "checked_learned_proposal"
+    },
+    {
+      "slide": 22,
+      "section": "L3 / practical bridge",
+      "title": "Keep a reproducible numerical experiment",
+      "original_v7_slide": 17,
+      "clip": null
+    },
+    {
+      "slide": 23,
+      "section": "L3 / practical bridge",
+      "title": "The practical learning cycle",
+      "original_v7_slide": 18,
+      "clip": null
+    }
+  ],
+  "media": [
+    {
+      "key": "phase_field_band",
+      "source": "assets/animations/mechanics/phase_field_band.mp4",
+      "source_sha256": "8959b32226e1748f1686393ca9e8e4b2014d01f2a8b622886bffde1445d8aae8",
+      "embedded_copy": "media/phase_field_band.mp4",
+      "embedded_sha256": "8959b32226e1748f1686393ca9e8e4b2014d01f2a8b622886bffde1445d8aae8",
+      "poster": "media/phase_field_band_poster.png",
+      "poster_sha256": "d1199eceae5c6199ba02fa43c116acc394edbdca1c04076ddd34f024499ddc03",
+      "duration_seconds": 24.8,
+      "original_probe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "profile": "High",
+            "width": 1280,
+            "height": 720,
+            "pix_fmt": "yuv420p",
+            "r_frame_rate": "30/1"
+          }
+        ],
+        "format": {
+          "duration": "24.800000"
+        }
+      },
+      "pause_seconds": 15.0,
+      "teaching_scope": "Analytic isolated AT2 profile. Lengths use one arbitrary unit."
+    },
+    {
+      "key": "explicit_implicit_step",
+      "source": "assets/animations/mechanics/explicit_implicit_step.mp4",
+      "source_sha256": "790cf324d9c8fe3b5bb65fbff8f02f172251b9a7a812a8c947831f345b95eb83",
+      "embedded_copy": "media/explicit_implicit_step.mp4",
+      "embedded_sha256": "790cf324d9c8fe3b5bb65fbff8f02f172251b9a7a812a8c947831f345b95eb83",
+      "poster": "media/explicit_implicit_step_poster.png",
+      "poster_sha256": "5f45911366414387b3a3d319e25c27a500cd7f1c5d831fff0a7016dafd768bca",
+      "duration_seconds": 26.5,
+      "original_probe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "profile": "High",
+            "width": 1280,
+            "height": 720,
+            "pix_fmt": "yuv420p",
+            "r_frame_rate": "30/1"
+          }
+        ],
+        "format": {
+          "duration": "26.500000"
+        }
+      },
+      "pause_seconds": 11.0,
+      "teaching_scope": "Partitioned dynamic schematic. The PhAST practical uses quasistatic mechanics."
+    },
+    {
+      "key": "reverse_accumulation",
+      "source": "assets/animations/learning/reverse_accumulation.mp4",
+      "source_sha256": "80e43933e41d009add9ad999a1fff070f6272e091849d052ac2ac4e52b0ace1e",
+      "embedded_copy": "media/reverse_accumulation.mp4",
+      "embedded_sha256": "80e43933e41d009add9ad999a1fff070f6272e091849d052ac2ac4e52b0ace1e",
+      "poster": "media/reverse_accumulation_poster.png",
+      "poster_sha256": "3ad9fe209f07f21d3841947643a042b9ce3a20ddd247ef18d4a720aa72c44e42",
+      "duration_seconds": 27.7,
+      "original_probe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "profile": "High",
+            "width": 1280,
+            "height": 720,
+            "pix_fmt": "yuv420p",
+            "r_frame_rate": "30/1"
+          }
+        ],
+        "format": {
+          "duration": "27.700000"
+        }
+      },
+      "pause_seconds": 15.0,
+      "teaching_scope": "Two differentiable updates; fixed initial state; terminal scalar loss."
+    },
+    {
+      "key": "history_switch",
+      "source": "source/book/research/visuals/history_switch.mp4",
+      "source_sha256": "dacb3085e9d561eca8ff6071a2324f0baeece548677b5d3ede3538e75cecc41d",
+      "embedded_copy": "media/history_switch.mp4",
+      "embedded_sha256": "07b34b8cf9a417c08994e59621e76fa67bad1816ae523430487969120b18eee3",
+      "poster": "media/history_switch_poster.png",
+      "poster_sha256": "19434462f9fa90fdb8ed526ff20584cd1daebc8acc2051fe5680e67c3e95f59d",
+      "duration_seconds": 18.0,
+      "original_probe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "profile": "High",
+            "width": 1392,
+            "height": 936,
+            "pix_fmt": "yuv420p",
+            "r_frame_rate": "1/2"
+          }
+        ],
+        "format": {
+          "duration": "18.000000"
+        }
+      },
+      "pause_seconds": 10.0,
+      "teaching_scope": "Dimensionless material-point teaching example. Green: surrogate reverse weights."
+    },
+    {
+      "key": "checked_learned_proposal",
+      "source": "assets/animations/learning/checked_learned_proposal.mp4",
+      "source_sha256": "6c60cbdc75d0c449997a101baf957b11a28c0c7611dfbeaf7ac5bc42c3e9775a",
+      "embedded_copy": "media/checked_learned_proposal.mp4",
+      "embedded_sha256": "6c60cbdc75d0c449997a101baf957b11a28c0c7611dfbeaf7ac5bc42c3e9775a",
+      "poster": "media/checked_learned_proposal_poster.png",
+      "poster_sha256": "33d5750d465078796f4d30ce665a4db4c06d6995d95414b0255fefa4653c5c74",
+      "duration_seconds": 26.5,
+      "original_probe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "profile": "High",
+            "width": 1280,
+            "height": 720,
+            "pix_fmt": "yuv420p",
+            "r_frame_rate": "30/1"
+          }
+        ],
+        "format": {
+          "duration": "26.500000"
+        }
+      },
+      "pause_seconds": 15.0,
+      "teaching_scope": "Interface schematic. Practical models: MLP/RBF on a Helmholtz-type teaching field."
+    }
+  ],
+  "native_playback": "Requires presentation-machine testing in PowerPoint and Keynote."
+}

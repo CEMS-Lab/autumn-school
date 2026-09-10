@@ -49,16 +49,15 @@
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="_static/mathjax/tex-mml-chtml.js?v=cadf963e"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'index';</script>
-    <script src="_static/learning_book.js?v=7a62d495"></script>
+    <script src="_static/learning_book.js?v=5aaa4a9b"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="1. From Cracks to Computation: Learn by Doing" href="00_welcome_and_routes.html" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-<meta name="author" content="Allamaprabhu Ani">
-<meta name="presenter" content="Sathiskumar A. Ponnusami">
-<meta name="presenter-affiliation" content="Queen Mary University of London · CEMS-Lab">
+<meta name="author" content="Allamaprabhu Ani and Sathiskumar A. Ponnusami">
+<meta name="prepared-by" content="Allamaprabhu Ani and Sathiskumar A. Ponnusami">
 <meta name="course" content="CEMS-Lab · UKACM Autumn School 2026">
 
   </head>
@@ -188,11 +187,11 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Hands-On Computational Labs</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="labs/00_why_average_predictions_can_fail.html">Lab 00: Branch Selection &amp; Energy-Based Objectives in Physics-Informed Learning</a></li>
-<li class="toctree-l1"><a class="reference internal" href="labs/01_phast_tiny_evolving_fracture.html">Lab 01: End-to-End Simulation with PhAST (Notched Tension)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="labs/01_phast_tiny_evolving_fracture.html">Run and interpret a small PhAST fracture calculation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="labs/02_degradation_autograd.html">Lab 02: Differentiating Degradation: Analytical, Autograd, &amp; Finite Differences</a></li>
 <li class="toctree-l1"><a class="reference internal" href="labs/03_tiny_derivative_inverse_toy.html">Lab 03: Differentiable Mechanics &amp; Inverse Parameter Identification</a></li>
-<li class="toctree-l1"><a class="reference internal" href="labs/04_train_save_reload_adapter.html">Lab 04: Neural Field Adapters (Training, Checkpointing, &amp; Reloading)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="labs/05_hybrid_reference_correction.html">Lab 05: Hybrid Physics-AI: Residual-Gated Proposals &amp; Solver Correction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="labs/04_train_save_reload_adapter.html">Train, save, reload, and compare a field model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="labs/05_hybrid_reference_correction.html">Assess a proposal and use a reference correction</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Review &amp; Reference</span></p>
 <ul class="nav bd-sidenav">
@@ -430,13 +429,6 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="phast-a-learn-by-doing-introduction-to-phase-field-fracture">
 <h1>PhAST: A Learn-by-Doing Introduction to Phase-Field Fracture<a class="headerlink" href="#phast-a-learn-by-doing-introduction-to-phase-field-fracture" title="Link to this heading">#</a></h1>
-<figure class="align-default" id="fig-course-map">
-<a class="reference internal image-reference" href="_images/00_course_map.svg"><img alt="Overview of the 6-hour workshop: 3 hours of interactive theory and demonstrations paired with 3 hours of hands-on computational lab exercises." src="_images/00_course_map.svg" style="width: 100%;" />
-</a>
-<figcaption>
-<p><span class="caption-number">Figure 1 </span><span class="caption-text">The workshop combines interactive lecture demonstrations with hands-on notebook activities across four core pillars of computational mechanics and scientific machine learning.</span><a class="headerlink" href="#fig-course-map" title="Link to this image">#</a></p>
-</figcaption>
-</figure>
 <p>Welcome to this interactive tutorial guide on <strong>phase-field fracture modeling and differentiable finite elements</strong>.</p>
 <p>This guide connects continuum solid mechanics, numerical algorithms, and machine learning into a clear, hands-on learning route. Designed for students, researchers, and engineers with an undergraduate background in mechanics or computing, this course demystifies how cracks nucleate and evolve, how finite element equations are assembled in modern tensor frameworks like PyTorch, and how automatic differentiation enables inverse parameter discovery.</p>
 <hr class="docutils" />
@@ -634,30 +626,47 @@ We examine how neural networks and operator learning interface with physics solv
 <li class="toctree-l1"><a class="reference internal" href="labs/00_why_average_predictions_can_fail.html">Lab 00: Branch Selection &amp; Energy-Based Objectives in Physics-Informed Learning</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="labs/00_why_average_predictions_can_fail.html#balanced-supervision-versus-an-energy-objective">Balanced supervision versus an energy objective</a></li>
 <li class="toctree-l2"><a class="reference internal" href="labs/00_why_average_predictions_can_fail.html#stationary-points-and-reference-branches">Stationary points and reference branches</a></li>
-<li class="toctree-l2"><a class="reference internal" href="labs/00_why_average_predictions_can_fail.html#physical-interpretation">Physical Interpretation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="labs/00_why_average_predictions_can_fail.html#physical-interpretation">Physical interpretation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="labs/00_why_average_predictions_can_fail.html#key-takeaways">Key takeaways</a></li>
 <li class="toctree-l2"><a class="reference internal" href="labs/00_why_average_predictions_can_fail.html#exercises">Exercises</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="labs/01_phast_tiny_evolving_fracture.html">Lab 01: End-to-End Simulation with PhAST (Notched Tension)</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="labs/01_phast_tiny_evolving_fracture.html#geometry-mesh-labelled-boundaries-material-and-constraints">Geometry, mesh, labelled boundaries, material, and constraints</a></li>
-<li class="toctree-l2"><a class="reference internal" href="labs/01_phast_tiny_evolving_fracture.html#route-and-representation">Route and representation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="labs/01_phast_tiny_evolving_fracture.html#physical-interpretation-and-load-displacement-response">Physical Interpretation and Load-Displacement Response</a></li>
+<li class="toctree-l1"><a class="reference internal" href="labs/01_phast_tiny_evolving_fracture.html">Run and interpret a small PhAST fracture calculation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="labs/01_phast_tiny_evolving_fracture.html#describe-the-specimen-and-predict-its-response">1. Describe the specimen and predict its response</a></li>
+<li class="toctree-l2"><a class="reference internal" href="labs/01_phast_tiny_evolving_fracture.html#generate-save-and-import-the-mesh">2. Generate, save and import the mesh</a></li>
+<li class="toctree-l2"><a class="reference internal" href="labs/01_phast_tiny_evolving_fracture.html#attach-the-initial-notch-boundary-conditions-and-material">3. Attach the initial notch, boundary conditions and material</a></li>
+<li class="toctree-l2"><a class="reference internal" href="labs/01_phast_tiny_evolving_fracture.html#apply-the-load-schedule-and-solve">4. Apply the load schedule and solve</a></li>
+<li class="toctree-l2"><a class="reference internal" href="labs/01_phast_tiny_evolving_fracture.html#save-and-reopen-the-numerical-results">5. Save and reopen the numerical results</a></li>
+<li class="toctree-l2"><a class="reference internal" href="labs/01_phast_tiny_evolving_fracture.html#interpret-displacement-damage-and-reaction">6. Interpret displacement, damage and reaction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="labs/01_phast_tiny_evolving_fracture.html#change-one-input-halve-the-imposed-separation">7. Change one input: halve the imposed separation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="labs/01_phast_tiny_evolving_fracture.html#key-takeaways">Key takeaways</a></li>
 <li class="toctree-l2"><a class="reference internal" href="labs/01_phast_tiny_evolving_fracture.html#exercises">Exercises</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="labs/02_degradation_autograd.html">Lab 02: Differentiating Degradation: Analytical, Autograd, &amp; Finite Differences</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="labs/02_degradation_autograd.html#key-takeaways">Key takeaways</a></li>
 <li class="toctree-l2"><a class="reference internal" href="labs/02_degradation_autograd.html#exercises">Exercises</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="labs/03_tiny_derivative_inverse_toy.html">Lab 03: Differentiable Mechanics &amp; Inverse Parameter Identification</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="labs/03_tiny_derivative_inverse_toy.html#key-takeaways">Key takeaways</a></li>
 <li class="toctree-l2"><a class="reference internal" href="labs/03_tiny_derivative_inverse_toy.html#exercises">Exercises</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="labs/04_train_save_reload_adapter.html">Lab 04: Neural Field Adapters (Training, Checkpointing, &amp; Reloading)</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="labs/04_train_save_reload_adapter.html">Train, save, reload, and compare a field model</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="labs/04_train_save_reload_adapter.html#from-reference-fields-to-a-training-objective">From reference fields to a training objective</a></li>
+<li class="toctree-l2"><a class="reference internal" href="labs/04_train_save_reload_adapter.html#read-the-training-step">Read the training step</a></li>
+<li class="toctree-l2"><a class="reference internal" href="labs/04_train_save_reload_adapter.html#interpreting-the-held-out-fields">Interpreting the held-out fields</a></li>
+<li class="toctree-l2"><a class="reference internal" href="labs/04_train_save_reload_adapter.html#key-takeaways">Key takeaways</a></li>
 <li class="toctree-l2"><a class="reference internal" href="labs/04_train_save_reload_adapter.html#exercises">Exercises</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="labs/05_hybrid_reference_correction.html">Lab 05: Hybrid Physics-AI: Residual-Gated Proposals &amp; Solver Correction</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="labs/05_hybrid_reference_correction.html">Assess a proposal and use a reference correction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="labs/05_hybrid_reference_correction.html#the-proposal-to-solution-sequence">The proposal-to-solution sequence</a></li>
+<li class="toctree-l2"><a class="reference internal" href="labs/05_hybrid_reference_correction.html#follow-the-calculation">Follow the calculation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="labs/05_hybrid_reference_correction.html#interpreting-the-residual-and-correction">Interpreting the residual and correction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="labs/05_hybrid_reference_correction.html#from-a-decision-record-to-learning-from-new-states">From a decision record to learning from new states</a></li>
+<li class="toctree-l2"><a class="reference internal" href="labs/05_hybrid_reference_correction.html#key-takeaways">Key takeaways</a></li>
 <li class="toctree-l2"><a class="reference internal" href="labs/05_hybrid_reference_correction.html#exercises">Exercises</a></li>
 </ul>
 </li>
@@ -755,8 +764,8 @@ and animations accompany the downloadable notebooks and figures.</p>
   
   <div class="footer-item">
     <div class="phast-course-credit">
-  <!-- Course material created by Allamaprabhu Ani, CEMS-Lab, 2026. -->
-  <p class="phast-course-creators">Presented by <span>Sathiskumar A. Ponnusami · Queen Mary University of London · CEMS-Lab</span></p>
+  <!-- Course material prepared by Allamaprabhu Ani and Sathiskumar A. Ponnusami, CEMS-Lab, 2026. -->
+  <p class="phast-course-creators">Prepared by <span>Allamaprabhu Ani and Sathiskumar A. Ponnusami</span></p>
   <p class="phast-course-purpose">© 2026
     <a href="https://github.com/CEMS-Lab">CEMS-Lab</a>
     <span aria-hidden="true"> · </span>

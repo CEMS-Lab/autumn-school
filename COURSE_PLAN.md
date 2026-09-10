@@ -14,9 +14,10 @@ differentiability and hybrid learning. Lecture 2 develops differentiability;
 lecture 3 develops hybrid approaches. The exercises revisit those questions
 in the same order.
 
-This is a local next-edition plan. Published v0.1.1 still has the earlier
-mixed two-hour sessions. The book, slide timings and overview must be rebuilt
-and reviewed before publishing this change. See [MVP_DELIVERY.md](MVP_DELIVERY.md)
+The current book source uses this three-lecture/three-practical route.
+Frozen v0.1.1 artifacts retain the earlier mixed two-hour sessions.
+The editable animated deck and classroom rehearsal are tracked in
+[TODAY.md](TODAY.md). See [MVP_DELIVERY.md](MVP_DELIVERY.md)
 for the selected scope and [BUILD_AGENT_PROMPTS.md](BUILD_AGENT_PROMPTS.md)
 for bounded build assignments. Preserve the complete issue inventory below.
 
@@ -44,8 +45,8 @@ bounded assignment, not another full course inside this allocation.
 
 The new live route is L1 fracture/numerics → L2 derivatives → L3 hybrid
 methods, followed by P1 PhAST → P2 derivative/recovery exercises → P3
-training/proposal assessment. The current graphical overview belongs to the
-previous edition until rebuilt. The longer sequence below preserves the
+training/proposal assessment. The opening timetable graphic has been removed
+from the book; its reusable figure sources are retained. The longer sequence preserves the
 full book inventory. Figures follow the [academic design standard](DESIGN_STANDARD.md).
 
 ```text
@@ -112,18 +113,18 @@ selects the classroom subset without closing or deleting unfinished extensions.
 | C01 | Phase-field foundations and comparisons | Explanations and figures exist. Review XFEM/cohesive trade-offs; do not call quasi-Newton a competing fracture formulation or claim universal phase-field superiority. |
 | C02 | Energy, degradation and damage morphology | Equations, derivative notebook and browser controls exist. Audit AT1/AT2 normalisation, profiles, continuity, mesh/length-scale effects and initiation/branching explanations. |
 | C03 | Solution algorithms and coupled physics | Staggering, static/dynamic and matrix-free concepts exist. Complete the transport/solid/damage operator narrative and distinguish physical time, load stepping and nonlinear iteration. |
-| C04 | First PhAST simulation | The existing public run is quasistatic with SciPy sparse-direct mechanics. The requested explicit-mechanics/implicit-damage, matrix-free demonstration needs a validated replacement or an explicit lecture-to-quasistatic-exercise bridge. Imported external meshes and short propagating-crack examples remain extensions. |
+| C04 | First PhAST simulation | The current candidate connects one configuration through geometry, mesh/notch, actual boundary conditions and solver objects, loading, exports and reloaded post-processing. Its reference and changed-load cases pass locally in 92.00 s. The model is plane-strain quasistatic AT2 with assembled sparse-direct mechanics and diffuse damage. Rehearse the published route in Colab; explicit/matrix-free execution, imported external meshes and short propagating-crack examples retain their own acceptance checks. |
 | C05 | Backpropagation explained step by step | Explicit local derivatives, adjoint propagation, shared-parameter sums and a checked three-step algebraic example exist. Revised book/lecture diagrams distinguish observable, gradient and optimisation update; a toy derivative check is not a full fracture-path validation. |
-| C06 | Inverse recovery | The elastic-bar toy is the minimum classroom route. The separate inverse/history handoff remains unmerged pending source, timing and coherence review. Primitive/history checks do not establish full fracture recovery. A small actual fracture-parameter/inclusion recovery remains a separate task. |
+| C06 | Inverse recovery | The elastic-bar toy is the classroom route. The optional inverse/history reading extension is integrated. Its contributor owns the remaining actual fracture recovery, multiple-start, held-out and under-300-second acceptance checks in issue #7. |
 | C07 | Train, save, reload and interchangeable models | MLP/RBF toy field examples run. Define and validate fracture-compatible damage inputs/outputs and saved-model contracts; do not imply arbitrary architectures are interchangeable automatically. |
 | C08 | Hybrid correction and DAgger | Toy accept/reject/fallback runs; DAgger is explained. A complete model-induced rollout, reference labelling, aggregation, retraining and held-out evaluation remains to be built. |
-| C09 | Laptop/Colab execution | All six notebooks have local receipts below 90 seconds after setup. Fresh installation, fresh Colab and slower-laptop rehearsal remain open; all activities must stay below 300 seconds. |
-| C10 | Integrated book and accessibility | Native code/output chapters, practice/solution downloads, HTML/PDF and visual explorations exist. Review offline/mobile/keyboard/print behaviour and all links after every edition change. |
-| C11 | Coherent lecture slides and animations | A clean 44-slide LaTeX deck exists. Align the new teaser and explicit backpropagation sequence; review pacing, readable equations and original animations against the final book. |
+| C09 | Laptop/Colab execution | All six notebooks have fresh local whole-process receipts of 3.74–92.00 seconds after setup, recorded in evidence/notebook_runtime_current.json. Shared cloud setup is implemented. Fresh installation, authenticated Colab and slower-laptop rehearsal retain separate checks; all activities must stay below 300 seconds. |
+| C10 | Integrated book and accessibility | The web textbook, native code/output chapters, practice/solution downloads and visual explorations form the student edition. The printable book is archived. Review offline/mobile/keyboard behaviour and links after every edition change. |
+| C11 | Coherent lecture slides and animations | A 23-slide editable PowerPoint/Keynote introduction contains five embedded animations and is mapped to the retained 44-slide LaTeX resource. All five clips play in local Keynote and all 23 slides have rendered reviews. Complete the full lecture integration, timed pacing, PowerPoint and presentation-machine seeking/replay checks. |
 | C12 | Paper-based extension studies | Select approved public papers and reproducible retained results, with one question and one limitation per study. Do not publish private worktrees or unapproved checkpoints. |
 | C13 | Teaching references and design standard | D2L/PBDL inform the book. The design standard records inspected Delft textbook, TUM lecture and ETH research-presentation visuals; original flowcharts apply those patterns. Remaining supplied Instagram/PDF repository lists still need a complete inventory; do not imply inaccessible material was inspected. |
-| C14 | Final coherence and completeness | Perform a learning-objective, notation, prerequisite, example, cross-format and timing audit; map every requested topic to a deliverable or an explicit open issue. |
-| C15 | Release, credits and community | Public repository, Pages and downloadable editions are the delivery route. Confirm credits/content licence, contributor guidance, follow-up exercises and a public showcase before claiming a finished course release. |
+| C14 | Final coherence and completeness | Local source/code/output parity, exercise, mathematical rendering and desktop/mobile checks pass. All 18 issues are mapped. Complete the whole-course learning-objective, notation, prerequisite and cross-format review, plus the timed three-lecture/three-practical rehearsal. |
+| C15 | Release, credits and community | Publication of the reviewed update is authorised. Verify the pushed revision, Pages deployment, credits and downloadable editions. Original-content licence, approved research exhibits, contributor pathway and final release acceptance remain tracked. |
 
 ## Evidence required before marking an issue complete
 
@@ -142,8 +143,10 @@ dark surfaces. Use readable tints of the public logo/documentation colours for
 navigation, links and answer edges; never alter quantitative figure colours.
 Two optional footer discoveries are native, keyboard-operable details, with no
 automatic animation, sound, tracking or impact on lesson completion.
-Footer credit: created by Allamaprabhu Ani and Sathiskumar A. Ponnusami,
+Book footer credit: prepared by Allamaprabhu Ani and Sathiskumar A. Ponnusami,
 CEMS-Lab; prepared for the UKACM Autumn School 2026. Preserve third-party credits.
+Reserve presenter wording for the slides, with Sathiskumar A. Ponnusami first
+and Queen Mary University of London · CEMS-Lab as his affiliation.
 
 The [main planning issue #1](https://github.com/CEMS-Lab/autumn-school/issues/1)
 tracks these linked workstreams. They remain open until their full acceptance
@@ -166,6 +169,8 @@ criteria are met, even where a first-edition artifact already exists.
 | C13 | [#14: Reference inventory and reusable academic design standard](https://github.com/CEMS-Lab/autumn-school/issues/14) |
 | C14 | [#15: Final lecture-series coherence and requirement-completeness audit](https://github.com/CEMS-Lab/autumn-school/issues/15) |
 | C15 | [#16: Public releases, credits, contributor pathway and course showcase](https://github.com/CEMS-Lab/autumn-school/issues/16) |
+| Course-wide pedagogy | [#17: Undergraduate tutorial style and coherent learning activities](https://github.com/CEMS-Lab/autumn-school/issues/17) |
+| Authoring standards | [#18: Editorial, notebook and visual directives](https://github.com/CEMS-Lab/autumn-school/issues/18) |
 
 ## Completion evidence
 
@@ -182,6 +187,10 @@ as the classroom fallback. No fresh Colab performance claim is made until a
 fresh-runtime receipt exists.
 
 ## Release gates
+
+Publication of the reviewed 10 September update is authorised. Confirm the
+pushed revision and live Pages deployment before recording that gate as
+complete; use that revision for the authenticated fresh-Colab rehearsal.
 
 The first publication is an evolving **prerelease**. Publishing it does not
 close the full-fracture inverse, learned damage or DAgger implementation issues.

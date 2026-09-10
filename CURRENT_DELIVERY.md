@@ -1,37 +1,40 @@
-# Current course material — 9 September 2026
+# Current course material — 10 September 2026
 
-Presented by Sathiskumar A. Ponnusami, Queen Mary University of London ·
-CEMS-Lab. Prepared for the UKACM Autumn School 2026. Creator attribution is
-retained in standard metadata, comments and presenter notes.
+Prepared by Allamaprabhu Ani and Sathiskumar A. Ponnusami, CEMS-Lab,
+for the UKACM Autumn School 2026. The slides retain Sathiskumar A. Ponnusami's
+presenter credit with Queen Mary University of London and CEMS-Lab.
 
 | Material | Current files |
 | --- | --- |
-| Introductory presentation, latest revision | [Keynote](output/intro-lecture-20260909/phast_lecture_introduction_v7.key) · [PowerPoint](output/intro-lecture-20260909/phast_lecture_introduction_v7.pptx) · [PDF](output/intro-lecture-20260909/phast_lecture_introduction_v7.pdf) |
+| Animated introductory presentation, local candidate | [Keynote](output/lecture-20260910/phast_lecture_animated.key) · [PowerPoint](output/lecture-20260910/phast_lecture_animated.pptx) · [Presenter notes](output/lecture-20260910/speaker_notes.md) |
+| Retained presentation fallback | [Keynote](output/intro-lecture-20260909/phast_lecture_introduction_v7.key) · [PowerPoint](output/intro-lecture-20260909/phast_lecture_introduction_v7.pptx) · [PDF](output/intro-lecture-20260909/phast_lecture_introduction_v7.pdf) |
 | HTML learning book and worked solutions | [Chapters](book/index.html) · [Notebook downloads](START_HERE.md#read-predict-compute-explain) |
 | Step-by-step differentiability lesson | [Notebook-style HTML](output/differentiability-step-by-step/index.html) · [Notebook](notebooks/drafts/06_differentiability_step_by_step.ipynb) |
 | Six-hour lecture resource | [44-slide PDF](slides/phast_autumn_school_2026.pdf) · [Editable LaTeX](slides/phast_latex_sources.zip) |
 | Inverse and history laboratory | [Visual laboratory](book/research/08_visual_lab.html) · [Guided history lesson](book/research/03_history_visual.html) |
 | Short conceptual animations | [Gallery and player notebook](assets/animations/index.html) |
 
-The 18-slide introduction continues the original Keynote. The 44-slide resource
-covers the broader teaching sequence. Its timetable mapping and classroom
-rehearsal are tracked in the [delivery plan](MVP_DELIVERY.md).
+The 23-slide animated introduction follows mechanics, differentiation and
+learning, with five embedded clips and presenter pause questions. The 44-slide
+resource supplies the broader explanations. The [lecture mapping](source/slides/intro-lecture/ANIMATED_LECTURE_MAP.md)
+connects these materials to three lecture hours and three practical hours.
 
-This update combines the PhAST dark orange-and-blue theme, integrated inverse
-material, academic prose, revised animation captions and current slides.
-Numerical assumptions and derivative definitions remain explicit. The classroom
-numerical results are preserved; the diffusion companion was rerun locally in
-6.934 seconds after setup. Its arrays and numerical checks match the previous run.
-All six classroom notebooks also passed a fresh exact-source local rehearsal;
-the longest complete calculation took 70.193 seconds after setup.
+Today's local candidate connects the complete forward-practical workflow,
+preserves authoring sources across all notebook formats, repairs cloud setup
+and exercises, and retains the PhAST dark orange-and-blue theme. The opening
+timetable image has been removed. All six classroom notebooks passed fresh
+local execution after setup; the longest whole process took 91.996 seconds.
+The [runtime receipt](evidence/notebook_runtime_current.json) records the exact
+code hashes and platform. The optional diffusion companion retains its
+9 September evidence; it was outside today's numerical changes.
 
-The latest native Keynote opens from a local disk copy. OneDrive hydration stalled
-during a separate reopen check; download the file fully before presentation.
-The [compatibility report](source/slides/intro-lecture/COMPATIBILITY_QA.md) records
-the checks. Superseded generated introductions are recoverable in local Trash;
-the original presenter source is preserved.
+The animated deck imported into Keynote from a local disk copy without a media
+warning, and all five clips played. The saved native Keynote contains the same
+five movies. See [today's compatibility evidence](evidence/slides_20260910.md)
+for exact checks and the remaining presentation-machine rehearsal.
 
-Rehearse the complete package in an authenticated fresh Colab session and on
-the presentation machine. The [forward-practical audit](source/planning/PRACTICAL_SEQUENCE_AUDIT_20260909.md)
-tracks preview/input alignment and portable result reload. The versioned
-[evidence](evidence/) and [manifest](MANIFEST.json) identify the review and files.
+The current files form the reviewed 10 September web edition. Publication has
+been authorised; deployment verification precedes authenticated fresh Colab
+checks from the published revision. [Today's checklist](TODAY.md) maps all 18 issues and the remaining
+delivery work. The [delivery evidence](evidence/course_delivery_20260910.md)
+and [manifest](MANIFEST.json) identify the candidate and its checks.

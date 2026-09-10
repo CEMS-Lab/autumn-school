@@ -780,10 +780,19 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--previews-only", action="store_true",
                         help="Render existing canonical notebooks to HTML while retaining their executions.")
+    parser.add_argument("--legacy-output", type=Path,
+                        help="Export historical starter templates into a separate folder.")
     args = parser.parse_args()
     if args.previews_only:
         export_previews()
         return
+    if args.legacy_output is None:
+        parser.error("Current lessons are authored in notebooks/. Use build_lab_pages.py for the book, sync_bootstrap.py for setup, or --legacy-output for historical templates.")
+    global NOTEBOOKS
+    destination = args.legacy_output.resolve()
+    if destination == (COURSE / "notebooks").resolve():
+        parser.error("Historical templates require a separate output directory.")
+    NOTEBOOKS = destination
     NOTEBOOKS.mkdir(parents=True, exist_ok=True)
     write_notebook("01_phast_tiny_evolving_fracture.ipynb", first_fracture())
     write_notebook("02_degradation_autograd.ipynb", degradation())

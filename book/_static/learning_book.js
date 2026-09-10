@@ -1,6 +1,15 @@
 /* Progressive enhancement: answers remain ordinary visible text without JS. */
 (() => {
   function enhance() {
+    document.querySelectorAll(".cell_output img").forEach(img => {
+      if (img.closest("a")) return;
+      const link = document.createElement("a");
+      link.href = img.src;
+      link.className = "figure-enlarge";
+      link.setAttribute("aria-label", "Open full-size figure: " + (img.alt || "notebook result"));
+      img.before(link);
+      link.append(img);
+    });
     document.querySelectorAll(".admonition.dropdown").forEach(panel => {
       if (panel.dataset.solutionEnhanced) return;
       const title = panel.querySelector(":scope > .admonition-title");

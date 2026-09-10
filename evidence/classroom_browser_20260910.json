@@ -1,0 +1,939 @@
+{
+  "date": "2026-09-10",
+  "baseURL": "http://127.0.0.1:8767/book/",
+  "scope": "Local desktop/mobile HTML, math, assets, downloads, keyboard answers, and screenshots; no numerical or Colab execution.",
+  "screenshotsDirectory": "reviews/classroom-20260910",
+  "passed": true,
+  "results": [
+    {
+      "name": "index",
+      "width": 1440,
+      "passed": true,
+      "screenshots": [
+        "reviews/classroom-20260910/index-1440-opening.png"
+      ],
+      "pageErrors": [],
+      "localFailedRequests": [],
+      "localHttpErrors": [],
+      "blockedExternalRequests": [],
+      "document": {
+        "width": 1440,
+        "scrollWidth": 1440,
+        "mathContainers": 9,
+        "mathErrors": [],
+        "unrenderedMath": [],
+        "brokenImages": [],
+        "theme": "dark",
+        "scrollableMath": 0
+      },
+      "index": {
+        "oldTimetableRemoved": true,
+        "allSixLabsLinked": true
+      }
+    },
+    {
+      "name": "00_why_average_predictions_can_fail",
+      "width": 1440,
+      "passed": true,
+      "screenshots": [
+        "reviews/classroom-20260910/00_why_average_predictions_can_fail-1440-opening.png",
+        "reviews/classroom-20260910/00_why_average_predictions_can_fail-1440-math.png",
+        "reviews/classroom-20260910/00_why_average_predictions_can_fail-1440-figure.png",
+        "reviews/classroom-20260910/00_why_average_predictions_can_fail-1440-worked-solution.png"
+      ],
+      "pageErrors": [],
+      "localFailedRequests": [],
+      "localHttpErrors": [],
+      "blockedExternalRequests": [],
+      "document": {
+        "width": 1440,
+        "scrollWidth": 1440,
+        "mathContainers": 59,
+        "mathErrors": [],
+        "unrenderedMath": [],
+        "brokenImages": [],
+        "theme": "dark",
+        "scrollableMath": 0
+      },
+      "actions": {
+        "practice": {
+          "url": "http://127.0.0.1:8767/notebooks/study/00_why_average_predictions_can_fail.ipynb",
+          "httpStatus": 200
+        },
+        "solutions": {
+          "url": "http://127.0.0.1:8767/notebooks/solutions/00_why_average_predictions_can_fail.ipynb",
+          "httpStatus": 200
+        },
+        "setup": {
+          "url": "http://127.0.0.1:8767/SETUP.md",
+          "httpStatus": 200
+        },
+        "colab": {
+          "href": "https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/study/00_why_average_predictions_can_fail.ipynb",
+          "checked": "target only; no external request or runtime launch"
+        }
+      },
+      "figureEnlargement": {
+        "keyboardEnterOpens": true,
+        "url": "http://127.0.0.1:8767/book/_images/3f86214e251368d0340097484d2e0d0a98e3572149526ce5807681de94b5ded8.png"
+      },
+      "keyboardAnswers": [
+        {
+          "title": "Hint 1",
+          "opensWithEnter": true
+        },
+        {
+          "title": "Worked solution 1",
+          "opensWithEnter": true
+        },
+        {
+          "title": "Hint 2",
+          "opensWithEnter": true
+        },
+        {
+          "title": "Worked solution 2",
+          "opensWithEnter": true
+        }
+      ],
+      "keyboardMathScroll": [],
+      "takeaways": 1,
+      "showAllKeyboard": true
+    },
+    {
+      "name": "01_phast_tiny_evolving_fracture",
+      "width": 1440,
+      "passed": true,
+      "screenshots": [
+        "reviews/classroom-20260910/01_phast_tiny_evolving_fracture-1440-opening.png",
+        "reviews/classroom-20260910/01_phast_tiny_evolving_fracture-1440-math.png",
+        "reviews/classroom-20260910/01_phast_tiny_evolving_fracture-1440-figure.png",
+        "reviews/classroom-20260910/01_phast_tiny_evolving_fracture-1440-worked-solution.png"
+      ],
+      "pageErrors": [],
+      "localFailedRequests": [],
+      "localHttpErrors": [],
+      "blockedExternalRequests": [],
+      "document": {
+        "width": 1440,
+        "scrollWidth": 1440,
+        "mathContainers": 64,
+        "mathErrors": [],
+        "unrenderedMath": [],
+        "brokenImages": [],
+        "theme": "dark",
+        "scrollableMath": 0
+      },
+      "actions": {
+        "practice": {
+          "url": "http://127.0.0.1:8767/notebooks/study/01_phast_tiny_evolving_fracture.ipynb",
+          "httpStatus": 200
+        },
+        "solutions": {
+          "url": "http://127.0.0.1:8767/notebooks/solutions/01_phast_tiny_evolving_fracture.ipynb",
+          "httpStatus": 200
+        },
+        "setup": {
+          "url": "http://127.0.0.1:8767/SETUP.md",
+          "httpStatus": 200
+        },
+        "colab": {
+          "href": "https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/study/01_phast_tiny_evolving_fracture.ipynb",
+          "checked": "target only; no external request or runtime launch"
+        }
+      },
+      "figureEnlargement": {
+        "keyboardEnterOpens": true,
+        "url": "http://127.0.0.1:8767/book/_images/dd1be88c78b519423ddc6a5f5a3afc56771d4be540681e48933e6ab1cb279599.png"
+      },
+      "keyboardAnswers": [
+        {
+          "title": "Hint 1",
+          "opensWithEnter": true
+        },
+        {
+          "title": "Worked solution 1",
+          "opensWithEnter": true
+        },
+        {
+          "title": "Hint 2",
+          "opensWithEnter": true
+        },
+        {
+          "title": "Worked solution 2",
+          "opensWithEnter": true
+        }
+      ],
+      "keyboardMathScroll": [],
+      "takeaways": 1,
+      "showAllKeyboard": true
+    },
+    {
+      "name": "02_degradation_autograd",
+      "width": 1440,
+      "passed": true,
+      "screenshots": [
+        "reviews/classroom-20260910/02_degradation_autograd-1440-opening.png",
+        "reviews/classroom-20260910/02_degradation_autograd-1440-math.png",
+        "reviews/classroom-20260910/02_degradation_autograd-1440-figure.png",
+        "reviews/classroom-20260910/02_degradation_autograd-1440-worked-solution.png"
+      ],
+      "pageErrors": [],
+      "localFailedRequests": [],
+      "localHttpErrors": [],
+      "blockedExternalRequests": [],
+      "document": {
+        "width": 1440,
+        "scrollWidth": 1440,
+        "mathContainers": 35,
+        "mathErrors": [],
+        "unrenderedMath": [],
+        "brokenImages": [],
+        "theme": "dark",
+        "scrollableMath": 0
+      },
+      "actions": {
+        "practice": {
+          "url": "http://127.0.0.1:8767/notebooks/study/02_degradation_autograd.ipynb",
+          "httpStatus": 200
+        },
+        "solutions": {
+          "url": "http://127.0.0.1:8767/notebooks/solutions/02_degradation_autograd.ipynb",
+          "httpStatus": 200
+        },
+        "setup": {
+          "url": "http://127.0.0.1:8767/SETUP.md",
+          "httpStatus": 200
+        },
+        "colab": {
+          "href": "https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/study/02_degradation_autograd.ipynb",
+          "checked": "target only; no external request or runtime launch"
+        }
+      },
+      "figureEnlargement": {
+        "keyboardEnterOpens": true,
+        "url": "http://127.0.0.1:8767/book/_images/5d3084e316d211a6b1417bb5f9e22907cc1e8d96e16283816136b60e61cad1ed.png"
+      },
+      "keyboardAnswers": [
+        {
+          "title": "Hint 1",
+          "opensWithEnter": true
+        },
+        {
+          "title": "Worked solution 1",
+          "opensWithEnter": true
+        },
+        {
+          "title": "Hint 2",
+          "opensWithEnter": true
+        },
+        {
+          "title": "Worked solution 2",
+          "opensWithEnter": true
+        }
+      ],
+      "keyboardMathScroll": [],
+      "takeaways": 1,
+      "showAllKeyboard": true
+    },
+    {
+      "name": "03_tiny_derivative_inverse_toy",
+      "width": 1440,
+      "passed": true,
+      "screenshots": [
+        "reviews/classroom-20260910/03_tiny_derivative_inverse_toy-1440-opening.png",
+        "reviews/classroom-20260910/03_tiny_derivative_inverse_toy-1440-math.png",
+        "reviews/classroom-20260910/03_tiny_derivative_inverse_toy-1440-figure.png",
+        "reviews/classroom-20260910/03_tiny_derivative_inverse_toy-1440-worked-solution.png"
+      ],
+      "pageErrors": [],
+      "localFailedRequests": [],
+      "localHttpErrors": [],
+      "blockedExternalRequests": [],
+      "document": {
+        "width": 1440,
+        "scrollWidth": 1440,
+        "mathContainers": 30,
+        "mathErrors": [],
+        "unrenderedMath": [],
+        "brokenImages": [],
+        "theme": "dark",
+        "scrollableMath": 0
+      },
+      "actions": {
+        "practice": {
+          "url": "http://127.0.0.1:8767/notebooks/study/03_tiny_derivative_inverse_toy.ipynb",
+          "httpStatus": 200
+        },
+        "solutions": {
+          "url": "http://127.0.0.1:8767/notebooks/solutions/03_tiny_derivative_inverse_toy.ipynb",
+          "httpStatus": 200
+        },
+        "setup": {
+          "url": "http://127.0.0.1:8767/SETUP.md",
+          "httpStatus": 200
+        },
+        "colab": {
+          "href": "https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/study/03_tiny_derivative_inverse_toy.ipynb",
+          "checked": "target only; no external request or runtime launch"
+        }
+      },
+      "figureEnlargement": {
+        "keyboardEnterOpens": true,
+        "url": "http://127.0.0.1:8767/book/_images/06cb78beb94d921b4128812cd0cb898820083f347f7d640efec52b60350577a9.png"
+      },
+      "keyboardAnswers": [
+        {
+          "title": "Hint 1",
+          "opensWithEnter": true
+        },
+        {
+          "title": "Worked solution 1",
+          "opensWithEnter": true
+        },
+        {
+          "title": "Hint 2",
+          "opensWithEnter": true
+        },
+        {
+          "title": "Worked solution 2",
+          "opensWithEnter": true
+        }
+      ],
+      "keyboardMathScroll": [],
+      "takeaways": 1,
+      "showAllKeyboard": true
+    },
+    {
+      "name": "04_train_save_reload_adapter",
+      "width": 1440,
+      "passed": true,
+      "screenshots": [
+        "reviews/classroom-20260910/04_train_save_reload_adapter-1440-opening.png",
+        "reviews/classroom-20260910/04_train_save_reload_adapter-1440-math.png",
+        "reviews/classroom-20260910/04_train_save_reload_adapter-1440-figure.png",
+        "reviews/classroom-20260910/04_train_save_reload_adapter-1440-worked-solution.png"
+      ],
+      "pageErrors": [],
+      "localFailedRequests": [],
+      "localHttpErrors": [],
+      "blockedExternalRequests": [],
+      "document": {
+        "width": 1440,
+        "scrollWidth": 1440,
+        "mathContainers": 35,
+        "mathErrors": [],
+        "unrenderedMath": [],
+        "brokenImages": [],
+        "theme": "dark",
+        "scrollableMath": 0
+      },
+      "actions": {
+        "practice": {
+          "url": "http://127.0.0.1:8767/notebooks/study/04_train_save_reload_adapter.ipynb",
+          "httpStatus": 200
+        },
+        "solutions": {
+          "url": "http://127.0.0.1:8767/notebooks/solutions/04_train_save_reload_adapter.ipynb",
+          "httpStatus": 200
+        },
+        "setup": {
+          "url": "http://127.0.0.1:8767/SETUP.md",
+          "httpStatus": 200
+        },
+        "colab": {
+          "href": "https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/study/04_train_save_reload_adapter.ipynb",
+          "checked": "target only; no external request or runtime launch"
+        }
+      },
+      "figureEnlargement": {
+        "keyboardEnterOpens": true,
+        "url": "http://127.0.0.1:8767/book/_images/df6f3635ff1ac9c480755ede1cfd329dc904ec0d5950c600ebcad2b8f000335d.png"
+      },
+      "keyboardAnswers": [
+        {
+          "title": "Hint 1",
+          "opensWithEnter": true
+        },
+        {
+          "title": "Worked solution 1",
+          "opensWithEnter": true
+        },
+        {
+          "title": "Hint 2",
+          "opensWithEnter": true
+        },
+        {
+          "title": "Worked solution 2",
+          "opensWithEnter": true
+        }
+      ],
+      "keyboardMathScroll": [],
+      "takeaways": 1,
+      "showAllKeyboard": true
+    },
+    {
+      "name": "05_hybrid_reference_correction",
+      "width": 1440,
+      "passed": true,
+      "screenshots": [
+        "reviews/classroom-20260910/05_hybrid_reference_correction-1440-opening.png",
+        "reviews/classroom-20260910/05_hybrid_reference_correction-1440-math.png",
+        "reviews/classroom-20260910/05_hybrid_reference_correction-1440-figure.png",
+        "reviews/classroom-20260910/05_hybrid_reference_correction-1440-worked-solution.png"
+      ],
+      "pageErrors": [],
+      "localFailedRequests": [],
+      "localHttpErrors": [],
+      "blockedExternalRequests": [],
+      "document": {
+        "width": 1440,
+        "scrollWidth": 1440,
+        "mathContainers": 20,
+        "mathErrors": [],
+        "unrenderedMath": [],
+        "brokenImages": [],
+        "theme": "dark",
+        "scrollableMath": 0
+      },
+      "actions": {
+        "practice": {
+          "url": "http://127.0.0.1:8767/notebooks/study/05_hybrid_reference_correction.ipynb",
+          "httpStatus": 200
+        },
+        "solutions": {
+          "url": "http://127.0.0.1:8767/notebooks/solutions/05_hybrid_reference_correction.ipynb",
+          "httpStatus": 200
+        },
+        "setup": {
+          "url": "http://127.0.0.1:8767/SETUP.md",
+          "httpStatus": 200
+        },
+        "colab": {
+          "href": "https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/study/05_hybrid_reference_correction.ipynb",
+          "checked": "target only; no external request or runtime launch"
+        }
+      },
+      "figureEnlargement": {
+        "keyboardEnterOpens": true,
+        "url": "http://127.0.0.1:8767/book/_images/cccdced8dd124c9962b3fde74608083fa88fc8b410b038c71bd6d0e1772025de.png"
+      },
+      "keyboardAnswers": [
+        {
+          "title": "Hint 1",
+          "opensWithEnter": true
+        },
+        {
+          "title": "Worked solution 1",
+          "opensWithEnter": true
+        },
+        {
+          "title": "Hint 2",
+          "opensWithEnter": true
+        },
+        {
+          "title": "Worked solution 2",
+          "opensWithEnter": true
+        }
+      ],
+      "keyboardMathScroll": [],
+      "takeaways": 1,
+      "showAllKeyboard": true
+    },
+    {
+      "name": "index",
+      "width": 390,
+      "passed": true,
+      "screenshots": [
+        "reviews/classroom-20260910/index-390-opening.png"
+      ],
+      "pageErrors": [],
+      "localFailedRequests": [],
+      "localHttpErrors": [],
+      "blockedExternalRequests": [],
+      "document": {
+        "width": 390,
+        "scrollWidth": 390,
+        "mathContainers": 9,
+        "mathErrors": [],
+        "unrenderedMath": [],
+        "brokenImages": [],
+        "theme": "dark",
+        "scrollableMath": 0
+      },
+      "index": {
+        "oldTimetableRemoved": true,
+        "allSixLabsLinked": true
+      }
+    },
+    {
+      "name": "00_why_average_predictions_can_fail",
+      "width": 390,
+      "passed": true,
+      "screenshots": [
+        "reviews/classroom-20260910/00_why_average_predictions_can_fail-390-opening.png",
+        "reviews/classroom-20260910/00_why_average_predictions_can_fail-390-math.png",
+        "reviews/classroom-20260910/00_why_average_predictions_can_fail-390-figure.png",
+        "reviews/classroom-20260910/00_why_average_predictions_can_fail-390-worked-solution.png"
+      ],
+      "pageErrors": [],
+      "localFailedRequests": [],
+      "localHttpErrors": [],
+      "blockedExternalRequests": [],
+      "document": {
+        "width": 390,
+        "scrollWidth": 390,
+        "mathContainers": 59,
+        "mathErrors": [],
+        "unrenderedMath": [],
+        "brokenImages": [],
+        "theme": "dark",
+        "scrollableMath": 2
+      },
+      "actions": {
+        "practice": {
+          "url": "http://127.0.0.1:8767/notebooks/study/00_why_average_predictions_can_fail.ipynb",
+          "httpStatus": 200
+        },
+        "solutions": {
+          "url": "http://127.0.0.1:8767/notebooks/solutions/00_why_average_predictions_can_fail.ipynb",
+          "httpStatus": 200
+        },
+        "setup": {
+          "url": "http://127.0.0.1:8767/SETUP.md",
+          "httpStatus": 200
+        },
+        "colab": {
+          "href": "https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/study/00_why_average_predictions_can_fail.ipynb",
+          "checked": "target only; no external request or runtime launch"
+        }
+      },
+      "figureEnlargement": {
+        "keyboardEnterOpens": true,
+        "url": "http://127.0.0.1:8767/book/_images/3f86214e251368d0340097484d2e0d0a98e3572149526ce5807681de94b5ded8.png"
+      },
+      "keyboardAnswers": [
+        {
+          "title": "Hint 1",
+          "opensWithEnter": true
+        },
+        {
+          "title": "Worked solution 1",
+          "opensWithEnter": true
+        },
+        {
+          "title": "Hint 2",
+          "opensWithEnter": true
+        },
+        {
+          "title": "Worked solution 2",
+          "opensWithEnter": true
+        }
+      ],
+      "keyboardMathScroll": [
+        {
+          "client": 324,
+          "scroll": 333,
+          "arrowRightScrolls": true
+        },
+        {
+          "client": 324,
+          "scroll": 555,
+          "arrowRightScrolls": true
+        }
+      ],
+      "takeaways": 1,
+      "showAllKeyboard": true
+    },
+    {
+      "name": "01_phast_tiny_evolving_fracture",
+      "width": 390,
+      "passed": true,
+      "screenshots": [
+        "reviews/classroom-20260910/01_phast_tiny_evolving_fracture-390-opening.png",
+        "reviews/classroom-20260910/01_phast_tiny_evolving_fracture-390-math.png",
+        "reviews/classroom-20260910/01_phast_tiny_evolving_fracture-390-figure.png",
+        "reviews/classroom-20260910/01_phast_tiny_evolving_fracture-390-worked-solution.png"
+      ],
+      "pageErrors": [],
+      "localFailedRequests": [],
+      "localHttpErrors": [],
+      "blockedExternalRequests": [],
+      "document": {
+        "width": 390,
+        "scrollWidth": 390,
+        "mathContainers": 64,
+        "mathErrors": [],
+        "unrenderedMath": [],
+        "brokenImages": [],
+        "theme": "dark",
+        "scrollableMath": 2
+      },
+      "actions": {
+        "practice": {
+          "url": "http://127.0.0.1:8767/notebooks/study/01_phast_tiny_evolving_fracture.ipynb",
+          "httpStatus": 200
+        },
+        "solutions": {
+          "url": "http://127.0.0.1:8767/notebooks/solutions/01_phast_tiny_evolving_fracture.ipynb",
+          "httpStatus": 200
+        },
+        "setup": {
+          "url": "http://127.0.0.1:8767/SETUP.md",
+          "httpStatus": 200
+        },
+        "colab": {
+          "href": "https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/study/01_phast_tiny_evolving_fracture.ipynb",
+          "checked": "target only; no external request or runtime launch"
+        }
+      },
+      "figureEnlargement": {
+        "keyboardEnterOpens": true,
+        "url": "http://127.0.0.1:8767/book/_images/dd1be88c78b519423ddc6a5f5a3afc56771d4be540681e48933e6ab1cb279599.png"
+      },
+      "keyboardAnswers": [
+        {
+          "title": "Hint 1",
+          "opensWithEnter": true
+        },
+        {
+          "title": "Worked solution 1",
+          "opensWithEnter": true
+        },
+        {
+          "title": "Hint 2",
+          "opensWithEnter": true
+        },
+        {
+          "title": "Worked solution 2",
+          "opensWithEnter": true
+        }
+      ],
+      "keyboardMathScroll": [
+        {
+          "client": 358,
+          "scroll": 483,
+          "arrowRightScrolls": true
+        },
+        {
+          "client": 324,
+          "scroll": 350,
+          "arrowRightScrolls": true
+        }
+      ],
+      "takeaways": 1,
+      "showAllKeyboard": true
+    },
+    {
+      "name": "02_degradation_autograd",
+      "width": 390,
+      "passed": true,
+      "screenshots": [
+        "reviews/classroom-20260910/02_degradation_autograd-390-opening.png",
+        "reviews/classroom-20260910/02_degradation_autograd-390-math.png",
+        "reviews/classroom-20260910/02_degradation_autograd-390-figure.png",
+        "reviews/classroom-20260910/02_degradation_autograd-390-worked-solution.png"
+      ],
+      "pageErrors": [],
+      "localFailedRequests": [],
+      "localHttpErrors": [],
+      "blockedExternalRequests": [],
+      "document": {
+        "width": 390,
+        "scrollWidth": 390,
+        "mathContainers": 35,
+        "mathErrors": [],
+        "unrenderedMath": [],
+        "brokenImages": [],
+        "theme": "dark",
+        "scrollableMath": 4
+      },
+      "actions": {
+        "practice": {
+          "url": "http://127.0.0.1:8767/notebooks/study/02_degradation_autograd.ipynb",
+          "httpStatus": 200
+        },
+        "solutions": {
+          "url": "http://127.0.0.1:8767/notebooks/solutions/02_degradation_autograd.ipynb",
+          "httpStatus": 200
+        },
+        "setup": {
+          "url": "http://127.0.0.1:8767/SETUP.md",
+          "httpStatus": 200
+        },
+        "colab": {
+          "href": "https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/study/02_degradation_autograd.ipynb",
+          "checked": "target only; no external request or runtime launch"
+        }
+      },
+      "figureEnlargement": {
+        "keyboardEnterOpens": true,
+        "url": "http://127.0.0.1:8767/book/_images/5d3084e316d211a6b1417bb5f9e22907cc1e8d96e16283816136b60e61cad1ed.png"
+      },
+      "keyboardAnswers": [
+        {
+          "title": "Hint 1",
+          "opensWithEnter": true
+        },
+        {
+          "title": "Worked solution 1",
+          "opensWithEnter": true
+        },
+        {
+          "title": "Hint 2",
+          "opensWithEnter": true
+        },
+        {
+          "title": "Worked solution 2",
+          "opensWithEnter": true
+        }
+      ],
+      "keyboardMathScroll": [
+        {
+          "client": 324,
+          "scroll": 390,
+          "arrowRightScrolls": true
+        },
+        {
+          "client": 324,
+          "scroll": 447,
+          "arrowRightScrolls": true
+        },
+        {
+          "client": 324,
+          "scroll": 394,
+          "arrowRightScrolls": true
+        },
+        {
+          "client": 324,
+          "scroll": 413,
+          "arrowRightScrolls": true
+        }
+      ],
+      "takeaways": 1,
+      "showAllKeyboard": true
+    },
+    {
+      "name": "03_tiny_derivative_inverse_toy",
+      "width": 390,
+      "passed": true,
+      "screenshots": [
+        "reviews/classroom-20260910/03_tiny_derivative_inverse_toy-390-opening.png",
+        "reviews/classroom-20260910/03_tiny_derivative_inverse_toy-390-math.png",
+        "reviews/classroom-20260910/03_tiny_derivative_inverse_toy-390-figure.png",
+        "reviews/classroom-20260910/03_tiny_derivative_inverse_toy-390-worked-solution.png"
+      ],
+      "pageErrors": [],
+      "localFailedRequests": [],
+      "localHttpErrors": [],
+      "blockedExternalRequests": [],
+      "document": {
+        "width": 390,
+        "scrollWidth": 390,
+        "mathContainers": 30,
+        "mathErrors": [],
+        "unrenderedMath": [],
+        "brokenImages": [],
+        "theme": "dark",
+        "scrollableMath": 0
+      },
+      "actions": {
+        "practice": {
+          "url": "http://127.0.0.1:8767/notebooks/study/03_tiny_derivative_inverse_toy.ipynb",
+          "httpStatus": 200
+        },
+        "solutions": {
+          "url": "http://127.0.0.1:8767/notebooks/solutions/03_tiny_derivative_inverse_toy.ipynb",
+          "httpStatus": 200
+        },
+        "setup": {
+          "url": "http://127.0.0.1:8767/SETUP.md",
+          "httpStatus": 200
+        },
+        "colab": {
+          "href": "https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/study/03_tiny_derivative_inverse_toy.ipynb",
+          "checked": "target only; no external request or runtime launch"
+        }
+      },
+      "figureEnlargement": {
+        "keyboardEnterOpens": true,
+        "url": "http://127.0.0.1:8767/book/_images/06cb78beb94d921b4128812cd0cb898820083f347f7d640efec52b60350577a9.png"
+      },
+      "keyboardAnswers": [
+        {
+          "title": "Hint 1",
+          "opensWithEnter": true
+        },
+        {
+          "title": "Worked solution 1",
+          "opensWithEnter": true
+        },
+        {
+          "title": "Hint 2",
+          "opensWithEnter": true
+        },
+        {
+          "title": "Worked solution 2",
+          "opensWithEnter": true
+        }
+      ],
+      "keyboardMathScroll": [],
+      "takeaways": 1,
+      "showAllKeyboard": true
+    },
+    {
+      "name": "04_train_save_reload_adapter",
+      "width": 390,
+      "passed": true,
+      "screenshots": [
+        "reviews/classroom-20260910/04_train_save_reload_adapter-390-opening.png",
+        "reviews/classroom-20260910/04_train_save_reload_adapter-390-math.png",
+        "reviews/classroom-20260910/04_train_save_reload_adapter-390-figure.png",
+        "reviews/classroom-20260910/04_train_save_reload_adapter-390-worked-solution.png"
+      ],
+      "pageErrors": [],
+      "localFailedRequests": [],
+      "localHttpErrors": [],
+      "blockedExternalRequests": [],
+      "document": {
+        "width": 390,
+        "scrollWidth": 390,
+        "mathContainers": 35,
+        "mathErrors": [],
+        "unrenderedMath": [],
+        "brokenImages": [],
+        "theme": "dark",
+        "scrollableMath": 3
+      },
+      "actions": {
+        "practice": {
+          "url": "http://127.0.0.1:8767/notebooks/study/04_train_save_reload_adapter.ipynb",
+          "httpStatus": 200
+        },
+        "solutions": {
+          "url": "http://127.0.0.1:8767/notebooks/solutions/04_train_save_reload_adapter.ipynb",
+          "httpStatus": 200
+        },
+        "setup": {
+          "url": "http://127.0.0.1:8767/SETUP.md",
+          "httpStatus": 200
+        },
+        "colab": {
+          "href": "https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/study/04_train_save_reload_adapter.ipynb",
+          "checked": "target only; no external request or runtime launch"
+        }
+      },
+      "figureEnlargement": {
+        "keyboardEnterOpens": true,
+        "url": "http://127.0.0.1:8767/book/_images/df6f3635ff1ac9c480755ede1cfd329dc904ec0d5950c600ebcad2b8f000335d.png"
+      },
+      "keyboardAnswers": [
+        {
+          "title": "Hint 1",
+          "opensWithEnter": true
+        },
+        {
+          "title": "Worked solution 1",
+          "opensWithEnter": true
+        },
+        {
+          "title": "Hint 2",
+          "opensWithEnter": true
+        },
+        {
+          "title": "Worked solution 2",
+          "opensWithEnter": true
+        }
+      ],
+      "keyboardMathScroll": [
+        {
+          "client": 358,
+          "scroll": 413,
+          "arrowRightScrolls": true
+        },
+        {
+          "client": 358,
+          "scroll": 495,
+          "arrowRightScrolls": true
+        },
+        {
+          "client": 324,
+          "scroll": 478,
+          "arrowRightScrolls": true
+        }
+      ],
+      "takeaways": 1,
+      "showAllKeyboard": true
+    },
+    {
+      "name": "05_hybrid_reference_correction",
+      "width": 390,
+      "passed": true,
+      "screenshots": [
+        "reviews/classroom-20260910/05_hybrid_reference_correction-390-opening.png",
+        "reviews/classroom-20260910/05_hybrid_reference_correction-390-math.png",
+        "reviews/classroom-20260910/05_hybrid_reference_correction-390-figure.png",
+        "reviews/classroom-20260910/05_hybrid_reference_correction-390-worked-solution.png"
+      ],
+      "pageErrors": [],
+      "localFailedRequests": [],
+      "localHttpErrors": [],
+      "blockedExternalRequests": [],
+      "document": {
+        "width": 390,
+        "scrollWidth": 390,
+        "mathContainers": 20,
+        "mathErrors": [],
+        "unrenderedMath": [],
+        "brokenImages": [],
+        "theme": "dark",
+        "scrollableMath": 0
+      },
+      "actions": {
+        "practice": {
+          "url": "http://127.0.0.1:8767/notebooks/study/05_hybrid_reference_correction.ipynb",
+          "httpStatus": 200
+        },
+        "solutions": {
+          "url": "http://127.0.0.1:8767/notebooks/solutions/05_hybrid_reference_correction.ipynb",
+          "httpStatus": 200
+        },
+        "setup": {
+          "url": "http://127.0.0.1:8767/SETUP.md",
+          "httpStatus": 200
+        },
+        "colab": {
+          "href": "https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/study/05_hybrid_reference_correction.ipynb",
+          "checked": "target only; no external request or runtime launch"
+        }
+      },
+      "figureEnlargement": {
+        "keyboardEnterOpens": true,
+        "url": "http://127.0.0.1:8767/book/_images/cccdced8dd124c9962b3fde74608083fa88fc8b410b038c71bd6d0e1772025de.png"
+      },
+      "keyboardAnswers": [
+        {
+          "title": "Hint 1",
+          "opensWithEnter": true
+        },
+        {
+          "title": "Worked solution 1",
+          "opensWithEnter": true
+        },
+        {
+          "title": "Hint 2",
+          "opensWithEnter": true
+        },
+        {
+          "title": "Worked solution 2",
+          "opensWithEnter": true
+        }
+      ],
+      "keyboardMathScroll": [],
+      "takeaways": 1,
+      "showAllKeyboard": true
+    }
+  ],
+  "pageViewportChecks": 14,
+  "manualVisualReview": "Screenshot capture complete; record human/model visual inspection in the independent review report.",
+  "manualVisualReviewReport": "evidence/notebook_delivery_review_20260910.md"
+}

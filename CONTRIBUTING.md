@@ -16,6 +16,15 @@ Please discuss new numerical examples with the maintainers before building them.
 | Styling and answer controls | `source/book/_static/` |
 | Solver implementation | Propose separately in CEMS-Lab/PhAST |
 
+The first practical has a dedicated generator,
+`source/notebooks/build_forward_practical.py`. The other current notebooks
+are authored directly. Shared environment cells come from
+`source/notebooks/colab_bootstrap.py`; apply them with
+`python source/notebooks/sync_bootstrap.py`, then rerun changed notebooks.
+Historical starter templates in `build_day2_notebooks.py` require an explicit
+separate export directory. Current prose and exercises belong in canonical
+notebooks and solution JSON, so a book rebuild preserves them.
+
 ## Rebuild the book
 
 Use Python 3.10–3.12 in an isolated environment. From the repository root:

@@ -2,7 +2,7 @@
 
 This authoring step never executes Python cells or changes their code/outputs.
 
-Course material created by Allamaprabhu Ani; presented by Sathiskumar A. Ponnusami,
+Course material prepared by Allamaprabhu Ani and Sathiskumar A. Ponnusami,
 CEMS-Lab, UKACM Autumn School 2026. Attribution does not replace bundled licences.
 """
 from __future__ import annotations
@@ -31,7 +31,7 @@ NAMES = (
 )
 COURSE_ATTRIBUTION = {
     "creator": "Allamaprabhu Ani",
-    "presenter": "Sathiskumar A. Ponnusami",
+    "prepared_by": ["Allamaprabhu Ani", "Sathiskumar A. Ponnusami"],
     "affiliation": "CEMS-Lab",
     "course": "UKACM Autumn School 2026",
 }
@@ -44,6 +44,11 @@ def computational_fingerprint(notebook) -> str:
         for cell in notebook.cells if cell.cell_type == "code"
     ]
     return hashlib.sha256(json.dumps(payload, sort_keys=True).encode()).hexdigest()
+
+
+def stable_cell_ids(notebook, name: str, surface: str):
+    for index, cell in enumerate(notebook.cells):
+        cell.id = hashlib.sha256(f"{name}:{surface}:{index}:{cell.source}".encode()).hexdigest()[:16]
 
 
 def exercise_cells(material: dict, answers: bool, myst: bool = True):
@@ -61,8 +66,8 @@ def exercise_cells(material: dict, answers: bool, myst: bool = True):
                     text = (f"::::{{admonition}} {label} {number}\n"
                             f":class: dropdown course-{key}\n\n{exercise[key]}\n::::")
                 else:
-                    # Jupyter Markdown does not interpret MyST directives.
-                    text = f"#### {label} {number}\n\n{exercise[key]}"
+                    text = (f"<details><summary>{label} {number}</summary>\n\n"
+                            f"{exercise[key]}\n\n</details>")
                 cells.append(nbformat.v4.new_markdown_cell(text))
     return cells
 
@@ -78,12 +83,22 @@ def main():
     teaser_path = runtime_path.parent / "teaser_runtime.json"
     teaser = json.loads(teaser_path.read_text())
     measured["00"] = teaser["notebook"]["aggregate_wall_seconds"]
+    current_path = ROOT / "evidence/notebook_runtime_current.json"
+    current_runs = {}
+    if current_path.exists():
+        current_runs = {item["id"]: item for item in json.loads(current_path.read_text())["notebooks"]}
     report = {"execution": "none; preserved reviewed code and outputs", "lessons": []}
     for name in NAMES:
         identifier = name[:2]
         authored_path = ROOT / "notebooks" / (name + ".ipynb")
         authored = nbformat.read(authored_path, as_version=4)
         nbformat.validate(authored)
+        if identifier in current_runs:
+            code = [cell.source for cell in authored.cells if cell.cell_type == "code"]
+            digest = hashlib.sha256(json.dumps(code).encode()).hexdigest()
+            if digest != current_runs[identifier]["code_sha256"]:
+                raise ValueError("Runtime receipt differs from authored code: " + name)
+            measured[identifier] = current_runs[identifier]["aggregate_wall_seconds"]
         source = ROOT / "notebooks/executed" / (name + ".ipynb")
         if not source.exists():
             source = authored_path
@@ -113,10 +128,14 @@ def main():
             if cell.cell_type == "markdown":
                 cell.source = authored_cell.source
         # Standard notebook metadata stays out of the rendered lesson body.
+        content.metadata.pop("presenter", None)
         content.metadata.update(COURSE_ATTRIBUTION)
         initial = content.cells.pop(0)
         assert initial.cell_type == "markdown"
         introduction = re.sub(r"^# [^\n]+\n+", "", initial.source, count=1)
+        # Action links and objectives are generated consistently for each surface.
+        introduction = re.sub(r"^\*\*Learning [Oo]bjective[.:]?\*\*[^\n]*\n+", "", introduction, flags=re.M)
+        introduction = re.sub(r"^\[!?\[?.*(?:[Oo]pen [Ii]n Colab|[Dd]ownload practice|[Dd]ownload with worked|[Ee]nvironment [Ss]etup|[Rr]ead this lesson).*\n*", "", introduction, flags=re.M)
         heading = (
             f"# {material['title']}\n\n"
             f"**Learning objective.** {material['objective']}\n\n"
@@ -124,19 +143,38 @@ def main():
             "Follow the worked calculation, then use the downloadable notebook "
             "to explore the exercises.\n\n"
         )
+        colab = f"https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/study/{name}.ipynb"
         book_links = (
-            f"[Download practice notebook](../../notebooks/study/{name}.ipynb) · "
-            f"[Download with worked solutions](../../notebooks/solutions/{name}.ipynb) · "
-            "[Environment setup](../../SETUP.md)\n\n"
+            '<div class="badge-row">\n'
+            f'<a class="badge-colab" href="{colab}"><img src="../_static/colab-badge.svg" alt="Open in Colab"/></a>\n'
+            f'<a class="badge-link" href="../../notebooks/study/{name}.ipynb">Download Practice Notebook</a>\n'
+            f'<a class="badge-link" href="../../notebooks/solutions/{name}.ipynb">Download with Worked Solutions</a>\n'
+            '<a class="badge-link" href="../../SETUP.md">Environment Setup</a>\n'
+            '</div>\n\n'
         )
-        notebook_links = f"[Read this lesson in the book](../../book/labs/{name}.html)\n\n"
+        public = "https://cems-lab.github.io/autumn-school"
+        notebook_links = (
+            f"[![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)]({colab})\n\n"
+            f"[Download practice notebook]({public}/notebooks/study/{name}.ipynb) · "
+            f"[Download with worked solutions]({public}/notebooks/solutions/{name}.ipynb) · "
+            f"[Environment setup]({public}/SETUP.md) · "
+            f"[Read this lesson in the book]({public}/book/labs/{name}.html)\n\n"
+        )
+        takeaways = material.get("takeaways", [])
+        if not 3 <= len(takeaways) <= 4:
+            raise ValueError("Each lesson needs three or four key takeaways: " + name)
+        content.cells = [cell for cell in content.cells
+                         if not (cell.cell_type == "markdown" and
+                                 cell.source.startswith("## Key takeaways"))]
+        content.cells.append(nbformat.v4.new_markdown_cell(
+            "## Key takeaways\n\n" + "\n".join("- " + item for item in takeaways)))
         book_notebook = copy.deepcopy(content)
         book_notebook.cells.insert(0, nbformat.v4.new_markdown_cell(heading + book_links + introduction))
         book_notebook.cells += exercise_cells(material, answers=True)
         book_notebook.metadata["mystnb"] = {"execution_mode": "off"}
         # The first code cell is reproducible environment/plot setup.
         first_code = next(cell for cell in book_notebook.cells if cell.cell_type == "code")
-        first_code.metadata["tags"] = list(set(first_code.metadata.get("tags", []) + ["hide-input"]))
+        first_code.metadata["tags"] = sorted(set(first_code.metadata.get("tags", []) + ["hide-input"]))
         for cell in book_notebook.cells:
             if any("image/png" in out.get("data", {}) for out in cell.get("outputs", [])):
                 cell.metadata["mystnb"] = {
@@ -148,9 +186,11 @@ def main():
             downloadable.cells += exercise_cells(material, answers, myst=False)
             if computational_fingerprint(downloadable) != computational_fingerprint(original):
                 raise AssertionError("Download computation changed")
+            stable_cell_ids(downloadable, name, kind)
             nbformat.write(downloadable, ROOT / "notebooks" / kind / (name + ".ipynb"))
         if computational_fingerprint(book_notebook) != computational_fingerprint(original):
             raise AssertionError("Published computation changed")
+        stable_cell_ids(book_notebook, name, "book")
         nbformat.write(book_notebook, BOOK / "labs" / (name + ".ipynb"))
         report["lessons"].append({
             "name": name,

@@ -1,4 +1,4 @@
-// Local-page checks for seven vector diagrams, with external requests blocked.
+// Local-page checks for the book opening and six scientific vector diagrams.
 const fs = require('fs');
 const path = require('path');
 const assert = require('assert/strict');
@@ -35,6 +35,20 @@ const {chromium} = require('playwright');
           await document.fonts.ready;
         });
         await page.waitForLoadState('networkidle');
+        assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));
+        if (name === 'index') {
+          assert.equal(await page.locator('#fig-course-map, img[src*="00_course_map"]').count(), 0,
+            'The timetable graphic belongs in the teaching plan, outside the book opening');
+          assert.ok(await page.locator('article h1').innerText());
+          for (const lesson of ['00_', '01_', '02_', '03_', '04_', '05_']) {
+            assert.ok(await page.locator(`article a[href*="labs/${lesson}"]`).count() > 0);
+          }
+          await page.screenshot({path:path.join(out, name+'-'+width+'.png')});
+          assert.deepEqual(errors,[]); assert.deepEqual(failed,[]);
+          results.push({name,width,timetableRemoved:true,labNavigation:true});
+          await page.close();
+          continue;
+        }
         const figure = page.locator('figure').first();
         const img = figure.locator('img');
         assert.ok((await img.getAttribute('src')).endsWith('.svg'));

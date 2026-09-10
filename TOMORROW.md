@@ -1,4 +1,30 @@
-# Tomorrow — 10 September 2026
+# Handoff issued 9 September — progress updated 10 September 2026
+
+This is the original handoff checklist. The [10 September execution record](TODAY.md)
+records completed items, current files and the remaining delivery checks.
+
+## Progress against the original handoff
+
+- [x] Build a 23-slide editable animated introduction with five embedded clips,
+  static fallbacks and presenter questions. Local Keynote import/playback pass.
+- [x] Complete the connected first PhAST practical, portable result reload and
+  changed-load comparison; fresh local whole-notebook time is 92.00 seconds.
+- [x] Preserve canonical notebook prose, code, outputs and worked answers across
+  the web and download editions. All six fresh local runs finish within 300 seconds.
+- [x] Check local desktop/mobile pages, equations, answer controls, downloads,
+  offline assets and scientific flowcharts; remove the opening timetable graphic.
+- [x] Receive publication authorisation for the reviewed update.
+- [ ] Verify the pushed revision and live Pages deployment, including credits
+  and downloads; record the deployed revision for fresh Colab rehearsal.
+- [ ] Run the six lessons and optional diffusion companion in fresh authenticated
+  Colab CPU sessions, recording setup and computation separately.
+- [ ] Test PowerPoint and presentation-machine playback, seeking/replay and
+  portability; refine opening movie frames and classroom readability.
+- [ ] Confirm organiser times and rehearse the full three-lecture/three-practical
+  route. Continue the separately tracked scientific extensions.
+
+The requirements below preserve the original handoff. Use [TODAY.md](TODAY.md)
+for current acceptance status and ownership.
 
 ## Delivery priorities
 

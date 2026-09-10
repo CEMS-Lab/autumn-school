@@ -54,9 +54,9 @@
       1.0
     ]
   },
-  "data_provenance": "course-owned ToyHelmholtzProblem; not PhAST or research data",
+  "data_provenance": "course-owned synthetic fields from the discrete ToyHelmholtzProblem",
   "seed": 20260909,
   "epochs": 400,
   "test_rmse": 0.049867531488768393,
-  "training_seconds": 1.3265216250001686
+  "training_seconds": 0.7838341250026133
 }

@@ -1,8 +1,7 @@
 {% extends "!layout.html" %}
 {% block extrahead %}
 {{ super() }}
-<meta name="author" content="Allamaprabhu Ani">
-<meta name="presenter" content="Sathiskumar A. Ponnusami">
-<meta name="presenter-affiliation" content="{{ course_presenter_affiliation }}">
+<meta name="author" content="{{ course_prepared_by }}">
+<meta name="prepared-by" content="{{ course_prepared_by }}">
 <meta name="course" content="CEMS-Lab · UKACM Autumn School 2026">
 {% endblock %}

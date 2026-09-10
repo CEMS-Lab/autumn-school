@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Lab 05: Hybrid Physics-AI: Residual-Gated Proposals &amp; Solver Correction &#8212; PhAST: Phase-field fracture with differentiable FEM</title>
+    <title>Assess a proposal and use a reference correction &#8212; PhAST: Phase-field fracture with differentiable FEM</title>
   
   
   
@@ -49,17 +49,16 @@
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="../_static/mathjax/tex-mml-chtml.js?v=cadf963e"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'labs/05_hybrid_reference_correction';</script>
-    <script src="../_static/learning_book.js?v=7a62d495"></script>
+    <script src="../_static/learning_book.js?v=5aaa4a9b"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Practice, Solutions, Glossary, and References" href="../07_practice_references.html" />
-    <link rel="prev" title="Lab 04: Neural Field Adapters (Training, Checkpointing, &amp; Reloading)" href="04_train_save_reload_adapter.html" />
+    <link rel="prev" title="Train, save, reload, and compare a field model" href="04_train_save_reload_adapter.html" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-<meta name="author" content="Allamaprabhu Ani">
-<meta name="presenter" content="Sathiskumar A. Ponnusami">
-<meta name="presenter-affiliation" content="Queen Mary University of London · CEMS-Lab">
+<meta name="author" content="Allamaprabhu Ani and Sathiskumar A. Ponnusami">
+<meta name="prepared-by" content="Allamaprabhu Ani and Sathiskumar A. Ponnusami">
 <meta name="course" content="CEMS-Lab · UKACM Autumn School 2026">
 
   </head>
@@ -174,12 +173,12 @@
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Theory &amp; Methods</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../00_welcome_and_routes.html">1. From Cracks to Computation: Learn by Doing</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../01_crack_representations.html">2. Crack representations: sharp, cohesive, and diffuse</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../02_phase_field_energy.html">3. Fracture energy: AT1, AT2, degradation, and width</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../03_staggered_solution.html">4. From solid mechanics to staggered damage updates</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../04_fem_to_tensors.html">5. Geometry, FEM, tensors, and matrix-free operators</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../05_differentiation_and_inverse.html">6. Differentiation and an illustrative inverse problem</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../05a_backpropagation_step_by_step.html">6.3.1. Backpropagation through a stepped update</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01_crack_representations.html">2. Crack Representations: Sharp, Cohesive, and Diffuse</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_phase_field_energy.html">3. Fracture Energy: AT1, AT2, Degradation, and Bandwidth</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_staggered_solution.html">4. The Staggered Solution Algorithm: Alternating Mechanics and Damage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_fem_to_tensors.html">5. From Weak Forms to Discrete Tensors: The PhAST Pipeline</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../05_differentiation_and_inverse.html">6. Differentiable Mechanics and Inverse Parameter Discovery</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../05a_backpropagation_step_by_step.html">6.4.1. Backpropagation through a stepped update</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../06_learning_adapter.html">7. Train, save, reload, adapters, and checked proposals</a></li>
@@ -187,11 +186,11 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Hands-On Computational Labs</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="00_why_average_predictions_can_fail.html">Lab 00: Branch Selection &amp; Energy-Based Objectives in Physics-Informed Learning</a></li>
-<li class="toctree-l1"><a class="reference internal" href="01_phast_tiny_evolving_fracture.html">Lab 01: End-to-End Simulation with PhAST (Notched Tension)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="01_phast_tiny_evolving_fracture.html">Run and interpret a small PhAST fracture calculation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="02_degradation_autograd.html">Lab 02: Differentiating Degradation: Analytical, Autograd, &amp; Finite Differences</a></li>
 <li class="toctree-l1"><a class="reference internal" href="03_tiny_derivative_inverse_toy.html">Lab 03: Differentiable Mechanics &amp; Inverse Parameter Identification</a></li>
-<li class="toctree-l1"><a class="reference internal" href="04_train_save_reload_adapter.html">Lab 04: Neural Field Adapters (Training, Checkpointing, &amp; Reloading)</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Lab 05: Hybrid Physics-AI: Residual-Gated Proposals &amp; Solver Correction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_train_save_reload_adapter.html">Train, save, reload, and compare a field model</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Assess a proposal and use a reference correction</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Review &amp; Reference</span></p>
 <ul class="nav bd-sidenav">
@@ -429,7 +428,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Lab 05: Hybrid Physics-AI: Residual-Gated Proposals & Solver Correction</h1>
+    <h1>Assess a proposal and use a reference correction</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -439,9 +438,14 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-proposal-to-solution-sequence">The proposal-to-solution sequence</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#follow-the-calculation">Follow the calculation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpreting-the-residual-and-correction">Interpreting the residual and correction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#from-a-decision-record-to-learning-from-new-states">From a decision record to learning from new states</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-takeaways">Key takeaways</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1-make-the-residual-gate-decision">Exercise 1: Make the residual-gate decision</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2-project-a-field-and-extend-the-correction-cycle">Exercise 2: Project a field and extend the correction cycle</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1-relate-residual-field-error-and-the-model-interface">Exercise 1: Relate residual, field error, and the model interface</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2-explore-the-residual-tolerance">Exercise 2: Explore the residual tolerance</a></li>
 </ul>
 </li>
 </ul>
@@ -455,21 +459,40 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="lab-05-hybrid-physics-ai-residual-gated-proposals-solver-correction">
-<h1>Lab 05: Hybrid Physics-AI: Residual-Gated Proposals &amp; Solver Correction<a class="headerlink" href="#lab-05-hybrid-physics-ai-residual-gated-proposals-solver-correction" title="Link to this heading">#</a></h1>
-<p><strong>Learning Objective:</strong> Implement a hybrid solver loop where a fast neural network proposes a trial solution, an admissibility gate evaluates the physical residual, and a trusted numerical solver corrects or refines the state when needed.</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="assess-a-proposal-and-use-a-reference-correction">
+<h1>Assess a proposal and use a reference correction<a class="headerlink" href="#assess-a-proposal-and-use-a-reference-correction" title="Link to this heading">#</a></h1>
+<p><strong>Learning objective.</strong> Evaluate a learned field against its discrete equation, select a residual tolerance, and compare accepted proposals with a direct reference correction.</p>
+<p><strong>Predict first.</strong> What happens to the selected field and the frequency of reference corrections when the residual tolerance is tightened?</p>
+<p>Follow the worked calculation, then use the downloadable notebook to explore the exercises.</p>
 <div class="badge-row">
-  <a class="badge-colab" href="https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/study/05_hybrid_reference_correction.ipynb" target="_blank"><img src="../_static/colab-badge.svg" alt="Open In Colab"/></a>
-  <a class="badge-link" href="../../notebooks/study/05_hybrid_reference_correction.ipynb"><i class="fa-solid fa-download"></i> Download Practice Notebook</a>
-  <a class="badge-link" href="../../notebooks/solutions/05_hybrid_reference_correction.ipynb"><i class="fa-solid fa-check-circle"></i> Download with Worked Solutions</a>
-  <a class="badge-link" href="../../SETUP.md"><i class="fa-solid fa-gear"></i> Environment Setup</a>
+<a class="badge-colab" href="https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/study/05_hybrid_reference_correction.ipynb"><img src="../_static/colab-badge.svg" alt="Open in Colab"/></a>
+<a class="badge-link" href="../../notebooks/study/05_hybrid_reference_correction.ipynb">Download Practice Notebook</a>
+<a class="badge-link" href="../../notebooks/solutions/05_hybrid_reference_correction.ipynb">Download with Worked Solutions</a>
+<a class="badge-link" href="../../SETUP.md">Environment Setup</a>
 </div>
-<p>In safety-critical engineering mechanics, purely data-driven neural networks can produce inaccurate predictions when queried outside their training distribution. A hybrid solver architecture combines the speed of learned models with the reliability of numerical solvers:</p>
+<p>A learned field can be compared with the discrete equation that generated its training data. This creates a useful interface between prediction and numerical solution: propose a field, impose the field constraints, measure its residual, and select a reference correction when the required tolerance calls for one.</p>
+<p>We reuse the MLP from the previous tutorial and the same course-owned <code class="docutils literal notranslate"><span class="pre">ToyHelmholtzProblem</span></code>. Its equation is <span class="math notranslate nohighlight">\(A\mathbf{d}=\mathbf{b}(\lambda)\)</span>, with a dimensionless damage-like scalar <span class="math notranslate nohighlight">\(d\)</span> on a unit square. The residual therefore measures agreement with this linear field equation.</p>
+<section id="the-proposal-to-solution-sequence">
+<h2>The proposal-to-solution sequence<a class="headerlink" href="#the-proposal-to-solution-sequence" title="Link to this heading">#</a></h2>
 <ol class="arabic simple">
-<li><p><strong>Fast Neural Proposal:</strong> The neural network generates an initial trial field <span class="math notranslate nohighlight">\(\widehat{u}\)</span>.</p></li>
-<li><p><strong>Physics-Based Gating:</strong> The physical PDE residual <span class="math notranslate nohighlight">\(r = \|R(\widehat{u})\|\)</span> is evaluated.</p></li>
-<li><p><strong>Selective Solver Refinement:</strong> If the residual is below tolerance, the proposal is accepted; otherwise, the proposal serves as an initial guess for a reference numerical solver, accelerating convergence.</p></li>
+<li><p><strong>Check the inputs.</strong> Verify the feature order <span class="math notranslate nohighlight">\([x/L,y/H,\lambda]\)</span>, tensor shape, finite values, and grid signature.</p></li>
+<li><p><strong>Predict and project.</strong> Evaluate the fixed MLP under <code class="docutils literal notranslate"><span class="pre">torch.no_grad()</span></code>, restrict values to <span class="math notranslate nohighlight">\([0,1]\)</span>, and use the previous field to impose a pointwise lower bound. Set boundary values to zero.</p></li>
+<li><p><strong>Measure agreement with the equation.</strong> Evaluate the dimensionless relative residual</p></li>
 </ol>
+<div class="math notranslate nohighlight">
+\[
+\rho(\widehat{\mathbf d};\lambda)
+=\frac{\|A\widehat{\mathbf d}-\mathbf b(\lambda)\|_2}
+       {\|\mathbf b(\lambda)\|_2+10^{-15}}.
+\]</div>
+<ol class="arabic simple" start="4">
+<li><p><strong>Select the result.</strong> Accept the projected proposal when <span class="math notranslate nohighlight">\(\rho\le\tau\)</span>. Otherwise obtain the reference field using the direct linear solve <code class="docutils literal notranslate"><span class="pre">torch.linalg.solve</span></code>. This correction computes a fresh solution of the discrete field equation.</p></li>
+</ol>
+<p>The scalar <span class="math notranslate nohighlight">\(\tau\)</span> is the acceptance tolerance. The notebook uses a visible teaching threshold so that students can compare an accepted model field, a deliberately perturbed field, and the corrected result. The previous field comes from a smaller positive load, for which the linear model’s reference field also has smaller values.</p>
+</section>
+<section id="follow-the-calculation">
+<h2>Follow the calculation<a class="headerlink" href="#follow-the-calculation" title="Link to this heading">#</a></h2>
+<p>The opening calculation loads the saved checkpoint, or trains it when starting this notebook independently. The next cell obtains a proposal, evaluates its residual, and compares it with the reference. It then perturbs a field to illustrate the correction route. Subsequent cells demonstrate feature-order and finite-input checks, compare full spatial fields, and save the decision metadata.</p>
 <div class="cell tag_hide-input docutils container">
 <details class="admonition hide above-input">
 <summary aria-label="Toggle hidden content">
@@ -477,57 +500,96 @@ document.write(`
 <p class="expanded admonition-title">Hide code cell source</p>
 </summary>
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Google Colab environment setup</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Environment setup is measured separately from the classroom computation.</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">importlib.metadata</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">subprocess</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+
+<span class="n">setup_started</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
 <span class="k">try</span><span class="p">:</span>
     <span class="kn">import</span><span class="w"> </span><span class="nn">google.colab</span>
-    <span class="kn">import</span><span class="w"> </span><span class="nn">subprocess</span>
-    <span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;autumn-school&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">is_dir</span><span class="p">()</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;notebooks&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">is_dir</span><span class="p">():</span>
-        <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="s2">&quot;git&quot;</span><span class="p">,</span> <span class="s2">&quot;clone&quot;</span><span class="p">,</span> <span class="s2">&quot;--depth&quot;</span><span class="p">,</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;https://github.com/CEMS-Lab/autumn-school.git&quot;</span><span class="p">],</span> <span class="n">check</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">IN_COLAB</span> <span class="o">=</span> <span class="kc">True</span>
 <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
-    <span class="k">pass</span>
+    <span class="n">IN_COLAB</span> <span class="o">=</span> <span class="kc">False</span>
 
-<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">sys</span><span class="o">.</span><span class="n">version_info</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span> <span class="o">&lt;</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">13</span><span class="p">):</span>
+    <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;This PhAST snapshot supports Python 3.10–3.12. Select a compatible runtime; see Environment Setup.&quot;</span><span class="p">)</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">locate_course_root</span><span class="p">():</span>
-    <span class="k">for</span> <span class="n">base</span> <span class="ow">in</span> <span class="p">(</span><span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">(),</span> <span class="o">*</span><span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">()</span><span class="o">.</span><span class="n">parents</span><span class="p">,</span> <span class="n">Path</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span><span class="o">.</span><span class="n">parent</span> <span class="k">if</span> <span class="s2">&quot;__file__&quot;</span> <span class="ow">in</span> <span class="nb">globals</span><span class="p">()</span> <span class="k">else</span> <span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">()):</span>
-        <span class="n">direct</span> <span class="o">=</span> <span class="n">base</span> <span class="o">/</span> <span class="s2">&quot;teaching&quot;</span> <span class="o">/</span> <span class="s2">&quot;ukacm_autumn_school_2026&quot;</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">direct</span> <span class="o">/</span> <span class="s2">&quot;notebooks&quot;</span> <span class="o">/</span> <span class="s2">&quot;day2_helpers&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">is_dir</span><span class="p">():</span>
-            <span class="k">return</span> <span class="n">direct</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">base</span> <span class="o">/</span> <span class="s2">&quot;notebooks&quot;</span> <span class="o">/</span> <span class="s2">&quot;day2_helpers&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">is_dir</span><span class="p">():</span>
-            <span class="k">return</span> <span class="n">base</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">base</span> <span class="o">/</span> <span class="s2">&quot;autumn-school&quot;</span> <span class="o">/</span> <span class="s2">&quot;notebooks&quot;</span> <span class="o">/</span> <span class="s2">&quot;day2_helpers&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">is_dir</span><span class="p">():</span>
-            <span class="k">return</span> <span class="n">base</span> <span class="o">/</span> <span class="s2">&quot;autumn-school&quot;</span>
-    <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span><span class="s2">&quot;Could not find teaching/ukacm_autumn_school_2026.&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">base</span> <span class="ow">in</span> <span class="p">(</span><span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">(),</span> <span class="o">*</span><span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">()</span><span class="o">.</span><span class="n">parents</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">candidate</span> <span class="ow">in</span> <span class="p">(</span><span class="n">base</span><span class="p">,</span> <span class="n">base</span> <span class="o">/</span> <span class="s2">&quot;autumn-school&quot;</span><span class="p">,</span> <span class="n">base</span> <span class="o">/</span> <span class="s2">&quot;teaching/ukacm_autumn_school_2026&quot;</span><span class="p">):</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">candidate</span> <span class="o">/</span> <span class="s2">&quot;notebooks/day2_helpers&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">is_dir</span><span class="p">()</span> <span class="ow">and</span> <span class="p">(</span><span class="n">candidate</span> <span class="o">/</span> <span class="s2">&quot;vendor/PhAST/src&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">is_dir</span><span class="p">():</span>
+                <span class="k">return</span> <span class="n">candidate</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span>
+    <span class="k">return</span> <span class="kc">None</span>
 
 <span class="n">COURSE_ROOT</span> <span class="o">=</span> <span class="n">locate_course_root</span><span class="p">()</span>
-<span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="n">COURSE_ROOT</span> <span class="o">/</span> <span class="s2">&quot;notebooks&quot;</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="p">:</span>
-    <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">COURSE_ROOT</span> <span class="o">/</span> <span class="s2">&quot;notebooks&quot;</span><span class="p">))</span>
+<span class="k">if</span> <span class="n">COURSE_ROOT</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">IN_COLAB</span><span class="p">:</span>
+    <span class="n">COURSE_ROOT</span> <span class="o">=</span> <span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">()</span> <span class="o">/</span> <span class="s2">&quot;autumn-school&quot;</span>
+    <span class="k">if</span> <span class="n">COURSE_ROOT</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;An incomplete autumn-school folder exists. Start a fresh runtime or select the complete course folder.&quot;</span><span class="p">)</span>
+    <span class="c1"># A release tag or full commit can be supplied for a fixed course edition.</span>
+    <span class="n">course_ref</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;PHAST_COURSE_REF&quot;</span><span class="p">,</span> <span class="s2">&quot;main&quot;</span><span class="p">)</span>
+    <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="s2">&quot;git&quot;</span><span class="p">,</span> <span class="s2">&quot;init&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">COURSE_ROOT</span><span class="p">)],</span> <span class="n">check</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">capture_output</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="s2">&quot;git&quot;</span><span class="p">,</span> <span class="s2">&quot;-C&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">COURSE_ROOT</span><span class="p">),</span> <span class="s2">&quot;remote&quot;</span><span class="p">,</span> <span class="s2">&quot;add&quot;</span><span class="p">,</span> <span class="s2">&quot;origin&quot;</span><span class="p">,</span> <span class="s2">&quot;https://github.com/CEMS-Lab/autumn-school.git&quot;</span><span class="p">],</span> <span class="n">check</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="s2">&quot;git&quot;</span><span class="p">,</span> <span class="s2">&quot;-C&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">COURSE_ROOT</span><span class="p">),</span> <span class="s2">&quot;fetch&quot;</span><span class="p">,</span> <span class="s2">&quot;--depth&quot;</span><span class="p">,</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;origin&quot;</span><span class="p">,</span> <span class="n">course_ref</span><span class="p">],</span> <span class="n">check</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">180</span><span class="p">)</span>
+    <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="s2">&quot;git&quot;</span><span class="p">,</span> <span class="s2">&quot;-C&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">COURSE_ROOT</span><span class="p">),</span> <span class="s2">&quot;checkout&quot;</span><span class="p">,</span> <span class="s2">&quot;--detach&quot;</span><span class="p">,</span> <span class="s2">&quot;FETCH_HEAD&quot;</span><span class="p">],</span> <span class="n">check</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">capture_output</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">COURSE_ROOT</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span><span class="s2">&quot;Open the notebook from the complete course folder, including notebooks/, configs/ and vendor/. See Environment Setup.&quot;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">IN_COLAB</span><span class="p">:</span>
+    <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="n">sys</span><span class="o">.</span><span class="n">executable</span><span class="p">,</span> <span class="s2">&quot;-m&quot;</span><span class="p">,</span> <span class="s2">&quot;pip&quot;</span><span class="p">,</span> <span class="s2">&quot;install&quot;</span><span class="p">,</span> <span class="s2">&quot;--quiet&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">COURSE_ROOT</span> <span class="o">/</span> <span class="s2">&quot;vendor/PhAST&quot;</span><span class="p">),</span> <span class="s2">&quot;nbformat&quot;</span><span class="p">,</span> <span class="s2">&quot;nbclient&quot;</span><span class="p">,</span> <span class="s2">&quot;nbconvert&quot;</span><span class="p">],</span> <span class="n">check</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">600</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">package_dir</span> <span class="ow">in</span> <span class="p">(</span><span class="n">COURSE_ROOT</span> <span class="o">/</span> <span class="s2">&quot;vendor/PhAST/src&quot;</span><span class="p">,</span> <span class="n">COURSE_ROOT</span> <span class="o">/</span> <span class="s2">&quot;notebooks&quot;</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="n">package_dir</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="p">:</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">package_dir</span><span class="p">))</span>
+
+<span class="n">revision</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="s2">&quot;git&quot;</span><span class="p">,</span> <span class="s2">&quot;-C&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">COURSE_ROOT</span><span class="p">),</span> <span class="s2">&quot;rev-parse&quot;</span><span class="p">,</span> <span class="s2">&quot;HEAD&quot;</span><span class="p">],</span> <span class="n">text</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">capture_output</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">package_versions</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">package</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;torch&quot;</span><span class="p">,</span> <span class="s2">&quot;numpy&quot;</span><span class="p">,</span> <span class="s2">&quot;scipy&quot;</span><span class="p">,</span> <span class="s2">&quot;matplotlib&quot;</span><span class="p">,</span> <span class="s2">&quot;nbformat&quot;</span><span class="p">):</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">package_versions</span><span class="p">[</span><span class="n">package</span><span class="p">]</span> <span class="o">=</span> <span class="n">importlib</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">version</span><span class="p">(</span><span class="n">package</span><span class="p">)</span>
+    <span class="k">except</span> <span class="n">importlib</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">PackageNotFoundError</span><span class="p">:</span>
+        <span class="n">package_versions</span><span class="p">[</span><span class="n">package</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;install using Environment Setup&quot;</span>
+<span class="n">setup_receipt</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;environment&quot;</span><span class="p">:</span> <span class="s2">&quot;Google Colab&quot;</span> <span class="k">if</span> <span class="n">IN_COLAB</span> <span class="k">else</span> <span class="s2">&quot;local&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;python&quot;</span><span class="p">:</span> <span class="n">sys</span><span class="o">.</span><span class="n">version</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">0</span><span class="p">],</span>
+    <span class="s2">&quot;course_revision&quot;</span><span class="p">:</span> <span class="n">revision</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">if</span> <span class="n">revision</span><span class="o">.</span><span class="n">returncode</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="s2">&quot;downloaded archive&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;versions&quot;</span><span class="p">:</span> <span class="n">package_versions</span><span class="p">,</span>
+    <span class="s2">&quot;setup_seconds&quot;</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span> <span class="o">-</span> <span class="n">setup_started</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
+<span class="p">}</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">setup_receipt</span><span class="p">)</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">io</span><span class="w"> </span><span class="kn">import</span> <span class="n">BytesIO</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">Image</span><span class="p">,</span> <span class="n">display</span>
-
 <span class="kn">from</span><span class="w"> </span><span class="nn">day2_helpers</span><span class="w"> </span><span class="kn">import</span> <span class="n">assets_dir</span>
 
 <span class="n">torch</span><span class="o">.</span><span class="n">set_default_dtype</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="o">.</span><span class="n">update</span><span class="p">({</span>
+    <span class="s2">&quot;font.family&quot;</span><span class="p">:</span> <span class="s2">&quot;sans-serif&quot;</span><span class="p">,</span> <span class="s2">&quot;font.sans-serif&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;DejaVu Sans&quot;</span><span class="p">,</span> <span class="s2">&quot;Arial&quot;</span><span class="p">,</span> <span class="s2">&quot;Helvetica&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;font.size&quot;</span><span class="p">:</span> <span class="mi">11</span><span class="p">,</span> <span class="s2">&quot;axes.labelsize&quot;</span><span class="p">:</span> <span class="mi">11</span><span class="p">,</span> <span class="s2">&quot;axes.titlesize&quot;</span><span class="p">:</span> <span class="mi">12</span><span class="p">,</span>
+    <span class="s2">&quot;xtick.labelsize&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span> <span class="s2">&quot;ytick.labelsize&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span> <span class="s2">&quot;legend.fontsize&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="s2">&quot;figure.titlesize&quot;</span><span class="p">:</span> <span class="mi">13</span><span class="p">,</span> <span class="s2">&quot;figure.dpi&quot;</span><span class="p">:</span> <span class="mi">150</span><span class="p">,</span> <span class="s2">&quot;axes.grid&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="s2">&quot;grid.alpha&quot;</span><span class="p">:</span> <span class="mf">0.3</span><span class="p">,</span> <span class="s2">&quot;grid.linestyle&quot;</span><span class="p">:</span> <span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="s2">&quot;lines.linewidth&quot;</span><span class="p">:</span> <span class="mf">1.8</span><span class="p">,</span>
+<span class="p">})</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">display_figure</span><span class="p">(</span><span class="n">figure</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">150</span><span class="p">,</span> <span class="n">alt</span><span class="o">=</span><span class="s2">&quot;Rendered teaching figure&quot;</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Embed a PNG even when nbclient uses a non-interactive Agg backend.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Retain figures for reading in the book and in a fresh notebook session.&quot;&quot;&quot;</span>
     <span class="n">buffer</span> <span class="o">=</span> <span class="n">BytesIO</span><span class="p">()</span>
     <span class="n">figure</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;png&quot;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="n">dpi</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s2">&quot;tight&quot;</span><span class="p">)</span>
     <span class="n">display</span><span class="p">(</span><span class="n">Image</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">buffer</span><span class="o">.</span><span class="n">getvalue</span><span class="p">(),</span> <span class="n">alt</span><span class="o">=</span><span class="n">alt</span><span class="p">))</span>
-
-<span class="nb">print</span><span class="p">({</span><span class="s2">&quot;course_layout&quot;</span><span class="p">:</span> <span class="s2">&quot;teaching/ukacm_autumn_school_2026 located&quot;</span><span class="p">,</span> <span class="s2">&quot;torch&quot;</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">__version__</span><span class="p">,</span> <span class="s2">&quot;device&quot;</span><span class="p">:</span> <span class="s2">&quot;cpu&quot;</span><span class="p">,</span> <span class="s2">&quot;dtype&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">get_default_dtype</span><span class="p">())})</span>
 </pre></div>
 </div>
 </div>
 </details>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;course_layout&#39;: &#39;teaching/ukacm_autumn_school_2026 located&#39;, &#39;torch&#39;: &#39;2.8.0&#39;, &#39;device&#39;: &#39;cpu&#39;, &#39;dtype&#39;: &#39;torch.float64&#39;}
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;environment&#39;: &#39;local&#39;, &#39;python&#39;: &#39;3.10.18&#39;, &#39;course_revision&#39;: &#39;077d43d87c55b4fdea720808fc24f040e957e1ea&#39;, &#39;versions&#39;: {&#39;torch&#39;: &#39;2.8.0&#39;, &#39;numpy&#39;: &#39;2.2.6&#39;, &#39;scipy&#39;: &#39;1.14.1&#39;, &#39;matplotlib&#39;: &#39;3.10.8&#39;, &#39;nbformat&#39;: &#39;5.10.4&#39;}, &#39;setup_seconds&#39;: 0.025}
 </pre></div>
 </div>
 </div>
@@ -639,7 +701,7 @@ Expected finite-input rejection: Incompatible feature tensor: all adapter inputs
 <span class="k">for</span> <span class="n">ax</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">cmap</span><span class="p">,</span> <span class="n">limits</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">axes</span><span class="p">,</span> <span class="o">*</span><span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">panels</span><span class="p">)):</span>
     <span class="n">image</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">field_image</span><span class="p">(</span><span class="n">field</span><span class="p">),</span> <span class="n">origin</span><span class="o">=</span><span class="s2">&quot;lower&quot;</span><span class="p">,</span> <span class="n">extent</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cmap</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="n">limits</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">vmax</span><span class="o">=</span><span class="n">limits</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="n">title</span><span class="p">,</span> <span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;x/L&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;y/H&quot;</span><span class="p">,</span> <span class="n">aspect</span><span class="o">=</span><span class="s2">&quot;equal&quot;</span><span class="p">)</span>
-    <span class="n">fig</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">shrink</span><span class="o">=</span><span class="mf">0.78</span><span class="p">)</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">shrink</span><span class="o">=</span><span class="mf">0.78</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;toy field d&quot;</span><span class="p">)</span>
 <span class="n">fig</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">assets_dir</span><span class="p">()</span> <span class="o">/</span> <span class="s2">&quot;toy_adapter_fallback.png&quot;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">160</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s2">&quot;tight&quot;</span><span class="p">)</span>
 <span class="n">display_figure</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">alt</span><span class="o">=</span><span class="s2">&quot;Toy adapter&#39;s compatible proposal, reference, rejected proposal, and fallback error.&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
@@ -647,12 +709,12 @@ Expected finite-input rejection: Incompatible feature tensor: all adapter inputs
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="Figure from Assess a proposal and use a reference correction" src="../_images/04f732c7e5bfc6ac6b9dea43ac81a7c423ba1431790d4dc27290facff501aa7b.png" />
+<img alt="Figure from Assess a proposal and use a reference correction" src="../_images/cccdced8dd124c9962b3fde74608083fa88fc8b410b038c71bd6d0e1772025de.png" />
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Save one proposal/reference pair for an offline replay dataset.</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Save decision metadata for this proposal/reference assessment.</span>
 <span class="c1"># Include reference-label cost in a later retraining comparison.</span>
 <span class="n">replay_record</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s2">&quot;scope&quot;</span><span class="p">:</span> <span class="s2">&quot;course-owned ToyHelmholtzProblem; one offline proposal/reference correction record&quot;</span><span class="p">,</span>
@@ -675,77 +737,93 @@ Expected finite-input rejection: Incompatible feature tensor: all adapter inputs
 </div>
 </div>
 </div>
-<p>The saved correction record pairs a model proposal with its reference
-solution. An offline DAgger extension uses such records in a repeated
-cycle: collect states visited by the current model, obtain reference
-labels, add those cases to the training data, retrain, and evaluate
-on a fixed held-out set. Include the cost of reference solves when
-assessing the computational benefit of that cycle.</p>
+</section>
+<section id="interpreting-the-residual-and-correction">
+<h2>Interpreting the residual and correction<a class="headerlink" href="#interpreting-the-residual-and-correction" title="Link to this heading">#</a></h2>
+<p>Compare the field panels and the residual together. The residual measures satisfaction of the discrete equation; the error relative to the known reference measures field accuracy. Their relationship depends on the operator and the chosen error norm. The acceptance tolerance should therefore reflect the accuracy needed for the intended observation.</p>
+<p>The plotted fallback error shows the outcome of the direct reference solve for the current monotone loading example. In this example, the model weights remain fixed during inference, and the correction route computes the reference field independently.</p>
+</section>
+<section id="from-a-decision-record-to-learning-from-new-states">
+<h2>From a decision record to learning from new states<a class="headerlink" href="#from-a-decision-record-to-learning-from-new-states" title="Link to this heading">#</a></h2>
+<p>The saved JSON record contains the load, feature order, residual assessments, and correction description. These metadata explain which decision was taken. A labelled training sample additionally needs the coordinates or mesh, the model inputs and previous state, the proposed field, and the reference field.</p>
+<p>A data-aggregation extension can collect states visited during a model-driven rollout, obtain reference labels, append those samples to the training data, retrain the model, and evaluate a fixed held-out set. This repeated state collection is the central idea behind DAgger-style training. Record the cost of prediction, residual checks, reference labels, and retraining when assessing the complete workflow.</p>
+</section>
+<section id="key-takeaways">
+<h2>Key takeaways<a class="headerlink" href="#key-takeaways" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Compatibility checks give each feature column, node ordering, and saved model a consistent interpretation.</p></li>
+<li><p>The relative residual measures agreement with the discrete ToyHelmholtz equation after field projection.</p></li>
+<li><p>A tighter acceptance tolerance can route more proposals to the direct reference solve.</p></li>
+<li><p>Data aggregation combines model-visited states with reference labels, followed by retraining and held-out evaluation.</p></li>
+</ul>
+</section>
 <section id="exercises">
 <h2>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
 <p>Try each question before opening the hint or worked solution. Keep the original calculation as your reference.</p>
-<section id="exercise-1-make-the-residual-gate-decision">
-<h3>Exercise 1: Make the residual-gate decision<a class="headerlink" href="#exercise-1-make-the-residual-gate-decision" title="Link to this heading">#</a></h3>
-<p>At load factor <span class="math notranslate nohighlight">\(0.94\)</span>, the compatible proposal has relative residual <span class="math notranslate nohighlight">\(0.1940274787\)</span> and the deliberately corrupted proposal has relative residual <span class="math notranslate nohighlight">\(1.1640088764\)</span>. The acceptance limit is <span class="math notranslate nohighlight">\(0.30\)</span>. The reference fallback has residual <span class="math notranslate nohighlight">\(2.9696\times10^{-15}\)</span>.</p>
+<section id="exercise-1-relate-residual-field-error-and-the-model-interface">
+<h3>Exercise 1: Relate residual, field error, and the model interface<a class="headerlink" href="#exercise-1-relate-residual-field-error-and-the-model-interface" title="Link to this heading">#</a></h3>
+<p>Let the reference field satisfy <span class="math notranslate nohighlight">\(A\mathbf d^\star=\mathbf b\)</span> and let a proposed field be <span class="math notranslate nohighlight">\(\widehat{\mathbf d}\)</span>. Define its algebraic residual <span class="math notranslate nohighlight">\(\mathbf r=A\widehat{\mathbf d}-\mathbf b\)</span>.</p>
 <ol class="arabic simple">
-<li><p>Decide accept or reject for each proposal.</p></li>
-<li><p>Compute the compatible proposal’s margin below the limit and the corrupted proposal’s excess above it.</p></li>
-<li><p>Explain why the reference result is still needed after a rejection.</p></li>
+<li><p>Derive the relationship between <span class="math notranslate nohighlight">\(\mathbf r\)</span> and the field error <span class="math notranslate nohighlight">\(\mathbf e=\widehat{\mathbf d}-\mathbf d^\star\)</span>. What property of <span class="math notranslate nohighlight">\(A\)</span> controls how a residual translates into field error?</p></li>
+<li><p>Explain why feature order and normalisation must be checked before evaluating a model proposal.</p></li>
+<li><p>The tutorial saves a JSON decision record. Name the additional data needed to turn one corrected state into a labelled training sample.</p></li>
 </ol>
 <div class="dropdown course-hint admonition">
 <p class="admonition-title">Hint 1</p>
-<p>The adapter accepts only when residual <span class="math notranslate nohighlight">\(\le0.30\)</span>. Subtract in the direction that produces a positive margin or excess.</p>
+<p>Subtract the two discrete equations and, when <span class="math notranslate nohighlight">\(A\)</span> is invertible, apply <span class="math notranslate nohighlight">\(A^{-1}\)</span>. Distinguish the information that records a decision from the arrays that train a model.</p>
 </div>
 <div class="dropdown course-solution admonition">
 <p class="admonition-title">Worked solution 1</p>
-<ol class="arabic simple">
-<li><p>The compatible proposal is accepted because</p></li>
-</ol>
+<p>Subtracting gives</p>
 <div class="math notranslate nohighlight">
 \[
-0.1940274787\le0.30.
+\mathbf r=A(\widehat{\mathbf d}-\mathbf d^\star)=A\mathbf e,
+\qquad
+\mathbf e=A^{-1}\mathbf r.
 \]</div>
-<p>The corrupted proposal is rejected because</p>
+<p>Consequently,</p>
 <div class="math notranslate nohighlight">
 \[
-1.1640088764&gt;0.30.
+\|\mathbf e\|_2\le\|A^{-1}\|_2\|\mathbf r\|_2.
 \]</div>
-<ol class="arabic simple" start="2">
-<li><p>The accepted proposal’s margin is</p></li>
-</ol>
-<div class="math notranslate nohighlight">
-\[
-0.30-0.1940274787=0.1059725213,
-\]</div>
-<p>whereas the corrupted proposal exceeds the limit by</p>
-<div class="math notranslate nohighlight">
-\[
-1.1640088764-0.30=0.8640088764.
-\]</div>
-<ol class="arabic simple" start="3">
-<li><p>On rejection, the adapter invokes the classical ToyHelmholtz reference solve, whose residual is near machine precision. This replaces an inaccurate proposal with a solution of the discrete model equation. The acceptance threshold is an illustrative choice for this exercise; select a tolerance appropriate to the observable and discretisation in an application.</p></li>
-</ol>
+<p>The inverse operator norm controls the absolute-error bound; conditioning also enters relative-error bounds. This explains why the residual tolerance should be interpreted alongside the operator, discretisation, and observation of interest.</p>
+<p>Each network input coordinate has the meaning established during training. Permuting feature columns or changing normalisation changes the point at which the learned function is evaluated. The adapter therefore checks the feature order, grid signature, input shape, and finite values.</p>
+<p>A training sample needs the coordinates or mesh representation, feature values, load and previous state, and the reference target field. Keeping the proposed field and residual assessment also supports evaluation of the correction decision. The current JSON file records decision metadata.</p>
 </div>
 </section>
-<section id="exercise-2-project-a-field-and-extend-the-correction-cycle">
-<h3>Exercise 2: Project a field and extend the correction cycle<a class="headerlink" href="#exercise-2-project-a-field-and-extend-the-correction-cycle" title="Link to this heading">#</a></h3>
-<p>For an interior node, the adapter first clamps a raw proposal to <span class="math notranslate nohighlight">\([0,1]\)</span> and then applies irreversibility with <span class="math notranslate nohighlight">\(\max(d_{\mathrm{proposal}},d_{\mathrm{previous}})\)</span>. Finally it enforces zero on the ToyHelmholtz boundary.</p>
+<section id="exercise-2-explore-the-residual-tolerance">
+<h3>Exercise 2: Explore the residual tolerance<a class="headerlink" href="#exercise-2-explore-the-residual-tolerance" title="Link to this heading">#</a></h3>
+<p>Use the existing <code class="docutils literal notranslate"><span class="pre">proposal</span></code>, <code class="docutils literal notranslate"><span class="pre">reference</span></code>, <code class="docutils literal notranslate"><span class="pre">adapter</span></code>, and <code class="docutils literal notranslate"><span class="pre">d_previous</span></code> variables to compare tolerances <span class="math notranslate nohighlight">\(0.05\)</span>, <span class="math notranslate nohighlight">\(0.15\)</span>, and <span class="math notranslate nohighlight">\(0.30\)</span> in a new cell.</p>
 <ol class="arabic simple">
-<li><p>Compute the final value for each case: (a) raw <span class="math notranslate nohighlight">\(0.15\)</span>, previous <span class="math notranslate nohighlight">\(0.25\)</span>, interior; (b) raw <span class="math notranslate nohighlight">\(1.4\)</span>, previous <span class="math notranslate nohighlight">\(0.25\)</span>, interior; (c) raw <span class="math notranslate nohighlight">\(0.7\)</span>, previous <span class="math notranslate nohighlight">\(0.25\)</span>, boundary.</p></li>
-<li><p>Name two interface checks that must happen before this projection.</p></li>
-<li><p>The notebook saves one correction record. Describe how to use such records in an offline DAgger extension.</p></li>
+<li><p>Record whether the proposal is accepted at each tolerance.</p></li>
+<li><p>Compute the selected field’s RMSE against the reference and its residual.</p></li>
+<li><p>Describe the relationship between tolerance, field accuracy, and use of the reference solver. Which quantities would you time before evaluating the computational benefit of the complete workflow?</p></li>
 </ol>
 <div class="dropdown course-hint admonition">
 <p class="admonition-title">Hint 2</p>
-<p>Apply the operations in order. The boundary rule is last, so it overrides an otherwise admissible projected value.</p>
+<p>Call <code class="docutils literal notranslate"><span class="pre">adapter.assess(proposal,</span> <span class="pre">load_factor,</span> <span class="pre">residual_limit=tolerance)</span></code>. Select <code class="docutils literal notranslate"><span class="pre">proposal</span></code> when accepted and <code class="docutils literal notranslate"><span class="pre">adapter.fallback(load_factor,</span> <span class="pre">d_previous)</span></code> otherwise. Preserve the original demonstration cell and perform this sweep in a separate cell.</p>
 </div>
 <div class="dropdown course-solution admonition">
 <p class="admonition-title">Worked solution 2</p>
-<ol class="arabic simple">
-<li><p>(a) Clamp leaves <span class="math notranslate nohighlight">\(0.15\)</span>, irreversibility gives <span class="math notranslate nohighlight">\(\max(0.15,0.25)=0.25\)</span>, and the node is interior, so the final value is <span class="math notranslate nohighlight">\(0.25\)</span>. (b) Clamp maps <span class="math notranslate nohighlight">\(1.4\)</span> to <span class="math notranslate nohighlight">\(1\)</span>, then <span class="math notranslate nohighlight">\(\max(1,0.25)=1\)</span>, so the final value is <span class="math notranslate nohighlight">\(1\)</span>. (c) The interior-style projection would be <span class="math notranslate nohighlight">\(0.7\)</span>, but the boundary rule is applied last, so the final value is <span class="math notranslate nohighlight">\(0\)</span>.</p></li>
-<li><p>The adapter checks that all feature values are finite, that feature order is exactly <span class="math notranslate nohighlight">\([x/L,y/H,\mathrm{load\ factor}]\)</span>, that the mesh signature matches <span class="math notranslate nohighlight">\([25,13]\)</span>, and that the feature tensor shape is compatible. A feature-order mismatch or a NaN triggers rejection.</p></li>
-<li><p>Begin with the saved proposal/reference pair. To form an offline DAgger cycle, collect states visited by the current model over a defined rollout, obtain reference labels, add the labelled cases to the training data, retrain, and assess a fixed held-out set. Account for the cost of reference labels. In the present exercise the model weights remain fixed during inference under <strong>torch.no_grad()</strong>, and the residual comes from the ToyHelmholtz equation.</p></li>
-</ol>
+<p>This sweep uses the existing proposal and evaluates the complete selection rule:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">tolerance</span> <span class="ow">in</span> <span class="p">(</span><span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">,</span> <span class="mf">0.30</span><span class="p">):</span>
+    <span class="n">decision</span> <span class="o">=</span> <span class="n">adapter</span><span class="o">.</span><span class="n">assess</span><span class="p">(</span>
+        <span class="n">proposal</span><span class="p">,</span> <span class="n">load_factor</span><span class="p">,</span> <span class="n">residual_limit</span><span class="o">=</span><span class="n">tolerance</span>
+    <span class="p">)</span>
+    <span class="n">selected</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">proposal</span> <span class="k">if</span> <span class="n">decision</span><span class="p">[</span><span class="s2">&quot;accepted&quot;</span><span class="p">]</span>
+        <span class="k">else</span> <span class="n">adapter</span><span class="o">.</span><span class="n">fallback</span><span class="p">(</span><span class="n">load_factor</span><span class="p">,</span> <span class="n">d_previous</span><span class="p">)</span>
+    <span class="p">)</span>
+    <span class="nb">print</span><span class="p">({</span>
+        <span class="s2">&quot;tolerance&quot;</span><span class="p">:</span> <span class="n">tolerance</span><span class="p">,</span>
+        <span class="s2">&quot;accepted&quot;</span><span class="p">:</span> <span class="n">decision</span><span class="p">[</span><span class="s2">&quot;accepted&quot;</span><span class="p">],</span>
+        <span class="s2">&quot;selected_rmse&quot;</span><span class="p">:</span> <span class="nb">float</span><span class="p">((</span><span class="n">selected</span> <span class="o">-</span> <span class="n">reference</span><span class="p">)</span><span class="o">.</span><span class="n">square</span><span class="p">()</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">sqrt</span><span class="p">()),</span>
+        <span class="s2">&quot;selected_residual&quot;</span><span class="p">:</span> <span class="n">problem</span><span class="o">.</span><span class="n">relative_residual</span><span class="p">(</span><span class="n">selected</span><span class="p">,</span> <span class="n">load_factor</span><span class="p">),</span>
+    <span class="p">})</span>
+</pre></div>
+</div>
+<p>For a fixed proposal, increasing the tolerance can change a rejection into acceptance. The reference branch computes the direct solution of this discrete field problem; the accepted branch retains the model approximation. Interpret the differences using the printed RMSE and residual, and inspect the corresponding spatial error.</p>
+<p>An end-to-end timing study includes feature preparation, prediction, projection, residual evaluation, and every reference correction. Report the reference-only baseline on the same inputs and hardware. A training or data-aggregation study additionally accounts for reference-label generation and retraining.</p>
 </div>
 </section>
 </section>
@@ -768,7 +846,7 @@ assessing the computational benefit of that cycle.</p>
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Lab 04: Neural Field Adapters (Training, Checkpointing, &amp; Reloading)</p>
+        <p class="prev-next-title">Train, save, reload, and compare a field model</p>
       </div>
     </a>
     <a class="right-next"
@@ -796,9 +874,14 @@ assessing the computational benefit of that cycle.</p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-proposal-to-solution-sequence">The proposal-to-solution sequence</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#follow-the-calculation">Follow the calculation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpreting-the-residual-and-correction">Interpreting the residual and correction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#from-a-decision-record-to-learning-from-new-states">From a decision record to learning from new states</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-takeaways">Key takeaways</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1-make-the-residual-gate-decision">Exercise 1: Make the residual-gate decision</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2-project-a-field-and-extend-the-correction-cycle">Exercise 2: Project a field and extend the correction cycle</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1-relate-residual-field-error-and-the-model-interface">Exercise 1: Relate residual, field error, and the model interface</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2-explore-the-residual-tolerance">Exercise 2: Explore the residual tolerance</a></li>
 </ul>
 </li>
 </ul>
@@ -814,8 +897,8 @@ assessing the computational benefit of that cycle.</p>
   
   <div class="footer-item">
     <div class="phast-course-credit">
-  <!-- Course material created by Allamaprabhu Ani, CEMS-Lab, 2026. -->
-  <p class="phast-course-creators">Presented by <span>Sathiskumar A. Ponnusami · Queen Mary University of London · CEMS-Lab</span></p>
+  <!-- Course material prepared by Allamaprabhu Ani and Sathiskumar A. Ponnusami, CEMS-Lab, 2026. -->
+  <p class="phast-course-creators">Prepared by <span>Allamaprabhu Ani and Sathiskumar A. Ponnusami</span></p>
   <p class="phast-course-purpose">© 2026
     <a href="https://github.com/CEMS-Lab">CEMS-Lab</a>
     <span aria-hidden="true"> · </span>

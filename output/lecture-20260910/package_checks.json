@@ -1,0 +1,26 @@
+{
+  "checks": {
+    "23_slides": true,
+    "five_internal_movies": true,
+    "all_movies_match_manifest": true,
+    "five_native_static_posters": true,
+    "all_slides_have_presenter_notes": true,
+    "movie_slides_have_pause_questions": true,
+    "no_shapes_outside_slide": true,
+    "source_v7_unchanged": true,
+    "candidate_matches_manifest": true,
+    "creator_metadata": true
+  },
+  "all_passed": true,
+  "candidate_sha256": "619a681653b26d7408c96ab5f5491a5312a27152f624737acef12a9d559d2cc8",
+  "embedded_movies": {
+    "ppt/media/media1.mp4": "8959b32226e1748f1686393ca9e8e4b2014d01f2a8b622886bffde1445d8aae8",
+    "ppt/media/media2.mp4": "790cf324d9c8fe3b5bb65fbff8f02f172251b9a7a812a8c947831f345b95eb83",
+    "ppt/media/media3.mp4": "80e43933e41d009add9ad999a1fff070f6272e091849d052ac2ac4e52b0ace1e",
+    "ppt/media/media4.mp4": "07b34b8cf9a417c08994e59621e76fa67bad1816ae523430487969120b18eee3",
+    "ppt/media/media5.mp4": "6c60cbdc75d0c449997a101baf957b11a28c0c7611dfbeaf7ac5bc42c3e9775a"
+  },
+  "external_movies": [],
+  "out_of_bounds": [],
+  "native_playback": "Separate PowerPoint/Keynote presentation-machine check required."
+}

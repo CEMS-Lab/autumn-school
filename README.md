@@ -3,9 +3,12 @@
 A short, learn-by-doing course on phase-field fracture, finite elements,
 differentiation and learning around numerical solvers.
 
+Prepared by **Allamaprabhu Ani and Sathiskumar A. Ponnusami**, CEMS-Lab,
+for the UKACM Autumn School 2026.
+
 The [delivery guide](MVP_DELIVERY.md) describes the three-hour lecture /
 three-hour exercise route. The book's topics follow three connected groups.
-See [current materials](CURRENT_DELIVERY.md) and [tomorrow's build checklist](TOMORROW.md).
+See [current materials](CURRENT_DELIVERY.md) and [the delivery checklist](TODAY.md).
 
 **[Read the interactive book](https://cems-lab.github.io/autumn-school/)** ·
 **[Download the current course](https://github.com/CEMS-Lab/autumn-school/archive/refs/heads/main.zip)** ·
@@ -22,8 +25,9 @@ or notebooks with solutions when you want to run or modify a calculation.
 - A small public PhAST quasistatic calculation with generated geometry and mesh.
 - Derivative checks and a small elastic-bar inverse problem.
 - Train/save/reload and checked model proposals on a labelled toy field problem.
-- An HTML learning book with notebook downloads, a 44-slide lecture deck and
-  three two-hour teaching schedule.
+- An HTML learning book with notebook downloads, a 23-slide animated introduction
+  and a 44-slide lecture resource, organised into three lecture hours followed
+  by three practical hours.
 
 Start with [the setup guide](SETUP.md) for execution, or open `index.html` in
 the complete downloaded folder to read offline. The book is static HTML:
@@ -32,10 +36,10 @@ The supplementary `explorations.html` page has browser-only visual controls.
 
 ## Runtime and scientific scope
 
-All six unmodified notebooks completed in less than 90 seconds each on the
-reference Apple M4 Pro CPU after setup. Installation time is separate. See
-[the execution report](EXECUTION_REPORT.md),
-[the teaser receipt](evidence/teaser_runtime.json), and the per-file receipts.
+All six current notebooks completed in 3.74–92.00 seconds each in fresh local
+processes on the reference macOS ARM machine after setup. Installation time is
+separate. See [the current runtime receipt](evidence/notebook_runtime_current.json)
+and [the delivery evidence](evidence/course_delivery_20260910.md).
 These measurements describe the reference environment. Repeat setup and timing
 on your chosen machine or Colab runtime before class.
 

@@ -8,8 +8,9 @@ recorded results and worked answers.
 
 Use [TEACHING_SCHEDULE.md](TEACHING_SCHEDULE.md) for the proposed three lecture
 hours followed by three exercise hours. Confirm clock times and break allocation
-with the organiser. Map the existing three two-hour topic groups in the book
-and 44-slide resource onto that agreed timetable.
+with the organiser. The current book follows this 3+3-hour route. The animated
+introduction maps the retained 44-slide resource onto L1/L2/L3; the complete
+lecture and practical sequence needs its timed rehearsal.
 
 1. Explain fracture energy, length scale and degradation. Distinguish the model,
    spatial approximation and solution algorithm. Interpret a small PhAST run.
@@ -26,28 +27,34 @@ through particle geometry, retained fracture fields and a guided history lesson.
 
 | Lesson | Model and evidence | Role |
 | --- | --- | --- |
-| 00 | Algebraic prediction/energy example; 6.381 s | Opening prediction |
-| 01 | Public PhAST quasistatic AT2, sparse-direct mechanics; 76.301 s original, 88.351 s package rehearsal | Forward calculation |
-| 02 | Public degradation law; analytic/AD/FD check; 4.721 s | Local sensitivity |
-| 03 | Elastic-bar inverse model; 5.446 s | Parameter recovery |
-| 04 | Scalar-field MLP/RBF, save/reload and held-out comparison; 9.473 s | Learned interface |
-| 05 | Scalar-field proposal, assessment and reference correction; 5.179 s | Checked hybrid cycle |
+| 00 | Algebraic prediction/energy example; 6.20 s | Opening prediction |
+| 01 | PhAST plane-strain quasistatic AT2, assembled sparse-direct mechanics; connected workflow and changed-load comparison; 92.00 s | Forward calculation |
+| 02 | Public degradation law; analytic/AD/FD check; 3.74 s | Local sensitivity |
+| 03 | Elastic-bar inverse model; 4.12 s | Parameter recovery |
+| 04 | Teaching Helmholtz field MLP/RBF, save/reload and held-out comparison; 5.17 s | Learned interface |
+| 05 | Teaching Helmholtz field proposal, assessment and independent direct-reference fallback; 4.72 s | Checked hybrid cycle |
 | Diffusion companion | Explicit stencil, reverse recurrence and synthetic recovery; current execution receipt linked below | Optional derivative practical |
 | Inverse/history extension | Retained fracture observations, sampled loss landscapes and loading/unloading history | Optional research exhibit |
 
-Sources: [notebook receipt](evidence/notebook_runtime.json),
+The [current notebook receipt](evidence/notebook_runtime_current.json) records
+the 10 September whole-process runs, source hashes and platform. Earlier
+evidence is retained in the [original notebook receipt](evidence/notebook_runtime.json),
 [teaser receipt](evidence/teaser_runtime.json),
 [package rehearsal](evidence/package_rehearsal.json) and
 [diffusion receipt](evidence/differentiability_step_by_step.json).
-These timings describe the reference local CPU after setup. Rehearse each
+The optional diffusion companion retains its 9 September receipt. Today's six
+timings describe fresh local processes on macOS ARM/Python 3.10.18 after setup.
+Rehearse each
 complete student calculation below 300 s in the selected environment, timing
 setup separately. Fresh Colab verification requires an authenticated session.
 
 The forward notebook provides a quasistatic bridge to the lecture's dynamic
 and matrix-free concepts. A classroom dynamic example needs its own complete
-under-five-minute rehearsal. The [forward practical audit](source/planning/PRACTICAL_SEQUENCE_AUDIT_20260909.md)
-tracks alignment of visible geometry/BC previews with actual solver inputs and
-a portable result-reload exercise.
+under-five-minute rehearsal. The [current forward-practical evidence](evidence/forward_practical_20260910.md)
+records the connected geometry/BC/solver objects, portable mesh and result
+reloads, inspected fields and changed-load exercise. The
+[9 September audit](source/planning/PRACTICAL_SEQUENCE_AUDIT_20260909.md)
+preserves the starting assessment.
 
 The learning exercises use a scalar field equation. Integrating a learned
 component into PhAST requires approved weights, a feature contract, full-field
@@ -57,21 +64,35 @@ retained example within the allocated exhibit slot when these are available.
 ## Assets and integration
 
 [CURRENT_DELIVERY.md](CURRENT_DELIVERY.md) links the book, six computational
-lessons, 18-slide introduction, 44-slide lecture resource, diffusion companion,
-four short Manim animations and optional inverse laboratory. Each animation
-includes a poster for static use.
+lessons, 23-slide editable animated introduction, retained 44-slide lecture
+resource, diffusion companion and optional inverse laboratory. The animated
+introduction embeds five original clips with static fallbacks and presenter
+pause questions. The previous working introduction is retained as a fallback.
 
 ## Classroom completion checklist
 
 - [ ] Confirm organiser clock times and break allocation.
-- [ ] Reorder and rehearse the lecture resource against L1/L2/L3.
-- [ ] Retain motivation by minute 60 and a clear handover to each practical.
-- [ ] Rehearse the full package in a fresh supported environment; time setup
-      and each complete notebook separately.
-- [ ] Align the forward notebook's preview, actual inputs and result reload.
-- [ ] Verify exercise questions, answers, downloads and offline outputs.
-- [ ] Test animation playback on the presentation machine.
-- [ ] Complete a student-level coherence review and timed six-hour rehearsal.
+- [x] Map the animated introduction and retained lecture resource to L1/L2/L3.
+- [ ] Rehearse the combined lecture, its motivation by minute 60 and the handover
+      to each practical.
+- [x] Execute all six complete classroom notebooks in fresh local processes;
+      record their whole-process times after setup and exact source hashes.
+- [ ] Install and rehearse the full package in fresh supported environments,
+      including authenticated Colab CPU sessions and a slower laptop; measure
+      setup and complete computation separately.
+- [x] Align the forward notebook's preview, actual inputs and result reload;
+      inspect the physical effect of a changed load.
+- [x] Verify local exercise questions, answers, notebook downloads, offline
+      outputs, mobile/desktop rendering and mathematical notation.
+- [x] Test all five animation clips in local Keynote; preserve their embedded
+      movies in the native Keynote file.
+- [ ] Test PowerPoint and presentation-machine playback, seeking/replay,
+      portability and classroom readability.
+- [x] Check local source/output parity and notebook-level coherence.
+- [ ] Complete the student-level cross-format review and timed six-hour rehearsal.
+- [x] Receive authorisation to publish the reviewed update.
+- [ ] Verify the pushed revision, live book, credits and downloadable files;
+      use that revision for fresh Colab rehearsal.
 
 ## Scientific conventions
 
@@ -95,12 +116,16 @@ remain follow-up projects.
 
 ## Attribution and continuing work
 
-Present Sathiskumar A. Ponnusami first, with Queen Mary University of London
-and CEMS-Lab. Retain Allamaprabhu Ani's creator credit in ordinary metadata,
+Use Presented by Sathiskumar A. Ponnusami only in the presentation, with
+Queen Mary University of London and CEMS-Lab. Credit the book as Prepared by
+Allamaprabhu Ani and Sathiskumar A. Ponnusami, CEMS-Lab. Retain creator credit in ordinary metadata,
 comments and presenter notes. Metadata supports source attribution and can be
 removed through re-export. Preserve third-party notices. Confirm consent and
 credits before distributing recordings.
 
 [Issue 1](https://github.com/CEMS-Lab/autumn-school/issues/1) is the main plan;
-issues 2–16 retain the wider objectives. Use [BUILD_AGENT_PROMPTS.md](BUILD_AGENT_PROMPTS.md)
-for bounded assignments. The edition manifest identifies the published files.
+issues 2–16 retain the wider objectives, and issues 17–18 govern course-wide
+pedagogy and authoring standards. Use [BUILD_AGENT_PROMPTS.md](BUILD_AGENT_PROMPTS.md)
+for bounded assignments. The current manifest identifies the reviewed candidate;
+record its published revision and deployment checks before marking delivery
+complete. The inverse contributor retains ownership of new inverse research work.

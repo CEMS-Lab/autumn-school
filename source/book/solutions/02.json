@@ -1,6 +1,6 @@
 {
-  "title": "02 — Differentiate a degradation law",
-  "objective": "Differentiate the normalised quadratic degradation law, compare analytic, automatic and finite-difference derivatives, and connect the calculation to a coupled parameter-to-loss map.",
+  "title": "Lab 02: Differentiating Degradation: Analytical, Autograd, & Finite Differences",
+  "objective": "Implement a quadratic degradation function in PyTorch, compute its derivative using analytical calculus, automatic differentiation (`torch.autograd`), and central finite differences, and explore the numerical precision properties of gradient evaluation.",
   "prediction": "Predict how the residual parameter $\\eta=10^{-7}$ affects $g(1)$ and the behaviour of the degradation law near the broken state.",
   "exercises": [
     {
@@ -10,10 +10,16 @@
       "solution": "First,\n\n$$\ng'(d)=-2(1-\\eta)(1-d),\n\\qquad\ng''(d)=2(1-\\eta).\n$$\n\nAt the endpoints,\n\n$$\ng(0)=1,\n\\qquad\ng(1)=\\eta=10^{-7},\n$$\n\nso a small residual stiffness remains in the broken state. At $d=0.25$,\n\n$$\ng(0.25)=(0.9999999)(0.75)^2+10^{-7}=0.56250004375,\n$$\n\nand\n\n$$\ng'(0.25)=-2(0.9999999)(0.75)=-1.49999985.\n$$\n\nFinally, $g''=1.9999998>0$, so the law is convex. For $d<1$, $g'(d)<0$, hence it is decreasing over the intact-to-broken interval. These values match the notebook output."
     },
     {
-      "title": "Interpret the derivative comparison",
-      "question": "At $d=0.25$, the notebook reports analytic and autograd derivatives of $-1.49999985$. Its centred finite difference uses $h=10^{-6}$ and gives $-1.4999998499964917$, with absolute error $3.5083\\times10^{-12}$.\n\n1. Write the centred-difference formula used here.\n2. Explain what this result checks.\n3. Name two additional operations whose derivatives enter a coupled fracture calculation.",
-      "hint": "The finite difference perturbs only the scalar $d$ in the smooth material law. Follow the computational graph only as far as the scalar function actually evaluated.",
-      "solution": "1. The numerical estimate is\n\n$$\ng'_{\\mathrm{FD}}(d)=\\frac{g(d+h)-g(d-h)}{2h},\n\\qquad h=10^{-6}.\n$$\n\n2. Its agreement with the analytic and autograd values checks the local implementation of this smooth scalar degradation function at the chosen point and precision. The $3.5083\\times10^{-12}$ discrepancy is consistent with a well-resolved centred difference in **float64**.\n\n3. A coupled calculation also differentiates the selected boundary treatment, equilibrium solve and history or irreversibility update. Convergence-dependent iterations and active constraints affect this derivative. Trace each operation from the chosen parameter to the observation and scalar loss, then check the complete derivative."
+      "title": "Explore finite-difference spacing for a quadratic law",
+      "question": "1. Derive the centred-difference formula using Taylor expansions. What happens to its truncation term for this quadratic degradation law?\n2. Evaluate the existing `g_analytic` and `gp_analytic` at $d=0.25$ using spacings from $10^{-2}$ to $10^{-16}$. Plot the absolute derivative error against spacing and explain the small-spacing behaviour.\n3. For a scalar loss depending on many parameters, compare the work of centred finite differences with reverse-mode differentiation.",
+      "hint": "For a smooth function the leading truncation term is $h^2g^{(3)}(d)/6$. Every derivative of this quadratic above order two vanishes. Subtraction and division still take place in finite precision.",
+      "solution": "For a sufficiently smooth function,\n\n$$\n\\frac{g(d+h)-g(d-h)}{2h}=g'(d)+\\frac{h^2}{6}g^{(3)}(d)+O(h^4).\n$$\n\nHere $g$ is quadratic, so the centred formula equals $g'(d)$ exactly in exact arithmetic. The error observed in this example is floating-point roundoff. At very small spacings the two function evaluations can round to nearly equal values, and division by $2h$ amplifies their subtraction error. A generic optimal-spacing estimate based on a nonzero cubic derivative requires a different function.\n\n```python\npoint = torch.tensor(0.25, dtype=torch.float64)\nspacings = torch.logspace(-2, -16, 29, dtype=torch.float64)\nestimates = (g_analytic(point + spacings) - g_analytic(point - spacings)) / (2 * spacings)\nerrors = torch.abs(estimates - gp_analytic(point))\nfig, ax = plt.subplots(figsize=(5.5, 3.5), layout=\"constrained\")\nax.loglog(spacings, torch.clamp(errors, min=torch.finfo(torch.float64).tiny), \"o-\")\nax.set(xlabel=\"spacing h\", ylabel=\"absolute derivative error\")\ndisplay_figure(fig)\n```\n\nCentred differences require two forward evaluations per perturbed parameter. Reverse-mode AD propagates the scalar loss seed through the stored computational graph and accumulates derivatives for all connected parameters in a backward traversal. Its memory and runtime depend on the operations, saved states and checkpointing strategy."
     }
+  ],
+  "takeaways": [
+    "The normalised quadratic law retains stiffness $g(1)=\\eta$ in the fully damaged state.",
+    "Autograd computes the derivative of the tensor operations connecting the selected input to the output.",
+    "A centred difference differentiates this quadratic exactly in exact arithmetic; floating-point roundoff matters as the spacing shrinks.",
+    "A derivative of the material law is one contribution to the coupled solver sensitivity."
   ]
 }

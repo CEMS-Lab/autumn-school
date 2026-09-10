@@ -1,19 +1,25 @@
 {
-  "title": "03 — Differentiate and recover the elastic modulus",
-  "objective": "Derive the tip-displacement sensitivity of a uniform elastic bar, use a positive modulus parameterisation, and evaluate recovery at a held-out load.",
+  "title": "Lab 03: Differentiable Mechanics & Inverse Parameter Identification",
+  "objective": "Formulate a forward mechanics problem in PyTorch, differentiate through the finite-element linear solve, verify the sensitivities against finite differences, and use gradient descent to solve an inverse problem recovering an unknown material stiffness parameter.",
   "prediction": "For a fixed positive load, predict the sign of $\\mathrm{d}u_{\\mathrm{tip}}/\\mathrm{d}E$. Also predict whether the notebook's $\\exp(\\mathrm{log\\_E})$ parameterisation imposes an upper bound on the modulus.",
   "exercises": [
     {
       "title": "Derive the tip sensitivity",
       "question": "The fixed-left, unit-length, unit-area bar has a tip load $F$ and a uniform modulus $E$.\n\n1. Derive $u_{\\mathrm{tip}}(E,F)$ and $\\mathrm{d}u_{\\mathrm{tip}}/\\mathrm{d}E$.\n2. Evaluate both at $E=1.8$ and $F=1.1$.\n3. Compare with the notebook's autograd and centred-FD values.",
       "hint": "For a uniform axial bar, the series assembly gives $u_{\\mathrm{tip}}=FL/(EA)$. Here $L=A=1$.",
-      "solution": "1. With $L=A=1$, the assembled bar has\n\n$$\nu_{\\mathrm{tip}}=\\frac{F}{E}.\n$$\n\nDifferentiating gives\n\n$$\n\\frac{\\mathrm{d}u_{\\mathrm{tip}}}{\\mathrm{d}E}=-\\frac{F}{E^2}=-\\frac{u_{\\mathrm{tip}}}{E}.\n$$\n\n2. Therefore\n\n$$\nu_{\\mathrm{tip}}=\\frac{1.1}{1.8}=0.6111111111,\n\\qquad\n\\frac{\\mathrm{d}u_{\\mathrm{tip}}}{\\mathrm{d}E}=-\\frac{1.1}{1.8^2}=-0.3395061728.\n$$\n\n3. The autograd value is $-0.33950617283949214$, the centred-FD value is $-0.3395061727862192$, and the analytic value is $-0.3395061728395104$. The negative sign has the expected mechanics interpretation: a stiffer bar displaces less under the same load. The sensitivity follows from the uniform bar's linear elastic constitutive law."
+      "solution": "For a uniform bar,\n\n$$\nu_{\\mathrm{tip}}=\\frac{FL}{EA},\n\\qquad\n\\frac{\\partial u_{\\mathrm{tip}}}{\\partial E}=-\\frac{FL}{AE^2}.\n$$\n\nWith $L=A=1$, $F=1.1$ and $E=1.8$, the tip displacement is approximately $0.611$ and the sensitivity is approximately $-0.340$. A stiffer bar stretches less under the same load. Compare the analytic and computed sensitivities using the relative error and the sign; vary the finite-difference spacing to assess its numerical accuracy."
     },
     {
-      "title": "Interpret the positive modulus parameterisation",
-      "question": "The optimiser holds **log_E** as its trainable parameter and computes $E_{\\mathrm{trial}}=\\exp(\\mathrm{log\\_E})$, starting from $E=0.9$. It reports $E_{\\mathrm{true}}=2.4$, $E_{\\mathrm{fit}}=2.4003023876$, held-out observed displacement $0.5625$, and held-out prediction $0.5624291368$.\n\n1. What values of $E$ can this parameterisation represent?\n2. Compare the range of the exponential parameterisation with that of a sigmoid.\n3. Compute the absolute held-out displacement error and state one reason the held-out load is useful.",
-      "hint": "The exponential maps every real number to a strictly positive number. Compare the observed and predicted held-out displacements directly.",
-      "solution": "1. Since $\\exp(z)>0$ for every real $z$, the parameterisation enforces only $E>0$. It has no finite upper bound. The initial value is obtained because $\\exp(\\log(0.9))=0.9$.\n\n2. A sigmoid maps a raw parameter to $(0,1)$ before any explicit scaling. The exponential $\\exp(\\mathrm{log\\_E})$ represents every strictly positive modulus, with no finite upper bound.\n\n3. The held-out absolute error is\n\n$$\n|0.562499999999992-0.5624291368281488|\n=7.0863\\times10^{-5}.\n$$\n\nThe held-out load $1.35$ provides a separate displacement observation beyond the four optimisation loads. Agreement at this load tests the recovered modulus under another loading condition within the same linear elastic model."
+      "title": "Explore positive stiffness and additional observations",
+      "question": "1. Let $z=\\log E$. Derive $\\partial u_{\\mathrm{tip}}/\\partial z$ from the chain rule. What values of stiffness can this parameterisation represent?\n2. Use `tip_displacement` to compare the recovered and reference bar over several positive loads. Plot both responses and their difference.\n3. Explain what an additional load observation tests in this linear bar model. What extra experiment would help if the material response were nonlinear?",
+      "hint": "Use $\\partial E/\\partial z=E$ and the sensitivity from Exercise 1. The notebook supplies `E_fit`, `E_true` and the callable `tip_displacement`.",
+      "solution": "The exponential maps each real $z$ to a positive stiffness. Applying the chain rule gives\n\n$$\n\\frac{\\partial u_{\\mathrm{tip}}}{\\partial z}\n=-\\frac{FL}{AE^2}E=-u_{\\mathrm{tip}}.\n$$\n\n```python\nloads = torch.linspace(0.2, 1.5, 12, dtype=torch.float64)\nwith torch.no_grad():\n    reference = torch.stack([tip_displacement(E_true, force) for force in loads])\n    recovered = torch.stack([tip_displacement(E_fit, force) for force in loads])\nfig, axes = plt.subplots(1, 2, figsize=(8.5, 3.2), layout=\"constrained\")\naxes[0].plot(loads, reference, label=\"reference\")\naxes[0].plot(loads, recovered, \"--\", label=\"recovered\")\naxes[0].set(xlabel=\"tip load F\", ylabel=\"tip displacement\")\naxes[0].legend()\naxes[1].plot(loads, recovered - reference)\naxes[1].set(xlabel=\"tip load F\", ylabel=\"displacement difference\")\ndisplay_figure(fig)\n```\n\nBoth curves are straight lines in this uniform linear-elastic model. An additional load tests the recovered compliance on another observation, while repeated noisy measurements help quantify uncertainty. A nonlinear material would require observations spanning the relevant strain range; unloading measurements could also reveal irreversible response."
     }
+  ],
+  "takeaways": [
+    "The elastic-bar response connects stiffness, load and displacement through equilibrium.",
+    "Reverse-mode differentiation propagates a scalar observation or loss back to the chosen parameter.",
+    "Optimising $\\log E$ keeps the recovered modulus positive.",
+    "A held-out displacement tests the recovered parameter on an additional observation."
   ]
 }

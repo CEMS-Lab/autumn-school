@@ -1,0 +1,61 @@
+{
+  "scope": "fresh local whole-notebook processes after setup; Colab rehearsal separate",
+  "platform": "macOS-27.0-arm64-arm-64bit",
+  "python": "3.10.18",
+  "notebooks": [
+    {
+      "id": "00",
+      "notebook": "00_why_average_predictions_can_fail.ipynb",
+      "aggregate_wall_seconds": 6.200265332998242,
+      "code_sha256": "480ceb0b041ae329e785bb3aced408f82582ef270062933fca9c086b0175977f",
+      "retained_sha256": "476335bf438c61e42b0832a2b1df7b5719ec4e337d2f2c40c8d385d5eb253a49",
+      "status": "passed",
+      "limit_seconds": 300
+    },
+    {
+      "id": "01",
+      "notebook": "01_phast_tiny_evolving_fracture.ipynb",
+      "aggregate_wall_seconds": 91.99642641699756,
+      "code_sha256": "95c2d4efc7214e6897779ce4d2e1a5b0bf09b2a673cda41b01c8c2f8ef14978a",
+      "retained_sha256": "b4d43fcd2d07cc840d2d7ab030acf2df81e099f3f73dbea96787fe6b5c00ffe3",
+      "status": "passed",
+      "limit_seconds": 300
+    },
+    {
+      "id": "02",
+      "notebook": "02_degradation_autograd.ipynb",
+      "aggregate_wall_seconds": 3.74468866600364,
+      "code_sha256": "e17209e37cec6b6304d87296ca944e247fad7c2f42ef9b9f10cf07332c57c985",
+      "retained_sha256": "1e15e5d5205528b30d282ad00b679caef645e8371165930293098b4aa54a9015",
+      "status": "passed",
+      "limit_seconds": 300
+    },
+    {
+      "id": "03",
+      "notebook": "03_tiny_derivative_inverse_toy.ipynb",
+      "aggregate_wall_seconds": 4.119218957996054,
+      "code_sha256": "67b0bf07a589d483038f3c53426fa8a6db910bd58d5f66f88332952da349aa48",
+      "retained_sha256": "ab74cacdc61cc195e23422f87b8a62646b6f8e34ebd83c3e649d56623a846bc6",
+      "status": "passed",
+      "limit_seconds": 300
+    },
+    {
+      "id": "04",
+      "notebook": "04_train_save_reload_adapter.ipynb",
+      "aggregate_wall_seconds": 5.16509604100429,
+      "code_sha256": "9795643ad860b01a2703b6a316b5b06a03ebceed87692999037d328703357af4",
+      "retained_sha256": "8ecf3b2bba36644f76f8718ae5b8094501d3d68025554e6c1a2e765518c21156",
+      "status": "passed",
+      "limit_seconds": 300
+    },
+    {
+      "id": "05",
+      "notebook": "05_hybrid_reference_correction.ipynb",
+      "aggregate_wall_seconds": 4.716146791004576,
+      "code_sha256": "b9ea27ed9085e6bd1e47432aa8cfee8a981a02235f56c1487d5d84a0fdad57be",
+      "retained_sha256": "5a5632cbde67d2862c1afa202331aa60368e4026a921c08068dd55e8c441ed3d",
+      "status": "passed",
+      "limit_seconds": 300
+    }
+  ]
+}

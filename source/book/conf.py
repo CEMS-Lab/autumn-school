@@ -4,9 +4,7 @@ from pathlib import Path
 from shutil import copytree
 
 project = "PhAST: Phase-field fracture with differentiable FEM"
-author = "Allamaprabhu Ani"
-presenter = "Sathiskumar A. Ponnusami"
-presenter_affiliation = "Queen Mary University of London · CEMS-Lab"
+author = "Allamaprabhu Ani and Sathiskumar A. Ponnusami"
 copyright = "2026, CEMS-Lab"
 release = "2026"
 
@@ -35,8 +33,7 @@ html_theme = "sphinx_book_theme"
 html_title = project
 html_context = {
     "default_mode": "dark",
-    "course_presenter": presenter,
-    "course_presenter_affiliation": presenter_affiliation,
+    "course_prepared_by": author,
 }
 html_theme_options = {
     "home_page_in_toc": True,
@@ -79,7 +76,6 @@ def _verify_design_directives(app, exception):
     if exception is not None or app.builder.format != "html":
         return
     import runpy
-    import sys
     checker_path = Path(__file__).resolve().parents[2] / "scripts/check_design_directives.py"
     if checker_path.is_file():
         support = runpy.run_path(str(checker_path))
@@ -87,9 +83,8 @@ def _verify_design_directives(app, exception):
         if passed:
             print(f"\n✓ [Design Directives] Verified: 0 violations, 4 pillars present, all tutorial badges active ({elapsed_ms:.1f} ms)")
         else:
-            print(f"\n⚠ [Design Directives] Found {len(errors)} violation(s):", file=sys.stderr)
-            for err in errors:
-                print(f"  - {err}", file=sys.stderr)
+            from sphinx.errors import SphinxError
+            raise SphinxError("Design directives check failed:\n" + "\n".join(errors))
 
 
 def setup(app):
@@ -101,9 +96,9 @@ def setup(app):
     app.connect("source-read", support["expand_notebook_attachments"])
 
 latex_engine = "xelatex"
-presenter_latex = presenter + r"\\[0.35em]{\large Queen Mary University of London · CEMS-Lab}"
+prepared_by_latex = author + r"\\[0.35em]{\large CEMS-Lab}"
 latex_documents = [
-    (master_doc, "phast-ukacm-course.tex", project, presenter_latex, "manual"),
+    (master_doc, "phast-ukacm-course.tex", project, prepared_by_latex, "manual"),
 ]
 latex_elements = {
     "papersize": "a4paper",
@@ -118,6 +113,6 @@ latex_elements = {
 % Keep an admonition title with the opening lines of its worked explanation.
 \BeforeBeginEnvironment{sphinxadmonition}{\Needspace{6\baselineskip}}
 \setlength{\parskip}{0.35em}
-\AtBeginDocument{\hypersetup{pdfauthor={Allamaprabhu Ani},pdfsubject={Presented by Sathiskumar A. Ponnusami, Queen Mary University of London, CEMS-Lab; UKACM Autumn School 2026}}}
+\AtBeginDocument{\hypersetup{pdfauthor={Allamaprabhu Ani and Sathiskumar A. Ponnusami},pdfsubject={Prepared for the UKACM Autumn School 2026, CEMS-Lab}}}
 """,
 }

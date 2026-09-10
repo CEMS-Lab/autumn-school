@@ -1,5 +1,8 @@
 # PhAST: an interactive learning book
 
+Prepared by Allamaprabhu Ani and Sathiskumar A. Ponnusami, CEMS-Lab,
+for the UKACM Autumn School 2026.
+
 Open **index.html** or **book/index.html**. Theory, equations, notebook code,
 recorded outputs, exercises, hints and worked solutions are now part of the
 same book. Computational lessons appear below their theory chapters in the
@@ -30,9 +33,10 @@ are part of the reproducible example.
 - **notebooks/study/** — practice downloads.
 - **notebooks/solutions/** — downloads including worked answers.
 - **slides/phast_autumn_school_2026.pdf** — the unchanged 44-slide lecture deck.
+- **output/lecture-20260910/** — the editable 23-slide animated introduction in PowerPoint and Keynote.
 - **INTEGRATED_EDITION.md** — source, execution and format notes for this revision.
-- **EXECUTION_REPORT.md** — actual notebook timings and scientific limitations.
-- **TEACHING_SCHEDULE.md** — three two-hour sessions.
+- **evidence/notebook_runtime_current.json** — current local notebook timings and source hashes.
+- **TEACHING_SCHEDULE.md** — three lecture hours followed by three practical hours.
 
 The revision adopts D2L's integrated reading pattern and draws teaching ideas
 from ADL4P's physics exercises. All PhAST lessons, questions and worked answers

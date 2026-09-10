@@ -1,13 +1,5 @@
 # PhAST: A Learn-by-Doing Introduction to Phase-Field Fracture
 
-```{figure} figures/00_course_map.*
-:name: fig-course-map
-:width: 100%
-:alt: Overview of the 6-hour workshop: 3 hours of interactive theory and demonstrations paired with 3 hours of hands-on computational lab exercises.
-
-The workshop combines interactive lecture demonstrations with hands-on notebook activities across four core pillars of computational mechanics and scientific machine learning.
-```
-
 Welcome to this interactive tutorial guide on **phase-field fracture modeling and differentiable finite elements**. 
 
 This guide connects continuum solid mechanics, numerical algorithms, and machine learning into a clear, hands-on learning route. Designed for students, researchers, and engineers with an undergraduate background in mechanics or computing, this course demystifies how cracks nucleate and evolve, how finite element equations are assembled in modern tensor frameworks like PyTorch, and how automatic differentiation enables inverse parameter discovery.

@@ -1,0 +1,447 @@
+{
+  "date": "2026-09-10",
+  "scope": "Authorised GitHub issue body/checklist updates; titles, labels, comments and states preserved",
+  "verification_time_utc": "2026-09-10T11:41:41.480797+00:00",
+  "all_18_verified": true,
+  "issues": [
+    {
+      "number": 1,
+      "title": "[Course plan] Coherent PhAST autumn-school lecture series and delivery",
+      "url": "https://github.com/CEMS-Lab/autumn-school/issues/1",
+      "state": "open",
+      "updated_at": "2026-09-10T11:41:32Z",
+      "body_sha256": "e9978f1b1a6bf5f6ee1825201d7e4a8db13ac965dbb3e76252faf4120b95ffd0",
+      "completed_or_retained": [
+        "Reviewed all 18 issue bodies and comments and reconciled the 3 lecture + 3 practical hour route.",
+        "Completed the connected forward-practical, six local notebook runs, book QA and animated introduction batch."
+      ],
+      "remaining": [
+        "Verify the authorised Pages publication, then complete fresh Colab and timed classroom rehearsal (#10, #12, #15).",
+        "Retain and complete the wider scientific workstreams #2\u20139 and #13\u201316; apply standards #17\u201318."
+      ],
+      "next_action": "Course integration owns the full route; the inverse contributor owns the optional inverse extension.",
+      "evidence": [
+        "TODAY.md",
+        "COURSE_PLAN.md",
+        "evidence/course_delivery_20260910.md"
+      ],
+      "read_back_verified": true
+    },
+    {
+      "number": 2,
+      "title": "[C01] Phase-field foundations and method comparisons",
+      "url": "https://github.com/CEMS-Lab/autumn-school/issues/2",
+      "state": "open",
+      "updated_at": "2026-09-10T11:41:32Z",
+      "body_sha256": "5708ca8aaf47063f29a61d27472416a025e2eab301e4fa19b8f84cfe2188952b",
+      "completed_or_retained": [
+        "Retained the comparison chapter and original methods figure; the current figure passed desktop/mobile vector and keyboard-enlargement checks."
+      ],
+      "remaining": [
+        "Complete a primary-source audit of XFEM/cohesive/phase-field trade-offs and the prerequisite/worked conceptual exercise.",
+        "Check the comparison wording against the lecture slides during the complete learner review."
+      ],
+      "next_action": "Review the formulation/approximation/algorithm definitions in the foundations chapter and corresponding L1 slides.",
+      "evidence": [
+        "source/book/01_crack_representations.md",
+        "DESIGN_STANDARD.md",
+        "evidence/course_delivery_20260910.md"
+      ],
+      "read_back_verified": true
+    },
+    {
+      "number": 3,
+      "title": "[C02] Energy, degradation laws and damage visual explanations",
+      "url": "https://github.com/CEMS-Lab/autumn-school/issues/3",
+      "state": "open",
+      "updated_at": "2026-09-10T11:41:32Z",
+      "body_sha256": "273d985e79743119d934237f99c435436cd93b5340e306f20eff314f4318531c",
+      "completed_or_retained": [
+        "Reran Lab 02 locally in 3.745 s; analytic, autograd and finite-difference calculations are retained in the book/downloads.",
+        "Corrected the quadratic-law finite-difference explanation and integrated the original AT2-profile animation into the editable lecture."
+      ],
+      "remaining": [
+        "Audit all AT1/AT2 normalisations, alternative laws, profiles and mesh/length-scale labels against source formulas.",
+        "Complete source-grounded initiation/propagation/branching explanations with verified numerical or clearly labelled schematic visuals."
+      ],
+      "next_action": "Finish the energy/profile formula ledger and align symbols across the chapter, figures and slides.",
+      "evidence": [
+        "notebooks/02_degradation_autograd.ipynb",
+        "source/book/solutions/02.json",
+        "evidence/notebook_runtime_current.json",
+        "evidence/slides_20260910.md"
+      ],
+      "read_back_verified": true
+    },
+    {
+      "number": 4,
+      "title": "[C03] FEM, staggered solution, dynamics and tensor operators",
+      "url": "https://github.com/CEMS-Lab/autumn-school/issues/4",
+      "state": "open",
+      "updated_at": "2026-09-10T11:41:33Z",
+      "body_sha256": "73f6c6d876a78cadb0084649cebe838579bdc590de40ded0496fbadc669309a0",
+      "completed_or_retained": [
+        "Retained and browser-checked the staggered and FEM/tensor diagrams; integrated the partitioned-update clip in the lecture.",
+        "The forward practical explicitly identifies plane-strain quasistatic AT2, assembled sparse-direct mechanics and relative iterate-change convergence."
+      ],
+      "remaining": [
+        "Complete the transport/solid/damage operator narrative and the explicit/implicit/static/dynamic teaching bridge.",
+        "Review physical time, load increments and nonlinear iterations consistently across lecture and practical; retain matrix-free benchmarking as a separately validated scope."
+      ],
+      "next_action": "Review L1 operator notation and transitions into the actual sparse-direct classroom calculation.",
+      "evidence": [
+        "source/book/03_staggered_solution.md",
+        "source/book/04_fem_to_tensors.md",
+        "evidence/forward_practical_20260910.md"
+      ],
+      "read_back_verified": true
+    },
+    {
+      "number": 5,
+      "title": "[C04] Geometry-to-results PhAST tutorial and short crack propagation",
+      "url": "https://github.com/CEMS-Lab/autumn-school/issues/5",
+      "state": "open",
+      "updated_at": "2026-09-10T11:41:33Z",
+      "body_sha256": "3a11e123a680c2a264ee21ef556444e38013010ee8f6b1694ab2c8b36a8a67cc",
+      "completed_or_retained": [
+        "Connected one configuration through generated geometry, prepared-mesh save/reload, notch, actual boundary conditions, solver objects, loading and post-processing.",
+        "Executed reference and half-load cases with 60 increments each; complete local notebook 91.996 s.",
+        "Checked exported displacement/damage/response fields, physical-state consistency, source hashes and 48 malformed-archive cases; inspected the fields and response plots."
+      ],
+      "remaining": [
+        "Publish and rehearse the complete folder in fresh Colab (#10).",
+        "Complete an external physical-group mesh-import activity if included; validate a short propagating-crack extension against convergence and the 300 s budget, retaining the current diffuse-damage route as the classroom fallback."
+      ],
+      "next_action": "Rehearse the published connected practical, then scope external-mesh/propagation extensions independently.",
+      "evidence": [
+        "notebooks/01_phast_tiny_evolving_fracture.ipynb",
+        "source/notebooks/build_forward_practical.py",
+        "scripts/check_forward_practical.py",
+        "evidence/forward_practical_20260910.md"
+      ],
+      "read_back_verified": true
+    },
+    {
+      "number": 6,
+      "title": "[C05] Step-by-step backpropagation equations and gradient checks",
+      "url": "https://github.com/CEMS-Lab/autumn-school/issues/6",
+      "state": "open",
+      "updated_at": "2026-09-10T11:41:33Z",
+      "body_sha256": "503c15eea22d4c55490c44309d5f5dac33885c11119d8137ee84582ac45ad6f3",
+      "completed_or_retained": [
+        "Retained the explicit local derivative, terminal seed, reverse recurrence and shared-parameter accumulation lesson and prior checked scalar example.",
+        "Integrated reverse-accumulation and history clips into the animated lecture; checked the vector diagram at desktop/mobile sizes.",
+        "Reran the elastic-bar derivative/recovery notebook in 4.119 s and aligned its written loss with the implemented mean-squared objective."
+      ],
+      "remaining": [
+        "Complete the full slide/book/student notation review, including scalar VJPs, direct terms and optimisation updates.",
+        "Review the fixed-history fracture assumptions and active-set regularity at the intended learner level."
+      ],
+      "next_action": "Rehearse L2's equation-to-animation-to-notebook transitions, preserving the separate fracture validation scope.",
+      "evidence": [
+        "source/book/05a_backpropagation_step_by_step.md",
+        "evidence/backprop_example.json",
+        "evidence/notebook_runtime_current.json",
+        "evidence/slides_20260910.md"
+      ],
+      "read_back_verified": true
+    },
+    {
+      "number": 7,
+      "title": "[C06] Small actual fracture inverse-recovery activity",
+      "url": "https://github.com/CEMS-Lab/autumn-school/issues/7",
+      "state": "open",
+      "updated_at": "2026-09-10T11:41:35Z",
+      "body_sha256": "633e282000392e70f5f69abb04a2ba59348177a70e7c29493440a0a578e9c290",
+      "completed_or_retained": [
+        "Preserved the already integrated optional inverse/history reading extension and its prior provenance records.",
+        "Retained the classroom elastic-bar route; its current local run takes 4.119 s."
+      ],
+      "remaining": [
+        "The inverse contributor must supply the approved actual-fracture recovery activity with derivative checks, held-out observations and multiple starts.",
+        "Check identifiability/noise/regularisation, public provenance and a fresh whole-task runtime below 300 s before replacing a classroom slot."
+      ],
+      "next_action": "Coordinate the separate inverse contribution without modifying its research source or expanding the six-hour timetable.",
+      "evidence": [
+        "INTEGRATED_EDITION.md",
+        "evidence/inverse_publication.json",
+        "evidence/notebook_runtime_current.json"
+      ],
+      "read_back_verified": true
+    },
+    {
+      "number": 8,
+      "title": "[C07] Damage-model interfaces and train-save-reload model swaps",
+      "url": "https://github.com/CEMS-Lab/autumn-school/issues/8",
+      "state": "open",
+      "updated_at": "2026-09-10T11:41:35Z",
+      "body_sha256": "9e2666c54e87935bae36ff759fe452d543e00fc01752053c15a94acf6d247e60",
+      "completed_or_retained": [
+        "Reran the teaching Helmholtz MLP/RBF train-save-reload activity in 5.165 s; retained held-out fields and reload checks.",
+        "Revised exercises and field/error plots; preserved model metadata and computational parity across download variants."
+      ],
+      "remaining": [
+        "Select approved public fracture-compatible weights and validate a genuine PhAST proposal contract.",
+        "Check feature order, units, coordinates, normalisation, mesh signature, device/dtype and each architecture-specific adapter; measure complete held-out field quality and runtime."
+      ],
+      "next_action": "Use the named teaching model for P3, then develop the genuine learned-damage extension with its own accepted evidence.",
+      "evidence": [
+        "notebooks/04_train_save_reload_adapter.ipynb",
+        "source/book/solutions/04.json",
+        "evidence/notebook_delivery_review_20260910.md",
+        "evidence/notebook_runtime_current.json"
+      ],
+      "read_back_verified": true
+    },
+    {
+      "number": 9,
+      "title": "[C08] Checked hybrid learning and complete DAgger-style loop",
+      "url": "https://github.com/CEMS-Lab/autumn-school/issues/9",
+      "state": "open",
+      "updated_at": "2026-09-10T11:41:35Z",
+      "body_sha256": "d7d279ec89d78ab7d0dea85c9b288861e43c2cc695a43ad08b38725c35370c95",
+      "completed_or_retained": [
+        "Reran the teaching proposal/residual/reference-fallback activity in 4.716 s and retained its tolerance exercise.",
+        "Aligned the prose with the independent direct reference solve and clarified that the saved JSON contains decision metadata.",
+        "Integrated the original checked-proposal animation and pause question into the lecture."
+      ],
+      "remaining": [
+        "Execute model-induced state collection, trusted reference labelling, dataset aggregation, retraining and held-out evaluation as a complete DAgger loop.",
+        "Retain out-of-domain/convergence cases and report prediction, conversion, checks and reference-correction costs at matched quality."
+      ],
+      "next_action": "Keep the current proposal assessment as P3; implement the full aggregation/retraining extension as a bounded follow-up.",
+      "evidence": [
+        "notebooks/05_hybrid_reference_correction.ipynb",
+        "source/book/solutions/05.json",
+        "evidence/notebook_delivery_review_20260910.md",
+        "evidence/slides_20260910.md"
+      ],
+      "read_back_verified": true
+    },
+    {
+      "number": 10,
+      "title": "[C09] Fresh Colab and laptop rehearsal under five minutes",
+      "url": "https://github.com/CEMS-Lab/autumn-school/issues/10",
+      "state": "open",
+      "updated_at": "2026-09-10T11:41:37Z",
+      "body_sha256": "0ff25221e5f87cab54484847270a06b29d4786b2e03010f1236e89ffda2589fb",
+      "completed_or_retained": [
+        "All six fresh local whole-notebook processes passed after setup: 6.20, 92.00, 3.74, 4.12, 5.17 and 4.72 s.",
+        "Implemented complete-folder Colab bootstrap, supported-version guard, resolved revision/environment reporting and separate setup timing.",
+        "Checked code/output parity and local setup/practice/solution downloads."
+      ],
+      "remaining": [
+        "Run all six published lessons and the optional diffusion companion from their public launch links in fresh authenticated Colab CPU runtimes.",
+        "Record dependency installation separately, test result downloads and restart/run-all, and obtain a slower-laptop receipt where available."
+      ],
+      "next_action": "Use the approved published revision for cloud rehearsal; retain the 300 s whole-calculation cap and recorded outputs.",
+      "evidence": [
+        "SETUP.md",
+        "source/notebooks/colab_bootstrap.py",
+        "scripts/run_course.py",
+        "evidence/notebook_runtime_current.json",
+        "evidence/classroom_browser_20260910.json"
+      ],
+      "read_back_verified": true
+    },
+    {
+      "number": 11,
+      "title": "[C10] Integrated textbook, notebook solutions and accessibility",
+      "url": "https://github.com/CEMS-Lab/autumn-school/issues/11",
+      "state": "open",
+      "updated_at": "2026-09-10T11:41:37Z",
+      "body_sha256": "663fc4d128c1a011f04cb15530add6f53e0be90d2070e8c1837c6b72c705b648",
+      "completed_or_retained": [
+        "Removed the opening timetable graphic and retained the original assets.",
+        "Regenerated all six native book lessons plus practice/solution downloads from authoritative sources with exact computational parity.",
+        "Passed the warning-as-error build, 33-page static asset checks and desktop/mobile notebook/flowchart browser checks.",
+        "Changed the book credit to Prepared by Allamaprabhu Ani and Sathiskumar A. Ponnusami; presenter wording is reserved for slides."
+      ],
+      "remaining": [
+        "Verify the authorised live Pages edition and notebook/download links.",
+        "Complete wider learner/accessibility review including light/system modes and fresh execution with #10/#15."
+      ],
+      "next_action": "Finish live verification of the web-first edition. The printable book remains archived; editable slides continue under #12.",
+      "evidence": [
+        "source/book/_templates/phast-credit.html",
+        "source/book/scripts/build_lab_pages.py",
+        "scripts/check_book_theme.py",
+        "evidence/classroom_browser_20260910.json"
+      ],
+      "read_back_verified": true
+    },
+    {
+      "number": 12,
+      "title": "[C11] Clean lecture slides, animations and pacing",
+      "url": "https://github.com/CEMS-Lab/autumn-school/issues/12",
+      "state": "open",
+      "updated_at": "2026-09-10T11:41:37Z",
+      "body_sha256": "fcd19f58d1dd90fd4fc4300ac40e1faee3be66ef4e3ca01bca2ccccc8005c865",
+      "completed_or_retained": [
+        "Created a 23-slide editable animated introduction with five embedded H.264 movies, static posters and presenter pause questions.",
+        "Rendered and inspected all 23 slides; package/OOXML checks passed.",
+        "Keynote imported the deck without a media warning; all five clips played. The saved native file retains the same movies and the v7 fallback is preserved."
+      ],
+      "remaining": [
+        "Complete the timed three-hour lecture using the introduction and mapped 44-slide resource, then rehearse all practical transitions.",
+        "Test PowerPoint, seeking/replay and offline portability on the presentation machine; improve video first frames and classroom-distance history labels."
+      ],
+      "next_action": "Keep Presented by Sathiskumar A. Ponnusami with Queen Mary University of London and CEMS-Lab on the presentation; retain book preparation credit for both authors.",
+      "evidence": [
+        "output/lecture-20260910/phast_lecture_animated.pptx",
+        "output/lecture-20260910/phast_lecture_animated.key",
+        "source/slides/intro-lecture/ANIMATED_LECTURE_MAP.md",
+        "evidence/slides_20260910.md"
+      ],
+      "read_back_verified": true
+    },
+    {
+      "number": 13,
+      "title": "[C12] Approved paper studies and advanced teaching extensions",
+      "url": "https://github.com/CEMS-Lab/autumn-school/issues/13",
+      "state": "open",
+      "updated_at": "2026-09-10T11:41:38Z",
+      "body_sha256": "f6ee203dff844680cd42d694fbbd391c3f8ac47db693d0b15d7dcdb9236dd31c",
+      "completed_or_retained": [
+        "Preserved the integrated optional inverse/history exhibit and its separately dated retained-result provenance.",
+        "The current timetable keeps larger studies as optional exhibits within explicitly allocated slots."
+      ],
+      "remaining": [
+        "Select approved papers and link each learning objective, public source revision, field evidence, assumptions and reproducibility scope.",
+        "Review further particle/hybrid/probabilistic studies separately; allocate any 45-minute paper session explicitly."
+      ],
+      "next_action": "Obtain the approved exhibit list and map each study to a bounded teaching slot.",
+      "evidence": [
+        "INTEGRATED_EDITION.md",
+        "TEACHING_SCHEDULE.md",
+        "evidence/inverse_publication.json"
+      ],
+      "read_back_verified": true
+    },
+    {
+      "number": 14,
+      "title": "[C13] Reference inventory and reusable academic design standard",
+      "url": "https://github.com/CEMS-Lab/autumn-school/issues/14",
+      "state": "open",
+      "updated_at": "2026-09-10T11:41:38Z",
+      "body_sha256": "91f3b2841e27025c88ed2e94b486346291a96075cd5730fe93e3f997611fb570",
+      "completed_or_retained": [
+        "Retained the documented Delft, TUM and ETH visual references and original course-diagram standard.",
+        "Rechecked six scientific SVG diagrams at desktop/mobile widths, including embedded fonts, alt text and keyboard enlargement."
+      ],
+      "remaining": [
+        "Complete the repository inventory from the supplied Instagram/PDF material when accessible; identify each inspected source and licence.",
+        "Record problem sequence, notebook/solution style and runtime assumptions for selected references."
+      ],
+      "next_action": "Finish the outstanding supplied-reference inventory without importing unapproved third-party assets.",
+      "evidence": [
+        "DESIGN_STANDARD.md",
+        "ATTRIBUTION.md",
+        "THIRD_PARTY_NOTICES.md",
+        "evidence/course_delivery_20260910.md"
+      ],
+      "read_back_verified": true
+    },
+    {
+      "number": 15,
+      "title": "[C14] Final lecture-series coherence and requirement-completeness audit",
+      "url": "https://github.com/CEMS-Lab/autumn-school/issues/15",
+      "state": "open",
+      "updated_at": "2026-09-10T11:41:38Z",
+      "body_sha256": "26de6779e50f28bd6f11c538834afe9f264f00badb91793fcdbd8674e0512dc9",
+      "completed_or_retained": [
+        "Mapped all 18 issues to the current 3+3 route and preserved the wider requirement inventory.",
+        "Completed independent source/prose and desktop/mobile notebook reviews, repaired math corruption and code/prose discrepancies, and verified computational parity.",
+        "Local numerical checks, native Keynote playback and local package/hash checks are recorded separately."
+      ],
+      "remaining": [
+        "Complete the full lecture/book/notebook learning-objective, prerequisite and notation audit at delivery speed.",
+        "Finish live-site checks, authenticated Colab and timed six-hour rehearsal; preserve unresolved scientific extensions in their owning issues."
+      ],
+      "next_action": "Perform a complete student journey from setup through fields, derivatives and model assessment, with presenter handovers.",
+      "evidence": [
+        "TODAY.md",
+        "COURSE_PLAN.md",
+        "evidence/notebook_delivery_review_20260910.md",
+        "evidence/course_delivery_20260910.md"
+      ],
+      "read_back_verified": true
+    },
+    {
+      "number": 16,
+      "title": "[C15] Public releases, credits, contributor pathway and course showcase",
+      "url": "https://github.com/CEMS-Lab/autumn-school/issues/16",
+      "state": "open",
+      "updated_at": "2026-09-10T11:41:40Z",
+      "body_sha256": "9b12aba1b45010a51bfda615fc03957f950c13feb13a6ff5df623e9ab9f98393",
+      "completed_or_retained": [
+        "Maintainer authorised pushing the reviewed 10 September edition and making the book live.",
+        "Prepared shared book credits, current notebook downloads and editable animated slides; retained third-party notices.",
+        "Validated local file inventory/hashes and added a manifest-only path that preserves slide artifacts and earlier HPC provenance."
+      ],
+      "remaining": [
+        "Confirm the source push and successful GitHub Pages deployment, then verify live book credits, equations and downloads.",
+        "Complete the original-content licence/event-credit review and contributor/showcase follow-up; finish fresh Colab and full teaching rehearsal."
+      ],
+      "next_action": "Publish to the existing CEMS-Lab/autumn-school main branch and verify Pages; record the exact deployment revision.",
+      "evidence": [
+        "CURRENT_DELIVERY.md",
+        "MANIFEST.json",
+        "CONTRIBUTING.md",
+        "evidence/course_delivery_20260910.md"
+      ],
+      "read_back_verified": true
+    },
+    {
+      "number": 17,
+      "title": "[Pedagogy & Design] Transform AI-generated text into undergraduate tutorial decorum (D2L & ADL4P style)",
+      "url": "https://github.com/CEMS-Lab/autumn-school/issues/17",
+      "state": "open",
+      "updated_at": "2026-09-10T11:41:40Z",
+      "body_sha256": "cf8c98439048a9197fb4b911f47358685fc0e80e127f2176d18030da7cc07dc4",
+      "completed_or_retained": [
+        "Preserved the chapter overhaul and made reviewed lab prose/JSON authoritative across regenerated book and downloadable variants.",
+        "All six labs contain conceptual and coding exercises, expandable answers and 3\u20134 key takeaways; repaired math variables and source/prose mismatches.",
+        "Dark orange/blue styling, action badges, responsive math, answers and enlarging figures passed local review."
+      ],
+      "remaining": [
+        "Finish the broader chapter-and-slide learner review and timed transitions under #15.",
+        "Verify the deployed edition and fresh Colab under #10/#11."
+      ],
+      "next_action": "Apply #18's later six-part anatomy with two structured exercises per classroom lab; keep scientific assumptions explicit.",
+      "evidence": [
+        "DESIGN_DIRECTIVES.md",
+        "PEDAGOGICAL_WALKTHROUGH.md",
+        "scripts/test_course_authoring.py",
+        "evidence/notebook_delivery_review_20260910.md"
+      ],
+      "read_back_verified": true
+    },
+    {
+      "number": 18,
+      "title": "[Standards & Directives] Editorial, Pedagogical, Notebook, and Visual Design Standards for Course Authors and AI Agents",
+      "url": "https://github.com/CEMS-Lab/autumn-school/issues/18",
+      "state": "open",
+      "updated_at": "2026-09-10T11:41:40Z",
+      "body_sha256": "ef793926921dcd0e7d4715aafc0b81be4821864fc03b7265bb1ec164cd7c829a",
+      "completed_or_retained": [
+        "The source-authoritative workflow now enforces tutorial anatomy, source/download parity and balanced math delimiters.",
+        "The Sphinx design gate stops invalid builds; six authoring regression tests pass.",
+        "The current shared plot setup, badge/answer controls and responsive notebook reading surfaces passed local checks."
+      ],
+      "remaining": [
+        "Continue applying the standard to every new or modified asset and complete the full student-level review.",
+        "Preserve the separate numerical, fresh-Colab, native presentation-machine and live publication gates."
+      ],
+      "next_action": "Keep this governing standards issue open through release review and future course contributions; #17's older exercise-count wording is superseded by this issue.",
+      "evidence": [
+        "AGENTS.md",
+        "DESIGN_DIRECTIVES.md",
+        "scripts/check_design_directives.py",
+        "scripts/test_course_authoring.py",
+        "evidence/course_delivery_20260910.md"
+      ],
+      "read_back_verified": true
+    }
+  ]
+}

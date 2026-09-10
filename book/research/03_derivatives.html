@@ -49,7 +49,7 @@
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="../_static/mathjax/tex-mml-chtml.js?v=cadf963e"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'research/03_derivatives';</script>
-    <script src="../_static/learning_book.js?v=7a62d495"></script>
+    <script src="../_static/learning_book.js?v=5aaa4a9b"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Why a fracture solver needs a memory-aware derivative" href="03_history_visual.html" />
@@ -57,9 +57,8 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-<meta name="author" content="Allamaprabhu Ani">
-<meta name="presenter" content="Sathiskumar A. Ponnusami">
-<meta name="presenter-affiliation" content="Queen Mary University of London · CEMS-Lab">
+<meta name="author" content="Allamaprabhu Ani and Sathiskumar A. Ponnusami">
+<meta name="prepared-by" content="Allamaprabhu Ani and Sathiskumar A. Ponnusami">
 <meta name="course" content="CEMS-Lab · UKACM Autumn School 2026">
 
   </head>
@@ -174,24 +173,24 @@
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Theory &amp; Methods</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../00_welcome_and_routes.html">1. From Cracks to Computation: Learn by Doing</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../01_crack_representations.html">2. Crack representations: sharp, cohesive, and diffuse</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../02_phase_field_energy.html">3. Fracture energy: AT1, AT2, degradation, and width</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../03_staggered_solution.html">4. From solid mechanics to staggered damage updates</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../04_fem_to_tensors.html">5. Geometry, FEM, tensors, and matrix-free operators</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../05_differentiation_and_inverse.html">6. Differentiation and an illustrative inverse problem</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../05a_backpropagation_step_by_step.html">6.3.1. Backpropagation through a stepped update</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01_crack_representations.html">2. Crack Representations: Sharp, Cohesive, and Diffuse</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_phase_field_energy.html">3. Fracture Energy: AT1, AT2, Degradation, and Bandwidth</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_staggered_solution.html">4. The Staggered Solution Algorithm: Alternating Mechanics and Damage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_fem_to_tensors.html">5. From Weak Forms to Discrete Tensors: The PhAST Pipeline</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../05_differentiation_and_inverse.html">6. Differentiable Mechanics and Inverse Parameter Discovery</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../05a_backpropagation_step_by_step.html">6.4.1. Backpropagation through a stepped update</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../06_learning_adapter.html">7. Train, save, reload, adapters, and checked proposals</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Hands-On Computational Labs</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../labs/00_why_average_predictions_can_fail.html">Branch Selection and Energy-Based Objectives in Physics-Informed Learning</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../labs/01_phast_tiny_evolving_fracture.html">End-to-End Simulation: Running Phase-Field Fracture in PhAST</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../labs/02_degradation_autograd.html">Differentiating Material Degradation: Analytical, Autograd, and Finite Differences</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../labs/03_tiny_derivative_inverse_toy.html">Differentiable Mechanics and Inverse Parameter Identification</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../labs/04_train_save_reload_adapter.html">Training, Saving, and Reloading Neural Field Adapters</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../labs/05_hybrid_reference_correction.html">Hybrid Physics-AI: Residual-Gated Model Proposals and Solver Correction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../labs/00_why_average_predictions_can_fail.html">Lab 00: Branch Selection &amp; Energy-Based Objectives in Physics-Informed Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../labs/01_phast_tiny_evolving_fracture.html">Run and interpret a small PhAST fracture calculation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../labs/02_degradation_autograd.html">Lab 02: Differentiating Degradation: Analytical, Autograd, &amp; Finite Differences</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../labs/03_tiny_derivative_inverse_toy.html">Lab 03: Differentiable Mechanics &amp; Inverse Parameter Identification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../labs/04_train_save_reload_adapter.html">Train, save, reload, and compare a field model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../labs/05_hybrid_reference_correction.html">Assess a proposal and use a reference correction</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Review &amp; Reference</span></p>
 <ul class="nav bd-sidenav">
@@ -476,7 +475,7 @@ Both derivatives use the same logarithmic coordinate.</p>
 <a class="reference internal image-reference" href="../_images/derivatives.png"><img alt="Finite-difference error decreases to an intermediate step size and increases at very small or large steps." src="../_images/derivatives.png" style="width: 94%;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Figure 5 </span><span class="caption-text">Relative central-FD discrepancy against AD for the small equilibrium model.
+<p><span class="caption-number">Figure 4 </span><span class="caption-text">Relative central-FD discrepancy against AD for the small equilibrium model.
 The hand-derived adjoint provides a second comparison. Individual values
 come from the retained computation; the line connects sampled step sizes.</span><a class="headerlink" href="#id1" title="Link to this image">#</a></p>
 </figcaption>
@@ -640,8 +639,8 @@ changes the differentiated map.</p>
   
   <div class="footer-item">
     <div class="phast-course-credit">
-  <!-- Course material created by Allamaprabhu Ani, CEMS-Lab, 2026. -->
-  <p class="phast-course-creators">Presented by <span>Sathiskumar A. Ponnusami · Queen Mary University of London · CEMS-Lab</span></p>
+  <!-- Course material prepared by Allamaprabhu Ani and Sathiskumar A. Ponnusami, CEMS-Lab, 2026. -->
+  <p class="phast-course-creators">Prepared by <span>Allamaprabhu Ani and Sathiskumar A. Ponnusami</span></p>
   <p class="phast-course-purpose">© 2026
     <a href="https://github.com/CEMS-Lab">CEMS-Lab</a>
     <span aria-hidden="true"> · </span>

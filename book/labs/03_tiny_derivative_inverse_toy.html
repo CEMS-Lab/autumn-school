@@ -49,17 +49,16 @@
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="../_static/mathjax/tex-mml-chtml.js?v=cadf963e"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'labs/03_tiny_derivative_inverse_toy';</script>
-    <script src="../_static/learning_book.js?v=7a62d495"></script>
+    <script src="../_static/learning_book.js?v=5aaa4a9b"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Lab 04: Neural Field Adapters (Training, Checkpointing, &amp; Reloading)" href="04_train_save_reload_adapter.html" />
+    <link rel="next" title="Train, save, reload, and compare a field model" href="04_train_save_reload_adapter.html" />
     <link rel="prev" title="Lab 02: Differentiating Degradation: Analytical, Autograd, &amp; Finite Differences" href="02_degradation_autograd.html" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-<meta name="author" content="Allamaprabhu Ani">
-<meta name="presenter" content="Sathiskumar A. Ponnusami">
-<meta name="presenter-affiliation" content="Queen Mary University of London · CEMS-Lab">
+<meta name="author" content="Allamaprabhu Ani and Sathiskumar A. Ponnusami">
+<meta name="prepared-by" content="Allamaprabhu Ani and Sathiskumar A. Ponnusami">
 <meta name="course" content="CEMS-Lab · UKACM Autumn School 2026">
 
   </head>
@@ -174,12 +173,12 @@
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Theory &amp; Methods</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../00_welcome_and_routes.html">1. From Cracks to Computation: Learn by Doing</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../01_crack_representations.html">2. Crack representations: sharp, cohesive, and diffuse</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../02_phase_field_energy.html">3. Fracture energy: AT1, AT2, degradation, and width</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../03_staggered_solution.html">4. From solid mechanics to staggered damage updates</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../04_fem_to_tensors.html">5. Geometry, FEM, tensors, and matrix-free operators</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../05_differentiation_and_inverse.html">6. Differentiation and an illustrative inverse problem</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../05a_backpropagation_step_by_step.html">6.3.1. Backpropagation through a stepped update</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01_crack_representations.html">2. Crack Representations: Sharp, Cohesive, and Diffuse</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_phase_field_energy.html">3. Fracture Energy: AT1, AT2, Degradation, and Bandwidth</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_staggered_solution.html">4. The Staggered Solution Algorithm: Alternating Mechanics and Damage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_fem_to_tensors.html">5. From Weak Forms to Discrete Tensors: The PhAST Pipeline</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../05_differentiation_and_inverse.html">6. Differentiable Mechanics and Inverse Parameter Discovery</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../05a_backpropagation_step_by_step.html">6.4.1. Backpropagation through a stepped update</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../06_learning_adapter.html">7. Train, save, reload, adapters, and checked proposals</a></li>
@@ -187,11 +186,11 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Hands-On Computational Labs</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="00_why_average_predictions_can_fail.html">Lab 00: Branch Selection &amp; Energy-Based Objectives in Physics-Informed Learning</a></li>
-<li class="toctree-l1"><a class="reference internal" href="01_phast_tiny_evolving_fracture.html">Lab 01: End-to-End Simulation with PhAST (Notched Tension)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="01_phast_tiny_evolving_fracture.html">Run and interpret a small PhAST fracture calculation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="02_degradation_autograd.html">Lab 02: Differentiating Degradation: Analytical, Autograd, &amp; Finite Differences</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Lab 03: Differentiable Mechanics &amp; Inverse Parameter Identification</a></li>
-<li class="toctree-l1"><a class="reference internal" href="04_train_save_reload_adapter.html">Lab 04: Neural Field Adapters (Training, Checkpointing, &amp; Reloading)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="05_hybrid_reference_correction.html">Lab 05: Hybrid Physics-AI: Residual-Gated Proposals &amp; Solver Correction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_train_save_reload_adapter.html">Train, save, reload, and compare a field model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_hybrid_reference_correction.html">Assess a proposal and use a reference correction</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Review &amp; Reference</span></p>
 <ul class="nav bd-sidenav">
@@ -439,9 +438,10 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-takeaways">Key takeaways</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1-derive-the-tip-sensitivity">Exercise 1: Derive the tip sensitivity</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2-interpret-the-positive-modulus-parameterisation">Exercise 2: Interpret the positive modulus parameterisation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2-explore-positive-stiffness-and-additional-observations">Exercise 2: Explore positive stiffness and additional observations</a></li>
 </ul>
 </li>
 </ul>
@@ -457,19 +457,21 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="lab-03-differentiable-mechanics-inverse-parameter-identification">
 <h1>Lab 03: Differentiable Mechanics &amp; Inverse Parameter Identification<a class="headerlink" href="#lab-03-differentiable-mechanics-inverse-parameter-identification" title="Link to this heading">#</a></h1>
-<p><strong>Learning Objective:</strong> Formulate a forward mechanics problem in PyTorch, differentiate through the finite-element linear solve, verify the sensitivities against finite differences, and use gradient descent to solve an inverse problem recovering an unknown material stiffness parameter.</p>
+<p><strong>Learning objective.</strong> Formulate a forward mechanics problem in PyTorch, differentiate through the finite-element linear solve, verify the sensitivities against finite differences, and use gradient descent to solve an inverse problem recovering an unknown material stiffness parameter.</p>
+<p><strong>Predict first.</strong> For a fixed positive load, predict the sign of <span class="math notranslate nohighlight">\(\mathrm{d}u_{\mathrm{tip}}/\mathrm{d}E\)</span>. Also predict whether the notebook’s <span class="math notranslate nohighlight">\(\exp(\mathrm{log\_E})\)</span> parameterisation imposes an upper bound on the modulus.</p>
+<p>Follow the worked calculation, then use the downloadable notebook to explore the exercises.</p>
 <div class="badge-row">
-  <a class="badge-colab" href="https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/study/03_tiny_derivative_inverse_toy.ipynb" target="_blank"><img src="../_static/colab-badge.svg" alt="Open In Colab"/></a>
-  <a class="badge-link" href="../../notebooks/study/03_tiny_derivative_inverse_toy.ipynb"><i class="fa-solid fa-download"></i> Download Practice Notebook</a>
-  <a class="badge-link" href="../../notebooks/solutions/03_tiny_derivative_inverse_toy.ipynb"><i class="fa-solid fa-check-circle"></i> Download with Worked Solutions</a>
-  <a class="badge-link" href="../../SETUP.md"><i class="fa-solid fa-gear"></i> Environment Setup</a>
+<a class="badge-colab" href="https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/study/03_tiny_derivative_inverse_toy.ipynb"><img src="../_static/colab-badge.svg" alt="Open in Colab"/></a>
+<a class="badge-link" href="../../notebooks/study/03_tiny_derivative_inverse_toy.ipynb">Download Practice Notebook</a>
+<a class="badge-link" href="../../notebooks/solutions/03_tiny_derivative_inverse_toy.ipynb">Download with Worked Solutions</a>
+<a class="badge-link" href="../../SETUP.md">Environment Setup</a>
 </div>
 <p>In engineering inverse problems, we frequently observe boundary measurements (such as displacements or reaction forces) and wish to infer unknown material parameters (such as Young’s modulus <span class="math notranslate nohighlight">\(E\)</span> or toughness <span class="math notranslate nohighlight">\(G_c\)</span>).</p>
 <p>In this tutorial, we:</p>
 <ol class="arabic simple">
 <li><p>Model a one-dimensional elastic bar governed by <span class="math notranslate nohighlight">\(\frac{d}{dx}\left(E \frac{du}{dx}\right) + f = 0\)</span>.</p></li>
 <li><p>Parameterize the unknown modulus using an unconstrained log-modulus representation <span class="math notranslate nohighlight">\(E = \exp(\theta)\)</span> to ensure strict positivity (<span class="math notranslate nohighlight">\(E &gt; 0\)</span>).</p></li>
-<li><p>Compute the sensitivity of a tracking loss <span class="math notranslate nohighlight">\(J(\theta) = \frac{1}{2}\|u(\theta) - u^\star\|_2^2\)</span> using PyTorch automatic differentiation.</p></li>
+<li><p>Compute the sensitivity of the mean-squared tracking loss <span class="math notranslate nohighlight">\(J(E) = \frac{1}{m}\sum_{i=1}^{m}[u_{\mathrm{tip}}(E,F_i)-u_i^\star]^2\)</span> using PyTorch automatic differentiation, where <span class="math notranslate nohighlight">\(m=4\)</span> training loads provide the observed tip displacements.</p></li>
 <li><p>Recover the true material parameter <span class="math notranslate nohighlight">\(E^\star\)</span> using gradient descent.</p></li>
 </ol>
 <div class="cell tag_hide-input docutils container">
@@ -479,57 +481,96 @@ document.write(`
 <p class="expanded admonition-title">Hide code cell source</p>
 </summary>
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Google Colab environment setup</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Environment setup is measured separately from the classroom computation.</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">importlib.metadata</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">subprocess</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+
+<span class="n">setup_started</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
 <span class="k">try</span><span class="p">:</span>
     <span class="kn">import</span><span class="w"> </span><span class="nn">google.colab</span>
-    <span class="kn">import</span><span class="w"> </span><span class="nn">subprocess</span>
-    <span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;autumn-school&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">is_dir</span><span class="p">()</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;notebooks&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">is_dir</span><span class="p">():</span>
-        <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="s2">&quot;git&quot;</span><span class="p">,</span> <span class="s2">&quot;clone&quot;</span><span class="p">,</span> <span class="s2">&quot;--depth&quot;</span><span class="p">,</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;https://github.com/CEMS-Lab/autumn-school.git&quot;</span><span class="p">],</span> <span class="n">check</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">IN_COLAB</span> <span class="o">=</span> <span class="kc">True</span>
 <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
-    <span class="k">pass</span>
+    <span class="n">IN_COLAB</span> <span class="o">=</span> <span class="kc">False</span>
 
-<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">sys</span><span class="o">.</span><span class="n">version_info</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span> <span class="o">&lt;</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">13</span><span class="p">):</span>
+    <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;This PhAST snapshot supports Python 3.10–3.12. Select a compatible runtime; see Environment Setup.&quot;</span><span class="p">)</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">locate_course_root</span><span class="p">():</span>
-    <span class="k">for</span> <span class="n">base</span> <span class="ow">in</span> <span class="p">(</span><span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">(),</span> <span class="o">*</span><span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">()</span><span class="o">.</span><span class="n">parents</span><span class="p">,</span> <span class="n">Path</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span><span class="o">.</span><span class="n">parent</span> <span class="k">if</span> <span class="s2">&quot;__file__&quot;</span> <span class="ow">in</span> <span class="nb">globals</span><span class="p">()</span> <span class="k">else</span> <span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">()):</span>
-        <span class="n">direct</span> <span class="o">=</span> <span class="n">base</span> <span class="o">/</span> <span class="s2">&quot;teaching&quot;</span> <span class="o">/</span> <span class="s2">&quot;ukacm_autumn_school_2026&quot;</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">direct</span> <span class="o">/</span> <span class="s2">&quot;notebooks&quot;</span> <span class="o">/</span> <span class="s2">&quot;day2_helpers&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">is_dir</span><span class="p">():</span>
-            <span class="k">return</span> <span class="n">direct</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">base</span> <span class="o">/</span> <span class="s2">&quot;notebooks&quot;</span> <span class="o">/</span> <span class="s2">&quot;day2_helpers&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">is_dir</span><span class="p">():</span>
-            <span class="k">return</span> <span class="n">base</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">base</span> <span class="o">/</span> <span class="s2">&quot;autumn-school&quot;</span> <span class="o">/</span> <span class="s2">&quot;notebooks&quot;</span> <span class="o">/</span> <span class="s2">&quot;day2_helpers&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">is_dir</span><span class="p">():</span>
-            <span class="k">return</span> <span class="n">base</span> <span class="o">/</span> <span class="s2">&quot;autumn-school&quot;</span>
-    <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span><span class="s2">&quot;Could not find teaching/ukacm_autumn_school_2026.&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">base</span> <span class="ow">in</span> <span class="p">(</span><span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">(),</span> <span class="o">*</span><span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">()</span><span class="o">.</span><span class="n">parents</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">candidate</span> <span class="ow">in</span> <span class="p">(</span><span class="n">base</span><span class="p">,</span> <span class="n">base</span> <span class="o">/</span> <span class="s2">&quot;autumn-school&quot;</span><span class="p">,</span> <span class="n">base</span> <span class="o">/</span> <span class="s2">&quot;teaching/ukacm_autumn_school_2026&quot;</span><span class="p">):</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">candidate</span> <span class="o">/</span> <span class="s2">&quot;notebooks/day2_helpers&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">is_dir</span><span class="p">()</span> <span class="ow">and</span> <span class="p">(</span><span class="n">candidate</span> <span class="o">/</span> <span class="s2">&quot;vendor/PhAST/src&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">is_dir</span><span class="p">():</span>
+                <span class="k">return</span> <span class="n">candidate</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span>
+    <span class="k">return</span> <span class="kc">None</span>
 
 <span class="n">COURSE_ROOT</span> <span class="o">=</span> <span class="n">locate_course_root</span><span class="p">()</span>
-<span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="n">COURSE_ROOT</span> <span class="o">/</span> <span class="s2">&quot;notebooks&quot;</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="p">:</span>
-    <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">COURSE_ROOT</span> <span class="o">/</span> <span class="s2">&quot;notebooks&quot;</span><span class="p">))</span>
+<span class="k">if</span> <span class="n">COURSE_ROOT</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">IN_COLAB</span><span class="p">:</span>
+    <span class="n">COURSE_ROOT</span> <span class="o">=</span> <span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">()</span> <span class="o">/</span> <span class="s2">&quot;autumn-school&quot;</span>
+    <span class="k">if</span> <span class="n">COURSE_ROOT</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;An incomplete autumn-school folder exists. Start a fresh runtime or select the complete course folder.&quot;</span><span class="p">)</span>
+    <span class="c1"># A release tag or full commit can be supplied for a fixed course edition.</span>
+    <span class="n">course_ref</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;PHAST_COURSE_REF&quot;</span><span class="p">,</span> <span class="s2">&quot;main&quot;</span><span class="p">)</span>
+    <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="s2">&quot;git&quot;</span><span class="p">,</span> <span class="s2">&quot;init&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">COURSE_ROOT</span><span class="p">)],</span> <span class="n">check</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">capture_output</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="s2">&quot;git&quot;</span><span class="p">,</span> <span class="s2">&quot;-C&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">COURSE_ROOT</span><span class="p">),</span> <span class="s2">&quot;remote&quot;</span><span class="p">,</span> <span class="s2">&quot;add&quot;</span><span class="p">,</span> <span class="s2">&quot;origin&quot;</span><span class="p">,</span> <span class="s2">&quot;https://github.com/CEMS-Lab/autumn-school.git&quot;</span><span class="p">],</span> <span class="n">check</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="s2">&quot;git&quot;</span><span class="p">,</span> <span class="s2">&quot;-C&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">COURSE_ROOT</span><span class="p">),</span> <span class="s2">&quot;fetch&quot;</span><span class="p">,</span> <span class="s2">&quot;--depth&quot;</span><span class="p">,</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;origin&quot;</span><span class="p">,</span> <span class="n">course_ref</span><span class="p">],</span> <span class="n">check</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">180</span><span class="p">)</span>
+    <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="s2">&quot;git&quot;</span><span class="p">,</span> <span class="s2">&quot;-C&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">COURSE_ROOT</span><span class="p">),</span> <span class="s2">&quot;checkout&quot;</span><span class="p">,</span> <span class="s2">&quot;--detach&quot;</span><span class="p">,</span> <span class="s2">&quot;FETCH_HEAD&quot;</span><span class="p">],</span> <span class="n">check</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">capture_output</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">COURSE_ROOT</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span><span class="s2">&quot;Open the notebook from the complete course folder, including notebooks/, configs/ and vendor/. See Environment Setup.&quot;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">IN_COLAB</span><span class="p">:</span>
+    <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="n">sys</span><span class="o">.</span><span class="n">executable</span><span class="p">,</span> <span class="s2">&quot;-m&quot;</span><span class="p">,</span> <span class="s2">&quot;pip&quot;</span><span class="p">,</span> <span class="s2">&quot;install&quot;</span><span class="p">,</span> <span class="s2">&quot;--quiet&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">COURSE_ROOT</span> <span class="o">/</span> <span class="s2">&quot;vendor/PhAST&quot;</span><span class="p">),</span> <span class="s2">&quot;nbformat&quot;</span><span class="p">,</span> <span class="s2">&quot;nbclient&quot;</span><span class="p">,</span> <span class="s2">&quot;nbconvert&quot;</span><span class="p">],</span> <span class="n">check</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">600</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">package_dir</span> <span class="ow">in</span> <span class="p">(</span><span class="n">COURSE_ROOT</span> <span class="o">/</span> <span class="s2">&quot;vendor/PhAST/src&quot;</span><span class="p">,</span> <span class="n">COURSE_ROOT</span> <span class="o">/</span> <span class="s2">&quot;notebooks&quot;</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="n">package_dir</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="p">:</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">package_dir</span><span class="p">))</span>
+
+<span class="n">revision</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="s2">&quot;git&quot;</span><span class="p">,</span> <span class="s2">&quot;-C&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">COURSE_ROOT</span><span class="p">),</span> <span class="s2">&quot;rev-parse&quot;</span><span class="p">,</span> <span class="s2">&quot;HEAD&quot;</span><span class="p">],</span> <span class="n">text</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">capture_output</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">package_versions</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">package</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;torch&quot;</span><span class="p">,</span> <span class="s2">&quot;numpy&quot;</span><span class="p">,</span> <span class="s2">&quot;scipy&quot;</span><span class="p">,</span> <span class="s2">&quot;matplotlib&quot;</span><span class="p">,</span> <span class="s2">&quot;nbformat&quot;</span><span class="p">):</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">package_versions</span><span class="p">[</span><span class="n">package</span><span class="p">]</span> <span class="o">=</span> <span class="n">importlib</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">version</span><span class="p">(</span><span class="n">package</span><span class="p">)</span>
+    <span class="k">except</span> <span class="n">importlib</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">PackageNotFoundError</span><span class="p">:</span>
+        <span class="n">package_versions</span><span class="p">[</span><span class="n">package</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;install using Environment Setup&quot;</span>
+<span class="n">setup_receipt</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;environment&quot;</span><span class="p">:</span> <span class="s2">&quot;Google Colab&quot;</span> <span class="k">if</span> <span class="n">IN_COLAB</span> <span class="k">else</span> <span class="s2">&quot;local&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;python&quot;</span><span class="p">:</span> <span class="n">sys</span><span class="o">.</span><span class="n">version</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">0</span><span class="p">],</span>
+    <span class="s2">&quot;course_revision&quot;</span><span class="p">:</span> <span class="n">revision</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">if</span> <span class="n">revision</span><span class="o">.</span><span class="n">returncode</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="s2">&quot;downloaded archive&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;versions&quot;</span><span class="p">:</span> <span class="n">package_versions</span><span class="p">,</span>
+    <span class="s2">&quot;setup_seconds&quot;</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span> <span class="o">-</span> <span class="n">setup_started</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
+<span class="p">}</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">setup_receipt</span><span class="p">)</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">io</span><span class="w"> </span><span class="kn">import</span> <span class="n">BytesIO</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">Image</span><span class="p">,</span> <span class="n">display</span>
-
 <span class="kn">from</span><span class="w"> </span><span class="nn">day2_helpers</span><span class="w"> </span><span class="kn">import</span> <span class="n">assets_dir</span>
 
 <span class="n">torch</span><span class="o">.</span><span class="n">set_default_dtype</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="o">.</span><span class="n">update</span><span class="p">({</span>
+    <span class="s2">&quot;font.family&quot;</span><span class="p">:</span> <span class="s2">&quot;sans-serif&quot;</span><span class="p">,</span> <span class="s2">&quot;font.sans-serif&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;DejaVu Sans&quot;</span><span class="p">,</span> <span class="s2">&quot;Arial&quot;</span><span class="p">,</span> <span class="s2">&quot;Helvetica&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;font.size&quot;</span><span class="p">:</span> <span class="mi">11</span><span class="p">,</span> <span class="s2">&quot;axes.labelsize&quot;</span><span class="p">:</span> <span class="mi">11</span><span class="p">,</span> <span class="s2">&quot;axes.titlesize&quot;</span><span class="p">:</span> <span class="mi">12</span><span class="p">,</span>
+    <span class="s2">&quot;xtick.labelsize&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span> <span class="s2">&quot;ytick.labelsize&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span> <span class="s2">&quot;legend.fontsize&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="s2">&quot;figure.titlesize&quot;</span><span class="p">:</span> <span class="mi">13</span><span class="p">,</span> <span class="s2">&quot;figure.dpi&quot;</span><span class="p">:</span> <span class="mi">150</span><span class="p">,</span> <span class="s2">&quot;axes.grid&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="s2">&quot;grid.alpha&quot;</span><span class="p">:</span> <span class="mf">0.3</span><span class="p">,</span> <span class="s2">&quot;grid.linestyle&quot;</span><span class="p">:</span> <span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="s2">&quot;lines.linewidth&quot;</span><span class="p">:</span> <span class="mf">1.8</span><span class="p">,</span>
+<span class="p">})</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">display_figure</span><span class="p">(</span><span class="n">figure</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">150</span><span class="p">,</span> <span class="n">alt</span><span class="o">=</span><span class="s2">&quot;Rendered teaching figure&quot;</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Embed a PNG even when nbclient uses a non-interactive Agg backend.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Retain figures for reading in the book and in a fresh notebook session.&quot;&quot;&quot;</span>
     <span class="n">buffer</span> <span class="o">=</span> <span class="n">BytesIO</span><span class="p">()</span>
     <span class="n">figure</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;png&quot;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="n">dpi</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s2">&quot;tight&quot;</span><span class="p">)</span>
     <span class="n">display</span><span class="p">(</span><span class="n">Image</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">buffer</span><span class="o">.</span><span class="n">getvalue</span><span class="p">(),</span> <span class="n">alt</span><span class="o">=</span><span class="n">alt</span><span class="p">))</span>
-
-<span class="nb">print</span><span class="p">({</span><span class="s2">&quot;course_layout&quot;</span><span class="p">:</span> <span class="s2">&quot;teaching/ukacm_autumn_school_2026 located&quot;</span><span class="p">,</span> <span class="s2">&quot;torch&quot;</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">__version__</span><span class="p">,</span> <span class="s2">&quot;device&quot;</span><span class="p">:</span> <span class="s2">&quot;cpu&quot;</span><span class="p">,</span> <span class="s2">&quot;dtype&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">get_default_dtype</span><span class="p">())})</span>
 </pre></div>
 </div>
 </div>
 </details>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;course_layout&#39;: &#39;teaching/ukacm_autumn_school_2026 located&#39;, &#39;torch&#39;: &#39;2.8.0&#39;, &#39;device&#39;: &#39;cpu&#39;, &#39;dtype&#39;: &#39;torch.float64&#39;}
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;environment&#39;: &#39;local&#39;, &#39;python&#39;: &#39;3.10.18&#39;, &#39;course_revision&#39;: &#39;077d43d87c55b4fdea720808fc24f040e957e1ea&#39;, &#39;versions&#39;: {&#39;torch&#39;: &#39;2.8.0&#39;, &#39;numpy&#39;: &#39;2.2.6&#39;, &#39;scipy&#39;: &#39;1.14.1&#39;, &#39;matplotlib&#39;: &#39;3.10.8&#39;, &#39;nbformat&#39;: &#39;5.10.4&#39;}, &#39;setup_seconds&#39;: 0.014}
 </pre></div>
 </div>
 </div>
@@ -631,7 +672,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="Figure from Differentiate and recover the elastic modulus" src="../_images/77373591df4852f0cec1504fcd3b18bbfa857eaec58788c345a40b6f5a639215.png" />
+<img alt="Figure from Lab 03: Differentiable Mechanics &amp; Inverse Parameter Identification" src="../_images/06cb78beb94d921b4128812cd0cb898820083f347f7d640efec52b60350577a9.png" />
 </div>
 </div>
 <p>Compare the recovered modulus and held-out displacement with their
@@ -640,6 +681,15 @@ agreement between automatic differentiation and finite differences.
 Extending the calculation to fracture introduces a load-dependent
 history, irreversibility constraints and sensitivity to the chosen
 observations and solver tolerance.</p>
+<section id="key-takeaways">
+<h2>Key takeaways<a class="headerlink" href="#key-takeaways" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>The elastic-bar response connects stiffness, load and displacement through equilibrium.</p></li>
+<li><p>Reverse-mode differentiation propagates a scalar observation or loss back to the chosen parameter.</p></li>
+<li><p>Optimising <span class="math notranslate nohighlight">\(\log E\)</span> keeps the recovered modulus positive.</p></li>
+<li><p>A held-out displacement tests the recovered parameter on an additional observation.</p></li>
+</ul>
+</section>
 <section id="exercises">
 <h2>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
 <p>Try each question before opening the hint or worked solution. Keep the original calculation as your reference.</p>
@@ -657,57 +707,50 @@ observations and solver tolerance.</p>
 </div>
 <div class="dropdown course-solution admonition">
 <p class="admonition-title">Worked solution 1</p>
-<ol class="arabic simple">
-<li><p>With <span class="math notranslate nohighlight">\(L=A=1\)</span>, the assembled bar has</p></li>
-</ol>
+<p>For a uniform bar,</p>
 <div class="math notranslate nohighlight">
 \[
-u_{\mathrm{tip}}=\frac{F}{E}.
-\]</div>
-<p>Differentiating gives</p>
-<div class="math notranslate nohighlight">
-\[
-\frac{\mathrm{d}u_{\mathrm{tip}}}{\mathrm{d}E}=-\frac{F}{E^2}=-\frac{u_{\mathrm{tip}}}{E}.
-\]</div>
-<ol class="arabic simple" start="2">
-<li><p>Therefore</p></li>
-</ol>
-<div class="math notranslate nohighlight">
-\[
-u_{\mathrm{tip}}=\frac{1.1}{1.8}=0.6111111111,
+u_{\mathrm{tip}}=\frac{FL}{EA},
 \qquad
-\frac{\mathrm{d}u_{\mathrm{tip}}}{\mathrm{d}E}=-\frac{1.1}{1.8^2}=-0.3395061728.
+\frac{\partial u_{\mathrm{tip}}}{\partial E}=-\frac{FL}{AE^2}.
 \]</div>
-<ol class="arabic simple" start="3">
-<li><p>The autograd value is <span class="math notranslate nohighlight">\(-0.33950617283949214\)</span>, the centred-FD value is <span class="math notranslate nohighlight">\(-0.3395061727862192\)</span>, and the analytic value is <span class="math notranslate nohighlight">\(-0.3395061728395104\)</span>. The negative sign has the expected mechanics interpretation: a stiffer bar displaces less under the same load. The sensitivity follows from the uniform bar’s linear elastic constitutive law.</p></li>
-</ol>
+<p>With <span class="math notranslate nohighlight">\(L=A=1\)</span>, <span class="math notranslate nohighlight">\(F=1.1\)</span> and <span class="math notranslate nohighlight">\(E=1.8\)</span>, the tip displacement is approximately <span class="math notranslate nohighlight">\(0.611\)</span> and the sensitivity is approximately <span class="math notranslate nohighlight">\(-0.340\)</span>. A stiffer bar stretches less under the same load. Compare the analytic and computed sensitivities using the relative error and the sign; vary the finite-difference spacing to assess its numerical accuracy.</p>
 </div>
 </section>
-<section id="exercise-2-interpret-the-positive-modulus-parameterisation">
-<h3>Exercise 2: Interpret the positive modulus parameterisation<a class="headerlink" href="#exercise-2-interpret-the-positive-modulus-parameterisation" title="Link to this heading">#</a></h3>
-<p>The optimiser holds <strong>log_E</strong> as its trainable parameter and computes <span class="math notranslate nohighlight">\(E_{\mathrm{trial}}=\exp(\mathrm{log\_E})\)</span>, starting from <span class="math notranslate nohighlight">\(E=0.9\)</span>. It reports <span class="math notranslate nohighlight">\(E_{\mathrm{true}}=2.4\)</span>, <span class="math notranslate nohighlight">\(E_{\mathrm{fit}}=2.4003023876\)</span>, held-out observed displacement <span class="math notranslate nohighlight">\(0.5625\)</span>, and held-out prediction <span class="math notranslate nohighlight">\(0.5624291368\)</span>.</p>
+<section id="exercise-2-explore-positive-stiffness-and-additional-observations">
+<h3>Exercise 2: Explore positive stiffness and additional observations<a class="headerlink" href="#exercise-2-explore-positive-stiffness-and-additional-observations" title="Link to this heading">#</a></h3>
 <ol class="arabic simple">
-<li><p>What values of <span class="math notranslate nohighlight">\(E\)</span> can this parameterisation represent?</p></li>
-<li><p>Compare the range of the exponential parameterisation with that of a sigmoid.</p></li>
-<li><p>Compute the absolute held-out displacement error and state one reason the held-out load is useful.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(z=\log E\)</span>. Derive <span class="math notranslate nohighlight">\(\partial u_{\mathrm{tip}}/\partial z\)</span> from the chain rule. What values of stiffness can this parameterisation represent?</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">tip_displacement</span></code> to compare the recovered and reference bar over several positive loads. Plot both responses and their difference.</p></li>
+<li><p>Explain what an additional load observation tests in this linear bar model. What extra experiment would help if the material response were nonlinear?</p></li>
 </ol>
 <div class="dropdown course-hint admonition">
 <p class="admonition-title">Hint 2</p>
-<p>The exponential maps every real number to a strictly positive number. Compare the observed and predicted held-out displacements directly.</p>
+<p>Use <span class="math notranslate nohighlight">\(\partial E/\partial z=E\)</span> and the sensitivity from Exercise 1. The notebook supplies <code class="docutils literal notranslate"><span class="pre">E_fit</span></code>, <code class="docutils literal notranslate"><span class="pre">E_true</span></code> and the callable <code class="docutils literal notranslate"><span class="pre">tip_displacement</span></code>.</p>
 </div>
 <div class="dropdown course-solution admonition">
 <p class="admonition-title">Worked solution 2</p>
-<ol class="arabic simple">
-<li><p>Since <span class="math notranslate nohighlight">\(\exp(z)&gt;0\)</span> for every real <span class="math notranslate nohighlight">\(z\)</span>, the parameterisation enforces only <span class="math notranslate nohighlight">\(E&gt;0\)</span>. It has no finite upper bound. The initial value is obtained because <span class="math notranslate nohighlight">\(\exp(\log(0.9))=0.9\)</span>.</p></li>
-<li><p>A sigmoid maps a raw parameter to <span class="math notranslate nohighlight">\((0,1)\)</span> before any explicit scaling. The exponential <span class="math notranslate nohighlight">\(\exp(\mathrm{log\_E})\)</span> represents every strictly positive modulus, with no finite upper bound.</p></li>
-<li><p>The held-out absolute error is</p></li>
-</ol>
+<p>The exponential maps each real <span class="math notranslate nohighlight">\(z\)</span> to a positive stiffness. Applying the chain rule gives</p>
 <div class="math notranslate nohighlight">
 \[
-|0.562499999999992-0.5624291368281488|
-=7.0863\times10^{-5}.
+\frac{\partial u_{\mathrm{tip}}}{\partial z}
+=-\frac{FL}{AE^2}E=-u_{\mathrm{tip}}.
 \]</div>
-<p>The held-out load <span class="math notranslate nohighlight">\(1.35\)</span> provides a separate displacement observation beyond the four optimisation loads. Agreement at this load tests the recovered modulus under another loading condition within the same linear elastic model.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">loads</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+<span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
+    <span class="n">reference</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">tip_displacement</span><span class="p">(</span><span class="n">E_true</span><span class="p">,</span> <span class="n">force</span><span class="p">)</span> <span class="k">for</span> <span class="n">force</span> <span class="ow">in</span> <span class="n">loads</span><span class="p">])</span>
+    <span class="n">recovered</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">tip_displacement</span><span class="p">(</span><span class="n">E_fit</span><span class="p">,</span> <span class="n">force</span><span class="p">)</span> <span class="k">for</span> <span class="n">force</span> <span class="ow">in</span> <span class="n">loads</span><span class="p">])</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mf">8.5</span><span class="p">,</span> <span class="mf">3.2</span><span class="p">),</span> <span class="n">layout</span><span class="o">=</span><span class="s2">&quot;constrained&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">loads</span><span class="p">,</span> <span class="n">reference</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;reference&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">loads</span><span class="p">,</span> <span class="n">recovered</span><span class="p">,</span> <span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;recovered&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;tip load F&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;tip displacement&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">loads</span><span class="p">,</span> <span class="n">recovered</span> <span class="o">-</span> <span class="n">reference</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;tip load F&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;displacement difference&quot;</span><span class="p">)</span>
+<span class="n">display_figure</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Both curves are straight lines in this uniform linear-elastic model. An additional load tests the recovered compliance on another observation, while repeated noisy measurements help quantify uncertainty. A nonlinear material would require observations spanning the relevant strain range; unloading measurements could also reveal irreversible response.</p>
 </div>
 </section>
 </section>
@@ -738,7 +781,7 @@ u_{\mathrm{tip}}=\frac{1.1}{1.8}=0.6111111111,
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Lab 04: Neural Field Adapters (Training, Checkpointing, &amp; Reloading)</p>
+        <p class="prev-next-title">Train, save, reload, and compare a field model</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -758,9 +801,10 @@ u_{\mathrm{tip}}=\frac{1.1}{1.8}=0.6111111111,
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-takeaways">Key takeaways</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1-derive-the-tip-sensitivity">Exercise 1: Derive the tip sensitivity</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2-interpret-the-positive-modulus-parameterisation">Exercise 2: Interpret the positive modulus parameterisation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2-explore-positive-stiffness-and-additional-observations">Exercise 2: Explore positive stiffness and additional observations</a></li>
 </ul>
 </li>
 </ul>
@@ -776,8 +820,8 @@ u_{\mathrm{tip}}=\frac{1.1}{1.8}=0.6111111111,
   
   <div class="footer-item">
     <div class="phast-course-credit">
-  <!-- Course material created by Allamaprabhu Ani, CEMS-Lab, 2026. -->
-  <p class="phast-course-creators">Presented by <span>Sathiskumar A. Ponnusami · Queen Mary University of London · CEMS-Lab</span></p>
+  <!-- Course material prepared by Allamaprabhu Ani and Sathiskumar A. Ponnusami, CEMS-Lab, 2026. -->
+  <p class="phast-course-creators">Prepared by <span>Allamaprabhu Ani and Sathiskumar A. Ponnusami</span></p>
   <p class="phast-course-purpose">© 2026
     <a href="https://github.com/CEMS-Lab">CEMS-Lab</a>
     <span aria-hidden="true"> · </span>

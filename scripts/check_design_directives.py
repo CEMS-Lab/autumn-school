@@ -35,13 +35,15 @@ def check_directives(book_dir=BOOK):
         if "_static" in f.parts:
             continue
         content = f.read_text(encoding="utf-8", errors="ignore")
-        rel = f.relative_to(ROOT)
+        rel = f.relative_to(book_dir)
         for pattern, desc in PROHIBITED_PATTERNS:
             if pattern.search(content):
                 errors.append(f"{rel}: contains prohibited text '{pattern.pattern}' ({desc})")
 
     # 2. Check 4 Pillars on index.html
     index_file = book_dir / "index.html"
+    if not index_file.is_file():
+        errors.append("index.html: book opening is missing")
     if index_file.is_file():
         index_content = index_file.read_text(encoding="utf-8", errors="ignore")
         pillars = [
@@ -58,14 +60,20 @@ def check_directives(book_dir=BOOK):
 
     # 3. Check lab notebooks action badges, download buttons, and Colab integration
     lab_files = sorted((book_dir / "labs").glob("*.html")) if (book_dir / "labs").is_dir() else []
+    if len(lab_files) != 6:
+        errors.append(f"labs/: expected six core tutorials, found {len(lab_files)}")
     for lf in lab_files:
         l_content = lf.read_text(encoding="utf-8", errors="ignore")
         if "badge-row" not in l_content and "badge-link" not in l_content:
-            errors.append(f"{lf.relative_to(ROOT)}: missing tutorial action badges (.badge-row)")
+            errors.append(f"{lf.relative_to(book_dir)}: missing tutorial action badges (.badge-row)")
         if "colab" not in l_content.lower():
-            errors.append(f"{lf.relative_to(ROOT)}: missing Google Colab launch button or badge")
+            errors.append(f"{lf.relative_to(book_dir)}: missing Google Colab launch button or badge")
         if "download" not in l_content.lower() and "btn-download" not in l_content:
-            errors.append(f"{lf.relative_to(ROOT)}: missing notebook download option")
+            errors.append(f"{lf.relative_to(book_dir)}: missing notebook download option")
+        if "key-takeaways" not in l_content:
+            errors.append(f"{lf.relative_to(book_dir)}: missing key takeaways")
+        if "course-hint" not in l_content or "course-solution" not in l_content:
+            errors.append(f"{lf.relative_to(book_dir)}: missing hints or worked solutions")
 
     elapsed_ms = (time.time() - t0) * 1000
     return len(errors) == 0, errors, elapsed_ms

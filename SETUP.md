@@ -58,15 +58,30 @@ Choose a CPU runtime for these small computational exercises. Before teaching
 on Colab, rehearse the complete setup and all six notebooks in a fresh runtime;
 Python and package availability may change.
 
-1. Upload and extract the complete ZIP into the Colab runtime, retaining its
-   directory structure, including `vendor/`, `configs/` and `notebooks/`.
-2. Check that the runtime's Python version meets the source requirements.
-3. In a setup cell, change directory into the extracted course folder and use
-   `%pip install ./vendor/PhAST nbformat nbclient nbconvert`.
-4. Open/upload the desired notebook and ensure its current directory is the
-   extracted course's `notebooks/` directory. Retain the helper folder.
-5. Run from the first cell. Record setup and whole-notebook time separately.
-   If the service is slow, use the included executed HTML for the discussion.
+1. Follow **Open in Colab** at the top of the selected book lesson. Select a
+   CPU runtime with Python 3.10–3.12.
+2. Run the first cell. It retrieves the complete public course folder,
+   including `vendor/`, `configs/` and notebook helpers, and installs the
+   declared PhAST dependencies into that Colab runtime.
+3. Read the printed setup record: it gives Python/package versions, the
+   resolved course commit and setup time. A fresh session uses the current
+   public `main` revision. For a fixed published edition, set
+   `os.environ["PHAST_COURSE_REF"]` to its release tag or full commit before
+   running the setup cell. Retain that commit in the rehearsal receipt.
+4. Choose **Runtime → Run all**. Follow the explanations, inspect the fields
+   and response curves, then try the exercises. Use **Restart session and run
+   all** when checking that a notebook runs independently from a clean kernel.
+5. Download generated NPZ/JSON/figure or model files from the Colab Files pane
+   under `autumn-school/assets/`. Keep those results with the setup record.
+
+Notebook variants share their computational cells. Practice files present
+the questions; solution files add expandable hints and worked answers.
+Colab links open the published course edition. Use the recorded commit and
+package versions when comparing your run with the course execution report.
+
+For an offline laptop, download and extract the full course folder and use
+the local environment instructions above. The book retains executed outputs
+for reading while an environment is being prepared.
 
 The public course source is [CEMS-Lab/autumn-school](https://github.com/CEMS-Lab/autumn-school).
 Retain the complete course folder to supply each notebook's local helpers and

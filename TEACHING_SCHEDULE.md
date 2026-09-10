@@ -1,7 +1,8 @@
 # Day two: three lecture hours, then three exercise hours
 
-Local next-edition plan. Published v0.1.1 still contains the earlier mixed
-2+2+2-hour schedule. Reordering the slide deck/book overview is pending.
+Current delivery route, aligned with design directives #17–18. Frozen
+v0.1.1 artifacts retain the earlier mixed 2+2+2-hour schedule. The animated
+slide candidate and today's execution/review evidence are tracked in TODAY.md.
 
 The audience knows basic mechanics, calculus and introductory Python but need
 not know fracture, phase fields or automatic differentiation. Connect every
@@ -75,8 +76,8 @@ are not demonstrated by this run.
 | 10–15 | Predict damage concentration; distinguish the locked precrack. |
 | 15–20 | Execute the unchanged baseline or inspect the recorded run. |
 | 20–40 | Compare initial/final/incremental damage, load response and stagger checks. |
-| 40–52 | Complete the existing mesh/precrack-count and evidence-scope exercises. |
-| 52–60 | Explain a field, a scalar response and one limitation in a result card. |
+| 40–52 | Change the applied separation, compare the fields/response, and work through the mesh and loading exercises. |
+| 52–60 | Explain how the prescribed loading shapes one field and one scalar response. |
 
 Do not make an untested stronger-load case mandatory. Existing attempted variants
 stopped at configured nonconvergence. An external mesher import is not part
@@ -117,7 +118,7 @@ models or an executed full DAgger experiment.
 | 13–30 | Compare reference/MLP/RBF/error fields, reload equivalence and metadata; complete exercises. |
 | 30–35 | Run compatible and corrupted proposals with reference correction. |
 | 35–50 | Explain the residual/projection checks, feature-order and nonfinite-input tests. |
-| 50–60 | Explain what is missing from one correction record for DAgger, reveal solutions and recap all three result cards. |
+| 50–60 | Trace data collection, reference labelling, aggregation and retraining for DAgger; reveal solutions and connect the three practical outcomes. |
 
 Notebook 05 can create its small checkpoint if notebook 04 was not completed.
 Use the same approved support files, not an isolated notebook upload.

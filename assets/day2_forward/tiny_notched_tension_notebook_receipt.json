@@ -1,0 +1,53 @@
+{
+  "scope": "all notebook computations after setup, including two full solves, assertions, save/reload and figures",
+  "setup_seconds": 0.018,
+  "computation_seconds": 88.21603716700338,
+  "installation": "pre-existing local environment",
+  "platform": {
+    "python": "3.10.18",
+    "platform": "macOS-27.0-arm64-arm-64bit",
+    "machine": "arm64",
+    "torch": "2.8.0",
+    "numpy": "2.2.6",
+    "device": "cpu",
+    "dtype": "float64",
+    "torch_threads": 4
+  },
+  "source_hashes": {
+    "notebooks/day2_helpers/forward_workflow.py": "c60efa3d98ea2a830c860262be1df56581d29ca10fe9c329b5eee39631d68437",
+    "configs/day2_forward/tiny_notched_tension.json": "31f808405a43c6d9aa88b54041ca8b51fde8f6991c3c149a3d03d23473627aa2"
+  },
+  "notebook_source": {
+    "path": "notebooks/01_phast_tiny_evolving_fracture.ipynb",
+    "cell_source_sha256": "ceb102d2b2b48770403edfe40444a7f9f9dd3b57c0d28d48ffd716b7ac9f7571",
+    "authored_file_sha256": "1e15c38391713a4c27ce2bf5ad10fea50f5d1973f43576a6f5e89862ca420732"
+  },
+  "reference_solve_seconds": 60.09031712500291,
+  "half_load_solve_seconds": 25.290846459000022,
+  "reference_checks": {
+    "finite_states": true,
+    "damage_bounds": true,
+    "irreversibility": true,
+    "maximum_boundary_error": 0.0,
+    "minimum_damage_increment": 0.0,
+    "state_tolerance": 1e-10,
+    "strict_mechanics_and_stagger_flags": true,
+    "stagger_residual_checked_each_step": true,
+    "warning_count": 0
+  },
+  "half_load_checks": {
+    "finite_states": true,
+    "damage_bounds": true,
+    "irreversibility": true,
+    "maximum_boundary_error": 0.0,
+    "minimum_damage_increment": 0.0,
+    "state_tolerance": 1e-10,
+    "strict_mechanics_and_stagger_flags": true,
+    "stagger_residual_checked_each_step": true,
+    "warning_count": 0
+  },
+  "reload_equality": true,
+  "one_changed_input": "loading.total_symmetric_vertical_displacement",
+  "half_load_has_lower_nodal_damage_sum": true,
+  "colab_execution": false
+}
