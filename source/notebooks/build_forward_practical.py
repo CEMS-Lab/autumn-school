@@ -53,8 +53,7 @@ import matplotlib.pyplot as plt
 import matplotlib.tri as mtri
 from IPython.display import Image, display
 from day2_helpers import assets_dir, import_public_phast, load_forward_config
-from day2_helpers.course_tools import _structured_triangles
-from day2_helpers.forward_workflow import (solver_configuration, solve_prepared_case,
+from day2_helpers.forward_workflow import (prepare_course_mesh, solver_configuration, solve_prepared_case,
                                          save_results, load_results, digest_file, notebook_source_hash)
 
 torch.set_default_dtype(torch.float64)
@@ -109,36 +108,29 @@ ax.legend(loc="upper left", bbox_to_anchor=(.015, .79))
 show_figure(fig, "tiny_notched_tension_geometry.png", "Rectangle with an initially damaged centreline and outward symmetric vertical loading arrows; horizontal displacement is restrained on every exterior edge.")
 ''')
 md(r'''
-## 2. Generate, save and import the mesh
+## 2. Create the mesh and inspect its boundaries
 
-Split each of the $n_x\times n_y$ rectangular cells into two three-node triangles (T3). Coordinates have shape $(N,2)$ and connectivity has shape $(N_e,3)$, with zero-based node indices.
+The mesh divides the rectangle into three-node triangles (T3). Set its resolution through `config["mesh"]["nx"]` and `config["mesh"]["ny"]`; an even `ny` places nodes along the damaged centreline. The boundary names `top`, `bottom`, `left` and `right` identify where we will apply constraints.
 
-We first save these arrays in a compressed NumPy archive (`.npz`). The **reopened arrays construct the actual `FEMMesh`** used below. This prepared tensor-mesh route makes the relationship between a portable file and the solver's in-memory mesh explicit.
+`prepare_course_mesh` is a **course helper** defined in [`day2_helpers/forward_workflow.py`](https://github.com/CEMS-Lab/autumn-school/blob/main/notebooks/day2_helpers/forward_workflow.py). It creates this rectangular grid, saves and reopens its coordinates and connectivity, checks their agreement, and returns the PhAST mesh used throughout the calculation.
 ''')
 code(r'''
-from phast.core.mesh import FEMMesh
-
-nx, ny = mesh_cfg["nx"], mesh_cfg["ny"]
-assert ny % 2 == 0  # The grid represents the horizontal centreline exactly.
-x = torch.linspace(0, width, nx + 1)
-y = torch.linspace(0, height, ny + 1)
-xx, yy = torch.meshgrid(x, y, indexing="xy")
-generated_nodes = torch.stack((xx.reshape(-1), yy.reshape(-1)), dim=1)
-generated_elements = _structured_triangles(nx, ny)
 prepared_mesh_path = assets_dir() / "tiny_notched_tension_prepared_mesh.npz"
-np.savez_compressed(prepared_mesh_path, nodes=generated_nodes.numpy(), elements=generated_elements.numpy())
-with np.load(prepared_mesh_path, allow_pickle=False) as mesh_file:
-    imported_nodes = torch.from_numpy(mesh_file["nodes"].copy())
-    imported_elements = torch.from_numpy(mesh_file["elements"].copy())
-torch.testing.assert_close(imported_nodes, generated_nodes, rtol=0, atol=0)
-assert torch.equal(imported_elements, generated_elements)
-mesh = FEMMesh.from_tensors(imported_nodes, imported_elements, device="cpu", dtype=torch.float64)
-mesh.identify_boundaries()
-assert mesh.n_nodes == (nx + 1) * (ny + 1) and mesh.n_elems == 2 * nx * ny
-assert mesh.elements.min() >= 0 and mesh.elements.max() < mesh.n_nodes
+mesh = prepare_course_mesh(config, prepared_mesh_path)
 print({"nodes": mesh.n_nodes, "T3_elements": mesh.n_elems, "boundary_sets": sorted(mesh.node_sets)})
 ''')
 md(r'''
+### Importing a mesh from Gmsh
+
+For a compatible, supplied Gmsh file, PhAST also provides a direct import:
+
+```python
+from phast import FEMMesh
+mesh = FEMMesh("specimen.msh", device="cpu", dtype=torch.float64)
+```
+
+This optional example assumes that `specimen.msh` already exists and contains the required elements and boundary groups. The calculation below continues with the rectangular mesh created above. The [PhAST tutorials](https://cems-lab.github.io/PhAST/tutorial/index.html) connect geometry, meshing, named regions, boundary conditions and result inspection for further practice.
+
 ## 3. Attach the initial notch, boundary conditions and material
 
 PhAST stores a scalar damage value at each node. We impose $d=1$ on the centreline mask and seed those same nodes in the solver's initial state. The full mesh view identifies the prescribed boundaries; the separate damage view shows the state before loading.
@@ -165,6 +157,13 @@ def construct_solver(case, actual_mesh):
     return solver, bcs, material, precrack
 
 solver, bcs, material, precrack = construct_solver(config, mesh)
+''')
+md(r'''
+### Inspect the mesh and initial damage
+
+Locate the four exterior boundaries and the centreline nodes held at $d=1$. The right-hand panel shows the initial nodal damage field on the same mesh. Compare these constraints with the geometry sketch before applying the load.
+''')
+code(r'''
 nodes = mesh.nodes.numpy()
 tri = mtri.Triangulation(nodes[:, 0], nodes[:, 1], mesh.elements.numpy())
 fig, axes = plt.subplots(1, 2, figsize=(11, 3.7), layout="constrained")

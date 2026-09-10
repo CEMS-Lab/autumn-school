@@ -15,9 +15,9 @@
     {
       "id": "01",
       "notebook": "01_phast_tiny_evolving_fracture.ipynb",
-      "aggregate_wall_seconds": 91.99642641699756,
-      "code_sha256": "95c2d4efc7214e6897779ce4d2e1a5b0bf09b2a673cda41b01c8c2f8ef14978a",
-      "retained_sha256": "b4d43fcd2d07cc840d2d7ab030acf2df81e099f3f73dbea96787fe6b5c00ffe3",
+      "aggregate_wall_seconds": 92.2463623750009,
+      "code_sha256": "3eb092613779d189cb817f419e0ee39e889c5e48a3c159d8e57b0f4b384e668b",
+      "retained_sha256": "5ce45672c507e45d2565fa57d5a308ba471aa8d703e3181e83d03a111ed906f5",
       "status": "passed",
       "limit_seconds": 300
     },

@@ -23,7 +23,7 @@ Today's published web edition connects the complete forward-practical workflow,
 preserves authoring sources across all notebook formats, repairs cloud setup
 and exercises, and retains the PhAST dark orange-and-blue theme. The opening
 timetable image has been removed. All six classroom notebooks passed fresh
-local execution after setup; the longest whole process took 91.996 seconds.
+local execution after setup; the revised first practical took 92.246 seconds.
 The [runtime receipt](evidence/notebook_runtime_current.json) records the exact
 code hashes and platform. The optional diffusion companion retains its
 9 September evidence; it was outside today's numerical changes.
@@ -42,3 +42,23 @@ specifies shorter mesh cells and a checked Gmsh import activity while preserving
 the current tested calculation. [Today's checklist](TODAY.md) maps all 18 issues
 and the remaining delivery work. The [delivery evidence](evidence/course_delivery_20260910.md)
 and [manifest](MANIFEST.json) identify the files and their checks.
+
+## Mesh and documentation update
+
+The mesh cell has been simplified and checked against the exact previous mesh
+and result fields. Both full calculations pass in 92.2464 seconds. The rebuilt
+book adds links to upstream problem setup and retained dynamic SENT results.
+See [mesh readability evidence](evidence/mesh_readability_20260910.md).
+The original-example propagation assessment and upstream documentation work
+are coordinated in [issue #19](https://github.com/CEMS-Lab/autumn-school/issues/19).
+
+The PhAST release/documentation task has also completed a local B3 reading
+notebook, clearer tutorial navigation and synchronized setup-notebook repairs,
+with executed-notebook and strict-build checks. Its [B3 provenance issue](https://github.com/CEMS-Lab/PhAST/issues/5)
+tracks the generated-versus-retained mesh discrepancy. The [canonical-example review](source/planning/CANONICAL_FRACTURE_REVIEW_20260910.md)
+records a separate 17.6787-second CPU propagation candidate and its remaining
+residual, resolution and whole-notebook acceptance checks.
+
+Publication of the reviewed update was authorised on 10 September. Source
+revisions and live deployment checks are recorded in
+[course issue #19](https://github.com/CEMS-Lab/autumn-school/issues/19).

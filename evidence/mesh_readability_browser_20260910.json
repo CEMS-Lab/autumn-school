@@ -1,0 +1,59 @@
+{
+  "scope": "Local mesh-readability and upstream-reading integration; no deployment or Colab execution",
+  "checked_at": "2026-09-10T12:07:47.294Z",
+  "pages": [
+    {
+      "path": "labs/01_phast_tiny_evolving_fracture.html",
+      "width": 1440,
+      "math": 62,
+      "mathErrors": 0,
+      "brokenImages": 0,
+      "overflow": false,
+      "upstreamLinks": [
+        "https://cems-lab.github.io/PhAST/tutorial/index.html"
+      ],
+      "mesh_code_lines": 3,
+      "passed": true
+    },
+    {
+      "path": "07_practice_references.html",
+      "width": 1440,
+      "math": 22,
+      "mathErrors": 0,
+      "brokenImages": 0,
+      "overflow": false,
+      "upstreamLinks": [
+        "https://cems-lab.github.io/PhAST/tutorial/index.html",
+        "https://cems-lab.github.io/PhAST/tutorial/notebook_setup.html"
+      ],
+      "passed": true
+    },
+    {
+      "path": "labs/01_phast_tiny_evolving_fracture.html",
+      "width": 390,
+      "math": 62,
+      "mathErrors": 0,
+      "brokenImages": 0,
+      "overflow": false,
+      "upstreamLinks": [
+        "https://cems-lab.github.io/PhAST/tutorial/index.html"
+      ],
+      "mesh_code_lines": 3,
+      "passed": true
+    },
+    {
+      "path": "07_practice_references.html",
+      "width": 390,
+      "math": 22,
+      "mathErrors": 0,
+      "brokenImages": 0,
+      "overflow": false,
+      "upstreamLinks": [
+        "https://cems-lab.github.io/PhAST/tutorial/index.html",
+        "https://cems-lab.github.io/PhAST/tutorial/notebook_setup.html"
+      ],
+      "passed": true
+    }
+  ],
+  "passed": true
+}

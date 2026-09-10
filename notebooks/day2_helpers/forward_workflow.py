@@ -32,6 +32,44 @@ def notebook_source_hash(path):
     return hashlib.sha256(json.dumps(cells, sort_keys=True).encode()).hexdigest()
 
 
+def prepare_course_mesh(config, path):
+    """Create, save and reopen the rectangular T3 mesh used in Practical 1.
+
+    This course helper packages the mesh construction for the first lesson.
+    It preserves the reference node ordering, triangle diagonals and CPU
+    float64 coordinates. The NPZ archive supplies the arrays passed to PhAST;
+    exact round-trip and connectivity checks run before mesh construction.
+    Axis-aligned boundary names are identified on the resulting FEMMesh.
+    """
+    from phast import FEMMesh
+    from .course_tools import _structured_triangles
+
+    width, height = (config["geometry"][key] for key in ("width", "height"))
+    nx, ny = (config["mesh"][key] for key in ("nx", "ny"))
+    assert isinstance(nx, int) and isinstance(ny, int) and nx > 0 and ny > 0
+    assert ny % 2 == 0, "Use an even ny to represent the damaged centreline."
+    assert np.isfinite(width) and np.isfinite(height) and width > 0 and height > 0
+    x = torch.linspace(0, width, nx + 1, dtype=torch.float64, device="cpu")
+    y = torch.linspace(0, height, ny + 1, dtype=torch.float64, device="cpu")
+    xx, yy = torch.meshgrid(x, y, indexing="xy")
+    generated_nodes = torch.stack((xx.reshape(-1), yy.reshape(-1)), dim=1)
+    generated_elements = _structured_triangles(nx, ny)
+    path = Path(path)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    np.savez_compressed(path, nodes=generated_nodes.numpy(), elements=generated_elements.numpy())
+    with np.load(path, allow_pickle=False) as mesh_file:
+        imported_nodes = torch.from_numpy(mesh_file["nodes"].copy())
+        imported_elements = torch.from_numpy(mesh_file["elements"].copy())
+    torch.testing.assert_close(imported_nodes, generated_nodes, rtol=0, atol=0)
+    assert torch.equal(imported_elements, generated_elements)
+    assert imported_elements.min() >= 0 and imported_elements.max() < len(imported_nodes)
+    mesh = FEMMesh.from_tensors(imported_nodes, imported_elements, device="cpu", dtype=torch.float64)
+    mesh.identify_boundaries()
+    assert mesh.n_nodes == (nx + 1) * (ny + 1) and mesh.n_elems == 2 * nx * ny
+    assert mesh.elements.min() >= 0 and mesh.elements.max() < mesh.n_nodes
+    return mesh
+
+
 def solver_configuration(config):
     """Translate the public course case into the public solver configuration."""
     from phast.solvers.staggered_solver import SolverConfig

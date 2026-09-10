@@ -105,6 +105,15 @@ until a replacement passes the relevant gates.
 
 ### Workstream record
 
+The [shared PhAST/course example issue #19](https://github.com/CEMS-Lab/autumn-school/issues/19)
+coordinates C04 and C14 with [PhAST documentation #4](https://github.com/CEMS-Lab/PhAST/issues/4).
+The [alignment plan](source/planning/PHAST_COURSE_ALIGNMENT_20260910.md) records
+example selection, source versions, short mesh cells, propagation evidence and
+cross-links. Course integration owns the classroom lesson; the PhAST release
+task owns upstream documentation. B3 dynamic SENT is being assessed as the
+shared crack-propagation example. The tested quasistatic lesson remains the
+current numerical baseline during that assessment.
+
 These are the full course ambitions. The MVP checklist in MVP_DELIVERY.md
 selects the classroom subset without closing or deleting unfinished extensions.
 
@@ -171,6 +180,7 @@ criteria are met, even where a first-edition artifact already exists.
 | C15 | [#16: Public releases, credits, contributor pathway and course showcase](https://github.com/CEMS-Lab/autumn-school/issues/16) |
 | Course-wide pedagogy | [#17: Undergraduate tutorial style and coherent learning activities](https://github.com/CEMS-Lab/autumn-school/issues/17) |
 | Authoring standards | [#18: Editorial, notebook and visual directives](https://github.com/CEMS-Lab/autumn-school/issues/18) |
+| Shared upstream/course example | [#19: Mesh-to-propagation learning route](https://github.com/CEMS-Lab/autumn-school/issues/19) |
 
 ## Completion evidence
 
@@ -205,3 +215,9 @@ and child issues open while their full acceptance criteria remain unmet.
 Maintain the plan and main issue together. New requests enter the coverage
 table and a linked issue before implementation. Do not delete unfinished
 requirements simply because they do not fit the first edition.
+
+After each brainstorming discussion, update the owning issue with the decision,
+file ownership, dependencies and acceptance checks. Create an additional issue
+for a distinct deliverable, then cross-link it here. Reply to actionable comments
+with the change and its evidence, preserving the discussion history. Review
+runtime, scientific interpretation and rendered output before closing a task.

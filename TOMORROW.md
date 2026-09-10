@@ -16,8 +16,12 @@ records completed items, current files and the remaining delivery checks.
 - [x] Receive publication authorisation for the reviewed update.
 - [x] Verify the pushed revision and live Pages deployment, including credits
   and downloads; record the deployed revision for fresh Colab rehearsal.
-- [ ] Shorten the visible mesh cells and add a tested Gmsh import activity
-  following the [mesh usability plan](source/planning/MESH_USABILITY_REVIEW_20260910.md).
+- [x] Shorten the visible mesh cell and verify the full local practical in
+  92.2464 seconds; retain exact physical arrays and result fields.
+- [ ] Add a tested Gmsh import activity following the
+  [mesh usability plan](source/planning/MESH_USABILITY_REVIEW_20260910.md).
+- [ ] Assess B3 dynamic SENT as a canonical propagation example and align the
+  course with upstream tutorials under [issue #19](https://github.com/CEMS-Lab/autumn-school/issues/19).
 - [ ] Run the six lessons and optional diffusion companion in fresh authenticated
   Colab CPU sessions, recording setup and computation separately.
 - [ ] Test PowerPoint and presentation-machine playback, seeking/replay and

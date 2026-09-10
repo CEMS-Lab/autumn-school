@@ -41,6 +41,24 @@ Use the quick-reference table below to open any course notebook directly in **Go
 
 ---
 
+## Continue with the PhAST documentation
+
+The [PhAST tutorial sequence](https://cems-lab.github.io/PhAST/tutorial/index.html)
+extends the same workflow used here: define a specimen, inspect mesh regions,
+apply supports and loading, solve, and interpret the saved fields.
+
+| Activity | Physical question | Next reading |
+| --- | --- | --- |
+| Course Lab 01 | How do the mesh, initial damage and imposed separation determine a quasistatic response? | Revisit the saved fields and changed-load exercise above. |
+| PhAST SENT setup | How do a Gmsh geometry and named regions become a configured problem? | [Step-by-step problem setup](https://cems-lab.github.io/PhAST/tutorial/notebook_setup.html) |
+| B3 dynamic SENT results | How does a damaged band extend across a tensile specimen during a dynamic calculation? | [Public B3 example and retained animation](https://github.com/CEMS-Lab/PhAST/tree/f6324f899f0701769810be117f27f1208f7a582e/examples/dynamic/B3_dynamic_sent) |
+
+B3 uses a 40 mm square with a 20 mm notch and explicit dynamics. Its retained
+animation provides a qualitative crack-growth example. When comparing it with
+Lab 01, identify the geometry, units, loading history and inertial terms in each
+model. For a fresh B3 calculation, review its configuration and mesh resolution
+and measure the complete runtime in your environment.
+
 ## Worked consolidation exercise
 
 Consider a two-dimensional notched specimen represented by displacement $u$

@@ -1,7 +1,7 @@
 {
   "scope": "all notebook computations after setup, including two full solves, assertions, save/reload and figures",
-  "setup_seconds": 0.018,
-  "computation_seconds": 88.21603716700338,
+  "setup_seconds": 0.017,
+  "computation_seconds": 88.0288597079998,
   "installation": "pre-existing local environment",
   "platform": {
     "python": "3.10.18",
@@ -14,16 +14,16 @@
     "torch_threads": 4
   },
   "source_hashes": {
-    "notebooks/day2_helpers/forward_workflow.py": "c60efa3d98ea2a830c860262be1df56581d29ca10fe9c329b5eee39631d68437",
+    "notebooks/day2_helpers/forward_workflow.py": "52c41173cf828a0fc3b77f7037ff2540f644d741b587a00a82c729f6ee80d551",
     "configs/day2_forward/tiny_notched_tension.json": "31f808405a43c6d9aa88b54041ca8b51fde8f6991c3c149a3d03d23473627aa2"
   },
   "notebook_source": {
     "path": "notebooks/01_phast_tiny_evolving_fracture.ipynb",
-    "cell_source_sha256": "ceb102d2b2b48770403edfe40444a7f9f9dd3b57c0d28d48ffd716b7ac9f7571",
-    "authored_file_sha256": "1e15c38391713a4c27ce2bf5ad10fea50f5d1973f43576a6f5e89862ca420732"
+    "cell_source_sha256": "9f5bd063e67be398af8ed379ec26e454752cf40411816e6d67d3c680c150b3ea",
+    "authored_file_sha256": "105d4e29481ff474861a964777819f096e29131538f6d5855b5b3f66b0ee3bc7"
   },
-  "reference_solve_seconds": 60.09031712500291,
-  "half_load_solve_seconds": 25.290846459000022,
+  "reference_solve_seconds": 59.889559708004526,
+  "half_load_solve_seconds": 25.275058125000214,
   "reference_checks": {
     "finite_states": true,
     "damage_bounds": true,

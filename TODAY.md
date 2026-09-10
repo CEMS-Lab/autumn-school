@@ -25,7 +25,7 @@ The inverse contributor retains ownership of new inverse research work. The clas
 | [#2](https://github.com/CEMS-Lab/autumn-school/issues/2) | Review fracture representations and conceptual exercise with primary sources; preserve formulation/algorithm distinctions. |
 | [#3](https://github.com/CEMS-Lab/autumn-school/issues/3) | Audit AT1/AT2 normalisation and degradation plots; use the original profile animation. |
 | [#4](https://github.com/CEMS-Lab/autumn-school/issues/4) | Align static/dynamic, load/time/iteration and staggered operator explanations with the actual practical. |
-| [#5](https://github.com/CEMS-Lab/autumn-school/issues/5) | The connected input-to-result workflow and changed-load comparison pass locally in 92.00 s. Next, shorten the mesh cells using the [mesh usability plan](source/planning/MESH_USABILITY_REVIEW_20260910.md), preserve the tested case and add a checked Gmsh import activity. Rehearse in Colab; a validated short propagating crack retains its separate acceptance check. |
+| [#5](https://github.com/CEMS-Lab/autumn-school/issues/5) | The shortened mesh cell and connected workflow pass locally in 92.25 s with the exact previous result fields. Next, add a checked Gmsh import activity and promote the original B3 propagation candidate after its residual/resolution and whole-notebook checks. Rehearse in Colab. |
 | [#6](https://github.com/CEMS-Lab/autumn-school/issues/6) | Checked backpropagation material and the reverse-accumulation/history animations are integrated into the candidate. Rehearse their notation and transitions across the full lecture. |
 | [#7](https://github.com/CEMS-Lab/autumn-school/issues/7) | The optional extension is integrated. Its contributor owns full fracture recovery with multiple starts, held-out checks and runtime evidence. |
 | [#8](https://github.com/CEMS-Lab/autumn-school/issues/8) | Retain MLP/RBF teaching contracts. Genuine learned PhAST damage integration needs approved public weights and matched field/timing evidence. |
@@ -39,6 +39,7 @@ The inverse contributor retains ownership of new inverse research work. The clas
 | [#16](https://github.com/CEMS-Lab/autumn-school/issues/16) | The pushed revision, successful Pages build, credits and downloadable files are verified. Retain original-content licence and final release checks. |
 | [#17](https://github.com/CEMS-Lab/autumn-school/issues/17) | Reviewed prose and conceptual exercises are preserved in authoritative sources; the checked notebook variants agree. Continue the complete lecture/book readability review with the current teaching conventions. |
 | [#18](https://github.com/CEMS-Lab/autumn-school/issues/18) | Notebook anatomy, plot formatting, source-math balance and the enforced design gate pass locally. Apply these checks to future changes and the final deployed edition. |
+| [#19](https://github.com/CEMS-Lab/autumn-school/issues/19) | B3 imported-mesh diagnostic completes in 17.68 s and its damage band crosses the remaining ligament; exact current YAML reached the 240 s cap. Review damage residuals and mesh/time-step sensitivity before a complete notebook/Colab run. Cross-link canonical configuration and upstream tutorials through PhAST #4. See the [alignment plan](source/planning/PHAST_COURSE_ALIGNMENT_20260910.md). |
 
 ## Completion record
 
@@ -60,8 +61,14 @@ See [today's delivery evidence](evidence/course_delivery_20260910.md) for comman
 
 ## Next delivery checks
 
+The subsequent mesh and propagation discussion is tracked in issue #19. The
+release/documentation task owns upstream tutorial edits; course integration
+owns classroom changes. The reviewed update is authorised for publication;
+source revisions and deployment checks are recorded in issue #19.
+
 - [x] Publish the approved revision and verify the Pages deployment, prepared-by book credits, local assets and notebook downloads from the live site.
-- [ ] Simplify the first practical's mesh cells and add a tested Gmsh import route following the [mesh usability plan](source/planning/MESH_USABILITY_REVIEW_20260910.md); rerun the revised practical and inspect its fields.
+- [x] Simplify the first practical's mesh cell to three lines, preserve exact arrays/checks, rerun both cases in 92.2464 seconds and review desktop/mobile HTML. See [mesh readability evidence](evidence/mesh_readability_20260910.md); publication is authorised and tracked in issue #19.
+- [ ] Add a tested Gmsh import route following the [mesh usability plan](source/planning/MESH_USABILITY_REVIEW_20260910.md); assess original PhAST propagation examples through issue #19.
 - [ ] Run all six lessons and the optional diffusion companion from public links in fresh authenticated Colab CPU sessions. Record setup and computation separately.
 - [ ] Rehearse the three lecture hours and three practical hours using the animated introduction and mapped 44-slide resource. Confirm breaks, transitions, pause questions and the presentation machine.
 - [ ] Test PowerPoint playback, native seeking/replay and portability on that machine. Improve first-frame posters and check the history animation at classroom viewing distance.
