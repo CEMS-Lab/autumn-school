@@ -82,6 +82,8 @@ pause questions. The previous working introduction is retained as a fallback.
       setup and complete computation separately.
 - [x] Align the forward notebook's preview, actual inputs and result reload;
       inspect the physical effect of a changed load.
+- [ ] Simplify the visible mesh workflow and add a checked Gmsh import activity
+      using the [mesh usability plan](source/planning/MESH_USABILITY_REVIEW_20260910.md).
 - [x] Verify local exercise questions, answers, notebook downloads, offline
       outputs, mobile/desktop rendering and mathematical notation.
 - [x] Test all five animation clips in local Keynote; preserve their embedded
@@ -91,8 +93,8 @@ pause questions. The previous working introduction is retained as a fallback.
 - [x] Check local source/output parity and notebook-level coherence.
 - [ ] Complete the student-level cross-format review and timed six-hour rehearsal.
 - [x] Receive authorisation to publish the reviewed update.
-- [ ] Verify the pushed revision, live book, credits and downloadable files;
-      use that revision for fresh Colab rehearsal.
+- [x] Verify the pushed revision, live book, credits and downloadable files;
+      record the checks in the [publication receipt](evidence/publication_20260910.json).
 
 ## Scientific conventions
 
@@ -126,6 +128,7 @@ credits before distributing recordings.
 [Issue 1](https://github.com/CEMS-Lab/autumn-school/issues/1) is the main plan;
 issues 2–16 retain the wider objectives, and issues 17–18 govern course-wide
 pedagogy and authoring standards. Use [BUILD_AGENT_PROMPTS.md](BUILD_AGENT_PROMPTS.md)
-for bounded assignments. The current manifest identifies the reviewed candidate;
-record its published revision and deployment checks before marking delivery
-complete. The inverse contributor retains ownership of new inverse research work.
+for bounded assignments. The current manifest identifies the published web edition;
+the publication receipt records its content revision and live checks. Complete
+fresh Colab checks and the timed rehearsal before classroom delivery. The inverse
+contributor retains ownership of new inverse research work.

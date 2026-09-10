@@ -19,7 +19,7 @@ learning, with five embedded clips and presenter pause questions. The 44-slide
 resource supplies the broader explanations. The [lecture mapping](source/slides/intro-lecture/ANIMATED_LECTURE_MAP.md)
 connects these materials to three lecture hours and three practical hours.
 
-Today's local candidate connects the complete forward-practical workflow,
+Today's published web edition connects the complete forward-practical workflow,
 preserves authoring sources across all notebook formats, repairs cloud setup
 and exercises, and retains the PhAST dark orange-and-blue theme. The opening
 timetable image has been removed. All six classroom notebooks passed fresh
@@ -33,8 +33,12 @@ warning, and all five clips played. The saved native Keynote contains the same
 five movies. See [today's compatibility evidence](evidence/slides_20260910.md)
 for exact checks and the remaining presentation-machine rehearsal.
 
-The current files form the reviewed 10 September web edition. Publication has
-been authorised; deployment verification precedes authenticated fresh Colab
-checks from the published revision. [Today's checklist](TODAY.md) maps all 18 issues and the remaining
-delivery work. The [delivery evidence](evidence/course_delivery_20260910.md)
-and [manifest](MANIFEST.json) identify the candidate and its checks.
+The reviewed 10 September web edition is [live on GitHub Pages](https://cems-lab.github.io/autumn-school/book/index.html).
+The [publication receipt](evidence/publication_20260910.json) verifies the published
+HTML and notebook hashes, shared prepared-by credits, mathematical rendering,
+mobile/desktop layout and editable slide download endpoints. Fresh authenticated
+Colab execution is the next environment check. The [mesh usability plan](source/planning/MESH_USABILITY_REVIEW_20260910.md)
+specifies shorter mesh cells and a checked Gmsh import activity while preserving
+the current tested calculation. [Today's checklist](TODAY.md) maps all 18 issues
+and the remaining delivery work. The [delivery evidence](evidence/course_delivery_20260910.md)
+and [manifest](MANIFEST.json) identify the files and their checks.

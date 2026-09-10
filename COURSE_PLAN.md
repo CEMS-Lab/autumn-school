@@ -113,7 +113,7 @@ selects the classroom subset without closing or deleting unfinished extensions.
 | C01 | Phase-field foundations and comparisons | Explanations and figures exist. Review XFEM/cohesive trade-offs; do not call quasi-Newton a competing fracture formulation or claim universal phase-field superiority. |
 | C02 | Energy, degradation and damage morphology | Equations, derivative notebook and browser controls exist. Audit AT1/AT2 normalisation, profiles, continuity, mesh/length-scale effects and initiation/branching explanations. |
 | C03 | Solution algorithms and coupled physics | Staggering, static/dynamic and matrix-free concepts exist. Complete the transport/solid/damage operator narrative and distinguish physical time, load stepping and nonlinear iteration. |
-| C04 | First PhAST simulation | The current candidate connects one configuration through geometry, mesh/notch, actual boundary conditions and solver objects, loading, exports and reloaded post-processing. Its reference and changed-load cases pass locally in 92.00 s. The model is plane-strain quasistatic AT2 with assembled sparse-direct mechanics and diffuse damage. Rehearse the published route in Colab; explicit/matrix-free execution, imported external meshes and short propagating-crack examples retain their own acceptance checks. |
+| C04 | First PhAST simulation | The published practical connects one configuration through geometry, mesh/notch, actual boundary conditions and solver objects, loading, exports and reloaded post-processing. Its reference and changed-load cases pass locally in 92.00 s. The model is plane-strain quasistatic AT2 with assembled sparse-direct mechanics and diffuse damage. Follow the [mesh usability plan](source/planning/MESH_USABILITY_REVIEW_20260910.md) to shorten the mesh cells and add checked Gmsh import, then rehearse in Colab. Explicit/matrix-free execution and short propagating-crack examples retain their own acceptance checks. |
 | C05 | Backpropagation explained step by step | Explicit local derivatives, adjoint propagation, shared-parameter sums and a checked three-step algebraic example exist. Revised book/lecture diagrams distinguish observable, gradient and optimisation update; a toy derivative check is not a full fracture-path validation. |
 | C06 | Inverse recovery | The elastic-bar toy is the classroom route. The optional inverse/history reading extension is integrated. Its contributor owns the remaining actual fracture recovery, multiple-start, held-out and under-300-second acceptance checks in issue #7. |
 | C07 | Train, save, reload and interchangeable models | MLP/RBF toy field examples run. Define and validate fracture-compatible damage inputs/outputs and saved-model contracts; do not imply arbitrary architectures are interchangeable automatically. |
@@ -124,7 +124,7 @@ selects the classroom subset without closing or deleting unfinished extensions.
 | C12 | Paper-based extension studies | Select approved public papers and reproducible retained results, with one question and one limitation per study. Do not publish private worktrees or unapproved checkpoints. |
 | C13 | Teaching references and design standard | D2L/PBDL inform the book. The design standard records inspected Delft textbook, TUM lecture and ETH research-presentation visuals; original flowcharts apply those patterns. Remaining supplied Instagram/PDF repository lists still need a complete inventory; do not imply inaccessible material was inspected. |
 | C14 | Final coherence and completeness | Local source/code/output parity, exercise, mathematical rendering and desktop/mobile checks pass. All 18 issues are mapped. Complete the whole-course learning-objective, notation, prerequisite and cross-format review, plus the timed three-lecture/three-practical rehearsal. |
-| C15 | Release, credits and community | Publication of the reviewed update is authorised. Verify the pushed revision, Pages deployment, credits and downloadable editions. Original-content licence, approved research exhibits, contributor pathway and final release acceptance remain tracked. |
+| C15 | Release, credits and community | The reviewed update is published; pushed revision, Pages deployment, credits and downloadable editions are verified in the [publication receipt](evidence/publication_20260910.json). Original-content licence, approved research exhibits, contributor pathway and final release acceptance remain tracked. |
 
 ## Evidence required before marking an issue complete
 
@@ -188,9 +188,10 @@ fresh-runtime receipt exists.
 
 ## Release gates
 
-Publication of the reviewed 10 September update is authorised. Confirm the
-pushed revision and live Pages deployment before recording that gate as
-complete; use that revision for the authenticated fresh-Colab rehearsal.
+The reviewed 10 September update is live. The [publication receipt](evidence/publication_20260910.json)
+records the successful Pages build, content revision, live HTML and notebook
+hashes, credits and browser checks. Use this edition for authenticated
+fresh-Colab rehearsal.
 
 The first publication is an evolving **prerelease**. Publishing it does not
 close the full-fracture inverse, learned damage or DAgger implementation issues.

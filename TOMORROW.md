@@ -14,8 +14,10 @@ records completed items, current files and the remaining delivery checks.
 - [x] Check local desktop/mobile pages, equations, answer controls, downloads,
   offline assets and scientific flowcharts; remove the opening timetable graphic.
 - [x] Receive publication authorisation for the reviewed update.
-- [ ] Verify the pushed revision and live Pages deployment, including credits
+- [x] Verify the pushed revision and live Pages deployment, including credits
   and downloads; record the deployed revision for fresh Colab rehearsal.
+- [ ] Shorten the visible mesh cells and add a tested Gmsh import activity
+  following the [mesh usability plan](source/planning/MESH_USABILITY_REVIEW_20260910.md).
 - [ ] Run the six lessons and optional diffusion companion in fresh authenticated
   Colab CPU sessions, recording setup and computation separately.
 - [ ] Test PowerPoint and presentation-machine playback, seeking/replay and
