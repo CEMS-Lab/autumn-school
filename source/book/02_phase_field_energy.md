@@ -95,13 +95,13 @@ In the accompanying computational lesson, you will implement this quadratic degr
 :class: tip
 
 **Ready to try this in practice?**  
-Explore the interactive tutorial: **{doc}`labs/02_degradation_autograd`**.  
+Explore the interactive tutorial: **{doc}`classroom/02_gradients_and_recovery`**.
 You can read through the worked derivatives and Taylor tests directly here in the book, or run it interactively in **Google Colab** with one click:
 
 <div class="badge-row">
-  <a class="badge-colab" href="https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/study/02_degradation_autograd.ipynb" target="_blank"><img src="_static/colab-badge.svg" alt="Open In Colab"/></a>
-  <a class="badge-link" href="../notebooks/study/02_degradation_autograd.ipynb"><i class="fa-solid fa-download"></i> Download Practice Notebook</a>
-  <a class="badge-link" href="../notebooks/solutions/02_degradation_autograd.ipynb"><i class="fa-solid fa-check-circle"></i> Download Worked Solutions</a>
+  <a class="badge-colab" href="https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/study/classroom/02_gradients_and_recovery.ipynb" target="_blank"><img src="_static/colab-badge.svg" alt="Open In Colab"/></a>
+  <a class="badge-link" href="../notebooks/study/classroom/02_gradients_and_recovery.ipynb"><i class="fa-solid fa-download"></i> Download Practice Notebook</a>
+  <a class="badge-link" href="../notebooks/solutions/classroom/02_gradients_and_recovery.ipynb"><i class="fa-solid fa-check-circle"></i> Download Worked Solutions</a>
 </div>
 :::
 

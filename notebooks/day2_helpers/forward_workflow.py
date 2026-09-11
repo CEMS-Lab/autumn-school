@@ -79,11 +79,13 @@ def solver_configuration(config):
     return SolverConfig(**settings)
 
 
-def solve_prepared_case(solver, config, load_factors, precrack, phast_info):
+def solve_prepared_case(solver, config, load_factors, precrack, phast_info, *, retain_history=False):
     """Advance the exact solver constructed in the notebook and check every step.
 
     All inputs are retained as constructed: this routine creates neither a mesh
     nor boundary conditions. The mesh is T3 and states use CPU float64.
+    ``retain_history`` copies the seeded state and each accepted increment for
+    observational export. It leaves the legacy four-snapshot arrays unchanged.
     """
     mesh, bcs = solver.mesh, solver.bcs
     expected = torch.linspace(config["loading"]["first_load_factor"],
@@ -106,6 +108,8 @@ def solve_prepared_case(solver, config, load_factors, precrack, phast_info):
     previous = seeded.clone()
     snapshots = {0: seeded}
     displacement_snapshots = {0: solver.u.detach().clone()}
+    damage_history = [seeded.clone()] if retain_history else []
+    displacement_history = [solver.u.detach().clone()] if retain_history else []
     trace, caught_messages = [], []
     started = time.perf_counter()
     max_bc_error, minimum_increment = 0.0, 0.0
@@ -146,6 +150,9 @@ def solve_prepared_case(solver, config, load_factors, precrack, phast_info):
         if step in {1, len(load_factors) // 2, len(load_factors)}:
             snapshots[step] = solver.d.detach().clone()
             displacement_snapshots[step] = solver.u.detach().clone()
+        if retain_history:
+            damage_history.append(solver.d.detach().clone())
+            displacement_history.append(solver.u.detach().clone())
         previous = solver.d.detach().clone()
     elapsed = time.perf_counter() - started
     assert not caught_messages, caught_messages
@@ -192,7 +199,14 @@ def solve_prepared_case(solver, config, load_factors, precrack, phast_info):
                                 "machine": platform.machine(), "torch": torch.__version__,
                                 "numpy": np.__version__, "device": "cpu", "dtype": "float64",
                                 "torch_threads": torch.get_num_threads()}}
-    return {"arrays": arrays, "metadata": metadata, "solver": solver}
+    result = {"arrays": arrays, "metadata": metadata, "solver": solver}
+    if retain_history:
+        history = {"history_steps": torch.arange(len(load_factors) + 1),
+                   "history_load_factors": torch.cat((load_factors.new_zeros(1), load_factors)),
+                   "damage_history": torch.stack(damage_history),
+                   "displacement_history": torch.stack(displacement_history)}
+        result["history"] = {key: value.detach().cpu().numpy().copy() for key, value in history.items()}
+    return result
 
 
 def save_results(result, directory, stem="tiny_notched_tension"):
@@ -202,6 +216,12 @@ def save_results(result, directory, stem="tiny_notched_tension"):
     np.savez_compressed(field_path, **result["arrays"])
     record = dict(result["metadata"])
     record["fields_sha256"] = digest_file(field_path)
+    if "history" in result:
+        history_path = directory / f"{stem}_history.npz"
+        np.savez_compressed(history_path, **result["history"])
+        record["retained_history"] = {"file": history_path.name, "sha256": digest_file(history_path),
+                                      "states": "0 seeded; then every accepted quasistatic increment",
+                                      "temporal_interpolation": False}
     metadata_path.write_text(json.dumps(record, indent=2) + "\n", encoding="utf-8")
     return field_path, metadata_path
 
@@ -249,3 +269,28 @@ def load_results(field_path, metadata_path):
     assert record["resolved_solver"]["stagger_criterion"] == "relative"
     assert record["resolved_solver"]["stagger_norm"] == "l2"
     return arrays, record
+
+
+def load_history(metadata_path, arrays, record):
+    """Validate optional full history against the unchanged legacy snapshots."""
+    descriptor = record["retained_history"]
+    assert Path(descriptor["file"]).name == descriptor["file"]
+    history_path = Path(metadata_path).parent / descriptor["file"]
+    assert digest_file(history_path) == descriptor["sha256"]
+    with np.load(history_path, allow_pickle=False) as archive:
+        history = {key: archive[key].copy() for key in archive.files}
+    assert set(history) == {"history_steps", "history_load_factors", "damage_history", "displacement_history"}
+    n_steps, n = record["summary"]["load_steps"], record["summary"]["nodes"]
+    np.testing.assert_array_equal(history["history_steps"], np.arange(n_steps + 1))
+    assert history["history_load_factors"].shape == (n_steps + 1,)
+    assert history["damage_history"].shape == (n_steps + 1, n)
+    assert history["displacement_history"].shape == (n_steps + 1, n, 2)
+    assert all(np.isfinite(value).all() for value in history.values())
+    steps = arrays["snapshot_steps"]
+    np.testing.assert_array_equal(history["damage_history"][steps], arrays["damage_snapshots"])
+    np.testing.assert_array_equal(history["displacement_history"][steps], arrays["displacement_snapshots"])
+    np.testing.assert_array_equal(history["history_load_factors"],
+                                  [0.0] + [row["load_factor"] for row in record["trace"]])
+    assert np.all(np.diff(history["damage_history"], axis=0) >= -1.e-10)
+    assert history["damage_history"].min() >= -1.e-10 and history["damage_history"].max() <= 1 + 1.e-10
+    return history

@@ -1,0 +1,4 @@
+case,residual,action
+Compatible proposal,0.19402747874051113,Accept
+Perturbed proposal,1.164008876432137,Reference correction
+Reference fallback,2.969565304912253e-15,Use reference solution

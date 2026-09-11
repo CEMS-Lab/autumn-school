@@ -188,13 +188,13 @@ In the accompanying computational notebook, you will execute a complete phase-fi
 :class: tip
 
 **Ready to try this in practice?**  
-Explore the interactive tutorial: **{doc}`labs/01_phast_tiny_evolving_fracture`**.  
+Explore the interactive tutorial: **{doc}`classroom/01_simulate_fracture`**.
 You can read through the full simulation pipeline and damage field plots directly here in the book, or run it interactively in **Google Colab** with one click:
 
 <div class="badge-row">
-  <a class="badge-colab" href="https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/study/01_phast_tiny_evolving_fracture.ipynb" target="_blank"><img src="_static/colab-badge.svg" alt="Open In Colab"/></a>
-  <a class="badge-link" href="../notebooks/study/01_phast_tiny_evolving_fracture.ipynb"><i class="fa-solid fa-download"></i> Download Practice Notebook</a>
-  <a class="badge-link" href="../notebooks/solutions/01_phast_tiny_evolving_fracture.ipynb"><i class="fa-solid fa-check-circle"></i> Download Worked Solutions</a>
+  <a class="badge-colab" href="https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/study/classroom/01_simulate_fracture.ipynb" target="_blank"><img src="_static/colab-badge.svg" alt="Open In Colab"/></a>
+  <a class="badge-link" href="../notebooks/study/classroom/01_simulate_fracture.ipynb"><i class="fa-solid fa-download"></i> Download Practice Notebook</a>
+  <a class="badge-link" href="../notebooks/solutions/classroom/01_simulate_fracture.ipynb"><i class="fa-solid fa-check-circle"></i> Download Worked Solutions</a>
 </div>
 :::
 

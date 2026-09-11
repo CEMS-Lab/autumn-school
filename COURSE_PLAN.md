@@ -5,26 +5,68 @@ by one interactive book, executable notebooks, worked solutions and slides.
 The main planning issue links the topic issues; this file preserves the
 curriculum when issues are closed or reorganised.
 
-## Latest delivery decision: a minimum viable course
+## Latest delivery decision: three curated lectures and three labs
 
-The latest autumn-school discussion sets **three hours of lectures followed
+**11 September runtime update.** Every complete student calculation, including
+plots and exports, must finish in less than **120 seconds**. The development
+target is at most 60 seconds locally to leave headroom for Colab CPUs. Time
+one-time dependency installation separately and rehearse each published
+notebook in a fresh Colab runtime. This decision supersedes earlier 300-second
+budgets recorded below. See [runtime policy](source/planning/RUNTIME_POLICY_20260911.md).
+
+Classroom 1 now uses the public B3 dynamic plate with its imported 1,091-node
+mesh, projected CG and Jacobi preconditioning. It demonstrates a crack crossing
+the remaining 20 mm ligament. The original quasistatic practical remains a
+detailed reference. Classroom 2 begins with a local damaged-bar force law,
+manual chain rule, PyTorch backward pass and finite-difference check before
+the existing parameter-recovery exercise. A four-slide insertion module follows
+that same example. B7 branching remains a recorded lecture exhibit.
+
+The 10 September voice memo and maintainer follow-up set the current route:
+**45 minutes of fracture/PhAST, 55 minutes of differentiability/inverse
+applications, and 50 minutes of hybrid learning**, followed by **three
+50-minute practicals**. The remaining 60 minutes in a six-hour event window
+support breaks, questions, setup and optional exploration; organisers confirm
+clock times. This replaces the previous six-hour contact-time assumption.
+
+The three classroom notebooks are `01_simulate_fracture`,
+`02_gradients_and_recovery` and `03_learning_and_hybrid`, stored in
+`notebooks/classroom/`. The original six notebooks remain detailed references.
+Existing editable decks and animations are preserved. The three lecture guides
+reserve clearly labelled example and animation slots for later completion.
+
+[Issue #20](https://github.com/CEMS-Lab/autumn-school/issues/20), the
+[curation plan](source/planning/VOICE_MEMO_CURATION_20260910.md) and
+[placeholder register](source/planning/PLACEHOLDER_REGISTER.md) govern this
+local curation. The latest published edition remains identified by its dated
+publication receipt until this candidate is reviewed and published.
+
+## Previous delivery baseline
+
+The 11 September [four-deliverable integration plan](source/planning/FOUR_PILLAR_DELIVERY_20260911.md)
+adds a [90-slide editable authoring scaffold](source/slides/course-blueprint-20260911/STORYBOARD.md),
+fresh notebook execution and independent layout/coherence audits. The scaffold
+preserves the 45/55/50-minute lectures, three practicals and all 21 content
+slots. It is a candidate expansion of the preserved 32-slide companion.
+Publication and fresh authenticated Colab remain separate acceptance gates.
+
+The preceding baseline allocated **three hours of lectures followed
 by three hours of interactive exercises**. Lecture 1 covers fracture,
 staggered solution and matrix-free operators and must already motivate
 differentiability and hybrid learning. Lecture 2 develops differentiability;
 lecture 3 develops hybrid approaches. The exercises revisit those questions
 in the same order.
 
-The current book source uses this three-lecture/three-practical route.
+The current book source uses the curated three-lecture/three-practical route above.
 Frozen v0.1.1 artifacts retain the earlier mixed two-hour sessions.
 The editable animated deck and classroom rehearsal are tracked in
 [TODAY.md](TODAY.md). See [MVP_DELIVERY.md](MVP_DELIVERY.md)
 for the selected scope and [BUILD_AGENT_PROMPTS.md](BUILD_AGENT_PROMPTS.md)
 for bounded build assignments. Preserve the complete issue inventory below.
 
-Timing assumption: 360 minutes of contact time, with lunch and breaks outside
-that allocation. The previous edition had 330 contact minutes and 30 minutes
-of breaks. The schedule supplies a 330-minute fallback pending organiser
-confirmation; these allocations are not interchangeable.
+The preceding editions used 360 contact minutes or 330 contact minutes plus
+30 minutes of breaks. These historical allocations are retained here for
+traceability; TEACHING_SCHEDULE.md defines the current 300-minute teaching core.
 
 ## Purpose and audience
 
@@ -43,7 +85,7 @@ bounded assignment, not another full course inside this allocation.
 
 ## Learning sequence
 
-The new live route is L1 fracture/numerics → L2 derivatives → L3 hybrid
+The current local route is L1 fracture/numerics → L2 derivatives → L3 hybrid
 methods, followed by P1 PhAST → P2 derivative/recovery exercises → P3
 training/proposal assessment. The opening timetable graphic has been removed
 from the book; its reusable figure sources are retained. The longer sequence preserves the
@@ -75,7 +117,7 @@ follows **predict → explain → compute → inspect → exercise → worked so
 Use a toy problem only after explicitly stating what it isolates and how the
 concept transfers to, or differs from, a fracture calculation.
 
-## Three lecture hours and three exercise hours
+## Three lectures and three practical notebooks
 
 | Session | Principal question | Student outcome |
 | --- | --- | --- |
@@ -129,7 +171,7 @@ selects the classroom subset without closing or deleting unfinished extensions.
 | C08 | Hybrid correction and DAgger | Toy accept/reject/fallback runs; DAgger is explained. A complete model-induced rollout, reference labelling, aggregation, retraining and held-out evaluation remains to be built. |
 | C09 | Laptop/Colab execution | All six notebooks have fresh local whole-process receipts of 3.74–92.00 seconds after setup, recorded in evidence/notebook_runtime_current.json. Shared cloud setup is implemented. Fresh installation, authenticated Colab and slower-laptop rehearsal retain separate checks; all activities must stay below 300 seconds. |
 | C10 | Integrated book and accessibility | The web textbook, native code/output chapters, practice/solution downloads and visual explorations form the student edition. The printable book is archived. Review offline/mobile/keyboard behaviour and links after every edition change. |
-| C11 | Coherent lecture slides and animations | A 23-slide editable PowerPoint/Keynote introduction contains five embedded animations and is mapped to the retained 44-slide LaTeX resource. All five clips play in local Keynote and all 23 slides have rendered reviews. Complete the full lecture integration, timed pacing, PowerPoint and presentation-machine seeking/replay checks. |
+| C11 | Coherent lecture slides and animations | A new 32-slide native Keynote outline follows the curated 45/55/50-minute lectures and maps all 21 registered content slots. Its fixed font roles, 24 LaTeX panels and five Matplotlib figures have native rendered reviews. The prior 23-slide animated introduction and 44-slide LaTeX resource are retained. Approve the style, fill selected exhibits, adapt presenter-controlled builds and rehearse the complete lecture/practical route. |
 | C12 | Paper-based extension studies | Select approved public papers and reproducible retained results, with one question and one limitation per study. Do not publish private worktrees or unapproved checkpoints. |
 | C13 | Teaching references and design standard | D2L/PBDL inform the book. The design standard records inspected Delft textbook, TUM lecture and ETH research-presentation visuals; original flowcharts apply those patterns. Remaining supplied Instagram/PDF repository lists still need a complete inventory; do not imply inaccessible material was inspected. |
 | C14 | Final coherence and completeness | Local source/code/output parity, exercise, mathematical rendering and desktop/mobile checks pass. All 18 issues are mapped. Complete the whole-course learning-objective, notation, prerequisite and cross-format review, plus the timed three-lecture/three-practical rehearsal. |
@@ -178,6 +220,7 @@ criteria are met, even where a first-edition artifact already exists.
 | C13 | [#14: Reference inventory and reusable academic design standard](https://github.com/CEMS-Lab/autumn-school/issues/14) |
 | C14 | [#15: Final lecture-series coherence and requirement-completeness audit](https://github.com/CEMS-Lab/autumn-school/issues/15) |
 | C15 | [#16: Public releases, credits, contributor pathway and course showcase](https://github.com/CEMS-Lab/autumn-school/issues/16) |
+| Curated three-lab classroom edition | [#20: Voice-memo curation and concise notebooks](https://github.com/CEMS-Lab/autumn-school/issues/20) |
 | Course-wide pedagogy | [#17: Undergraduate tutorial style and coherent learning activities](https://github.com/CEMS-Lab/autumn-school/issues/17) |
 | Authoring standards | [#18: Editorial, notebook and visual directives](https://github.com/CEMS-Lab/autumn-school/issues/18) |
 | Shared upstream/course example | [#19: Mesh-to-propagation learning route](https://github.com/CEMS-Lab/autumn-school/issues/19) |

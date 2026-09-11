@@ -139,17 +139,17 @@ must survive serialization for a newly created model object to reproduce the
 same output. The lesson uses an original `ToyHelmholtzProblem` to examine
 the saved-model interface and prediction accuracy on a scalar field.
 
-:::{admonition} Hands-On Tutorial: Lab 04 (Neural Field Adapter: Training & Checkpointing)
+:::{admonition} Hands-On Tutorial: Lab 3 (Training and Model Reloading)
 :class: tip
 
 **Ready to try this in practice?**  
-Explore the interactive tutorial: **{doc}`labs/04_train_save_reload_adapter`**.  
+Explore the interactive tutorial: **{doc}`classroom/03_learning_and_hybrid`**.
 You can read through the MLP training loops and checkpoint verification directly here in the book, or run it interactively in **Google Colab** with one click:
 
 <div class="badge-row">
-  <a class="badge-colab" href="https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/study/04_train_save_reload_adapter.ipynb" target="_blank"><img src="_static/colab-badge.svg" alt="Open In Colab"/></a>
-  <a class="badge-link" href="../notebooks/study/04_train_save_reload_adapter.ipynb"><i class="fa-solid fa-download"></i> Download Practice Notebook</a>
-  <a class="badge-link" href="../notebooks/solutions/04_train_save_reload_adapter.ipynb"><i class="fa-solid fa-check-circle"></i> Download Worked Solutions</a>
+  <a class="badge-colab" href="https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/study/classroom/03_learning_and_hybrid.ipynb" target="_blank"><img src="_static/colab-badge.svg" alt="Open In Colab"/></a>
+  <a class="badge-link" href="../notebooks/study/classroom/03_learning_and_hybrid.ipynb"><i class="fa-solid fa-download"></i> Download Practice Notebook</a>
+  <a class="badge-link" href="../notebooks/solutions/classroom/03_learning_and_hybrid.ipynb"><i class="fa-solid fa-check-circle"></i> Download Worked Solutions</a>
 </div>
 :::
 
@@ -215,17 +215,17 @@ checks when interpreting the four field panels. The residual is defined by
 the scalar `ToyHelmholtzProblem`. Applying this pattern to fracture requires
 the fracture residual and its damage admissibility conditions.
 
-:::{admonition} Hands-On Tutorial: Lab 05 (Residual Evaluation & Hybrid Correction)
+:::{admonition} Hands-On Tutorial: Lab 3 (Physical Assessment and Correction)
 :class: tip
 
 **Ready to try this in practice?**  
-Explore the interactive tutorial: **{doc}`labs/05_hybrid_reference_correction`**.  
+Explore the interactive tutorial: **{doc}`classroom/03_learning_and_hybrid`**.
 You can read through the residual gating logic and solver correction steps directly here in the book, or run it interactively in **Google Colab** with one click:
 
 <div class="badge-row">
-  <a class="badge-colab" href="https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/study/05_hybrid_reference_correction.ipynb" target="_blank"><img src="_static/colab-badge.svg" alt="Open In Colab"/></a>
-  <a class="badge-link" href="../notebooks/study/05_hybrid_reference_correction.ipynb"><i class="fa-solid fa-download"></i> Download Practice Notebook</a>
-  <a class="badge-link" href="../notebooks/solutions/05_hybrid_reference_correction.ipynb"><i class="fa-solid fa-check-circle"></i> Download Worked Solutions</a>
+  <a class="badge-colab" href="https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/study/classroom/03_learning_and_hybrid.ipynb" target="_blank"><img src="_static/colab-badge.svg" alt="Open In Colab"/></a>
+  <a class="badge-link" href="../notebooks/study/classroom/03_learning_and_hybrid.ipynb"><i class="fa-solid fa-download"></i> Download Practice Notebook</a>
+  <a class="badge-link" href="../notebooks/solutions/classroom/03_learning_and_hybrid.ipynb"><i class="fa-solid fa-check-circle"></i> Download Worked Solutions</a>
 </div>
 :::
 

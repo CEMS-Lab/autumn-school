@@ -1,4 +1,17 @@
-# Bounded next-build assignments
+<!-- Current curation assignment: issue #20 -->
+
+The current course has three lectures and three concise classroom notebooks.
+Use [the placeholder register](source/planning/PLACEHOLDER_REGISTER.md) to select
+one asset, its owner, source and acceptance checks before using a historical
+assignment below. Preserve the detailed notebooks and editable decks. Keep
+new inverse research with its existing contributor. A completed placeholder
+outline is distinct from an executed scientific example. Use the current
+[next-build assignments](source/planning/NEXT_BUILD_ASSIGNMENTS.md) for new work.
+
+# Earlier assignments — reference only
+
+The assignments below document the preceding edition. Their timing and
+notebook numbering are superseded by the current schedule and assignments above.
 
 Read AGENTS.md, CONTRIBUTING.md, COURSE_PLAN.md, TEACHING_SCHEDULE.md and
 MVP_DELIVERY.md first. Use the assigned issue and declare exact owned files.

@@ -1,0 +1,970 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" data-theme="dark">
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Practical 1: Simulate a crack crossing a plate &#8212; PhAST: Phase-field fracture with differentiable FEM</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "dark";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "dark";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mobile_math.css?v=acf5579e" />
+    <link rel="stylesheet" type="text/css" href="../_static/learning_book.css?v=37e7f39f" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=c22d28c4"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="../_static/mathjax/tex-mml-chtml.js?v=cadf963e"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'classroom/01_simulate_fracture';</script>
+    <script src="../_static/learning_book.js?v=5aaa4a9b"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Practical 2: Gradients and material recovery" href="02_gradients_and_recovery.html" />
+    <link rel="prev" title="Lecture 3: Learning inside a numerical workflow" href="../lectures/03_hybrid_learning.html" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+<meta name="author" content="Allamaprabhu Ani and Sathiskumar A. Ponnusami">
+<meta name="prepared-by" content="Allamaprabhu Ani and Sathiskumar A. Ponnusami">
+<meta name="course" content="CEMS-Lab · UKACM Autumn School 2026">
+
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="dark">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">PhAST: Phase-field fracture with differentiable FEM</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../index.html">
+                    PhAST: fracture simulation, differentiation and learning
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Lecture guides</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../lectures/01_fracture_and_phast.html">Lecture 1: Phase-field fracture and PhAST</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lectures/02_differentiability_and_inverse.html">Lecture 2: Differentiability and inverse recovery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lectures/03_hybrid_learning.html">Lecture 3: Learning inside a numerical workflow</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Three practical labs</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Practical 1: Simulate a crack crossing a plate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_gradients_and_recovery.html">Practical 2: Gradients and material recovery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_learning_and_hybrid.html">Practical 3: Learn a field and assess its proposal</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Reference chapters</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../00_welcome_and_routes.html">From Cracks to Computation: Learn by Doing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01_crack_representations.html">Crack Representations: Sharp, Cohesive, and Diffuse</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_phase_field_energy.html">Fracture Energy: AT1, AT2, Degradation, and Bandwidth</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_staggered_solution.html">The Staggered Solution Algorithm: Alternating Mechanics and Damage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_fem_to_tensors.html">From Weak Forms to Discrete Tensors: The PhAST Pipeline</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../05_differentiation_and_inverse.html">Differentiable Mechanics and Inverse Parameter Discovery</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../05a_backpropagation_step_by_step.html">Backpropagation through a stepped update</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../06_learning_adapter.html">Train, save, reload, adapters, and checked proposals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../07_practice_references.html">Practice, Solutions, Glossary, and References</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../further_practice.html">Detailed notebooks and further practice</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../labs/00_why_average_predictions_can_fail.html">Lab 00: Branch Selection &amp; Energy-Based Objectives in Physics-Informed Learning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../labs/01_phast_tiny_evolving_fracture.html">Run and interpret a small PhAST fracture calculation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../labs/02_degradation_autograd.html">Lab 02: Differentiating Degradation: Analytical, Autograd, &amp; Finite Differences</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../labs/03_tiny_derivative_inverse_toy.html">Lab 03: Differentiable Mechanics &amp; Inverse Parameter Identification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../labs/04_train_save_reload_adapter.html">Train, save, reload, and compare a field model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../labs/05_hybrid_reference_correction.html">Assess a proposal and use a reference correction</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Optional inverse experiments</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../research/index.html">From gradients to reliable inverse experiments</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../research/01_geometry.html">Representing particles and testing their geometry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../research/02_observations.html">From measurements to a loss</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../research/03_derivatives.html">Verify a derivative before interpreting an update</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../research/03_history_visual.html">Why a fracture solver needs a memory-aware derivative</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../research/03_history.html">Differentiating fracture: memory, switches and useful limits</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../research/04_recovery.html">Why a correct gradient can give slow or ambiguous recovery</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../research/05_learning.html">A useful role for learning: propose, solve and check</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../research/06_applications.html">Designing a fracture-inverse research programme</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../research/08_visual_lab.html">Watch the particle, the crack and the loss</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../research/07_results.html">Retained computations and reproducibility</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../research/notebooks/inverse_experiments.html">From gradients to reliable inverse experiments</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/source/book/classroom/01_simulate_fracture.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/CEMS-Lab/autumn-school" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/CEMS-Lab/autumn-school/issues/new?title=Issue%20on%20page%20%2Fclassroom/01_simulate_fracture.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/classroom/01_simulate_fracture.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Practical 1: Simulate a crack crossing a plate</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-specimen-and-physical-model">1. The specimen and physical model</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#open-the-inputs">Open the inputs</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#inspect-the-mesh-supports-and-load">Inspect the mesh, supports and load</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-the-plate-calculation">2. Run the plate calculation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#follow-the-computed-crack">3. Follow the computed crack</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#animate-the-result">Animate the result</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpret-the-fields-and-energy">4. Interpret the fields and energy</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#read-and-export-a-results-table">Read and export a results table</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#worked-example-p1-r01-a-short-propagating-crack">Worked example · P1-R01 · A short propagating crack</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#animation-p1-a01-geometry-to-damage">Animation · P1-A01 · Geometry to damage</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-takeaways">Key takeaways</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1-resolve-the-time-and-length-scales">Exercise 1: Resolve the time and length scales</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2-measure-a-crack-descriptor-from-saved-fields">Exercise 2: Measure a crack descriptor from saved fields</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#continue-studying">Continue studying</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#session-timing">Session timing</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="practical-1-simulate-a-crack-crossing-a-plate">
+<h1>Practical 1: Simulate a crack crossing a plate<a class="headerlink" href="#practical-1-simulate-a-crack-crossing-a-plate" title="Link to this heading">#</a></h1>
+<p><strong>Learning objective.</strong> Import a notched-plate mesh, understand its supports and loading, run a short dynamic PhAST calculation, and interpret the crack evolution and energy components.</p>
+<p><strong>Predict first.</strong> Under vertical tension, where will the crack grow from a horizontal notch, and how might its opening change the stored elastic energy?</p>
+<div class="badge-row">
+<a class="badge-colab" href="https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/study/classroom/01_simulate_fracture.ipynb"><img src="../_static/colab-badge.svg" alt="Open in Colab"/></a>
+<a class="badge-link" href="../../notebooks/study/classroom/01_simulate_fracture.ipynb">Download Practice Notebook</a>
+<a class="badge-link" href="../../notebooks/solutions/classroom/01_simulate_fracture.ipynb">Download with Worked Solutions</a>
+<a class="badge-link" href="../../SETUP.md">Environment Setup</a>
+</div>
+<p>Work through the cells in order. Expand setup and figure details when you want to inspect the complete implementation.</p>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#@title Set up the course environment { display-mode: &quot;form&quot; }</span>
+<span class="c1"># Environment setup is measured separately from the classroom computation.</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">importlib.metadata</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">subprocess</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+
+<span class="n">setup_started</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">google.colab</span>
+    <span class="n">IN_COLAB</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="n">IN_COLAB</span> <span class="o">=</span> <span class="kc">False</span>
+
+<span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">sys</span><span class="o">.</span><span class="n">version_info</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span> <span class="o">&lt;</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">13</span><span class="p">):</span>
+    <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;This PhAST snapshot supports Python 3.10–3.12. Select a compatible runtime; see Environment Setup.&quot;</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">locate_course_root</span><span class="p">():</span>
+    <span class="k">for</span> <span class="n">base</span> <span class="ow">in</span> <span class="p">(</span><span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">(),</span> <span class="o">*</span><span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">()</span><span class="o">.</span><span class="n">parents</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">candidate</span> <span class="ow">in</span> <span class="p">(</span><span class="n">base</span><span class="p">,</span> <span class="n">base</span> <span class="o">/</span> <span class="s2">&quot;autumn-school&quot;</span><span class="p">,</span> <span class="n">base</span> <span class="o">/</span> <span class="s2">&quot;teaching/ukacm_autumn_school_2026&quot;</span><span class="p">):</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">candidate</span> <span class="o">/</span> <span class="s2">&quot;notebooks/day2_helpers&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">is_dir</span><span class="p">()</span> <span class="ow">and</span> <span class="p">(</span><span class="n">candidate</span> <span class="o">/</span> <span class="s2">&quot;vendor/PhAST/src&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">is_dir</span><span class="p">():</span>
+                <span class="k">return</span> <span class="n">candidate</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span>
+    <span class="k">return</span> <span class="kc">None</span>
+
+<span class="n">COURSE_ROOT</span> <span class="o">=</span> <span class="n">locate_course_root</span><span class="p">()</span>
+<span class="k">if</span> <span class="n">COURSE_ROOT</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">IN_COLAB</span><span class="p">:</span>
+    <span class="n">COURSE_ROOT</span> <span class="o">=</span> <span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">()</span> <span class="o">/</span> <span class="s2">&quot;autumn-school&quot;</span>
+    <span class="k">if</span> <span class="n">COURSE_ROOT</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;An incomplete autumn-school folder exists. Start a fresh runtime or select the complete course folder.&quot;</span><span class="p">)</span>
+    <span class="c1"># A release tag or full commit can be supplied for a fixed course edition.</span>
+    <span class="n">course_ref</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;PHAST_COURSE_REF&quot;</span><span class="p">,</span> <span class="s2">&quot;main&quot;</span><span class="p">)</span>
+    <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="s2">&quot;git&quot;</span><span class="p">,</span> <span class="s2">&quot;init&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">COURSE_ROOT</span><span class="p">)],</span> <span class="n">check</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">capture_output</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="s2">&quot;git&quot;</span><span class="p">,</span> <span class="s2">&quot;-C&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">COURSE_ROOT</span><span class="p">),</span> <span class="s2">&quot;remote&quot;</span><span class="p">,</span> <span class="s2">&quot;add&quot;</span><span class="p">,</span> <span class="s2">&quot;origin&quot;</span><span class="p">,</span> <span class="s2">&quot;https://github.com/CEMS-Lab/autumn-school.git&quot;</span><span class="p">],</span> <span class="n">check</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="s2">&quot;git&quot;</span><span class="p">,</span> <span class="s2">&quot;-C&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">COURSE_ROOT</span><span class="p">),</span> <span class="s2">&quot;fetch&quot;</span><span class="p">,</span> <span class="s2">&quot;--depth&quot;</span><span class="p">,</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;origin&quot;</span><span class="p">,</span> <span class="n">course_ref</span><span class="p">],</span> <span class="n">check</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">180</span><span class="p">)</span>
+    <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="s2">&quot;git&quot;</span><span class="p">,</span> <span class="s2">&quot;-C&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">COURSE_ROOT</span><span class="p">),</span> <span class="s2">&quot;checkout&quot;</span><span class="p">,</span> <span class="s2">&quot;--detach&quot;</span><span class="p">,</span> <span class="s2">&quot;FETCH_HEAD&quot;</span><span class="p">],</span> <span class="n">check</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">capture_output</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">COURSE_ROOT</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span><span class="s2">&quot;Open the notebook from the complete course folder, including notebooks/, configs/ and vendor/. See Environment Setup.&quot;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">IN_COLAB</span><span class="p">:</span>
+    <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="n">sys</span><span class="o">.</span><span class="n">executable</span><span class="p">,</span> <span class="s2">&quot;-m&quot;</span><span class="p">,</span> <span class="s2">&quot;pip&quot;</span><span class="p">,</span> <span class="s2">&quot;install&quot;</span><span class="p">,</span> <span class="s2">&quot;--quiet&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">COURSE_ROOT</span> <span class="o">/</span> <span class="s2">&quot;vendor/PhAST&quot;</span><span class="p">),</span> <span class="s2">&quot;nbformat&quot;</span><span class="p">,</span> <span class="s2">&quot;nbclient&quot;</span><span class="p">,</span> <span class="s2">&quot;nbconvert&quot;</span><span class="p">],</span> <span class="n">check</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">600</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">package_dir</span> <span class="ow">in</span> <span class="p">(</span><span class="n">COURSE_ROOT</span> <span class="o">/</span> <span class="s2">&quot;vendor/PhAST/src&quot;</span><span class="p">,</span> <span class="n">COURSE_ROOT</span> <span class="o">/</span> <span class="s2">&quot;notebooks&quot;</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="n">package_dir</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="p">:</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">package_dir</span><span class="p">))</span>
+
+<span class="n">revision</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="s2">&quot;git&quot;</span><span class="p">,</span> <span class="s2">&quot;-C&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">COURSE_ROOT</span><span class="p">),</span> <span class="s2">&quot;rev-parse&quot;</span><span class="p">,</span> <span class="s2">&quot;HEAD&quot;</span><span class="p">],</span> <span class="n">text</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">capture_output</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">package_versions</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">package</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;torch&quot;</span><span class="p">,</span> <span class="s2">&quot;numpy&quot;</span><span class="p">,</span> <span class="s2">&quot;scipy&quot;</span><span class="p">,</span> <span class="s2">&quot;matplotlib&quot;</span><span class="p">,</span> <span class="s2">&quot;nbformat&quot;</span><span class="p">):</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">package_versions</span><span class="p">[</span><span class="n">package</span><span class="p">]</span> <span class="o">=</span> <span class="n">importlib</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">version</span><span class="p">(</span><span class="n">package</span><span class="p">)</span>
+    <span class="k">except</span> <span class="n">importlib</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">PackageNotFoundError</span><span class="p">:</span>
+        <span class="n">package_versions</span><span class="p">[</span><span class="n">package</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;install using Environment Setup&quot;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">io</span><span class="w"> </span><span class="kn">import</span> <span class="n">BytesIO</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">Image</span><span class="p">,</span> <span class="n">display</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">day2_helpers</span><span class="w"> </span><span class="kn">import</span> <span class="n">assets_dir</span>
+
+<span class="n">torch</span><span class="o">.</span><span class="n">set_default_dtype</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="o">.</span><span class="n">update</span><span class="p">({</span>
+    <span class="s2">&quot;font.family&quot;</span><span class="p">:</span> <span class="s2">&quot;sans-serif&quot;</span><span class="p">,</span> <span class="s2">&quot;font.sans-serif&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;DejaVu Sans&quot;</span><span class="p">,</span> <span class="s2">&quot;Arial&quot;</span><span class="p">,</span> <span class="s2">&quot;Helvetica&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;font.size&quot;</span><span class="p">:</span> <span class="mi">11</span><span class="p">,</span> <span class="s2">&quot;axes.labelsize&quot;</span><span class="p">:</span> <span class="mi">11</span><span class="p">,</span> <span class="s2">&quot;axes.titlesize&quot;</span><span class="p">:</span> <span class="mi">12</span><span class="p">,</span>
+    <span class="s2">&quot;xtick.labelsize&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span> <span class="s2">&quot;ytick.labelsize&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span> <span class="s2">&quot;legend.fontsize&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="s2">&quot;figure.titlesize&quot;</span><span class="p">:</span> <span class="mi">13</span><span class="p">,</span> <span class="s2">&quot;figure.dpi&quot;</span><span class="p">:</span> <span class="mi">150</span><span class="p">,</span> <span class="s2">&quot;axes.grid&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="s2">&quot;grid.alpha&quot;</span><span class="p">:</span> <span class="mf">0.3</span><span class="p">,</span> <span class="s2">&quot;grid.linestyle&quot;</span><span class="p">:</span> <span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="s2">&quot;lines.linewidth&quot;</span><span class="p">:</span> <span class="mf">1.8</span><span class="p">,</span>
+<span class="p">})</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">display_figure</span><span class="p">(</span><span class="n">figure</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">150</span><span class="p">,</span> <span class="n">alt</span><span class="o">=</span><span class="s2">&quot;Rendered teaching figure&quot;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Retain figures for reading in the book and in a fresh notebook session.&quot;&quot;&quot;</span>
+    <span class="n">buffer</span> <span class="o">=</span> <span class="n">BytesIO</span><span class="p">()</span>
+    <span class="n">figure</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;png&quot;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="n">dpi</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s2">&quot;tight&quot;</span><span class="p">)</span>
+    <span class="n">display</span><span class="p">(</span><span class="n">Image</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">buffer</span><span class="o">.</span><span class="n">getvalue</span><span class="p">(),</span> <span class="n">alt</span><span class="o">=</span><span class="n">alt</span><span class="p">))</span>
+
+<span class="c1"># Include dependency imports and plotting configuration in the setup duration.</span>
+<span class="n">setup_receipt</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;environment&quot;</span><span class="p">:</span> <span class="s2">&quot;Google Colab&quot;</span> <span class="k">if</span> <span class="n">IN_COLAB</span> <span class="k">else</span> <span class="s2">&quot;local&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;python&quot;</span><span class="p">:</span> <span class="n">sys</span><span class="o">.</span><span class="n">version</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">0</span><span class="p">],</span>
+    <span class="s2">&quot;course_revision&quot;</span><span class="p">:</span> <span class="n">revision</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">if</span> <span class="n">revision</span><span class="o">.</span><span class="n">returncode</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="s2">&quot;downloaded archive&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;versions&quot;</span><span class="p">:</span> <span class="n">package_versions</span><span class="p">,</span>
+    <span class="s2">&quot;setup_seconds&quot;</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span> <span class="o">-</span> <span class="n">setup_started</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
+<span class="p">}</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">setup_receipt</span><span class="p">)</span>
+
+<span class="n">session_started</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
+<span class="n">torch</span><span class="o">.</span><span class="n">set_num_threads</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;environment&#39;: &#39;local&#39;, &#39;python&#39;: &#39;3.10.18&#39;, &#39;course_revision&#39;: &#39;48ae30794de3da1f4242bfbefff124dfd0d9a594&#39;, &#39;versions&#39;: {&#39;torch&#39;: &#39;2.8.0&#39;, &#39;numpy&#39;: &#39;2.2.6&#39;, &#39;scipy&#39;: &#39;1.14.1&#39;, &#39;matplotlib&#39;: &#39;3.10.8&#39;, &#39;nbformat&#39;: &#39;5.10.4&#39;}, &#39;setup_seconds&#39;: 1.103}
+</pre></div>
+</div>
+</div>
+</div>
+<section id="the-specimen-and-physical-model">
+<h2>1. The specimen and physical model<a class="headerlink" href="#the-specimen-and-physical-model" title="Link to this heading">#</a></h2>
+<p>The 40 mm square glass plate has a 20 mm geometric notch. The notch is already a cut in the imported mesh. The phase-field variable starts at <span class="math notranslate nohighlight">\(d=0\)</span> and increases towards <span class="math notranslate nohighlight">\(d=1\)</span> as a diffuse crack forms in the remaining ligament.</p>
+<p>PhAST solves the discrete balance of momentum with an explicit central-difference update, then an implicit damage update:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf M\ddot{\mathbf u}+\mathbf f_{\mathrm{int}}(\mathbf u,d)=\mathbf f_{\mathrm{ext}},
+\qquad d^{n+1}\in[d^n,1].\]</div>
+<p>Here <span class="math notranslate nohighlight">\(\mathbf M\)</span> is the mass matrix, <span class="math notranslate nohighlight">\(\mathbf u\)</span> is displacement and <span class="math notranslate nohighlight">\(n\)</span> indexes physical time. The spectral split separates tensile and compressive elastic energies. The AT2 energy is</p>
+<div class="math notranslate nohighlight">
+\[\mathcal E(\mathbf u,d)=\int_\Omega
+\left[g(d)\psi^+(\boldsymbol\varepsilon)+\psi^-(\boldsymbol\varepsilon)
++\frac{G_c}{2\ell}d^2+\frac{G_c\ell}{2}|\nabla d|^2\right]\,\mathrm d\Omega,\]</div>
+<p>where <span class="math notranslate nohighlight">\(g(d)=(1-\eta)(1-d)^2+\eta\)</span>, <span class="math notranslate nohighlight">\(G_c\)</span> is fracture toughness, <span class="math notranslate nohighlight">\(\ell\)</span> is the regularisation length and <span class="math notranslate nohighlight">\(\eta\)</span> is residual stiffness. The history of tensile energy supplies the irreversible damage update.</p>
+<section id="open-the-inputs">
+<h3>Open the inputs<a class="headerlink" href="#open-the-inputs" title="Link to this heading">#</a></h3>
+<p>The portable YAML file contains the material, supports, loading and numerical settings. Its mesh is the checked public PhAST B3 example. Keeping that mesh fixed makes the calculation reproducible across computers.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">day2_helpers.dynamic_practical</span><span class="w"> </span><span class="kn">import</span> <span class="n">case_files</span><span class="p">,</span> <span class="n">load_case</span><span class="p">,</span> <span class="n">setup_figure</span>
+<span class="n">config_path</span><span class="p">,</span> <span class="n">mesh_path</span> <span class="o">=</span> <span class="n">case_files</span><span class="p">()</span>
+<span class="n">config</span> <span class="o">=</span> <span class="n">load_case</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Mesh:&quot;</span><span class="p">,</span> <span class="n">mesh_path</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Material:&quot;</span><span class="p">,</span> <span class="n">config</span><span class="p">[</span><span class="s2">&quot;material&quot;</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Solver:&quot;</span><span class="p">,</span> <span class="n">config</span><span class="p">[</span><span class="s2">&quot;solver&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mesh: mesh.msh
+Material: {&#39;E&#39;: 32000.0, &#39;nu&#39;: 0.2, &#39;Gc&#39;: 0.003, &#39;l0&#39;: 0.5, &#39;rho&#39;: 2.45e-09, &#39;energy_split&#39;: &#39;spectral&#39;, &#39;pf_model&#39;: &#39;AT2&#39;, &#39;eta_residual&#39;: 1e-06, &#39;plane_stress&#39;: False}
+Solver: {&#39;solver_type&#39;: &#39;explicit&#39;, &#39;time_integrator&#39;: &#39;central_difference&#39;, &#39;dt_safety&#39;: 0.8, &#39;damage_every&#39;: 1, &#39;bounds_method&#39;: &#39;projected_cg&#39;, &#39;use_multigrid&#39;: False, &#39;preconditioner&#39;: &#39;jacobi&#39;, &#39;damage_tol&#39;: 1e-05}
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="inspect-the-mesh-supports-and-load">
+<h3>Inspect the mesh, supports and load<a class="headerlink" href="#inspect-the-mesh-supports-and-load" title="Link to this heading">#</a></h3>
+<p>The left and right edges have <span class="math notranslate nohighlight">\(u_x=0\)</span>. The top and bottom move vertically by <span class="math notranslate nohighlight">\(+0.002\,s(t)\)</span> mm and <span class="math notranslate nohighlight">\(-0.002\,s(t)\)</span> mm. The smooth ramp <span class="math notranslate nohighlight">\(s(t)\)</span> rises from zero to one over <span class="math notranslate nohighlight">\(20\,\mu\)</span>s, then remains constant until <span class="math notranslate nohighlight">\(100\,\mu\)</span>s. The 0.5 mm regularisation length determines the diffuse crack-band scale.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">setup_figure</span><span class="p">()</span>
+<span class="n">display_figure</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">alt</span><span class="o">=</span><span class="s2">&quot;B3 imported triangular mesh, geometric notch, supports and smooth opening ramp&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<img alt="Computed field or curve from Practical 1: Simulate a crack crossing a plate" src="../_images/889f2997f3719de27e68b2610ca121ada4689a736d69d044d44a692884879d2f.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="run-the-plate-calculation">
+<h2>2. Run the plate calculation<a class="headerlink" href="#run-the-plate-calculation" title="Link to this heading">#</a></h2>
+<p>Run one baseline calculation on the CPU. The public solver updates momentum and damage at each time step; the projected damage solve enforces <span class="math notranslate nohighlight">\(d^{n+1}\ge d^n\)</span>. Numerical checks accompany every update. The calculation exports sampled fields, energy components and a results table into its own output folder.</p>
+<p>The helper starts the public PhAST command with the visible configuration. Expand its Python source to inspect the subprocess, residual checks and output routines. The solver subprocess has a 95-second safety cap; the complete uninterrupted practical is tested against a 120-second computation budget after environment setup.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">tempfile</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">day2_helpers.dynamic_practical</span><span class="w"> </span><span class="kn">import</span> <span class="n">run_case</span><span class="p">,</span> <span class="n">load_results</span>
+<span class="n">practical_dir</span> <span class="o">=</span> <span class="n">assets_dir</span><span class="p">()</span> <span class="o">/</span> <span class="s2">&quot;classroom&quot;</span> <span class="o">/</span> <span class="s2">&quot;01_dynamic&quot;</span>
+<span class="n">practical_dir</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">output_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">tempfile</span><span class="o">.</span><span class="n">mkdtemp</span><span class="p">(</span><span class="n">prefix</span><span class="o">=</span><span class="s2">&quot;b3-&quot;</span><span class="p">,</span> <span class="nb">dir</span><span class="o">=</span><span class="n">practical_dir</span><span class="p">))</span> <span class="o">/</span> <span class="s2">&quot;results&quot;</span>
+<span class="n">output_dir</span> <span class="o">=</span> <span class="n">run_case</span><span class="p">(</span><span class="n">output_dir</span><span class="p">,</span> <span class="n">timeout_seconds</span><span class="o">=</span><span class="mi">95</span><span class="p">)</span>
+<span class="n">fields</span><span class="p">,</span> <span class="n">summary</span> <span class="o">=</span> <span class="n">load_results</span><span class="p">(</span><span class="n">output_dir</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">({</span><span class="n">key</span><span class="p">:</span> <span class="n">summary</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;nodes&quot;</span><span class="p">,</span> <span class="s2">&quot;elements&quot;</span><span class="p">,</span> <span class="s2">&quot;steps&quot;</span><span class="p">,</span> <span class="s2">&quot;sampled_states&quot;</span><span class="p">,</span> <span class="s2">&quot;all_checks_pass&quot;</span><span class="p">]})</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;nodes&#39;: 1091, &#39;elements&#39;: 1940, &#39;steps&#39;: 6116, &#39;sampled_states&#39;: 154, &#39;all_checks_pass&#39;: True}
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="follow-the-computed-crack">
+<h2>3. Follow the computed crack<a class="headerlink" href="#follow-the-computed-crack" title="Link to this heading">#</a></h2>
+<p>The images use the same damage colour scale throughout. Locate the initial notch, then follow the high-damage band into the remaining 20 mm ligament. The four fields below are selected from the saved calculation.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">day2_helpers.dynamic_practical</span><span class="w"> </span><span class="kn">import</span> <span class="n">result_figure</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">result_figure</span><span class="p">(</span><span class="n">output_dir</span><span class="p">)</span>
+<span class="n">display_figure</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">alt</span><span class="o">=</span><span class="s2">&quot;Four actual B3 damage states showing initiation and propagation across the ligament&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="Computed field or curve from Practical 1: Simulate a crack crossing a plate" src="../_images/ada91b3103171ac9dee459425874d7a98e3041f8e553af4b711d35cec2ba3316.png" />
+</div>
+</div>
+<section id="animate-the-result">
+<h3>Animate the result<a class="headerlink" href="#animate-the-result" title="Link to this heading">#</a></h3>
+<p>Each frame below is a sampled solver state. Frames emphasise the first <span class="math notranslate nohighlight">\(40\,\mu\)</span>s, when the crack initiates and traverses the plate, and include the final <span class="math notranslate nohighlight">\(100\,\mu\)</span>s hold state. Playback speed is selected for viewing.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">day2_helpers.dynamic_practical</span><span class="w"> </span><span class="kn">import</span> <span class="n">make_animation</span>
+<span class="n">gif_path</span> <span class="o">=</span> <span class="n">make_animation</span><span class="p">(</span><span class="n">output_dir</span><span class="p">,</span> <span class="n">frames</span><span class="o">=</span><span class="mi">40</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">Image</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">gif_path</span><span class="p">),</span> <span class="n">alt</span><span class="o">=</span><span class="s2">&quot;Computed B3 crack propagation from notch to plate edge&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="Computed field or curve from Practical 1: Simulate a crack crossing a plate" src="../_images/5a4fa1452fa398cee76b12654b47f7013c552ef61c3a021e888c0a692d56548c.gif" />
+</div>
+</div>
+</section>
+</section>
+<section id="interpret-the-fields-and-energy">
+<h2>4. Interpret the fields and energy<a class="headerlink" href="#interpret-the-fields-and-energy" title="Link to this heading">#</a></h2>
+<p>Stored elastic energy changes as the plate is loaded and the crack opens. Fracture energy measures the diffuse crack contribution, and kinetic energy describes motion. These are energies per unit specimen thickness. A complete energy balance additionally requires the work done at the moving boundaries.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">day2_helpers.dynamic_practical</span><span class="w"> </span><span class="kn">import</span> <span class="n">energy_figure</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">energy_figure</span><span class="p">(</span><span class="n">output_dir</span><span class="p">)</span>
+<span class="n">display_figure</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">alt</span><span class="o">=</span><span class="s2">&quot;Stored elastic, fracture and kinetic energy versus physical time&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="Computed field or curve from Practical 1: Simulate a crack crossing a plate" src="../_images/5c38e6155f4a831331bc741f1776cb21489474906a3d915574d1c1e92c7eb773.png" />
+</div>
+</div>
+<section id="read-and-export-a-results-table">
+<h3>Read and export a results table<a class="headerlink" href="#read-and-export-a-results-table" title="Link to this heading">#</a></h3>
+<p>The CSV records the time, maximum damage, displacement and forward extent of nodes with <span class="math notranslate nohighlight">\(d\ge0.95\)</span> within a 2 mm strip along the ligament. The extent is a threshold-dependent, mesh-resolved descriptor. The NPZ stores the mesh and sampled displacement/damage fields for further plotting; Zarr stores the public solver’s trajectory outputs.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">csv</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">HTML</span>
+<span class="k">with</span> <span class="p">(</span><span class="n">output_dir</span> <span class="o">/</span> <span class="s2">&quot;results.csv&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">open</span><span class="p">()</span> <span class="k">as</span> <span class="n">stream</span><span class="p">:</span>
+    <span class="n">rows</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">csv</span><span class="o">.</span><span class="n">DictReader</span><span class="p">(</span><span class="n">stream</span><span class="p">))</span>
+<span class="n">selected_rows</span> <span class="o">=</span> <span class="p">[</span><span class="n">rows</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">rows</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)]</span>
+<span class="n">head</span> <span class="o">=</span> <span class="s2">&quot;&lt;tr&gt;&lt;th&gt;Time [µs]&lt;/th&gt;&lt;th&gt;Maximum d&lt;/th&gt;&lt;th&gt;Extent [mm]&lt;/th&gt;&lt;/tr&gt;&quot;</span>
+<span class="n">body</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&lt;tr&gt;&lt;td&gt;</span><span class="si">{</span><span class="nb">float</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="s1">&#39;time_us&#39;</span><span class="p">])</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&lt;/td&gt;&lt;td&gt;</span><span class="si">{</span><span class="nb">float</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="s1">&#39;maximum_damage&#39;</span><span class="p">])</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&lt;/td&gt;&lt;td&gt;</span><span class="si">{</span><span class="nb">float</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="s1">&#39;extent_d095_mm&#39;</span><span class="p">])</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&lt;/td&gt;&lt;/tr&gt;&quot;</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">selected_rows</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">HTML</span><span class="p">(</span><span class="s2">&quot;&lt;table&gt;&quot;</span> <span class="o">+</span> <span class="n">head</span> <span class="o">+</span> <span class="n">body</span> <span class="o">+</span> <span class="s2">&quot;&lt;/table&gt;&quot;</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Saved files:&quot;</span><span class="p">,</span> <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">output_dir</span><span class="o">.</span><span class="n">iterdir</span><span class="p">()</span> <span class="k">if</span> <span class="n">p</span><span class="o">.</span><span class="n">is_file</span><span class="p">())))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table><tr><th>Time [µs]</th><th>Maximum d</th><th>Extent [mm]</th></tr><tr><td>0.00</td><td>0.000</td><td>0.00</td></tr><tr><td>19.61</td><td>1.000</td><td>4.60</td></tr><tr><td>39.88</td><td>1.000</td><td>20.00</td></tr><tr><td>59.51</td><td>1.000</td><td>20.00</td></tr><tr><td>79.79</td><td>1.000</td><td>20.00</td></tr><tr><td>100.00</td><td>1.000</td><td>20.00</td></tr></table></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Saved files: crack_propagation.gif, diagnostics.csv, results.csv, run.log, runtime.json, summary.json, trajectory.npz
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="worked-example-p1-r01-a-short-propagating-crack">
+<h3>Worked example · P1-R01 · A short propagating crack<a class="headerlink" href="#worked-example-p1-r01-a-short-propagating-crack" title="Link to this heading">#</a></h3>
+<p>The computed fields above follow initiation at the geometric notch and growth through the remaining ligament. Read the field sequence together with the elastic, fracture and kinetic energy curves. The fixed-mesh half-time-step comparison records temporal sensitivity; spatial refinement is a further study.</p>
+</section>
+<section id="animation-p1-a01-geometry-to-damage">
+<h3>Animation · P1-A01 · Geometry to damage<a class="headerlink" href="#animation-p1-a01-geometry-to-damage" title="Link to this heading">#</a></h3>
+<p>The mesh and support diagram introduces the specimen. The 40-frame GIF selects actual saved states through initiation and propagation, then includes the final hold state. The static snapshots and numerical CSV remain available for independent interpretation.</p>
+<p>For a new geometry, create the mesh with Gmsh, identify boundary sets, then follow the same material → supports → loading → solve → inspect sequence. The supplied public mesh makes this first practical short and reproducible.</p>
+</section>
+</section>
+<section id="key-takeaways">
+<h2>Key takeaways<a class="headerlink" href="#key-takeaways" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Geometry, material properties, supports and loading jointly define the fracture problem.</p></li>
+<li><p>The phase field resolves a continuous damage band whose width depends on regularisation and mesh resolution.</p></li>
+<li><p>The dynamic calculation couples explicit momentum updates with constrained implicit damage updates.</p></li>
+<li><p>Fields, animation, energy curves and numerical tables describe complementary aspects of one simulation.</p></li>
+</ul>
+</section>
+<section id="exercises">
+<h2>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
+<p>Try each question before opening the hint or worked solution. Keep the original calculation as your reference.</p>
+<section id="exercise-1-resolve-the-time-and-length-scales">
+<h3>Exercise 1: Resolve the time and length scales<a class="headerlink" href="#exercise-1-resolve-the-time-and-length-scales" title="Link to this heading">#</a></h3>
+<p>How many numerical updates occur during the <span class="math notranslate nohighlight">\(20\,\mu\)</span>s ramp? Compare the regularisation length with the plate width. Explain why the smallest mesh element affects explicit computational cost.</p>
+<div class="dropdown course-hint admonition">
+<p class="admonition-title">Hint 1</p>
+<p>Read <code class="docutils literal notranslate"><span class="pre">summary['dt_seconds']</span></code> and use <span class="math notranslate nohighlight">\(N_{\mathrm{ramp}}\simeq t_{\mathrm{ramp}}/\Delta t\)</span>. The explicit stability step scales with element size divided by elastic-wave speed.</p>
+</div>
+<div class="dropdown course-solution admonition">
+<p class="admonition-title">Worked solution 1</p>
+<p>With <span class="math notranslate nohighlight">\(\Delta t\simeq1.6353\times10^{-8}\)</span> s, the ramp spans approximately 1,223 updates. The regularisation length is <span class="math notranslate nohighlight">\(0.5/40=0.0125\)</span> of the plate width. A smaller element reduces the stable time step and increases the update count for the same physical duration. Resolution along the whole crack path must also be considered when assessing a mesh.</p>
+</div>
+</section>
+<section id="exercise-2-measure-a-crack-descriptor-from-saved-fields">
+<h3>Exercise 2: Measure a crack descriptor from saved fields<a class="headerlink" href="#exercise-2-measure-a-crack-descriptor-from-saved-fields" title="Link to this heading">#</a></h3>
+<p>Use the saved fields to compare the forward extent obtained with thresholds <span class="math notranslate nohighlight">\(d\ge0.5\)</span> and <span class="math notranslate nohighlight">\(d\ge0.95\)</span>. At an intermediate time, explain why the two values can differ. Reuse the completed simulation.</p>
+<div class="dropdown course-hint admonition">
+<p class="admonition-title">Hint 2</p>
+<p>Select nodes with <span class="math notranslate nohighlight">\(x&gt;20\)</span> mm and <span class="math notranslate nohighlight">\(|y-20|\le1\)</span> mm, then apply each threshold to one row of <code class="docutils literal notranslate"><span class="pre">fields['damage']</span></code>. Subtract 20 mm from the largest selected x-coordinate.</p>
+</div>
+<div class="dropdown course-solution admonition">
+<p class="admonition-title">Worked solution 2</p>
+<p>The lower threshold includes the partially damaged process zone ahead of the highly damaged band, so its extent can be greater. Both values are discrete descriptors of a diffuse field. Report the threshold, strip and mesh when presenting either measure as a crack-length estimate.</p>
+</div>
+</section>
+</section>
+<section id="continue-studying">
+<h2>Continue studying<a class="headerlink" href="#continue-studying" title="Link to this heading">#</a></h2>
+<p><a class="reference external" href="https://github.com/CEMS-Lab/autumn-school/blob/main/notebooks/extensions/01_dynamic_plate_crossing.ipynb">Detailed notebook 01</a></p>
+<p>The complete source, attribution and bundled licences remain in the <a class="reference external" href="https://github.com/CEMS-Lab/autumn-school/blob/main/ATTRIBUTION.md">course repository</a>.</p>
+<section id="session-timing">
+<h3>Session timing<a class="headerlink" href="#session-timing" title="Link to this heading">#</a></h3>
+<p>Elapsed session time includes reading and pauses between cells. The course runner measures uninterrupted computation separately from installation.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">session_seconds</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span> <span class="o">-</span> <span class="n">session_started</span>
+<span class="nb">print</span><span class="p">({</span><span class="s2">&quot;setup_seconds&quot;</span><span class="p">:</span> <span class="n">setup_receipt</span><span class="p">[</span><span class="s2">&quot;setup_seconds&quot;</span><span class="p">],</span>
+       <span class="s2">&quot;elapsed_session_seconds&quot;</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">session_seconds</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
+       <span class="s2">&quot;environment&quot;</span><span class="p">:</span> <span class="n">setup_receipt</span><span class="p">[</span><span class="s2">&quot;environment&quot;</span><span class="p">],</span> <span class="s2">&quot;torch&quot;</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">__version__</span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;setup_seconds&#39;: 1.103, &#39;elapsed_session_seconds&#39;: 24.61, &#39;environment&#39;: &#39;local&#39;, &#39;torch&#39;: &#39;2.8.0&#39;}
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../lectures/03_hybrid_learning.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Lecture 3: Learning inside a numerical workflow</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="02_gradients_and_recovery.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Practical 2: Gradients and material recovery</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-specimen-and-physical-model">1. The specimen and physical model</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#open-the-inputs">Open the inputs</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#inspect-the-mesh-supports-and-load">Inspect the mesh, supports and load</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-the-plate-calculation">2. Run the plate calculation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#follow-the-computed-crack">3. Follow the computed crack</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#animate-the-result">Animate the result</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpret-the-fields-and-energy">4. Interpret the fields and energy</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#read-and-export-a-results-table">Read and export a results table</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#worked-example-p1-r01-a-short-propagating-crack">Worked example · P1-R01 · A short propagating crack</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#animation-p1-a01-geometry-to-damage">Animation · P1-A01 · Geometry to damage</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-takeaways">Key takeaways</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1-resolve-the-time-and-length-scales">Exercise 1: Resolve the time and length scales</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2-measure-a-crack-descriptor-from-saved-fields">Exercise 2: Measure a crack descriptor from saved fields</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#continue-studying">Continue studying</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#session-timing">Session timing</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    <div class="phast-course-credit">
+  <!-- Course material prepared by Allamaprabhu Ani and Sathiskumar A. Ponnusami, CEMS-Lab, 2026. -->
+  <p class="phast-course-creators">Prepared by <span>Allamaprabhu Ani and Sathiskumar A. Ponnusami</span></p>
+  <p class="phast-course-purpose">© 2026
+    <a href="https://github.com/CEMS-Lab">CEMS-Lab</a>
+    <span aria-hidden="true"> · </span>
+    Prepared for the
+    <a href="https://www.ukacm-school.uk/home">UKACM Autumn School 2026</a>.
+  </p>
+</div>
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="phast-discoveries" aria-label="Optional PhAST discoveries">
+  <details class="phast-discovery" id="phast-gradient-discovery">
+    <summary aria-label="PhAST ∇: a gradient discovery">PhAST ∇</summary>
+    <div class="phast-discovery-body">
+      <p><strong>No neural network required.</strong></p>
+      <p>A differentiable simulation can provide parameter sensitivities on
+        its own. The chain rule was here before the neural network.</p>
+    </div>
+  </details>
+  <details class="phast-discovery" id="phast-backward-discovery">
+    <summary><code>.backward()</code></summary>
+    <div class="phast-discovery-body">
+      <p><strong>A pocket chain rule.</strong></p>
+      <p>Let <var>q</var> = <var>θ</var><sup>2</sup> and
+        <var>L</var> = ½(<var>q</var> − 4)<sup>2</sup>.
+        At <var>θ</var> = 1, which way does the loss decrease locally?</p>
+      <details class="phast-pocket-answer">
+        <summary>Follow the derivative</summary>
+        <p>d<var>L</var>/d<var>θ</var> = (<var>q</var> − 4) · 2<var>θ</var> = −6.
+          A sufficiently small positive change in <var>θ</var> decreases
+          the loss. The gradient points uphill; a descent step goes against it.</p>
+      </details>
+    </div>
+  </details>
+</div>
+
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

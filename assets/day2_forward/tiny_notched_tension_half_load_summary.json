@@ -72,7 +72,7 @@
     "nodes": 8385,
     "elements": 16384,
     "load_steps": 60,
-    "solve_seconds": 25.275058125000214,
+    "solve_seconds": 25.142546457995195,
     "incremental_damage_outside_sum": 273.8038560854412,
     "incremental_damage_outside_max": 0.07542499324892749,
     "final_damage_outside_max": 0.8862718966501655,
@@ -91,7 +91,7 @@
       "stagger_residual": 1.447140467868551e-13,
       "boundary_value_error": 0.0,
       "minimum_damage_increment": 0.0,
-      "step_seconds": 0.4159261249951669
+      "step_seconds": 0.29764129099203274
     },
     {
       "step": 2,
@@ -105,7 +105,7 @@
       "stagger_residual": 6.512105710499124e-13,
       "boundary_value_error": 0.0,
       "minimum_damage_increment": 0.0,
-      "step_seconds": 0.1585923750026268
+      "step_seconds": 0.1323936670087278
     },
     {
       "step": 3,
@@ -119,7 +119,7 @@
       "stagger_residual": 1.7835984250853649e-12,
       "boundary_value_error": 0.0,
       "minimum_damage_increment": 0.0,
-      "step_seconds": 0.14232929100398906
+      "step_seconds": 0.13330762498662807
     },
     {
       "step": 4,
@@ -133,7 +133,7 @@
       "stagger_residual": 3.04544587433797e-12,
       "boundary_value_error": 0.0,
       "minimum_damage_increment": 0.0,
-      "step_seconds": 0.2322392909991322
+      "step_seconds": 0.2350587499968242
     },
     {
       "step": 5,
@@ -147,7 +147,7 @@
       "stagger_residual": 5.5762323676994094e-12,
       "boundary_value_error": 0.0,
       "minimum_damage_increment": 0.0,
-      "step_seconds": 0.22947129199746996
+      "step_seconds": 0.2336307920049876
     },
     {
       "step": 6,
@@ -161,7 +161,7 @@
       "stagger_residual": 8.574128804460473e-12,
       "boundary_value_error": 0.0,
       "minimum_damage_increment": 0.0,
-      "step_seconds": 0.2425330420010141
+      "step_seconds": 0.27072262499132194
     },
     {
       "step": 7,
@@ -175,7 +175,7 @@
       "stagger_residual": 1.4057997779190377e-11,
       "boundary_value_error": 0.0,
       "minimum_damage_increment": 0.0,
-      "step_seconds": 0.2321269169988227
+      "step_seconds": 0.3135258750116918
     },
     {
       "step": 8,
@@ -189,7 +189,7 @@
       "stagger_residual": 1.3456524829270208e-11,
       "boundary_value_error": 0.0,
       "minimum_damage_increment": 0.0,
-      "step_seconds": 0.22681929200189188
+      "step_seconds": 0.2350297090015374
     },
     {
       "step": 9,
@@ -203,7 +203,7 @@
       "stagger_residual": 1.9497066565088358e-11,
       "boundary_value_error": 0.0,
       "minimum_damage_increment": 0.0,
-      "step_seconds": 0.2236985409981571
+      "step_seconds": 0.2269329580012709
     },
     {
       "step": 10,
@@ -217,7 +217,7 @@
       "stagger_residual": 2.7107169282618953e-11,
       "boundary_value_error": 0.0,
       "minimum_damage_increment": 0.0,
-      "step_seconds": 0.2288235420055571
+      "step_seconds": 0.22125779098132625
     },
     {
       "step": 11,
@@ -231,7 +231,7 @@
       "stagger_residual": 2.5991598048711148e-11,
       "boundary_value_error": 0.0,
       "minimum_damage_increment": 0.0,
-      "step_seconds": 0.2298896669963142
+      "step_seconds": 0.21674083400284871
     },
     {
       "step": 12,
@@ -245,7 +245,7 @@
       "stagger_residual": 3.4020565311158714e-11,
       "boundary_value_error": 0.0,
       "minimum_damage_increment": 0.0,
-      "step_seconds": 0.22429850000480656
+      "step_seconds": 0.2278594579838682
     },
     {
       "step": 13,
@@ -259,7 +259,7 @@
       "stagger_residual": 3.870588614515178e-11,
       "boundary_value_error": 0.0,
       "minimum_damage_increment": 0.0,
-      "step_seconds": 0.23990233299991814
+      "step_seconds": 0.2576045830210205
     },
     {
       "step": 14,
@@ -273,7 +273,7 @@
       "stagger_residual": 4.858866509533249e-11,
       "boundary_value_error": 0.0,
       "minimum_damage_increment": 0.0,
-      "step_seconds": 0.2161757080029929
+      "step_seconds": 0.24473491602111608
     },
     {
       "step": 15,
@@ -287,7 +287,7 @@
       "stagger_residual": 5.99986217201019e-11,
       "boundary_value_error": 0.0,
       "minimum_damage_increment": 0.0,
-      "step_seconds": 0.21710991700092563
+      "step_seconds": 0.2379124159924686
     },
     {
       "step": 16,
@@ -301,7 +301,7 @@
       "stagger_residual": 7.303638436206516e-11,
       "boundary_value_error": 0.0,
       "minimum_damage_increment": 0.0,
-      "step_seconds": 0.22559608399751596
+      "step_seconds": 0.243709750007838
     },
     {
       "step": 17,
@@ -315,7 +315,7 @@
       "stagger_residual": 6.305614799946006e-11,
       "boundary_value_error": 0.0,
       "minimum_damage_increment": 0.0,
-      "step_seconds": 0.2358475420041941
+      "step_seconds": 0.22984845901373774
     },
     {
       "step": 18,
@@ -329,7 +329,7 @@
       "stagger_residual": 7.497567783436443e-11,
       "boundary_value_error": 0.0,
       "minimum_damage_increment": 0.0,
-      "step_seconds": 0.23638633299560752
+      "step_seconds": 0.24031704099616036
     },
     {
       "step": 19,
@@ -343,7 +343,7 @@
       "stagger_residual": 5.5693131400771274e-06,
       "boundary_value_error": 0.0,
       "minimum_damage_increment": 0.0,
-      "step_seconds": 0.32490191599936225
+      "step_seconds": 0.3290674999880139
     },
     {
       "step": 20,
@@ -357,7 +357,7 @@
       "stagger_residual": 6.4967703008843215e-06,
       "boundary_value_error": 0.0,
       "minimum_damage_increment": 0.0,
-      "step_seconds": 0.3361743330024183
+      "step_seconds": 0.3111260829900857
     },
     {
       "step": 21,
@@ -371,7 +371,7 @@
       "stagger_residual": 7.524927852493892e-06,
       "boundary_value_error": 0.0,
       "minimum_damage_increment": 0.0,
-      "step_seconds": 0.322785083000781
+      "step_seconds": 0.3270885840174742
     },
     {
       "step": 22,
@@ -385,7 +385,7 @@
       "stagger_residual": 8.653357889174366e-06,
       "boundary_value_error": 0.0,
       "minimum_damage_increment": 0.0,
-      "step_seconds": 0.34563991699542385
+      "step_seconds": 0.32501029199920595
     },
     {
       "step": 23,
@@ -399,7 +399,7 @@
       "stagger_residual": 9.886113211176255e-06,
       "boundary_value_error": 0.0,
       "minimum_damage_increment": 0.0,
-      "step_seconds": 0.3201930409995839
+      "step_seconds": 0.33888191598816775
     },
     {
       "step": 24,
@@ -413,7 +413,7 @@
       "stagger_residual": 3.554588977211867e-11,
       "boundary_value_error": 0.0,
       "minimum_damage_increment": 0.0,
-      "step_seconds": 0.3274214999983087
+      "step_seconds": 0.33009649999439716
     },
     {
       "step": 25,
@@ -427,7 +427,7 @@
       "stagger_residual": 4.361748098087362e-11,
       "boundary_value_error": 0.0,
       "minimum_damage_increment": 0.0,
-      "step_seconds": 0.33190204099810217
+      "step_seconds": 0.3462330419861246
     },
     {
       "step": 26,
@@ -441,7 +441,7 @@
       "stagger_residual": 5.3110831178066395e-11,
       "boundary_value_error": 0.0,
       "minimum_damage_increment": 0.0,
-      "step_seconds": 0.35112595799728297
+      "step_seconds": 0.3141759170102887
     },
     {
       "step": 27,
@@ -455,7 +455,7 @@
       "stagger_residual": 6.412902947655434e-11,
       "boundary_value_error": 0.0,
       "minimum_damage_increment": 0.0,
-      "step_seconds": 0.41995875000429805
+      "step_seconds": 0.31343454201123677
     },
     {
       "step": 28,
@@ -469,7 +469,7 @@
       "stagger_residual": 7.68250904769028e-11,
       "boundary_value_error": 0.0,
       "minimum_damage_increment": 0.0,
-      "step_seconds": 0.3979097499977797
+      "step_seconds": 0.323682916990947
     },
     {
       "step": 29,
@@ -483,7 +483,7 @@
       "stagger_residual": 9.149352477866535e-11,
       "boundary_value_error": 0.0,
       "minimum_damage_increment": 0.0,
-      "step_seconds": 0.3479839159990661
+      "step_seconds": 0.36684416700154543
     },
     {
       "step": 30,
@@ -497,7 +497,7 @@
       "stagger_residual": 1.0830570731648389e-10,
       "boundary_value_error": 0.0,
       "minimum_damage_increment": 0.0,
-      "step_seconds": 0.3290567910007667
+      "step_seconds": 0.34071145800407976
     },
     {
       "step": 31,
@@ -511,7 +511,7 @@
       "stagger_residual": 2.1957942845086533e-06,
       "boundary_value_error": 0.0,
       "minimum_damage_increment": 0.0,
-      "step_seconds": 0.47174412500316976
+      "step_seconds": 0.4366339579864871
     },
     {
       "step": 32,
@@ -525,7 +525,7 @@
       "stagger_residual": 2.579133035582025e-06,
       "boundary_value_error": 0.0,
       "minimum_damage_increment": 0.0,
-      "step_seconds": 0.4193950839980971
+      "step_seconds": 0.4542609589989297
     },
     {
       "step": 33,
@@ -539,7 +539,7 @@
       "stagger_residual": 3.020892460830685e-06,
       "boundary_value_error": 0.0,
       "minimum_damage_increment": 0.0,
-      "step_seconds": 0.42524437500105705
+      "step_seconds": 0.41726241700234823
     },
     {
       "step": 34,
@@ -553,7 +553,7 @@
       "stagger_residual": 3.522543139046796e-06,
       "boundary_value_error": 0.0,
       "minimum_damage_increment": 0.0,
-      "step_seconds": 0.40215066599921556
+      "step_seconds": 0.4214495829946827
     },
     {
       "step": 35,
@@ -567,7 +567,7 @@
       "stagger_residual": 4.091713467754085e-06,
       "boundary_value_error": 0.0,
       "minimum_damage_increment": 0.0,
-      "step_seconds": 0.41643791700334987
+      "step_seconds": 0.41256541601615027
     },
     {
       "step": 36,
@@ -581,7 +581,7 @@
       "stagger_residual": 4.735971632108739e-06,
       "boundary_value_error": 0.0,
       "minimum_damage_increment": 0.0,
-      "step_seconds": 0.4166247500033933
+      "step_seconds": 0.4400047500093933
     },
     {
       "step": 37,
@@ -595,7 +595,7 @@
       "stagger_residual": 5.463769887826103e-06,
       "boundary_value_error": 0.0,
       "minimum_damage_increment": 0.0,
-      "step_seconds": 0.4770255420007743
+      "step_seconds": 0.4173444999905769
     },
     {
       "step": 38,
@@ -609,7 +609,7 @@
       "stagger_residual": 6.2849245413003415e-06,
       "boundary_value_error": 0.0,
       "minimum_damage_increment": 0.0,
-      "step_seconds": 0.5123942079953849
+      "step_seconds": 0.4411373330221977
     },
     {
       "step": 39,
@@ -623,7 +623,7 @@
       "stagger_residual": 7.210284004747989e-06,
       "boundary_value_error": 0.0,
       "minimum_damage_increment": 0.0,
-      "step_seconds": 0.45072912499745144
+      "step_seconds": 0.4365226249792613
     },
     {
       "step": 40,
@@ -637,7 +637,7 @@
       "stagger_residual": 8.252308791946121e-06,
       "boundary_value_error": 0.0,
       "minimum_damage_increment": 0.0,
-      "step_seconds": 0.41321208299632417
+      "step_seconds": 0.4298495829862077
     },
     {
       "step": 41,
@@ -651,7 +651,7 @@
       "stagger_residual": 9.42539322159842e-06,
       "boundary_value_error": 0.0,
       "minimum_damage_increment": 0.0,
-      "step_seconds": 0.42072358400037047
+      "step_seconds": 0.40431079201516695
     },
     {
       "step": 42,
@@ -665,7 +665,7 @@
       "stagger_residual": 2.6651728253058703e-06,
       "boundary_value_error": 0.0,
       "minimum_damage_increment": 0.0,
-      "step_seconds": 0.5964646670036018
+      "step_seconds": 0.5270944999938365
     },
     {
       "step": 43,
@@ -679,7 +679,7 @@
       "stagger_residual": 3.184200492993258e-06,
       "boundary_value_error": 0.0,
       "minimum_damage_increment": 0.0,
-      "step_seconds": 0.5511184170027263
+      "step_seconds": 0.5088947089971043
     },
     {
       "step": 44,
@@ -693,7 +693,7 @@
       "stagger_residual": 3.8071781523225206e-06,
       "boundary_value_error": 0.0,
       "minimum_damage_increment": 0.0,
-      "step_seconds": 0.5234739169973182
+      "step_seconds": 0.5167172499932349
     },
     {
       "step": 45,
@@ -707,7 +707,7 @@
       "stagger_residual": 4.544005892373224e-06,
       "boundary_value_error": 0.0,
       "minimum_damage_increment": 0.0,
-      "step_seconds": 0.5311966669978574
+      "step_seconds": 0.5201068749884143
     },
     {
       "step": 46,
@@ -721,7 +721,7 @@
       "stagger_residual": 5.412859794581927e-06,
       "boundary_value_error": 0.0,
       "minimum_damage_increment": 0.0,
-      "step_seconds": 0.5662404999966384
+      "step_seconds": 0.5240347499784548
     },
     {
       "step": 47,
@@ -735,7 +735,7 @@
       "stagger_residual": 6.441321676902144e-06,
       "boundary_value_error": 0.0,
       "minimum_damage_increment": 0.0,
-      "step_seconds": 0.5480150410003262
+      "step_seconds": 0.5341640830156393
     },
     {
       "step": 48,
@@ -749,7 +749,7 @@
       "stagger_residual": 7.648723133071161e-06,
       "boundary_value_error": 0.0,
       "minimum_damage_increment": 0.0,
-      "step_seconds": 0.5406302080009482
+      "step_seconds": 0.5430597910017241
     },
     {
       "step": 49,
@@ -763,7 +763,7 @@
       "stagger_residual": 9.070981049358685e-06,
       "boundary_value_error": 0.0,
       "minimum_damage_increment": 0.0,
-      "step_seconds": 0.5397276250005234
+      "step_seconds": 0.5116203329816926
     },
     {
       "step": 50,
@@ -777,7 +777,7 @@
       "stagger_residual": 4.091306322305624e-06,
       "boundary_value_error": 0.0,
       "minimum_damage_increment": 0.0,
-      "step_seconds": 0.6184583329959423
+      "step_seconds": 0.6324800829752348
     },
     {
       "step": 51,
@@ -791,7 +791,7 @@
       "stagger_residual": 5.0419267688164284e-06,
       "boundary_value_error": 0.0,
       "minimum_damage_increment": 0.0,
-      "step_seconds": 0.6207387499962351
+      "step_seconds": 0.6617034169903491
     },
     {
       "step": 52,
@@ -805,7 +805,7 @@
       "stagger_residual": 6.231233644565467e-06,
       "boundary_value_error": 0.0,
       "minimum_damage_increment": 0.0,
-      "step_seconds": 0.623628875000577
+      "step_seconds": 0.6515902919927612
     },
     {
       "step": 53,
@@ -819,7 +819,7 @@
       "stagger_residual": 7.708388883656749e-06,
       "boundary_value_error": 0.0,
       "minimum_damage_increment": 0.0,
-      "step_seconds": 0.608970417000819
+      "step_seconds": 0.6350963329896331
     },
     {
       "step": 54,
@@ -833,7 +833,7 @@
       "stagger_residual": 9.51258366330333e-06,
       "boundary_value_error": 0.0,
       "minimum_damage_increment": 0.0,
-      "step_seconds": 0.6141255000038655
+      "step_seconds": 0.6275216250214726
     },
     {
       "step": 55,
@@ -847,7 +847,7 @@
       "stagger_residual": 5.451391302484603e-06,
       "boundary_value_error": 0.0,
       "minimum_damage_increment": 0.0,
-      "step_seconds": 0.7241748749947874
+      "step_seconds": 0.7549238750070799
     },
     {
       "step": 56,
@@ -861,7 +861,7 @@
       "stagger_residual": 7.00006231620691e-06,
       "boundary_value_error": 0.0,
       "minimum_damage_increment": 0.0,
-      "step_seconds": 0.7196497920012916
+      "step_seconds": 0.7122417500067968
     },
     {
       "step": 57,
@@ -875,7 +875,7 @@
       "stagger_residual": 8.990308602425668e-06,
       "boundary_value_error": 0.0,
       "minimum_damage_increment": 0.0,
-      "step_seconds": 0.7153395839995937
+      "step_seconds": 0.7260031669866294
     },
     {
       "step": 58,
@@ -889,7 +889,7 @@
       "stagger_residual": 5.992341337944708e-06,
       "boundary_value_error": 0.0,
       "minimum_damage_increment": 0.0,
-      "step_seconds": 0.7934258329987642
+      "step_seconds": 0.8474235000030603
     },
     {
       "step": 59,
@@ -903,7 +903,7 @@
       "stagger_residual": 7.925782348831348e-06,
       "boundary_value_error": 0.0,
       "minimum_damage_increment": 0.0,
-      "step_seconds": 0.7888023749983404
+      "step_seconds": 0.8803282909793779
     },
     {
       "step": 60,
@@ -917,7 +917,7 @@
       "stagger_residual": 5.809173556136056e-06,
       "boundary_value_error": 0.0,
       "minimum_damage_increment": 0.0,
-      "step_seconds": 0.9110609169947566
+      "step_seconds": 0.9496789169788826
     }
   ],
   "resolved_model": {

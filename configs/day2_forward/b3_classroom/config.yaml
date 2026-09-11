@@ -1,0 +1,45 @@
+schema_version: 1
+problem:
+  name: B3 dynamic single-edge-notched tension classroom example
+  reference: Borden et al. (2012); CEMS-Lab/PhAST public B3 geometric notch
+geometry:
+  units: mm
+  mesh_path: mesh.msh
+material:
+  E: 32000.0
+  nu: 0.20
+  Gc: 0.003
+  l0: 0.5
+  rho: 2.45e-9
+  energy_split: spectral
+  pf_model: AT2
+  eta_residual: 1.0e-6
+  plane_stress: false
+boundary_conditions:
+  - {nodes: left, type: fix, component: 0}
+  - {nodes: right, type: fix, component: 0}
+  - {nodes: top, type: prescribe, component: 1, value: 0.002}
+  - {nodes: bottom, type: prescribe, component: 1, value: -0.002}
+loading:
+  protocol: simple
+  t_total: 1.0e-4
+  ramp_type: smooth_step
+  t_ramp: 2.0e-5
+solver:
+  solver_type: explicit
+  time_integrator: central_difference
+  dt_safety: 0.8
+  damage_every: 1
+  bounds_method: projected_cg
+  use_multigrid: false
+  preconditioner: jacobi
+  damage_tol: 1.0e-5
+output:
+  trajectory: true
+  trajectory_format: zarr
+  h5_every: 40
+  fast: true
+  print_every: 1000
+device:
+  device: cpu
+  compile: false

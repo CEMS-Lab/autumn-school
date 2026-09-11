@@ -17,9 +17,9 @@ By the end of this workshop, you will be able to:
 
 ---
 
-## Introductory Experiment: Multi-Valued Systems and Energy Objectives
+## Optional exploration: multi-valued systems and energy objectives
 
-Many non-linear physical systems exhibit multiple stable equilibrium states for a given set of boundary conditions. In our opening tutorial, we explore what happens when we train a learning model on data generated from multiple solution branches.
+Many non-linear physical systems exhibit multiple stable equilibrium states for a given set of boundary conditions. In the optional reference notebook, we explore what happens when we train a learning model on data generated from multiple solution branches.
 
 :::{admonition} Hands-On Tutorial: Lab 00 (Branch Selection & Energy Landscapes)
 :class: tip
@@ -71,7 +71,11 @@ Whenever you run a simulation or inverse optimization, it is good engineering pr
 Before opening the computational lessons, consider a simple intuitive question:
 *If a rectangular specimen contains a sharp horizontal notch and is pulled vertically in tension, where should material damage first accumulate?*
 
-As you run the simulations, observe how the high stress concentration at the notch tip naturally drives localized damage accumulation, causing a diffuse crack band to propagate across the specimen.
+As you run the simulation, compare the initial and final damage fields and
+locate the change relative to the notch and supports. The first practical uses
+a small dynamic single-edge-notched plate. Its damage band advances from the
+geometric notch to the opposite edge. Read the mesh, loading history and
+physical timestamps together when interpreting this trajectory.
 
 ## Exercise: label the layers
 

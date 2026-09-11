@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>7. Train, save, reload, adapters, and checked proposals &#8212; PhAST: Phase-field fracture with differentiable FEM</title>
+    <title>Train, save, reload, adapters, and checked proposals &#8212; PhAST: Phase-field fracture with differentiable FEM</title>
   
   
   
@@ -52,8 +52,8 @@
     <script src="_static/learning_book.js?v=5aaa4a9b"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Lab 00: Branch Selection &amp; Energy-Based Objectives in Physics-Informed Learning" href="labs/00_why_average_predictions_can_fail.html" />
-    <link rel="prev" title="6.4.1. Backpropagation through a stepped update" href="05a_backpropagation_step_by_step.html" />
+    <link rel="next" title="Practice, Solutions, Glossary, and References" href="07_practice_references.html" />
+    <link rel="prev" title="Backpropagation through a stepped update" href="05a_backpropagation_step_by_step.html" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -166,35 +166,44 @@
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="index.html">
-                    PhAST: A Learn-by-Doing Introduction to Phase-Field Fracture
+                    PhAST: fracture simulation, differentiation and learning
                 </a>
             </li>
         </ul>
-        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Theory &amp; Methods</span></p>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Lecture guides</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="lectures/01_fracture_and_phast.html">Lecture 1: Phase-field fracture and PhAST</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lectures/02_differentiability_and_inverse.html">Lecture 2: Differentiability and inverse recovery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lectures/03_hybrid_learning.html">Lecture 3: Learning inside a numerical workflow</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Three practical labs</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="classroom/01_simulate_fracture.html">Practical 1: Simulate and interpret diffuse fracture damage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classroom/02_gradients_and_recovery.html">Practical 2: Gradients and material recovery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classroom/03_learning_and_hybrid.html">Practical 3: Learn a field and assess its proposal</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Reference chapters</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="00_welcome_and_routes.html">1. From Cracks to Computation: Learn by Doing</a></li>
-<li class="toctree-l1"><a class="reference internal" href="01_crack_representations.html">2. Crack Representations: Sharp, Cohesive, and Diffuse</a></li>
-<li class="toctree-l1"><a class="reference internal" href="02_phase_field_energy.html">3. Fracture Energy: AT1, AT2, Degradation, and Bandwidth</a></li>
-<li class="toctree-l1"><a class="reference internal" href="03_staggered_solution.html">4. The Staggered Solution Algorithm: Alternating Mechanics and Damage</a></li>
-<li class="toctree-l1"><a class="reference internal" href="04_fem_to_tensors.html">5. From Weak Forms to Discrete Tensors: The PhAST Pipeline</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="05_differentiation_and_inverse.html">6. Differentiable Mechanics and Inverse Parameter Discovery</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="05a_backpropagation_step_by_step.html">6.4.1. Backpropagation through a stepped update</a></li>
+<li class="toctree-l1"><a class="reference internal" href="00_welcome_and_routes.html">From Cracks to Computation: Learn by Doing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="01_crack_representations.html">Crack Representations: Sharp, Cohesive, and Diffuse</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_phase_field_energy.html">Fracture Energy: AT1, AT2, Degradation, and Bandwidth</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_staggered_solution.html">The Staggered Solution Algorithm: Alternating Mechanics and Damage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_fem_to_tensors.html">From Weak Forms to Discrete Tensors: The PhAST Pipeline</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="05_differentiation_and_inverse.html">Differentiable Mechanics and Inverse Parameter Discovery</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="05a_backpropagation_step_by_step.html">Backpropagation through a stepped update</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">7. Train, save, reload, adapters, and checked proposals</a></li>
-</ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Hands-On Computational Labs</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="labs/00_why_average_predictions_can_fail.html">Lab 00: Branch Selection &amp; Energy-Based Objectives in Physics-Informed Learning</a></li>
-<li class="toctree-l1"><a class="reference internal" href="labs/01_phast_tiny_evolving_fracture.html">Run and interpret a small PhAST fracture calculation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="labs/02_degradation_autograd.html">Lab 02: Differentiating Degradation: Analytical, Autograd, &amp; Finite Differences</a></li>
-<li class="toctree-l1"><a class="reference internal" href="labs/03_tiny_derivative_inverse_toy.html">Lab 03: Differentiable Mechanics &amp; Inverse Parameter Identification</a></li>
-<li class="toctree-l1"><a class="reference internal" href="labs/04_train_save_reload_adapter.html">Train, save, reload, and compare a field model</a></li>
-<li class="toctree-l1"><a class="reference internal" href="labs/05_hybrid_reference_correction.html">Assess a proposal and use a reference correction</a></li>
-</ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Review &amp; Reference</span></p>
-<ul class="nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Train, save, reload, adapters, and checked proposals</a></li>
 <li class="toctree-l1"><a class="reference internal" href="07_practice_references.html">Practice, Solutions, Glossary, and References</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="further_practice.html">Detailed notebooks and further practice</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="labs/00_why_average_predictions_can_fail.html">Lab 00: Branch Selection &amp; Energy-Based Objectives in Physics-Informed Learning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="labs/01_phast_tiny_evolving_fracture.html">Run and interpret a small PhAST fracture calculation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="labs/02_degradation_autograd.html">Lab 02: Differentiating Degradation: Analytical, Autograd, &amp; Finite Differences</a></li>
+<li class="toctree-l2"><a class="reference internal" href="labs/03_tiny_derivative_inverse_toy.html">Lab 03: Differentiable Mechanics &amp; Inverse Parameter Identification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="labs/04_train_save_reload_adapter.html">Train, save, reload, and compare a field model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="labs/05_hybrid_reference_correction.html">Assess a proposal and use a reference correction</a></li>
+</ul>
+</details></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Optional inverse experiments</span></p>
 <ul class="nav bd-sidenav">
@@ -407,19 +416,19 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-best-of-both-worlds-fast-ai-proposals-physics-truth">7.1. The Best of Both Worlds: Fast AI Proposals &amp; Physics Truth</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#decide-what-is-being-learned">7.2. Decide What is Being Learned</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-small-supervised-learning-contract">7.3. A small supervised-learning contract</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#where-does-the-training-gradient-travel">7.4. Where does the training gradient travel?</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#train-save-and-reload-reproducibly">7.5. Train, save, and reload reproducibly</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#computational-lesson-train-save-reload-and-compare-a-toy-field-model">7.6. Computational lesson: train, save, reload, and compare a toy field model</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mapping-between-representations">7.7. Mapping between representations</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#from-a-proposal-to-a-checked-hybrid-calculation">7.8. From a proposal to a checked hybrid calculation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#computational-lesson-accept-a-compatible-proposal-or-fall-back">7.9. Computational lesson: accept a compatible proposal or fall back</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dagger-style-data-aggregation">7.10. DAgger-style data aggregation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluation-physical-metrics-and-model-validation">7.11. Evaluation: Physical Metrics and Model Validation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-identify-the-missing-provenance">7.12. Exercise: identify the missing provenance</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sources-for-this-chapter">7.13. Sources for this chapter</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-best-of-both-worlds-fast-ai-proposals-physics-truth">The Best of Both Worlds: Fast AI Proposals &amp; Physics Truth</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#decide-what-is-being-learned">Decide What is Being Learned</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-small-supervised-learning-contract">A small supervised-learning contract</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#where-does-the-training-gradient-travel">Where does the training gradient travel?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#train-save-and-reload-reproducibly">Train, save, and reload reproducibly</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#computational-lesson-train-save-reload-and-compare-a-toy-field-model">Computational lesson: train, save, reload, and compare a toy field model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mapping-between-representations">Mapping between representations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#from-a-proposal-to-a-checked-hybrid-calculation">From a proposal to a checked hybrid calculation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#computational-lesson-accept-a-compatible-proposal-or-fall-back">Computational lesson: accept a compatible proposal or fall back</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dagger-style-data-aggregation">DAgger-style data aggregation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluation-physical-metrics-and-model-validation">Evaluation: Physical Metrics and Model Validation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-identify-the-missing-provenance">Exercise: identify the missing provenance</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sources-for-this-chapter">Sources for this chapter</a></li>
 </ul>
             </nav>
         </div>
@@ -432,17 +441,17 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="train-save-reload-adapters-and-checked-proposals">
-<h1><span class="section-number">7. </span>Train, save, reload, adapters, and checked proposals<a class="headerlink" href="#train-save-reload-adapters-and-checked-proposals" title="Link to this heading">#</a></h1>
+<h1>Train, save, reload, adapters, and checked proposals<a class="headerlink" href="#train-save-reload-adapters-and-checked-proposals" title="Link to this heading">#</a></h1>
 <figure class="align-default" id="fig-learning-cycle">
 <a class="reference internal image-reference" href="_images/06_learning_cycle.svg"><img alt="Offline reference data support training and checkpoint reload. Online model proposals are checked, then accepted or corrected by the reference solver. A dashed conceptual feedback path collects labelled states for another training round." src="_images/06_learning_cycle.svg" style="width: 96%;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Figure 7.1 </span><span class="caption-text">A learning component has defined inputs, outputs, and physics checks, just as
+<p><span class="caption-number">Figure 7 </span><span class="caption-text">A learning component has defined inputs, outputs, and physics checks, just as
 the reference calculation does.</span><a class="headerlink" href="#fig-learning-cycle" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <section id="the-best-of-both-worlds-fast-ai-proposals-physics-truth">
-<h2><span class="section-number">7.1. </span>The Best of Both Worlds: Fast AI Proposals &amp; Physics Truth<a class="headerlink" href="#the-best-of-both-worlds-fast-ai-proposals-physics-truth" title="Link to this heading">#</a></h2>
+<h2>The Best of Both Worlds: Fast AI Proposals &amp; Physics Truth<a class="headerlink" href="#the-best-of-both-worlds-fast-ai-proposals-physics-truth" title="Link to this heading">#</a></h2>
 <p>Why combine deep learning with numerical mechanics solvers in fracture simulation?</p>
 <p>Traditional finite element solvers are exact, rigorous, and trustworthy: they enforce mechanical equilibrium, respect conservation laws, and satisfy boundary conditions. However, for non-linear problems like crack propagation, solving large coupled linear systems over dozens or hundreds of quasi-static load increments is computationally expensive.</p>
 <p>On the other hand, modern deep learning models (such as neural networks and neural operators) are extraordinarily fast: once trained, evaluating a forward pass takes just a fraction of a millisecond. Yet, on their own, purely data-driven models can produce unphysical predictions: they can predict negative damage (<span class="math notranslate nohighlight">\(d &lt; 0\)</span>), exceed physical bounds (<span class="math notranslate nohighlight">\(d &gt; 1\)</span>), or violate momentum balance when tested outside their immediate training distribution.</p>
@@ -455,7 +464,7 @@ the reference calculation does.</span><a class="headerlink" href="#fig-learning-
 <p>In this chapter, we explore how to build and evaluate these learning components: defining clear data contracts, serializing and reloading model checkpoints reproducibly, evaluating physical residuals, and building robust hybrid workflows.</p>
 </section>
 <section id="decide-what-is-being-learned">
-<h2><span class="section-number">7.2. </span>Decide What is Being Learned<a class="headerlink" href="#decide-what-is-being-learned" title="Link to this heading">#</a></h2>
+<h2>Decide What is Being Learned<a class="headerlink" href="#decide-what-is-being-learned" title="Link to this heading">#</a></h2>
 <p>The phrase “use machine learning for fracture” hides several different tasks.
 Name the role precisely.</p>
 <ul class="simple">
@@ -473,7 +482,7 @@ the subsequent mechanics solve; a model intended to replace that solve
 requires evaluation of the resulting mechanical fields and observables.</p>
 </section>
 <section id="a-small-supervised-learning-contract">
-<h2><span class="section-number">7.3. </span>A small supervised-learning contract<a class="headerlink" href="#a-small-supervised-learning-contract" title="Link to this heading">#</a></h2>
+<h2>A small supervised-learning contract<a class="headerlink" href="#a-small-supervised-learning-contract" title="Link to this heading">#</a></h2>
 <p>Let <span class="math notranslate nohighlight">\(x_i\)</span> be an input representation and <span class="math notranslate nohighlight">\(z_i\)</span> a reference target. A simple
 training objective is</p>
 <div class="math notranslate nohighlight">
@@ -496,7 +505,7 @@ as <span class="math notranslate nohighlight">\(\tilde x=(x-\mu)/s\)</span>, sav
 state is part of the computational map reconstructed during reload.</p>
 </section>
 <section id="where-does-the-training-gradient-travel">
-<h2><span class="section-number">7.4. </span>Where does the training gradient travel?<a class="headerlink" href="#where-does-the-training-gradient-travel" title="Link to this heading">#</a></h2>
+<h2>Where does the training gradient travel?<a class="headerlink" href="#where-does-the-training-gradient-travel" title="Link to this heading">#</a></h2>
 <p>Distinguish three computational graphs before choosing a learning method.</p>
 <p><strong>Supervised fitting</strong> compares a prediction with stored targets:</p>
 <div class="math notranslate nohighlight">
@@ -540,7 +549,7 @@ derivative conventions and checks.</p>
 on a scalar Helmholtz teaching problem.</p>
 </section>
 <section id="train-save-and-reload-reproducibly">
-<h2><span class="section-number">7.5. </span>Train, save, and reload reproducibly<a class="headerlink" href="#train-save-and-reload-reproducibly" title="Link to this heading">#</a></h2>
+<h2>Train, save, and reload reproducibly<a class="headerlink" href="#train-save-and-reload-reproducibly" title="Link to this heading">#</a></h2>
 <p>A minimal saved model package should include:</p>
 <ul class="simple">
 <li><p>model weights and architecture configuration;</p></li>
@@ -553,7 +562,7 @@ in-memory prediction for the same declared input.</p></li>
 </ul>
 </section>
 <section id="computational-lesson-train-save-reload-and-compare-a-toy-field-model">
-<h2><span class="section-number">7.6. </span>Computational lesson: train, save, reload, and compare a toy field model<a class="headerlink" href="#computational-lesson-train-save-reload-and-compare-a-toy-field-model" title="Link to this heading">#</a></h2>
+<h2>Computational lesson: train, save, reload, and compare a toy field model<a class="headerlink" href="#computational-lesson-train-save-reload-and-compare-a-toy-field-model" title="Link to this heading">#</a></h2>
 <p>The lesson below makes the saved state visible: feature order, normalisation,
 mesh signature, data split, checkpoint metadata, and a reload comparison all
 appear beside the code and field plots. Begin by predicting which information
@@ -561,14 +570,14 @@ must survive serialization for a newly created model object to reproduce the
 same output. The lesson uses an original <code class="docutils literal notranslate"><span class="pre">ToyHelmholtzProblem</span></code> to examine
 the saved-model interface and prediction accuracy on a scalar field.</p>
 <div class="tip admonition">
-<p class="admonition-title">Hands-On Tutorial: Lab 04 (Neural Field Adapter: Training &amp; Checkpointing)</p>
+<p class="admonition-title">Hands-On Tutorial: Lab 3 (Training and Model Reloading)</p>
 <p><strong>Ready to try this in practice?</strong><br />
-Explore the interactive tutorial: <strong><a class="reference internal" href="labs/04_train_save_reload_adapter.html"><span class="doc">Train, save, reload, and compare a field model</span></a></strong>.<br />
+Explore the interactive tutorial: <strong><a class="reference internal" href="classroom/03_learning_and_hybrid.html"><span class="doc">Practical 3: Learn a field and assess its proposal</span></a></strong>.
 You can read through the MLP training loops and checkpoint verification directly here in the book, or run it interactively in <strong>Google Colab</strong> with one click:</p>
 <div class="badge-row">
-  <a class="badge-colab" href="https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/study/04_train_save_reload_adapter.ipynb" target="_blank"><img src="_static/colab-badge.svg" alt="Open In Colab"/></a>
-  <a class="badge-link" href="../notebooks/study/04_train_save_reload_adapter.ipynb"><i class="fa-solid fa-download"></i> Download Practice Notebook</a>
-  <a class="badge-link" href="../notebooks/solutions/04_train_save_reload_adapter.ipynb"><i class="fa-solid fa-check-circle"></i> Download Worked Solutions</a>
+  <a class="badge-colab" href="https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/study/classroom/03_learning_and_hybrid.ipynb" target="_blank"><img src="_static/colab-badge.svg" alt="Open In Colab"/></a>
+  <a class="badge-link" href="../notebooks/study/classroom/03_learning_and_hybrid.ipynb"><i class="fa-solid fa-download"></i> Download Practice Notebook</a>
+  <a class="badge-link" href="../notebooks/solutions/classroom/03_learning_and_hybrid.ipynb"><i class="fa-solid fa-check-circle"></i> Download Worked Solutions</a>
 </div>
 </div>
 <div class="tip admonition">
@@ -581,7 +590,7 @@ again.</p>
 </div>
 </section>
 <section id="mapping-between-representations">
-<h2><span class="section-number">7.7. </span>Mapping between representations<a class="headerlink" href="#mapping-between-representations" title="Link to this heading">#</a></h2>
+<h2>Mapping between representations<a class="headerlink" href="#mapping-between-representations" title="Link to this heading">#</a></h2>
 <p>An adapter is a stated map between representations,</p>
 <div class="math notranslate nohighlight">
 \[
@@ -603,7 +612,7 @@ on both sides.</p>
 transfer assumption that needs its own evaluation.</p>
 </section>
 <section id="from-a-proposal-to-a-checked-hybrid-calculation">
-<h2><span class="section-number">7.8. </span>From a proposal to a checked hybrid calculation<a class="headerlink" href="#from-a-proposal-to-a-checked-hybrid-calculation" title="Link to this heading">#</a></h2>
+<h2>From a proposal to a checked hybrid calculation<a class="headerlink" href="#from-a-proposal-to-a-checked-hybrid-calculation" title="Link to this heading">#</a></h2>
 <p>Suppose a learned model proposes <span class="math notranslate nohighlight">\(\widehat d\)</span> for a damage field. A
 conservative hybrid workflow is</p>
 <div class="math notranslate nohighlight">
@@ -621,7 +630,7 @@ any fallback. Assess runtime improvement by comparing this complete cost with
 the corresponding reference calculation.</p>
 </section>
 <section id="computational-lesson-accept-a-compatible-proposal-or-fall-back">
-<h2><span class="section-number">7.9. </span>Computational lesson: accept a compatible proposal or fall back<a class="headerlink" href="#computational-lesson-accept-a-compatible-proposal-or-fall-back" title="Link to this heading">#</a></h2>
+<h2>Computational lesson: accept a compatible proposal or fall back<a class="headerlink" href="#computational-lesson-accept-a-compatible-proposal-or-fall-back" title="Link to this heading">#</a></h2>
 <p>The next lesson reuses the toy field-model contract to test a compatible
 proposal, reject a deliberately corrupted proposal by a stated residual gate,
 and fall back to the reference field. Read the compatibility and residual
@@ -629,19 +638,19 @@ checks when interpreting the four field panels. The residual is defined by
 the scalar <code class="docutils literal notranslate"><span class="pre">ToyHelmholtzProblem</span></code>. Applying this pattern to fracture requires
 the fracture residual and its damage admissibility conditions.</p>
 <div class="tip admonition">
-<p class="admonition-title">Hands-On Tutorial: Lab 05 (Residual Evaluation &amp; Hybrid Correction)</p>
+<p class="admonition-title">Hands-On Tutorial: Lab 3 (Physical Assessment and Correction)</p>
 <p><strong>Ready to try this in practice?</strong><br />
-Explore the interactive tutorial: <strong><a class="reference internal" href="labs/05_hybrid_reference_correction.html"><span class="doc">Assess a proposal and use a reference correction</span></a></strong>.<br />
+Explore the interactive tutorial: <strong><a class="reference internal" href="classroom/03_learning_and_hybrid.html"><span class="doc">Practical 3: Learn a field and assess its proposal</span></a></strong>.
 You can read through the residual gating logic and solver correction steps directly here in the book, or run it interactively in <strong>Google Colab</strong> with one click:</p>
 <div class="badge-row">
-  <a class="badge-colab" href="https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/study/05_hybrid_reference_correction.ipynb" target="_blank"><img src="_static/colab-badge.svg" alt="Open In Colab"/></a>
-  <a class="badge-link" href="../notebooks/study/05_hybrid_reference_correction.ipynb"><i class="fa-solid fa-download"></i> Download Practice Notebook</a>
-  <a class="badge-link" href="../notebooks/solutions/05_hybrid_reference_correction.ipynb"><i class="fa-solid fa-check-circle"></i> Download Worked Solutions</a>
+  <a class="badge-colab" href="https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/study/classroom/03_learning_and_hybrid.ipynb" target="_blank"><img src="_static/colab-badge.svg" alt="Open In Colab"/></a>
+  <a class="badge-link" href="../notebooks/study/classroom/03_learning_and_hybrid.ipynb"><i class="fa-solid fa-download"></i> Download Practice Notebook</a>
+  <a class="badge-link" href="../notebooks/solutions/classroom/03_learning_and_hybrid.ipynb"><i class="fa-solid fa-check-circle"></i> Download Worked Solutions</a>
 </div>
 </div>
 </section>
 <section id="dagger-style-data-aggregation">
-<h2><span class="section-number">7.10. </span>DAgger-style data aggregation<a class="headerlink" href="#dagger-style-data-aggregation" title="Link to this heading">#</a></h2>
+<h2>DAgger-style data aggregation<a class="headerlink" href="#dagger-style-data-aggregation" title="Link to this heading">#</a></h2>
 <p>Distribution shift can appear when a learned proposal visits states absent
 from its original training records. Dataset Aggregation (often called DAgger)
 is one way to describe an iterative collection loop:</p>
@@ -660,7 +669,7 @@ fail or become inappropriate outside its assumptions; retain those outcomes
 when evaluating the method.</p>
 </section>
 <section id="evaluation-physical-metrics-and-model-validation">
-<h2><span class="section-number">7.11. </span>Evaluation: Physical Metrics and Model Validation<a class="headerlink" href="#evaluation-physical-metrics-and-model-validation" title="Link to this heading">#</a></h2>
+<h2>Evaluation: Physical Metrics and Model Validation<a class="headerlink" href="#evaluation-physical-metrics-and-model-validation" title="Link to this heading">#</a></h2>
 <p>Evaluating a machine learning model for physical problems requires examining both statistical accuracy and physical consistency. Standard mean squared error alone can be deceptive: a low average field error may mask an unphysical local stress concentration or an incorrect crack path.</p>
 <p>A comprehensive validation protocol evaluates:</p>
 <ol class="arabic simple">
@@ -682,7 +691,7 @@ Report performance across varying load levels, mesh densities, and unseen geomet
 </ol>
 </section>
 <section id="exercise-identify-the-missing-provenance">
-<h2><span class="section-number">7.12. </span>Exercise: identify the missing provenance<a class="headerlink" href="#exercise-identify-the-missing-provenance" title="Link to this heading">#</a></h2>
+<h2>Exercise: identify the missing provenance<a class="headerlink" href="#exercise-identify-the-missing-provenance" title="Link to this heading">#</a></h2>
 <p>A colleague shares a file called “best_model” and says it predicts damage on a
 new mesh. List four items you need before interpreting the output as a
 mechanics field.</p>
@@ -700,7 +709,7 @@ stated residual/fallback check.</p>
 </div>
 </section>
 <section id="sources-for-this-chapter">
-<h2><span class="section-number">7.13. </span>Sources for this chapter<a class="headerlink" href="#sources-for-this-chapter" title="Link to this heading">#</a></h2>
+<h2>Sources for this chapter<a class="headerlink" href="#sources-for-this-chapter" title="Link to this heading">#</a></h2>
 <p>The notebook practices draw on standard reproducible machine-learning ideas:
 separate evaluation data, explicit preprocessing, and persistent model state.
 For a practical notebook pattern with open exercises and solutions, see the
@@ -727,15 +736,15 @@ tensor/autodiff ecosystem used in the companion activities, see the
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">6.4.1. </span>Backpropagation through a stepped update</p>
+        <p class="prev-next-title">Backpropagation through a stepped update</p>
       </div>
     </a>
     <a class="right-next"
-       href="labs/00_why_average_predictions_can_fail.html"
+       href="07_practice_references.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Lab 00: Branch Selection &amp; Energy-Based Objectives in Physics-Informed Learning</p>
+        <p class="prev-next-title">Practice, Solutions, Glossary, and References</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -755,19 +764,19 @@ tensor/autodiff ecosystem used in the companion activities, see the
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-best-of-both-worlds-fast-ai-proposals-physics-truth">7.1. The Best of Both Worlds: Fast AI Proposals &amp; Physics Truth</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#decide-what-is-being-learned">7.2. Decide What is Being Learned</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-small-supervised-learning-contract">7.3. A small supervised-learning contract</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#where-does-the-training-gradient-travel">7.4. Where does the training gradient travel?</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#train-save-and-reload-reproducibly">7.5. Train, save, and reload reproducibly</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#computational-lesson-train-save-reload-and-compare-a-toy-field-model">7.6. Computational lesson: train, save, reload, and compare a toy field model</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mapping-between-representations">7.7. Mapping between representations</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#from-a-proposal-to-a-checked-hybrid-calculation">7.8. From a proposal to a checked hybrid calculation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#computational-lesson-accept-a-compatible-proposal-or-fall-back">7.9. Computational lesson: accept a compatible proposal or fall back</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dagger-style-data-aggregation">7.10. DAgger-style data aggregation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluation-physical-metrics-and-model-validation">7.11. Evaluation: Physical Metrics and Model Validation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-identify-the-missing-provenance">7.12. Exercise: identify the missing provenance</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sources-for-this-chapter">7.13. Sources for this chapter</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-best-of-both-worlds-fast-ai-proposals-physics-truth">The Best of Both Worlds: Fast AI Proposals &amp; Physics Truth</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#decide-what-is-being-learned">Decide What is Being Learned</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-small-supervised-learning-contract">A small supervised-learning contract</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#where-does-the-training-gradient-travel">Where does the training gradient travel?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#train-save-and-reload-reproducibly">Train, save, and reload reproducibly</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#computational-lesson-train-save-reload-and-compare-a-toy-field-model">Computational lesson: train, save, reload, and compare a toy field model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mapping-between-representations">Mapping between representations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#from-a-proposal-to-a-checked-hybrid-calculation">From a proposal to a checked hybrid calculation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#computational-lesson-accept-a-compatible-proposal-or-fall-back">Computational lesson: accept a compatible proposal or fall back</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dagger-style-data-aggregation">DAgger-style data aggregation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluation-physical-metrics-and-model-validation">Evaluation: Physical Metrics and Model Validation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-identify-the-missing-provenance">Exercise: identify the missing provenance</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sources-for-this-chapter">Sources for this chapter</a></li>
 </ul>
   </nav></div>
 

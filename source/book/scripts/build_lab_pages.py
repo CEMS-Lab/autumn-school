@@ -51,10 +51,15 @@ def stable_cell_ids(notebook, name: str, surface: str):
         cell.id = hashlib.sha256(f"{name}:{surface}:{index}:{cell.source}".encode()).hexdigest()[:16]
 
 
-def exercise_cells(material: dict, answers: bool, myst: bool = True):
+def exercise_cells(material: dict, answers: bool, myst: bool = True, solutions_url: str | None = None):
+    if answers:
+        introduction = "Try each question before opening the hint or worked solution."
+    elif solutions_url:
+        introduction = f"Try each question, then use the [notebook with worked solutions]({solutions_url}) for hints and worked answers."
+    else:
+        introduction = "Try each question, then use the worked-solutions download at the top of this notebook for hints and worked answers."
     cells = [nbformat.v4.new_markdown_cell(
-        "## Exercises\n\nTry each question before opening the hint or worked solution. "
-        "Keep the original calculation as your reference."
+        "## Exercises\n\n" + introduction + " Keep the original calculation as your reference."
     )]
     for number, exercise in enumerate(material["exercises"], 1):
         cells.append(nbformat.v4.new_markdown_cell(

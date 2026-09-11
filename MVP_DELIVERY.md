@@ -6,9 +6,10 @@ recorded results and worked answers.
 
 ## Teaching sequence
 
-Use [TEACHING_SCHEDULE.md](TEACHING_SCHEDULE.md) for the proposed three lecture
-hours followed by three exercise hours. Confirm clock times and break allocation
-with the organiser. The current book follows this 3+3-hour route. The animated
+Use [TEACHING_SCHEDULE.md](TEACHING_SCHEDULE.md) for the curated three-lecture,
+three-practical route: 150 minutes of lectures and 150 minutes of practicals,
+plus 60 flexible minutes. Confirm clock times with the organiser. The new local
+candidate follows issue #20; the earlier published edition retains its dated receipt. The animated
 introduction maps the retained 44-slide resource onto L1/L2/L3; the complete
 lecture and practical sequence needs its timed rehearsal.
 
@@ -23,7 +24,21 @@ Each practical ends with a field or checked number, a worked answer and stated
 model assumptions. The optional inverse contribution extends the common course
 through particle geometry, retained fracture fields and a guided history lesson.
 
-## Computational scope and recorded local runtimes
+## Three-lab classroom candidate
+
+The curated notebooks combine the existing material as follows:
+
+| Classroom lab | Detailed sources | Learning result |
+| --- | --- | --- |
+| 1 — Simulate fracture | Original 01 | Mesh, boundary conditions, load, fields and saved results. |
+| 2 — Gradients and recovery | Original 02 + 03 | Checked degradation derivative and elastic-bar modulus recovery. |
+| 3 — Learning and hybrid | Original 04 + 05 | Visible training loop, saved model and physical correction. |
+
+The new notebooks require their own execution receipts; the historical timings
+below describe their source examples. The lecture guides and placeholder
+register specify the research exhibits and animations to fill later.
+
+## Detailed-source scope and recorded local runtimes
 
 | Lesson | Model and evidence | Role |
 | --- | --- | --- |
@@ -75,14 +90,15 @@ pause questions. The previous working introduction is retained as a fallback.
 - [x] Map the animated introduction and retained lecture resource to L1/L2/L3.
 - [ ] Rehearse the combined lecture, its motivation by minute 60 and the handover
       to each practical.
-- [x] Execute all six complete classroom notebooks in fresh local processes;
+- [x] Execute all six original detailed notebooks in fresh local processes;
       record their whole-process times after setup and exact source hashes.
 - [ ] Install and rehearse the full package in fresh supported environments,
       including authenticated Colab CPU sessions and a slower laptop; measure
       setup and complete computation separately.
 - [x] Align the forward notebook's preview, actual inputs and result reload;
       inspect the physical effect of a changed load.
-- [ ] Simplify the visible mesh workflow and add a checked Gmsh import activity
+- [x] Simplify the visible mesh cell while preserving the numerical case.
+- [ ] Add a checked Gmsh import activity
       using the [mesh usability plan](source/planning/MESH_USABILITY_REVIEW_20260910.md).
 - [x] Verify local exercise questions, answers, notebook downloads, offline
       outputs, mobile/desktop rendering and mathematical notation.

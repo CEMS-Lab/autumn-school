@@ -1,7 +1,7 @@
 {
   "scope": "all notebook computations after setup, including two full solves, assertions, save/reload and figures",
-  "setup_seconds": 0.017,
-  "computation_seconds": 88.0288597079998,
+  "setup_seconds": 0.015,
+  "computation_seconds": 92.23114637497929,
   "installation": "pre-existing local environment",
   "platform": {
     "python": "3.10.18",
@@ -20,10 +20,10 @@
   "notebook_source": {
     "path": "notebooks/01_phast_tiny_evolving_fracture.ipynb",
     "cell_source_sha256": "9f5bd063e67be398af8ed379ec26e454752cf40411816e6d67d3c680c150b3ea",
-    "authored_file_sha256": "105d4e29481ff474861a964777819f096e29131538f6d5855b5b3f66b0ee3bc7"
+    "authored_file_sha256": "5ce45672c507e45d2565fa57d5a308ba471aa8d703e3181e83d03a111ed906f5"
   },
-  "reference_solve_seconds": 59.889559708004526,
-  "half_load_solve_seconds": 25.275058125000214,
+  "reference_solve_seconds": 64.28061908300151,
+  "half_load_solve_seconds": 25.142546457995195,
   "reference_checks": {
     "finite_states": true,
     "damage_bounds": true,

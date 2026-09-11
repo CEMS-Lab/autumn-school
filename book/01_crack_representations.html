@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>2. Crack Representations: Sharp, Cohesive, and Diffuse &#8212; PhAST: Phase-field fracture with differentiable FEM</title>
+    <title>Crack Representations: Sharp, Cohesive, and Diffuse &#8212; PhAST: Phase-field fracture with differentiable FEM</title>
   
   
   
@@ -52,8 +52,8 @@
     <script src="_static/learning_book.js?v=5aaa4a9b"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="3. Fracture Energy: AT1, AT2, Degradation, and Bandwidth" href="02_phase_field_energy.html" />
-    <link rel="prev" title="1. From Cracks to Computation: Learn by Doing" href="00_welcome_and_routes.html" />
+    <link rel="next" title="Fracture Energy: AT1, AT2, Degradation, and Bandwidth" href="02_phase_field_energy.html" />
+    <link rel="prev" title="From Cracks to Computation: Learn by Doing" href="00_welcome_and_routes.html" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -166,35 +166,44 @@
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="index.html">
-                    PhAST: A Learn-by-Doing Introduction to Phase-Field Fracture
+                    PhAST: fracture simulation, differentiation and learning
                 </a>
             </li>
         </ul>
-        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Theory &amp; Methods</span></p>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Lecture guides</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="lectures/01_fracture_and_phast.html">Lecture 1: Phase-field fracture and PhAST</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lectures/02_differentiability_and_inverse.html">Lecture 2: Differentiability and inverse recovery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lectures/03_hybrid_learning.html">Lecture 3: Learning inside a numerical workflow</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Three practical labs</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="classroom/01_simulate_fracture.html">Practical 1: Simulate and interpret diffuse fracture damage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classroom/02_gradients_and_recovery.html">Practical 2: Gradients and material recovery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classroom/03_learning_and_hybrid.html">Practical 3: Learn a field and assess its proposal</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Reference chapters</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="00_welcome_and_routes.html">1. From Cracks to Computation: Learn by Doing</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">2. Crack Representations: Sharp, Cohesive, and Diffuse</a></li>
-<li class="toctree-l1"><a class="reference internal" href="02_phase_field_energy.html">3. Fracture Energy: AT1, AT2, Degradation, and Bandwidth</a></li>
-<li class="toctree-l1"><a class="reference internal" href="03_staggered_solution.html">4. The Staggered Solution Algorithm: Alternating Mechanics and Damage</a></li>
-<li class="toctree-l1"><a class="reference internal" href="04_fem_to_tensors.html">5. From Weak Forms to Discrete Tensors: The PhAST Pipeline</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="05_differentiation_and_inverse.html">6. Differentiable Mechanics and Inverse Parameter Discovery</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="05a_backpropagation_step_by_step.html">6.4.1. Backpropagation through a stepped update</a></li>
+<li class="toctree-l1"><a class="reference internal" href="00_welcome_and_routes.html">From Cracks to Computation: Learn by Doing</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Crack Representations: Sharp, Cohesive, and Diffuse</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_phase_field_energy.html">Fracture Energy: AT1, AT2, Degradation, and Bandwidth</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_staggered_solution.html">The Staggered Solution Algorithm: Alternating Mechanics and Damage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_fem_to_tensors.html">From Weak Forms to Discrete Tensors: The PhAST Pipeline</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="05_differentiation_and_inverse.html">Differentiable Mechanics and Inverse Parameter Discovery</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="05a_backpropagation_step_by_step.html">Backpropagation through a stepped update</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1"><a class="reference internal" href="06_learning_adapter.html">7. Train, save, reload, adapters, and checked proposals</a></li>
-</ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Hands-On Computational Labs</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="labs/00_why_average_predictions_can_fail.html">Lab 00: Branch Selection &amp; Energy-Based Objectives in Physics-Informed Learning</a></li>
-<li class="toctree-l1"><a class="reference internal" href="labs/01_phast_tiny_evolving_fracture.html">Run and interpret a small PhAST fracture calculation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="labs/02_degradation_autograd.html">Lab 02: Differentiating Degradation: Analytical, Autograd, &amp; Finite Differences</a></li>
-<li class="toctree-l1"><a class="reference internal" href="labs/03_tiny_derivative_inverse_toy.html">Lab 03: Differentiable Mechanics &amp; Inverse Parameter Identification</a></li>
-<li class="toctree-l1"><a class="reference internal" href="labs/04_train_save_reload_adapter.html">Train, save, reload, and compare a field model</a></li>
-<li class="toctree-l1"><a class="reference internal" href="labs/05_hybrid_reference_correction.html">Assess a proposal and use a reference correction</a></li>
-</ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Review &amp; Reference</span></p>
-<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="06_learning_adapter.html">Train, save, reload, adapters, and checked proposals</a></li>
 <li class="toctree-l1"><a class="reference internal" href="07_practice_references.html">Practice, Solutions, Glossary, and References</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="further_practice.html">Detailed notebooks and further practice</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="labs/00_why_average_predictions_can_fail.html">Lab 00: Branch Selection &amp; Energy-Based Objectives in Physics-Informed Learning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="labs/01_phast_tiny_evolving_fracture.html">Run and interpret a small PhAST fracture calculation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="labs/02_degradation_autograd.html">Lab 02: Differentiating Degradation: Analytical, Autograd, &amp; Finite Differences</a></li>
+<li class="toctree-l2"><a class="reference internal" href="labs/03_tiny_derivative_inverse_toy.html">Lab 03: Differentiable Mechanics &amp; Inverse Parameter Identification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="labs/04_train_save_reload_adapter.html">Train, save, reload, and compare a field model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="labs/05_hybrid_reference_correction.html">Assess a proposal and use a reference correction</a></li>
+</ul>
+</details></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Optional inverse experiments</span></p>
 <ul class="nav bd-sidenav">
@@ -407,18 +416,18 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-should-we-represent-a-crack">2.1. How Should We Represent a Crack?</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-starting-point-a-sharp-crack">2.2. The Starting Point: A Sharp Crack</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cohesive-zone-models-separation-on-an-interface">2.3. Cohesive-zone models: separation on an interface</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#xfem-enrich-an-approximation-space">2.4. XFEM: enrich an approximation space</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#phase-field-replace-a-surface-by-a-narrow-band">2.5. Phase field: replace a surface by a narrow band</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-crack-representations">2.6. Comparing Crack Representations</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#when-to-choose-phase-field-fracture">2.6.1. When to Choose Phase-Field Fracture</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-should-we-represent-a-crack">How Should We Represent a Crack?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-starting-point-a-sharp-crack">The Starting Point: A Sharp Crack</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cohesive-zone-models-separation-on-an-interface">Cohesive-zone models: separation on an interface</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#xfem-enrich-an-approximation-space">XFEM: enrich an approximation space</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#phase-field-replace-a-surface-by-a-narrow-band">Phase field: replace a surface by a narrow band</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-crack-representations">Comparing Crack Representations</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#when-to-choose-phase-field-fracture">When to Choose Phase-Field Fracture</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#separating-formulation-discretization-and-solver">2.7. Separating Formulation, Discretization, and Solver</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-identifying-the-computational-layers">2.8. Exercise: Identifying the Computational Layers</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary-of-key-concepts">2.9. Summary of Key Concepts</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#separating-formulation-discretization-and-solver">Separating Formulation, Discretization, and Solver</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-identifying-the-computational-layers">Exercise: Identifying the Computational Layers</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary-of-key-concepts">Summary of Key Concepts</a></li>
 </ul>
             </nav>
         </div>
@@ -431,16 +440,16 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="crack-representations-sharp-cohesive-and-diffuse">
-<h1><span class="section-number">2. </span>Crack Representations: Sharp, Cohesive, and Diffuse<a class="headerlink" href="#crack-representations-sharp-cohesive-and-diffuse" title="Link to this heading">#</a></h1>
+<h1>Crack Representations: Sharp, Cohesive, and Diffuse<a class="headerlink" href="#crack-representations-sharp-cohesive-and-diffuse" title="Link to this heading">#</a></h1>
 <figure class="align-default" id="fig-methods-map">
 <a class="reference internal image-reference" href="_images/01_methods_map.svg"><img alt="Three separate choices: fracture formulation, spatial discretisation and nonlinear solution algorithm. Phase field, XFEM and quasi-Newton answer different questions." src="_images/01_methods_map.svg" style="width: 96%;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Figure 2.1 </span><span class="caption-text">A complete computational simulation requires three distinct engineering choices: the fracture formulation, the spatial discretization, and the nonlinear solver. Keeping these layers modular makes comparing methods clear and straightforward.</span><a class="headerlink" href="#fig-methods-map" title="Link to this image">#</a></p>
+<p><span class="caption-number">Figure 1 </span><span class="caption-text">A complete computational simulation requires three distinct engineering choices: the fracture formulation, the spatial discretization, and the nonlinear solver. Keeping these layers modular makes comparing methods clear and straightforward.</span><a class="headerlink" href="#fig-methods-map" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <section id="how-should-we-represent-a-crack">
-<h2><span class="section-number">2.1. </span>How Should We Represent a Crack?<a class="headerlink" href="#how-should-we-represent-a-crack" title="Link to this heading">#</a></h2>
+<h2>How Should We Represent a Crack?<a class="headerlink" href="#how-should-we-represent-a-crack" title="Link to this heading">#</a></h2>
 <p>Imagine dropping a ceramic cup or watching a car windshield crack after being struck by a pebble. In the real physical world, fracture is an abrupt geometric split: atomic bonds stretch until they snap, creating two brand-new surfaces.</p>
 <p>When engineers attempt to model this on a computer, they face a classic dilemma:
 <em>Should we represent the crack as a razor-sharp geometric boundary that literally slices our mesh in two, or can we represent the damaged material smoothly, like a continuous field of damage density?</em></p>
@@ -453,7 +462,7 @@ document.write(`
 </section>
 <hr class="docutils" />
 <section id="the-starting-point-a-sharp-crack">
-<h2><span class="section-number">2.2. </span>The Starting Point: A Sharp Crack<a class="headerlink" href="#the-starting-point-a-sharp-crack" title="Link to this heading">#</a></h2>
+<h2>The Starting Point: A Sharp Crack<a class="headerlink" href="#the-starting-point-a-sharp-crack" title="Link to this heading">#</a></h2>
 <p>In classical linear elastic fracture mechanics (LEFM), a crack is modeled as an exact lower-dimensional geometric boundary <span class="math notranslate nohighlight">\(\Gamma\)</span> embedded inside a solid body <span class="math notranslate nohighlight">\(\Omega\)</span>. A Griffith-type energy balance compares the bulk elastic strain energy, external work, and the energy required to create new crack surface:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -473,7 +482,7 @@ document.write(`
 <p>The energy balance principle originated with <a class="reference external" href="https://doi.org/10.1098/rsta.1921.0006">Griffith (1921)</a> and was given its modern variational formulation for evolving cracks by <a class="reference external" href="https://doi.org/10.1016/S0022-5096(98)00034-9">Francfort and Marigo (1998)</a>.</p>
 </section>
 <section id="cohesive-zone-models-separation-on-an-interface">
-<h2><span class="section-number">2.3. </span>Cohesive-zone models: separation on an interface<a class="headerlink" href="#cohesive-zone-models-separation-on-an-interface" title="Link to this heading">#</a></h2>
+<h2>Cohesive-zone models: separation on an interface<a class="headerlink" href="#cohesive-zone-models-separation-on-an-interface" title="Link to this heading">#</a></h2>
 <p>A cohesive-zone model (CZM) places a constitutive traction–separation law on
 an interface. If <span class="math notranslate nohighlight">\(\delta\)</span> denotes displacement jump, a simple scalar picture
 is</p>
@@ -499,7 +508,7 @@ physical idealisation from a diffuse crack-density regularisation.</p>
 </div>
 </section>
 <section id="xfem-enrich-an-approximation-space">
-<h2><span class="section-number">2.4. </span>XFEM: enrich an approximation space<a class="headerlink" href="#xfem-enrich-an-approximation-space" title="Link to this heading">#</a></h2>
+<h2>XFEM: enrich an approximation space<a class="headerlink" href="#xfem-enrich-an-approximation-space" title="Link to this heading">#</a></h2>
 <p>The extended finite-element method (XFEM) represents a discontinuity or a
 near-tip feature by enriching a conventional finite-element approximation. A
 schematic displacement approximation is</p>
@@ -521,7 +530,7 @@ The foundational paper is
 <a class="reference external" href="https://doi.org/10.1002/(SICI)1097-0207(19990910)46:1%3C131::AID-NME726%3E3.0.CO;2-J">Moes, Dolbow, and Belytschko (1999)</a>.</p>
 </section>
 <section id="phase-field-replace-a-surface-by-a-narrow-band">
-<h2><span class="section-number">2.5. </span>Phase field: replace a surface by a narrow band<a class="headerlink" href="#phase-field-replace-a-surface-by-a-narrow-band" title="Link to this heading">#</a></h2>
+<h2>Phase field: replace a surface by a narrow band<a class="headerlink" href="#phase-field-replace-a-surface-by-a-narrow-band" title="Link to this heading">#</a></h2>
 <p>In a phase-field formulation, a scalar field <span class="math notranslate nohighlight">\(d(x)\)</span> spreads the crack over a
 band of width governed by a length <span class="math notranslate nohighlight">\(\ell\)</span>. With the convention used here,
 <span class="math notranslate nohighlight">\(d=0\)</span> is intact and <span class="math notranslate nohighlight">\(d=1\)</span> is broken. A typical crack-density functional is</p>
@@ -544,7 +553,7 @@ for brittle fracture by
 <a class="reference external" href="https://doi.org/10.1016/S0022-5096(99)00028-9">Bourdin, Francfort, and Marigo (2000)</a>.</p>
 </section>
 <section id="comparing-crack-representations">
-<h2><span class="section-number">2.6. </span>Comparing Crack Representations<a class="headerlink" href="#comparing-crack-representations" title="Link to this heading">#</a></h2>
+<h2>Comparing Crack Representations<a class="headerlink" href="#comparing-crack-representations" title="Link to this heading">#</a></h2>
 <p>Each representation offers distinct advantages depending on the engineering application:</p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
@@ -584,13 +593,13 @@ for brittle fracture by
 </table>
 </div>
 <section id="when-to-choose-phase-field-fracture">
-<h3><span class="section-number">2.6.1. </span>When to Choose Phase-Field Fracture<a class="headerlink" href="#when-to-choose-phase-field-fracture" title="Link to this heading">#</a></h3>
+<h3>When to Choose Phase-Field Fracture<a class="headerlink" href="#when-to-choose-phase-field-fracture" title="Link to this heading">#</a></h3>
 <p>Phase-field methods have become widely adopted in modern computational mechanics because they transform a complex geometric interface tracking problem into the solution of coupled partial differential equations on a fixed mesh. The crack trajectory, initiation, branching, and coalescence emerge naturally from energy minimization without requiring <em>ad hoc</em> geometric tracking criteria.</p>
 </section>
 </section>
 <hr class="docutils" />
 <section id="separating-formulation-discretization-and-solver">
-<h2><span class="section-number">2.7. </span>Separating Formulation, Discretization, and Solver<a class="headerlink" href="#separating-formulation-discretization-and-solver" title="Link to this heading">#</a></h2>
+<h2>Separating Formulation, Discretization, and Solver<a class="headerlink" href="#separating-formulation-discretization-and-solver" title="Link to this heading">#</a></h2>
 <p>To reason clearly about any computational mechanics calculation, we maintain a clean separation between three levels:</p>
 <ol class="arabic simple">
 <li><p><strong>Continuum Formulation:</strong><br />
@@ -604,7 +613,7 @@ The iterative numerical algorithm used to solve the coupled nonlinear system of 
 </section>
 <hr class="docutils" />
 <section id="exercise-identifying-the-computational-layers">
-<h2><span class="section-number">2.8. </span>Exercise: Identifying the Computational Layers<a class="headerlink" href="#exercise-identifying-the-computational-layers" title="Link to this heading">#</a></h2>
+<h2>Exercise: Identifying the Computational Layers<a class="headerlink" href="#exercise-identifying-the-computational-layers" title="Link to this heading">#</a></h2>
 <p>Consider the following statement from a research paper:</p>
 <blockquote>
 <div><p><em>“We simulate crack branching using an AT2 phase-field model on triangular finite elements solved with a staggered alternating minimization scheme.”</em></p>
@@ -626,7 +635,7 @@ The iterative numerical algorithm used to solve the coupled nonlinear system of 
 </section>
 <hr class="docutils" />
 <section id="summary-of-key-concepts">
-<h2><span class="section-number">2.9. </span>Summary of Key Concepts<a class="headerlink" href="#summary-of-key-concepts" title="Link to this heading">#</a></h2>
+<h2>Summary of Key Concepts<a class="headerlink" href="#summary-of-key-concepts" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p><strong>Sharp vs. Diffuse:</strong> Sharp crack models treat cracks as surfaces of discontinuity; phase-field models diffuse the crack over a narrow zone of characteristic width governed by the length scale <span class="math notranslate nohighlight">\(\ell\)</span>.</p></li>
 <li><p><strong>Energy Balance:</strong> In a phase-field model, the total energy consists of bulk elastic strain energy and surface fracture dissipation.</p></li>
@@ -652,7 +661,7 @@ The iterative numerical algorithm used to solve the coupled nonlinear system of 
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">1. </span>From Cracks to Computation: Learn by Doing</p>
+        <p class="prev-next-title">From Cracks to Computation: Learn by Doing</p>
       </div>
     </a>
     <a class="right-next"
@@ -660,7 +669,7 @@ The iterative numerical algorithm used to solve the coupled nonlinear system of 
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">3. </span>Fracture Energy: AT1, AT2, Degradation, and Bandwidth</p>
+        <p class="prev-next-title">Fracture Energy: AT1, AT2, Degradation, and Bandwidth</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -680,18 +689,18 @@ The iterative numerical algorithm used to solve the coupled nonlinear system of 
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-should-we-represent-a-crack">2.1. How Should We Represent a Crack?</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-starting-point-a-sharp-crack">2.2. The Starting Point: A Sharp Crack</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cohesive-zone-models-separation-on-an-interface">2.3. Cohesive-zone models: separation on an interface</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#xfem-enrich-an-approximation-space">2.4. XFEM: enrich an approximation space</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#phase-field-replace-a-surface-by-a-narrow-band">2.5. Phase field: replace a surface by a narrow band</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-crack-representations">2.6. Comparing Crack Representations</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#when-to-choose-phase-field-fracture">2.6.1. When to Choose Phase-Field Fracture</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-should-we-represent-a-crack">How Should We Represent a Crack?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-starting-point-a-sharp-crack">The Starting Point: A Sharp Crack</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cohesive-zone-models-separation-on-an-interface">Cohesive-zone models: separation on an interface</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#xfem-enrich-an-approximation-space">XFEM: enrich an approximation space</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#phase-field-replace-a-surface-by-a-narrow-band">Phase field: replace a surface by a narrow band</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-crack-representations">Comparing Crack Representations</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#when-to-choose-phase-field-fracture">When to Choose Phase-Field Fracture</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#separating-formulation-discretization-and-solver">2.7. Separating Formulation, Discretization, and Solver</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-identifying-the-computational-layers">2.8. Exercise: Identifying the Computational Layers</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary-of-key-concepts">2.9. Summary of Key Concepts</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#separating-formulation-discretization-and-solver">Separating Formulation, Discretization, and Solver</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-identifying-the-computational-layers">Exercise: Identifying the Computational Layers</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary-of-key-concepts">Summary of Key Concepts</a></li>
 </ul>
   </nav></div>
 

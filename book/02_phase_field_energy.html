@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>3. Fracture Energy: AT1, AT2, Degradation, and Bandwidth &#8212; PhAST: Phase-field fracture with differentiable FEM</title>
+    <title>Fracture Energy: AT1, AT2, Degradation, and Bandwidth &#8212; PhAST: Phase-field fracture with differentiable FEM</title>
   
   
   
@@ -52,8 +52,8 @@
     <script src="_static/learning_book.js?v=5aaa4a9b"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="4. The Staggered Solution Algorithm: Alternating Mechanics and Damage" href="03_staggered_solution.html" />
-    <link rel="prev" title="2. Crack Representations: Sharp, Cohesive, and Diffuse" href="01_crack_representations.html" />
+    <link rel="next" title="The Staggered Solution Algorithm: Alternating Mechanics and Damage" href="03_staggered_solution.html" />
+    <link rel="prev" title="Crack Representations: Sharp, Cohesive, and Diffuse" href="01_crack_representations.html" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -166,35 +166,44 @@
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="index.html">
-                    PhAST: A Learn-by-Doing Introduction to Phase-Field Fracture
+                    PhAST: fracture simulation, differentiation and learning
                 </a>
             </li>
         </ul>
-        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Theory &amp; Methods</span></p>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Lecture guides</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="lectures/01_fracture_and_phast.html">Lecture 1: Phase-field fracture and PhAST</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lectures/02_differentiability_and_inverse.html">Lecture 2: Differentiability and inverse recovery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lectures/03_hybrid_learning.html">Lecture 3: Learning inside a numerical workflow</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Three practical labs</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="classroom/01_simulate_fracture.html">Practical 1: Simulate and interpret diffuse fracture damage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classroom/02_gradients_and_recovery.html">Practical 2: Gradients and material recovery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classroom/03_learning_and_hybrid.html">Practical 3: Learn a field and assess its proposal</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Reference chapters</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="00_welcome_and_routes.html">1. From Cracks to Computation: Learn by Doing</a></li>
-<li class="toctree-l1"><a class="reference internal" href="01_crack_representations.html">2. Crack Representations: Sharp, Cohesive, and Diffuse</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">3. Fracture Energy: AT1, AT2, Degradation, and Bandwidth</a></li>
-<li class="toctree-l1"><a class="reference internal" href="03_staggered_solution.html">4. The Staggered Solution Algorithm: Alternating Mechanics and Damage</a></li>
-<li class="toctree-l1"><a class="reference internal" href="04_fem_to_tensors.html">5. From Weak Forms to Discrete Tensors: The PhAST Pipeline</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="05_differentiation_and_inverse.html">6. Differentiable Mechanics and Inverse Parameter Discovery</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="05a_backpropagation_step_by_step.html">6.4.1. Backpropagation through a stepped update</a></li>
+<li class="toctree-l1"><a class="reference internal" href="00_welcome_and_routes.html">From Cracks to Computation: Learn by Doing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="01_crack_representations.html">Crack Representations: Sharp, Cohesive, and Diffuse</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Fracture Energy: AT1, AT2, Degradation, and Bandwidth</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_staggered_solution.html">The Staggered Solution Algorithm: Alternating Mechanics and Damage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_fem_to_tensors.html">From Weak Forms to Discrete Tensors: The PhAST Pipeline</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="05_differentiation_and_inverse.html">Differentiable Mechanics and Inverse Parameter Discovery</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="05a_backpropagation_step_by_step.html">Backpropagation through a stepped update</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1"><a class="reference internal" href="06_learning_adapter.html">7. Train, save, reload, adapters, and checked proposals</a></li>
-</ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Hands-On Computational Labs</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="labs/00_why_average_predictions_can_fail.html">Lab 00: Branch Selection &amp; Energy-Based Objectives in Physics-Informed Learning</a></li>
-<li class="toctree-l1"><a class="reference internal" href="labs/01_phast_tiny_evolving_fracture.html">Run and interpret a small PhAST fracture calculation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="labs/02_degradation_autograd.html">Lab 02: Differentiating Degradation: Analytical, Autograd, &amp; Finite Differences</a></li>
-<li class="toctree-l1"><a class="reference internal" href="labs/03_tiny_derivative_inverse_toy.html">Lab 03: Differentiable Mechanics &amp; Inverse Parameter Identification</a></li>
-<li class="toctree-l1"><a class="reference internal" href="labs/04_train_save_reload_adapter.html">Train, save, reload, and compare a field model</a></li>
-<li class="toctree-l1"><a class="reference internal" href="labs/05_hybrid_reference_correction.html">Assess a proposal and use a reference correction</a></li>
-</ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Review &amp; Reference</span></p>
-<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="06_learning_adapter.html">Train, save, reload, adapters, and checked proposals</a></li>
 <li class="toctree-l1"><a class="reference internal" href="07_practice_references.html">Practice, Solutions, Glossary, and References</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="further_practice.html">Detailed notebooks and further practice</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="labs/00_why_average_predictions_can_fail.html">Lab 00: Branch Selection &amp; Energy-Based Objectives in Physics-Informed Learning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="labs/01_phast_tiny_evolving_fracture.html">Run and interpret a small PhAST fracture calculation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="labs/02_degradation_autograd.html">Lab 02: Differentiating Degradation: Analytical, Autograd, &amp; Finite Differences</a></li>
+<li class="toctree-l2"><a class="reference internal" href="labs/03_tiny_derivative_inverse_toy.html">Lab 03: Differentiable Mechanics &amp; Inverse Parameter Identification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="labs/04_train_save_reload_adapter.html">Train, save, reload, and compare a field model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="labs/05_hybrid_reference_correction.html">Assess a proposal and use a reference correction</a></li>
+</ul>
+</details></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Optional inverse experiments</span></p>
 <ul class="nav bd-sidenav">
@@ -407,19 +416,19 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-energy-balance-why-do-materials-break">3.1. The Energy Balance: Why Do Materials Break?</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-phase-field-energy-functional">3.2. The Phase-Field Energy Functional</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-damage-convention-and-degradation-derivative">3.3. The damage convention and degradation derivative</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hands-on-lab-verifying-the-degradation-derivative">3.4. Hands-On Lab: Verifying the Degradation Derivative</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#at2-and-at1-are-normalised-choices">3.5. AT2 and AT1 are normalised choices</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-the-profiles-look-different">3.5.1. Why the profiles look different</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-energy-balance-why-do-materials-break">The Energy Balance: Why Do Materials Break?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-phase-field-energy-functional">The Phase-Field Energy Functional</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-damage-convention-and-degradation-derivative">The damage convention and degradation derivative</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hands-on-lab-verifying-the-degradation-derivative">Hands-On Lab: Verifying the Degradation Derivative</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#at2-and-at1-are-normalised-choices">AT2 and AT1 are normalised choices</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-the-profiles-look-different">Why the profiles look different</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deriving-the-strong-form-damage-residual">3.6. Deriving the strong-form damage residual</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#enforcing-irreversibility">3.7. Enforcing irreversibility</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#width-mesh-and-what-must-be-checked">3.8. Width, mesh, and what must be checked</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-one-derivative-and-one-scale-argument">3.9. Exercise: one derivative and one scale argument</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sources-for-this-chapter">3.10. Sources for this chapter</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deriving-the-strong-form-damage-residual">Deriving the strong-form damage residual</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#enforcing-irreversibility">Enforcing irreversibility</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#width-mesh-and-what-must-be-checked">Width, mesh, and what must be checked</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-one-derivative-and-one-scale-argument">Exercise: one derivative and one scale argument</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sources-for-this-chapter">Sources for this chapter</a></li>
 </ul>
             </nav>
         </div>
@@ -432,16 +441,16 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="fracture-energy-at1-at2-degradation-and-bandwidth">
-<h1><span class="section-number">3. </span>Fracture Energy: AT1, AT2, Degradation, and Bandwidth<a class="headerlink" href="#fracture-energy-at1-at2-degradation-and-bandwidth" title="Link to this heading">#</a></h1>
+<h1>Fracture Energy: AT1, AT2, Degradation, and Bandwidth<a class="headerlink" href="#fracture-energy-at1-at2-degradation-and-bandwidth" title="Link to this heading">#</a></h1>
 <figure class="align-default" id="fig-energy-profiles">
 <a class="reference internal image-reference" href="_images/02_energy_profiles.png"><img alt="_images/02_energy_profiles.png" src="_images/02_energy_profiles.png" style="width: 96%;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Figure 3.1 </span><span class="caption-text">The crack-density choice and the stiffness degradation law are independent mathematical functions. Together, they govern how damage nucleates, diffuses, and softens the solid.</span><a class="headerlink" href="#fig-energy-profiles" title="Link to this image">#</a></p>
+<p><span class="caption-number">Figure 2 </span><span class="caption-text">The crack-density choice and the stiffness degradation law are independent mathematical functions. Together, they govern how damage nucleates, diffuses, and softens the solid.</span><a class="headerlink" href="#fig-energy-profiles" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <section id="the-energy-balance-why-do-materials-break">
-<h2><span class="section-number">3.1. </span>The Energy Balance: Why Do Materials Break?<a class="headerlink" href="#the-energy-balance-why-do-materials-break" title="Link to this heading">#</a></h2>
+<h2>The Energy Balance: Why Do Materials Break?<a class="headerlink" href="#the-energy-balance-why-do-materials-break" title="Link to this heading">#</a></h2>
 <p>When an engineer pulls on a solid bar, work is done to stretch the atomic bonds. This energy is stored elastically inside the material. If a tiny defect or notch exists, stress concentrates intensely near the notch tip.</p>
 <p>At some critical point, the solid faces a fundamental thermodynamic choice:
 <em>Is it energetically cheaper to keep stretching the heavily strained atomic bonds, or to break them and create two free crack surfaces?</em></p>
@@ -461,7 +470,7 @@ where <span class="math notranslate nohighlight">\(G_c\)</span> is the <strong>f
 </section>
 <hr class="docutils" />
 <section id="the-phase-field-energy-functional">
-<h2><span class="section-number">3.2. </span>The Phase-Field Energy Functional<a class="headerlink" href="#the-phase-field-energy-functional" title="Link to this heading">#</a></h2>
+<h2>The Phase-Field Energy Functional<a class="headerlink" href="#the-phase-field-energy-functional" title="Link to this heading">#</a></h2>
 <p>For small-strain brittle fracture, the total potential energy of the coupled displacement-damage system is formulated as:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -489,7 +498,7 @@ tensile contribution;</p></li>
 or mixed-mode behaviour.</p>
 </section>
 <section id="the-damage-convention-and-degradation-derivative">
-<h2><span class="section-number">3.3. </span>The damage convention and degradation derivative<a class="headerlink" href="#the-damage-convention-and-degradation-derivative" title="Link to this heading">#</a></h2>
+<h2>The damage convention and degradation derivative<a class="headerlink" href="#the-damage-convention-and-degradation-derivative" title="Link to this heading">#</a></h2>
 <p>This book uses <span class="math notranslate nohighlight">\(d=0\)</span> for intact material and <span class="math notranslate nohighlight">\(d=1\)</span> for fully broken material.
 A standard residual-stiffness degradation law is</p>
 <div class="math notranslate nohighlight">
@@ -514,7 +523,7 @@ fracture density, gradients, boundary data, and irreversibility through the
 total variation.</p>
 </section>
 <section id="hands-on-lab-verifying-the-degradation-derivative">
-<h2><span class="section-number">3.4. </span>Hands-On Lab: Verifying the Degradation Derivative<a class="headerlink" href="#hands-on-lab-verifying-the-degradation-derivative" title="Link to this heading">#</a></h2>
+<h2>Hands-On Lab: Verifying the Degradation Derivative<a class="headerlink" href="#hands-on-lab-verifying-the-degradation-derivative" title="Link to this heading">#</a></h2>
 <p>In the accompanying computational lesson, you will implement this quadratic degradation law in PyTorch and compute its derivative:</p>
 <ul class="simple">
 <li><p><strong>Analytically:</strong> Using explicit calculus, <span class="math notranslate nohighlight">\(g'_\eta(d) = -2(1-\eta_{\mathrm{res}})(1-d)\)</span>.</p></li>
@@ -524,18 +533,18 @@ total variation.</p>
 <div class="tip admonition">
 <p class="admonition-title">Hands-On Tutorial: Lab 02 (Autograd vs. Finite Differences for Degradation)</p>
 <p><strong>Ready to try this in practice?</strong><br />
-Explore the interactive tutorial: <strong><a class="reference internal" href="labs/02_degradation_autograd.html"><span class="doc">Lab 02: Differentiating Degradation: Analytical, Autograd, &amp; Finite Differences</span></a></strong>.<br />
+Explore the interactive tutorial: <strong><a class="reference internal" href="classroom/02_gradients_and_recovery.html"><span class="doc">Practical 2: Gradients and material recovery</span></a></strong>.
 You can read through the worked derivatives and Taylor tests directly here in the book, or run it interactively in <strong>Google Colab</strong> with one click:</p>
 <div class="badge-row">
-  <a class="badge-colab" href="https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/study/02_degradation_autograd.ipynb" target="_blank"><img src="_static/colab-badge.svg" alt="Open In Colab"/></a>
-  <a class="badge-link" href="../notebooks/study/02_degradation_autograd.ipynb"><i class="fa-solid fa-download"></i> Download Practice Notebook</a>
-  <a class="badge-link" href="../notebooks/solutions/02_degradation_autograd.ipynb"><i class="fa-solid fa-check-circle"></i> Download Worked Solutions</a>
+  <a class="badge-colab" href="https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/study/classroom/02_gradients_and_recovery.ipynb" target="_blank"><img src="_static/colab-badge.svg" alt="Open In Colab"/></a>
+  <a class="badge-link" href="../notebooks/study/classroom/02_gradients_and_recovery.ipynb"><i class="fa-solid fa-download"></i> Download Practice Notebook</a>
+  <a class="badge-link" href="../notebooks/solutions/classroom/02_gradients_and_recovery.ipynb"><i class="fa-solid fa-check-circle"></i> Download Worked Solutions</a>
 </div>
 </div>
 <p>This exercise demonstrates the core mechanic of automatic differentiation: computing exact programmatic derivatives through the operations defined in your code.</p>
 </section>
 <section id="at2-and-at1-are-normalised-choices">
-<h2><span class="section-number">3.5. </span>AT2 and AT1 are normalised choices<a class="headerlink" href="#at2-and-at1-are-normalised-choices" title="Link to this heading">#</a></h2>
+<h2>AT2 and AT1 are normalised choices<a class="headerlink" href="#at2-and-at1-are-normalised-choices" title="Link to this heading">#</a></h2>
 <p>The crack-density contribution is often written</p>
 <div class="math notranslate nohighlight">
 \[
@@ -557,7 +566,7 @@ c_0=4\int_0^1\sqrt{w(s)}\,\mathrm{d}s.
 different because authors absorb factors into <span class="math notranslate nohighlight">\(G_c\)</span>, <span class="math notranslate nohighlight">\(c_0\)</span>, or the gradient
 term. Compare the complete functionals and their normalisation.</p>
 <section id="why-the-profiles-look-different">
-<h3><span class="section-number">3.5.1. </span>Why the profiles look different<a class="headerlink" href="#why-the-profiles-look-different" title="Link to this heading">#</a></h3>
+<h3>Why the profiles look different<a class="headerlink" href="#why-the-profiles-look-different" title="Link to this heading">#</a></h3>
 <p>At a fully developed straight crack in an idealised one-dimensional setting,
 the AT2 profile has exponential tails,</p>
 <div class="math notranslate nohighlight">
@@ -581,7 +590,7 @@ history construction, which determine how the initiation thresholds compare.</p>
 </section>
 </section>
 <section id="deriving-the-strong-form-damage-residual">
-<h2><span class="section-number">3.6. </span>Deriving the strong-form damage residual<a class="headerlink" href="#deriving-the-strong-form-damage-residual" title="Link to this heading">#</a></h2>
+<h2>Deriving the strong-form damage residual<a class="headerlink" href="#deriving-the-strong-form-damage-residual" title="Link to this heading">#</a></h2>
 <p>Hold <span class="math notranslate nohighlight">\(u\)</span> fixed momentarily and take a virtual change <span class="math notranslate nohighlight">\(\delta d\)</span>. The
 damage-dependent part of the first variation is</p>
 <div class="math notranslate nohighlight">
@@ -615,7 +624,7 @@ mechanical driving energy and a one-way damage history. These latter terms
 give the equation its fracture interpretation.</p>
 </section>
 <section id="enforcing-irreversibility">
-<h2><span class="section-number">3.7. </span>Enforcing irreversibility<a class="headerlink" href="#enforcing-irreversibility" title="Link to this heading">#</a></h2>
+<h2>Enforcing irreversibility<a class="headerlink" href="#enforcing-irreversibility" title="Link to this heading">#</a></h2>
 <p>For brittle damage, a common admissible set at load step <span class="math notranslate nohighlight">\(n\)</span> is</p>
 <div class="math notranslate nohighlight">
 \[
@@ -637,7 +646,7 @@ under stated assumptions. Verify irreversibility using the stored constraint
 or history data alongside the field plots.</p>
 </section>
 <section id="width-mesh-and-what-must-be-checked">
-<h2><span class="section-number">3.8. </span>Width, mesh, and what must be checked<a class="headerlink" href="#width-mesh-and-what-must-be-checked" title="Link to this heading">#</a></h2>
+<h2>Width, mesh, and what must be checked<a class="headerlink" href="#width-mesh-and-what-must-be-checked" title="Link to this heading">#</a></h2>
 <p>The parameter <span class="math notranslate nohighlight">\(\ell\)</span> is a modelling and numerical length. It spreads the
 regularised crack and therefore interacts with mesh spacing <span class="math notranslate nohighlight">\(h\)</span>, geometry, and
 material calibration. A credible study reports <span class="math notranslate nohighlight">\(\ell\)</span>, the mesh, and a
@@ -653,7 +662,7 @@ convergence or sensitivity check appropriate to that combination.</p>
 calibration for the chosen material and model.</p>
 </section>
 <section id="exercise-one-derivative-and-one-scale-argument">
-<h2><span class="section-number">3.9. </span>Exercise: one derivative and one scale argument<a class="headerlink" href="#exercise-one-derivative-and-one-scale-argument" title="Link to this heading">#</a></h2>
+<h2>Exercise: one derivative and one scale argument<a class="headerlink" href="#exercise-one-derivative-and-one-scale-argument" title="Link to this heading">#</a></h2>
 <ol class="arabic simple">
 <li><p>Evaluate <span class="math notranslate nohighlight">\(g_\eta(0)\)</span>, <span class="math notranslate nohighlight">\(g_\eta(1)\)</span>, and <span class="math notranslate nohighlight">\(g_\eta'(1)\)</span> for the law above.</p></li>
 <li><p>In the damage residual, which term becomes large when <span class="math notranslate nohighlight">\(\ell\)</span> is made small
@@ -681,7 +690,7 @@ material inputs held fixed.</p>
 </div>
 </section>
 <section id="sources-for-this-chapter">
-<h2><span class="section-number">3.10. </span>Sources for this chapter<a class="headerlink" href="#sources-for-this-chapter" title="Link to this heading">#</a></h2>
+<h2>Sources for this chapter<a class="headerlink" href="#sources-for-this-chapter" title="Link to this heading">#</a></h2>
 <p>The Ambrosio–Tortorelli regularisation idea underlies the AT terminology.
 For phase-field fracture derivations and comparisons, see
 <a class="reference external" href="https://doi.org/10.1002/nme.2861">Miehe, Welschinger, and Hofacker (2010)</a>,
@@ -708,7 +717,7 @@ review by <a class="reference external" href="https://doi.org/10.1098/rsta.2021.
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">2. </span>Crack Representations: Sharp, Cohesive, and Diffuse</p>
+        <p class="prev-next-title">Crack Representations: Sharp, Cohesive, and Diffuse</p>
       </div>
     </a>
     <a class="right-next"
@@ -716,7 +725,7 @@ review by <a class="reference external" href="https://doi.org/10.1098/rsta.2021.
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">4. </span>The Staggered Solution Algorithm: Alternating Mechanics and Damage</p>
+        <p class="prev-next-title">The Staggered Solution Algorithm: Alternating Mechanics and Damage</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -736,19 +745,19 @@ review by <a class="reference external" href="https://doi.org/10.1098/rsta.2021.
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-energy-balance-why-do-materials-break">3.1. The Energy Balance: Why Do Materials Break?</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-phase-field-energy-functional">3.2. The Phase-Field Energy Functional</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-damage-convention-and-degradation-derivative">3.3. The damage convention and degradation derivative</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hands-on-lab-verifying-the-degradation-derivative">3.4. Hands-On Lab: Verifying the Degradation Derivative</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#at2-and-at1-are-normalised-choices">3.5. AT2 and AT1 are normalised choices</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-the-profiles-look-different">3.5.1. Why the profiles look different</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-energy-balance-why-do-materials-break">The Energy Balance: Why Do Materials Break?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-phase-field-energy-functional">The Phase-Field Energy Functional</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-damage-convention-and-degradation-derivative">The damage convention and degradation derivative</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hands-on-lab-verifying-the-degradation-derivative">Hands-On Lab: Verifying the Degradation Derivative</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#at2-and-at1-are-normalised-choices">AT2 and AT1 are normalised choices</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-the-profiles-look-different">Why the profiles look different</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deriving-the-strong-form-damage-residual">3.6. Deriving the strong-form damage residual</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#enforcing-irreversibility">3.7. Enforcing irreversibility</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#width-mesh-and-what-must-be-checked">3.8. Width, mesh, and what must be checked</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-one-derivative-and-one-scale-argument">3.9. Exercise: one derivative and one scale argument</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sources-for-this-chapter">3.10. Sources for this chapter</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deriving-the-strong-form-damage-residual">Deriving the strong-form damage residual</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#enforcing-irreversibility">Enforcing irreversibility</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#width-mesh-and-what-must-be-checked">Width, mesh, and what must be checked</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-one-derivative-and-one-scale-argument">Exercise: one derivative and one scale argument</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sources-for-this-chapter">Sources for this chapter</a></li>
 </ul>
   </nav></div>
 

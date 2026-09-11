@@ -1,0 +1,36 @@
+{
+  "scope": "Local damaged-bar constitutive teaching model",
+  "input_order": [
+    "u",
+    "d"
+  ],
+  "q": [
+    0.1,
+    0.5
+  ],
+  "E": 2.0,
+  "A": 1.0,
+  "length": 1.0,
+  "residual_stiffness": 0,
+  "target_force": 0.04,
+  "force": 0.05,
+  "loss": 5.000000000000002e-05,
+  "force_gradient": [
+    0.5,
+    -0.2
+  ],
+  "loss_gradient_autograd": [
+    0.005000000000000001,
+    -0.0020000000000000005
+  ],
+  "loss_gradient_analytic": [
+    0.005000000000000001,
+    -0.0020000000000000005
+  ],
+  "loss_gradient_central_fd": [
+    0.005000000000007576,
+    -0.00199999999996034
+  ],
+  "fd_step": 1e-06,
+  "max_fd_absolute_error": 3.9660549150388746e-14
+}

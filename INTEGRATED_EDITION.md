@@ -1,6 +1,7 @@
 # About the integrated edition
 
-The HTML book renders six notebooks as native chapter pages, including their
+The HTML book presents three classroom notebooks and preserves six detailed
+reference notebooks as native chapter pages, including their
 code and recorded outputs. MyST-NB and Sphinx generate the HTML reading route;
 each computational lesson provides downloadable practice and solution notebooks.
 

@@ -1,148 +1,52 @@
-# Day two: three lecture hours, then three exercise hours
+# Day two: three lectures and three practicals
 
-Current delivery route, aligned with design directives #17–18. Frozen
-v0.1.1 artifacts retain the earlier mixed 2+2+2-hour schedule. The animated
-slide candidate and today's execution/review evidence are tracked in TODAY.md.
+Curated from the 10 September voice-memo discussion and the maintainer's
+follow-up. This schedule supersedes the earlier six-hour contact-time baseline.
+The proposed event window contains **150 minutes of lectures, 150 minutes of
+practicals and 60 minutes for breaks, questions, setup support and extension**.
+Lunch sits outside this six-hour allocation; organisers confirm clock times.
+An earlier finish is appropriate when the learning outcomes have been met.
 
-The audience knows basic mechanics, calculus and introductory Python but need
-not know fracture, phase fields or automatic differentiation. Connect every
-block to the same question: how does a damaged body respond, how does its
-response depend on an input, and where could a learned component assist?
+## Morning: the solver, its gradients and hybrid learning
 
-## Timing
+| Block | Minutes | Sequence |
+| --- | ---: | --- |
+| L1 — Phase-field fracture and PhAST | 45 | Crack and damage field (6); energy and degradation (12); one numerical increment (13); tensors, matrix-free actions and dynamics (10); practical connection (4). |
+| L2 — Differentiability and inverse applications | 55 | Parameter and observation (6); reverse sensitivity (12); derivative scope (10); fracture-energy, single-particle, multi-particle and non-particle exhibit slots (22); practical connection (5). |
+| L3 — Hybrid numerical and learned methods | 50 | Training motivation (8); damage-subsolve replacement (10); prediction and physical correction (10); compatible model comparison (10); online learning and DAgger (8); practical connection (4). |
 
-Baseline: 180 lecture minutes followed by 180 exercise minutes. These are
-relative contact times, not event clock times. Lunch/breaks need separate
-organiser confirmation. If the allocation includes 30 minutes of breaks,
-use the six 55-minute blocks described below. Notebook computation is measured
-separately but included within the allocated practical slots; each complete
-run must stay below 300 seconds after setup.
+Guides and fill-in slots: `source/book/lectures/`. Research exhibits require
+approved public evidence before replacing their outlines. The non-particle
+example in the recording remains unnamed until its identity is confirmed.
 
-## L1 — fracture and numerical solvers
+## Afternoon: three guided notebooks
 
-| Minutes | Content | Student checkpoint |
-| --- | --- | --- |
-| 00–05 | Notched-body physical question, damage field and load response. | Name the fields and one observable. |
-| 05–13 | Sharp cracks, cohesive models, XFEM and phase fields, with trade-offs. | Distinguish formulation, approximation and solution algorithm. |
-| 13–26 | Annotated elastic/fracture energy, damage convention, length scale and degradation; initiation and branching as physical questions. | Identify stored energy, crack cost and regularisation. |
-| 26–40 | FEM residuals, staggered versus monolithic coupling; explicit solid dynamics with implicit damage, stability and convergence. | Trace mechanics, driving quantity, damage and checks. |
-| 40–50 | Tensor operations and assembled versus matrix-free actions. | Explain an operator action and what need not be stored. |
-| 50–60 | PhAST introduction and motivation for sensitivities, inverse calibration and learned proposals. Preview the actual afternoon case. | State the questions for L2 and L3. |
+| Block | Minutes | Sequence and model |
+| --- | ---: | --- |
+| P1 — Simulate and interpret fracture | 50 | Setup (8); geometry/notch/mesh and BCs (10); load and solve (7); fields, animation, energy curves and archives (15); saved-field exercises (10). Actual PhAST dynamic spectral AT2, explicit momentum and implicit damage. |
+| P2 — Gradients and recovery | 50 | Damaged-bar autodiff primer (10); degradation and analytic/AD/FD comparison (10); bar observation and sensitivity (10); parameter recovery (10); exercise and fracture transfer (10). Public degradation law and compact bar teaching models. |
+| P3 — Learning and hybrid correction | 50 | Data/feature contract (8); training and inspection (12); save/reload (8); propose, assess and correct (12); exercise and route comparison (10). Teaching Helmholtz field. |
 
-Use one energy visual and one staggered update. Keep more degradation laws,
-fracture history and transport derivations in the book. The final ten minutes
-must already connect the solver to differentiability and hybrid learning.
+Each block is one notebook with one environment setup and two structured
+exercises. Complete computational runs must remain below **120 seconds after setup**;
+explanation, prediction and discussion occupy the rest of the slot.
+Fresh Colab and presentation-machine rehearsal retain separate delivery checks.
 
-## L2 — differentiability and inverse problems
+## Flexible time
 
-| Minutes | Content | Student checkpoint |
-| --- | --- | --- |
-| 00–08 | Parameter, state, observation and scalar loss. | State the derivative direction. |
-| 08–22 | One explicit update, local derivatives and vector–Jacobian product. | Work one scalar derivative by hand. |
-| 22–35 | Several updates, reverse accumulation and shared-parameter contributions. | Explain why contributions must be summed. |
-| 35–45 | Implicit damage adjoint, active branches and nonsmooth history operations. | State which derivative a check concerns. |
-| 45–55 | Bar inverse example; observations, identifiability and fracture-specific complications. | Identify an ambiguous observation. |
-| 55–60 | Calibration parameters versus trainable model weights. | Connect the loss to the selected weights. |
+Allocate the remaining 60 minutes with the organisers: for example, two
+15-minute breaks, 15 minutes of setup support and 15 minutes of discussion or
+extension. These are proposed allocations. Paper exhibits fit inside L2/L3;
+a longer paper discussion replaces an allocated activity.
 
-Use the existing derivation and label the bar as a teaching model. The separate
-inverse/history extension is reviewed optional detail. Tensor notation does
-not alone establish a valid gradient through every implementation operation.
+## Preserved material and next steps
 
-## L3 — hybrid numerical and learned methods
+The original individual notebooks remain in `notebooks/` and the book's
+**Detailed notebooks and further practice** section. The algebraic teaser is
+optional. Existing editable presentations, movies, theory and research readings
+are retained. The placeholder register maps them to the curated lecture route.
 
-| Minutes | Content | Student checkpoint |
-| --- | --- | --- |
-| 00–08 | Offline surrogate, in-solver proposal and end-to-end training graphs. | Locate the numerical solve and loss. |
-| 08–20 | Inputs/targets, units/locations, data splits, MLP/RBF and graph-model contracts. | Explain why matching output size is insufficient for a model swap. |
-| 20–32 | Train, evaluate, save metadata/weights, reload and predict. | Name the held-out and reload checks. |
-| 32–45 | Proposed field, admissibility/residual checks, correction, recheck and rejection. | Explain the response to a poor prediction or failed correction. |
-| 45–53 | DAgger-style visited states, reference labels, aggregation, retraining and independent evaluation. | Distinguish the loop from one online gradient step. |
-| 53–60 | One approved actual hybrid exhibit if ready; otherwise a labelled toy-to-fracture transfer discussion. | Name the evidence needed for a wall-time benefit. |
-
-No new architecture sweep or large-model training is required. A research
-exhibit replaces this slot and must have approved provenance and limitations.
-
-## P1 — run and interpret PhAST
-
-Use [notebook 01](notebooks/study/01_phast_tiny_evolving_fracture.ipynb),
-with [worked solutions](notebooks/solutions/01_phast_tiny_evolving_fracture.ipynb).
-This is actual public PhAST AT2, but its mechanics route is quasistatic and
-assembled/sparse-direct. Explicit dynamics and matrix-free mechanics from L1
-are not demonstrated by this run.
-
-| Minutes | Activity |
-| --- | --- |
-| 00–10 | Check setup/source pin; inspect geometry, mesh, material and boundary conditions. If setup stalls, use retained outputs and a running partner. |
-| 10–15 | Predict damage concentration; distinguish the locked precrack. |
-| 15–20 | Execute the unchanged baseline or inspect the recorded run. |
-| 20–40 | Compare initial/final/incremental damage, load response and stagger checks. |
-| 40–52 | Change the applied separation, compare the fields/response, and work through the mesh and loading exercises. |
-| 52–60 | Explain how the prescribed loading shapes one field and one scalar response. |
-
-Do not make an untested stronger-load case mandatory. Existing attempted variants
-stopped at configured nonconvergence. An external mesher import is not part
-of the minimum route; the existing prepared mesh uses a tensor/NPZ round-trip.
-
-## P2 — check derivatives and recover a parameter
-
-Use [notebook 02](notebooks/study/02_degradation_autograd.ipynb) and
-[notebook 03](notebooks/study/03_tiny_derivative_inverse_toy.ipynb), with
-[02 solutions](notebooks/solutions/02_degradation_autograd.ipynb) and
-[03 solutions](notebooks/solutions/03_tiny_derivative_inverse_toy.ipynb). The first checks
-the exact public degradation law locally; the second is an elastic-bar tensor
-inverse teaching model, not full fracture inversion.
-
-| Minutes | Activity |
-| --- | --- |
-| 00–10 | Derive the degradation slope/curvature and predict their signs. |
-| 10–15 | Compare analytic, autograd and centred finite differences. |
-| 15–25 | Complete the two derivative exercises and discuss scope. |
-| 25–35 | Derive the bar tip response and its modulus sensitivity. |
-| 35–40 | Execute the derivative and modulus-recovery baseline. |
-| 40–52 | Inspect recovery, positive parameterisation and held-out response; complete exercises. |
-| 52–60 | Explain observable, loss, gradient and optional optimiser step. |
-
-## P3 — train, reload and assess a learned proposal
-
-Use [notebook 04](notebooks/study/04_train_save_reload_adapter.ipynb) and
-[notebook 05](notebooks/study/05_hybrid_reference_correction.ipynb), with
-[04 solutions](notebooks/solutions/04_train_save_reload_adapter.ipynb) and
-[05 solutions](notebooks/solutions/05_hybrid_reference_correction.ipynb). These are
-ToyHelmholtzProblem MLP/RBF and correction exercises, not trained PhAST damage
-models or an executed full DAgger experiment.
-
-| Minutes | Activity |
-| --- | --- |
-| 00–08 | Inspect whole-case train/validation/test splits and input/output contract. |
-| 08–13 | Run bounded MLP training, save and reload. |
-| 13–30 | Compare reference/MLP/RBF/error fields, reload equivalence and metadata; complete exercises. |
-| 30–35 | Run compatible and corrupted proposals with reference correction. |
-| 35–50 | Explain the residual/projection checks, feature-order and nonfinite-input tests. |
-| 50–60 | Trace data collection, reference labelling, aggregation and retraining for DAgger; reveal solutions and connect the three practical outcomes. |
-
-Notebook 05 can create its small checkpoint if notebook 04 was not completed.
-Use the same approved support files, not an isolated notebook upload.
-
-## Fallback for 330 contact minutes plus 30 minutes of breaks
-
-Use six 55-minute blocks, 165 minutes of lectures and 165 of exercises, with
-three separately placed ten-minute breaks. Keep order and all core outcomes.
-Cut five minutes per block as follows:
-
-| Block | Reduction |
-| --- | --- |
-| L1 | Contrast only one degradation law (3 min) and shorten the operator example (2 min); retain ML motivation. |
-| L2 | Shorten the hand example (3 min) and inverse discussion (2 min). |
-| L3 | Shorten architecture comparison (3 min) and optional exhibit (2 min). |
-| P1 | Shorten paired discussion (5 min), preserving baseline interpretation. |
-| P2 | Shorten exercise discussion (5 min), preserving both derivative/recovery checks. |
-| P3 | Shorten model comparison (3 min) and replay discussion (2 min). |
-
-## Preparation and contingency
-
-Rehearse the exact complete student package in the supported environment before
-class. Existing local receipts do not establish fresh Colab performance.
-Provide executed HTML, downloadable notebooks and worked answers offline. Retained
-outputs support learning during setup failures but are not an execution pass.
-
-The remaining acceptance gates are in [MVP_DELIVERY.md](MVP_DELIVERY.md).
+Use [the placeholder register](source/planning/PLACEHOLDER_REGISTER.md) for
+asset ownership and acceptance, [TODAY.md](TODAY.md) for active work and
+[COURSE_PLAN.md](COURSE_PLAN.md) for the full curriculum. Rehearse transitions,
+code readability, equations, exercises, complete runtime and download parity.

@@ -52,8 +52,8 @@
     <script src="_static/learning_book.js?v=5aaa4a9b"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="From gradients to reliable inverse experiments" href="research/index.html" />
-    <link rel="prev" title="Assess a proposal and use a reference correction" href="labs/05_hybrid_reference_correction.html" />
+    <link rel="next" title="Detailed notebooks and further practice" href="further_practice.html" />
+    <link rel="prev" title="Train, save, reload, adapters, and checked proposals" href="06_learning_adapter.html" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -166,35 +166,44 @@
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="index.html">
-                    PhAST: A Learn-by-Doing Introduction to Phase-Field Fracture
+                    PhAST: fracture simulation, differentiation and learning
                 </a>
             </li>
         </ul>
-        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Theory &amp; Methods</span></p>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Lecture guides</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="00_welcome_and_routes.html">1. From Cracks to Computation: Learn by Doing</a></li>
-<li class="toctree-l1"><a class="reference internal" href="01_crack_representations.html">2. Crack Representations: Sharp, Cohesive, and Diffuse</a></li>
-<li class="toctree-l1"><a class="reference internal" href="02_phase_field_energy.html">3. Fracture Energy: AT1, AT2, Degradation, and Bandwidth</a></li>
-<li class="toctree-l1"><a class="reference internal" href="03_staggered_solution.html">4. The Staggered Solution Algorithm: Alternating Mechanics and Damage</a></li>
-<li class="toctree-l1"><a class="reference internal" href="04_fem_to_tensors.html">5. From Weak Forms to Discrete Tensors: The PhAST Pipeline</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="05_differentiation_and_inverse.html">6. Differentiable Mechanics and Inverse Parameter Discovery</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="05a_backpropagation_step_by_step.html">6.4.1. Backpropagation through a stepped update</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lectures/01_fracture_and_phast.html">Lecture 1: Phase-field fracture and PhAST</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lectures/02_differentiability_and_inverse.html">Lecture 2: Differentiability and inverse recovery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lectures/03_hybrid_learning.html">Lecture 3: Learning inside a numerical workflow</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Three practical labs</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="classroom/01_simulate_fracture.html">Practical 1: Simulate and interpret diffuse fracture damage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classroom/02_gradients_and_recovery.html">Practical 2: Gradients and material recovery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classroom/03_learning_and_hybrid.html">Practical 3: Learn a field and assess its proposal</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Reference chapters</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="00_welcome_and_routes.html">From Cracks to Computation: Learn by Doing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="01_crack_representations.html">Crack Representations: Sharp, Cohesive, and Diffuse</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_phase_field_energy.html">Fracture Energy: AT1, AT2, Degradation, and Bandwidth</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_staggered_solution.html">The Staggered Solution Algorithm: Alternating Mechanics and Damage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_fem_to_tensors.html">From Weak Forms to Discrete Tensors: The PhAST Pipeline</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="05_differentiation_and_inverse.html">Differentiable Mechanics and Inverse Parameter Discovery</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="05a_backpropagation_step_by_step.html">Backpropagation through a stepped update</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1"><a class="reference internal" href="06_learning_adapter.html">7. Train, save, reload, adapters, and checked proposals</a></li>
-</ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Hands-On Computational Labs</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="labs/00_why_average_predictions_can_fail.html">Lab 00: Branch Selection &amp; Energy-Based Objectives in Physics-Informed Learning</a></li>
-<li class="toctree-l1"><a class="reference internal" href="labs/01_phast_tiny_evolving_fracture.html">Run and interpret a small PhAST fracture calculation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="labs/02_degradation_autograd.html">Lab 02: Differentiating Degradation: Analytical, Autograd, &amp; Finite Differences</a></li>
-<li class="toctree-l1"><a class="reference internal" href="labs/03_tiny_derivative_inverse_toy.html">Lab 03: Differentiable Mechanics &amp; Inverse Parameter Identification</a></li>
-<li class="toctree-l1"><a class="reference internal" href="labs/04_train_save_reload_adapter.html">Train, save, reload, and compare a field model</a></li>
-<li class="toctree-l1"><a class="reference internal" href="labs/05_hybrid_reference_correction.html">Assess a proposal and use a reference correction</a></li>
-</ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Review &amp; Reference</span></p>
-<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="06_learning_adapter.html">Train, save, reload, adapters, and checked proposals</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Practice, Solutions, Glossary, and References</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="further_practice.html">Detailed notebooks and further practice</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="labs/00_why_average_predictions_can_fail.html">Lab 00: Branch Selection &amp; Energy-Based Objectives in Physics-Informed Learning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="labs/01_phast_tiny_evolving_fracture.html">Run and interpret a small PhAST fracture calculation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="labs/02_degradation_autograd.html">Lab 02: Differentiating Degradation: Analytical, Autograd, &amp; Finite Differences</a></li>
+<li class="toctree-l2"><a class="reference internal" href="labs/03_tiny_derivative_inverse_toy.html">Lab 03: Differentiable Mechanics &amp; Inverse Parameter Identification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="labs/04_train_save_reload_adapter.html">Train, save, reload, and compare a field model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="labs/05_hybrid_reference_correction.html">Assess a proposal and use a reference correction</a></li>
+</ul>
+</details></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Optional inverse experiments</span></p>
 <ul class="nav bd-sidenav">
@@ -409,7 +418,7 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#workshop-synthesis-the-four-core-milestones">Workshop Synthesis: The Four Core Milestones</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#best-practices-for-computational-exploration">Best Practices for Computational Exploration</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#complete-notebook-index-google-colab-links">Complete Notebook Index &amp; Google Colab Links</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#three-classroom-notebooks">Three classroom notebooks</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#continue-with-the-phast-documentation">Continue with the PhAST documentation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#worked-consolidation-exercise">Worked consolidation exercise</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#glossary">Glossary</a></li>
@@ -459,67 +468,31 @@ Formulate how neural networks can serve as fast surrogate proposal models, evalu
 </ul>
 </section>
 <hr class="docutils" />
-<section id="complete-notebook-index-google-colab-links">
-<h2>Complete Notebook Index &amp; Google Colab Links<a class="headerlink" href="#complete-notebook-index-google-colab-links" title="Link to this heading">#</a></h2>
-<p>Use the quick-reference table below to open any course notebook directly in <strong>Google Colab</strong>, or download the practice and solution notebooks for offline study:</p>
+<section id="three-classroom-notebooks">
+<h2>Three classroom notebooks<a class="headerlink" href="#three-classroom-notebooks" title="Link to this heading">#</a></h2>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
-<tr class="row-odd"><th class="head text-left"><p>Lab Tutorial</p></th>
-<th class="head text-left"><p>Topic &amp; Pillar</p></th>
-<th class="head text-center"><p>Launch in Colab</p></th>
-<th class="head text-center"><p>Practice Notebook</p></th>
-<th class="head text-center"><p>Worked Solutions</p></th>
-<th class="head text-center"><p>Relevant Theory</p></th>
+<tr class="row-odd"><th class="head"><p>Practical</p></th>
+<th class="head"><p>Focus</p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td class="text-left"><p><strong><a class="reference internal" href="labs/00_why_average_predictions_can_fail.html"><span class="doc">Lab 00</span></a></strong></p></td>
-<td class="text-left"><p><strong>Branch Selection &amp; Energy Objectives</strong></p></td>
-<td class="text-center"><p><a class="reference external" href="https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/study/00_why_average_predictions_can_fail.ipynb"><img alt="Open In Colab" src="_images/colab-badge.svg" /></a></p></td>
-<td class="text-center"><p><a class="reference external" href="https://github.com/CEMS-Lab/autumn-school/blob/main/notebooks/study/00_why_average_predictions_can_fail.ipynb">Practice .ipynb</a></p></td>
-<td class="text-center"><p><a class="reference external" href="https://github.com/CEMS-Lab/autumn-school/blob/main/notebooks/solutions/00_why_average_predictions_can_fail.ipynb">Solutions .ipynb</a></p></td>
-<td class="text-center"><p><a class="reference internal" href="00_welcome_and_routes.html"><span class="doc">From Cracks to Computation: Learn by Doing</span></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="classroom/01_simulate_fracture.html"><span class="doc">Lab 1 — Simulate fracture</span></a></p></td>
+<td><p>Geometry, supports, loading, PhAST results and their interpretation.</p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><strong><a class="reference internal" href="labs/01_phast_tiny_evolving_fracture.html"><span class="doc">Lab 01</span></a></strong></p></td>
-<td class="text-left"><p><strong>End-to-End PhAST Simulation</strong></p></td>
-<td class="text-center"><p><a class="reference external" href="https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/study/01_phast_tiny_evolving_fracture.ipynb"><img alt="Open In Colab" src="_images/colab-badge.svg" /></a></p></td>
-<td class="text-center"><p><a class="reference external" href="https://github.com/CEMS-Lab/autumn-school/blob/main/notebooks/study/01_phast_tiny_evolving_fracture.ipynb">Practice .ipynb</a></p></td>
-<td class="text-center"><p><a class="reference external" href="https://github.com/CEMS-Lab/autumn-school/blob/main/notebooks/solutions/01_phast_tiny_evolving_fracture.ipynb">Solutions .ipynb</a></p></td>
-<td class="text-center"><p><a class="reference internal" href="04_fem_to_tensors.html"><span class="doc">From Weak Forms to Discrete Tensors: The PhAST Pipeline</span></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="classroom/02_gradients_and_recovery.html"><span class="doc">Lab 2 — Gradients and recovery</span></a></p></td>
+<td><p>Degradation derivatives and elastic-bar parameter recovery.</p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p><strong><a class="reference internal" href="labs/02_degradation_autograd.html"><span class="doc">Lab 02</span></a></strong></p></td>
-<td class="text-left"><p><strong>Autograd vs. Finite Differences</strong></p></td>
-<td class="text-center"><p><a class="reference external" href="https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/study/02_degradation_autograd.ipynb"><img alt="Open In Colab" src="_images/colab-badge.svg" /></a></p></td>
-<td class="text-center"><p><a class="reference external" href="https://github.com/CEMS-Lab/autumn-school/blob/main/notebooks/study/02_degradation_autograd.ipynb">Practice .ipynb</a></p></td>
-<td class="text-center"><p><a class="reference external" href="https://github.com/CEMS-Lab/autumn-school/blob/main/notebooks/solutions/02_degradation_autograd.ipynb">Solutions .ipynb</a></p></td>
-<td class="text-center"><p><a class="reference internal" href="02_phase_field_energy.html"><span class="doc">Fracture Energy: AT1, AT2, Degradation, and Bandwidth</span></a></p></td>
-</tr>
-<tr class="row-odd"><td class="text-left"><p><strong><a class="reference internal" href="labs/03_tiny_derivative_inverse_toy.html"><span class="doc">Lab 03</span></a></strong></p></td>
-<td class="text-left"><p><strong>Inverse Parameter Discovery</strong></p></td>
-<td class="text-center"><p><a class="reference external" href="https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/study/03_tiny_derivative_inverse_toy.ipynb"><img alt="Open In Colab" src="_images/colab-badge.svg" /></a></p></td>
-<td class="text-center"><p><a class="reference external" href="https://github.com/CEMS-Lab/autumn-school/blob/main/notebooks/study/03_tiny_derivative_inverse_toy.ipynb">Practice .ipynb</a></p></td>
-<td class="text-center"><p><a class="reference external" href="https://github.com/CEMS-Lab/autumn-school/blob/main/notebooks/solutions/03_tiny_derivative_inverse_toy.ipynb">Solutions .ipynb</a></p></td>
-<td class="text-center"><p><a class="reference internal" href="05_differentiation_and_inverse.html"><span class="doc">Differentiable Mechanics and Inverse Parameter Discovery</span></a></p></td>
-</tr>
-<tr class="row-even"><td class="text-left"><p><strong><a class="reference internal" href="labs/04_train_save_reload_adapter.html"><span class="doc">Lab 04</span></a></strong></p></td>
-<td class="text-left"><p><strong>Neural Field Adapter</strong></p></td>
-<td class="text-center"><p><a class="reference external" href="https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/study/04_train_save_reload_adapter.ipynb"><img alt="Open In Colab" src="_images/colab-badge.svg" /></a></p></td>
-<td class="text-center"><p><a class="reference external" href="https://github.com/CEMS-Lab/autumn-school/blob/main/notebooks/study/04_train_save_reload_adapter.ipynb">Practice .ipynb</a></p></td>
-<td class="text-center"><p><a class="reference external" href="https://github.com/CEMS-Lab/autumn-school/blob/main/notebooks/solutions/04_train_save_reload_adapter.ipynb">Solutions .ipynb</a></p></td>
-<td class="text-center"><p><a class="reference internal" href="06_learning_adapter.html"><span class="doc">Train, save, reload, adapters, and checked proposals</span></a></p></td>
-</tr>
-<tr class="row-odd"><td class="text-left"><p><strong><a class="reference internal" href="labs/05_hybrid_reference_correction.html"><span class="doc">Lab 05</span></a></strong></p></td>
-<td class="text-left"><p><strong>Residual Evaluation &amp; Hybrid Correction</strong></p></td>
-<td class="text-center"><p><a class="reference external" href="https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/study/05_hybrid_reference_correction.ipynb"><img alt="Open In Colab" src="_images/colab-badge.svg" /></a></p></td>
-<td class="text-center"><p><a class="reference external" href="https://github.com/CEMS-Lab/autumn-school/blob/main/notebooks/study/05_hybrid_reference_correction.ipynb">Practice .ipynb</a></p></td>
-<td class="text-center"><p><a class="reference external" href="https://github.com/CEMS-Lab/autumn-school/blob/main/notebooks/solutions/05_hybrid_reference_correction.ipynb">Solutions .ipynb</a></p></td>
-<td class="text-center"><p><a class="reference internal" href="06_learning_adapter.html"><span class="doc">Train, save, reload, adapters, and checked proposals</span></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="classroom/03_learning_and_hybrid.html"><span class="doc">Lab 3 — Learning and hybrid correction</span></a></p></td>
+<td><p>Training, saved models and physical correction of a proposed field.</p></td>
 </tr>
 </tbody>
 </table>
 </div>
+<p>Each page includes Google Colab and practice/solution downloads. Visit
+<a class="reference internal" href="further_practice.html"><span class="doc">Detailed notebooks and further practice</span></a> for the original individual notebooks and longer
+implementation walkthroughs.</p>
 </section>
-<hr class="docutils" />
 <section id="continue-with-the-phast-documentation">
 <h2>Continue with the PhAST documentation<a class="headerlink" href="#continue-with-the-phast-documentation" title="Link to this heading">#</a></h2>
 <p>The <a class="reference external" href="https://cems-lab.github.io/PhAST/tutorial/index.html">PhAST tutorial sequence</a>
@@ -742,20 +715,20 @@ Transactions of the Royal Society A</em> 379 (2021),
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="labs/05_hybrid_reference_correction.html"
+       href="06_learning_adapter.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Assess a proposal and use a reference correction</p>
+        <p class="prev-next-title">Train, save, reload, adapters, and checked proposals</p>
       </div>
     </a>
     <a class="right-next"
-       href="research/index.html"
+       href="further_practice.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">From gradients to reliable inverse experiments</p>
+        <p class="prev-next-title">Detailed notebooks and further practice</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -777,7 +750,7 @@ Transactions of the Royal Society A</em> 379 (2021),
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#workshop-synthesis-the-four-core-milestones">Workshop Synthesis: The Four Core Milestones</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#best-practices-for-computational-exploration">Best Practices for Computational Exploration</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#complete-notebook-index-google-colab-links">Complete Notebook Index &amp; Google Colab Links</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#three-classroom-notebooks">Three classroom notebooks</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#continue-with-the-phast-documentation">Continue with the PhAST documentation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#worked-consolidation-exercise">Worked consolidation exercise</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#glossary">Glossary</a></li>

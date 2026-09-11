@@ -93,15 +93,35 @@ plt.rcParams.update({
 
 ## 4. Course Curriculum Mapping (Six-Hour Workshop)
 
-The six-hour course is organized into two parallel streams:
-- **3 Hours of Interactive Demonstrations:** Lecturer-led walkthroughs of continuum theory, tensor mechanics, and differentiable physics.
-- **3 Hours of Hands-on Lab Sessions:** Guided interactive student execution across the 4 core pillars:
+The current six-hour event window contains a 150-minute lecture core and three
+50-minute practicals, with 60 minutes for breaks, questions and support.
+Issue #20 and TEACHING_SCHEDULE.md supersede the earlier contact-time allocation.
+The four conceptual pillars remain, grouped into three classroom notebooks:
 
 | Pillar | Core Theme | Lecture Milestone | Hands-On Lab Notebook |
 | :--- | :--- | :--- | :--- |
-| **1. Phase-Field Fundamentals** | Physics of brittle fracture & diffuse crack bands | Chapters 1 & 2: Griffith energy, regularisation $\ell$, $g(d)$, AT1 vs. AT2 | **Lab 02:** Differentiating degradation laws (`torch.autograd` vs. finite differences) |
-| **2. End-to-End Simulation** | Finite element tensors & staggered solver | Chapters 3 & 4: Weak forms, T3 meshing, boundary conditions, staggered loop | **Lab 01:** Running notched tension in PhAST, extracting $F$-$\delta$ curves & damage fields |
-| **3. Differentiable Mechanics** | Automatic differentiation & inverse discovery | Chapter 5 & 5a: Computational graphs, VJPs, gradient verification | **Lab 03:** Differentiable 1D bar, sensitivity verification, modulus recovery via gradient descent |
-| **4. Deep Learning Integration** | Plug-and-play neural surrogates & hybrid loops | Chapter 6: Neural operators, model checkpoints, physics residual gating | **Lab 04 & 05:** Training neural field adapters, saving/reloading, residual-gated reference solver |
+| **1. Phase-Field Fundamentals** | Physics of brittle fracture & diffuse crack bands | Chapters 1 & 2: Griffith energy, regularisation $\ell$, $g(d)$, AT1 vs. AT2 | **Classroom Lab 2:** Degradation derivatives followed by elastic-bar recovery |
+| **2. End-to-End Simulation** | Finite element tensors & staggered solver | Chapters 3 & 4: Weak forms, T3 meshing, boundary conditions, staggered loop | **Classroom Lab 1:** Notched tension in PhAST, fields and reaction curves |
+| **3. Differentiable Mechanics** | Automatic differentiation & inverse discovery | Chapter 5 & 5a: Computational graphs, VJPs, gradient verification | **Classroom Lab 2:** Differentiable 1D bar, sensitivity verification and modulus recovery |
+| **4. Deep Learning Integration** | Plug-and-play neural surrogates & hybrid loops | Chapter 6: Neural operators, model checkpoints, physics residual gating | **Classroom Lab 3:** Train, save, reload, assess and correct a teaching field |
 
-*Supplementary Notebook:* **Lab 00** (Branch selection in multi-valued energy landscapes) serves as a self-study teaser or opening motivation.
+The original six notebooks remain in the detailed-reference library. The
+algebraic teaser is optional self-study.
+
+### Concise classroom code
+
+- Whole-notebook execution, plots and exports must complete in less than 120
+  seconds. Target 60 seconds locally and retain a fresh Colab timing receipt.
+  Record dependency installation separately. This supersedes earlier runtime
+  budgets; the full policy is in `source/planning/RUNTIME_POLICY_20260911.md`.
+
+- Aim for at most 12 nonblank lines per visible code cell and one clear purpose.
+- Introduce each operation in a short Markdown paragraph before its cell.
+- Keep the material, boundary conditions, loading, solver call, autograd call
+  and prediction → loss → backward → optimiser step visible.
+- Fold environment setup, long plotting and validation details in HTML and
+  provide compatible collapsed-input metadata for notebook readers.
+- Keep supporting functions inspectable, documented and covered by runtime
+  receipts; a short cell must preserve the numerical inputs and scientific scope.
+- Use labelled example outlines and animation storyboards for requested future
+  content. Reserve author assignments and acceptance checks for planning files.

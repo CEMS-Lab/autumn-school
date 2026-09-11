@@ -1,11 +1,65 @@
 # Current course material — 10 September 2026
 
+## Latest consolidated local edition — 11 September 2026
+
+The public [HTML course](https://cems-lab.github.io/autumn-school/book/index.html)
+contains the current notebook route and web textbook. The local delivery package
+named **UKACM Autumn School 2026** contains the editable master PowerPoint, the
+90-slide scaffold, the specialist inserts, visual results, and source records.
+
+The visual-results gallery in the local package collects fresh outputs from eleven teaching notebooks: three
+classroom labs, six detailed references and two optional companions. Each has
+an executed notebook, a matching `# %%` Python export and an execution record.
+The current classroom processes took **28.612, 7.440 and 6.729 seconds** locally
+with preinstalled dependencies. Classroom 1 uses a compact dynamic B3 plate
+and shows a crack crossing the full remaining ligament, with a 40-frame GIF,
+energy curves and CSV/NPZ results. Classroom 2 begins with the damaged-bar
+autodiff primer. Every student run has a **120-second acceptance limit**.
+Fresh authenticated Colab and cold installation remain separate checks.
+
+The entries below preserve earlier delivery history and source locations.
+
 Prepared by Allamaprabhu Ani and Sathiskumar A. Ponnusami, CEMS-Lab,
 for the UKACM Autumn School 2026. The slides retain Sathiskumar A. Ponnusami's
 presenter credit with Queen Mary University of London and CEMS-Lab.
 
+## Current local curation
+
+The primary classroom route is curated into three lectures and three
+notebooks under [issue #20](https://github.com/CEMS-Lab/autumn-school/issues/20).
+Start with [the local book](book/index.html),
+[the schedule](TEACHING_SCHEDULE.md) and
+[the placeholder register](source/planning/PLACEHOLDER_REGISTER.md). The
+[next-build assignments](source/planning/NEXT_BUILD_ASSIGNMENTS.md) provide
+bounded prompts for filling the first selected slots.
+The live website below remains the earlier published edition until review and
+publication of this candidate. Earlier editable presentations are preserved;
+the new Keynote companion is available below.
+
+The three complete notebook processes passed locally in **91.30, 4.84 and
+5.55 seconds** after setup. Each visible code cell has at most 12 nonblank
+lines. Setup and implementation details remain expandable. The 21 planned
+example/animation slots are matched to their register entries. See
+[the curation receipt](evidence/classroom_curation_20260910.json).
+
+## Presentations and preserved resources
+
+The [curated Keynote lecture companion](output/curated-keynote-20260910/phast_autumn_school_curated.key)
+now follows the three-part narrative in 32 slides. Its
+[presentation standard](source/slides/curated-keynote/DESIGN_STANDARD.md)
+defines uniform font roles, half-slide LaTeX equations and Matplotlib figures.
+Research exhibits and animation adaptations retain their registered outlines.
+This is the local visual-review edition; presenter-controlled builds and the
+full lecture rehearsal remain in the delivery checklist.
+A [Keynote transfer ZIP](output/curated-keynote-20260910/keynote_transfer.zip)
+is retained. A local native Save-dialog working copy has been closed and
+reopened successfully. Direct synced-folder opening stalled; opening the
+extracted transfer copy returned macOS “Operation not permitted”. Transfer
+verification awaits permission review; system permissions remain unchanged.
+
 | Material | Current files |
 | --- | --- |
+| Curated lecture companion, local review edition | [Keynote](output/curated-keynote-20260910/phast_autumn_school_curated.key) · [PowerPoint export](output/curated-keynote-20260910/phast_autumn_school_curated.pptx) · [Design and source](source/slides/curated-keynote/README.md) |
 | Animated introductory presentation, local candidate | [Keynote](output/lecture-20260910/phast_lecture_animated.key) · [PowerPoint](output/lecture-20260910/phast_lecture_animated.pptx) · [Presenter notes](output/lecture-20260910/speaker_notes.md) |
 | Retained presentation fallback | [Keynote](output/intro-lecture-20260909/phast_lecture_introduction_v7.key) · [PowerPoint](output/intro-lecture-20260909/phast_lecture_introduction_v7.pptx) · [PDF](output/intro-lecture-20260909/phast_lecture_introduction_v7.pdf) |
 | HTML learning book and worked solutions | [Chapters](book/index.html) · [Notebook downloads](START_HERE.md#read-predict-compute-explain) |
@@ -17,12 +71,13 @@ presenter credit with Queen Mary University of London and CEMS-Lab.
 The 23-slide animated introduction follows mechanics, differentiation and
 learning, with five embedded clips and presenter pause questions. The 44-slide
 resource supplies the broader explanations. The [lecture mapping](source/slides/intro-lecture/ANIMATED_LECTURE_MAP.md)
-connects these materials to three lecture hours and three practical hours.
+connects these retained materials to the preceding three-hour lecture and
+three-hour practical allocation. The new schedule supplies the curated timing.
 
 Today's published web edition connects the complete forward-practical workflow,
 preserves authoring sources across all notebook formats, repairs cloud setup
 and exercises, and retains the PhAST dark orange-and-blue theme. The opening
-timetable image has been removed. All six classroom notebooks passed fresh
+timetable image has been removed. All six original detailed notebooks passed fresh
 local execution after setup; the revised first practical took 92.246 seconds.
 The [runtime receipt](evidence/notebook_runtime_current.json) records the exact
 code hashes and platform. The optional diffusion companion retains its

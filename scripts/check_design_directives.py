@@ -3,7 +3,7 @@
 Validates that:
 1. No prohibited AI drama, negative framing, or compliance checklists exist.
 2. The four core workshop pillars are clearly presented on the index page.
-3. Every lab notebook page features standard tutorial action badges and dropdown solutions.
+3. Three classroom notebooks and six retained references have action badges and solutions.
 """
 from pathlib import Path
 import re
@@ -61,8 +61,15 @@ def check_directives(book_dir=BOOK):
     # 3. Check lab notebooks action badges, download buttons, and Colab integration
     lab_files = sorted((book_dir / "labs").glob("*.html")) if (book_dir / "labs").is_dir() else []
     if len(lab_files) != 6:
-        errors.append(f"labs/: expected six core tutorials, found {len(lab_files)}")
-    for lf in lab_files:
+        errors.append(f"labs/: expected six detailed reference tutorials, found {len(lab_files)}")
+    classroom_names = {"01_simulate_fracture", "02_gradients_and_recovery", "03_learning_and_hybrid"}
+    classroom_files = sorted((book_dir / "classroom").glob("*.html"))
+    if {p.stem for p in classroom_files} != classroom_names:
+        errors.append("classroom/: expected exactly three curated practical notebooks")
+    lecture_files = sorted((book_dir / "lectures").glob("*.html"))
+    if len(lecture_files) != 3:
+        errors.append("lectures/: expected three connected lecture guides")
+    for lf in lab_files + classroom_files:
         l_content = lf.read_text(encoding="utf-8", errors="ignore")
         if "badge-row" not in l_content and "badge-link" not in l_content:
             errors.append(f"{lf.relative_to(book_dir)}: missing tutorial action badges (.badge-row)")

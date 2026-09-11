@@ -6,8 +6,9 @@ differentiation and learning around numerical solvers.
 Prepared by **Allamaprabhu Ani and Sathiskumar A. Ponnusami**, CEMS-Lab,
 for the UKACM Autumn School 2026.
 
-The [delivery guide](MVP_DELIVERY.md) describes the three-hour lecture /
-three-hour exercise route. The book's topics follow three connected groups.
+The [delivery guide](MVP_DELIVERY.md) describes three lectures followed by
+three concise practical notebooks. The curated teaching core is five hours,
+with one flexible hour for breaks, questions and support. The book's topics follow three connected groups.
 See [current materials](CURRENT_DELIVERY.md) and [the delivery checklist](TODAY.md).
 
 **[Read the interactive book](https://cems-lab.github.io/autumn-school/)** ·
@@ -26,17 +27,21 @@ or notebooks with solutions when you want to run or modify a calculation.
 - Derivative checks and a small elastic-bar inverse problem.
 - Train/save/reload and checked model proposals on a labelled toy field problem.
 - An HTML learning book with notebook downloads, a 23-slide animated introduction
-  and a 44-slide lecture resource, organised into three lecture hours followed
-  by three practical hours.
+  and a 44-slide lecture resource, organised into three lecture themes and three practicals.
 
 Start with [the setup guide](SETUP.md) for execution, or open `index.html` in
 the complete downloaded folder to read offline. The book is static HTML:
 it shows recorded Python outputs. Download a notebook to execute its Python cells.
 The supplementary `explorations.html` page has browser-only visual controls.
 
+The classroom candidates are in `notebooks/classroom/`, with matching practice
+and worked-solution downloads. The original notebooks remain in the detailed
+reference library. Clearly labelled lecture outlines reserve the examples and
+animations to complete later; see [issue #20](https://github.com/CEMS-Lab/autumn-school/issues/20).
+
 ## Runtime and scientific scope
 
-All six current notebooks completed in 3.74–92.00 seconds each in fresh local
+The six retained detailed notebooks completed in 3.74–92.00 seconds each in fresh local
 processes on the reference macOS ARM machine after setup. Installation time is
 separate. See [the current runtime receipt](evidence/notebook_runtime_current.json)
 and [the delivery evidence](evidence/course_delivery_20260910.md).

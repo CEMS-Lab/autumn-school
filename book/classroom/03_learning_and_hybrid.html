@@ -1,0 +1,1358 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" data-theme="dark">
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Practical 3: Learn a field and assess its proposal &#8212; PhAST: Phase-field fracture with differentiable FEM</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "dark";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "dark";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mobile_math.css?v=acf5579e" />
+    <link rel="stylesheet" type="text/css" href="../_static/learning_book.css?v=37e7f39f" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=c22d28c4"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="../_static/mathjax/tex-mml-chtml.js?v=cadf963e"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'classroom/03_learning_and_hybrid';</script>
+    <script src="../_static/learning_book.js?v=5aaa4a9b"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="From Cracks to Computation: Learn by Doing" href="../00_welcome_and_routes.html" />
+    <link rel="prev" title="Practical 2: Gradients and material recovery" href="02_gradients_and_recovery.html" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+<meta name="author" content="Allamaprabhu Ani and Sathiskumar A. Ponnusami">
+<meta name="prepared-by" content="Allamaprabhu Ani and Sathiskumar A. Ponnusami">
+<meta name="course" content="CEMS-Lab · UKACM Autumn School 2026">
+
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="dark">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">PhAST: Phase-field fracture with differentiable FEM</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../index.html">
+                    PhAST: fracture simulation, differentiation and learning
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Lecture guides</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../lectures/01_fracture_and_phast.html">Lecture 1: Phase-field fracture and PhAST</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lectures/02_differentiability_and_inverse.html">Lecture 2: Differentiability and inverse recovery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lectures/03_hybrid_learning.html">Lecture 3: Learning inside a numerical workflow</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Three practical labs</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_simulate_fracture.html">Practical 1: Simulate a crack crossing a plate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_gradients_and_recovery.html">Practical 2: Gradients and material recovery</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Practical 3: Learn a field and assess its proposal</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Reference chapters</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../00_welcome_and_routes.html">From Cracks to Computation: Learn by Doing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01_crack_representations.html">Crack Representations: Sharp, Cohesive, and Diffuse</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_phase_field_energy.html">Fracture Energy: AT1, AT2, Degradation, and Bandwidth</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_staggered_solution.html">The Staggered Solution Algorithm: Alternating Mechanics and Damage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_fem_to_tensors.html">From Weak Forms to Discrete Tensors: The PhAST Pipeline</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../05_differentiation_and_inverse.html">Differentiable Mechanics and Inverse Parameter Discovery</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../05a_backpropagation_step_by_step.html">Backpropagation through a stepped update</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../06_learning_adapter.html">Train, save, reload, adapters, and checked proposals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../07_practice_references.html">Practice, Solutions, Glossary, and References</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../further_practice.html">Detailed notebooks and further practice</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../labs/00_why_average_predictions_can_fail.html">Lab 00: Branch Selection &amp; Energy-Based Objectives in Physics-Informed Learning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../labs/01_phast_tiny_evolving_fracture.html">Run and interpret a small PhAST fracture calculation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../labs/02_degradation_autograd.html">Lab 02: Differentiating Degradation: Analytical, Autograd, &amp; Finite Differences</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../labs/03_tiny_derivative_inverse_toy.html">Lab 03: Differentiable Mechanics &amp; Inverse Parameter Identification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../labs/04_train_save_reload_adapter.html">Train, save, reload, and compare a field model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../labs/05_hybrid_reference_correction.html">Assess a proposal and use a reference correction</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Optional inverse experiments</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../research/index.html">From gradients to reliable inverse experiments</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../research/01_geometry.html">Representing particles and testing their geometry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../research/02_observations.html">From measurements to a loss</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../research/03_derivatives.html">Verify a derivative before interpreting an update</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../research/03_history_visual.html">Why a fracture solver needs a memory-aware derivative</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../research/03_history.html">Differentiating fracture: memory, switches and useful limits</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../research/04_recovery.html">Why a correct gradient can give slow or ambiguous recovery</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../research/05_learning.html">A useful role for learning: propose, solve and check</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../research/06_applications.html">Designing a fracture-inverse research programme</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../research/08_visual_lab.html">Watch the particle, the crack and the loss</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../research/07_results.html">Retained computations and reproducibility</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../research/notebooks/inverse_experiments.html">From gradients to reliable inverse experiments</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/source/book/classroom/03_learning_and_hybrid.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/CEMS-Lab/autumn-school" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/CEMS-Lab/autumn-school/issues/new?title=Issue%20on%20page%20%2Fclassroom/03_learning_and_hybrid.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/classroom/03_learning_and_hybrid.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Practical 3: Learn a field and assess its proposal</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#physical-motivation-and-model">Physical motivation and model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-by-step-calculation">Step-by-step calculation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#generate-whole-load-datasets">Generate whole-load datasets</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#define-the-neural-model">Define the neural model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#train-with-an-inspectable-gradient-loop">Train with an inspectable gradient loop</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#save-the-model-with-its-input-conventions">Save the model with its input conventions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-comparison-a-radial-basis-predictor">Additional comparison: a radial-basis predictor</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpret-the-fields-and-correction">Interpret the fields and correction</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#assess-a-compatible-proposal">Assess a compatible proposal</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#observe-the-reference-correction-branch">Observe the reference-correction branch</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-outline-p3-r01-a-fracture-compatible-hybrid">Example outline · P3-R01 · A fracture-compatible hybrid</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#animation-storyboard-p3-a01-proposal-check-and-correction">Animation storyboard · P3-A01 · Proposal, check and correction</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-takeaways">Key takeaways</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1-connect-the-data-layout-to-the-training-gradient">Exercise 1: Connect the data layout to the training gradient</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2-explore-the-residual-tolerance">Exercise 2: Explore the residual tolerance</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#continue-studying">Continue studying</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#session-timing">Session timing</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="practical-3-learn-a-field-and-assess-its-proposal">
+<h1>Practical 3: Learn a field and assess its proposal<a class="headerlink" href="#practical-3-learn-a-field-and-assess-its-proposal" title="Link to this heading">#</a></h1>
+<p><strong>Learning objective.</strong> Train, save and reload a small field model, then assess its output against a discrete equation and apply a reference correction when needed.</p>
+<p><strong>Predict first.</strong> How will tightening a residual tolerance affect the selected field and use of reference corrections?</p>
+<div class="badge-row">
+<a class="badge-colab" href="https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/study/classroom/03_learning_and_hybrid.ipynb"><img src="../_static/colab-badge.svg" alt="Open in Colab"/></a>
+<a class="badge-link" href="../../notebooks/study/classroom/03_learning_and_hybrid.ipynb">Download Practice Notebook</a>
+<a class="badge-link" href="../../notebooks/solutions/classroom/03_learning_and_hybrid.ipynb">Download with Worked Solutions</a>
+<a class="badge-link" href="../../SETUP.md">Environment Setup</a>
+</div>
+<p>Work through the cells in order. Expand setup and figure details when you want to inspect the complete implementation.</p>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#@title Set up the course environment { display-mode: &quot;form&quot; }</span>
+<span class="c1"># Environment setup is measured separately from the classroom computation.</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">importlib.metadata</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">subprocess</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+
+<span class="n">setup_started</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">google.colab</span>
+    <span class="n">IN_COLAB</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="n">IN_COLAB</span> <span class="o">=</span> <span class="kc">False</span>
+
+<span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">sys</span><span class="o">.</span><span class="n">version_info</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span> <span class="o">&lt;</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">13</span><span class="p">):</span>
+    <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;This PhAST snapshot supports Python 3.10–3.12. Select a compatible runtime; see Environment Setup.&quot;</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">locate_course_root</span><span class="p">():</span>
+    <span class="k">for</span> <span class="n">base</span> <span class="ow">in</span> <span class="p">(</span><span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">(),</span> <span class="o">*</span><span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">()</span><span class="o">.</span><span class="n">parents</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">candidate</span> <span class="ow">in</span> <span class="p">(</span><span class="n">base</span><span class="p">,</span> <span class="n">base</span> <span class="o">/</span> <span class="s2">&quot;autumn-school&quot;</span><span class="p">,</span> <span class="n">base</span> <span class="o">/</span> <span class="s2">&quot;teaching/ukacm_autumn_school_2026&quot;</span><span class="p">):</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">candidate</span> <span class="o">/</span> <span class="s2">&quot;notebooks/day2_helpers&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">is_dir</span><span class="p">()</span> <span class="ow">and</span> <span class="p">(</span><span class="n">candidate</span> <span class="o">/</span> <span class="s2">&quot;vendor/PhAST/src&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">is_dir</span><span class="p">():</span>
+                <span class="k">return</span> <span class="n">candidate</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span>
+    <span class="k">return</span> <span class="kc">None</span>
+
+<span class="n">COURSE_ROOT</span> <span class="o">=</span> <span class="n">locate_course_root</span><span class="p">()</span>
+<span class="k">if</span> <span class="n">COURSE_ROOT</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">IN_COLAB</span><span class="p">:</span>
+    <span class="n">COURSE_ROOT</span> <span class="o">=</span> <span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">()</span> <span class="o">/</span> <span class="s2">&quot;autumn-school&quot;</span>
+    <span class="k">if</span> <span class="n">COURSE_ROOT</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;An incomplete autumn-school folder exists. Start a fresh runtime or select the complete course folder.&quot;</span><span class="p">)</span>
+    <span class="c1"># A release tag or full commit can be supplied for a fixed course edition.</span>
+    <span class="n">course_ref</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;PHAST_COURSE_REF&quot;</span><span class="p">,</span> <span class="s2">&quot;main&quot;</span><span class="p">)</span>
+    <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="s2">&quot;git&quot;</span><span class="p">,</span> <span class="s2">&quot;init&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">COURSE_ROOT</span><span class="p">)],</span> <span class="n">check</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">capture_output</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="s2">&quot;git&quot;</span><span class="p">,</span> <span class="s2">&quot;-C&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">COURSE_ROOT</span><span class="p">),</span> <span class="s2">&quot;remote&quot;</span><span class="p">,</span> <span class="s2">&quot;add&quot;</span><span class="p">,</span> <span class="s2">&quot;origin&quot;</span><span class="p">,</span> <span class="s2">&quot;https://github.com/CEMS-Lab/autumn-school.git&quot;</span><span class="p">],</span> <span class="n">check</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="s2">&quot;git&quot;</span><span class="p">,</span> <span class="s2">&quot;-C&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">COURSE_ROOT</span><span class="p">),</span> <span class="s2">&quot;fetch&quot;</span><span class="p">,</span> <span class="s2">&quot;--depth&quot;</span><span class="p">,</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;origin&quot;</span><span class="p">,</span> <span class="n">course_ref</span><span class="p">],</span> <span class="n">check</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">180</span><span class="p">)</span>
+    <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="s2">&quot;git&quot;</span><span class="p">,</span> <span class="s2">&quot;-C&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">COURSE_ROOT</span><span class="p">),</span> <span class="s2">&quot;checkout&quot;</span><span class="p">,</span> <span class="s2">&quot;--detach&quot;</span><span class="p">,</span> <span class="s2">&quot;FETCH_HEAD&quot;</span><span class="p">],</span> <span class="n">check</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">capture_output</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">COURSE_ROOT</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span><span class="s2">&quot;Open the notebook from the complete course folder, including notebooks/, configs/ and vendor/. See Environment Setup.&quot;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">IN_COLAB</span><span class="p">:</span>
+    <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="n">sys</span><span class="o">.</span><span class="n">executable</span><span class="p">,</span> <span class="s2">&quot;-m&quot;</span><span class="p">,</span> <span class="s2">&quot;pip&quot;</span><span class="p">,</span> <span class="s2">&quot;install&quot;</span><span class="p">,</span> <span class="s2">&quot;--quiet&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">COURSE_ROOT</span> <span class="o">/</span> <span class="s2">&quot;vendor/PhAST&quot;</span><span class="p">),</span> <span class="s2">&quot;nbformat&quot;</span><span class="p">,</span> <span class="s2">&quot;nbclient&quot;</span><span class="p">,</span> <span class="s2">&quot;nbconvert&quot;</span><span class="p">],</span> <span class="n">check</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">600</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">package_dir</span> <span class="ow">in</span> <span class="p">(</span><span class="n">COURSE_ROOT</span> <span class="o">/</span> <span class="s2">&quot;vendor/PhAST/src&quot;</span><span class="p">,</span> <span class="n">COURSE_ROOT</span> <span class="o">/</span> <span class="s2">&quot;notebooks&quot;</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="n">package_dir</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="p">:</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">package_dir</span><span class="p">))</span>
+
+<span class="n">revision</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="s2">&quot;git&quot;</span><span class="p">,</span> <span class="s2">&quot;-C&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">COURSE_ROOT</span><span class="p">),</span> <span class="s2">&quot;rev-parse&quot;</span><span class="p">,</span> <span class="s2">&quot;HEAD&quot;</span><span class="p">],</span> <span class="n">text</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">capture_output</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">package_versions</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">package</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;torch&quot;</span><span class="p">,</span> <span class="s2">&quot;numpy&quot;</span><span class="p">,</span> <span class="s2">&quot;scipy&quot;</span><span class="p">,</span> <span class="s2">&quot;matplotlib&quot;</span><span class="p">,</span> <span class="s2">&quot;nbformat&quot;</span><span class="p">):</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">package_versions</span><span class="p">[</span><span class="n">package</span><span class="p">]</span> <span class="o">=</span> <span class="n">importlib</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">version</span><span class="p">(</span><span class="n">package</span><span class="p">)</span>
+    <span class="k">except</span> <span class="n">importlib</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">PackageNotFoundError</span><span class="p">:</span>
+        <span class="n">package_versions</span><span class="p">[</span><span class="n">package</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;install using Environment Setup&quot;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">io</span><span class="w"> </span><span class="kn">import</span> <span class="n">BytesIO</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">Image</span><span class="p">,</span> <span class="n">display</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">day2_helpers</span><span class="w"> </span><span class="kn">import</span> <span class="n">assets_dir</span>
+
+<span class="n">torch</span><span class="o">.</span><span class="n">set_default_dtype</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="o">.</span><span class="n">update</span><span class="p">({</span>
+    <span class="s2">&quot;font.family&quot;</span><span class="p">:</span> <span class="s2">&quot;sans-serif&quot;</span><span class="p">,</span> <span class="s2">&quot;font.sans-serif&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;DejaVu Sans&quot;</span><span class="p">,</span> <span class="s2">&quot;Arial&quot;</span><span class="p">,</span> <span class="s2">&quot;Helvetica&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;font.size&quot;</span><span class="p">:</span> <span class="mi">11</span><span class="p">,</span> <span class="s2">&quot;axes.labelsize&quot;</span><span class="p">:</span> <span class="mi">11</span><span class="p">,</span> <span class="s2">&quot;axes.titlesize&quot;</span><span class="p">:</span> <span class="mi">12</span><span class="p">,</span>
+    <span class="s2">&quot;xtick.labelsize&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span> <span class="s2">&quot;ytick.labelsize&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span> <span class="s2">&quot;legend.fontsize&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="s2">&quot;figure.titlesize&quot;</span><span class="p">:</span> <span class="mi">13</span><span class="p">,</span> <span class="s2">&quot;figure.dpi&quot;</span><span class="p">:</span> <span class="mi">150</span><span class="p">,</span> <span class="s2">&quot;axes.grid&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="s2">&quot;grid.alpha&quot;</span><span class="p">:</span> <span class="mf">0.3</span><span class="p">,</span> <span class="s2">&quot;grid.linestyle&quot;</span><span class="p">:</span> <span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="s2">&quot;lines.linewidth&quot;</span><span class="p">:</span> <span class="mf">1.8</span><span class="p">,</span>
+<span class="p">})</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">display_figure</span><span class="p">(</span><span class="n">figure</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">150</span><span class="p">,</span> <span class="n">alt</span><span class="o">=</span><span class="s2">&quot;Rendered teaching figure&quot;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Retain figures for reading in the book and in a fresh notebook session.&quot;&quot;&quot;</span>
+    <span class="n">buffer</span> <span class="o">=</span> <span class="n">BytesIO</span><span class="p">()</span>
+    <span class="n">figure</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;png&quot;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="n">dpi</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s2">&quot;tight&quot;</span><span class="p">)</span>
+    <span class="n">display</span><span class="p">(</span><span class="n">Image</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">buffer</span><span class="o">.</span><span class="n">getvalue</span><span class="p">(),</span> <span class="n">alt</span><span class="o">=</span><span class="n">alt</span><span class="p">))</span>
+
+<span class="c1"># Include dependency imports and plotting configuration in the setup duration.</span>
+<span class="n">setup_receipt</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;environment&quot;</span><span class="p">:</span> <span class="s2">&quot;Google Colab&quot;</span> <span class="k">if</span> <span class="n">IN_COLAB</span> <span class="k">else</span> <span class="s2">&quot;local&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;python&quot;</span><span class="p">:</span> <span class="n">sys</span><span class="o">.</span><span class="n">version</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">0</span><span class="p">],</span>
+    <span class="s2">&quot;course_revision&quot;</span><span class="p">:</span> <span class="n">revision</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">if</span> <span class="n">revision</span><span class="o">.</span><span class="n">returncode</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="s2">&quot;downloaded archive&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;versions&quot;</span><span class="p">:</span> <span class="n">package_versions</span><span class="p">,</span>
+    <span class="s2">&quot;setup_seconds&quot;</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span> <span class="o">-</span> <span class="n">setup_started</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
+<span class="p">}</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">setup_receipt</span><span class="p">)</span>
+
+<span class="n">session_started</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
+<span class="n">torch</span><span class="o">.</span><span class="n">set_num_threads</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;environment&#39;: &#39;local&#39;, &#39;python&#39;: &#39;3.10.18&#39;, &#39;course_revision&#39;: &#39;48ae30794de3da1f4242bfbefff124dfd0d9a594&#39;, &#39;versions&#39;: {&#39;torch&#39;: &#39;2.8.0&#39;, &#39;numpy&#39;: &#39;2.2.6&#39;, &#39;scipy&#39;: &#39;1.14.1&#39;, &#39;matplotlib&#39;: &#39;3.10.8&#39;, &#39;nbformat&#39;: &#39;5.10.4&#39;}, &#39;setup_seconds&#39;: 0.744}
+</pre></div>
+</div>
+</div>
+</div>
+<section id="physical-motivation-and-model">
+<h2>Physical motivation and model<a class="headerlink" href="#physical-motivation-and-model" title="Link to this heading">#</a></h2>
+<p>A learned model can propose a field from coordinates and loading. A discrete equation then provides a second way to inspect that proposal. We practise this relationship using the course-owned <strong>ToyHelmholtzProblem</strong>, a smooth scalar-field model on a <span class="math notranslate nohighlight">\(25\times13\)</span> grid:</p>
+<div class="math notranslate nohighlight">
+\[d-\ell^2\nabla^2d=s(x,y,\lambda),\qquad d=0\text{ on the boundary}.\]</div>
+<p>Here <span class="math notranslate nohighlight">\(d\)</span> is a dimensionless scalar field, <span class="math notranslate nohighlight">\(\ell\)</span> is its smoothing length, <span class="math notranslate nohighlight">\(s\)</span> is a prescribed source and <span class="math notranslate nohighlight">\(\lambda\)</span> is a load factor. Its discrete equation is <span class="math notranslate nohighlight">\(A\mathbf d=\mathbf b(\lambda)\)</span>. The helper exposes the matrix, source, reference solve and residual. These synthetic fields support teaching model interfaces and correction; applying a learned damage component to fracture requires the fracture-specific inputs, history and coupled residuals.</p>
+<p>The workflow is <strong>reference fields → training → saved model → proposal → residual check → selected field</strong>.</p>
+</section>
+<section id="step-by-step-calculation">
+<h2>Step-by-step calculation<a class="headerlink" href="#step-by-step-calculation" title="Link to this heading">#</a></h2>
+<section id="generate-whole-load-datasets">
+<h3>Generate whole-load datasets<a class="headerlink" href="#generate-whole-load-datasets" title="Link to this heading">#</a></h3>
+<p>Each node supplies the row <code class="docutils literal notranslate"><span class="pre">[x/L,</span> <span class="pre">y/H,</span> <span class="pre">load_factor]</span></code> and one target field value. Keep complete load cases together when dividing training, validation and test data. <a class="reference external" href="https://github.com/CEMS-Lab/autumn-school/blob/main/notebooks/day2_helpers/course_tools.py">Inspect the existing toy and model helpers</a>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">day2_helpers.course_tools</span><span class="w"> </span><span class="kn">import</span> <span class="n">FEATURE_ORDER</span><span class="p">,</span> <span class="n">TOY_INTERFACE_VERSION</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">day2_helpers.course_tools</span><span class="w"> </span><span class="kn">import</span> <span class="n">TinyDamageMLP</span><span class="p">,</span> <span class="n">ToyHelmholtzProblem</span><span class="p">,</span> <span class="n">ToyDamageAdapter</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">day2_helpers.course_tools</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_toy_model</span><span class="p">,</span> <span class="n">normalise_features</span>
+<span class="n">torch</span><span class="o">.</span><span class="n">manual_seed</span><span class="p">(</span><span class="mi">20260909</span><span class="p">)</span>
+<span class="n">problem</span> <span class="o">=</span> <span class="n">ToyHelmholtzProblem</span><span class="p">()</span>
+<span class="n">split_loads</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;train&quot;</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">.12</span><span class="p">,</span> <span class="mf">.76</span><span class="p">,</span> <span class="mi">12</span><span class="p">)),</span>
+               <span class="s2">&quot;validation&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mf">.82</span><span class="p">,</span> <span class="mf">.88</span><span class="p">),</span> <span class="s2">&quot;test&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mf">.94</span><span class="p">,</span> <span class="mf">1.00</span><span class="p">)}</span>
+<span class="n">train_x</span><span class="p">,</span> <span class="n">train_y</span> <span class="o">=</span> <span class="n">problem</span><span class="o">.</span><span class="n">case_tensor</span><span class="p">(</span><span class="n">split_loads</span><span class="p">[</span><span class="s2">&quot;train&quot;</span><span class="p">])</span>
+<span class="n">val_x</span><span class="p">,</span> <span class="n">val_y</span> <span class="o">=</span> <span class="n">problem</span><span class="o">.</span><span class="n">case_tensor</span><span class="p">(</span><span class="n">split_loads</span><span class="p">[</span><span class="s2">&quot;validation&quot;</span><span class="p">])</span>
+<span class="n">test_x</span><span class="p">,</span> <span class="n">test_y</span> <span class="o">=</span> <span class="n">problem</span><span class="o">.</span><span class="n">case_tensor</span><span class="p">(</span><span class="n">split_loads</span><span class="p">[</span><span class="s2">&quot;test&quot;</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">({</span><span class="s2">&quot;features&quot;</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">train_x</span><span class="o">.</span><span class="n">shape</span><span class="p">),</span> <span class="s2">&quot;targets&quot;</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">train_y</span><span class="o">.</span><span class="n">shape</span><span class="p">)})</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;features&#39;: (3900, 3), &#39;targets&#39;: (3900, 1)}
+</pre></div>
+</div>
+</div>
+</div>
+<p>Inspect complete sample fields from the whole-load splits. Load changes the source amplitude in this teaching equation. Every panel uses the same 0–1 field scale; the NPZ retains the coordinates, split names, loads and shown fields.</p>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">day2_helpers.classroom_visuals</span><span class="w"> </span><span class="kn">import</span> <span class="n">toy_reference_samples</span><span class="p">,</span> <span class="n">toy_initial_prediction</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">day2_helpers.classroom_visuals</span><span class="w"> </span><span class="kn">import</span> <span class="n">training_snapshot</span><span class="p">,</span> <span class="n">toy_training_history</span>
+<span class="n">practical_dir</span> <span class="o">=</span> <span class="n">assets_dir</span><span class="p">()</span> <span class="o">/</span> <span class="s2">&quot;classroom&quot;</span> <span class="o">/</span> <span class="s2">&quot;03&quot;</span>
+<span class="n">practical_dir</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">toy_reference_samples</span><span class="p">(</span><span class="n">problem</span><span class="p">,</span> <span class="n">split_loads</span><span class="p">,</span> <span class="n">practical_dir</span><span class="p">)</span>
+<span class="n">display_figure</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">alt</span><span class="o">=</span><span class="s2">&quot;Full toy reference fields at two training loads, a validation load and a test load on a common colour scale.&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="Computed field or curve from Practical 3: Learn a field and assess its proposal" src="../_images/d1a2b36c5b903ad3d9b9fa7569682742b24c59b383145fa101499d9aa111eb9f.png" />
+</div>
+</div>
+</section>
+<section id="define-the-neural-model">
+<h3>Define the neural model<a class="headerlink" href="#define-the-neural-model" title="Link to this heading">#</a></h3>
+<p>Compute the feature mean and scale from the training inputs. Reuse that transform for every split. <code class="docutils literal notranslate"><span class="pre">TinyDamageMLP</span></code> has two hidden layers of width 32 with SiLU activations and a scalar sigmoid output; print its structure to inspect the model.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mean</span> <span class="o">=</span> <span class="n">train_x</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">scale</span> <span class="o">=</span> <span class="n">train_x</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">clamp_min</span><span class="p">(</span><span class="mf">1.e-12</span><span class="p">)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">TinyDamageMLP</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mi">32</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+<span class="n">optimiser</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="mf">1.5e-2</span><span class="p">)</span>
+<span class="n">history</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>TinyDamageMLP(
+  (network): Sequential(
+    (0): Linear(in_features=3, out_features=32, bias=True)
+    (1): SiLU()
+    (2): Linear(in_features=32, out_features=32, bias=True)
+    (3): SiLU()
+    (4): Linear(in_features=32, out_features=1, bias=True)
+    (5): Sigmoid()
+  )
+)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Before training, compare the initial model prediction with one training reference field. The model and the source equation produce visibly different spatial patterns at this stage.</p>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">toy_initial_prediction</span><span class="p">(</span><span class="n">problem</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">mean</span><span class="p">,</span> <span class="n">scale</span><span class="p">,</span> <span class="n">split_loads</span><span class="p">[</span><span class="s2">&quot;train&quot;</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">practical_dir</span><span class="p">)</span>
+<span class="n">display_figure</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">alt</span><span class="o">=</span><span class="s2">&quot;Training reference field and initial neural prediction at the same load and colour scale.&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="Computed field or curve from Practical 3: Learn a field and assess its proposal" src="../_images/00bf1b2dd29ff36ad83328ba2ee7a688e416022d098e57d2bd0cf69ee764b93f.png" />
+</div>
+</div>
+</section>
+<section id="train-with-an-inspectable-gradient-loop">
+<h3>Train with an inspectable gradient loop<a class="headerlink" href="#train-with-an-inspectable-gradient-loop" title="Link to this heading">#</a></h3>
+<p>The mean squared error is <span class="math notranslate nohighlight">\(\mathcal L=M^{-1}\sum_i(\widehat d_i-d_i)^2\)</span> over the <span class="math notranslate nohighlight">\(M\)</span> training rows. <code class="docutils literal notranslate"><span class="pre">loss.backward()</span></code> accumulates gradients of this scalar loss with respect to network weights; Adam updates them. Four snapshots record the training and validation losses. This is the existing 400-epoch teaching calculation.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">training_started</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">400</span><span class="p">):</span>
+    <span class="n">optimiser</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">(</span><span class="n">set_to_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">prediction</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">normalise_features</span><span class="p">(</span><span class="n">train_x</span><span class="p">,</span> <span class="n">mean</span><span class="p">,</span> <span class="n">scale</span><span class="p">))</span>
+    <span class="n">loss</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">mean</span><span class="p">((</span><span class="n">prediction</span> <span class="o">-</span> <span class="n">train_y</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+    <span class="n">optimiser</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">24</span><span class="p">,</span> <span class="mi">99</span><span class="p">,</span> <span class="mi">399</span><span class="p">}:</span>
+        <span class="n">history</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">training_snapshot</span><span class="p">(</span><span class="n">epoch</span><span class="p">,</span> <span class="n">loss</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">train_x</span><span class="p">,</span> <span class="n">train_y</span><span class="p">,</span> <span class="n">val_x</span><span class="p">,</span> <span class="n">val_y</span><span class="p">,</span> <span class="n">mean</span><span class="p">,</span> <span class="n">scale</span><span class="p">))</span>
+<span class="n">training_seconds</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span> <span class="o">-</span> <span class="n">training_started</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Read the four recorded snapshots at epochs 1, 25, 100 and 400. Both plotted errors use the same updated model weights. The CSV also retains the original pre-update training loss used by the optimiser; connected markers guide the eye between the four recorded points.</p>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">toy_training_history</span><span class="p">(</span><span class="n">history</span><span class="p">,</span> <span class="n">practical_dir</span><span class="p">)</span>
+<span class="n">display_figure</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">alt</span><span class="o">=</span><span class="s2">&quot;Four matched post-update training and validation mean-squared field-error snapshots.&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="Computed field or curve from Practical 3: Learn a field and assess its proposal" src="../_images/f68ca960b41e70cd121f52cf157c08ddcb3f8d152864a2351baff0e0d74e7e60.png" />
+</div>
+</div>
+<p>Evaluate the held-out data after training. Separate test error, training time and validation history describe different parts of the calculation.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
+<span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
+    <span class="n">test_prediction</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">normalise_features</span><span class="p">(</span><span class="n">test_x</span><span class="p">,</span> <span class="n">mean</span><span class="p">,</span> <span class="n">scale</span><span class="p">))</span>
+    <span class="n">test_rmse</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">mean</span><span class="p">((</span><span class="n">test_prediction</span> <span class="o">-</span> <span class="n">test_y</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">({</span><span class="s2">&quot;test_rmse&quot;</span><span class="p">:</span> <span class="n">test_rmse</span><span class="p">,</span> <span class="s2">&quot;training_seconds&quot;</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">training_seconds</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
+       <span class="s2">&quot;history&quot;</span><span class="p">:</span> <span class="n">history</span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;test_rmse&#39;: 0.049867531488768393, &#39;training_seconds&#39;: 0.87, &#39;history&#39;: [{&#39;epoch&#39;: 1, &#39;train_mse&#39;: 0.1517765063048665, &#39;validation_mse&#39;: 0.07862736928885466, &#39;post_update_train_mse&#39;: 0.12749937341629575}, {&#39;epoch&#39;: 25, &#39;train_mse&#39;: 0.009012028414098669, &#39;validation_mse&#39;: 0.0252641187641007, &#39;post_update_train_mse&#39;: 0.00838073397708302}, {&#39;epoch&#39;: 100, &#39;train_mse&#39;: 0.0012914382086734117, &#39;validation_mse&#39;: 0.005490918863171005, &#39;post_update_train_mse&#39;: 0.0012778083686655118}, {&#39;epoch&#39;: 400, &#39;train_mse&#39;: 0.0001303170500437651, &#39;validation_mse&#39;: 0.0007892991355557108, &#39;post_update_train_mse&#39;: 0.00013010943114154136}]}
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="save-the-model-with-its-input-conventions">
+<h3>Save the model with its input conventions<a class="headerlink" href="#save-the-model-with-its-input-conventions" title="Link to this heading">#</a></h3>
+<p>A usable checkpoint stores architecture, weights, feature order, normalisation and data provenance. Expand the packaging cell to inspect every field. The training and prediction operations above remain unchanged by saving.</p>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">practical_dir</span> <span class="o">=</span> <span class="n">assets_dir</span><span class="p">()</span> <span class="o">/</span> <span class="s2">&quot;classroom&quot;</span> <span class="o">/</span> <span class="s2">&quot;03&quot;</span>
+<span class="n">practical_dir</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">checkpoint_path</span> <span class="o">=</span> <span class="n">practical_dir</span> <span class="o">/</span> <span class="s2">&quot;tiny_damage_mlp.pt&quot;</span>
+<span class="n">metadata</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;interface_version&quot;</span><span class="p">:</span> <span class="n">TOY_INTERFACE_VERSION</span><span class="p">,</span> <span class="s2">&quot;architecture&quot;</span><span class="p">:</span> <span class="s2">&quot;TinyDamageMLP&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;width&quot;</span><span class="p">:</span> <span class="n">model</span><span class="o">.</span><span class="n">width</span><span class="p">,</span> <span class="s2">&quot;feature_order&quot;</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="n">FEATURE_ORDER</span><span class="p">),</span>
+    <span class="s2">&quot;feature_location&quot;</span><span class="p">:</span> <span class="s2">&quot;node&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;feature_units&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;dimensionless x/L&quot;</span><span class="p">,</span> <span class="s2">&quot;dimensionless y/H&quot;</span><span class="p">,</span> <span class="s2">&quot;dimensionless&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;output&quot;</span><span class="p">:</span> <span class="s2">&quot;toy_damage_proposal at nodes; d=0 intact-like, d=1 saturated&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;dtype&quot;</span><span class="p">:</span> <span class="s2">&quot;float64&quot;</span><span class="p">,</span> <span class="s2">&quot;device&quot;</span><span class="p">:</span> <span class="s2">&quot;cpu&quot;</span><span class="p">,</span> <span class="s2">&quot;mesh_signature&quot;</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="n">problem</span><span class="o">.</span><span class="n">mesh_signature</span><span class="p">),</span>
+    <span class="s2">&quot;normalisation_mean&quot;</span><span class="p">:</span> <span class="n">mean</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span> <span class="s2">&quot;normalisation_scale&quot;</span><span class="p">:</span> <span class="n">scale</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span>
+    <span class="s2">&quot;splits&quot;</span><span class="p">:</span> <span class="p">{</span><span class="n">key</span><span class="p">:</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">values</span><span class="p">]</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">values</span> <span class="ow">in</span> <span class="n">split_loads</span><span class="o">.</span><span class="n">items</span><span class="p">()},</span>
+    <span class="s2">&quot;data_provenance&quot;</span><span class="p">:</span> <span class="s2">&quot;course-owned synthetic fields from the discrete ToyHelmholtzProblem&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;seed&quot;</span><span class="p">:</span> <span class="mi">20260909</span><span class="p">,</span> <span class="s2">&quot;epochs&quot;</span><span class="p">:</span> <span class="mi">400</span><span class="p">,</span>
+<span class="p">}</span>
+<span class="n">checkpoint</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;state_dict&quot;</span><span class="p">:</span> <span class="n">model</span><span class="o">.</span><span class="n">state_dict</span><span class="p">(),</span> <span class="s2">&quot;metadata&quot;</span><span class="p">:</span> <span class="n">metadata</span><span class="p">,</span> <span class="s2">&quot;history&quot;</span><span class="p">:</span> <span class="n">history</span><span class="p">,</span>
+              <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;test_rmse&quot;</span><span class="p">:</span> <span class="n">test_rmse</span><span class="p">,</span> <span class="s2">&quot;training_seconds&quot;</span><span class="p">:</span> <span class="n">training_seconds</span><span class="p">}}</span>
+<span class="n">torch</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">checkpoint</span><span class="p">,</span> <span class="n">checkpoint_path</span><span class="p">)</span>
+<span class="n">checkpoint_path</span><span class="o">.</span><span class="n">with_suffix</span><span class="p">(</span><span class="s2">&quot;.metadata.json&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">write_text</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">metadata</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1183
+</pre></div>
+</div>
+</div>
+</div>
+<p>Reload a fresh model instance and compare predictions at load 1.00. Equal predictions check reconstruction from the checkpoint; reference-field error assesses approximation quality.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reloaded</span><span class="p">,</span> <span class="n">reloaded_metadata</span> <span class="o">=</span> <span class="n">load_toy_model</span><span class="p">(</span><span class="n">checkpoint_path</span><span class="p">)</span>
+<span class="n">heldout_load</span> <span class="o">=</span> <span class="mf">1.00</span>
+<span class="n">heldout_features</span> <span class="o">=</span> <span class="n">problem</span><span class="o">.</span><span class="n">features</span><span class="p">(</span><span class="n">heldout_load</span><span class="p">)</span>
+<span class="n">heldout_reference</span> <span class="o">=</span> <span class="n">problem</span><span class="o">.</span><span class="n">reference_field</span><span class="p">(</span><span class="n">heldout_load</span><span class="p">)</span>
+<span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
+    <span class="n">prediction_before</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">normalise_features</span><span class="p">(</span><span class="n">heldout_features</span><span class="p">,</span> <span class="n">mean</span><span class="p">,</span> <span class="n">scale</span><span class="p">))</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">prediction_after</span> <span class="o">=</span> <span class="n">reloaded</span><span class="p">(</span><span class="n">normalise_features</span><span class="p">(</span><span class="n">heldout_features</span><span class="p">,</span> <span class="n">mean</span><span class="p">,</span> <span class="n">scale</span><span class="p">))</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">reload_difference</span> <span class="o">=</span> <span class="nb">float</span><span class="p">((</span><span class="n">prediction_before</span> <span class="o">-</span> <span class="n">prediction_after</span><span class="p">)</span><span class="o">.</span><span class="n">abs</span><span class="p">()</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
+<span class="n">heldout_rmse</span> <span class="o">=</span> <span class="nb">float</span><span class="p">((</span><span class="n">prediction_after</span> <span class="o">-</span> <span class="n">heldout_reference</span><span class="p">)</span><span class="o">.</span><span class="n">square</span><span class="p">()</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">sqrt</span><span class="p">())</span>
+<span class="k">assert</span> <span class="n">reload_difference</span> <span class="o">&lt;</span> <span class="mf">1.e-12</span> <span class="ow">and</span> <span class="n">heldout_rmse</span> <span class="o">&lt;</span> <span class="mf">.07</span>
+<span class="nb">print</span><span class="p">({</span><span class="s2">&quot;reload_difference&quot;</span><span class="p">:</span> <span class="n">reload_difference</span><span class="p">,</span> <span class="s2">&quot;heldout_rmse&quot;</span><span class="p">:</span> <span class="n">heldout_rmse</span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;reload_difference&#39;: 0.0, &#39;heldout_rmse&#39;: 0.05636315718170472}
+</pre></div>
+</div>
+</div>
+</div>
+<p>Reload agreement checks the saved model; reference error measures its approximation. Keep those two questions separate in this compact table.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">HTML</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">day2_helpers.classroom_visuals</span><span class="w"> </span><span class="kn">import</span> <span class="n">numeric_table_html</span><span class="p">,</span> <span class="n">save_table</span>
+<span class="n">reload_rows</span> <span class="o">=</span> <span class="p">[{</span><span class="s2">&quot;comparison&quot;</span><span class="p">:</span> <span class="s2">&quot;Original vs reloaded: maximum difference&quot;</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="n">reload_difference</span><span class="p">},</span>
+               <span class="p">{</span><span class="s2">&quot;comparison&quot;</span><span class="p">:</span> <span class="s2">&quot;Reloaded vs reference: held-out RMSE&quot;</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="n">heldout_rmse</span><span class="p">}]</span>
+<span class="n">save_table</span><span class="p">(</span><span class="n">reload_rows</span><span class="p">,</span> <span class="n">practical_dir</span> <span class="o">/</span> <span class="s2">&quot;toy_reload_checks.csv&quot;</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">HTML</span><span class="p">(</span><span class="n">numeric_table_html</span><span class="p">(</span><span class="n">reload_rows</span><span class="p">,</span> <span class="p">[(</span><span class="s2">&quot;comparison&quot;</span><span class="p">,</span> <span class="s2">&quot;Question&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;value&quot;</span><span class="p">,</span> <span class="s2">&quot;Field difference&quot;</span><span class="p">)],</span>
+                               <span class="s2">&quot;Model reconstruction and held-out field quality&quot;</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table><caption>Model reconstruction and held-out field quality</caption><thead><tr><th>Question</th><th>Field difference</th></tr></thead><tbody><tr><td>Original vs reloaded: maximum difference</td><td>0</td></tr><tr><td>Reloaded vs reference: held-out RMSE</td><td>0.056363</td></tr></tbody></table></div></div>
+</div>
+</section>
+<section id="additional-comparison-a-radial-basis-predictor">
+<h3>Additional comparison: a radial-basis predictor<a class="headerlink" href="#additional-comparison-a-radial-basis-predictor" title="Link to this heading">#</a></h3>
+<p>The retained reference notebook also compares a radial-basis average using the same nodewise features. Run the following cell as part of the sequence; its prediction is used in the next figure. Its prediction and assumptions remain separate from the neural model.</p>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># A compatible RBF reference alternative shares the same nodewise features,</span>
+<span class="c1"># but is a distinct architecture with its own resolution/data assumptions.</span>
+<span class="n">train_loads</span> <span class="o">=</span> <span class="n">metadata</span><span class="p">[</span><span class="s2">&quot;splits&quot;</span><span class="p">][</span><span class="s2">&quot;train&quot;</span><span class="p">]</span>
+<span class="n">train_features</span><span class="p">,</span> <span class="n">train_targets</span> <span class="o">=</span> <span class="n">problem</span><span class="o">.</span><span class="n">case_tensor</span><span class="p">(</span><span class="n">train_loads</span><span class="p">)</span>
+<span class="n">z_train</span> <span class="o">=</span> <span class="n">normalise_features</span><span class="p">(</span><span class="n">train_features</span><span class="p">,</span> <span class="n">mean</span><span class="p">,</span> <span class="n">scale</span><span class="p">)</span>
+<span class="n">z_test</span> <span class="o">=</span> <span class="n">normalise_features</span><span class="p">(</span><span class="n">heldout_features</span><span class="p">,</span> <span class="n">mean</span><span class="p">,</span> <span class="n">scale</span><span class="p">)</span>
+<span class="n">squared_distance</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cdist</span><span class="p">(</span><span class="n">z_test</span><span class="p">,</span> <span class="n">z_train</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>
+<span class="n">weights</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">squared_distance</span> <span class="o">/</span> <span class="mf">0.18</span><span class="p">)</span>
+<span class="n">rbf_prediction</span> <span class="o">=</span> <span class="p">(</span><span class="n">weights</span> <span class="o">@</span> <span class="n">train_targets</span><span class="p">)</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="n">weights</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">clamp_min</span><span class="p">(</span><span class="mf">1.0e-15</span><span class="p">)</span>
+<span class="n">rbf_rmse</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">mean</span><span class="p">((</span><span class="n">rbf_prediction</span> <span class="o">-</span> <span class="n">heldout_reference</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">({</span><span class="s2">&quot;MLP_heldout_RMSE&quot;</span><span class="p">:</span> <span class="n">heldout_rmse</span><span class="p">,</span> <span class="s2">&quot;RBF_heldout_RMSE&quot;</span><span class="p">:</span> <span class="n">rbf_rmse</span><span class="p">,</span> <span class="s2">&quot;RBF_scope&quot;</span><span class="p">:</span> <span class="s2">&quot;shared nodewise feature contract for the discrete Helmholtz model&quot;</span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;MLP_heldout_RMSE&#39;: 0.05636315718170472, &#39;RBF_heldout_RMSE&#39;: 0.0997143167782659, &#39;RBF_scope&#39;: &#39;shared nodewise feature contract for the discrete Helmholtz model&#39;}
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="interpret-the-fields-and-correction">
+<h2>Interpret the fields and correction<a class="headerlink" href="#interpret-the-fields-and-correction" title="Link to this heading">#</a></h2>
+<p>Inspect the complete reference, MLP and radial-basis fields together with the signed MLP error. Common field scales make their spatial differences visible.</p>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">field_image</span><span class="p">(</span><span class="n">values</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">values</span><span class="o">.</span><span class="n">detach</span><span class="p">()</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">problem</span><span class="o">.</span><span class="n">ny</span><span class="p">,</span> <span class="n">problem</span><span class="o">.</span><span class="n">nx</span><span class="p">)</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+
+<span class="n">error</span> <span class="o">=</span> <span class="n">prediction_after</span> <span class="o">-</span> <span class="n">heldout_reference</span>
+<span class="n">error_limit</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">error</span><span class="o">.</span><span class="n">abs</span><span class="p">()</span><span class="o">.</span><span class="n">max</span><span class="p">()),</span> <span class="n">torch</span><span class="o">.</span><span class="n">finfo</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span><span class="o">.</span><span class="n">eps</span><span class="p">)</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mf">3.2</span><span class="p">),</span> <span class="n">constrained_layout</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">ax</span><span class="p">,</span> <span class="n">values</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">cmap</span><span class="p">,</span> <span class="n">limits</span> <span class="ow">in</span> <span class="p">(</span>
+    <span class="p">(</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">heldout_reference</span><span class="p">,</span> <span class="s2">&quot;held-out toy reference&quot;</span><span class="p">,</span> <span class="s2">&quot;magma&quot;</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)),</span>
+    <span class="p">(</span><span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">prediction_after</span><span class="p">,</span> <span class="s2">&quot;reloaded MLP&quot;</span><span class="p">,</span> <span class="s2">&quot;magma&quot;</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)),</span>
+    <span class="p">(</span><span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">rbf_prediction</span><span class="p">,</span> <span class="s2">&quot;compatible RBF baseline&quot;</span><span class="p">,</span> <span class="s2">&quot;magma&quot;</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)),</span>
+    <span class="p">(</span><span class="n">axes</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">error</span><span class="p">,</span> <span class="s2">&quot;MLP − reference&quot;</span><span class="p">,</span> <span class="s2">&quot;coolwarm&quot;</span><span class="p">,</span> <span class="p">(</span><span class="o">-</span><span class="n">error_limit</span><span class="p">,</span> <span class="n">error_limit</span><span class="p">)),</span>
+<span class="p">):</span>
+    <span class="n">image</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">field_image</span><span class="p">(</span><span class="n">values</span><span class="p">),</span> <span class="n">origin</span><span class="o">=</span><span class="s2">&quot;lower&quot;</span><span class="p">,</span> <span class="n">extent</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cmap</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="n">limits</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">vmax</span><span class="o">=</span><span class="n">limits</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="n">title</span><span class="p">,</span> <span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;x/L&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;y/H&quot;</span><span class="p">,</span> <span class="n">aspect</span><span class="o">=</span><span class="s2">&quot;equal&quot;</span><span class="p">)</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">shrink</span><span class="o">=</span><span class="mf">0.78</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;field error&quot;</span> <span class="k">if</span> <span class="n">ax</span> <span class="ow">is</span> <span class="n">axes</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="k">else</span> <span class="s2">&quot;toy field d&quot;</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">practical_dir</span> <span class="o">/</span> <span class="s2">&quot;tiny_mlp_heldout_field.png&quot;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">160</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s2">&quot;tight&quot;</span><span class="p">)</span>
+<span class="n">display_figure</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">alt</span><span class="o">=</span><span class="s2">&quot;Held-out toy reference, reloaded MLP field, compatible RBF field, and MLP error.&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="Computed field or curve from Practical 3: Learn a field and assess its proposal" src="../_images/df6f3635ff1ac9c480755ede1cfd329dc904ec0d5950c600ebcad2b8f000335d.png" />
+</div>
+</div>
+<section id="assess-a-compatible-proposal">
+<h3>Assess a compatible proposal<a class="headerlink" href="#assess-a-compatible-proposal" title="Link to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">ToyDamageAdapter</span></code> checks feature order, grid signature, input shape and finite values. Its proposal also respects the scalar bounds, boundary values and supplied previous state. The relative residual is</p>
+<div class="math notranslate nohighlight">
+\[\rho=\frac{\|A\widehat{\mathbf d}-\mathbf b\|_2}{\|\mathbf b\|_2+10^{-15}}.\]</div>
+<p>The gate accepts when <span class="math notranslate nohighlight">\(\rho\le0.30\)</span>. Otherwise it computes the direct toy reference correction. Here the previous state is the reference field at the lower load 0.82.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">adapter</span> <span class="o">=</span> <span class="n">ToyDamageAdapter</span><span class="p">(</span><span class="n">reloaded</span><span class="p">,</span> <span class="n">metadata</span><span class="p">,</span> <span class="n">problem</span><span class="p">)</span>
+<span class="n">load_factor</span> <span class="o">=</span> <span class="mf">.94</span>
+<span class="n">d_previous</span> <span class="o">=</span> <span class="n">problem</span><span class="o">.</span><span class="n">reference_field</span><span class="p">(</span><span class="mf">.82</span><span class="p">)</span>
+<span class="n">proposal</span> <span class="o">=</span> <span class="n">adapter</span><span class="o">.</span><span class="n">propose</span><span class="p">(</span><span class="n">problem</span><span class="o">.</span><span class="n">features</span><span class="p">(</span><span class="n">load_factor</span><span class="p">),</span> <span class="n">d_previous</span><span class="o">=</span><span class="n">d_previous</span><span class="p">)</span>
+<span class="n">assessment</span> <span class="o">=</span> <span class="n">adapter</span><span class="o">.</span><span class="n">assess</span><span class="p">(</span><span class="n">proposal</span><span class="p">,</span> <span class="n">load_factor</span><span class="p">,</span> <span class="n">residual_limit</span><span class="o">=</span><span class="mf">.30</span><span class="p">)</span>
+<span class="n">reference</span> <span class="o">=</span> <span class="n">problem</span><span class="o">.</span><span class="n">reference_field</span><span class="p">(</span><span class="n">load_factor</span><span class="p">)</span>
+<span class="n">corrected</span> <span class="o">=</span> <span class="n">proposal</span> <span class="k">if</span> <span class="n">assessment</span><span class="p">[</span><span class="s2">&quot;accepted&quot;</span><span class="p">]</span> <span class="k">else</span> <span class="n">adapter</span><span class="o">.</span><span class="n">fallback</span><span class="p">(</span><span class="n">load_factor</span><span class="p">,</span> <span class="n">d_previous</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">({</span><span class="s2">&quot;assessment&quot;</span><span class="p">:</span> <span class="n">assessment</span><span class="p">,</span> <span class="s2">&quot;proposal_rmse&quot;</span><span class="p">:</span> <span class="nb">float</span><span class="p">((</span><span class="n">proposal</span><span class="o">-</span><span class="n">reference</span><span class="p">)</span><span class="o">.</span><span class="n">square</span><span class="p">()</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">sqrt</span><span class="p">())})</span>
+<span class="k">assert</span> <span class="n">assessment</span><span class="p">[</span><span class="s2">&quot;accepted&quot;</span><span class="p">],</span> <span class="n">assessment</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;assessment&#39;: {&#39;toy_relative_residual&#39;: 0.19402747874051113, &#39;residual_limit&#39;: 0.3, &#39;accepted&#39;: True, &#39;scope&#39;: &#39;Residual of the discrete ToyHelmholtzProblem&#39;}, &#39;proposal_rmse&#39;: 0.029164814588982523}
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="observe-the-reference-correction-branch">
+<h3>Observe the reference-correction branch<a class="headerlink" href="#observe-the-reference-correction-branch" title="Link to this heading">#</a></h3>
+<p>A controlled spatial perturbation provides a second proposal for the same equation and tolerance. Compare its residual with the reference correction’s residual. This demonstration keeps the data, model and load fixed.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">corrupted</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">problem</span><span class="o">.</span><span class="n">boundary_mask</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">proposal</span><span class="p">),</span>
+                        <span class="p">(</span><span class="n">proposal</span> <span class="o">+</span> <span class="mf">.30</span> <span class="o">*</span> <span class="n">torch</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">12</span> <span class="o">*</span> <span class="n">problem</span><span class="o">.</span><span class="n">coordinates</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]))</span><span class="o">.</span><span class="n">clamp</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="n">rejected</span> <span class="o">=</span> <span class="n">adapter</span><span class="o">.</span><span class="n">assess</span><span class="p">(</span><span class="n">corrupted</span><span class="p">,</span> <span class="n">load_factor</span><span class="p">,</span> <span class="n">residual_limit</span><span class="o">=</span><span class="mf">.30</span><span class="p">)</span>
+<span class="n">fallback</span> <span class="o">=</span> <span class="n">adapter</span><span class="o">.</span><span class="n">fallback</span><span class="p">(</span><span class="n">load_factor</span><span class="p">,</span> <span class="n">d_previous</span><span class="p">)</span>
+<span class="n">fallback_residual</span> <span class="o">=</span> <span class="n">problem</span><span class="o">.</span><span class="n">relative_residual</span><span class="p">(</span><span class="n">fallback</span><span class="p">,</span> <span class="n">load_factor</span><span class="p">)</span>
+<span class="k">assert</span> <span class="ow">not</span> <span class="n">rejected</span><span class="p">[</span><span class="s2">&quot;accepted&quot;</span><span class="p">],</span> <span class="n">rejected</span>
+<span class="k">assert</span> <span class="n">fallback_residual</span> <span class="o">&lt;</span> <span class="mf">1.e-10</span>
+<span class="nb">print</span><span class="p">({</span><span class="s2">&quot;perturbed_assessment&quot;</span><span class="p">:</span> <span class="n">rejected</span><span class="p">,</span> <span class="s2">&quot;fallback_residual&quot;</span><span class="p">:</span> <span class="n">fallback_residual</span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;perturbed_assessment&#39;: {&#39;toy_relative_residual&#39;: 1.164008876432137, &#39;residual_limit&#39;: 0.3, &#39;accepted&#39;: False, &#39;scope&#39;: &#39;Residual of the discrete ToyHelmholtzProblem&#39;}, &#39;fallback_residual&#39;: 2.969565304912253e-15}
+</pre></div>
+</div>
+</div>
+</div>
+<p>Expand the optional interface checks to see how the adapter responds to permuted feature names and a non-finite input.</p>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Explicitly demonstrate an interface failure instead of silently reshaping input.</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">adapter</span><span class="o">.</span><span class="n">propose</span><span class="p">(</span>
+        <span class="n">problem</span><span class="o">.</span><span class="n">features</span><span class="p">(</span><span class="n">load_factor</span><span class="p">),</span>
+        <span class="n">feature_order</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;load_factor&quot;</span><span class="p">,</span> <span class="s2">&quot;x_over_L&quot;</span><span class="p">,</span> <span class="s2">&quot;y_over_H&quot;</span><span class="p">),</span>
+    <span class="p">)</span>
+<span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+    <span class="n">compatibility_message</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="k">raise</span> <span class="ne">AssertionError</span><span class="p">(</span><span class="s2">&quot;An incompatible feature order was unexpectedly accepted.&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Expected incompatibility:&quot;</span><span class="p">,</span> <span class="n">compatibility_message</span><span class="p">)</span>
+
+<span class="n">nan_features</span> <span class="o">=</span> <span class="n">problem</span><span class="o">.</span><span class="n">features</span><span class="p">(</span><span class="n">load_factor</span><span class="p">)</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span>
+<span class="n">nan_features</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="s2">&quot;nan&quot;</span><span class="p">)</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">adapter</span><span class="o">.</span><span class="n">propose</span><span class="p">(</span><span class="n">nan_features</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+    <span class="n">finiteness_message</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="k">raise</span> <span class="ne">AssertionError</span><span class="p">(</span><span class="s2">&quot;A non-finite adapter input was unexpectedly accepted.&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Expected finite-input rejection:&quot;</span><span class="p">,</span> <span class="n">finiteness_message</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Expected incompatibility: Incompatible feature order. Expected [&#39;x_over_L&#39;, &#39;y_over_H&#39;, &#39;load_factor&#39;], got [&#39;load_factor&#39;, &#39;x_over_L&#39;, &#39;y_over_H&#39;].
+Expected finite-input rejection: Incompatible feature tensor: all adapter inputs must be finite.
+</pre></div>
+</div>
+</div>
+</div>
+<p>Read the complete fields alongside the residuals. A proposal can look smooth and still differ from the discrete reference; the equation check adds information about that difference.</p>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">field_image</span><span class="p">(</span><span class="n">values</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">values</span><span class="o">.</span><span class="n">detach</span><span class="p">()</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">problem</span><span class="o">.</span><span class="n">ny</span><span class="p">,</span> <span class="n">problem</span><span class="o">.</span><span class="n">nx</span><span class="p">)</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mf">3.2</span><span class="p">),</span> <span class="n">constrained_layout</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">panels</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="p">(</span><span class="n">proposal</span><span class="p">,</span> <span class="s2">&quot;compatible proposal&quot;</span><span class="p">,</span> <span class="s2">&quot;magma&quot;</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)),</span>
+    <span class="p">(</span><span class="n">reference</span><span class="p">,</span> <span class="s2">&quot;reference field&quot;</span><span class="p">,</span> <span class="s2">&quot;magma&quot;</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)),</span>
+    <span class="p">(</span><span class="n">corrupted</span><span class="p">,</span> <span class="s2">&quot;rejected proposal&quot;</span><span class="p">,</span> <span class="s2">&quot;magma&quot;</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)),</span>
+    <span class="p">(</span><span class="n">fallback</span> <span class="o">-</span> <span class="n">reference</span><span class="p">,</span> <span class="s2">&quot;fallback − reference&quot;</span><span class="p">,</span> <span class="s2">&quot;coolwarm&quot;</span><span class="p">,</span> <span class="p">(</span><span class="o">-</span><span class="mf">0.02</span><span class="p">,</span> <span class="mf">0.02</span><span class="p">)),</span>
+<span class="p">)</span>
+<span class="k">for</span> <span class="n">ax</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">cmap</span><span class="p">,</span> <span class="n">limits</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">axes</span><span class="p">,</span> <span class="o">*</span><span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">panels</span><span class="p">)):</span>
+    <span class="n">image</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">field_image</span><span class="p">(</span><span class="n">field</span><span class="p">),</span> <span class="n">origin</span><span class="o">=</span><span class="s2">&quot;lower&quot;</span><span class="p">,</span> <span class="n">extent</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cmap</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="n">limits</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">vmax</span><span class="o">=</span><span class="n">limits</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="n">title</span><span class="p">,</span> <span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;x/L&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;y/H&quot;</span><span class="p">,</span> <span class="n">aspect</span><span class="o">=</span><span class="s2">&quot;equal&quot;</span><span class="p">)</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">shrink</span><span class="o">=</span><span class="mf">0.78</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;field error&quot;</span> <span class="k">if</span> <span class="n">ax</span> <span class="ow">is</span> <span class="n">axes</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="k">else</span> <span class="s2">&quot;toy field d&quot;</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">practical_dir</span> <span class="o">/</span> <span class="s2">&quot;toy_adapter_fallback.png&quot;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">160</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s2">&quot;tight&quot;</span><span class="p">)</span>
+<span class="n">display_figure</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">alt</span><span class="o">=</span><span class="s2">&quot;Toy adapter&#39;s compatible proposal, reference, rejected proposal, and fallback error.&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="Computed field or curve from Practical 3: Learn a field and assess its proposal" src="../_images/4217a9dca227b689aa9ffd68bd96d8f1db3b9471f9834e86c796301fb39b48d8.png" />
+</div>
+</div>
+<p>The result table links each field to its residual and selected action. In the saved NPZ, <code class="docutils literal notranslate"><span class="pre">proposal</span></code> is the model prediction, <code class="docutils literal notranslate"><span class="pre">selected</span></code> is the field returned by the acceptance check, and <code class="docutils literal notranslate"><span class="pre">fallback</span></code> is the reference solution used after rejection.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gate_rows</span> <span class="o">=</span> <span class="p">[{</span><span class="s2">&quot;case&quot;</span><span class="p">:</span> <span class="s2">&quot;Compatible proposal&quot;</span><span class="p">,</span> <span class="s2">&quot;residual&quot;</span><span class="p">:</span> <span class="n">assessment</span><span class="p">[</span><span class="s2">&quot;toy_relative_residual&quot;</span><span class="p">],</span> <span class="s2">&quot;action&quot;</span><span class="p">:</span> <span class="s2">&quot;Accept&quot;</span><span class="p">},</span>
+             <span class="p">{</span><span class="s2">&quot;case&quot;</span><span class="p">:</span> <span class="s2">&quot;Perturbed proposal&quot;</span><span class="p">,</span> <span class="s2">&quot;residual&quot;</span><span class="p">:</span> <span class="n">rejected</span><span class="p">[</span><span class="s2">&quot;toy_relative_residual&quot;</span><span class="p">],</span> <span class="s2">&quot;action&quot;</span><span class="p">:</span> <span class="s2">&quot;Reference correction&quot;</span><span class="p">},</span>
+             <span class="p">{</span><span class="s2">&quot;case&quot;</span><span class="p">:</span> <span class="s2">&quot;Reference fallback&quot;</span><span class="p">,</span> <span class="s2">&quot;residual&quot;</span><span class="p">:</span> <span class="n">fallback_residual</span><span class="p">,</span> <span class="s2">&quot;action&quot;</span><span class="p">:</span> <span class="s2">&quot;Use reference solution&quot;</span><span class="p">}]</span>
+<span class="n">save_table</span><span class="p">(</span><span class="n">gate_rows</span><span class="p">,</span> <span class="n">practical_dir</span> <span class="o">/</span> <span class="s2">&quot;toy_gate_results.csv&quot;</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">HTML</span><span class="p">(</span><span class="n">numeric_table_html</span><span class="p">(</span><span class="n">gate_rows</span><span class="p">,</span> <span class="p">[(</span><span class="s2">&quot;case&quot;</span><span class="p">,</span> <span class="s2">&quot;Field&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;residual&quot;</span><span class="p">,</span> <span class="s2">&quot;Relative equation residual&quot;</span><span class="p">),</span>
+                                           <span class="p">(</span><span class="s2">&quot;action&quot;</span><span class="p">,</span> <span class="s2">&quot;Selected action&quot;</span><span class="p">)],</span> <span class="s2">&quot;Residual limit = 0.30&quot;</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table><caption>Residual limit = 0.30</caption><thead><tr><th>Field</th><th>Relative equation residual</th><th>Selected action</th></tr></thead><tbody><tr><td>Compatible proposal</td><td>0.19403</td><td>Accept</td></tr><tr><td>Perturbed proposal</td><td>1.164</td><td>Reference correction</td></tr><tr><td>Reference fallback</td><td>2.9696e-15</td><td>Use reference solution</td></tr></tbody></table></div></div>
+</div>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">savez_compressed</span><span class="p">(</span><span class="n">practical_dir</span> <span class="o">/</span> <span class="s2">&quot;toy_review_fields.npz&quot;</span><span class="p">,</span> <span class="n">coordinates</span><span class="o">=</span><span class="n">problem</span><span class="o">.</span><span class="n">coordinates</span><span class="o">.</span><span class="n">numpy</span><span class="p">(),</span>
+                    <span class="n">heldout_load</span><span class="o">=</span><span class="n">heldout_load</span><span class="p">,</span> <span class="n">heldout_reference</span><span class="o">=</span><span class="n">heldout_reference</span><span class="o">.</span><span class="n">numpy</span><span class="p">(),</span>
+                    <span class="n">prediction_before</span><span class="o">=</span><span class="n">prediction_before</span><span class="o">.</span><span class="n">numpy</span><span class="p">(),</span> <span class="n">prediction_after</span><span class="o">=</span><span class="n">prediction_after</span><span class="o">.</span><span class="n">numpy</span><span class="p">(),</span>
+                    <span class="n">rbf_prediction</span><span class="o">=</span><span class="n">rbf_prediction</span><span class="o">.</span><span class="n">detach</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">(),</span> <span class="n">proposal_load</span><span class="o">=</span><span class="n">load_factor</span><span class="p">,</span>
+                    <span class="n">previous</span><span class="o">=</span><span class="n">d_previous</span><span class="o">.</span><span class="n">numpy</span><span class="p">(),</span> <span class="n">proposal</span><span class="o">=</span><span class="n">proposal</span><span class="o">.</span><span class="n">numpy</span><span class="p">(),</span> <span class="n">reference</span><span class="o">=</span><span class="n">reference</span><span class="o">.</span><span class="n">numpy</span><span class="p">(),</span>
+                    <span class="n">perturbed</span><span class="o">=</span><span class="n">corrupted</span><span class="o">.</span><span class="n">numpy</span><span class="p">(),</span> <span class="n">selected</span><span class="o">=</span><span class="n">corrected</span><span class="o">.</span><span class="n">numpy</span><span class="p">(),</span> <span class="n">fallback</span><span class="o">=</span><span class="n">fallback</span><span class="o">.</span><span class="n">numpy</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<p>The optional export records the two decisions. A later data-aggregation activity would additionally retain the model-visited inputs and reference target arrays, retrain, and evaluate a held-out rollout.</p>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Save decision metadata for this proposal/reference assessment.</span>
+<span class="c1"># Include reference-label cost in a later retraining comparison.</span>
+<span class="n">replay_record</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;scope&quot;</span><span class="p">:</span> <span class="s2">&quot;course-owned ToyHelmholtzProblem; one offline proposal/reference correction record&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;load_factor&quot;</span><span class="p">:</span> <span class="n">load_factor</span><span class="p">,</span>
+    <span class="s2">&quot;feature_order&quot;</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="n">FEATURE_ORDER</span><span class="p">),</span>
+    <span class="s2">&quot;normal_assessment&quot;</span><span class="p">:</span> <span class="n">assessment</span><span class="p">,</span>
+    <span class="s2">&quot;rejected_assessment&quot;</span><span class="p">:</span> <span class="n">rejected</span><span class="p">,</span>
+    <span class="s2">&quot;correction&quot;</span><span class="p">:</span> <span class="s2">&quot;classical ToyHelmholtzProblem reference solve&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;heldout_evaluation_frozen&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+<span class="p">}</span>
+<span class="n">replay_path</span> <span class="o">=</span> <span class="n">practical_dir</span> <span class="o">/</span> <span class="s2">&quot;toy_adapter_replay_record.json&quot;</span>
+<span class="n">replay_path</span><span class="o">.</span><span class="n">write_text</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">replay_record</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">),</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">({</span><span class="s2">&quot;replay_record&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">replay_path</span><span class="o">.</span><span class="n">relative_to</span><span class="p">(</span><span class="n">COURSE_ROOT</span><span class="p">)),</span> <span class="s2">&quot;decision&quot;</span><span class="p">:</span> <span class="s2">&quot;accept compatible / fallback rejected&quot;</span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;replay_record&#39;: &#39;assets/day2_forward/classroom/03/toy_adapter_replay_record.json&#39;, &#39;decision&#39;: &#39;accept compatible / fallback rejected&#39;}
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="example-outline-p3-r01-a-fracture-compatible-hybrid">
+<h3>Example outline · P3-R01 · A fracture-compatible hybrid<a class="headerlink" href="#example-outline-p3-r01-a-fracture-compatible-hybrid" title="Link to this heading">#</a></h3>
+<p><strong>Learning question:</strong> Which proposed fracture state can be accepted, and when is a coupled correction needed?</p>
+<p><strong>Planned content.</strong> Follow a learned damage proposal through a coupled fracture calculation, with its history inputs and corrected fields. The Helmholtz calculation above supplies the current executable demonstration.</p>
+</section>
+<section id="animation-storyboard-p3-a01-proposal-check-and-correction">
+<h3>Animation storyboard · P3-A01 · Proposal, check and correction<a class="headerlink" href="#animation-storyboard-p3-a01-proposal-check-and-correction" title="Link to this heading">#</a></h3>
+<p><strong>Planned content.</strong> Show a model proposal, its residual assessment and the accepted or corrected field. Link this sequence to Lecture 3’s conceptual data-aggregation loop, with reference labelling, retraining and held-out evaluation.</p>
+</section>
+</section>
+<section id="key-takeaways">
+<h2>Key takeaways<a class="headerlink" href="#key-takeaways" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Whole-load splits and training-only normalisation define the learning experiment.</p></li>
+<li><p>The visible loss and backward pass connect field mismatch to every trainable weight.</p></li>
+<li><p>Saved weights and input conventions reconstruct the same model prediction.</p></li>
+<li><p>The discrete toy residual guides proposal acceptance and checked reference correction.</p></li>
+</ul>
+</section>
+<section id="exercises">
+<h2>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
+<p>Try each question before opening the hint or worked solution. Keep the original calculation as your reference.</p>
+<section id="exercise-1-connect-the-data-layout-to-the-training-gradient">
+<h3>Exercise 1: Connect the data layout to the training gradient<a class="headerlink" href="#exercise-1-connect-the-data-layout-to-the-training-gradient" title="Link to this heading">#</a></h3>
+<p>The grid contains <span class="math notranslate nohighlight">\(25\times13\)</span> nodes. Twelve whole load cases form the training set, and each node supplies the feature row <span class="math notranslate nohighlight">\([x/L,y/H,\lambda]\)</span> and one target value.</p>
+<ol class="arabic simple">
+<li><p>Determine the shapes of the combined training-feature and target tensors.</p></li>
+<li><p>For <span class="math notranslate nohighlight">\(\mathcal L=M^{-1}\sum_i(\widehat d_i-d_i)^2\)</span>, derive <span class="math notranslate nohighlight">\(\partial\mathcal L/\partial\widehat d_i\)</span> and use the chain rule to express <span class="math notranslate nohighlight">\(\nabla_{\boldsymbol\theta}\mathcal L\)</span>.</p></li>
+<li><p>Explain why normalisation statistics are fitted on training inputs and reused for validation and test inputs. How does keeping whole load cases together affect the interpretation of test accuracy?</p></li>
+</ol>
+<div class="dropdown course-hint admonition">
+<p class="admonition-title">Hint 1</p>
+<p>Count all nodewise rows across the training loads. Differentiate one squared error, then propagate that derivative through the network output. Think of normalisation as part of the model’s input interface.</p>
+</div>
+<div class="dropdown course-solution admonition">
+<p class="admonition-title">Worked solution 1</p>
+<p>There are <span class="math notranslate nohighlight">\(N=25\times13=325\)</span> nodes per load and <span class="math notranslate nohighlight">\(M=12N=3900\)</span> training rows. The feature tensor has shape <span class="math notranslate nohighlight">\((3900,3)\)</span> and the target tensor has shape <span class="math notranslate nohighlight">\((3900,1)\)</span>.</p>
+<p>For each row,</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\partial\mathcal L}{\partial\widehat d_i}
+=\frac{2}{M}(\widehat d_i-d_i),
+\qquad
+\nabla_{\boldsymbol\theta}\mathcal L
+=\sum_{i=1}^{M}\frac{2}{M}(\widehat d_i-d_i)
+\nabla_{\boldsymbol\theta}f_{\boldsymbol\theta}(\mathbf z_i).
+\]</div>
+<p>The visible training loop computes these derivatives with <code class="docutils literal notranslate"><span class="pre">loss.backward()</span></code>. Adam then updates the parameters using the accumulated gradients.</p>
+<p>Training-only statistics define a fixed transformation available when the model is deployed. Reusing them gives validation, test, and future inputs the same meaning. Keeping every node from one load case in a single split evaluates a new loading condition; randomly splitting nodes within one field also measures interpolation inside a field already represented during training. Here <span class="math notranslate nohighlight">\(z_i\)</span> denotes the normalised feature row for training sample <span class="math notranslate nohighlight">\(i\)</span>, containing position and load.</p>
+</div>
+</section>
+<section id="exercise-2-explore-the-residual-tolerance">
+<h3>Exercise 2: Explore the residual tolerance<a class="headerlink" href="#exercise-2-explore-the-residual-tolerance" title="Link to this heading">#</a></h3>
+<p>Use the existing <code class="docutils literal notranslate"><span class="pre">proposal</span></code>, <code class="docutils literal notranslate"><span class="pre">reference</span></code>, <code class="docutils literal notranslate"><span class="pre">adapter</span></code>, and <code class="docutils literal notranslate"><span class="pre">d_previous</span></code> variables to compare tolerances <span class="math notranslate nohighlight">\(0.05\)</span>, <span class="math notranslate nohighlight">\(0.15\)</span>, and <span class="math notranslate nohighlight">\(0.30\)</span> in a new cell.</p>
+<ol class="arabic simple">
+<li><p>Record whether the proposal is accepted at each tolerance.</p></li>
+<li><p>Compute the selected field’s RMSE against the reference and its residual.</p></li>
+<li><p>Describe the relationship between tolerance, field accuracy, and use of the reference solver. Which quantities would you time before evaluating the computational benefit of the complete workflow?</p></li>
+</ol>
+<div class="dropdown course-hint admonition">
+<p class="admonition-title">Hint 2</p>
+<p>Call <code class="docutils literal notranslate"><span class="pre">adapter.assess(proposal,</span> <span class="pre">load_factor,</span> <span class="pre">residual_limit=tolerance)</span></code>. Select <code class="docutils literal notranslate"><span class="pre">proposal</span></code> when accepted and <code class="docutils literal notranslate"><span class="pre">adapter.fallback(load_factor,</span> <span class="pre">d_previous)</span></code> otherwise. Preserve the original demonstration cell and perform this sweep in a separate cell.</p>
+</div>
+<div class="dropdown course-solution admonition">
+<p class="admonition-title">Worked solution 2</p>
+<p>This sweep uses the existing proposal and evaluates the complete selection rule:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">tolerance</span> <span class="ow">in</span> <span class="p">(</span><span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">,</span> <span class="mf">0.30</span><span class="p">):</span>
+    <span class="n">decision</span> <span class="o">=</span> <span class="n">adapter</span><span class="o">.</span><span class="n">assess</span><span class="p">(</span>
+        <span class="n">proposal</span><span class="p">,</span> <span class="n">load_factor</span><span class="p">,</span> <span class="n">residual_limit</span><span class="o">=</span><span class="n">tolerance</span>
+    <span class="p">)</span>
+    <span class="n">selected</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">proposal</span> <span class="k">if</span> <span class="n">decision</span><span class="p">[</span><span class="s2">&quot;accepted&quot;</span><span class="p">]</span>
+        <span class="k">else</span> <span class="n">adapter</span><span class="o">.</span><span class="n">fallback</span><span class="p">(</span><span class="n">load_factor</span><span class="p">,</span> <span class="n">d_previous</span><span class="p">)</span>
+    <span class="p">)</span>
+    <span class="nb">print</span><span class="p">({</span>
+        <span class="s2">&quot;tolerance&quot;</span><span class="p">:</span> <span class="n">tolerance</span><span class="p">,</span>
+        <span class="s2">&quot;accepted&quot;</span><span class="p">:</span> <span class="n">decision</span><span class="p">[</span><span class="s2">&quot;accepted&quot;</span><span class="p">],</span>
+        <span class="s2">&quot;selected_rmse&quot;</span><span class="p">:</span> <span class="nb">float</span><span class="p">((</span><span class="n">selected</span> <span class="o">-</span> <span class="n">reference</span><span class="p">)</span><span class="o">.</span><span class="n">square</span><span class="p">()</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">sqrt</span><span class="p">()),</span>
+        <span class="s2">&quot;selected_residual&quot;</span><span class="p">:</span> <span class="n">problem</span><span class="o">.</span><span class="n">relative_residual</span><span class="p">(</span><span class="n">selected</span><span class="p">,</span> <span class="n">load_factor</span><span class="p">),</span>
+    <span class="p">})</span>
+</pre></div>
+</div>
+<p>For a fixed proposal, increasing the tolerance can change a rejection into acceptance. The reference branch computes the direct solution of this discrete field problem; the accepted branch retains the model approximation. Interpret the differences using the printed RMSE and residual, and inspect the corresponding spatial error.</p>
+<p>An end-to-end timing study includes feature preparation, prediction, projection, residual evaluation, and every reference correction. Report the reference-only baseline on the same inputs and hardware. A training or data-aggregation study additionally accounts for reference-label generation and retraining.</p>
+</div>
+</section>
+</section>
+<section id="continue-studying">
+<h2>Continue studying<a class="headerlink" href="#continue-studying" title="Link to this heading">#</a></h2>
+<p><a class="reference external" href="https://github.com/CEMS-Lab/autumn-school/blob/main/notebooks/04_train_save_reload_adapter.ipynb">Detailed notebook 04</a> · <a class="reference external" href="https://github.com/CEMS-Lab/autumn-school/blob/main/notebooks/05_hybrid_reference_correction.ipynb">Detailed notebook 05</a></p>
+<p>The complete source, attribution and bundled licences remain in the <a class="reference external" href="https://github.com/CEMS-Lab/autumn-school/blob/main/ATTRIBUTION.md">course repository</a>.</p>
+<section id="session-timing">
+<h3>Session timing<a class="headerlink" href="#session-timing" title="Link to this heading">#</a></h3>
+<p>Elapsed session time includes reading and pauses between cells. The course runner measures uninterrupted computation separately from installation.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">session_seconds</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span> <span class="o">-</span> <span class="n">session_started</span>
+<span class="nb">print</span><span class="p">({</span><span class="s2">&quot;setup_seconds&quot;</span><span class="p">:</span> <span class="n">setup_receipt</span><span class="p">[</span><span class="s2">&quot;setup_seconds&quot;</span><span class="p">],</span>
+       <span class="s2">&quot;elapsed_session_seconds&quot;</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">session_seconds</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
+       <span class="s2">&quot;environment&quot;</span><span class="p">:</span> <span class="n">setup_receipt</span><span class="p">[</span><span class="s2">&quot;environment&quot;</span><span class="p">],</span> <span class="s2">&quot;torch&quot;</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">__version__</span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;setup_seconds&#39;: 0.744, &#39;elapsed_session_seconds&#39;: 3.33, &#39;environment&#39;: &#39;local&#39;, &#39;torch&#39;: &#39;2.8.0&#39;}
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="02_gradients_and_recovery.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Practical 2: Gradients and material recovery</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../00_welcome_and_routes.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">From Cracks to Computation: Learn by Doing</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#physical-motivation-and-model">Physical motivation and model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-by-step-calculation">Step-by-step calculation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#generate-whole-load-datasets">Generate whole-load datasets</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#define-the-neural-model">Define the neural model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#train-with-an-inspectable-gradient-loop">Train with an inspectable gradient loop</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#save-the-model-with-its-input-conventions">Save the model with its input conventions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-comparison-a-radial-basis-predictor">Additional comparison: a radial-basis predictor</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpret-the-fields-and-correction">Interpret the fields and correction</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#assess-a-compatible-proposal">Assess a compatible proposal</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#observe-the-reference-correction-branch">Observe the reference-correction branch</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-outline-p3-r01-a-fracture-compatible-hybrid">Example outline · P3-R01 · A fracture-compatible hybrid</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#animation-storyboard-p3-a01-proposal-check-and-correction">Animation storyboard · P3-A01 · Proposal, check and correction</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-takeaways">Key takeaways</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1-connect-the-data-layout-to-the-training-gradient">Exercise 1: Connect the data layout to the training gradient</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2-explore-the-residual-tolerance">Exercise 2: Explore the residual tolerance</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#continue-studying">Continue studying</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#session-timing">Session timing</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    <div class="phast-course-credit">
+  <!-- Course material prepared by Allamaprabhu Ani and Sathiskumar A. Ponnusami, CEMS-Lab, 2026. -->
+  <p class="phast-course-creators">Prepared by <span>Allamaprabhu Ani and Sathiskumar A. Ponnusami</span></p>
+  <p class="phast-course-purpose">© 2026
+    <a href="https://github.com/CEMS-Lab">CEMS-Lab</a>
+    <span aria-hidden="true"> · </span>
+    Prepared for the
+    <a href="https://www.ukacm-school.uk/home">UKACM Autumn School 2026</a>.
+  </p>
+</div>
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="phast-discoveries" aria-label="Optional PhAST discoveries">
+  <details class="phast-discovery" id="phast-gradient-discovery">
+    <summary aria-label="PhAST ∇: a gradient discovery">PhAST ∇</summary>
+    <div class="phast-discovery-body">
+      <p><strong>No neural network required.</strong></p>
+      <p>A differentiable simulation can provide parameter sensitivities on
+        its own. The chain rule was here before the neural network.</p>
+    </div>
+  </details>
+  <details class="phast-discovery" id="phast-backward-discovery">
+    <summary><code>.backward()</code></summary>
+    <div class="phast-discovery-body">
+      <p><strong>A pocket chain rule.</strong></p>
+      <p>Let <var>q</var> = <var>θ</var><sup>2</sup> and
+        <var>L</var> = ½(<var>q</var> − 4)<sup>2</sup>.
+        At <var>θ</var> = 1, which way does the loss decrease locally?</p>
+      <details class="phast-pocket-answer">
+        <summary>Follow the derivative</summary>
+        <p>d<var>L</var>/d<var>θ</var> = (<var>q</var> − 4) · 2<var>θ</var> = −6.
+          A sufficiently small positive change in <var>θ</var> decreases
+          the loss. The gradient points uphill; a descent step goes against it.</p>
+      </details>
+    </div>
+  </details>
+</div>
+
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

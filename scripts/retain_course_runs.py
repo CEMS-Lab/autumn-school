@@ -19,8 +19,13 @@ def main():
     for source in sorted((ROOT / "notebooks").glob("0[0-5]*.ipynb")):
         folder = ROOT / "runs" / source.stem
         receipt = json.loads((folder / "runtime.json").read_text())
-        if receipt["status"] != "passed" or receipt["seconds"] >= 300:
-            raise ValueError("A successful under-300-second run is required: " + source.name)
+        if receipt["status"] != "passed" or not 0 <= receipt["seconds"] < 120:
+            raise ValueError("A successful under-120-second run is required: " + source.name)
+        if "under_120_seconds" in receipt and not receipt["under_120_seconds"]:
+            raise ValueError("Receipt failed the two-minute acceptance gate: " + source.name)
+        for relative, expected in receipt.get("support_sha256", {}).items():
+            if hashlib.sha256((ROOT / relative).read_bytes()).hexdigest() != expected:
+                raise ValueError("Supporting source changed after execution: " + relative)
         authored = nbformat.read(source, 4)
         executed = nbformat.read(folder / source.name, 4)
         if code_hash(authored) != code_hash(executed):
@@ -41,7 +46,7 @@ def main():
             "aggregate_wall_seconds": receipt["seconds"],
             "code_sha256": code_hash(retained),
             "retained_sha256": hashlib.sha256(source.read_bytes()).hexdigest(),
-            "status": receipt["status"], "limit_seconds": 300,
+            "status": receipt["status"], "limit_seconds": 120,
         })
     target = ROOT / "evidence/notebook_runtime_current.json"
     target.write_text(json.dumps(report, indent=2) + "\n")

@@ -58,5 +58,5 @@
   "seed": 20260909,
   "epochs": 400,
   "test_rmse": 0.049867531488768393,
-  "training_seconds": 0.7838341250026133
+  "training_seconds": 0.8532295420009177
 }

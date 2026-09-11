@@ -4,6 +4,13 @@ This standard supports the complete six-hour lecture, book and notebook route.
 Figures should help a student answer a scientific question before they inspect
 implementation details. A diagram is an explanation, not decoration.
 
+## Curated Keynote lecture companion
+
+The [Keynote presentation standard](source/slides/curated-keynote/DESIGN_STANDARD.md)
+specifies fixed typography, half-slide equations, Matplotlib scaling, restrained
+builds and native Keynote review for the three-lecture narrative. Its source
+notes distinguish teaching guidance from our numerical layout choices.
+
 ## Inspected design references
 
 The following publicly accessible sources were visually reviewed on
@@ -103,12 +110,13 @@ licences in `source/book/_static/licenses/` so Sphinx includes them in HTML.
 
 ## Course-wide invariants
 
-The next-edition overview follows three 60-minute lecture blocks, then three
-60-minute exercise blocks, with breaks separately scheduled. The 330-minute
-contact fallback is explicit in TEACHING_SCHEDULE.md. The existing v0.1.1
-overview still depicts the previous three mixed 120-minute blocks.
+The curated edition follows three lectures of 45, 55 and 50 minutes, then three
+50-minute practicals. The six-hour event window includes 60 flexible minutes;
+TEACHING_SCHEDULE.md defines that allocation. The frozen v0.1.1 overview
+depicts the previous three mixed 120-minute blocks.
 It must show the fundamentals and model-learning activities, not only inverse
-problems. Notebook numbers refer to the canonical six notebooks. Lecture time
+problems. Classroom notebooks are numbered 1–3; the original six notebooks retain their
+separate detailed-reference identifiers. Lecture time
 includes explanation and discussion; it is not a computational runtime.
 
 The staggered diagram orders mechanics, driving field, damage and convergence;

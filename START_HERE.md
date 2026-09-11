@@ -5,10 +5,10 @@ for the UKACM Autumn School 2026.
 
 Open **index.html** or **book/index.html**. Theory, equations, notebook code,
 recorded outputs, exercises, hints and worked solutions are now part of the
-same book. Computational lessons appear below their theory chapters in the
-contents and in the previous/next reading sequence.
-Begin with the optional opening teaser, then continue through the five core
-computational lessons beside their theory chapters.
+same book. The primary route has three lecture guides and three practical notebooks:
+**simulate fracture → check gradients and recover a parameter → train and
+use a hybrid model**. Longer original notebooks remain in the detailed-reference
+library; the algebraic teaser is optional.
 
 ## Read, predict, compute, explain
 
@@ -30,13 +30,13 @@ are part of the reproducible example.
 
 - **book/index.html** — the HTML chapters, code, recorded outputs and answers.
 - **explorations.html** — interactive visual explanations of equations and algorithms.
-- **notebooks/study/** — practice downloads.
-- **notebooks/solutions/** — downloads including worked answers.
+- **notebooks/study/classroom/** — the three practice downloads.
+- **notebooks/solutions/classroom/** — the three worked-solution downloads.
 - **slides/phast_autumn_school_2026.pdf** — the unchanged 44-slide lecture deck.
 - **output/lecture-20260910/** — the editable 23-slide animated introduction in PowerPoint and Keynote.
 - **INTEGRATED_EDITION.md** — source, execution and format notes for this revision.
 - **evidence/notebook_runtime_current.json** — current local notebook timings and source hashes.
-- **TEACHING_SCHEDULE.md** — three lecture hours followed by three practical hours.
+- **TEACHING_SCHEDULE.md** — three lectures and three practicals, with flexible support time.
 
 The revision adopts D2L's integrated reading pattern and draws teaching ideas
 from ADL4P's physics exercises. All PhAST lessons, questions and worked answers

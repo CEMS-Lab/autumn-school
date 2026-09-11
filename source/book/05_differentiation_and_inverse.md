@@ -174,17 +174,17 @@ In the accompanying computational lesson, you will implement a complete differen
 2. **Derivative Verification:** Compute sensitivities of an observation with respect to the elastic modulus using analytical formulas, automatic differentiation (`loss.backward()`), and central finite differences.
 3. **Inverse Identification:** Use gradient descent to automatically recover the unknown ground-truth stiffness from synthetic displacement measurements.
 
-:::{admonition} Hands-On Tutorial: Lab 03 (Differentiable Mechanics & Inverse Recovery)
+:::{admonition} Hands-On Tutorial: Lab 2 (Gradients and Parameter Recovery)
 :class: tip
 
 **Ready to try this in practice?**  
-Explore the interactive tutorial: **{doc}`labs/03_tiny_derivative_inverse_toy`**.  
+Explore the interactive tutorial: **{doc}`classroom/02_gradients_and_recovery`**.
 You can read through the worked autograd graph and parameter recovery trajectories directly here in the book, or run it interactively in **Google Colab** with one click:
 
 <div class="badge-row">
-  <a class="badge-colab" href="https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/study/03_tiny_derivative_inverse_toy.ipynb" target="_blank"><img src="_static/colab-badge.svg" alt="Open In Colab"/></a>
-  <a class="badge-link" href="../notebooks/study/03_tiny_derivative_inverse_toy.ipynb"><i class="fa-solid fa-download"></i> Download Practice Notebook</a>
-  <a class="badge-link" href="../notebooks/solutions/03_tiny_derivative_inverse_toy.ipynb"><i class="fa-solid fa-check-circle"></i> Download Worked Solutions</a>
+  <a class="badge-colab" href="https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/study/classroom/02_gradients_and_recovery.ipynb" target="_blank"><img src="_static/colab-badge.svg" alt="Open In Colab"/></a>
+  <a class="badge-link" href="../notebooks/study/classroom/02_gradients_and_recovery.ipynb"><i class="fa-solid fa-download"></i> Download Practice Notebook</a>
+  <a class="badge-link" href="../notebooks/solutions/classroom/02_gradients_and_recovery.ipynb"><i class="fa-solid fa-check-circle"></i> Download Worked Solutions</a>
 </div>
 :::
 

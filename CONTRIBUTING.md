@@ -25,6 +25,26 @@ Historical starter templates in `build_day2_notebooks.py` require an explicit
 separate export directory. Current prose and exercises belong in canonical
 notebooks and solution JSON, so a book rebuild preserves them.
 
+## Curated classroom notebooks
+
+The primary route consists of three notebooks in `notebooks/classroom/`.
+`source/notebooks/build_classroom_labs.py` authors them from the retained
+examples and inspectable course helpers. `source/book/scripts/build_classroom_pages.py`
+creates book-native pages and practice/solution variants after execution.
+Do not overwrite the original detailed notebooks or their dated receipts.
+
+After an intentional generator change, run each complete classroom notebook
+with `python scripts/run_classroom.py --notebook 1` (then 2 and 3). The runner
+retains checked outputs in the tracked canonical classroom files. A clean
+checkout can rebuild their HTML from those files; ignored execution caches
+provide an optional local source. Generation clears outputs and therefore
+requires a new execution before rebuilding the published variants.
+
+Use full classroom notebook names in execution records; the original two-digit
+reference IDs are a separate registry. Hash supporting helpers as well as cell
+sources. The [placeholder register](source/planning/PLACEHOLDER_REGISTER.md)
+tracks future lecture and research assets.
+
 ## Rebuild the book
 
 Use Python 3.10–3.12 in an isolated environment. From the repository root:
@@ -32,6 +52,7 @@ Use Python 3.10–3.12 in an isolated environment. From the repository root:
 ```bash
 python -m pip install -r source/requirements-book.txt
 python source/book/scripts/build_lab_pages.py
+python source/book/scripts/build_classroom_pages.py
 python -m sphinx -b html -E -a source/book book -W --keep-going
 ```
 

@@ -69,7 +69,8 @@ class AuthoringTests(unittest.TestCase):
             (path / "index.html").write_text("<h1>Example</h1>")
             passed, errors, _ = CHECK(path)
             self.assertFalse(passed)
-            self.assertTrue(any("six core tutorials" in error for error in errors))
+            self.assertTrue(any("six detailed reference tutorials" in error for error in errors))
+            self.assertTrue(any("three curated practical notebooks" in error for error in errors))
 
     def test_sphinx_hook_stops_invalid_build(self):
         conf = runpy.run_path(str(ROOT / "source/book/conf.py"))
