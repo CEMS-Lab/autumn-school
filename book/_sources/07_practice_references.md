@@ -156,7 +156,7 @@ objective and an inspectable result. Include:
 2. a complete case definition: geometry, parameter choices, boundary
    conditions, and initial state;
 3. a short prediction prompt before code is executed;
-4. labelled figures or data products with original provenance;
+4. labelled figures or datasets with their sources and processing steps;
 5. a numerical or physical check appropriate to the task;
 6. a solution or interpretation note; and
 7. the assumptions and scope of the result.

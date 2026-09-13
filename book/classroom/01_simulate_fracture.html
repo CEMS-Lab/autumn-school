@@ -182,6 +182,10 @@
 <li class="toctree-l1"><a class="reference internal" href="02_gradients_and_recovery.html">Practical 2: Gradients and material recovery</a></li>
 <li class="toctree-l1"><a class="reference internal" href="03_learning_and_hybrid.html">Practical 3: Learn a field and assess its proposal</a></li>
 </ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Optional direct-replacement case study</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../w53_direct_replacement.html">Case study: a direct learned damage replacement</a></li>
+</ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Reference chapters</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../00_welcome_and_routes.html">From Cracks to Computation: Learn by Doing</a></li>
@@ -459,8 +463,10 @@ document.write(`
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpret-the-fields-and-energy">4. Interpret the fields and energy</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#read-and-export-a-results-table">Read and export a results table</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#worked-example-p1-r01-a-short-propagating-crack">Worked example · P1-R01 · A short propagating crack</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#animation-p1-a01-geometry-to-damage">Animation · P1-A01 · Geometry to damage</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#look-inside-the-solve">Look inside the solve</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-the-descriptors-the-table-samples">Plot the descriptors the table samples</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reading-the-crack-sequence-as-a-whole">Reading the crack sequence as a whole</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#applying-the-same-sequence-to-your-own-geometry">Applying the same sequence to your own geometry</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-takeaways">Key takeaways</a></li>
@@ -580,14 +586,14 @@ document.write(`
     <span class="n">display</span><span class="p">(</span><span class="n">Image</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">buffer</span><span class="o">.</span><span class="n">getvalue</span><span class="p">(),</span> <span class="n">alt</span><span class="o">=</span><span class="n">alt</span><span class="p">))</span>
 
 <span class="c1"># Include dependency imports and plotting configuration in the setup duration.</span>
-<span class="n">setup_receipt</span> <span class="o">=</span> <span class="p">{</span>
+<span class="n">setup_summary</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s2">&quot;environment&quot;</span><span class="p">:</span> <span class="s2">&quot;Google Colab&quot;</span> <span class="k">if</span> <span class="n">IN_COLAB</span> <span class="k">else</span> <span class="s2">&quot;local&quot;</span><span class="p">,</span>
     <span class="s2">&quot;python&quot;</span><span class="p">:</span> <span class="n">sys</span><span class="o">.</span><span class="n">version</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">0</span><span class="p">],</span>
     <span class="s2">&quot;course_revision&quot;</span><span class="p">:</span> <span class="n">revision</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">if</span> <span class="n">revision</span><span class="o">.</span><span class="n">returncode</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="s2">&quot;downloaded archive&quot;</span><span class="p">,</span>
     <span class="s2">&quot;versions&quot;</span><span class="p">:</span> <span class="n">package_versions</span><span class="p">,</span>
     <span class="s2">&quot;setup_seconds&quot;</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span> <span class="o">-</span> <span class="n">setup_started</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
 <span class="p">}</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">setup_receipt</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">setup_summary</span><span class="p">)</span>
 
 <span class="n">session_started</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
 <span class="n">torch</span><span class="o">.</span><span class="n">set_num_threads</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
@@ -596,7 +602,7 @@ document.write(`
 </div>
 </details>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;environment&#39;: &#39;local&#39;, &#39;python&#39;: &#39;3.10.18&#39;, &#39;course_revision&#39;: &#39;48ae30794de3da1f4242bfbefff124dfd0d9a594&#39;, &#39;versions&#39;: {&#39;torch&#39;: &#39;2.8.0&#39;, &#39;numpy&#39;: &#39;2.2.6&#39;, &#39;scipy&#39;: &#39;1.14.1&#39;, &#39;matplotlib&#39;: &#39;3.10.8&#39;, &#39;nbformat&#39;: &#39;5.10.4&#39;}, &#39;setup_seconds&#39;: 1.103}
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;environment&#39;: &#39;local&#39;, &#39;python&#39;: &#39;3.10.18&#39;, &#39;course_revision&#39;: &#39;e47a8e7fb7e5f8b97642d1149d9c1b7da514a354&#39;, &#39;versions&#39;: {&#39;torch&#39;: &#39;2.8.0&#39;, &#39;numpy&#39;: &#39;2.2.6&#39;, &#39;scipy&#39;: &#39;1.14.1&#39;, &#39;matplotlib&#39;: &#39;3.10.8&#39;, &#39;nbformat&#39;: &#39;5.10.4&#39;}, &#39;setup_seconds&#39;: 1.106}
 </pre></div>
 </div>
 </div>
@@ -754,14 +760,60 @@ Solver: {&#39;solver_type&#39;: &#39;explicit&#39;, &#39;time_integrator&#39;: &
 </div>
 </div>
 </section>
-<section id="worked-example-p1-r01-a-short-propagating-crack">
-<h3>Worked example · P1-R01 · A short propagating crack<a class="headerlink" href="#worked-example-p1-r01-a-short-propagating-crack" title="Link to this heading">#</a></h3>
-<p>The computed fields above follow initiation at the geometric notch and growth through the remaining ligament. Read the field sequence together with the elastic, fracture and kinetic energy curves. The fixed-mesh half-time-step comparison records temporal sensitivity; spatial refinement is a further study.</p>
+<section id="look-inside-the-solve">
+<h3>Look inside the solve<a class="headerlink" href="#look-inside-the-solve" title="Link to this heading">#</a></h3>
+<p>Every accepted time step also solved the constrained damage update. The two panels record what that cost and how accurately it was met: the iteration count rises while the crack is running and falls once the plate has separated, and the projected relative residual stays under its tolerance throughout.</p>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">day2_helpers.dynamic_practical</span><span class="w"> </span><span class="kn">import</span> <span class="n">diagnostics_figure</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">diagnostics_figure</span><span class="p">(</span><span class="n">output_dir</span><span class="p">)</span>
+<span class="n">display_figure</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">alt</span><span class="o">=</span><span class="s2">&quot;Projected conjugate-gradient iterations and relative residual against tolerance for every time step.&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="Computed field or curve from Practical 1: Simulate a crack crossing a plate" src="../_images/c29c2d0e9fd5833f3591490223835c9e5f9a09017932fec6c60c94b50a55541a.png" />
+</div>
+</div>
 </section>
-<section id="animation-p1-a01-geometry-to-damage">
-<h3>Animation · P1-A01 · Geometry to damage<a class="headerlink" href="#animation-p1-a01-geometry-to-damage" title="Link to this heading">#</a></h3>
-<p>The mesh and support diagram introduces the specimen. The 40-frame GIF selects actual saved states through initiation and propagation, then includes the final hold state. The static snapshots and numerical CSV remain available for independent interpretation.</p>
-<p>For a new geometry, create the mesh with Gmsh, identify boundary sets, then follow the same material → supports → loading → solve → inspect sequence. The supplied public mesh makes this first practical short and reproducible.</p>
+<section id="plot-the-descriptors-the-table-samples">
+<h3>Plot the descriptors the table samples<a class="headerlink" href="#plot-the-descriptors-the-table-samples" title="Link to this heading">#</a></h3>
+<p>The table above lists six sampled rows. The same two columns are drawn in full below, so the initiation time, the crossing time and the opening of the plate can be read directly.</p>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">day2_helpers.dynamic_practical</span><span class="w"> </span><span class="kn">import</span> <span class="n">history_figure</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">history_figure</span><span class="p">(</span><span class="n">output_dir</span><span class="p">)</span>
+<span class="n">display_figure</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">alt</span><span class="o">=</span><span class="s2">&quot;Maximum damage, forward crack extent and maximum displacement against physical time.&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="Computed field or curve from Practical 1: Simulate a crack crossing a plate" src="../_images/46242e922de5b7b3de2b44eb937b79c9bf295cf8b930d16c25306a58269c70ee.png" />
+</div>
+</div>
+</section>
+<section id="reading-the-crack-sequence-as-a-whole">
+<h3>Reading the crack sequence as a whole<a class="headerlink" href="#reading-the-crack-sequence-as-a-whole" title="Link to this heading">#</a></h3>
+<p>The computed fields above follow initiation at the geometric notch and growth through the remaining ligament. Read the field sequence together with the elastic, fracture and kinetic energy curves. The fixed-mesh half-time-step comparison records temporal sensitivity; spatial refinement is a further study.</p>
+<p>The mesh and support diagram introduces the specimen. The 40-frame animation traces the saved solver states through initiation and propagation, including the final arrest state. The static snapshots and the numerical tables describe the same sequence in a form you can measure.</p>
+</section>
+<section id="applying-the-same-sequence-to-your-own-geometry">
+<h3>Applying the same sequence to your own geometry<a class="headerlink" href="#applying-the-same-sequence-to-your-own-geometry" title="Link to this heading">#</a></h3>
+<p>For a new geometry, create the mesh with Gmsh, identify the boundary sets, then follow the same material → supports → loading → solve → inspect order. The supplied public mesh keeps this first practical concise, transparent and reproducible.</p>
 </section>
 </section>
 <section id="key-takeaways">
@@ -807,18 +859,18 @@ Solver: {&#39;solver_type&#39;: &#39;explicit&#39;, &#39;time_integrator&#39;: &
 <p>The complete source, attribution and bundled licences remain in the <a class="reference external" href="https://github.com/CEMS-Lab/autumn-school/blob/main/ATTRIBUTION.md">course repository</a>.</p>
 <section id="session-timing">
 <h3>Session timing<a class="headerlink" href="#session-timing" title="Link to this heading">#</a></h3>
-<p>Elapsed session time includes reading and pauses between cells. The course runner measures uninterrupted computation separately from installation.</p>
+<p>Elapsed session time includes reading and pauses between cells. Uninterrupted computation time is measured separately from environment setup and installation.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">session_seconds</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span> <span class="o">-</span> <span class="n">session_started</span>
-<span class="nb">print</span><span class="p">({</span><span class="s2">&quot;setup_seconds&quot;</span><span class="p">:</span> <span class="n">setup_receipt</span><span class="p">[</span><span class="s2">&quot;setup_seconds&quot;</span><span class="p">],</span>
+<span class="nb">print</span><span class="p">({</span><span class="s2">&quot;setup_seconds&quot;</span><span class="p">:</span> <span class="n">setup_summary</span><span class="p">[</span><span class="s2">&quot;setup_seconds&quot;</span><span class="p">],</span>
        <span class="s2">&quot;elapsed_session_seconds&quot;</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">session_seconds</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
-       <span class="s2">&quot;environment&quot;</span><span class="p">:</span> <span class="n">setup_receipt</span><span class="p">[</span><span class="s2">&quot;environment&quot;</span><span class="p">],</span> <span class="s2">&quot;torch&quot;</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">__version__</span><span class="p">})</span>
+       <span class="s2">&quot;environment&quot;</span><span class="p">:</span> <span class="n">setup_summary</span><span class="p">[</span><span class="s2">&quot;environment&quot;</span><span class="p">],</span> <span class="s2">&quot;torch&quot;</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">__version__</span><span class="p">})</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;setup_seconds&#39;: 1.103, &#39;elapsed_session_seconds&#39;: 24.61, &#39;environment&#39;: &#39;local&#39;, &#39;torch&#39;: &#39;2.8.0&#39;}
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;setup_seconds&#39;: 1.106, &#39;elapsed_session_seconds&#39;: 23.32, &#39;environment&#39;: &#39;local&#39;, &#39;torch&#39;: &#39;2.8.0&#39;}
 </pre></div>
 </div>
 </div>
@@ -884,8 +936,10 @@ Solver: {&#39;solver_type&#39;: &#39;explicit&#39;, &#39;time_integrator&#39;: &
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpret-the-fields-and-energy">4. Interpret the fields and energy</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#read-and-export-a-results-table">Read and export a results table</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#worked-example-p1-r01-a-short-propagating-crack">Worked example · P1-R01 · A short propagating crack</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#animation-p1-a01-geometry-to-damage">Animation · P1-A01 · Geometry to damage</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#look-inside-the-solve">Look inside the solve</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-the-descriptors-the-table-samples">Plot the descriptors the table samples</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reading-the-crack-sequence-as-a-whole">Reading the crack sequence as a whole</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#applying-the-same-sequence-to-your-own-geometry">Applying the same sequence to your own geometry</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-takeaways">Key takeaways</a></li>

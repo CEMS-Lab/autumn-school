@@ -182,6 +182,10 @@
 <li class="toctree-l1"><a class="reference internal" href="../classroom/02_gradients_and_recovery.html">Practical 2: Gradients and material recovery</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../classroom/03_learning_and_hybrid.html">Practical 3: Learn a field and assess its proposal</a></li>
 </ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Optional direct-replacement case study</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../w53_direct_replacement.html">Case study: a direct learned damage replacement</a></li>
+</ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Reference chapters</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../00_welcome_and_routes.html">From Cracks to Computation: Learn by Doing</a></li>
@@ -450,11 +454,10 @@ The length scale <span class="math notranslate nohighlight">\(\ell\)</span> cont
 The <a class="reference internal" href="../01_crack_representations.html"><span class="doc">crack-representation chapter</span></a> places this
 description alongside sharp-crack, cohesive and enriched finite-element models.</p>
 <div class="note admonition">
-<p class="admonition-title">Animation storyboard · L1-A01</p>
-<p><strong>Planned content.</strong> A notched specimen, a diffuse damage band and a line
-profile will appear in sequence. A change in <span class="math notranslate nohighlight">\(\ell\)</span> will show how the profile
-width changes. The frames will distinguish an idealised profile illustration
-from a computed fracture field.</p>
+<p class="admonition-title">Reading a diffuse crack profile</p>
+<p>Compare a notched specimen, its diffuse damage band and a line profile across
+the band. Increasing <span class="math notranslate nohighlight">\(\ell\)</span> widens an idealised profile. In a computed fracture
+field, the material model, loading and mesh also affect the observed profile.</p>
 <p><strong>Learning question:</strong> Which quantity changes when we widen the diffuse band?</p>
 </div>
 </section>
@@ -470,11 +473,11 @@ to compare AT1 and AT2 profiles and the degradation curve. Their functions,
 normalisation and derivations are in the
 <a class="reference internal" href="../02_phase_field_energy.html"><span class="doc">phase-field energy chapter</span></a>.</p>
 <div class="note admonition">
-<p class="admonition-title">Worked example outline · L1-W01</p>
-<p><strong>Planned content.</strong> Read the degradation curve at intact, partially damaged
+<p class="admonition-title">Interpreting degradation and the length scale</p>
+<p>Read the degradation curve at intact, partially damaged
 and nearly broken states. Then compare a change in <span class="math notranslate nohighlight">\(G_c\)</span> with a change in
-<span class="math notranslate nohighlight">\(\ell\)</span>, keeping the other modelling choices fixed. The discussion will
-separate fracture-energy scale, band width and mesh resolution.</p>
+<span class="math notranslate nohighlight">\(\ell\)</span>, keeping the other modelling choices fixed. Distinguish the
+fracture-energy scale, band width and mesh resolution.</p>
 <p><strong>Learning question:</strong> How do these choices enter the physical model?</p>
 </div>
 </section>
@@ -488,11 +491,11 @@ updates or accept the increment. The
 <a class="reference internal" href="../03_staggered_solution.html#fig-staggered-loop"><span class="std std-ref">staggered-loop figure</span></a> shows this ordering;
 the <a class="reference internal" href="../03_staggered_solution.html"><span class="doc">chapter</span></a> gives the governing equations.</p>
 <div class="note admonition">
-<p class="admonition-title">Animation storyboard · L1-A02</p>
-<p><strong>Planned content.</strong> Highlight mechanics, driving field, damage and convergence
-in order within one fixed load increment. A separate final transition will
-advance the load. The accepted damage from the preceding increment will stay
-visible as the history reference.</p>
+<p class="admonition-title">Following the staggered calculation</p>
+<p>Follow mechanics, the driving field, damage and convergence in order within
+one fixed load increment. Advance the load after the increment satisfies its
+convergence criterion. The accepted damage from the preceding increment
+provides the irreversibility reference.</p>
 <p><strong>Learning question:</strong> Which loop repeats at a fixed load, and which step
 changes the loading?</p>
 </div>
@@ -511,8 +514,8 @@ preconditioning used. Dynamics additionally evolves velocity and acceleration
 through physical time; the selected time integrator and time step become part
 of the model’s numerical description.</p>
 <div class="note admonition">
-<p class="admonition-title">Worked example outline · L1-W02</p>
-<p><strong>Planned content.</strong> Follow one triangle from nodal displacement to strain
+<p class="admonition-title">One element and its tensor operations</p>
+<p>Follow one triangle from nodal displacement to strain
 and a residual contribution, then sketch an operator action using the same
 local data. Add a final state row for displacement, velocity, acceleration and
 damage to locate the extra quantities in a dynamic calculation.</p>

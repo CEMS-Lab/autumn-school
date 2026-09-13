@@ -40,7 +40,7 @@ The workflow is **configuration → geometry → mesh import → constraints and
 ''')
 code((ROOT / "source/notebooks/colab_bootstrap.py").read_text() + r'''
 
-setup_seconds = setup_receipt["setup_seconds"]
+setup_seconds = setup_summary["setup_seconds"]
 computation_started = time.perf_counter()
 
 import copy
@@ -348,7 +348,7 @@ For independent practice, use the accompanying conceptual and numerical exercise
 ''')
 code(r'''
 computation_seconds = time.perf_counter() - computation_started
-receipt = {"scope": "all notebook computations after setup, including two full solves, assertions, save/reload and figures",
+run_record = {"scope": "all notebook computations after setup, including two full solves, assertions, save/reload and figures",
            "setup_seconds": setup_seconds, "computation_seconds": computation_seconds,
            "installation": "pip installation during cloud setup" if IN_COLAB else "pre-existing local environment",
            "platform": record["environment"], "source_hashes": record["source_hashes"],
@@ -358,7 +358,7 @@ receipt = {"scope": "all notebook computations after setup, including two full s
            "reference_checks": record["checks"], "half_load_checks": smaller_record["checks"],
            "reload_equality": True, "one_changed_input": "loading.total_symmetric_vertical_displacement",
            "half_load_has_lower_nodal_damage_sum": True, "colab_execution": IN_COLAB}
-(assets_dir() / "tiny_notched_tension_notebook_receipt.json").write_text(json.dumps(receipt, indent=2) + "\n")
+(assets_dir() / "tiny_notched_tension_run_record.json").write_text(json.dumps(run_record, indent=2) + "\n")
 assert computation_seconds < config["limits"]["notebook_seconds_hard"]
 print({"complete_computation_seconds": round(computation_seconds, 2), "results": "saved and reopened successfully"})
 ''')

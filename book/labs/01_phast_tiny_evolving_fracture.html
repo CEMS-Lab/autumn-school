@@ -178,9 +178,13 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Three practical labs</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../classroom/01_simulate_fracture.html">Practical 1: Simulate and interpret diffuse fracture damage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../classroom/01_simulate_fracture.html">Practical 1: Simulate a crack crossing a plate</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../classroom/02_gradients_and_recovery.html">Practical 2: Gradients and material recovery</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../classroom/03_learning_and_hybrid.html">Practical 3: Learn a field and assess its proposal</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Optional direct-replacement case study</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../w53_direct_replacement.html">Case study: a direct learned damage replacement</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Reference chapters</span></p>
 <ul class="current nav bd-sidenav">
@@ -552,14 +556,14 @@ document.write(`
         <span class="n">package_versions</span><span class="p">[</span><span class="n">package</span><span class="p">]</span> <span class="o">=</span> <span class="n">importlib</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">version</span><span class="p">(</span><span class="n">package</span><span class="p">)</span>
     <span class="k">except</span> <span class="n">importlib</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">PackageNotFoundError</span><span class="p">:</span>
         <span class="n">package_versions</span><span class="p">[</span><span class="n">package</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;install using Environment Setup&quot;</span>
-<span class="n">setup_receipt</span> <span class="o">=</span> <span class="p">{</span>
+<span class="n">setup_summary</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s2">&quot;environment&quot;</span><span class="p">:</span> <span class="s2">&quot;Google Colab&quot;</span> <span class="k">if</span> <span class="n">IN_COLAB</span> <span class="k">else</span> <span class="s2">&quot;local&quot;</span><span class="p">,</span>
     <span class="s2">&quot;python&quot;</span><span class="p">:</span> <span class="n">sys</span><span class="o">.</span><span class="n">version</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">0</span><span class="p">],</span>
     <span class="s2">&quot;course_revision&quot;</span><span class="p">:</span> <span class="n">revision</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">if</span> <span class="n">revision</span><span class="o">.</span><span class="n">returncode</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="s2">&quot;downloaded archive&quot;</span><span class="p">,</span>
     <span class="s2">&quot;versions&quot;</span><span class="p">:</span> <span class="n">package_versions</span><span class="p">,</span>
     <span class="s2">&quot;setup_seconds&quot;</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span> <span class="o">-</span> <span class="n">setup_started</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
 <span class="p">}</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">setup_receipt</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">setup_summary</span><span class="p">)</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
@@ -584,7 +588,7 @@ document.write(`
     <span class="n">display</span><span class="p">(</span><span class="n">Image</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">buffer</span><span class="o">.</span><span class="n">getvalue</span><span class="p">(),</span> <span class="n">alt</span><span class="o">=</span><span class="n">alt</span><span class="p">))</span>
 
 
-<span class="n">setup_seconds</span> <span class="o">=</span> <span class="n">setup_receipt</span><span class="p">[</span><span class="s2">&quot;setup_seconds&quot;</span><span class="p">]</span>
+<span class="n">setup_seconds</span> <span class="o">=</span> <span class="n">setup_summary</span><span class="p">[</span><span class="s2">&quot;setup_seconds&quot;</span><span class="p">]</span>
 <span class="n">computation_started</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">copy</span>
@@ -621,7 +625,7 @@ document.write(`
 </div>
 </details>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;environment&#39;: &#39;local&#39;, &#39;python&#39;: &#39;3.10.18&#39;, &#39;course_revision&#39;: &#39;6254c050f1af34efd10ddf1df7c5e80aa8302d40&#39;, &#39;versions&#39;: {&#39;torch&#39;: &#39;2.8.0&#39;, &#39;numpy&#39;: &#39;2.2.6&#39;, &#39;scipy&#39;: &#39;1.14.1&#39;, &#39;matplotlib&#39;: &#39;3.10.8&#39;, &#39;nbformat&#39;: &#39;5.10.4&#39;}, &#39;setup_seconds&#39;: 0.017}
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;environment&#39;: &#39;local&#39;, &#39;python&#39;: &#39;3.10.18&#39;, &#39;course_revision&#39;: &#39;e47a8e7fb7e5f8b97642d1149d9c1b7da514a354&#39;, &#39;versions&#39;: {&#39;torch&#39;: &#39;2.8.0&#39;, &#39;numpy&#39;: &#39;2.2.6&#39;, &#39;scipy&#39;: &#39;1.14.1&#39;, &#39;matplotlib&#39;: &#39;3.10.8&#39;, &#39;nbformat&#39;: &#39;5.10.4&#39;}, &#39;setup_seconds&#39;: 0.018}
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;torch&#39;: &#39;2.8.0&#39;, &#39;device&#39;: &#39;cpu&#39;, &#39;dtype&#39;: &#39;float64&#39;, &#39;cloud_setup&#39;: False}
@@ -833,7 +837,7 @@ document.write(`
 [QuasiStaticSolver] mechanics backend: scipy (SciPy SuperLU sparse-direct LU); tangent=isotropic linear tangent; free_dofs=16128
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;solve_seconds&#39;: 59.89, &#39;load_steps&#39;: 60, &#39;checks&#39;: {&#39;finite_states&#39;: True, &#39;damage_bounds&#39;: True, &#39;irreversibility&#39;: True, &#39;maximum_boundary_error&#39;: 0.0, &#39;minimum_damage_increment&#39;: 0.0, &#39;state_tolerance&#39;: 1e-10, &#39;strict_mechanics_and_stagger_flags&#39;: True, &#39;stagger_residual_checked_each_step&#39;: True, &#39;warning_count&#39;: 0}}
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;solve_seconds&#39;: 57.86, &#39;load_steps&#39;: 60, &#39;checks&#39;: {&#39;finite_states&#39;: True, &#39;damage_bounds&#39;: True, &#39;irreversibility&#39;: True, &#39;maximum_boundary_error&#39;: 0.0, &#39;minimum_damage_increment&#39;: 0.0, &#39;state_tolerance&#39;: 1e-10, &#39;strict_mechanics_and_stagger_flags&#39;: True, &#39;stagger_residual_checked_each_step&#39;: True, &#39;warning_count&#39;: 0}}
 </pre></div>
 </div>
 </div>
@@ -1027,7 +1031,7 @@ document.write(`
 </pre></div>
 </div>
 <img alt="Figure from Run and interpret a small PhAST fracture calculation" src="../_images/5a66321e3fabb02f79d36ef44088e7bef98caf964a36f0a002e3cf83959f2173.png" />
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;full_load_damage_sum&#39;: 1213.4936484865932, &#39;half_load_damage_sum&#39;: 519.6831787108099, &#39;half_load_solve_seconds&#39;: 25.28}
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;full_load_damage_sum&#39;: 1213.4936484865932, &#39;half_load_damage_sum&#39;: 519.6831787108099, &#39;half_load_solve_seconds&#39;: 24.58}
 </pre></div>
 </div>
 </div>
@@ -1035,7 +1039,7 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">computation_seconds</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span> <span class="o">-</span> <span class="n">computation_started</span>
-<span class="n">receipt</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;scope&quot;</span><span class="p">:</span> <span class="s2">&quot;all notebook computations after setup, including two full solves, assertions, save/reload and figures&quot;</span><span class="p">,</span>
+<span class="n">run_record</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;scope&quot;</span><span class="p">:</span> <span class="s2">&quot;all notebook computations after setup, including two full solves, assertions, save/reload and figures&quot;</span><span class="p">,</span>
            <span class="s2">&quot;setup_seconds&quot;</span><span class="p">:</span> <span class="n">setup_seconds</span><span class="p">,</span> <span class="s2">&quot;computation_seconds&quot;</span><span class="p">:</span> <span class="n">computation_seconds</span><span class="p">,</span>
            <span class="s2">&quot;installation&quot;</span><span class="p">:</span> <span class="s2">&quot;pip installation during cloud setup&quot;</span> <span class="k">if</span> <span class="n">IN_COLAB</span> <span class="k">else</span> <span class="s2">&quot;pre-existing local environment&quot;</span><span class="p">,</span>
            <span class="s2">&quot;platform&quot;</span><span class="p">:</span> <span class="n">record</span><span class="p">[</span><span class="s2">&quot;environment&quot;</span><span class="p">],</span> <span class="s2">&quot;source_hashes&quot;</span><span class="p">:</span> <span class="n">record</span><span class="p">[</span><span class="s2">&quot;source_hashes&quot;</span><span class="p">],</span>
@@ -1045,14 +1049,14 @@ document.write(`
            <span class="s2">&quot;reference_checks&quot;</span><span class="p">:</span> <span class="n">record</span><span class="p">[</span><span class="s2">&quot;checks&quot;</span><span class="p">],</span> <span class="s2">&quot;half_load_checks&quot;</span><span class="p">:</span> <span class="n">smaller_record</span><span class="p">[</span><span class="s2">&quot;checks&quot;</span><span class="p">],</span>
            <span class="s2">&quot;reload_equality&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s2">&quot;one_changed_input&quot;</span><span class="p">:</span> <span class="s2">&quot;loading.total_symmetric_vertical_displacement&quot;</span><span class="p">,</span>
            <span class="s2">&quot;half_load_has_lower_nodal_damage_sum&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s2">&quot;colab_execution&quot;</span><span class="p">:</span> <span class="n">IN_COLAB</span><span class="p">}</span>
-<span class="p">(</span><span class="n">assets_dir</span><span class="p">()</span> <span class="o">/</span> <span class="s2">&quot;tiny_notched_tension_notebook_receipt.json&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">write_text</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">receipt</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="p">(</span><span class="n">assets_dir</span><span class="p">()</span> <span class="o">/</span> <span class="s2">&quot;tiny_notched_tension_run_record.json&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">write_text</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">run_record</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="k">assert</span> <span class="n">computation_seconds</span> <span class="o">&lt;</span> <span class="n">config</span><span class="p">[</span><span class="s2">&quot;limits&quot;</span><span class="p">][</span><span class="s2">&quot;notebook_seconds_hard&quot;</span><span class="p">]</span>
 <span class="nb">print</span><span class="p">({</span><span class="s2">&quot;complete_computation_seconds&quot;</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">computation_seconds</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="s2">&quot;results&quot;</span><span class="p">:</span> <span class="s2">&quot;saved and reopened successfully&quot;</span><span class="p">})</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;complete_computation_seconds&#39;: 88.03, &#39;results&#39;: &#39;saved and reopened successfully&#39;}
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;complete_computation_seconds&#39;: 85.1, &#39;results&#39;: &#39;saved and reopened successfully&#39;}
 </pre></div>
 </div>
 </div>

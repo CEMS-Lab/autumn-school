@@ -190,7 +190,7 @@ class CheckedLearnedProposal(LectureScene):
             "Schematic interface: model architecture must match the declared inputs and output.",
         )
         y = 1.15
-        features = box("Feature\ncontract", [-5.55, y, 0], 1.75, 1.03)
+        features = box("Input\nfeatures", [-5.55, y, 0], 1.75, 1.03)
         model = box("Radius GNO\nor GNN", [-2.85, y, 0], 2.03, 1.03,
                     color=PARAMETER, fill=PALE_TEAL, size=23)
         proposal = box(r"\widehat d", [-0.25, y, 0], 1.2, 1.03,

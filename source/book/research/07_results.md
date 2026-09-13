@@ -47,7 +47,7 @@ Download the {download}`experiment script <code/lab.py>` and
 {download}`retained arrays and checks <data/teaching_results.json>`.
 The {download}`figure renderer <code/render.py>` only reads retained results.
 The {download}`workflow source <tex/inverse_workflow.tex>` uses LaTeX/TikZ.
-The {download}`rendering receipt <data/rendering_receipt.json>` records
+The {download}`rendering record <data/rendering_receipt.json>` lists
 input, generator and figure hashes with the plotting-library version.
 
 ```bash

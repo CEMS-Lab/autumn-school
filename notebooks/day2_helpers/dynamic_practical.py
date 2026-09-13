@@ -141,6 +141,53 @@ def energy_figure(output_dir):
     return fig
 
 
+def diagnostics_figure(output_dir):
+    """Show the constrained damage solve behind every accepted time step."""
+    import matplotlib.pyplot as plt
+    data = np.genfromtxt(Path(output_dir) / "diagnostics.csv", delimiter=",", names=True)
+    step, iterations = data["step"], data["iterations"]
+    residual, tolerance = data["projected_relative_residual"], data["tolerance"]
+    fig, (upper, lower) = plt.subplots(2, 1, figsize=(7.6, 4.6), sharex=True, layout="constrained")
+    upper.plot(step, iterations, color="#267eaf", linewidth=.8)
+    upper.set(ylabel="Projected CG\niterations", ylim=(0, max(iterations.max() * 1.18, 1)),
+              title="Cost and accuracy of the damage solve at every time step")
+    lower.semilogy(step, np.maximum(residual, 1e-18), color="#198d83", linewidth=.8,
+                   label="Projected relative residual")
+    lower.axhline(tolerance[0], color="#b4531f", linestyle="--", linewidth=1.5,
+                  label=f"Tolerance {tolerance[0]:g}")
+    lower.set(xlabel="Time step", ylabel="Relative residual")
+    lower.legend(loc="upper center", bbox_to_anchor=(.5, -.30), ncol=2, frameon=False)
+    return fig
+
+
+def history_figure(output_dir):
+    """Plot the recorded crack descriptors that the results table samples."""
+    import matplotlib.pyplot as plt
+    data = np.genfromtxt(Path(output_dir) / "results.csv", delimiter=",", names=True)
+    time_us, extent = data["time_us"], data["extent_d095_mm"]
+    grown = np.flatnonzero(extent >= extent.max() - 1e-9)
+    fig, (left, right) = plt.subplots(1, 2, figsize=(10.6, 3.5), layout="constrained")
+    left.plot(time_us, data["maximum_damage"], color="#d47924")
+    left.set(xlabel=r"Time [$\mu$s]", ylabel="Maximum damage $d$", ylim=(-.05, 1.05),
+             title="Damage saturates soon after initiation")
+    right.plot(time_us, extent, color="#267eaf")
+    right.set(xlabel=r"Time [$\mu$s]", ylabel=r"Forward extent, $d\geq0.95$ [mm]",
+              title="Crack extent and plate opening")
+    right.yaxis.label.set_color("#267eaf")
+    right.tick_params(axis="y", colors="#267eaf")
+    if grown.size:
+        arrest = time_us[grown[0]]
+        right.axvline(arrest, color="#8a94a6", linestyle=":", linewidth=1.4)
+        right.annotate(rf"ligament crossed, $t={arrest:.0f}\,\mu$s", xy=(arrest, extent.max() * .45),
+                       xytext=(9, 0), textcoords="offset points", fontsize=9, color="#5a6472")
+    opening = right.twinx()
+    opening.plot(time_us, data["maximum_displacement_mm"], "--", color="#198d83")
+    opening.set_ylabel("Maximum displacement [mm]", color="#198d83")
+    opening.tick_params(axis="y", colors="#198d83")
+    opening.grid(False)
+    return fig
+
+
 def make_animation(output_dir, frames=40):
     """Encode selected computed states; no interpolation of physical fields."""
     import matplotlib.pyplot as plt

@@ -32,7 +32,7 @@ The introductory {download}`40-second algorithm walkthrough <interactive/forward
 is also available separately. It shows the computational sequence, with
 illustrative local curves and distinctly labelled retained FEM context.
 Its {download}`Matplotlib renderer <code/render_forward_cycle.py>` and
-{download}`animation receipt <interactive/forward_cycle_manifest.json>`
+{download}`animation manifest <interactive/forward_cycle_manifest.json>`
 identify the plotted sequence. The panel's
 {download}`HTML template <interactive/history_plate.template.html>` and
 {download}`guided explanation source <interactive/history_walkthrough.html>`
@@ -50,7 +50,7 @@ boundary can be displayed to relate the subsequent deflection to the inclusion.
 Both renderings preserve the complete damage range, $0\leq d\leq1$.
 
 The {download}`retained mesh and damage arrays <interactive/history_plate_arrays.npz>`,
-{download}`export receipt <interactive/history_plate_manifest.json>`, and
+{download}`export manifest <interactive/history_plate_manifest.json>`, and
 {download}`Matplotlib exporter <code/build_history_panel.py>` accompany the panel.
 Four frames agree exactly with the previously retained inverse target data.
 The browser's compact damage arrays introduce a maximum rounding difference
@@ -145,8 +145,8 @@ different parts of the problem.
 the {download}`Matplotlib source <code/history_animation.py>`,
 {download}`tested teaching primitive <code/history_lesson.py>`,
 {download}`plotted arrays <visuals/history_animation_arrays.npz>`, and
-{download}`HPC checks and receipt <visuals/history_manifest.json>`.
-The receipt retains the example where a hard-map finite difference is zero
+{download}`HPC checks and manifest <visuals/history_manifest.json>`.
+The manifest retains the example where a hard-map finite difference is zero
 and the surrogate weight is approximately $0.475$.
 
 ```{raw} html

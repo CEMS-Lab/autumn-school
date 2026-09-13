@@ -9,20 +9,35 @@ A learning component has defined inputs, outputs, and physics checks, just as
 the reference calculation does.
 :::
 
-## The Best of Both Worlds: Fast AI Proposals & Physics Truth
+## Neural predictions within a mechanics calculation
 
-Why combine deep learning with numerical mechanics solvers in fracture simulation?
+A hybrid calculation combines a learned field prediction with the equations
+and constraints of a mechanics model.
 
-Traditional finite element solvers are exact, rigorous, and trustworthy: they enforce mechanical equilibrium, respect conservation laws, and satisfy boundary conditions. However, for non-linear problems like crack propagation, solving large coupled linear systems over dozens or hundreds of quasi-static load increments is computationally expensive.
+Finite elements approximate the governing equations on a mesh. Numerical
+iterations reduce the discrete residual to a specified tolerance while
+applying boundary conditions and damage constraints. Repeated solutions
+during crack growth contribute to the computational cost.
 
-On the other hand, modern deep learning models (such as neural networks and neural operators) are extraordinarily fast: once trained, evaluating a forward pass takes just a fraction of a millisecond. Yet, on their own, purely data-driven models can produce unphysical predictions: they can predict negative damage ($d < 0$), exceed physical bounds ($d > 1$), or violate momentum balance when tested outside their immediate training distribution.
+A trained neural network or neural operator maps the current input state to a
+predicted field. Its usefulness depends on prediction error, computational
+cost and physical consistency, including the bounds $0\leq d\leq1$,
+irreversibility and mechanical equilibrium.
 
-The solution is a **hybrid physics-AI architecture**:
-1. **Fast Neural Proposal:** A neural surrogate rapidly suggests a trial displacement or damage field $\widehat{d}$.
-2. **Physics-Based Gating:** We substitute the proposal into the physical PDE weak form to evaluate its equilibrium residual $\|R(\widehat{d})\|$.
-3. **Selective Solver Refinement:** If the residual is small, we accept the proposal immediately. If the residual is high, the neural prediction serves as an initial guess for a trusted numerical solver (like PhAST's staggered solver), cutting iteration count while guaranteeing physical accuracy.
+One approach uses three operations:
 
-In this chapter, we explore how to build and evaluate these learning components: defining clear data contracts, serializing and reloading model checkpoints reproducibly, evaluating physical residuals, and building robust hybrid workflows.
+1. **Field prediction:** A neural surrogate supplies a trial displacement or
+damage field $\widehat{d}$.
+2. **Residual-based assessment:** Substituting the field into the discrete
+equations gives the residual $\|R(\widehat{d})\|$. Boundary conditions and
+damage admissibility are checked alongside this value.
+3. **Numerical refinement:** A prediction satisfying the stated criteria can
+be used directly. Otherwise, a numerical solve refines the prediction or
+supplies a reference field. The resulting field is checked again.
+
+This chapter develops the input and output specification, model saving and
+reloading, and residual assessment. Comparing the complete calculation with
+the corresponding reference solve establishes its accuracy and runtime.
 
 ## Decide What is Being Learned
 
@@ -42,7 +57,7 @@ These roles can be combined. A model that predicts an initialisation supports
 the subsequent mechanics solve; a model intended to replace that solve
 requires evaluation of the resulting mechanical fields and observables.
 
-## A small supervised-learning contract
+## Define the supervised-learning problem
 
 Let $x_i$ be an input representation and $z_i$ a reference target. A simple
 training objective is
@@ -62,7 +77,7 @@ Before training, write down:
 4. the training, validation, and test split rule; and
 5. the metric and physical diagnostic reported on each split.
 
-Normalisation belongs to this contract. If an input component is transformed
+Normalisation is part of this definition. If an input component is transformed
 as $\tilde x=(x-\mu)/s$, save $\mu$ and $s$ with the model. The preprocessing
 state is part of the computational map reconstructed during reload.
 
@@ -208,8 +223,8 @@ the corresponding reference calculation.
 
 ## Computational lesson: accept a compatible proposal or fall back
 
-The next lesson reuses the toy field-model contract to test a compatible
-proposal, reject a deliberately corrupted proposal by a stated residual gate,
+The next lesson reuses the toy field-model input and output specification to test a compatible
+proposal, reject a deliberately perturbed proposal using a stated residual criterion,
 and fall back to the reference field. Read the compatibility and residual
 checks when interpreting the four field panels. The residual is defined by
 the scalar `ToyHelmholtzProblem`. Applying this pattern to fracture requires
@@ -220,7 +235,7 @@ the fracture residual and its damage admissibility conditions.
 
 **Ready to try this in practice?**  
 Explore the interactive tutorial: **{doc}`classroom/03_learning_and_hybrid`**.
-You can read through the residual gating logic and solver correction steps directly here in the book, or run it interactively in **Google Colab** with one click:
+You can read through the residual assessment and solver correction steps directly here in the book, or run the tutorial in **Google Colab**:
 
 <div class="badge-row">
   <a class="badge-colab" href="https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/study/classroom/03_learning_and_hybrid.ipynb" target="_blank"><img src="_static/colab-badge.svg" alt="Open In Colab"/></a>
@@ -243,7 +258,7 @@ is one way to describe an iterative collection loop:
    model selection.
 
 This idea is useful when the model's own trajectory changes the data it sees.
-It relies on a trusted labelling procedure, recorded provenance, and separate
+It relies on a trusted labelling procedure, documented data sources and processing steps, and separate
 training and final evaluation data. In mechanics, the reference procedure may
 fail or become inappropriate outside its assumptions; retain those outcomes
 when evaluating the method.
@@ -268,7 +283,7 @@ A comprehensive validation protocol evaluates:
 5. **Generalization Bounds:**
    Report performance across varying load levels, mesh densities, and unseen geometries to characterize the model's domain of applicability.
 
-## Exercise: identify the missing provenance
+## Exercise: describe the information needed to reuse a model
 
 A colleague shares a file called “best_model” and says it predicts damage on a
 new mesh. List four items you need before interpreting the output as a
@@ -283,7 +298,7 @@ representation; coordinate frame and units; load/time step represented; the
 training/validation/test split; a reload comparison; and the physical checks
 used on the proposed field. These records give the predicted tensor its
 mechanical meaning. The two computational lessons provide
-a concrete version of this answer: the first records the model contract and
+a concrete version of this answer: the first records the model’s input conventions and
 reload check; the second refuses an incompatible feature order and performs a
 stated residual/fallback check.
 :::

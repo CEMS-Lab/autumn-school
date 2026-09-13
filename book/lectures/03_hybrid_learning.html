@@ -50,7 +50,7 @@
     <script src="../_static/learning_book.js?v=5aaa4a9b"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Practical 1: Simulate and interpret diffuse fracture damage" href="../classroom/01_simulate_fracture.html" />
+    <link rel="next" title="Practical 1: Simulate a crack crossing a plate" href="../classroom/01_simulate_fracture.html" />
     <link rel="prev" title="Lecture 2: Differentiability and inverse recovery" href="02_differentiability_and_inverse.html" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -176,9 +176,13 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Three practical labs</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../classroom/01_simulate_fracture.html">Practical 1: Simulate and interpret diffuse fracture damage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../classroom/01_simulate_fracture.html">Practical 1: Simulate a crack crossing a plate</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../classroom/02_gradients_and_recovery.html">Practical 2: Gradients and material recovery</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../classroom/03_learning_and_hybrid.html">Practical 3: Learn a field and assess its proposal</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Optional direct-replacement case study</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../w53_direct_replacement.html">Case study: a direct learned damage replacement</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Reference chapters</span></p>
 <ul class="nav bd-sidenav">
@@ -447,8 +451,8 @@ prediction. Solver-in-the-loop training also follows the selected numerical
 updates. The <a class="reference internal" href="../06_learning_adapter.html"><span class="doc">learning chapter</span></a> expands these
 three computational graphs.</p>
 <div class="note admonition">
-<p class="admonition-title">Worked example outline · L3-W01</p>
-<p><strong>Planned content.</strong> Identify the coordinate and parameter inputs and scalar
+<p class="admonition-title">Training and reusing a small field model</p>
+<p>Identify the coordinate and parameter inputs and scalar
 field target in the existing Helmholtz teaching model. Follow a short training
 step, then save and reload the weights together with normalisation and feature
 order. Compare the same input before and after reload.</p>
@@ -463,12 +467,14 @@ geometry, loading and history. A learned replacement would produce a damage
 update for those inputs. It remains coupled to the next mechanics update and
 to the convergence and admissibility checks for the complete increment.</p>
 <div class="note admonition">
-<p class="admonition-title">Animation storyboard · L3-A01</p>
-<p><strong>Planned content.</strong> Start from the staggered loop and mark the damage
+<p class="admonition-title">A learned damage update</p>
+<p>Start from the staggered loop and identify the damage
 subsolve. Replace that operation with a labelled learned damage update,
 show its input and output fields, and follow the next mechanics update.
 Keep the bounds, irreversibility and coupled convergence checks visible.
-This is a proposed fracture workflow.</p>
+The <a class="reference internal" href="../w53_direct_replacement.html"><span class="doc">single-replacement case study</span></a> illustrates
+this role with a retained Radius-GNO fracture trajectory and a measured
+damage-stage timing comparison.</p>
 <p><strong>Learning question:</strong> Which operation is learned, and what conditions still
 govern the accepted state?</p>
 </div>
@@ -482,12 +488,11 @@ The corrected state needs its own checks. The
 <a class="reference internal" href="../06_learning_adapter.html#fig-learning-cycle"><span class="std std-ref">existing learning-cycle figure</span></a> introduces
 these exchanges.</p>
 <div class="note admonition">
-<p class="admonition-title">Animation storyboard · L3-A02</p>
-<p><strong>Planned content.</strong> Follow input, prediction, residual evaluation, correction
-and the final checked field in separate frames. Label direct acceptance and
-reference fallback as distinct branches. A final cost strip will identify
-prediction, checking, correction and fallback costs without assigning timing
-values.</p>
+<p class="admonition-title">Assessing and correcting a prediction</p>
+<p>Follow the inputs, prediction, residual evaluation, numerical correction and
+accepted field. Distinguish direct acceptance from reference fallback.
+Include prediction, checking, correction and fallback when measuring the
+cost of the complete calculation.</p>
 <p><strong>Learning question:</strong> How can we tell whether the complete hybrid calculation
 improves on its reference calculation?</p>
 </div>
@@ -501,12 +506,12 @@ Architecture choice follows the available data and the desired field map.
 Input meaning, spatial ordering, units and output interpretation must remain
 clear when models are exchanged.</p>
 <div class="note admonition">
-<p class="admonition-title">Worked example outline · L3-W02</p>
-<p><strong>Planned content.</strong> Use the existing small MLP and RBF field examples to
-compare compatible inputs, predictions and saved-model metadata. Add a
-conceptual row identifying the representation changes required by a grid or
-graph model. Keep architecture comparisons qualitative until matched
-computations are available.</p>
+<p class="admonition-title">Comparing model interfaces</p>
+<p>Use the small field-model example to identify its input features, prediction
+and saved-model metadata. Consider how an RBF, grid-based model or graph model
+would represent the same field. Explain which inputs and spatial information
+each architecture requires. A quantitative comparison would use matched
+training data, field-error measures and complete computation times.</p>
 <p><strong>Learning question:</strong> Which parts of the model interface must agree for a
 comparison to be meaningful?</p>
 </div>
@@ -520,11 +525,11 @@ DAgger-style round specifically collects states visited by the current model,
 queries a reference procedure there, aggregates those labelled records and
 re-trains the model. Held-out evaluation is needed to assess the revised model.</p>
 <div class="note admonition">
-<p class="admonition-title">Animation storyboard · L3-A03</p>
-<p><strong>Planned content.</strong> Show a current model visiting states, reference labelling
-of those states, dataset aggregation and another training round. Keep a
-separate evaluation set visible. Mark the entire loop as a conceptual
-extension to the practical.</p>
+<p class="admonition-title">A conceptual DAgger round</p>
+<p>Trace the states visited by the current model, reference labelling of those
+states, dataset aggregation and another training round. Reserve a separate
+evaluation set to assess the updated model. This conceptual extension explains
+how the data distribution can change as a learned component is used.</p>
 <p><strong>Learning question:</strong> Why might model-visited states add information to the
 original training set?</p>
 </div>
@@ -535,8 +540,9 @@ original training set?</p>
 Helmholtz field model, inspect a proposal and evaluate the numerical response
 to its residual. The example teaches the model interface and reference
 correction or fallback in a compact setting. Its field and residual belong to
-the Helmholtz teaching problem. A learned fracture damage subsolve and a
-complete DAgger rollout are further developments represented by the storyboards.</p>
+the Helmholtz teaching problem. The direct-replacement fracture case study
+provides a separate application, while the DAgger discussion introduces an
+iterative data-collection and training strategy.</p>
 <p>Discuss both field quality and complete computation time when assessing a
 hybrid method. The same comparison links model learning back to the physical
 question that opened the course.</p>
@@ -568,7 +574,7 @@ question that opened the course.</p>
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Practical 1: Simulate and interpret diffuse fracture damage</p>
+        <p class="prev-next-title">Practical 1: Simulate a crack crossing a plate</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

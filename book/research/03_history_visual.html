@@ -178,9 +178,13 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Three practical labs</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../classroom/01_simulate_fracture.html">Practical 1: Simulate and interpret diffuse fracture damage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../classroom/01_simulate_fracture.html">Practical 1: Simulate a crack crossing a plate</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../classroom/02_gradients_and_recovery.html">Practical 2: Gradients and material recovery</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../classroom/03_learning_and_hybrid.html">Practical 3: Learn a field and assess its proposal</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Optional direct-replacement case study</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../w53_direct_replacement.html">Case study: a direct learned damage replacement</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Reference chapters</span></p>
 <ul class="nav bd-sidenav">
@@ -454,7 +458,7 @@ The introductory <a class="reference download internal" download="" href="../_do
 is also available separately. It shows the computational sequence, with
 illustrative local curves and distinctly labelled retained FEM context.
 Its <a class="reference download internal" download="" href="../_downloads/4effa619f8a30328db2debae016f8e47/render_forward_cycle.py"><code class="xref download docutils literal notranslate"><span class="pre">Matplotlib</span> <span class="pre">renderer</span></code></a> and
-<a class="reference download internal" download="" href="../_downloads/4b605deefbc18aae18a406a67cc2cf64/forward_cycle_manifest.json"><code class="xref download docutils literal notranslate"><span class="pre">animation</span> <span class="pre">receipt</span></code></a>
+<a class="reference download internal" download="" href="../_downloads/4b605deefbc18aae18a406a67cc2cf64/forward_cycle_manifest.json"><code class="xref download docutils literal notranslate"><span class="pre">animation</span> <span class="pre">manifest</span></code></a>
 identify the plotted sequence. The panel’s
 <a class="reference download internal" download="" href="../_downloads/36b16ac439a8cd8e13971ea7822e771e/history_plate.template.html"><code class="xref download docutils literal notranslate"><span class="pre">HTML</span> <span class="pre">template</span></code></a> and
 <a class="reference download internal" download="" href="../_downloads/e704e69977dab7ea430a06b0566ba2ff/history_walkthrough.html"><code class="xref download docutils literal notranslate"><span class="pre">guided</span> <span class="pre">explanation</span> <span class="pre">source</span></code></a>
@@ -469,7 +473,7 @@ representation. The initial notch extends from the left edge. A particle
 boundary can be displayed to relate the subsequent deflection to the inclusion.
 Both renderings preserve the complete damage range, <span class="math notranslate nohighlight">\(0\leq d\leq1\)</span>.</p>
 <p>The <a class="reference download internal" download="" href="../_downloads/fd6f407726272e4f0d95c1a5998acc2c/history_plate_arrays.npz"><code class="xref download docutils literal notranslate"><span class="pre">retained</span> <span class="pre">mesh</span> <span class="pre">and</span> <span class="pre">damage</span> <span class="pre">arrays</span></code></a>,
-<a class="reference download internal" download="" href="../_downloads/2e88bf1ae48d6a8fce5931f407952d25/history_plate_manifest.json"><code class="xref download docutils literal notranslate"><span class="pre">export</span> <span class="pre">receipt</span></code></a>, and
+<a class="reference download internal" download="" href="../_downloads/2e88bf1ae48d6a8fce5931f407952d25/history_plate_manifest.json"><code class="xref download docutils literal notranslate"><span class="pre">export</span> <span class="pre">manifest</span></code></a>, and
 <a class="reference download internal" download="" href="../_downloads/cb6ae7c56da4c7f78f2294229ea56330/build_history_panel.py"><code class="xref download docutils literal notranslate"><span class="pre">Matplotlib</span> <span class="pre">exporter</span></code></a> accompany the panel.
 Four frames agree exactly with the previously retained inverse target data.
 The browser’s compact damage arrays introduce a maximum rounding difference
@@ -483,7 +487,7 @@ The lower panels show the history update and its reverse weight at that step.</p
 <a class="reference internal image-reference" href="../_images/history_switch.png"><img alt="Loading history, a maximum function with a kink, and hard versus sigmoid reverse weights at a repeated maximum." src="../_images/history_switch.png" style="width: 100%;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Figure 12 </span><span class="caption-text">A dimensionless example at one material point. The orange marker is the
+<p><span class="caption-number">Figure 14 </span><span class="caption-text">A dimensionless example at one material point. The orange marker is the
 current state; the green marker is its surrogate reverse weight. The open
 blue marker at a tie denotes the half-weight convention at the kink, where
 the classical one-sided derivatives differ.</span><a class="headerlink" href="#fig-history-switch" title="Link to this image">#</a></p>
@@ -550,8 +554,8 @@ different parts of the problem.</p>
 the <a class="reference download internal" download="" href="../_downloads/84c316cf5bddb4fe4279537ed6a57b5b/history_animation.py"><code class="xref download docutils literal notranslate"><span class="pre">Matplotlib</span> <span class="pre">source</span></code></a>,
 <a class="reference download internal" download="" href="../_downloads/0b73e2537df98b60fcb2d6269bcf1269/history_lesson.py"><code class="xref download docutils literal notranslate"><span class="pre">tested</span> <span class="pre">teaching</span> <span class="pre">primitive</span></code></a>,
 <a class="reference download internal" download="" href="../_downloads/df6af38bbdfa1618253c9318bb822d61/history_animation_arrays.npz"><code class="xref download docutils literal notranslate"><span class="pre">plotted</span> <span class="pre">arrays</span></code></a>, and
-<a class="reference download internal" download="" href="../_downloads/5ae9b7ab8bbf8055201fe3dd82171dde/history_manifest.json"><code class="xref download docutils literal notranslate"><span class="pre">HPC</span> <span class="pre">checks</span> <span class="pre">and</span> <span class="pre">receipt</span></code></a>.
-The receipt retains the example where a hard-map finite difference is zero
+<a class="reference download internal" download="" href="../_downloads/5ae9b7ab8bbf8055201fe3dd82171dde/history_manifest.json"><code class="xref download docutils literal notranslate"><span class="pre">HPC</span> <span class="pre">checks</span> <span class="pre">and</span> <span class="pre">manifest</span></code></a>.
+The manifest retains the example where a hard-map finite difference is zero
 and the surrogate weight is approximately <span class="math notranslate nohighlight">\(0.475\)</span>.</p>
 <script>
 const panel = document.getElementById('history-explorer');

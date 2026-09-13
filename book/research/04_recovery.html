@@ -178,9 +178,13 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Three practical labs</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../classroom/01_simulate_fracture.html">Practical 1: Simulate and interpret diffuse fracture damage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../classroom/01_simulate_fracture.html">Practical 1: Simulate a crack crossing a plate</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../classroom/02_gradients_and_recovery.html">Practical 2: Gradients and material recovery</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../classroom/03_learning_and_hybrid.html">Practical 3: Learn a field and assess its proposal</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Optional direct-replacement case study</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../w53_direct_replacement.html">Case study: a direct learned damage replacement</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Reference chapters</span></p>
 <ul class="nav bd-sidenav">
@@ -457,7 +461,7 @@ These choices isolate conditioning in this prescribed quadratic.</p>
 <a class="reference internal image-reference" href="../_images/conditioning.png"><img alt="Scaled descent approaches the quadratic minimum faster than unscaled descent from the same initial parameters." src="../_images/conditioning.png" style="width: 100%;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Figure 14 </span><span class="caption-text">Gradient descent and diagonally scaled descent on the same quadratic, using
+<p><span class="caption-number">Figure 16 </span><span class="caption-text">Gradient descent and diagonally scaled descent on the same quadratic, using
 the same initial state. The objective panel shows the first 20 updates;
 the paths and retained data include 80 updates. Scaling is exact for this
 teaching quadratic; fracture preconditioners require a corresponding
@@ -491,7 +495,7 @@ observations and assess the estimates. Updates use the observation residual.</p>
 <a class="reference internal image-reference" href="../_images/observations.png"><img alt="Two starts reach different points in a one-observation valley but the same solution with two independent observations." src="../_images/observations.png" style="width: 100%;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Figure 15 </span><span class="caption-text">Loss contours and recorded optimisation paths for one and two observations.
+<p><span class="caption-number">Figure 17 </span><span class="caption-text">Loss contours and recorded optimisation paths for one and two observations.
 The flat valley disappears when the added observation resolves its null
 direction. These teaching landscapes come from the stated linear
 observation models.</span><a class="headerlink" href="#id2" title="Link to this image">#</a></p>
@@ -533,7 +537,7 @@ eigenvectors. Their lengths scale with the square roots of its eigenvalues.</p>
 <a class="reference internal image-reference" href="../_images/uncertainty.png"><img alt="A long posterior ellipse with one observation contracts to a small circle with two independent observations." src="../_images/uncertainty.png" style="width: 94%;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Figure 16 </span><span class="caption-text">Posterior contours containing 95% probability for the declared two-dimensional
+<p><span class="caption-number">Figure 18 </span><span class="caption-text">Posterior contours containing 95% probability for the declared two-dimensional
 Gaussian model. The first observation leaves a broad trade-off direction.
 The second constrains it. Filled circles denote posterior means and the star
 marks the reference. With one observation, the prior selects a mean along

@@ -1,4 +1,4 @@
-"""Fast (<0.05s) design and textual directives validator for Sphinx HTML builds.
+"""Design and academic-language checks for Sphinx HTML builds.
 
 Validates that:
 1. No prohibited AI drama, negative framing, or compliance checklists exist.
@@ -6,6 +6,7 @@ Validates that:
 3. Three classroom notebooks and six retained references have action badges and solutions.
 """
 from pathlib import Path
+from html.parser import HTMLParser
 import re
 import sys
 import time
@@ -18,6 +19,45 @@ PROHIBITED_PATTERNS = [
     (re.compile(r"stationary trap", re.I), "Negative/dramatic phrasing ('stationary trap')"),
     (re.compile(r"Minimum result card", re.I), "AI compliance checklist phrase ('Minimum result card')"),
 ]
+
+ACADEMIC_PATTERNS = [
+    (re.compile(r"\b(?:gate|gates|gated|gating)\b", re.I), "describe the numerical acceptance or residual criterion"),
+    (re.compile(r"\bprovenance\b", re.I), "describe the data sources or processing history"),
+    (re.compile(r"\bguardrails?\b", re.I), "name the physical constraint or numerical safeguard"),
+    (re.compile(r"\b(?:smoke test|preflight|fail.closed|source of truth)\b", re.I), "describe the relevant operation in academic language"),
+]
+
+
+class TeachingText(HTMLParser):
+    """Read prose without flagging literal code, URLs, scripts or quotations."""
+
+    ignored_tags = {"code", "pre", "kbd", "samp", "script", "style", "textarea", "blockquote"}
+
+    def __init__(self):
+        super().__init__(convert_charrefs=True)
+        self.ignored = 0
+        self.fragments = []
+
+    def handle_starttag(self, tag, attrs):
+        if tag in self.ignored_tags:
+            self.ignored += 1
+
+    def handle_endtag(self, tag):
+        if tag in self.ignored_tags:
+            self.ignored = max(0, self.ignored - 1)
+
+    def handle_data(self, data):
+        if not self.ignored:
+            self.fragments.append(data)
+
+
+def academic_language_hits(content):
+    parser = TeachingText()
+    parser.feed(content)
+    prose = " ".join(parser.fragments)
+    # These are established scientific expressions, not workflow metaphors.
+    prose = re.sub(r"\b(?:neural.network\s+)?gating\s+(?:function|mechanism)s?\b", "", prose, flags=re.I)
+    return [(pattern.pattern, reason) for pattern, reason in ACADEMIC_PATTERNS if pattern.search(prose)]
 
 def check_directives(book_dir=BOOK):
     t0 = time.time()
@@ -39,6 +79,8 @@ def check_directives(book_dir=BOOK):
         for pattern, desc in PROHIBITED_PATTERNS:
             if pattern.search(content):
                 errors.append(f"{rel}: contains prohibited text '{pattern.pattern}' ({desc})")
+        for pattern, reason in academic_language_hits(content):
+            errors.append(f"{rel}: academic terminology ({pattern}): {reason}")
 
     # 2. Check 4 Pillars on index.html
     index_file = book_dir / "index.html"

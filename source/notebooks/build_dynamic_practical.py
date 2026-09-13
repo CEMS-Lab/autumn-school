@@ -196,7 +196,7 @@ add("code","""
 elapsed_seconds = time.perf_counter() - computation_started
 print({"elapsed_after_setup_seconds": round(elapsed_seconds, 2),
        "solver_subprocess_seconds": json.loads((output_dir / "runtime.json").read_text())["whole_process_seconds"],
-       "environment": setup_receipt["environment"]})
+       "environment": setup_summary["environment"]})
 """)
 
 notebook={"nbformat":4,"nbformat_minor":5,"cells":cells,"metadata":{

@@ -269,12 +269,12 @@ The implementation inspection covers `phast/physics/h_update.py`,
 the implicit functions in `phast/solvers/damage_solver.py`. The public teaching
 snapshot contains the dimensional custom rule; the explicit dimensionless
 variant is in the Particle Inverse research worktree. Its manuscript describes
-that variant for the single-particle study. Configuration receipts identify
+that variant for the single-particle study. Configuration records identify
 the history rule for each other run.
 
 The accompanying teaching code is a minimal, self-contained illustration of
-the audited rules. It isolates history values and reverse weights; the
-source audit records the corresponding implementation files and hashes.
+the checked rules. It isolates history values and reverse weights; the
+source listing gives the corresponding implementation files and hashes.
 
 [PyTorch's autograd documentation](https://docs.pytorch.org/docs/2.14/notes/autograd.html#gradients-for-non-differentiable-functions)
 describes derivative conventions for nonsmooth primitives.

@@ -113,8 +113,8 @@
         "pix_fmt": "yuv420p",
         "r_frame_rate": "30/1"
       },
-      "video_sha256": "6c60cbdc75d0c449997a101baf957b11a28c0c7611dfbeaf7ac5bc42c3e9775a",
-      "poster_sha256": "33d5750d465078796f4d30ce665a4db4c06d6995d95414b0255fefa4653c5c74"
+      "video_sha256": "b983eaa910c6d037811abc5dc8d773692f503d0e88ce503533a5a0711abd31f0",
+      "poster_sha256": "524a4b9a5bae0a21dcd73b2df27270f669e888ba7e480c61f0df2997a0f175de"
     }
   ],
   "gallery_sha256": "4b2078129c11e1a4b1585aa24365f5deed30be91967e9ad2cfd0a55c8ee789fa",

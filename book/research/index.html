@@ -178,9 +178,13 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Three practical labs</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../classroom/01_simulate_fracture.html">Practical 1: Simulate and interpret diffuse fracture damage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../classroom/01_simulate_fracture.html">Practical 1: Simulate a crack crossing a plate</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../classroom/02_gradients_and_recovery.html">Practical 2: Gradients and material recovery</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../classroom/03_learning_and_hybrid.html">Practical 3: Learn a field and assess its proposal</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Optional direct-replacement case study</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../w53_direct_replacement.html">Case study: a direct learned damage replacement</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Reference chapters</span></p>
 <ul class="nav bd-sidenav">
@@ -454,7 +458,7 @@ parameter on a fixed finite-element mesh.</p>
 <a class="reference internal image-reference" href="../_images/inverse_workflow.png"><img alt="Parameters feed a forward model, observations, loss, reverse sensitivity and a bounded update." src="../_images/inverse_workflow.png" style="width: 100%;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Figure 8 </span><span class="caption-text">An inverse experiment connects parameters to observations through a forward
+<p><span class="caption-number">Figure 10 </span><span class="caption-text">An inverse experiment connects parameters to observations through a forward
 model. The arrows describe the information flow used to assess recovery.
 Editable LaTeX/TikZ source accompanies this original schematic.</span><a class="headerlink" href="#fig-research-workflow" title="Link to this image">#</a></p>
 </figcaption>
@@ -465,7 +469,7 @@ Editable LaTeX/TikZ source accompanies this original schematic.</span><a class="
 <p>Open the <a class="reference internal" href="notebooks/inverse_experiments.html"><span class="std std-doc">one-stop notebook</span></a> for a
 continuous explanation with complete code, worked answers and retained plots.
 It also has a <a class="reference download internal" download="" href="../_downloads/c681ec56e173d59ef3a7900f7d630dcb/inverse_experiments.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">downloadable</span> <span class="pre">Jupyter</span> <span class="pre">copy</span></code></a>.
-The execution receipt distinguishes completed HPC calculations from proposed
+The execution record distinguishes completed HPC calculations from proposed
 full-fracture research protocols.</p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
@@ -512,8 +516,8 @@ phase-field fracture recovery. The application chapter explains how to repeat
 the checks with PhAST and how to keep those results separate.</p>
 <p>The <a class="reference internal" href="08_visual_lab.html"><span class="std std-doc">visual laboratory</span></a> adds computed loss surfaces and
 three animations. It pairs an explicit geometry-observation toy with retained
-FEM samples and a recorded particle recovery, keeping their objectives and
-provenance separate. Begin there for a visual connection between the plate,
+FEM samples and a recorded particle recovery, with each example’s objective
+and data sources identified. Begin there for a visual connection between the plate,
 the particle estimate and the objective.</p>
 <div class="toctree-wrapper compound">
 <ul>

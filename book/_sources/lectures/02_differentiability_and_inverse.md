@@ -35,12 +35,12 @@ locates these quantities. The
 {doc}`three-step worked derivation <../05a_backpropagation_step_by_step>` supplies
 a small algebraic calculation that can be checked by hand.
 
-:::{admonition} Animation storyboard · L2-A01
+:::{admonition} Three updates and one shared parameter
 :class: note
 
-**Planned content.** Reveal three forward updates, the observation and the
-loss. Reverse the highlighting to follow one VJP at each update and collect
-every use of the shared parameter. Show the optimisation update last.
+Follow three forward updates, the observation and the loss. Trace the reverse
+path through one VJP at each update and add the contributions from every use
+of the shared parameter. The optimisation update uses the resulting gradient.
 
 **Learning question:** Why can an early update contribute to the final loss
 gradient?
@@ -55,10 +55,10 @@ active constraints and branch changes affect that interpretation. The
 {doc}`differentiation chapter <../05_differentiation_and_inverse>` develops both
 routes and their assumptions.
 
-:::{admonition} Worked example outline · L2-W01
+:::{admonition} Checking the elastic-bar sensitivity
 :class: note
 
-**Planned content.** Use the existing elastic-bar teaching model to compare
+Use the elastic-bar teaching model to compare
 an analytical sensitivity, autograd and finite differences over several
 perturbation sizes. Alongside it, draw the graphs for a fixed number of
 iterations and for a converged residual equation. State which graph each
@@ -70,54 +70,54 @@ computational map?
 
 ## A sequence of fracture inverse applications · 28–50 minutes
 
-The four outlines below reserve a connected progression of applications.
-Each asks what is unknown, what is measured and what would support a recovery
-claim. They are planned exhibits; numerical results will accompany them when
-the corresponding examples have been selected and reviewed.
+The following discussion problems extend the inverse formulation to fracture.
+For each, specify the unknowns, observations and assumptions, then identify the
+comparisons needed to assess a recovered parameter. The worked elastic-bar
+calculation in the practical provides a small numerical example of this process.
 
-:::{admonition} Research example outline · L2-R01 · Fracture-energy recovery
+:::{admonition} Discussion: fracture-energy recovery
 :class: note
 
-**Planned content.** Begin with a scalar $G_c$, a fixed specimen and prescribed
-loading. Place the target observation, initial prediction and recovered
-prediction in a common comparison, followed by the parameter trajectory and
-a derivative check.
+Consider an unknown scalar $G_c$, a fixed specimen and prescribed loading.
+Choose an observation and define a mismatch loss. Explain how you would compare
+the target, initial prediction and fitted prediction using common scales,
+then assess the parameter trajectory and derivative accuracy.
 
 **Learning question:** Which feature of the response provides information
 about $G_c$?
 :::
 
-:::{admonition} Research example outline · L2-R02 · Single-particle recovery
+:::{admonition} Discussion: one inclusion
 :class: note
 
-**Planned content.** Extend the parameter description to one inclusion.
-Identify which geometry or material quantities are unknown and show how its
-presence affects the observed displacement or crack field. Reserve adjacent
-panels for target, initial and recovered configurations using common scales.
+Extend the parameter description to one inclusion. Identify which geometry
+or material quantities are unknown and explain how its presence could affect
+an observed displacement or crack field. Specify a suitable comparison of
+target, initial and fitted configurations using common scales.
 
 **Learning question:** Can the chosen observations distinguish the inclusion
 parameters being recovered?
 :::
 
-:::{admonition} Research example outline · L2-R03 · Multiple-particle recovery
+:::{admonition} Discussion: several inclusions
 :class: note
 
-**Planned content.** Extend the single-particle setup to several inclusions.
-Compare geometry and observed fields, then examine parameter correlation,
-initialisation and observations held out from fitting. Panel positions are
-textual outlines at this stage.
+Extend the single-inclusion description to several inclusions. Discuss how
+parameter correlation, initialisation and observations held out from fitting
+affect the interpretation of a recovery. Distinguish fitting the measured
+fields from uniquely identifying the underlying parameters.
 
 **Learning question:** How does adding unknowns change the observations needed
 for recovery?
 :::
 
-:::{admonition} Research example outline · L2-R04 · A non-particle application
+:::{admonition} Discussion: an unknown load
 :class: note
 
-**Planned content.** A further inverse problem will connect the same
-parameter–state–observation–loss sequence to a different physical setting.
-The application is awaiting selection; its parameters, observations and
-result panels will be defined together.
+Consider recovering the magnitude of an applied load from displacement
+observations while the material properties are known. Define the
+parameter–state–observation–loss sequence. Then discuss what changes if both
+the load and elastic modulus are unknown.
 
 **Learning question:** Which parts of the inverse workflow transfer to a new
 physical problem?
@@ -131,8 +131,9 @@ chain rule, then compare PyTorch's backward pass with analytic derivatives
 and finite differences. Next inspect a degradation-law derivative and recover
 a modulus in a one-dimensional elastic bar. These teaching models make the
 derivative and recovery steps easy to inspect.
-The fracture exhibits above extend the scientific questions to coupled
-damage evolution and require their own evidence.
+The fracture discussion problems extend these scientific questions to coupled
+damage evolution. Assessing each recovery requires observations and derivative
+checks appropriate to its particular model.
 
 The same chain rule also computes gradients of neural-model weights.
 {doc}`Lecture 3 <03_hybrid_learning>` uses that connection to introduce training

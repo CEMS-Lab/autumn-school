@@ -16,9 +16,9 @@ calculus and introductory Python provide the starting point.
 | {doc}`2. Differentiability and inverse applications <lectures/02_differentiability_and_inverse>` | How can a measured response tell us about an unknown input? |
 | {doc}`3. Hybrid numerical and learned methods <lectures/03_hybrid_learning>` | How can a learned prediction work alongside a physical solver? |
 
-The guides connect the existing explanations and illustrations. Labelled example
-outlines and animation storyboards identify the material being prepared for
-the lecture series.
+The lecture guides connect the governing equations and illustrations to each
+practical. Discussion questions provide opportunities to interpret the model
+before running the corresponding calculation.
 
 ## Three practical notebooks
 
@@ -32,6 +32,10 @@ available for closer study.
 | {doc}`Lab 1 — Simulate and interpret fracture <classroom/01_simulate_fracture>` | Inspect a notched specimen and its loading, run PhAST, and interpret crack propagation, energy curves and saved fields. |
 | {doc}`Lab 2 — Gradients and parameter recovery <classroom/02_gradients_and_recovery>` | Check a degradation derivative, trace an elastic-bar sensitivity, and recover a material parameter. |
 | {doc}`Lab 3 — Learning and hybrid correction <classroom/03_learning_and_hybrid>` | Train a small field model, save and reload it, then assess and correct its prediction. |
+
+The optional {doc}`direct learned-replacement case study <w53_direct_replacement>`
+connects Lab 3 to a retained Radius-GNO fracture trajectory and reports a
+matched damage-stage timing comparison.
 
 Each notebook page includes **Google Colab**, practice and worked-solution
 downloads. Start with the [environment setup guide](../SETUP.md).
@@ -67,6 +71,13 @@ lectures/03_hybrid_learning
 classroom/01_simulate_fracture
 classroom/02_gradients_and_recovery
 classroom/03_learning_and_hybrid
+```
+
+```{toctree}
+:maxdepth: 1
+:caption: Optional direct-replacement case study
+
+w53_direct_replacement
 ```
 
 ```{toctree}

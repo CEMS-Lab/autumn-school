@@ -178,9 +178,13 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Three practical labs</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="classroom/01_simulate_fracture.html">Practical 1: Simulate and interpret diffuse fracture damage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classroom/01_simulate_fracture.html">Practical 1: Simulate a crack crossing a plate</a></li>
 <li class="toctree-l1"><a class="reference internal" href="classroom/02_gradients_and_recovery.html">Practical 2: Gradients and material recovery</a></li>
 <li class="toctree-l1"><a class="reference internal" href="classroom/03_learning_and_hybrid.html">Practical 3: Learn a field and assess its proposal</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Optional direct-replacement case study</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="w53_direct_replacement.html">Case study: a direct learned damage replacement</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Reference chapters</span></p>
 <ul class="current nav bd-sidenav">
@@ -416,9 +420,9 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-best-of-both-worlds-fast-ai-proposals-physics-truth">The Best of Both Worlds: Fast AI Proposals &amp; Physics Truth</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#neural-predictions-within-a-mechanics-calculation">Neural predictions within a mechanics calculation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#decide-what-is-being-learned">Decide What is Being Learned</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-small-supervised-learning-contract">A small supervised-learning contract</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#define-the-supervised-learning-problem">Define the supervised-learning problem</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#where-does-the-training-gradient-travel">Where does the training gradient travel?</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#train-save-and-reload-reproducibly">Train, save, and reload reproducibly</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#computational-lesson-train-save-reload-and-compare-a-toy-field-model">Computational lesson: train, save, reload, and compare a toy field model</a></li>
@@ -427,7 +431,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#computational-lesson-accept-a-compatible-proposal-or-fall-back">Computational lesson: accept a compatible proposal or fall back</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dagger-style-data-aggregation">DAgger-style data aggregation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluation-physical-metrics-and-model-validation">Evaluation: Physical Metrics and Model Validation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-identify-the-missing-provenance">Exercise: identify the missing provenance</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-describe-the-information-needed-to-reuse-a-model">Exercise: describe the information needed to reuse a model</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sources-for-this-chapter">Sources for this chapter</a></li>
 </ul>
             </nav>
@@ -446,22 +450,36 @@ document.write(`
 <a class="reference internal image-reference" href="_images/06_learning_cycle.svg"><img alt="Offline reference data support training and checkpoint reload. Online model proposals are checked, then accepted or corrected by the reference solver. A dashed conceptual feedback path collects labelled states for another training round." src="_images/06_learning_cycle.svg" style="width: 96%;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Figure 7 </span><span class="caption-text">A learning component has defined inputs, outputs, and physics checks, just as
+<p><span class="caption-number">Figure 9 </span><span class="caption-text">A learning component has defined inputs, outputs, and physics checks, just as
 the reference calculation does.</span><a class="headerlink" href="#fig-learning-cycle" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
-<section id="the-best-of-both-worlds-fast-ai-proposals-physics-truth">
-<h2>The Best of Both Worlds: Fast AI Proposals &amp; Physics Truth<a class="headerlink" href="#the-best-of-both-worlds-fast-ai-proposals-physics-truth" title="Link to this heading">#</a></h2>
-<p>Why combine deep learning with numerical mechanics solvers in fracture simulation?</p>
-<p>Traditional finite element solvers are exact, rigorous, and trustworthy: they enforce mechanical equilibrium, respect conservation laws, and satisfy boundary conditions. However, for non-linear problems like crack propagation, solving large coupled linear systems over dozens or hundreds of quasi-static load increments is computationally expensive.</p>
-<p>On the other hand, modern deep learning models (such as neural networks and neural operators) are extraordinarily fast: once trained, evaluating a forward pass takes just a fraction of a millisecond. Yet, on their own, purely data-driven models can produce unphysical predictions: they can predict negative damage (<span class="math notranslate nohighlight">\(d &lt; 0\)</span>), exceed physical bounds (<span class="math notranslate nohighlight">\(d &gt; 1\)</span>), or violate momentum balance when tested outside their immediate training distribution.</p>
-<p>The solution is a <strong>hybrid physics-AI architecture</strong>:</p>
+<section id="neural-predictions-within-a-mechanics-calculation">
+<h2>Neural predictions within a mechanics calculation<a class="headerlink" href="#neural-predictions-within-a-mechanics-calculation" title="Link to this heading">#</a></h2>
+<p>A hybrid calculation combines a learned field prediction with the equations
+and constraints of a mechanics model.</p>
+<p>Finite elements approximate the governing equations on a mesh. Numerical
+iterations reduce the discrete residual to a specified tolerance while
+applying boundary conditions and damage constraints. Repeated solutions
+during crack growth contribute to the computational cost.</p>
+<p>A trained neural network or neural operator maps the current input state to a
+predicted field. Its usefulness depends on prediction error, computational
+cost and physical consistency, including the bounds <span class="math notranslate nohighlight">\(0\leq d\leq1\)</span>,
+irreversibility and mechanical equilibrium.</p>
+<p>One approach uses three operations:</p>
 <ol class="arabic simple">
-<li><p><strong>Fast Neural Proposal:</strong> A neural surrogate rapidly suggests a trial displacement or damage field <span class="math notranslate nohighlight">\(\widehat{d}\)</span>.</p></li>
-<li><p><strong>Physics-Based Gating:</strong> We substitute the proposal into the physical PDE weak form to evaluate its equilibrium residual <span class="math notranslate nohighlight">\(\|R(\widehat{d})\|\)</span>.</p></li>
-<li><p><strong>Selective Solver Refinement:</strong> If the residual is small, we accept the proposal immediately. If the residual is high, the neural prediction serves as an initial guess for a trusted numerical solver (like PhAST’s staggered solver), cutting iteration count while guaranteeing physical accuracy.</p></li>
+<li><p><strong>Field prediction:</strong> A neural surrogate supplies a trial displacement or
+damage field <span class="math notranslate nohighlight">\(\widehat{d}\)</span>.</p></li>
+<li><p><strong>Residual-based assessment:</strong> Substituting the field into the discrete
+equations gives the residual <span class="math notranslate nohighlight">\(\|R(\widehat{d})\|\)</span>. Boundary conditions and
+damage admissibility are checked alongside this value.</p></li>
+<li><p><strong>Numerical refinement:</strong> A prediction satisfying the stated criteria can
+be used directly. Otherwise, a numerical solve refines the prediction or
+supplies a reference field. The resulting field is checked again.</p></li>
 </ol>
-<p>In this chapter, we explore how to build and evaluate these learning components: defining clear data contracts, serializing and reloading model checkpoints reproducibly, evaluating physical residuals, and building robust hybrid workflows.</p>
+<p>This chapter develops the input and output specification, model saving and
+reloading, and residual assessment. Comparing the complete calculation with
+the corresponding reference solve establishes its accuracy and runtime.</p>
 </section>
 <section id="decide-what-is-being-learned">
 <h2>Decide What is Being Learned<a class="headerlink" href="#decide-what-is-being-learned" title="Link to this heading">#</a></h2>
@@ -481,8 +499,8 @@ trusted reference computation.</p></li>
 the subsequent mechanics solve; a model intended to replace that solve
 requires evaluation of the resulting mechanical fields and observables.</p>
 </section>
-<section id="a-small-supervised-learning-contract">
-<h2>A small supervised-learning contract<a class="headerlink" href="#a-small-supervised-learning-contract" title="Link to this heading">#</a></h2>
+<section id="define-the-supervised-learning-problem">
+<h2>Define the supervised-learning problem<a class="headerlink" href="#define-the-supervised-learning-problem" title="Link to this heading">#</a></h2>
 <p>Let <span class="math notranslate nohighlight">\(x_i\)</span> be an input representation and <span class="math notranslate nohighlight">\(z_i\)</span> a reference target. A simple
 training objective is</p>
 <div class="math notranslate nohighlight">
@@ -500,7 +518,7 @@ fields, and units;</p></li>
 <li><p>the training, validation, and test split rule; and</p></li>
 <li><p>the metric and physical diagnostic reported on each split.</p></li>
 </ol>
-<p>Normalisation belongs to this contract. If an input component is transformed
+<p>Normalisation is part of this definition. If an input component is transformed
 as <span class="math notranslate nohighlight">\(\tilde x=(x-\mu)/s\)</span>, save <span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(s\)</span> with the model. The preprocessing
 state is part of the computational map reconstructed during reload.</p>
 </section>
@@ -631,8 +649,8 @@ the corresponding reference calculation.</p>
 </section>
 <section id="computational-lesson-accept-a-compatible-proposal-or-fall-back">
 <h2>Computational lesson: accept a compatible proposal or fall back<a class="headerlink" href="#computational-lesson-accept-a-compatible-proposal-or-fall-back" title="Link to this heading">#</a></h2>
-<p>The next lesson reuses the toy field-model contract to test a compatible
-proposal, reject a deliberately corrupted proposal by a stated residual gate,
+<p>The next lesson reuses the toy field-model input and output specification to test a compatible
+proposal, reject a deliberately perturbed proposal using a stated residual criterion,
 and fall back to the reference field. Read the compatibility and residual
 checks when interpreting the four field panels. The residual is defined by
 the scalar <code class="docutils literal notranslate"><span class="pre">ToyHelmholtzProblem</span></code>. Applying this pattern to fracture requires
@@ -641,7 +659,7 @@ the fracture residual and its damage admissibility conditions.</p>
 <p class="admonition-title">Hands-On Tutorial: Lab 3 (Physical Assessment and Correction)</p>
 <p><strong>Ready to try this in practice?</strong><br />
 Explore the interactive tutorial: <strong><a class="reference internal" href="classroom/03_learning_and_hybrid.html"><span class="doc">Practical 3: Learn a field and assess its proposal</span></a></strong>.
-You can read through the residual gating logic and solver correction steps directly here in the book, or run it interactively in <strong>Google Colab</strong> with one click:</p>
+You can read through the residual assessment and solver correction steps directly here in the book, or run the tutorial in <strong>Google Colab</strong>:</p>
 <div class="badge-row">
   <a class="badge-colab" href="https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/study/classroom/03_learning_and_hybrid.ipynb" target="_blank"><img src="_static/colab-badge.svg" alt="Open In Colab"/></a>
   <a class="badge-link" href="../notebooks/study/classroom/03_learning_and_hybrid.ipynb"><i class="fa-solid fa-download"></i> Download Practice Notebook</a>
@@ -663,7 +681,7 @@ is one way to describe an iterative collection loop:</p>
 model selection.</p></li>
 </ol>
 <p>This idea is useful when the model’s own trajectory changes the data it sees.
-It relies on a trusted labelling procedure, recorded provenance, and separate
+It relies on a trusted labelling procedure, documented data sources and processing steps, and separate
 training and final evaluation data. In mechanics, the reference procedure may
 fail or become inappropriate outside its assumptions; retain those outcomes
 when evaluating the method.</p>
@@ -690,8 +708,8 @@ Compare integral quantities of direct engineering interest, such as global react
 Report performance across varying load levels, mesh densities, and unseen geometries to characterize the model’s domain of applicability.</p></li>
 </ol>
 </section>
-<section id="exercise-identify-the-missing-provenance">
-<h2>Exercise: identify the missing provenance<a class="headerlink" href="#exercise-identify-the-missing-provenance" title="Link to this heading">#</a></h2>
+<section id="exercise-describe-the-information-needed-to-reuse-a-model">
+<h2>Exercise: describe the information needed to reuse a model<a class="headerlink" href="#exercise-describe-the-information-needed-to-reuse-a-model" title="Link to this heading">#</a></h2>
 <p>A colleague shares a file called “best_model” and says it predicts damage on a
 new mesh. List four items you need before interpreting the output as a
 mechanics field.</p>
@@ -703,7 +721,7 @@ representation; coordinate frame and units; load/time step represented; the
 training/validation/test split; a reload comparison; and the physical checks
 used on the proposed field. These records give the predicted tensor its
 mechanical meaning. The two computational lessons provide
-a concrete version of this answer: the first records the model contract and
+a concrete version of this answer: the first records the model’s input conventions and
 reload check; the second refuses an incompatible feature order and performs a
 stated residual/fallback check.</p>
 </div>
@@ -764,9 +782,9 @@ tensor/autodiff ecosystem used in the companion activities, see the
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-best-of-both-worlds-fast-ai-proposals-physics-truth">The Best of Both Worlds: Fast AI Proposals &amp; Physics Truth</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#neural-predictions-within-a-mechanics-calculation">Neural predictions within a mechanics calculation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#decide-what-is-being-learned">Decide What is Being Learned</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-small-supervised-learning-contract">A small supervised-learning contract</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#define-the-supervised-learning-problem">Define the supervised-learning problem</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#where-does-the-training-gradient-travel">Where does the training gradient travel?</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#train-save-and-reload-reproducibly">Train, save, and reload reproducibly</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#computational-lesson-train-save-reload-and-compare-a-toy-field-model">Computational lesson: train, save, reload, and compare a toy field model</a></li>
@@ -775,7 +793,7 @@ tensor/autodiff ecosystem used in the companion activities, see the
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#computational-lesson-accept-a-compatible-proposal-or-fall-back">Computational lesson: accept a compatible proposal or fall back</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dagger-style-data-aggregation">DAgger-style data aggregation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluation-physical-metrics-and-model-validation">Evaluation: Physical Metrics and Model Validation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-identify-the-missing-provenance">Exercise: identify the missing provenance</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-describe-the-information-needed-to-reuse-a-model">Exercise: describe the information needed to reuse a model</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sources-for-this-chapter">Sources for this chapter</a></li>
 </ul>
   </nav></div>

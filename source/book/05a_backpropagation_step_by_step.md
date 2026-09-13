@@ -147,7 +147,7 @@ A parameter-dependent observation/loss or parameter-dependent initial state
 contributes through the first or last term of the total-derivative formula.
 
 The accompanying script independently evaluates the same recurrence with
-PyTorch and a central finite difference. Its retained receipt records
+PyTorch and a central finite difference. Its retained execution record lists
 
 $$
 \begin{aligned}
@@ -165,10 +165,10 @@ python source/book/scripts/build_backprop_example.py
 ```
 
 Run this command from the course directory. It updates the
-figure under `source/book/figures/` and writes a new validation receipt under
+figure under `source/book/figures/` and writes a new validation record under
 `reviews/`.
 
-The [machine-readable validation receipt](../evidence/backprop_example.json)
+The [machine-readable validation record](../evidence/backprop_example.json)
 retains the measured runtime, all forward/reverse values, and the analytic,
 automatic-differentiation, and central-difference assertions used here.
 

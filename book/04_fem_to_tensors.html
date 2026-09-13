@@ -178,9 +178,13 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Three practical labs</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="classroom/01_simulate_fracture.html">Practical 1: Simulate and interpret diffuse fracture damage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classroom/01_simulate_fracture.html">Practical 1: Simulate a crack crossing a plate</a></li>
 <li class="toctree-l1"><a class="reference internal" href="classroom/02_gradients_and_recovery.html">Practical 2: Gradients and material recovery</a></li>
 <li class="toctree-l1"><a class="reference internal" href="classroom/03_learning_and_hybrid.html">Practical 3: Learn a field and assess its proposal</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Optional direct-replacement case study</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="w53_direct_replacement.html">Case study: a direct learned damage replacement</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Reference chapters</span></p>
 <ul class="current nav bd-sidenav">
@@ -444,7 +448,7 @@ document.write(`
 <a class="reference internal image-reference" href="_images/04_fem_pipeline.svg"><img alt="Geometry, mesh, fields and boundary data define finite-element operators. Assemble a global matrix or evaluate element-local actions; both routes include a solution and numerical checks." src="_images/04_fem_pipeline.svg" style="width: 97%;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Figure 4 </span><span class="caption-text">The finite element pipeline translates physical boundary-value problems into discrete tensor operations, connecting continuous weak forms to PyTorch data structures.</span><a class="headerlink" href="#fig-fem-pipeline" title="Link to this image">#</a></p>
+<p><span class="caption-number">Figure 6 </span><span class="caption-text">The finite element pipeline translates physical boundary-value problems into discrete tensor operations, connecting continuous weak forms to PyTorch data structures.</span><a class="headerlink" href="#fig-fem-pipeline" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <section id="why-tensors-bridging-traditional-fem-with-modern-computing">
@@ -616,7 +620,7 @@ and</p></li>
 <div class="tip admonition">
 <p class="admonition-title">Hands-On Tutorial: Lab 01 (End-to-End PhAST Fracture Simulation)</p>
 <p><strong>Ready to try this in practice?</strong><br />
-Explore the interactive tutorial: <strong><a class="reference internal" href="classroom/01_simulate_fracture.html"><span class="doc">Practical 1: Simulate and interpret diffuse fracture damage</span></a></strong>.
+Explore the interactive tutorial: <strong><a class="reference internal" href="classroom/01_simulate_fracture.html"><span class="doc">Practical 1: Simulate a crack crossing a plate</span></a></strong>.
 You can read through the full simulation pipeline and damage field plots directly here in the book, or run it interactively in <strong>Google Colab</strong> with one click:</p>
 <div class="badge-row">
   <a class="badge-colab" href="https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/study/classroom/01_simulate_fracture.ipynb" target="_blank"><img src="_static/colab-badge.svg" alt="Open In Colab"/></a>

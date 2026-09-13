@@ -178,9 +178,13 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Three practical labs</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="classroom/01_simulate_fracture.html">Practical 1: Simulate and interpret diffuse fracture damage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classroom/01_simulate_fracture.html">Practical 1: Simulate a crack crossing a plate</a></li>
 <li class="toctree-l1"><a class="reference internal" href="classroom/02_gradients_and_recovery.html">Practical 2: Gradients and material recovery</a></li>
 <li class="toctree-l1"><a class="reference internal" href="classroom/03_learning_and_hybrid.html">Practical 3: Learn a field and assess its proposal</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Optional direct-replacement case study</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="w53_direct_replacement.html">Case study: a direct learned damage replacement</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Reference chapters</span></p>
 <ul class="current nav bd-sidenav">
@@ -449,7 +453,7 @@ document.write(`
 <a class="reference internal image-reference" href="_images/05_autograd_inverse.svg"><img alt="Parameters enter a supported forward computation and a scalar loss. Reverse sensitivities return a gradient, checked against a directional finite difference. An optional optimizer uses that gradient in a separate parameter update." src="_images/05_autograd_inverse.svg" style="width: 96%;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Figure 5 </span><span class="caption-text">In differentiable mechanics, parameters flow through the forward solver graph to produce an observation. Reverse-mode automatic differentiation computes the sensitivity gradient, which guides an optimizer to discover unknown physical properties.</span><a class="headerlink" href="#fig-autograd-inverse" title="Link to this image">#</a></p>
+<p><span class="caption-number">Figure 7 </span><span class="caption-text">In differentiable mechanics, parameters flow through the forward solver graph to produce an observation. Reverse-mode automatic differentiation computes the sensitivity gradient, which guides an optimizer to discover unknown physical properties.</span><a class="headerlink" href="#fig-autograd-inverse" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <section id="the-detective-story-solving-inverse-problems-with-differentiable-mechanics">

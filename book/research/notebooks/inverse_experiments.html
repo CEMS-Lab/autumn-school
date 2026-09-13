@@ -177,9 +177,13 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Three practical labs</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../../classroom/01_simulate_fracture.html">Practical 1: Simulate and interpret diffuse fracture damage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../classroom/01_simulate_fracture.html">Practical 1: Simulate a crack crossing a plate</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../classroom/02_gradients_and_recovery.html">Practical 2: Gradients and material recovery</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../classroom/03_learning_and_hybrid.html">Practical 3: Learn a field and assess its proposal</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Optional direct-replacement case study</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../w53_direct_replacement.html">Case study: a direct learned damage replacement</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Reference chapters</span></p>
 <ul class="nav bd-sidenav">
@@ -1647,11 +1651,11 @@ reverse rule.</p>
 the implicit functions in <code class="docutils literal notranslate"><span class="pre">phast/solvers/damage_solver.py</span></code>. The public teaching
 snapshot contains the dimensional custom rule; the explicit dimensionless
 variant is in the Particle Inverse research worktree. Its manuscript describes
-that variant for the single-particle study. Configuration receipts identify
+that variant for the single-particle study. Configuration records identify
 the history rule for each other run.</p>
 <p>The accompanying teaching code is a minimal, self-contained illustration of
-the audited rules. It isolates history values and reverse weights; the
-source audit records the corresponding implementation files and hashes.</p>
+the checked rules. It isolates history values and reverse weights; the
+source listing gives the corresponding implementation files and hashes.</p>
 <p><a class="reference external" href="https://docs.pytorch.org/docs/2.14/notes/autograd.html#gradients-for-non-differentiable-functions">PyTorch’s autograd documentation</a>
 describes derivative conventions for nonsmooth primitives.
 <a class="reference external" href="https://physicsbaseddeeplearning.org/diffphys.html">Physics-based Deep Learning</a>

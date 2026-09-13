@@ -178,9 +178,13 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Three practical labs</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../classroom/01_simulate_fracture.html">Practical 1: Simulate and interpret diffuse fracture damage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../classroom/01_simulate_fracture.html">Practical 1: Simulate a crack crossing a plate</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../classroom/02_gradients_and_recovery.html">Practical 2: Gradients and material recovery</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../classroom/03_learning_and_hybrid.html">Practical 3: Learn a field and assess its proposal</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Optional direct-replacement case study</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../w53_direct_replacement.html">Case study: a direct learned damage replacement</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Reference chapters</span></p>
 <ul class="nav bd-sidenav">
@@ -464,7 +468,7 @@ example of direct geometry observation.</p>
 <a class="reference internal image-reference" href="../_images/geometry_observation.png"><img alt="Three plate images show the reference circular indicator, the offset initial indicator, and their signed residual." src="../_images/geometry_observation.png" style="width: 100%;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Figure 18 </span><span class="caption-text">The initial centre is <span class="math notranslate nohighlight">\((34,33)\)</span> mm. Both indicator images use the same colour
+<p><span class="caption-number">Figure 20 </span><span class="caption-text">The initial centre is <span class="math notranslate nohighlight">\((34,33)\)</span> mm. Both indicator images use the same colour
 scale. The residual changes sign where the reference and trial images differ.
 The calculation compares smooth indicator images directly.</span><a class="headerlink" href="#fig-visual-geometry" title="Link to this image">#</a></p>
 </figcaption>
@@ -478,7 +482,7 @@ the mismatch? What happens to the information available far from the circle?</p>
 <a class="reference internal image-reference" href="../_images/geometry_loss.png"><img alt="A three-dimensional geometry-loss surface and its top-down map show the computed descent trajectory into a low-loss region." src="../_images/geometry_loss.png" style="width: 100%;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Figure 19 </span><span class="caption-text">The surface is calculated at 5,265 centre locations on a <span class="math notranslate nohighlight">\(65\times81\)</span> grid.
+<p><span class="caption-number">Figure 21 </span><span class="caption-text">The surface is calculated at 5,265 centre locations on a <span class="math notranslate nohighlight">\(65\times81\)</span> grid.
 The map and surface display the same untransformed loss. Orange marks a
 computed descent using analytic gradients and a sufficient-decrease line
 search. Surface tessellation connects the calculated values for display.</span><a class="headerlink" href="#fig-visual-landscape" title="Link to this image">#</a></p>
@@ -518,7 +522,7 @@ geometry-image MSE above and the four-frame objective in the next section.</p>
 <a class="reference internal image-reference" href="../_images/fem_sampled_loss.png"><img alt="A coarse three-dimensional FEM loss surface and a five-by-five sample map mark every evaluated particle centre." src="../_images/fem_sampled_loss.png" style="width: 100%;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Figure 20 </span><span class="caption-text">Exactly 25 retained FEM values are shown. Facets join adjacent samples;
+<p><span class="caption-number">Figure 22 </span><span class="caption-text">Exactly 25 retained FEM values are shown. Facets join adjacent samples;
 the top-down view shows their individual values. The reference centre lies at
 <span class="math notranslate nohighlight">\((28,23)\)</span> mm. This local same-basin scan represents one fixed observation
 objective.</span><a class="headerlink" href="#fig-visual-fem-landscape" title="Link to this image">#</a></p>
@@ -546,7 +550,7 @@ L_{\rm time}(\mathbf c)=
 <a class="reference internal image-reference" href="../_images/fem_recovery.png"><img alt="Five panels compare reference damage, predicted damage, signed error, particle centre updates and the complete objective history." src="../_images/fem_recovery.png" style="width: 100%;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Figure 21 </span><span class="caption-text">Final recorded state after 20 inverse updates. The centre is approximately
+<p><span class="caption-number">Figure 23 </span><span class="caption-text">Final recorded state after 20 inverse updates. The centre is approximately
 <span class="math notranslate nohighlight">\((28.080,23.034)\)</span> mm, with a 0.087 mm centre error. The damage panels show the
 last fitting frame, step 1454. The colour scale represents the full damage
 range, including diffuse damage. Particle circles and trajectories are shown separately
@@ -575,7 +579,7 @@ recorded schedule, including its increases in loss.</p>
 <a class="reference internal image-reference" href="../_images/fem_time.png"><img alt="Four reference damage fields show successive retained physical observation steps with one shared colour scale." src="../_images/fem_time.png" style="width: 100%;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Figure 22 </span><span class="caption-text">Four saved reference observations. Here geometry stays fixed while physical
+<p><span class="caption-number">Figure 24 </span><span class="caption-text">Four saved reference observations. Here geometry stays fixed while physical
 time advances. In the inverse animation above, the observation step stays
 fixed while the candidate geometry changes between forward replays.</span><a class="headerlink" href="#fig-visual-time" title="Link to this image">#</a></p>
 </figcaption>
@@ -607,7 +611,7 @@ contains the files expected by the renderer. Extract it, then run:</p>
 </pre></div>
 </div>
 <p>NumPy, Matplotlib and an FFmpeg executable with H.264 support are needed.
-Use a new output directory to preserve earlier receipts. The downloadable
+Use a new output directory to preserve earlier results. The downloadable
 bundle contains the retained numerical inputs used by the renderer.</p>
 <p>Vector figures:
 <a class="reference download internal" download="" href="../_downloads/c6607a028f8f1e98cbfe6d9dca7c4394/geometry_observation.pdf"><code class="xref download docutils literal notranslate"><span class="pre">geometry</span> <span class="pre">observations</span></code></a>,

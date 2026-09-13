@@ -41,7 +41,7 @@ Editable LaTeX/TikZ source accompanies this original schematic.
 Open the [one-stop notebook](notebooks/inverse_experiments.ipynb) for a
 continuous explanation with complete code, worked answers and retained plots.
 It also has a {download}`downloadable Jupyter copy <notebooks/inverse_experiments.ipynb>`.
-The execution receipt distinguishes completed HPC calculations from proposed
+The execution record distinguishes completed HPC calculations from proposed
 full-fracture research protocols.
 
 | Part | Question | Computation |
@@ -61,8 +61,8 @@ the checks with PhAST and how to keep those results separate.
 
 The [visual laboratory](08_visual_lab.md) adds computed loss surfaces and
 three animations. It pairs an explicit geometry-observation toy with retained
-FEM samples and a recorded particle recovery, keeping their objectives and
-provenance separate. Begin there for a visual connection between the plate,
+FEM samples and a recorded particle recovery, with each example’s objective
+and data sources identified. Begin there for a visual connection between the plate,
 the particle estimate and the objective.
 
 ```{toctree}

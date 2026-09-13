@@ -112,12 +112,12 @@ Prepared by Allamaprabhu Ani and Sathiskumar A. Ponnusami, CEMS-Lab, for the UKA
                            for name in (Path(path).stem for path in self.info["source_notebooks"]))
         self.md("## Continue studying\n\n" + links +
                 f"\n\nThe complete source, attribution and bundled licences remain in the [course repository]({GITHUB}/ATTRIBUTION.md).")
-        self.md("### Session timing\n\nElapsed session time includes reading and pauses between cells. The course runner measures uninterrupted computation separately from installation.")
+        self.md("### Session timing\n\nElapsed session time includes reading and pauses between cells. Uninterrupted computation time is measured separately from environment setup and installation.")
         self.code('''
             session_seconds = time.perf_counter() - session_started
-            print({"setup_seconds": setup_receipt["setup_seconds"],
+            print({"setup_seconds": setup_summary["setup_seconds"],
                    "elapsed_session_seconds": round(session_seconds, 2),
-                   "environment": setup_receipt["environment"], "torch": torch.__version__})
+                   "environment": setup_summary["environment"], "torch": torch.__version__})
         ''')
         return {
             "cells": self.cells, "nbformat": 4, "nbformat_minor": 5,
@@ -318,15 +318,11 @@ For a fixed damage field, halving displacement halves strain and reduces elastic
         save_table(comparison_rows, practical_dir / "tiny_notched_tension_comparison.csv")
         display(HTML(numeric_table_html(comparison_rows, columns, "Final states on the same mesh and scales")))
     ''')
-    lab.md("""### Example outline · P1-R01 · A short propagating crack
+    lab.md("""### Watching the damage front advance
 
-**Learning question:** How does a resolved crack front advance as loading continues?
+How does a resolved damage front advance as loading continues? Read the full-domain displacement and damage fields together with the reaction history from the public PhAST propagation example.
 
-**Planned content.** Compare full-domain displacement and damage fields with the reaction history from a selected public PhAST propagation example.
-
-### Animation storyboard · P1-A01 · Geometry to damage
-
-**Current notebook visual.** The accepted-state GIF above shows the seeded notch followed by all 60 computed damage states with their response history. The geometry and mesh figures supply the preceding static views. A presenter-controlled composition can combine those stages using the retained outputs.
+The animation begins at the seeded notch and steps through the computed damage states alongside the corresponding mechanical response. The geometry and mesh figures supply the static views that precede it.
 """)
     return lab.finish(material["takeaways"], material["exercises"])
 
@@ -344,6 +340,7 @@ def build_simulation(root, detailed):
                  "Under vertical tension, where will the crack grow from a horizontal notch, and how might its opening change the stored elastic energy?",
                  ["extensions/01_dynamic_plate_crossing"])
     lab.info.update(
+        placeholder_slots=["P1-R01", "P1-A01"],
         authoring_source="source/notebooks/build_classroom_labs.py, build_simulation",
         dynamic_authoring_source="source/notebooks/build_dynamic_practical.py",
         physical_case="Public PhAST B3 dynamic SENT, plane-strain spectral AT2",
@@ -366,15 +363,35 @@ def build_simulation(root, detailed):
                     'practical_dir.mkdir(parents=True, exist_ok=True)\n'
                     'output_dir = Path(tempfile.mkdtemp(prefix="b3-", dir=practical_dir)) / "results"')
             lab.code(source)
-    lab.md("""### Worked example · P1-R01 · A short propagating crack
+    lab.md("""### Look inside the solve
+
+Every accepted time step also solved the constrained damage update. The two panels record what that cost and how accurately it was met: the iteration count rises while the crack is running and falls once the plate has separated, and the projected relative residual stays under its tolerance throughout.
+""")
+    lab.code('''
+        from day2_helpers.dynamic_practical import diagnostics_figure
+        fig = diagnostics_figure(output_dir)
+        display_figure(fig, alt="Projected conjugate-gradient iterations and relative residual against tolerance for every time step.")
+        plt.close(fig)
+    ''', folded=True, role="plotting")
+    lab.md("""### Plot the descriptors the table samples
+
+The table above lists six sampled rows. The same two columns are drawn in full below, so the initiation time, the crossing time and the opening of the plate can be read directly.
+""")
+    lab.code('''
+        from day2_helpers.dynamic_practical import history_figure
+        fig = history_figure(output_dir)
+        display_figure(fig, alt="Maximum damage, forward crack extent and maximum displacement against physical time.")
+        plt.close(fig)
+    ''', folded=True, role="plotting")
+    lab.md("""### Reading the crack sequence as a whole
 
 The computed fields above follow initiation at the geometric notch and growth through the remaining ligament. Read the field sequence together with the elastic, fracture and kinetic energy curves. The fixed-mesh half-time-step comparison records temporal sensitivity; spatial refinement is a further study.
 
-### Animation · P1-A01 · Geometry to damage
+The mesh and support diagram introduces the specimen. The 40-frame animation traces the saved solver states through initiation and propagation, including the final arrest state. The static snapshots and the numerical tables describe the same sequence in a form you can measure.
 
-The mesh and support diagram introduces the specimen. The 40-frame GIF selects actual saved states through initiation and propagation, then includes the final hold state. The static snapshots and numerical CSV remain available for independent interpretation.
+### Applying the same sequence to your own geometry
 
-For a new geometry, create the mesh with Gmsh, identify boundary sets, then follow the same material → supports → loading → solve → inspect sequence. The supplied public mesh makes this first practical short and reproducible.
+For a new geometry, create the mesh with Gmsh, identify the boundary sets, then follow the same material → supports → loading → solve → inspect order. The supplied public mesh keeps this first practical concise, transparent and reproducible.
 """)
     notebook = lab.finish([
         "Geometry, material properties, supports and loading jointly define the fracture problem.",
@@ -411,6 +428,7 @@ def build_gradients(root, detailed):
     lab = Lesson(root, NAMES[1], "Practical 2: Gradients and material recovery",
                  "Trace a force-to-loss gradient by hand and with PyTorch, check a material-law derivative, then differentiate an elastic-bar solve and recover its modulus.",
                  "For a stretched, damaged bar, how will a little more extension or a little more damage change its force?", DETAILS[1:3])
+    lab.info.update(placeholder_slots=["P2-R01", "P2-A01"])
     lab.md(r"""## Physical motivation and equations
 
 A derivative quantifies how a chosen output changes when one input changes. We begin with a local damaged bar whose extension and damage are prescribed. Then we connect that chain rule to a public material law and an equilibrium solve.
@@ -601,6 +619,21 @@ For the uniform bar, $\partial u_{\mathrm{tip}}/\partial E=-u_{\mathrm{tip}}/E$.
         display_figure(fig, alt="Negative bar sensitivity from autograd, finite differences and calculus, with finite-difference error versus step size.")
         plt.close(fig)
     ''', folded=True, role="plotting")
+    lab.md("The three estimates are gathered below with their difference from the analytic value. Autograd differentiates the solve to floating-point accuracy; the central difference carries a truncation error set by its step size.")
+    lab.code('''
+        from IPython.display import HTML
+        from day2_helpers.classroom_visuals import numeric_table_html, save_table
+        exact = float(du_dE_exact)
+        sensitivity_rows = [{"method": label, "value": value, "difference": value - exact} for label, value in
+                            (("Automatic differentiation", float(du_dE_ad)),
+                             ("Central finite difference", float(du_dE_fd)),
+                             ("Analytic", exact))]
+        save_table(sensitivity_rows, practical_dir / "bar_sensitivity_methods.csv")
+        display(HTML(numeric_table_html(sensitivity_rows,
+                     [("method", "Method"), ("value", "Sensitivity of tip displacement to E"),
+                      ("difference", "Difference from analytic")],
+                     f"Bar at E = 1.8 and tip load 1.1; tip displacement {float(u_probe.detach()):.6g}")))
+    ''', folded=True, role="plotting")
     lab.md("### Create synthetic observations\n\nThe known modulus generates displacement observations at separate training, validation and held-out loads. Detaching observations treats them as fixed measurements during recovery.")
     initial = text(inverse[3])
     lab.code(initial[:initial.index("log_E =")])
@@ -637,6 +670,19 @@ Represent stiffness as $E=\exp(z)$, with the trainable scalar `log_E` storing $z
     ''')
     lab.md("## Interpret the recovered response\n\nCompare the recovered modulus and the held-out tip displacement, then inspect both the load-response curve and optimisation history. All observations here come from the same linear-elastic bar model.")
     lab.code(initial[initial.index("E_fit ="):])
+    lab.md("The recovered modulus and the held-out check are collected in one place. The relative differences show how closely the fitted bar reproduces both the parameter and an observation that took no part in training.")
+    lab.code('''
+        recovery_rows = [
+            {"quantity": "Young's modulus E", "reference": float(E_true), "recovered": float(E_fit)},
+            {"quantity": f"Tip displacement at held-out load {heldout_load:g}",
+             "reference": float(observed_heldout), "recovered": float(heldout_prediction)}]
+        for row in recovery_rows:
+            row["relative_difference"] = (row["recovered"] - row["reference"]) / row["reference"]
+        save_table(recovery_rows, practical_dir / "bar_recovery_summary.csv")
+        display(HTML(numeric_table_html(recovery_rows,
+                     [("quantity", "Quantity"), ("reference", "Reference"), ("recovered", "Recovered"),
+                      ("relative_difference", "Relative difference")], "Recovered bar against its reference")))
+    ''', folded=True, role="plotting")
     lab.md("Agreement at an additional positive load checks the fitted compliance. Both history curves show root-mean-square displacement error at the same recorded, updated modulus. Training uses four loads; validation uses one load, for which RMSE equals absolute displacement error. New geometries, nonlinear material laws and noisy observations would require their own evaluations.")
     history_plot = text(inverse[4]).replace('assets_dir() / "tiny_inverse_bar.png"', 'practical_dir / "tiny_inverse_bar.png"')
     # Re-evaluate only the plotted training metric at each recorded post-update
@@ -674,15 +720,11 @@ fig.savefig(''')
     history_plot = history_plot.replace('Toy elastic-bar response recovery and optimisation history.',
                                         'Elastic-bar response, matched training/validation displacement RMSE, and updated modulus across recovery.')
     lab.code(history_plot, folded=True, role="plotting")
-    lab.md("""### Example outline · P2-R01 · Fracture inverse recovery
+    lab.md(r"""### From one recovered modulus to inverse problems
 
-**Learning question:** Which fracture parameters can be recovered from specified observations?
+Which material parameters can be recovered from a given set of mechanical observations? The bar above answers that question in its simplest form: one scalar parameter, an analytic response, and observations at a few loads. Larger inverse problems keep the same three ingredients — a parameter, an observation and a loss connecting them — and add coupling, loading history and measurement noise.
 
-**Planned content.** Extend the parameter–observation–loss sequence to a small fracture problem, with recovery histories and held-out observations. The elastic bar above supplies the current executable exercise.
-
-### Animation storyboard · P2-A01 · Forward values and backward sensitivities
-
-**Planned content.** Follow $E$, the stiffness matrix, tip displacement and scalar mismatch forwards, then follow the derivative backwards. Show the optimisation update as a separate final step.
+The computational graph is read in two directions. Forwards, the modulus $E$ builds the stiffness matrix $\mathbf{K}(E)$, the solve returns the displacements $\mathbf{u}$, and the mismatch gives the scalar loss $\mathcal{L}$. Backwards, reverse-mode automatic differentiation traverses that same graph to return $\partial\mathcal{L}/\partial E$, and the optimiser uses this gradient to update the parameter.
 """)
     exercise1 = {
         "id": "02-1", "title": "Derive two sensitivities", "kind": "conceptual",
@@ -707,6 +749,7 @@ def build_learning(root, detailed):
     lab = Lesson(root, NAMES[2], "Practical 3: Learn a field and assess its proposal",
                  "Train, save and reload a small field model, then assess its output against a discrete equation and apply a reference correction when needed.",
                  "How will tightening a residual tolerance affect the selected field and use of reference corrections?", DETAILS[3:5])
+    lab.info.update(placeholder_slots=["P3-R01", "P3-A01"])
     lab.md(r"""## Physical motivation and model
 
 A learned model can propose a field from coordinates and loading. A discrete equation then provides a second way to inspect that proposal. We practise this relationship using the course-owned **ToyHelmholtzProblem**, a smooth scalar-field model on a $25\times13$ grid:
@@ -789,10 +832,15 @@ The mean squared error is $\mathcal L=M^{-1}\sum_i(\widehat d_i-d_i)^2$ over the
         with torch.no_grad():
             test_prediction = model(normalise_features(test_x, mean, scale))
             test_rmse = float(torch.sqrt(torch.mean((test_prediction - test_y) ** 2)))
-        print({"test_rmse": test_rmse, "training_seconds": round(training_seconds, 2),
-               "history": history})
+        print({"test_rmse": test_rmse, "training_seconds": round(training_seconds, 2)})
     ''')
-    lab.md("### Save the model with its input conventions\n\nA usable checkpoint stores architecture, weights, feature order, normalisation and data provenance. Expand the packaging cell to inspect every field. The training and prediction operations above remain unchanged by saving.")
+    lab.md("The same four snapshots are collected below, with the held-out error beside them. Read the training and validation columns together: both use the updated weights at the recorded epoch.")
+    lab.code('''
+        from IPython.display import HTML
+        from day2_helpers.classroom_visuals import toy_history_table
+        display(HTML(toy_history_table(history, test_rmse, training_seconds)))
+    ''', folded=True, role="plotting")
+    lab.md("### Save the model with its input conventions\n\nA usable checkpoint stores architecture, weights, feature order, normalisation and data sources. Expand the packaging cell to inspect every field. The training and prediction operations above remain unchanged by saving.")
     lab.code('''
         practical_dir = assets_dir() / "classroom" / "03"
         practical_dir.mkdir(parents=True, exist_ok=True)
@@ -848,7 +896,7 @@ The mean squared error is $\mathcal L=M^{-1}\sum_i(\widehat d_i-d_i)^2$ over the
 
 $$\rho=\frac{\|A\widehat{\mathbf d}-\mathbf b\|_2}{\|\mathbf b\|_2+10^{-15}}.$$
 
-The gate accepts when $\rho\le0.30$. Otherwise it computes the direct toy reference correction. Here the previous state is the reference field at the lower load 0.82.
+The prediction is used when $\rho\le0.30$. Otherwise the direct toy reference solve supplies the corrected field. Here the previous state is the reference field at the lower load 0.82.
 """)
     lab.code('''
         adapter = ToyDamageAdapter(reloaded, metadata, problem)
@@ -887,6 +935,13 @@ The gate accepts when $\rho\le0.30$. Otherwise it computes the direct toy refere
         display(HTML(numeric_table_html(gate_rows, [("case", "Field"), ("residual", "Relative equation residual"),
                                                    ("action", "Selected action")], "Residual limit = 0.30")))
     ''')
+    lab.md("The same three residuals are drawn on a logarithmic axis against the acceptance limit. The bar that crosses the dashed line is the proposal the workflow replaces with a reference solution.")
+    lab.code('''
+        from day2_helpers.classroom_visuals import toy_gate_residuals
+        fig = toy_gate_residuals(gate_rows, .30, practical_dir)
+        display_figure(fig, alt="Relative equation residual of each candidate field against the 0.30 acceptance limit.")
+        plt.close(fig)
+    ''', folded=True, role="plotting")
     lab.code('''
         np.savez_compressed(practical_dir / "toy_review_fields.npz", coordinates=problem.coordinates.numpy(),
                             heldout_load=heldout_load, heldout_reference=heldout_reference.numpy(),
@@ -897,15 +952,11 @@ The gate accepts when $\rho\le0.30$. Otherwise it computes the direct toy refere
     ''', folded=True, role="export")
     lab.md("The optional export records the two decisions. A later data-aggregation activity would additionally retain the model-visited inputs and reference target arrays, retrain, and evaluate a held-out rollout.")
     lab.code(text(hybrid[6]).replace('assets_dir() / "toy_adapter_replay_record.json"', 'practical_dir / "toy_adapter_replay_record.json"'), folded=True, role="export")
-    lab.md("""### Example outline · P3-R01 · A fracture-compatible hybrid
+    lab.md("""### Where this pattern is used
 
-**Learning question:** Which proposed fracture state can be accepted, and when is a coupled correction needed?
+When can a learned damage proposal be accepted, and when is a reference solve required? The residual answers that question. The model proposes a field, the discrete governing equation is evaluated on that field, and the relative residual is compared with the tolerance. A proposal inside the tolerance is accepted and the calculation continues. A proposal outside it is replaced by the reference solution, which also supplies a fresh training example for the next model.
 
-**Planned content.** Follow a learned damage proposal through a coupled fracture calculation, with its history inputs and corrected fields. The Helmholtz calculation above supplies the current executable demonstration.
-
-### Animation storyboard · P3-A01 · Proposal, check and correction
-
-**Planned content.** Show a model proposal, its residual assessment and the accepted or corrected field. Link this sequence to Lecture 3's conceptual data-aggregation loop, with reference labelling, retraining and held-out evaluation.
+The same three steps — propose, check against the equation, correct when needed — carry over to a coupled fracture calculation. There the proposal covers the damage field, the check uses the coupled residual together with the irreversibility constraint, and the correction is the solver's own damage update.
 """)
     exercise1 = solutions(root, 4)["exercises"][0]
     exercise1["solution"] = exercise1["solution"].replace("The notebook's training helper computes", "The visible training loop computes")
@@ -917,7 +968,7 @@ The gate accepts when $\rho\le0.30$. Otherwise it computes the direct toy refere
         "Whole-load splits and training-only normalisation define the learning experiment.",
         "The visible loss and backward pass connect field mismatch to every trainable weight.",
         "Saved weights and input conventions reconstruct the same model prediction.",
-        "The discrete toy residual guides proposal acceptance and checked reference correction.",
+        "The discrete equation residual guides proposal acceptance and checked reference correction.",
     ], [exercise1, exercise2])
 
 

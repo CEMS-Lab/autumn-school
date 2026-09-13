@@ -212,7 +212,7 @@ python particle_visuals.py --inputs inputs --output regenerated_visuals
 ```
 
 NumPy, Matplotlib and an FFmpeg executable with H.264 support are needed.
-Use a new output directory to preserve earlier receipts. The downloadable
+Use a new output directory to preserve earlier results. The downloadable
 bundle contains the retained numerical inputs used by the renderer.
 
 Vector figures:

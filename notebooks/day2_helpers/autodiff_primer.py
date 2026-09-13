@@ -118,7 +118,7 @@ def forward_reverse_graph(receipt, directory):
         forward = [(0.09, rf"$u={u:g}$"+"\n"+rf"$d={d:g}$"),
                    (.35, rf"$g=(1-d)^2={((1-d)**2):g}$"),
                    (.62, rf"$F=(EA/L_b)gu={force:g}$"),
-                   (.89, rf"$\mathcal{{L}}=\frac{{1}}{{2}}(F-F^\star)^2$"+"\n"+
+                   (.89, r"$\mathcal{L}=\frac{1}{2}(F-F^\star)^2$"+"\n"+
                     rf"$={receipt['loss']:.5f}$")]
         for x, label in forward:
             axes[0].text(x, .5, label, ha="center", va="center", bbox=boxes, color=INK)

@@ -18,13 +18,12 @@ The length scale $\ell$ controls the width of the diffuse transition.
 The {doc}`crack-representation chapter <../01_crack_representations>` places this
 description alongside sharp-crack, cohesive and enriched finite-element models.
 
-:::{admonition} Animation storyboard · L1-A01
+:::{admonition} Reading a diffuse crack profile
 :class: note
 
-**Planned content.** A notched specimen, a diffuse damage band and a line
-profile will appear in sequence. A change in $\ell$ will show how the profile
-width changes. The frames will distinguish an idealised profile illustration
-from a computed fracture field.
+Compare a notched specimen, its diffuse damage band and a line profile across
+the band. Increasing $\ell$ widens an idealised profile. In a computed fracture
+field, the material model, loading and mesh also affect the observed profile.
 
 **Learning question:** Which quantity changes when we widen the diffuse band?
 :::
@@ -42,13 +41,13 @@ to compare AT1 and AT2 profiles and the degradation curve. Their functions,
 normalisation and derivations are in the
 {doc}`phase-field energy chapter <../02_phase_field_energy>`.
 
-:::{admonition} Worked example outline · L1-W01
+:::{admonition} Interpreting degradation and the length scale
 :class: note
 
-**Planned content.** Read the degradation curve at intact, partially damaged
+Read the degradation curve at intact, partially damaged
 and nearly broken states. Then compare a change in $G_c$ with a change in
-$\ell$, keeping the other modelling choices fixed. The discussion will
-separate fracture-energy scale, band width and mesh resolution.
+$\ell$, keeping the other modelling choices fixed. Distinguish the
+fracture-energy scale, band width and mesh resolution.
 
 **Learning question:** How do these choices enter the physical model?
 :::
@@ -63,13 +62,13 @@ updates or accept the increment. The
 {ref}`staggered-loop figure <fig-staggered-loop>` shows this ordering;
 the {doc}`chapter <../03_staggered_solution>` gives the governing equations.
 
-:::{admonition} Animation storyboard · L1-A02
+:::{admonition} Following the staggered calculation
 :class: note
 
-**Planned content.** Highlight mechanics, driving field, damage and convergence
-in order within one fixed load increment. A separate final transition will
-advance the load. The accepted damage from the preceding increment will stay
-visible as the history reference.
+Follow mechanics, the driving field, damage and convergence in order within
+one fixed load increment. Advance the load after the increment satisfies its
+convergence criterion. The accepted damage from the preceding increment
+provides the irreversibility reference.
 
 **Learning question:** Which loop repeats at a fixed load, and which step
 changes the loading?
@@ -90,10 +89,10 @@ preconditioning used. Dynamics additionally evolves velocity and acceleration
 through physical time; the selected time integrator and time step become part
 of the model's numerical description.
 
-:::{admonition} Worked example outline · L1-W02
+:::{admonition} One element and its tensor operations
 :class: note
 
-**Planned content.** Follow one triangle from nodal displacement to strain
+Follow one triangle from nodal displacement to strain
 and a residual contribution, then sketch an operator action using the same
 local data. Add a final state row for displacement, velocity, acceleration and
 damage to locate the extra quantities in a dynamic calculation.

@@ -178,9 +178,13 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Three practical labs</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../classroom/01_simulate_fracture.html">Practical 1: Simulate and interpret diffuse fracture damage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../classroom/01_simulate_fracture.html">Practical 1: Simulate a crack crossing a plate</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../classroom/02_gradients_and_recovery.html">Practical 2: Gradients and material recovery</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../classroom/03_learning_and_hybrid.html">Practical 3: Learn a field and assess its proposal</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Optional direct-replacement case study</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../w53_direct_replacement.html">Case study: a direct learned damage replacement</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Reference chapters</span></p>
 <ul class="current nav bd-sidenav">
@@ -573,15 +577,6 @@ d-\ell^2\nabla^2d=b(\mathbf{x},\lambda),
         <span class="n">package_versions</span><span class="p">[</span><span class="n">package</span><span class="p">]</span> <span class="o">=</span> <span class="n">importlib</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">version</span><span class="p">(</span><span class="n">package</span><span class="p">)</span>
     <span class="k">except</span> <span class="n">importlib</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">PackageNotFoundError</span><span class="p">:</span>
         <span class="n">package_versions</span><span class="p">[</span><span class="n">package</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;install using Environment Setup&quot;</span>
-<span class="n">setup_receipt</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;environment&quot;</span><span class="p">:</span> <span class="s2">&quot;Google Colab&quot;</span> <span class="k">if</span> <span class="n">IN_COLAB</span> <span class="k">else</span> <span class="s2">&quot;local&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;python&quot;</span><span class="p">:</span> <span class="n">sys</span><span class="o">.</span><span class="n">version</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">0</span><span class="p">],</span>
-    <span class="s2">&quot;course_revision&quot;</span><span class="p">:</span> <span class="n">revision</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">if</span> <span class="n">revision</span><span class="o">.</span><span class="n">returncode</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="s2">&quot;downloaded archive&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;versions&quot;</span><span class="p">:</span> <span class="n">package_versions</span><span class="p">,</span>
-    <span class="s2">&quot;setup_seconds&quot;</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span> <span class="o">-</span> <span class="n">setup_started</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
-<span class="p">}</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">setup_receipt</span><span class="p">)</span>
-
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
@@ -603,12 +598,22 @@ d-\ell^2\nabla^2d=b(\mathbf{x},\lambda),
     <span class="n">buffer</span> <span class="o">=</span> <span class="n">BytesIO</span><span class="p">()</span>
     <span class="n">figure</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;png&quot;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="n">dpi</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s2">&quot;tight&quot;</span><span class="p">)</span>
     <span class="n">display</span><span class="p">(</span><span class="n">Image</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">buffer</span><span class="o">.</span><span class="n">getvalue</span><span class="p">(),</span> <span class="n">alt</span><span class="o">=</span><span class="n">alt</span><span class="p">))</span>
+
+<span class="c1"># Include dependency imports and plotting configuration in the setup duration.</span>
+<span class="n">setup_summary</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;environment&quot;</span><span class="p">:</span> <span class="s2">&quot;Google Colab&quot;</span> <span class="k">if</span> <span class="n">IN_COLAB</span> <span class="k">else</span> <span class="s2">&quot;local&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;python&quot;</span><span class="p">:</span> <span class="n">sys</span><span class="o">.</span><span class="n">version</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">0</span><span class="p">],</span>
+    <span class="s2">&quot;course_revision&quot;</span><span class="p">:</span> <span class="n">revision</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">if</span> <span class="n">revision</span><span class="o">.</span><span class="n">returncode</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="s2">&quot;downloaded archive&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;versions&quot;</span><span class="p">:</span> <span class="n">package_versions</span><span class="p">,</span>
+    <span class="s2">&quot;setup_seconds&quot;</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span> <span class="o">-</span> <span class="n">setup_started</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
+<span class="p">}</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">setup_summary</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </details>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;environment&#39;: &#39;local&#39;, &#39;python&#39;: &#39;3.10.18&#39;, &#39;course_revision&#39;: &#39;077d43d87c55b4fdea720808fc24f040e957e1ea&#39;, &#39;versions&#39;: {&#39;torch&#39;: &#39;2.8.0&#39;, &#39;numpy&#39;: &#39;2.2.6&#39;, &#39;scipy&#39;: &#39;1.14.1&#39;, &#39;matplotlib&#39;: &#39;3.10.8&#39;, &#39;nbformat&#39;: &#39;5.10.4&#39;}, &#39;setup_seconds&#39;: 0.016}
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;environment&#39;: &#39;local&#39;, &#39;python&#39;: &#39;3.10.18&#39;, &#39;course_revision&#39;: &#39;e47a8e7fb7e5f8b97642d1149d9c1b7da514a354&#39;, &#39;versions&#39;: {&#39;torch&#39;: &#39;2.8.0&#39;, &#39;numpy&#39;: &#39;2.2.6&#39;, &#39;scipy&#39;: &#39;1.14.1&#39;, &#39;matplotlib&#39;: &#39;3.10.8&#39;, &#39;nbformat&#39;: &#39;5.10.4&#39;}, &#39;setup_seconds&#39;: 0.694}
 </pre></div>
 </div>
 </div>
@@ -628,7 +633,7 @@ d-\ell^2\nabla^2d=b(\mathbf{x},\lambda),
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;checkpoint&#39;: &#39;assets/day2_forward/models/tiny_damage_mlp.pt&#39;, &#39;metadata&#39;: {&#39;interface_version&#39;: &#39;ukacm-toy-damage-v1&#39;, &#39;architecture&#39;: &#39;TinyDamageMLP&#39;, &#39;width&#39;: 32, &#39;feature_order&#39;: [&#39;x_over_L&#39;, &#39;y_over_H&#39;, &#39;load_factor&#39;], &#39;feature_location&#39;: &#39;node&#39;, &#39;feature_units&#39;: [&#39;dimensionless x/L&#39;, &#39;dimensionless y/H&#39;, &#39;dimensionless&#39;], &#39;output&#39;: &#39;toy_damage_proposal at nodes; d=0 intact-like, d=1 saturated&#39;, &#39;dtype&#39;: &#39;float64&#39;, &#39;device&#39;: &#39;cpu&#39;, &#39;mesh_signature&#39;: [25, 13], &#39;normalisation_mean&#39;: [0.5, 0.5, 0.4400000000000001], &#39;normalisation_scale&#39;: [0.3005011345450644, 0.3118447648923806, 0.20087244715634883], &#39;splits&#39;: {&#39;train&#39;: [0.12, 0.17818181818181816, 0.23636363636363636, 0.29454545454545455, 0.3527272727272727, 0.4109090909090909, 0.4690909090909091, 0.5272727272727273, 0.5854545454545454, 0.6436363636363637, 0.7018181818181818, 0.76], &#39;validation&#39;: [0.82, 0.88], &#39;test&#39;: [0.94, 1.0]}, &#39;data_provenance&#39;: &#39;course-owned synthetic fields from the discrete ToyHelmholtzProblem&#39;, &#39;seed&#39;: 20260909, &#39;epochs&#39;: 400}, &#39;history&#39;: [{&#39;epoch&#39;: 1.0, &#39;train_mse&#39;: 0.1517765063048665, &#39;validation_mse&#39;: 0.07862736928885466}, {&#39;epoch&#39;: 25.0, &#39;train_mse&#39;: 0.009012028414098669, &#39;validation_mse&#39;: 0.0252641187641007}, {&#39;epoch&#39;: 100.0, &#39;train_mse&#39;: 0.0012914382086734117, &#39;validation_mse&#39;: 0.005490918863171005}, {&#39;epoch&#39;: 400.0, &#39;train_mse&#39;: 0.0001303170500437651, &#39;validation_mse&#39;: 0.0007892991355557108}], &#39;metrics&#39;: {&#39;test_rmse&#39;: 0.049867531488768393, &#39;training_seconds&#39;: 0.7838341250026133}}
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;checkpoint&#39;: &#39;assets/day2_forward/models/tiny_damage_mlp.pt&#39;, &#39;metadata&#39;: {&#39;interface_version&#39;: &#39;ukacm-toy-damage-v1&#39;, &#39;architecture&#39;: &#39;TinyDamageMLP&#39;, &#39;width&#39;: 32, &#39;feature_order&#39;: [&#39;x_over_L&#39;, &#39;y_over_H&#39;, &#39;load_factor&#39;], &#39;feature_location&#39;: &#39;node&#39;, &#39;feature_units&#39;: [&#39;dimensionless x/L&#39;, &#39;dimensionless y/H&#39;, &#39;dimensionless&#39;], &#39;output&#39;: &#39;toy_damage_proposal at nodes; d=0 intact-like, d=1 saturated&#39;, &#39;dtype&#39;: &#39;float64&#39;, &#39;device&#39;: &#39;cpu&#39;, &#39;mesh_signature&#39;: [25, 13], &#39;normalisation_mean&#39;: [0.5, 0.5, 0.4400000000000001], &#39;normalisation_scale&#39;: [0.3005011345450644, 0.3118447648923806, 0.20087244715634883], &#39;splits&#39;: {&#39;train&#39;: [0.12, 0.17818181818181816, 0.23636363636363636, 0.29454545454545455, 0.3527272727272727, 0.4109090909090909, 0.4690909090909091, 0.5272727272727273, 0.5854545454545454, 0.6436363636363637, 0.7018181818181818, 0.76], &#39;validation&#39;: [0.82, 0.88], &#39;test&#39;: [0.94, 1.0]}, &#39;data_provenance&#39;: &#39;course-owned synthetic fields from the discrete ToyHelmholtzProblem&#39;, &#39;seed&#39;: 20260909, &#39;epochs&#39;: 400}, &#39;history&#39;: [{&#39;epoch&#39;: 1.0, &#39;train_mse&#39;: 0.1517765063048665, &#39;validation_mse&#39;: 0.07862736928885466}, {&#39;epoch&#39;: 25.0, &#39;train_mse&#39;: 0.009012028414098669, &#39;validation_mse&#39;: 0.0252641187641007}, {&#39;epoch&#39;: 100.0, &#39;train_mse&#39;: 0.0012914382086734117, &#39;validation_mse&#39;: 0.005490918863171005}, {&#39;epoch&#39;: 400.0, &#39;train_mse&#39;: 0.0001303170500437651, &#39;validation_mse&#39;: 0.0007892991355557108}], &#39;metrics&#39;: {&#39;test_rmse&#39;: 0.049867531488768393, &#39;training_seconds&#39;: 0.7921602499845903}}
 </pre></div>
 </div>
 </div>

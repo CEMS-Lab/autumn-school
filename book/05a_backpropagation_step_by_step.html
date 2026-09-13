@@ -178,9 +178,13 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Three practical labs</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="classroom/01_simulate_fracture.html">Practical 1: Simulate and interpret diffuse fracture damage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classroom/01_simulate_fracture.html">Practical 1: Simulate a crack crossing a plate</a></li>
 <li class="toctree-l1"><a class="reference internal" href="classroom/02_gradients_and_recovery.html">Practical 2: Gradients and material recovery</a></li>
 <li class="toctree-l1"><a class="reference internal" href="classroom/03_learning_and_hybrid.html">Practical 3: Learn a field and assess its proposal</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Optional direct-replacement case study</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="w53_direct_replacement.html">Case study: a direct learned damage replacement</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Reference chapters</span></p>
 <ul class="current nav bd-sidenav">
@@ -443,7 +447,7 @@ The worked example and diagram below were developed for this course.</p>
 <a class="reference internal image-reference" href="_images/05a_backpropagation.svg"><img alt="Three updates propagate states forward. The terminal loss seeds adjoints, which propagate backwards through transposed state Jacobians. Add each shared-parameter contribution plus direct-loss and initial-state terms to obtain the total gradient; optimisation is a separate step." src="_images/05a_backpropagation.svg" style="width: 100%;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Figure 6 </span><span class="caption-text">One parameter can influence a final loss at every update. Reverse mode passes
+<p><span class="caption-number">Figure 8 </span><span class="caption-text">One parameter can influence a final loss at every update. Reverse mode passes
 a cotangent backwards and adds one parameter contribution per use of that
 parameter.</span><a class="headerlink" href="#fig-backpropagation-step-by-step" title="Link to this image">#</a></p>
 </figcaption>
@@ -600,7 +604,7 @@ Adding the three entries in the last column gives</p>
 <p>A parameter-dependent observation/loss or parameter-dependent initial state
 contributes through the first or last term of the total-derivative formula.</p>
 <p>The accompanying script independently evaluates the same recurrence with
-PyTorch and a central finite difference. Its retained receipt records</p>
+PyTorch and a central finite difference. Its retained execution record lists</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \begin{aligned}
@@ -615,9 +619,9 @@ floating-point roundoff. Reproduce the calculation with:</p>
 </pre></div>
 </div>
 <p>Run this command from the course directory. It updates the
-figure under <code class="docutils literal notranslate"><span class="pre">source/book/figures/</span></code> and writes a new validation receipt under
+figure under <code class="docutils literal notranslate"><span class="pre">source/book/figures/</span></code> and writes a new validation record under
 <code class="docutils literal notranslate"><span class="pre">reviews/</span></code>.</p>
-<p>The <a class="reference external" href="../evidence/backprop_example.json">machine-readable validation receipt</a>
+<p>The <a class="reference external" href="../evidence/backprop_example.json">machine-readable validation record</a>
 retains the measured runtime, all forward/reverse values, and the analytic,
 automatic-differentiation, and central-difference assertions used here.</p>
 <p>The comparison checks the derivative of the stated three-step scalar

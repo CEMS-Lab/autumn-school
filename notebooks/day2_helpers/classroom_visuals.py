@@ -254,3 +254,39 @@ def toy_training_history(history, directory):
     ax.set(xlabel="Epoch", ylabel="Mean squared field error", title="Four recorded training snapshots")
     ax.legend()
     return _save_figure(fig, directory, "toy_training_history.png")
+
+
+def toy_gate_residuals(rows, residual_limit, directory):
+    """Show each candidate field's equation residual against the acceptance limit."""
+    labels = [row["case"] for row in rows]
+    residuals = [max(float(row["residual"]), 1e-16) for row in rows]
+    accepted = [float(row["residual"]) <= residual_limit for row in rows]
+    positions = np.arange(len(rows))
+    low, high = min(residuals) / 30, max(residuals) * 4000
+    fig, ax = plt.subplots(figsize=(8.4, 2.9), layout="constrained")
+    ax.axvspan(low, residual_limit, color="#2a7f62", alpha=.10)
+    ax.axvline(residual_limit, color="#263746", linestyle="--", linewidth=1.6)
+    ax.annotate(f"acceptance limit {residual_limit:g}", xy=(residual_limit, -.42),
+                xytext=(-6, 0), textcoords="offset points", annotation_clip=False,
+                ha="right", va="top", fontsize=9, color="#263746")
+    for position, residual, ok in zip(positions, residuals, accepted):
+        colour = "#2a7f62" if ok else "#b4531f"
+        ax.plot([low, residual], [position, position], color=colour, linewidth=1.2, alpha=.55)
+        ax.plot(residual, position, "o", color=colour, markersize=9)
+        ax.annotate(f"{residual:.3g} · {'accepted' if ok else 'corrected'}",
+                    xy=(residual, position), xytext=(10, 0), textcoords="offset points",
+                    va="center", fontsize=9, color=colour)
+    ax.set(xscale="log", yticks=positions, yticklabels=labels, xlim=(low, high),
+           ylim=(len(rows) - .5, -.5), xlabel="Relative equation residual",
+           title="Residual check: which field the workflow selects")
+    ax.grid(axis="y", visible=False)
+    return _save_figure(fig, directory, "toy_gate_residuals.png")
+
+
+def toy_history_table(history, test_rmse, training_seconds):
+    """Tabulate the recorded snapshots beside the held-out test error."""
+    columns = [("epoch", "Epoch"), ("post_update_train_mse", "Training MSE"),
+               ("validation_mse", "Validation MSE")]
+    caption = (f"Recorded training snapshots · held-out RMSE {test_rmse:.5g}"
+               f" · training {training_seconds:.2f} s")
+    return numeric_table_html(history, columns, caption)

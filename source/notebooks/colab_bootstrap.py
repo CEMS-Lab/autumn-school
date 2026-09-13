@@ -75,11 +75,11 @@ def display_figure(figure, dpi=150, alt="Rendered teaching figure"):
     display(Image(data=buffer.getvalue(), alt=alt))
 
 # Include dependency imports and plotting configuration in the setup duration.
-setup_receipt = {
+setup_summary = {
     "environment": "Google Colab" if IN_COLAB else "local",
     "python": sys.version.split()[0],
     "course_revision": revision.stdout.strip() if revision.returncode == 0 else "downloaded archive",
     "versions": package_versions,
     "setup_seconds": round(time.perf_counter() - setup_started, 3),
 }
-print(setup_receipt)
+print(setup_summary)

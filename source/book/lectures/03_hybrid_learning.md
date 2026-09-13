@@ -15,10 +15,10 @@ prediction. Solver-in-the-loop training also follows the selected numerical
 updates. The {doc}`learning chapter <../06_learning_adapter>` expands these
 three computational graphs.
 
-:::{admonition} Worked example outline · L3-W01
+:::{admonition} Training and reusing a small field model
 :class: note
 
-**Planned content.** Identify the coordinate and parameter inputs and scalar
+Identify the coordinate and parameter inputs and scalar
 field target in the existing Helmholtz teaching model. Follow a short training
 step, then save and reload the weights together with normalisation and feature
 order. Compare the same input before and after reload.
@@ -34,14 +34,16 @@ geometry, loading and history. A learned replacement would produce a damage
 update for those inputs. It remains coupled to the next mechanics update and
 to the convergence and admissibility checks for the complete increment.
 
-:::{admonition} Animation storyboard · L3-A01
+:::{admonition} A learned damage update
 :class: note
 
-**Planned content.** Start from the staggered loop and mark the damage
+Start from the staggered loop and identify the damage
 subsolve. Replace that operation with a labelled learned damage update,
 show its input and output fields, and follow the next mechanics update.
 Keep the bounds, irreversibility and coupled convergence checks visible.
-This is a proposed fracture workflow.
+The {doc}`single-replacement case study <../w53_direct_replacement>` illustrates
+this role with a retained Radius-GNO fracture trajectory and a measured
+damage-stage timing comparison.
 
 **Learning question:** Which operation is learned, and what conditions still
 govern the accepted state?
@@ -56,14 +58,13 @@ The corrected state needs its own checks. The
 {ref}`existing learning-cycle figure <fig-learning-cycle>` introduces
 these exchanges.
 
-:::{admonition} Animation storyboard · L3-A02
+:::{admonition} Assessing and correcting a prediction
 :class: note
 
-**Planned content.** Follow input, prediction, residual evaluation, correction
-and the final checked field in separate frames. Label direct acceptance and
-reference fallback as distinct branches. A final cost strip will identify
-prediction, checking, correction and fallback costs without assigning timing
-values.
+Follow the inputs, prediction, residual evaluation, numerical correction and
+accepted field. Distinguish direct acceptance from reference fallback.
+Include prediction, checking, correction and fallback when measuring the
+cost of the complete calculation.
 
 **Learning question:** How can we tell whether the complete hybrid calculation
 improves on its reference calculation?
@@ -78,14 +79,14 @@ Architecture choice follows the available data and the desired field map.
 Input meaning, spatial ordering, units and output interpretation must remain
 clear when models are exchanged.
 
-:::{admonition} Worked example outline · L3-W02
+:::{admonition} Comparing model interfaces
 :class: note
 
-**Planned content.** Use the existing small MLP and RBF field examples to
-compare compatible inputs, predictions and saved-model metadata. Add a
-conceptual row identifying the representation changes required by a grid or
-graph model. Keep architecture comparisons qualitative until matched
-computations are available.
+Use the small field-model example to identify its input features, prediction
+and saved-model metadata. Consider how an RBF, grid-based model or graph model
+would represent the same field. Explain which inputs and spatial information
+each architecture requires. A quantitative comparison would use matched
+training data, field-error measures and complete computation times.
 
 **Learning question:** Which parts of the model interface must agree for a
 comparison to be meaningful?
@@ -100,13 +101,13 @@ DAgger-style round specifically collects states visited by the current model,
 queries a reference procedure there, aggregates those labelled records and
 re-trains the model. Held-out evaluation is needed to assess the revised model.
 
-:::{admonition} Animation storyboard · L3-A03
+:::{admonition} A conceptual DAgger round
 :class: note
 
-**Planned content.** Show a current model visiting states, reference labelling
-of those states, dataset aggregation and another training round. Keep a
-separate evaluation set visible. Mark the entire loop as a conceptual
-extension to the practical.
+Trace the states visited by the current model, reference labelling of those
+states, dataset aggregation and another training round. Reserve a separate
+evaluation set to assess the updated model. This conceptual extension explains
+how the data distribution can change as a learned component is used.
 
 **Learning question:** Why might model-visited states add information to the
 original training set?
@@ -118,8 +119,9 @@ In {doc}`../classroom/03_learning_and_hybrid`, train and reuse a small scalar
 Helmholtz field model, inspect a proposal and evaluate the numerical response
 to its residual. The example teaches the model interface and reference
 correction or fallback in a compact setting. Its field and residual belong to
-the Helmholtz teaching problem. A learned fracture damage subsolve and a
-complete DAgger rollout are further developments represented by the storyboards.
+the Helmholtz teaching problem. The direct-replacement fracture case study
+provides a separate application, while the DAgger discussion introduces an
+iterative data-collection and training strategy.
 
 Discuss both field quality and complete computation time when assessing a
 hybrid method. The same comparison links model learning back to the physical

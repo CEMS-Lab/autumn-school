@@ -182,6 +182,10 @@
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Practical 2: Gradients and material recovery</a></li>
 <li class="toctree-l1"><a class="reference internal" href="03_learning_and_hybrid.html">Practical 3: Learn a field and assess its proposal</a></li>
 </ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Optional direct-replacement case study</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../w53_direct_replacement.html">Case study: a direct learned damage replacement</a></li>
+</ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Reference chapters</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../00_welcome_and_routes.html">From Cracks to Computation: Learn by Doing</a></li>
@@ -466,8 +470,7 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpret-the-recovered-response">Interpret the recovered response</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-outline-p2-r01-fracture-inverse-recovery">Example outline · P2-R01 · Fracture inverse recovery</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#animation-storyboard-p2-a01-forward-values-and-backward-sensitivities">Animation storyboard · P2-A01 · Forward values and backward sensitivities</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#from-one-recovered-modulus-to-inverse-problems">From one recovered modulus to inverse problems</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-takeaways">Key takeaways</a></li>
@@ -587,14 +590,14 @@ document.write(`
     <span class="n">display</span><span class="p">(</span><span class="n">Image</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">buffer</span><span class="o">.</span><span class="n">getvalue</span><span class="p">(),</span> <span class="n">alt</span><span class="o">=</span><span class="n">alt</span><span class="p">))</span>
 
 <span class="c1"># Include dependency imports and plotting configuration in the setup duration.</span>
-<span class="n">setup_receipt</span> <span class="o">=</span> <span class="p">{</span>
+<span class="n">setup_summary</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s2">&quot;environment&quot;</span><span class="p">:</span> <span class="s2">&quot;Google Colab&quot;</span> <span class="k">if</span> <span class="n">IN_COLAB</span> <span class="k">else</span> <span class="s2">&quot;local&quot;</span><span class="p">,</span>
     <span class="s2">&quot;python&quot;</span><span class="p">:</span> <span class="n">sys</span><span class="o">.</span><span class="n">version</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">0</span><span class="p">],</span>
     <span class="s2">&quot;course_revision&quot;</span><span class="p">:</span> <span class="n">revision</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">if</span> <span class="n">revision</span><span class="o">.</span><span class="n">returncode</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="s2">&quot;downloaded archive&quot;</span><span class="p">,</span>
     <span class="s2">&quot;versions&quot;</span><span class="p">:</span> <span class="n">package_versions</span><span class="p">,</span>
     <span class="s2">&quot;setup_seconds&quot;</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span> <span class="o">-</span> <span class="n">setup_started</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
 <span class="p">}</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">setup_receipt</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">setup_summary</span><span class="p">)</span>
 
 <span class="n">session_started</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
 <span class="n">torch</span><span class="o">.</span><span class="n">set_num_threads</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
@@ -603,7 +606,7 @@ document.write(`
 </div>
 </details>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;environment&#39;: &#39;local&#39;, &#39;python&#39;: &#39;3.10.18&#39;, &#39;course_revision&#39;: &#39;48ae30794de3da1f4242bfbefff124dfd0d9a594&#39;, &#39;versions&#39;: {&#39;torch&#39;: &#39;2.8.0&#39;, &#39;numpy&#39;: &#39;2.2.6&#39;, &#39;scipy&#39;: &#39;1.14.1&#39;, &#39;matplotlib&#39;: &#39;3.10.8&#39;, &#39;nbformat&#39;: &#39;5.10.4&#39;}, &#39;setup_seconds&#39;: 1.108}
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;environment&#39;: &#39;local&#39;, &#39;python&#39;: &#39;3.10.18&#39;, &#39;course_revision&#39;: &#39;e47a8e7fb7e5f8b97642d1149d9c1b7da514a354&#39;, &#39;versions&#39;: {&#39;torch&#39;: &#39;2.8.0&#39;, &#39;numpy&#39;: &#39;2.2.6&#39;, &#39;scipy&#39;: &#39;1.14.1&#39;, &#39;matplotlib&#39;: &#39;3.10.8&#39;, &#39;nbformat&#39;: &#39;5.10.4&#39;}, &#39;setup_seconds&#39;: 0.914}
 </pre></div>
 </div>
 </div>
@@ -951,6 +954,33 @@ More damage {&#39;force&#39;: 0.0498002, &#39;loss&#39;: 4.802196002000002e-05, 
 <img alt="Computed field or curve from Practical 2: Gradients and material recovery" src="../_images/68247e1093149f7433e6e33d732afd4aef0ffe7b0f880ce687ac23f37134742d.png" />
 </div>
 </div>
+<p>The three estimates are gathered below with their difference from the analytic value. Autograd differentiates the solve to floating-point accuracy; the central difference carries a truncation error set by its step size.</p>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">HTML</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">day2_helpers.classroom_visuals</span><span class="w"> </span><span class="kn">import</span> <span class="n">numeric_table_html</span><span class="p">,</span> <span class="n">save_table</span>
+<span class="n">exact</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">du_dE_exact</span><span class="p">)</span>
+<span class="n">sensitivity_rows</span> <span class="o">=</span> <span class="p">[{</span><span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="n">label</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="n">value</span><span class="p">,</span> <span class="s2">&quot;difference&quot;</span><span class="p">:</span> <span class="n">value</span> <span class="o">-</span> <span class="n">exact</span><span class="p">}</span> <span class="k">for</span> <span class="n">label</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span>
+                    <span class="p">((</span><span class="s2">&quot;Automatic differentiation&quot;</span><span class="p">,</span> <span class="nb">float</span><span class="p">(</span><span class="n">du_dE_ad</span><span class="p">)),</span>
+                     <span class="p">(</span><span class="s2">&quot;Central finite difference&quot;</span><span class="p">,</span> <span class="nb">float</span><span class="p">(</span><span class="n">du_dE_fd</span><span class="p">)),</span>
+                     <span class="p">(</span><span class="s2">&quot;Analytic&quot;</span><span class="p">,</span> <span class="n">exact</span><span class="p">))]</span>
+<span class="n">save_table</span><span class="p">(</span><span class="n">sensitivity_rows</span><span class="p">,</span> <span class="n">practical_dir</span> <span class="o">/</span> <span class="s2">&quot;bar_sensitivity_methods.csv&quot;</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">HTML</span><span class="p">(</span><span class="n">numeric_table_html</span><span class="p">(</span><span class="n">sensitivity_rows</span><span class="p">,</span>
+             <span class="p">[(</span><span class="s2">&quot;method&quot;</span><span class="p">,</span> <span class="s2">&quot;Method&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;value&quot;</span><span class="p">,</span> <span class="s2">&quot;Sensitivity of tip displacement to E&quot;</span><span class="p">),</span>
+              <span class="p">(</span><span class="s2">&quot;difference&quot;</span><span class="p">,</span> <span class="s2">&quot;Difference from analytic&quot;</span><span class="p">)],</span>
+             <span class="sa">f</span><span class="s2">&quot;Bar at E = 1.8 and tip load 1.1; tip displacement </span><span class="si">{</span><span class="nb">float</span><span class="p">(</span><span class="n">u_probe</span><span class="o">.</span><span class="n">detach</span><span class="p">())</span><span class="si">:</span><span class="s2">.6g</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output text_html"><table><caption>Bar at E = 1.8 and tip load 1.1; tip displacement 0.611111</caption><thead><tr><th>Method</th><th>Sensitivity of tip displacement to E</th><th>Difference from analytic</th></tr></thead><tbody><tr><td>Automatic differentiation</td><td>-0.33951</td><td>1.8263e-14</td></tr><tr><td>Central finite difference</td><td>-0.33951</td><td>5.3291e-11</td></tr><tr><td>Analytic</td><td>-0.33951</td><td>0</td></tr></tbody></table></div></div>
+</div>
 </section>
 <section id="create-synthetic-observations">
 <h3>Create synthetic observations<a class="headerlink" href="#create-synthetic-observations" title="Link to this heading">#</a></h3>
@@ -1041,6 +1071,31 @@ More damage {&#39;force&#39;: 0.0498002, &#39;loss&#39;: 4.802196002000002e-05, 
 </div>
 </div>
 </div>
+<p>The recovered modulus and the held-out check are collected in one place. The relative differences show how closely the fitted bar reproduces both the parameter and an observation that took no part in training.</p>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">recovery_rows</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span><span class="s2">&quot;quantity&quot;</span><span class="p">:</span> <span class="s2">&quot;Young&#39;s modulus E&quot;</span><span class="p">,</span> <span class="s2">&quot;reference&quot;</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">E_true</span><span class="p">),</span> <span class="s2">&quot;recovered&quot;</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">E_fit</span><span class="p">)},</span>
+    <span class="p">{</span><span class="s2">&quot;quantity&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;Tip displacement at held-out load </span><span class="si">{</span><span class="n">heldout_load</span><span class="si">:</span><span class="s2">g</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+     <span class="s2">&quot;reference&quot;</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">observed_heldout</span><span class="p">),</span> <span class="s2">&quot;recovered&quot;</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">heldout_prediction</span><span class="p">)}]</span>
+<span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">recovery_rows</span><span class="p">:</span>
+    <span class="n">row</span><span class="p">[</span><span class="s2">&quot;relative_difference&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s2">&quot;recovered&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="n">row</span><span class="p">[</span><span class="s2">&quot;reference&quot;</span><span class="p">])</span> <span class="o">/</span> <span class="n">row</span><span class="p">[</span><span class="s2">&quot;reference&quot;</span><span class="p">]</span>
+<span class="n">save_table</span><span class="p">(</span><span class="n">recovery_rows</span><span class="p">,</span> <span class="n">practical_dir</span> <span class="o">/</span> <span class="s2">&quot;bar_recovery_summary.csv&quot;</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">HTML</span><span class="p">(</span><span class="n">numeric_table_html</span><span class="p">(</span><span class="n">recovery_rows</span><span class="p">,</span>
+             <span class="p">[(</span><span class="s2">&quot;quantity&quot;</span><span class="p">,</span> <span class="s2">&quot;Quantity&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;reference&quot;</span><span class="p">,</span> <span class="s2">&quot;Reference&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;recovered&quot;</span><span class="p">,</span> <span class="s2">&quot;Recovered&quot;</span><span class="p">),</span>
+              <span class="p">(</span><span class="s2">&quot;relative_difference&quot;</span><span class="p">,</span> <span class="s2">&quot;Relative difference&quot;</span><span class="p">)],</span> <span class="s2">&quot;Recovered bar against its reference&quot;</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output text_html"><table><caption>Recovered bar against its reference</caption><thead><tr><th>Quantity</th><th>Reference</th><th>Recovered</th><th>Relative difference</th></tr></thead><tbody><tr><td>Young&#x27;s modulus E</td><td>2.4</td><td>2.4003</td><td>0.00012599</td></tr><tr><td>Tip displacement at held-out load 1.35</td><td>0.5625</td><td>0.56243</td><td>-0.00012598</td></tr></tbody></table></div></div>
+</div>
 <p>Agreement at an additional positive load checks the fitted compliance. Both history curves show root-mean-square displacement error at the same recorded, updated modulus. Training uses four loads; validation uses one load, for which RMSE equals absolute displacement error. New geometries, nonlinear material laws and noisy observations would require their own evaluations.</p>
 <div class="cell tag_hide-input docutils container">
 <details class="admonition hide above-input">
@@ -1092,14 +1147,10 @@ More damage {&#39;force&#39;: 0.0498002, &#39;loss&#39;: 4.802196002000002e-05, 
 <img alt="Computed field or curve from Practical 2: Gradients and material recovery" src="../_images/8c1b242e0bdd6aab604819d7ee0b65b22124279dcb15d74d3b7758eab6c54f0a.png" />
 </div>
 </div>
-<section id="example-outline-p2-r01-fracture-inverse-recovery">
-<h3>Example outline · P2-R01 · Fracture inverse recovery<a class="headerlink" href="#example-outline-p2-r01-fracture-inverse-recovery" title="Link to this heading">#</a></h3>
-<p><strong>Learning question:</strong> Which fracture parameters can be recovered from specified observations?</p>
-<p><strong>Planned content.</strong> Extend the parameter–observation–loss sequence to a small fracture problem, with recovery histories and held-out observations. The elastic bar above supplies the current executable exercise.</p>
-</section>
-<section id="animation-storyboard-p2-a01-forward-values-and-backward-sensitivities">
-<h3>Animation storyboard · P2-A01 · Forward values and backward sensitivities<a class="headerlink" href="#animation-storyboard-p2-a01-forward-values-and-backward-sensitivities" title="Link to this heading">#</a></h3>
-<p><strong>Planned content.</strong> Follow <span class="math notranslate nohighlight">\(E\)</span>, the stiffness matrix, tip displacement and scalar mismatch forwards, then follow the derivative backwards. Show the optimisation update as a separate final step.</p>
+<section id="from-one-recovered-modulus-to-inverse-problems">
+<h3>From one recovered modulus to inverse problems<a class="headerlink" href="#from-one-recovered-modulus-to-inverse-problems" title="Link to this heading">#</a></h3>
+<p>Which material parameters can be recovered from a given set of mechanical observations? The bar above answers that question in its simplest form: one scalar parameter, an analytic response, and observations at a few loads. Larger inverse problems keep the same three ingredients — a parameter, an observation and a loss connecting them — and add coupling, loading history and measurement noise.</p>
+<p>The computational graph is read in two directions. Forwards, the modulus <span class="math notranslate nohighlight">\(E\)</span> builds the stiffness matrix <span class="math notranslate nohighlight">\(\mathbf{K}(E)\)</span>, the solve returns the displacements <span class="math notranslate nohighlight">\(\mathbf{u}\)</span>, and the mismatch gives the scalar loss <span class="math notranslate nohighlight">\(\mathcal{L}\)</span>. Backwards, reverse-mode automatic differentiation traverses that same graph to return <span class="math notranslate nohighlight">\(\partial\mathcal{L}/\partial E\)</span>, and the optimiser uses this gradient to update the parameter.</p>
 </section>
 </section>
 <section id="key-takeaways">
@@ -1169,18 +1220,18 @@ More damage {&#39;force&#39;: 0.0498002, &#39;loss&#39;: 4.802196002000002e-05, 
 <p>The complete source, attribution and bundled licences remain in the <a class="reference external" href="https://github.com/CEMS-Lab/autumn-school/blob/main/ATTRIBUTION.md">course repository</a>.</p>
 <section id="session-timing">
 <h3>Session timing<a class="headerlink" href="#session-timing" title="Link to this heading">#</a></h3>
-<p>Elapsed session time includes reading and pauses between cells. The course runner measures uninterrupted computation separately from installation.</p>
+<p>Elapsed session time includes reading and pauses between cells. Uninterrupted computation time is measured separately from environment setup and installation.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">session_seconds</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span> <span class="o">-</span> <span class="n">session_started</span>
-<span class="nb">print</span><span class="p">({</span><span class="s2">&quot;setup_seconds&quot;</span><span class="p">:</span> <span class="n">setup_receipt</span><span class="p">[</span><span class="s2">&quot;setup_seconds&quot;</span><span class="p">],</span>
+<span class="nb">print</span><span class="p">({</span><span class="s2">&quot;setup_seconds&quot;</span><span class="p">:</span> <span class="n">setup_summary</span><span class="p">[</span><span class="s2">&quot;setup_seconds&quot;</span><span class="p">],</span>
        <span class="s2">&quot;elapsed_session_seconds&quot;</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">session_seconds</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
-       <span class="s2">&quot;environment&quot;</span><span class="p">:</span> <span class="n">setup_receipt</span><span class="p">[</span><span class="s2">&quot;environment&quot;</span><span class="p">],</span> <span class="s2">&quot;torch&quot;</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">__version__</span><span class="p">})</span>
+       <span class="s2">&quot;environment&quot;</span><span class="p">:</span> <span class="n">setup_summary</span><span class="p">[</span><span class="s2">&quot;environment&quot;</span><span class="p">],</span> <span class="s2">&quot;torch&quot;</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">__version__</span><span class="p">})</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;setup_seconds&#39;: 1.108, &#39;elapsed_session_seconds&#39;: 3.34, &#39;environment&#39;: &#39;local&#39;, &#39;torch&#39;: &#39;2.8.0&#39;}
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;setup_seconds&#39;: 0.914, &#39;elapsed_session_seconds&#39;: 2.97, &#39;environment&#39;: &#39;local&#39;, &#39;torch&#39;: &#39;2.8.0&#39;}
 </pre></div>
 </div>
 </div>
@@ -1253,8 +1304,7 @@ More damage {&#39;force&#39;: 0.0498002, &#39;loss&#39;: 4.802196002000002e-05, 
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpret-the-recovered-response">Interpret the recovered response</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-outline-p2-r01-fracture-inverse-recovery">Example outline · P2-R01 · Fracture inverse recovery</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#animation-storyboard-p2-a01-forward-values-and-backward-sensitivities">Animation storyboard · P2-A01 · Forward values and backward sensitivities</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#from-one-recovered-modulus-to-inverse-problems">From one recovered modulus to inverse problems</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-takeaways">Key takeaways</a></li>
