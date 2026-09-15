@@ -129,13 +129,14 @@ $\overline H=\partial J/\partial H_{n+1}$, it returns
 $$\overline a=\overline H\,\sigma[s(a-b)],\qquad
 \overline b=\overline H\,\sigma[s(b-a)].$$
 
-The two saved operands and sharpness suffice to evaluate these local
-vector--Jacobian products (VJPs). Later backward
-steps carry $\overline a$ through the earlier history. Away from a tie, a
-finite-width sigmoid differs from the classical derivative of the hard
-forward. It is a **surrogate gradient**, even when it helps optimisation.
-Differentiating the smooth sibling verifies the sigmoid formula for that
-smooth map. Exact hard-forward derivatives use the hard branch rule.
+The backward calculation multiplies the incoming loss sensitivity by the two
+sigmoid weights. These local vector--Jacobian products (VJPs) use the saved
+operands and sharpness. Later backward steps carry $\overline a$ through the
+earlier history. The weights generally differ from the derivative of the
+maximum function away from equality, so they define a **surrogate gradient**.
+Checking the derivative of the corresponding smooth function verifies the
+sigmoid formula for that function. The maximum function itself uses the
+derivative of its selected branch.
 
 For example, set $a=1$, $b=0.99$, $s=10$. Small perturbations of $b$ keep the
 hard output at 1, so the hard-map FD derivative is zero. The custom reverse
@@ -176,11 +177,14 @@ The operator derivative $A_q$ matters as much as the right-hand-side
 derivative. This is an equation-level derivative evaluated with finite
 solver accuracy, assuming a locally invertible reduced operator.
 
-For a **solve-then-project** map
-$d_{n+1}=\min(1,\max(d_n,\widetilde d))$, the strictly interior nodes route
-sensitivity to $\widetilde d$. Strictly lower-active nodes route it to $d_n$;
-strictly upper-active nodes route none to either when the bound 1 is fixed.
-The adjoint right-hand side is masked accordingly. The operator derivative
+Consider a calculation that first solves for $\widetilde d$, then applies
+the bounds $d_{n+1}=\min(1,\max(d_n,\widetilde d))$.
+Where $d_n<\widetilde d<1$, the updated damage inherits the sensitivity of
+$\widetilde d$. Where $\widetilde d<d_n<1$, it inherits the sensitivity of
+the previous damage. Where $\widetilde d>1$, the fixed upper bound gives zero
+sensitivity to both inputs. Equality cases require a stated derivative
+convention. These cases determine which entries contribute to the adjoint
+right-hand side. The operator derivative
 uses the pre-projection $\widetilde d$ from the linear subproblem. A different
 projected iterative or constrained-equilibrium forward requires its own
 consistent backward derivation. We must establish which map was executed

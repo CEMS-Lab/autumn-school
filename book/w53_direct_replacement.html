@@ -9,20 +9,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Case study: a direct learned damage replacement &#8212; PhAST: Phase-field fracture with differentiable FEM</title>
-
-
-
+  
+  
+  
   <script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "dark";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "dark";
   </script>
-
+  
   <!-- Loaded before other Sphinx assets -->
   <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
 <link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
 <link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
 
-
+  
   <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
   <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
@@ -33,8 +33,8 @@
     <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="_static/mobile_math.css?v=acf5579e" />
-    <link rel="stylesheet" type="text/css" href="_static/learning_book.css?v=37e7f39f" />
-
+    <link rel="stylesheet" type="text/css" href="_static/learning_book.css?v=d69ae7f6" />
+  
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
 <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
@@ -53,7 +53,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="From Cracks to Computation: Learn by Doing" href="00_welcome_and_routes.html" />
-    <link rel="prev" title="Practical 3: Learn a field and assess its proposal" href="classroom/03_learning_and_hybrid.html" />
+    <link rel="prev" title="Replacing the damage subproblem with a trained network" href="classroom/03_learning_and_hybrid.html" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -62,30 +62,30 @@
 <meta name="course" content="CEMS-Lab · UKACM Autumn School 2026">
 
   </head>
-
-
+  
+  
   <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="dark">
 
-
-
+  
+  
   <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
-
+  
   <div id="pst-scroll-pixel-helper"></div>
-
+  
   <button type="button" class="btn rounded-pill" id="pst-back-to-top">
     <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
-
+  
   <input type="checkbox"
           class="sidebar-toggle"
           id="pst-primary-sidebar-checkbox"/>
   <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
-
+  
   <input type="checkbox"
           class="sidebar-toggle"
           id="pst-secondary-sidebar-checkbox"/>
   <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
-
+  
   <div class="search-button__wrapper">
     <div class="search-button__overlay"></div>
     <div class="search-button__search-container">
@@ -111,43 +111,43 @@
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
 </div>
 
-
+  
     <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
     </header>
-
+  
 
   <div class="bd-container">
     <div class="bd-container__inner bd-page-width">
-
-
-
+      
+      
+      
       <div class="bd-sidebar-primary bd-sidebar">
+        
 
-
-
+  
   <div class="sidebar-header-items sidebar-primary__section">
-
-
-
-
+    
+    
+    
+    
   </div>
-
+  
     <div class="sidebar-primary-items__start sidebar-primary__section">
         <div class="sidebar-primary-item">
 
-
-
-
+  
+    
+  
 
 <a class="navbar-brand logo" href="index.html">
-
-
-
-
-
-
+  
+  
+  
+  
+  
+  
     <p class="title logo__title">PhAST: Phase-field fracture with differentiable FEM</p>
-
+  
 </a></div>
         <div class="sidebar-primary-item">
 
@@ -162,7 +162,7 @@
  </script></div>
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
-
+        
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="index.html">
@@ -174,13 +174,13 @@
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="lectures/01_fracture_and_phast.html">Lecture 1: Phase-field fracture and PhAST</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lectures/02_differentiability_and_inverse.html">Lecture 2: Differentiability and inverse recovery</a></li>
-<li class="toctree-l1"><a class="reference internal" href="lectures/03_hybrid_learning.html">Lecture 3: Learning inside a numerical workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lectures/03_hybrid_learning.html">Lecture 3: Learned damage updates in PhAST</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Three practical labs</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="classroom/01_simulate_fracture.html">Practical 1: Simulate a crack crossing a plate</a></li>
-<li class="toctree-l1"><a class="reference internal" href="classroom/02_gradients_and_recovery.html">Practical 2: Gradients and material recovery</a></li>
-<li class="toctree-l1"><a class="reference internal" href="classroom/03_learning_and_hybrid.html">Practical 3: Learn a field and assess its proposal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classroom/01_simulate_fracture.html">Phase-field fracture of a notched square plate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classroom/02_gradients_and_recovery.html">Recovering Young’s modulus from measured extension</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classroom/03_learning_and_hybrid.html">Replacing the damage subproblem with a trained network</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Optional direct-replacement case study</span></p>
 <ul class="current nav bd-sidenav">
@@ -197,7 +197,7 @@
 <li class="toctree-l2"><a class="reference internal" href="05a_backpropagation_step_by_step.html">Backpropagation through a stepped update</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1"><a class="reference internal" href="06_learning_adapter.html">Train, save, reload, adapters, and checked proposals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_learning_adapter.html">Learning field predictions and combining them with a solver</a></li>
 <li class="toctree-l1"><a class="reference internal" href="07_practice_references.html">Practice, Solutions, Glossary, and References</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="further_practice.html">Detailed notebooks and further practice</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="labs/00_why_average_predictions_can_fail.html">Lab 00: Branch Selection &amp; Energy-Based Objectives in Physics-Informed Learning</a></li>
@@ -215,7 +215,7 @@
 <li class="toctree-l2"><a class="reference internal" href="research/01_geometry.html">Representing particles and testing their geometry</a></li>
 <li class="toctree-l2"><a class="reference internal" href="research/02_observations.html">From measurements to a loss</a></li>
 <li class="toctree-l2"><a class="reference internal" href="research/03_derivatives.html">Verify a derivative before interpreting an update</a></li>
-<li class="toctree-l2"><a class="reference internal" href="research/03_history_visual.html">Why a fracture solver needs a memory-aware derivative</a></li>
+<li class="toctree-l2"><a class="reference internal" href="research/03_history_visual.html">Differentiating a fracture simulation with loading history</a></li>
 <li class="toctree-l2"><a class="reference internal" href="research/03_history.html">Differentiating fracture: memory, switches and useful limits</a></li>
 <li class="toctree-l2"><a class="reference internal" href="research/04_recovery.html">Why a correct gradient can give slow or ambiguous recovery</a></li>
 <li class="toctree-l2"><a class="reference internal" href="research/05_learning.html">A useful role for learning: propose, solve and check</a></li>
@@ -230,39 +230,39 @@
     </div>
 </nav></div>
     </div>
-
-
+  
+  
   <div class="sidebar-primary-items__end sidebar-primary__section">
   </div>
-
+  
   <div id="rtd-footer-container"></div>
 
 
       </div>
-
+      
       <main id="main-content" class="bd-main" role="main">
-
-
+        
+        
 
 <div class="sbt-scroll-pixel-helper"></div>
 
           <div class="bd-content">
             <div class="bd-article-container">
-
+              
               <div class="bd-header-article d-print-none">
 <div class="header-article-items header-article__inner">
-
+  
     <div class="header-article-items__start">
-
+      
         <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
   <span class="fa-solid fa-bars"></span>
 </button></div>
-
+      
     </div>
-
-
+  
+  
     <div class="header-article-items__end">
-
+      
         <div class="header-article-item">
 
 <div class="article-header-buttons">
@@ -276,15 +276,15 @@
     <i class="fab fa-github"></i>
   </button>
   <ul class="dropdown-menu">
-
-
-
+      
+      
+      
       <li><a href="https://github.com/CEMS-Lab/autumn-school" target="_blank"
    class="btn btn-sm btn-source-repository-button dropdown-item"
    title="Source repository"
    data-bs-placement="left" data-bs-toggle="tooltip"
 >
-
+  
 
 <span class="btn__icon-container">
   <i class="fab fa-github"></i>
@@ -292,16 +292,16 @@
 <span class="btn__text-container">Repository</span>
 </a>
 </li>
-
-
-
-
+      
+      
+      
+      
       <li><a href="https://github.com/CEMS-Lab/autumn-school/issues/new?title=Issue%20on%20page%20%2Fw53_direct_replacement.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
 >
-
+  
 
 <span class="btn__icon-container">
   <i class="fas fa-lightbulb"></i>
@@ -309,7 +309,7 @@
 <span class="btn__text-container">Open issue</span>
 </a>
 </li>
-
+      
   </ul>
 </div>
 
@@ -323,15 +323,15 @@
     <i class="fas fa-download"></i>
   </button>
   <ul class="dropdown-menu">
-
-
-
+      
+      
+      
       <li><a href="_sources/w53_direct_replacement.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
 >
-
+  
 
 <span class="btn__icon-container">
   <i class="fas fa-file"></i>
@@ -339,17 +339,17 @@
 <span class="btn__text-container">.md</span>
 </a>
 </li>
-
-
-
-
+      
+      
+      
+      
       <li>
 <button onclick="window.print()"
   class="btn btn-sm btn-download-pdf-button dropdown-item"
   title="Print to PDF"
   data-bs-placement="left" data-bs-toggle="tooltip"
 >
-
+  
 
 <span class="btn__icon-container">
   <i class="fas fa-file-pdf"></i>
@@ -357,7 +357,7 @@
 <span class="btn__text-container">.pdf</span>
 </button>
 </li>
-
+      
   </ul>
 </div>
 
@@ -369,7 +369,7 @@
   title="Fullscreen mode"
   data-bs-placement="bottom" data-bs-toggle="tooltip"
 >
-
+  
 
 <span class="btn__icon-container">
   <i class="fas fa-expand"></i>
@@ -401,20 +401,20 @@ document.write(`
     <span class="fa-solid fa-list"></span>
 </button>
 </div></div>
-
+      
     </div>
-
+  
 </div>
 </div>
-
-
+              
+              
 
 <div id="jb-print-docs-body" class="onlyprint">
     <h1>Case study: a direct learned damage replacement</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
-
+            
             <div>
                 <h2> Contents </h2>
             </div>
@@ -429,11 +429,11 @@ document.write(`
     </div>
 </div>
 
-
-
+              
+                
 <div id="searchbox"></div>
                 <article class="bd-article">
-
+                  
   <section class="tex2jax_ignore mathjax_ignore" id="case-study-a-direct-learned-damage-replacement">
 <h1>Case study: a direct learned damage replacement<a class="headerlink" href="#case-study-a-direct-learned-damage-replacement" title="Link to this heading">#</a></h1>
 <p>This optional case study uses a frozen <strong>Radius-GNO</strong> model in a compact
@@ -522,14 +522,14 @@ complete notebook separately when assessing runtime on a laptop or Colab.</p>
 
 
                 </article>
+              
 
-
-
-
-
-
+              
+              
+              
+              
                 <footer class="prev-next-footer d-print-none">
-
+                  
 <div class="prev-next-area">
     <a class="left-prev"
        href="classroom/03_learning_and_hybrid.html"
@@ -537,7 +537,7 @@ complete notebook separately when assessing runtime on a laptop or Colab.</p>
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Practical 3: Learn a field and assess its proposal</p>
+        <p class="prev-next-title">Replacing the damage subproblem with a trained network</p>
       </div>
     </a>
     <a class="right-next"
@@ -551,11 +551,11 @@ complete notebook separately when assessing runtime on a laptop or Colab.</p>
     </a>
 </div>
                 </footer>
-
+              
             </div>
-
-
-
+            
+            
+              
                 <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
 
@@ -572,13 +572,13 @@ complete notebook separately when assessing runtime on a laptop or Colab.</p>
   </nav></div>
 
 </div></div>
-
-
+              
+            
           </div>
           <footer class="bd-footer-content">
-
+            
 <div class="bd-footer-content__inner container">
-
+  
   <div class="footer-item">
     <div class="phast-course-credit">
   <!-- Course material prepared by Allamaprabhu Ani and Sathiskumar A. Ponnusami, CEMS-Lab, 2026. -->
@@ -591,9 +591,9 @@ complete notebook separately when assessing runtime on a laptop or Colab.</p>
   </p>
 </div>
   </div>
-
+  
   <div class="footer-item">
-
+    
 <div class="phast-discoveries" aria-label="Optional PhAST discoveries">
   <details class="phast-discovery" id="phast-gradient-discovery">
     <summary aria-label="PhAST ∇: a gradient discovery">PhAST ∇</summary>
@@ -621,15 +621,15 @@ complete notebook separately when assessing runtime on a laptop or Colab.</p>
 </div>
 
   </div>
-
+  
 </div>
           </footer>
-
+        
 
       </main>
     </div>
   </div>
-
+  
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
   <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
 <script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>

@@ -1,140 +1,140 @@
 # Lecture 2: Differentiability and inverse recovery
 
-**55 minutes.** Building on the displacement and damage updates in
-{doc}`Lecture 1 <01_fracture_and_phast>`, we ask how a chosen observation changes
-with a material or geometry parameter. The lecture uses elementary chain-rule
-calculations before connecting them to fracture applications.
+The forward problem predicts a mechanical response from known inputs. The inverse
+problem estimates an unknown input from an observed response. Begin with the small
+elastic bar, then connect the same operations to the particle-position exhibits.
 
-## Choose a parameter and an observation · 0–6 minutes
+## 1. State the experiment
 
-Let $p$ denote the chosen parameters, $y$ the observed response and $J$ a
-scalar loss measuring disagreement with target observations. The forward
-calculation has the sequence
+A uniform bar has length $L=100\,\mathrm{mm}$ and area $A=10\,\mathrm{mm}^2$.
+Its left end is fixed and a tensile force $F=4000\,\mathrm{N}$ acts at the right.
+The unknown is the uniform Young’s modulus $E$. The observation is the tip
+displacement $y_{\mathrm{obs}}$. Geometry, area and force are known independently.
+This example uses linear elasticity; damage evolution belongs to the later
+fracture applications.
+
+## 2. Build and solve the forward problem with PhAST
+
+The continuum equation and its finite-element form are
 
 $$
-p \longrightarrow \text{computed states}
-\longrightarrow y \longrightarrow J.
+\begin{aligned}
+\frac{\mathrm{d}}{\mathrm{d}x}\left(EA\frac{\mathrm{d}u}{\mathrm{d}x}\right)&=0,\\
+u(0)&=0,\qquad EA u'(L)=F,\\
+\mathbf K_{ff}(E)\mathbf u_f&=\mathbf f_f.
+\end{aligned}
 $$
 
-For a fracture problem, observations might be sampled displacements, a
-load–displacement response or a stated measure of the crack field. The
-observation definition, boundary conditions and loading remain part of this
-map. Recovering a parameter also depends on how much information these
-observations contain.
+The subscript $f$ denotes unconstrained degrees of freedom. Ten line elements
+give eleven nodes. Reuse this forward function throughout recovery:
 
-## Follow the sensitivity backwards · 6–18 minutes
+```python
+mesh = phast.line_mesh(length=100.0, n_elements=10)
 
-Reverse mode starts from the scalar loss and passes its sensitivity backwards
-through each operation. A vector–Jacobian product (VJP) performs one such
-local propagation. When a parameter is used at several updates, its
-contributions add. An optimisation method then uses the accumulated gradient
-to choose a parameter update.
+def forward(E):
+    return phast.solve_bar(mesh, young_modulus=E,
+                           area=10.0, end_force=4000.0)
+```
 
-The {ref}`existing backpropagation figure <fig-backpropagation-step-by-step>`
-locates these quantities. The
-{doc}`three-step worked derivation <../05a_backpropagation_step_by_step>` supplies
-a small algebraic calculation that can be checked by hand.
+For this uniform bar, $u(x)=Fx/(EA)$ supplies an analytical comparison.
+The notebook creates a synthetic observation with $E_{\mathrm{ref}}=210\,\mathrm{GPa}$,
+giving $y_{\mathrm{obs}}\approx0.190476\,\mathrm{mm}$. Inspect nodal displacement,
+reaction and the free-degree residual before beginning recovery.
 
-:::{admonition} Three updates and one shared parameter
-:class: note
+## 3. Differentiate a scalar mismatch
 
-Follow three forward updates, the observation and the loss. Trace the reverse
-path through one VJP at each update and add the contributions from every use
-of the shared parameter. The optimisation update uses the resulting gradient.
+At a trial modulus, predict $y(E)=u(L;E)$ and define
 
-**Learning question:** Why can an early update contribute to the final loss
-gradient?
-:::
+$$
+\begin{aligned}
+\mathcal L(E)&=\left(\frac{y(E)-y_{\mathrm{obs}}}{y_{\mathrm{obs}}}\right)^2,\\[0.5em]
+\frac{\mathrm{d}\mathcal L}{\mathrm{d}E}
+&=\frac{2(y-y_{\mathrm{obs}})}{y_{\mathrm{obs}}^2}\frac{\mathrm{d}y}{\mathrm{d}E},\\[0.5em]
+\frac{\mathrm{d}y}{\mathrm{d}E}&=-\frac{FL}{AE^2}.
+\end{aligned}
+$$
 
-## Specify the derivative being computed · 18–28 minutes
+The computational sequence is $E\rightarrow\mathbf u\rightarrow y\rightarrow\mathcal L$.
+`loss.backward()` applies the chain rule through the recorded calculation,
+including the PhAST solve. At the initial $E=100\,\mathrm{GPa}$ the bar extends
+too much: increasing $E$ locally reduces the loss. One backward pass gives a
+gradient at the evaluated state. Plotting the loss over a range of modulus
+values requires a separate forward calculation at each value.
 
-Unrolling differentiates the sequence of operations actually executed.
-Implicit differentiation uses the equation defining a converged state, under
-appropriate local smoothness and nonsingularity assumptions. Fracture history,
-active constraints and branch changes affect that interpretation. The
-{doc}`differentiation chapter <../05_differentiation_and_inverse>` develops both
-routes and their assumptions.
+## 4. Let the optimiser choose the next modulus
 
-:::{admonition} Checking the elastic-bar sensitivity
-:class: note
+Use $q=\log(E/E_{\mathrm{scale}})$ with $E_{\mathrm{scale}}=1\,\mathrm{MPa}$,
+so $E=E_{\mathrm{scale}}\exp(q)$ remains positive. The code stores modulus
+values in MPa. The Day 2 notebook uses SGD with momentum:
 
-Use the elastic-bar teaching model to compare
-an analytical sensitivity, autograd and finite differences over several
-perturbation sizes. Alongside it, draw the graphs for a fixed number of
-iterations and for a converged residual equation. State which graph each
-derivative follows.
+```python
+log_E = torch.nn.Parameter(torch.log(torch.tensor(100000.)))
+optimiser = torch.optim.SGD([log_E], lr=0.1, momentum=0.5)
+optimiser.zero_grad()
+y = forward(log_E.exp()).displacement[-1]
+loss = ((y - observed) / observed)**2
+loss.backward()
+optimiser.step()
+```
 
-**Learning question:** What evidence supports the gradient of the selected
-computational map?
-:::
+Repeat prediction, loss, backward and update until the relative tip mismatch
+is below $10^{-4}$ for five consecutive evaluations, with at most 80 updates.
+The force stays fixed. Momentum can produce overshoot and oscillation.
+The lecture’s plain-SGD example and the notebook’s momentum example have
+different histories: use the notebook’s printed result beside its own plots.
 
-## A sequence of fracture inverse applications · 28–50 minutes
+## 5. Interpret and check the result
 
-The following discussion problems extend the inverse formulation to fracture.
-For each, specify the unknowns, observations and assumptions, then identify the
-comparisons needed to assess a recovered parameter. The worked elastic-bar
-calculation in the practical provides a small numerical example of this process.
+{doc}`Lab 2 <../classroom/02_gradients_and_recovery>` contains geometry,
+mesh, boundary conditions, displacement fields, a computational graph, modulus
+and loss histories, and an animated recovery. Compare the recovered field with
+the observed tip and analytical extension. Synthetic, noise-free data test this
+implementation; experimental identification adds measurement and model uncertainty.
 
-:::{admonition} Discussion: fracture-energy recovery
-:class: note
+Finite differences and Taylor remainders are optional derivative checks:
 
-Consider an unknown scalar $G_c$, a fixed specimen and prescribed loading.
-Choose an observation and define a mismatch loss. Explain how you would compare
-the target, initial prediction and fitted prediction using common scales,
-then assess the parameter trajectory and derivative accuracy.
+$$
+\begin{aligned}
+\mathcal L'(E)&\approx\frac{\mathcal L(E+h)-\mathcal L(E-h)}{2h},\\[0.5em]
+R(h)&=|\mathcal L(E+h)-\mathcal L(E)-h\mathcal L'(E)|.
+\end{aligned}
+$$
 
-**Learning question:** Which feature of the response provides information
-about $G_c$?
-:::
+The first compares the gradient with nearby solves. For a smooth function and
+a correct derivative, the second decreases as $h^2$ until numerical error
+dominates. These checks assess a local derivative separately from the inverse loop.
+The {doc}`reference derivation <../05_differentiation_and_inverse>` gives details.
 
-:::{admonition} Discussion: one inclusion
-:class: note
+## 6. Extend the same chain rule to fracture
 
-Extend the parameter description to one inclusion. Identify which geometry
-or material quantities are unknown and explain how its presence could affect
-an observed displacement or crack field. Specify a suitable comparison of
-target, initial and fitted configurations using common scales.
+For observations $\mathbf y(\boldsymbol\theta)$ and a symmetric positive-semidefinite
+weighting matrix $\mathbf W$,
 
-**Learning question:** Can the chosen observations distinguish the inclusion
-parameters being recovered?
-:::
+$$
+\begin{aligned}
+\mathcal L&=\tfrac12(\mathbf y-\mathbf y_{\mathrm{obs}})^T
+\mathbf W(\mathbf y-\mathbf y_{\mathrm{obs}}),\\[0.5em]
+\nabla_{\boldsymbol\theta}\mathcal L
+&=\mathbf J^T\mathbf W(\mathbf y-\mathbf y_{\mathrm{obs}}),\\[0.5em]
+\mathbf J&=\frac{\partial\mathbf y}{\partial\boldsymbol\theta}.
+\end{aligned}
+$$
 
-:::{admonition} Discussion: several inclusions
-:class: note
+This vector–Jacobian product combines the sensitivity of each observation into
+a gradient of the scalar loss. For an implicitly solved equilibrium equation,
+write the force residual as $\mathbf R(\mathbf u,\boldsymbol\theta)=0$.
+If the residual is differentiable and its displacement Jacobian is invertible,
+differentiating this equation locally gives
 
-Extend the single-inclusion description to several inclusions. Discuss how
-parameter correlation, initialisation and observations held out from fitting
-affect the interpretation of a recovery. Distinguish fitting the measured
-fields from uniquely identifying the underlying parameters.
+$$
+\mathbf R_{\mathbf u}\frac{\partial\mathbf u}{\partial\boldsymbol\theta}
+=-\mathbf R_{\boldsymbol\theta}.
+$$
 
-**Learning question:** How does adding unknowns change the observations needed
-for recovery?
-:::
-
-:::{admonition} Discussion: an unknown load
-:class: note
-
-Consider recovering the magnitude of an applied load from displacement
-observations while the material properties are known. Define the
-parameter–state–observation–loss sequence. Then discuss what changes if both
-the load and elastic modulus are unknown.
-
-**Learning question:** Which parts of the inverse workflow transfer to a new
-physical problem?
-:::
-
-## Connect the examples to the practical · 50–55 minutes
-
-In {doc}`../classroom/02_gradients_and_recovery`, begin with a damaged bar's
-force and scalar mismatch loss. Predict the sensitivity signs, calculate the
-chain rule, then compare PyTorch's backward pass with analytic derivatives
-and finite differences. Next inspect a degradation-law derivative and recover
-a modulus in a one-dimensional elastic bar. These teaching models make the
-derivative and recovery steps easy to inspect.
-The fracture discussion problems extend these scientific questions to coupled
-damage evolution. Assessing each recovery requires observations and derivative
-checks appropriate to its particular model.
-
-The same chain rule also computes gradients of neural-model weights.
-{doc}`Lecture 3 <03_hybrid_learning>` uses that connection to introduce training
-and two different roles for a learned component in a numerical workflow.
+For evolving fracture, sensitivities also pass through earlier states, history
+and damage updates. Shared parameters contribute at each use. Particle-position
+recovery replaces $E$ with inclusion coordinates and the tip measurement with
+selected field observations. Assess sensitivity, initialisation, active
+constraints and non-uniqueness for that problem. The
+{doc}`inverse visual laboratory <../research/08_visual_lab>`
+provides additional reading; these larger studies are separate from the bar practical.

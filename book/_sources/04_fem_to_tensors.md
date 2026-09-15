@@ -8,17 +8,13 @@
 The finite element pipeline translates physical boundary-value problems into discrete tensor operations, connecting continuous weak forms to PyTorch data structures.
 :::
 
-## Why Tensors? Bridging Traditional FEM with Modern Computing
+## Expressing finite elements with tensors
 
-In traditional finite element analysis, code is organized around nested loops: iterating over thousands of elements, evaluating shape function gradients at each Gauss quadrature point, and accumulating element matrices into a global sparse system. In Python, explicit nested loops over large meshes are notoriously slow.
+A finite-element calculation repeats similar operations over many elements and quadrature points. Tensor operations group these calculations so that libraries such as PyTorch can evaluate them in batches.
 
-Modern scientific machine learning replaces element loops with **batched multi-dimensional tensor operations** in PyTorch:
-- **Nodal Coordinates:** A tensor of shape $(N_{\mathrm{node}}, 2)$ defining the physical position $(x, y)$ of every mesh node.
-- **Element Connectivity:** An integer index tensor of shape $(N_{\mathrm{elem}}, 3)$ grouping node IDs into linear triangular (T3) elements.
-- **Shape Function Gradients:** A tensor of shape $(N_{\mathrm{elem}}, N_q, 3, 2)$ holding the spatial derivatives $\nabla N_i$ at all $N_q$ quadrature points.
-- **Element Strains & Stresses:** Evaluated across the entire mesh simultaneously using tensor contractions (`torch.einsum`), running seamlessly on multi-core CPUs and GPUs!
+For a mesh of linear triangles, the main arrays contain node coordinates, element connectivity, shape-function gradients and field values. Their dimensions identify the element, quadrature point, local node and physical component used by each operation.
 
-By representing the continuum problem as a computational tensor graph, the simulation pipeline becomes fast, vectorized, and inherently differentiable.
+Batching can improve performance on CPUs and GPUs. Automatic differentiation is available when the operations and solver components support the required derivatives.
 
 ---
 
@@ -32,7 +28,7 @@ Every computational mechanics simulation begins with a well-posed boundary-value
   u = \bar{u} \quad \text{on } \Gamma_u, \qquad \boldsymbol{\sigma}\cdot\mathbf{n} = \bar{t} \quad \text{on } \Gamma_t.
   $$
 - **Precrack Representation:** Whether a notch is modeled as a geometric cut or an initial seeded damage field ($d_0 = 1$ along the notch line).
-- **Physical Discretization:** The characteristic element size $h$, ensuring the mesh can resolve the phase-field regularisation width ($h < \ell$).
+- **Mesh Resolution:** Choose the element size $h$ to resolve the damage band, and examine how the results change under refinement at fixed $\ell$.
 
 State how the notch is represented: a prescribed initial damage field or a
 geometric cut. These choices encode different computational objects and can
@@ -77,7 +73,7 @@ Assembly scatters each local residual into the appropriate entries of the
 global residual. The same operation can be expressed with index operations,
 scatter-adds, or framework-specific sparse primitives.
 
-## Tensor shapes are part of the model contract
+## Tensor dimensions and indexing
 
 Write expected shapes next to a tensor operation. For example, with batched
 cells and quadrature points, an implementation might use:
@@ -179,17 +175,15 @@ For a tiny evolving-fracture run, inspect at least:
 
 In the accompanying computational notebook, you will execute a complete phase-field fracture calculation using the PhAST solver:
 
-1. **Geometry & Meshing:** Generate a two-dimensional rectangular specimen and discretize it with structured triangular (T3) finite elements.
-2. **Boundary Conditions & Precrack:** Identify boundary node sets (`left`, `right`, `top`, `bottom`) and define an initial center-notch precrack.
-3. **Solver Execution:** Run the staggered displacement-damage solver over 60 incremental load steps.
-4. **Post-Processing & Field Visualization:** Extract the global load-displacement curve, observe peak softening, and render the localized diffuse damage field.
+1. **Geometry & Meshing:** Generate a 40 mm square specimen with a 20 mm edge notch and a graded triangular Gmsh mesh.
+2. **Boundary Conditions:** Use named regions for symmetric vertical opening and horizontal restraint on the lateral edges.
+3. **Solver Execution:** Run explicit dynamics with an implicit AT2 damage update over 50 microseconds, using a mesh-dependent stable time step.
+4. **Post-Processing:** Reload saved fields, inspect displacement, strain, stress and damage, and animate them with fixed colour scales.
 
 :::{admonition} Hands-On Tutorial: Lab 01 (End-to-End PhAST Fracture Simulation)
 :class: tip
 
-**Ready to try this in practice?**  
-Explore the interactive tutorial: **{doc}`classroom/01_simulate_fracture`**.
-You can read through the full simulation pipeline and damage field plots directly here in the book, or run it interactively in **Google Colab** with one click:
+In {doc}`classroom/01_simulate_fracture`, configure the notched plate, run PhAST and interpret the saved fields and energy histories.
 
 <div class="badge-row">
   <a class="badge-colab" href="https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/study/classroom/01_simulate_fracture.ipynb" target="_blank"><img src="_static/colab-badge.svg" alt="Open In Colab"/></a>
@@ -217,10 +211,8 @@ shape gradients. Contract the local-node axis and preserve the displacement
 component and spatial-derivative axes according to the chosen convention. For
 an affine displacement field, the displacement gradient and its symmetric
 strain should be constant across all elements and quadrature points (up to
-round-off). This is an excellent first unit test. The PhAST lesson makes the
-mesh, nodal fields, and boundary labels visible; this one-element affine test
-remains the right additional check before treating a vectorised tensor route
-as trustworthy.
+round-off). This gives a simple reference calculation for checking the tensor
+implementation.
 :::
 
 ## Take-away

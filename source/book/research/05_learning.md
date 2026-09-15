@@ -83,9 +83,8 @@ $m_{ij}=f_\phi(h_i,h_j,x_j-x_i)$ and
 $h_i'=g_\phi(h_i,\sum_{j\in\mathcal N(i)}m_{ij})$.
 Here $h_i$ contains node features, $\mathcal N(i)$ contains its mesh
 neighbours, and $f_\phi,g_\phi$ are trainable maps. Summation makes the
-aggregation independent of neighbour ordering. Boundary conditions and
-history still need explicit treatment. This formula explains the graph
-extension; the executed predictor above uses the specified fitted linear map.
+aggregation independent of neighbour ordering. This formula illustrates a
+possible graph model. The executed example above uses the fitted linear map.
 
 ## Three comparisons worth making
 

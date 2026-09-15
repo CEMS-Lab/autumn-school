@@ -1,4 +1,8 @@
-# Train, save, reload, adapters, and checked proposals
+# Learning field predictions and combining them with a solver
+
+The Day 2 classroom application is {doc}`classroom/03_learning_and_hybrid`,
+which compares a supplied graph network with the classical PhAST damage solve.
+The Helmholtz examples below remain optional training and interface tutorials.
 
 :::{figure} figures/06_learning_cycle.*
 :name: fig-learning-cycle
@@ -147,24 +151,21 @@ A minimal saved model package should include:
 
 ## Computational lesson: train, save, reload, and compare a toy field model
 
-The lesson below makes the saved state visible: feature order, normalisation,
-mesh signature, data split, checkpoint metadata, and a reload comparison all
-appear beside the code and field plots. Begin by predicting which information
-must survive serialization for a newly created model object to reproduce the
-same output. The lesson uses an original `ToyHelmholtzProblem` to examine
-the saved-model interface and prediction accuracy on a scalar field.
+This optional lesson trains a model for a scalar Helmholtz field, saves it
+and reloads it into a new model object. Compare the predictions before and
+after reloading. The example shows why the saved weights must be accompanied
+by the feature order, normalisation and model configuration. The field
+calculation uses the course's `ToyHelmholtzProblem`.
 
-:::{admonition} Hands-On Tutorial: Lab 3 (Training and Model Reloading)
+:::{admonition} Optional tutorial: Training and Model Reloading
 :class: tip
 
-**Ready to try this in practice?**  
-Explore the interactive tutorial: **{doc}`classroom/03_learning_and_hybrid`**.
-You can read through the MLP training loops and checkpoint verification directly here in the book, or run it interactively in **Google Colab** with one click:
+In {doc}`labs/04_train_save_reload_adapter`, train the field model and check that saving and reloading preserves its predictions.
 
 <div class="badge-row">
-  <a class="badge-colab" href="https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/study/classroom/03_learning_and_hybrid.ipynb" target="_blank"><img src="_static/colab-badge.svg" alt="Open In Colab"/></a>
-  <a class="badge-link" href="../notebooks/study/classroom/03_learning_and_hybrid.ipynb"><i class="fa-solid fa-download"></i> Download Practice Notebook</a>
-  <a class="badge-link" href="../notebooks/solutions/classroom/03_learning_and_hybrid.ipynb"><i class="fa-solid fa-check-circle"></i> Download Worked Solutions</a>
+  <a class="badge-colab" href="https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/study/04_train_save_reload_adapter.ipynb" target="_blank"><img src="_static/colab-badge.svg" alt="Open In Colab"/></a>
+  <a class="badge-link" href="../notebooks/study/04_train_save_reload_adapter.ipynb"><i class="fa-solid fa-download"></i> Download Practice Notebook</a>
+  <a class="badge-link" href="../notebooks/solutions/04_train_save_reload_adapter.ipynb"><i class="fa-solid fa-check-circle"></i> Download Worked Solutions</a>
 </div>
 :::
 
@@ -230,17 +231,15 @@ checks when interpreting the four field panels. The residual is defined by
 the scalar `ToyHelmholtzProblem`. Applying this pattern to fracture requires
 the fracture residual and its damage admissibility conditions.
 
-:::{admonition} Hands-On Tutorial: Lab 3 (Physical Assessment and Correction)
+:::{admonition} Optional tutorial: Physical Assessment and Correction
 :class: tip
 
-**Ready to try this in practice?**  
-Explore the interactive tutorial: **{doc}`classroom/03_learning_and_hybrid`**.
-You can read through the residual assessment and solver correction steps directly here in the book, or run the tutorial in **Google Colab**:
+In {doc}`labs/05_hybrid_reference_correction`, assess a proposed field using the Helmholtz residual and examine when the reference correction is used.
 
 <div class="badge-row">
-  <a class="badge-colab" href="https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/study/classroom/03_learning_and_hybrid.ipynb" target="_blank"><img src="_static/colab-badge.svg" alt="Open In Colab"/></a>
-  <a class="badge-link" href="../notebooks/study/classroom/03_learning_and_hybrid.ipynb"><i class="fa-solid fa-download"></i> Download Practice Notebook</a>
-  <a class="badge-link" href="../notebooks/solutions/classroom/03_learning_and_hybrid.ipynb"><i class="fa-solid fa-check-circle"></i> Download Worked Solutions</a>
+  <a class="badge-colab" href="https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/study/05_hybrid_reference_correction.ipynb" target="_blank"><img src="_static/colab-badge.svg" alt="Open In Colab"/></a>
+  <a class="badge-link" href="../notebooks/study/05_hybrid_reference_correction.ipynb"><i class="fa-solid fa-download"></i> Download Practice Notebook</a>
+  <a class="badge-link" href="../notebooks/solutions/05_hybrid_reference_correction.ipynb"><i class="fa-solid fa-check-circle"></i> Download Worked Solutions</a>
 </div>
 :::
 
@@ -265,22 +264,22 @@ when evaluating the method.
 
 ## Evaluation: Physical Metrics and Model Validation
 
-Evaluating a machine learning model for physical problems requires examining both statistical accuracy and physical consistency. Standard mean squared error alone can be deceptive: a low average field error may mask an unphysical local stress concentration or an incorrect crack path. 
+Compare both field error and physical consistency. A small average error can coexist with a misplaced crack or a large local error, so inspect the spatial fields alongside scalar measures.
 
-A comprehensive validation protocol evaluates:
+Useful comparisons include:
 
 1. **Field-Level Discrepancy:**
    $$
    e_d = \frac{\|\widehat d - d_{\mathrm{ref}}\|_2}{\max(\|d_{\mathrm{ref}}\|_2, \epsilon)}
    $$
-   measures normalized spatial disagreement across test meshes.
+   measures the discrepancy on the evaluated field. Comparing different meshes also requires a consistent spatial weighting or a common evaluation grid.
 2. **Physical Constraints:**
    Verify that predicted fields respect admissibility conditions (such as $0 \le d \le 1$ and non-decreasing damage history $d_n \ge d_{n-1}$).
 3. **Mechanics Residuals:**
    Substitute the predicted field directly into the governing mechanical weak form. A physically consistent prediction yields low equilibrium residuals.
 4. **Engineering Observables:**
    Compare integral quantities of direct engineering interest, such as global reaction curves, peak load capacity, and total dissipated fracture energy.
-5. **Generalization Bounds:**
+5. **Performance on Unseen Cases:**
    Report performance across varying load levels, mesh densities, and unseen geometries to characterize the model's domain of applicability.
 
 ## Exercise: describe the information needed to reuse a model

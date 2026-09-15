@@ -3,12 +3,12 @@ myst:
   all_links_external: false
 ---
 
-# Why a fracture solver needs a memory-aware derivative
+# Differentiating a fracture simulation with loading history
 
-**A diffuse crack can still contain a sharp mathematical decision.** At each
-material point, the solver asks: *is the current crack-driving energy larger
-than anything this point has experienced before?* This short lesson follows
-that decision through loading, unloading and backpropagation.
+At each material point, the solver stores the largest crack-driving energy
+reached during loading. When the current energy exceeds that value, the stored
+history changes. This lesson follows that update through loading, unloading
+and the backward calculation of sensitivities.
 
 ## Explore the switch beside a real crack
 
@@ -90,9 +90,10 @@ curve shows the surrogate reverse weight. Energy values are dimensionless.
 $$H_{n+1}=\max(H_n,\psi^+_{n+1}).$$
 
 Here $H_n$ stores the previous maximum and $\psi^+$ is the current tensile
-driving energy. The maximum is **continuous, with a kink at equality**.
-Its current-energy partial is zero below the old maximum and one above it.
-At the tie, a classical partial derivative is generally undefined.
+driving energy. Holding $H_n$ fixed, the derivative with respect to $\psi^+$
+is zero below the previous maximum and one above it. The maximum is continuous,
+but these different slopes form a kink at equality, where a unique classical
+partial derivative generally does not exist.
 
 ## 2. Carry the memory backwards
 

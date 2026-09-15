@@ -33,7 +33,7 @@
     <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="_static/mobile_math.css?v=acf5579e" />
-    <link rel="stylesheet" type="text/css" href="_static/learning_book.css?v=37e7f39f" />
+    <link rel="stylesheet" type="text/css" href="_static/learning_book.css?v=d69ae7f6" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -174,13 +174,13 @@
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="lectures/01_fracture_and_phast.html">Lecture 1: Phase-field fracture and PhAST</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lectures/02_differentiability_and_inverse.html">Lecture 2: Differentiability and inverse recovery</a></li>
-<li class="toctree-l1"><a class="reference internal" href="lectures/03_hybrid_learning.html">Lecture 3: Learning inside a numerical workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lectures/03_hybrid_learning.html">Lecture 3: Learned damage updates in PhAST</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Three practical labs</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="classroom/01_simulate_fracture.html">Practical 1: Simulate a crack crossing a plate</a></li>
-<li class="toctree-l1"><a class="reference internal" href="classroom/02_gradients_and_recovery.html">Practical 2: Gradients and material recovery</a></li>
-<li class="toctree-l1"><a class="reference internal" href="classroom/03_learning_and_hybrid.html">Practical 3: Learn a field and assess its proposal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classroom/01_simulate_fracture.html">Phase-field fracture of a notched square plate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classroom/02_gradients_and_recovery.html">Recovering Young’s modulus from measured extension</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classroom/03_learning_and_hybrid.html">Replacing the damage subproblem with a trained network</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Optional direct-replacement case study</span></p>
 <ul class="nav bd-sidenav">
@@ -197,7 +197,7 @@
 <li class="toctree-l2"><a class="reference internal" href="05a_backpropagation_step_by_step.html">Backpropagation through a stepped update</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1"><a class="reference internal" href="06_learning_adapter.html">Train, save, reload, adapters, and checked proposals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_learning_adapter.html">Learning field predictions and combining them with a solver</a></li>
 <li class="toctree-l1"><a class="reference internal" href="07_practice_references.html">Practice, Solutions, Glossary, and References</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="further_practice.html">Detailed notebooks and further practice</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="labs/00_why_average_predictions_can_fail.html">Lab 00: Branch Selection &amp; Energy-Based Objectives in Physics-Informed Learning</a></li>
@@ -215,7 +215,7 @@
 <li class="toctree-l2"><a class="reference internal" href="research/01_geometry.html">Representing particles and testing their geometry</a></li>
 <li class="toctree-l2"><a class="reference internal" href="research/02_observations.html">From measurements to a loss</a></li>
 <li class="toctree-l2"><a class="reference internal" href="research/03_derivatives.html">Verify a derivative before interpreting an update</a></li>
-<li class="toctree-l2"><a class="reference internal" href="research/03_history_visual.html">Why a fracture solver needs a memory-aware derivative</a></li>
+<li class="toctree-l2"><a class="reference internal" href="research/03_history_visual.html">Differentiating a fracture simulation with loading history</a></li>
 <li class="toctree-l2"><a class="reference internal" href="research/03_history.html">Differentiating fracture: memory, switches and useful limits</a></li>
 <li class="toctree-l2"><a class="reference internal" href="research/04_recovery.html">Why a correct gradient can give slow or ambiguous recovery</a></li>
 <li class="toctree-l2"><a class="reference internal" href="research/05_learning.html">A useful role for learning: propose, solve and check</a></li>
@@ -442,8 +442,8 @@ document.write(`
 <h1>From Cracks to Computation: Learn by Doing<a class="headerlink" href="#from-cracks-to-computation-learn-by-doing" title="Link to this heading">#</a></h1>
 <section id="motivation-and-learning-goals">
 <h2>Motivation and Learning Goals<a class="headerlink" href="#motivation-and-learning-goals" title="Link to this heading">#</a></h2>
-<p>Predicting when, where, and how materials break is one of the foundational challenges of modern solid mechanics. In traditional engineering, we often treat cracks as sharp geometric discontinuities. In modern computational physics and scientific machine learning, however, we represent cracks as continuous damage fields governed by energy minimization.</p>
-<p>Interpreting a damage band, a softening reaction curve, or an automatically computed sensitivity gradient requires understanding the interplay between three distinct layers:</p>
+<p>Cracks change how a solid carries load. Computational models describe this change using sharp crack surfaces, cohesive interfaces, or diffuse damage fields. This course develops the phase-field approach and shows how its numerical solution connects to differentiation and learning.</p>
+<p>To interpret a damage field, a reaction curve, or a parameter gradient, identify three parts of the calculation:</p>
 <ol class="arabic simple">
 <li><p><strong>The Physical Formulation:</strong> The continuum theory and energy functional describing deformation and fracture.</p></li>
 <li><p><strong>The Numerical Discretization:</strong> The finite element interpolation, mesh geometry, and quadrature rules that translate continuous fields into discrete tensors.</p></li>
@@ -452,9 +452,9 @@ document.write(`
 <p>By the end of this workshop, you will be able to:</p>
 <ul class="simple">
 <li><p><strong>Understand Phase-Field Fracture:</strong> Formulate the variational Griffith brittle fracture problem, explain the physical role of regularisation length <span class="math notranslate nohighlight">\(\ell\)</span> and fracture toughness <span class="math notranslate nohighlight">\(G_c\)</span>, and contrast AT1 and AT2 models.</p></li>
-<li><p><strong>Run the PhAST Solver End-to-End:</strong> Set up a two-dimensional domain, generate a triangular mesh, assign boundary conditions, execute the coupled staggered solve, and extract reaction forces and damage fields.</p></li>
+<li><p><strong>Run a PhAST simulation:</strong> Set up a two-dimensional domain, generate a triangular mesh, assign boundary conditions, run the mechanical and damage updates, and interpret the saved fields and energy histories.</p></li>
 <li><p><strong>Differentiate Mechanics Computations:</strong> Construct a computational graph in PyTorch, verify analytical and autograd derivatives against directional finite differences, and solve an inverse parameter identification problem.</p></li>
-<li><p><strong>Integrate Machine Learning Plug-and-Play:</strong> Train neural operator adapters on field data, evaluate neural predictions against physical equilibrium residuals, and apply hybrid solver-in-the-loop corrections.</p></li>
+<li><p><strong>Assess learned damage updates:</strong> Use a supplied graph network, compare its predictions with the PhAST damage solution, and examine how residual checks and numerical correction affect the result. Optional notebooks introduce model training, saving and reloading.</p></li>
 </ul>
 </section>
 <hr class="docutils" />
@@ -463,21 +463,14 @@ document.write(`
 <p>Many non-linear physical systems exhibit multiple stable equilibrium states for a given set of boundary conditions. In the optional reference notebook, we explore what happens when we train a learning model on data generated from multiple solution branches.</p>
 <div class="tip admonition">
 <p class="admonition-title">Hands-On Tutorial: Lab 00 (Branch Selection &amp; Energy Landscapes)</p>
-<p><strong>Ready to try this in practice?</strong><br />
-Explore the interactive tutorial: <strong><a class="reference internal" href="labs/00_why_average_predictions_can_fail.html"><span class="doc">Lab 00: Branch Selection &amp; Energy-Based Objectives in Physics-Informed Learning</span></a></strong>.<br />
-You can read through the worked derivations and energy plots directly here in the book, or run it interactively in <strong>Google Colab</strong> with one click:</p>
+<p>In <a class="reference internal" href="labs/00_why_average_predictions_can_fail.html"><span class="doc">Lab 00: Branch Selection &amp; Energy-Based Objectives in Physics-Informed Learning</span></a>, compare predictions from squared-error and energy objectives on a system with multiple equilibrium branches.</p>
 <div class="badge-row">
   <a class="badge-colab" href="https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/study/00_why_average_predictions_can_fail.ipynb" target="_blank"><img src="_static/colab-badge.svg" alt="Open In Colab"/></a>
   <a class="badge-link" href="../notebooks/study/00_why_average_predictions_can_fail.ipynb"><i class="fa-solid fa-download"></i> Download Practice Notebook</a>
   <a class="badge-link" href="../notebooks/solutions/00_why_average_predictions_can_fail.ipynb"><i class="fa-solid fa-check-circle"></i> Download Worked Solutions</a>
 </div>
 </div>
-<p>We compare two fundamental approaches:</p>
-<ul class="simple">
-<li><p><strong>Supervised Regression (Mean Squared Error):</strong> Which naturally converges to conditional averages.</p></li>
-<li><p><strong>Physics-Informed Energy Minimization:</strong> Which guides the model directly to physical equilibrium branches.</p></li>
-</ul>
-<p>This motivating exercise illustrates a key takeaway: in physical problems, optimizing a physically grounded energy functional is often essential for capturing true physical branches.</p>
+<p>The example compares two training objectives. Squared-error regression fits the observed targets and can approach their conditional mean. Energy minimisation favours low-energy states of the chosen physical model. When several stable branches exist, loading history, constraints and initialisation influence which branch is selected.</p>
 </section>
 <hr class="docutils" />
 <section id="course-workflow-theory-code-and-practice">

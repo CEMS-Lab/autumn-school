@@ -2,16 +2,16 @@
 
 ## Workshop Synthesis: The Four Core Milestones
 
-Throughout this tutorial course, we navigated the bridge connecting continuum fracture mechanics to modern differentiable scientific computing and machine learning. As a review, ensure you can comfortably explain the four foundational milestones:
+The course connects fracture modelling, numerical solution, differentiation and learning. Use the following topics to review those connections.
 
 1. **Pillar 1: What Phase-Field Fracture Is**  
    Explain how Griffith's surface energy is approximated by a volume integral over a continuous scalar damage field $d(x)$, governed by the regularisation length $\ell$, the crack-density function $w(d)$, and the stiffness degradation law $g(d)$.
-2. **Pillar 2: The Computational Simulation Pipeline (PhAST)**  
-   Trace an end-to-end simulation: defining domain coordinates and connectivity, assembling finite element tensors, applying boundary conditions and precracks, and executing the staggered alternating minimization loop until equilibrium residuals converge.
-3. **Pillar 3: Differentiability and Inverse Discovery**  
-   Explain how reverse-mode automatic differentiation computes exact sensitivities through numerical mechanics graphs, verify autograd gradients against directional numerical finite differences, and formulate gradient-based inverse optimization to recover unknown physical parameters.
-4. **Pillar 4: Deep Learning Surrogates and Hybrid Correction**  
-   Formulate how neural networks can serve as fast surrogate proposal models, evaluate neural predictions against physical PDE residuals, and use trusted numerical solvers in a hybrid loop to correct out-of-distribution predictions.
+2. **Pillar 2: Simulation with PhAST**
+   Trace the geometry, mesh, boundary conditions, mechanical update and damage solve, and explain the resulting fields and energy histories.
+3. **Pillar 3: Differentiation and Recovery**
+   Explain how the chain rule produces a parameter gradient, compare it with a finite-difference check, and use it to estimate an unknown parameter.
+4. **Pillar 4: Learning and Hybrid Correction**
+   Explain the role of a learned prediction, assess its residuals and constraints, and compare the complete hybrid calculation with its numerical reference.
 
 ---
 
@@ -19,8 +19,8 @@ Throughout this tutorial course, we navigated the bridge connecting continuum fr
 
 When experimenting with computational mechanics models in Jupyter or Colab:
 
-- **Vary One Parameter at a Time:** For example, decrease $\ell$ to observe crack bandwidth narrowing, or increase $G_c$ to observe higher fracture toughness and peak load.
-- **Examine Both Fields and Curves:** Do not rely solely on scalar metrics. Always inspect the full spatial damage and stress fields alongside global load-displacement curves.
+- **Vary One Parameter at a Time:** For example, change $\ell$ and examine the damage-band width, or change $G_c$ and compare the resulting peak load. Keep the other model inputs fixed and check that the mesh resolves each case.
+- **Examine Both Fields and Curves:** Inspect the full spatial damage and stress fields alongside global load-displacement curves.
 - **Verify Gradients Early:** When writing custom differentiable loss functions, verify gradients against finite differences before launching long optimization runs.
 - **Check Physical Bounds:** Ensure the damage field respects $0 \le d \le 1$ and non-decreasing history $d_n \ge d_{n-1}$.
 
@@ -31,10 +31,11 @@ When experimenting with computational mechanics models in Jupyter or Colab:
 | Practical | Focus |
 | --- | --- |
 | {doc}`Lab 1 — Simulate fracture <classroom/01_simulate_fracture>` | Geometry, supports, loading, PhAST results and their interpretation. |
-| {doc}`Lab 2 — Gradients and recovery <classroom/02_gradients_and_recovery>` | Degradation derivatives and elastic-bar parameter recovery. |
-| {doc}`Lab 3 — Learning and hybrid correction <classroom/03_learning_and_hybrid>` | Training, saved models and physical correction of a proposed field. |
+| {doc}`Lab 2 — Gradients and recovery <classroom/02_gradients_and_recovery>` | One force, one tip observation and Young’s-modulus recovery through PhAST. |
+| {doc}`Lab 3 — Learned damage updates <classroom/03_learning_and_hybrid>` | Frozen graph-network predictions, classical correction and checked direct replacement on a three-hole plate. |
 
-Each page includes Google Colab and practice/solution downloads. Visit
+Each page includes Google Colab, notebook downloads and a conceptual answer.
+The learned lab needs the instructor-supplied checkpoint. Visit
 {doc}`further_practice` for the original individual notebooks and longer
 implementation walkthroughs.
 
@@ -46,7 +47,7 @@ apply supports and loading, solve, and interpret the saved fields.
 
 | Activity | Physical question | Next reading |
 | --- | --- | --- |
-| Course Lab 01 | How do the mesh, initial damage and imposed separation determine a quasistatic response? | Revisit the saved fields and changed-load exercise above. |
+| Course Lab 01 | How do a graded mesh and imposed separation affect dynamic crack growth? | Inspect displacement, strain, stress and damage animations in the square-plate notebook. |
 | PhAST SENT setup | How do a Gmsh geometry and named regions become a configured problem? | [Step-by-step problem setup](https://cems-lab.github.io/PhAST/tutorial/notebook_setup.html) |
 | B3 dynamic SENT results | How does a damaged band extend across a tensile specimen during a dynamic calculation? | [Public B3 example and retained animation](https://github.com/CEMS-Lab/PhAST/tree/f6324f899f0701769810be117f27f1208f7a582e/examples/dynamic/B3_dynamic_sent) |
 
@@ -62,7 +63,7 @@ Consider a two-dimensional notched specimen represented by displacement $u$
 and damage $d$. The calculation uses a length scale $\ell$, a residual
 stiffness $\eta_{\mathrm{res}}$, and a displacement-controlled load increment.
 
-1. Give the three terms in the fracture density that regularise a sharp crack.
+1. Identify the local damage term, the gradient term and the energy prefactor in the fracture contribution.
 2. Write the qualitative order of a staggered update.
 3. Name two visual outputs and one scalar output you would retain.
 4. A learned model proposes $d$. Name two checks required before using it as a

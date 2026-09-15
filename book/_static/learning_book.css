@@ -27,6 +27,24 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   letter-spacing: -0.01em;
 }
+/* Keep the print-only title/contents out of the normal reading layout. */
+@media screen {
+  .jb-print-docs-body { display: none; }
+}
+/* Keep copy controls compact even when an older theme stylesheet is cached. */
+.highlight { position: relative; }
+.highlight button.copybtn {
+  position: absolute;
+  top: .3rem;
+  right: .3rem;
+  width: 1.8rem;
+  height: 1.8rem;
+  padding: .25rem;
+}
+.highlight button.copybtn img, .highlight button.copybtn svg {
+  width: 1rem;
+  height: 1rem;
+}
 code, pre, kbd {
   font-family: ui-monospace, "SF Mono", "Source Code Pro", Menlo, Monaco, Consolas, monospace;
 }

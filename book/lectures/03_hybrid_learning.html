@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Lecture 3: Learning inside a numerical workflow &#8212; PhAST: Phase-field fracture with differentiable FEM</title>
+    <title>Lecture 3: Learned damage updates in PhAST &#8212; PhAST: Phase-field fracture with differentiable FEM</title>
   
   
   
@@ -33,7 +33,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/mobile_math.css?v=acf5579e" />
-    <link rel="stylesheet" type="text/css" href="../_static/learning_book.css?v=37e7f39f" />
+    <link rel="stylesheet" type="text/css" href="../_static/learning_book.css?v=d69ae7f6" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -46,11 +46,13 @@
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../_static/copybutton.js?v=f281be69"></script>
     <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="../_static/mathjax/tex-mml-chtml.js?v=cadf963e"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'lectures/03_hybrid_learning';</script>
     <script src="../_static/learning_book.js?v=5aaa4a9b"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Practical 1: Simulate a crack crossing a plate" href="../classroom/01_simulate_fracture.html" />
+    <link rel="next" title="Phase-field fracture of a notched square plate" href="../classroom/01_simulate_fracture.html" />
     <link rel="prev" title="Lecture 2: Differentiability and inverse recovery" href="02_differentiability_and_inverse.html" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -172,13 +174,13 @@
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="01_fracture_and_phast.html">Lecture 1: Phase-field fracture and PhAST</a></li>
 <li class="toctree-l1"><a class="reference internal" href="02_differentiability_and_inverse.html">Lecture 2: Differentiability and inverse recovery</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Lecture 3: Learning inside a numerical workflow</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Lecture 3: Learned damage updates in PhAST</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Three practical labs</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../classroom/01_simulate_fracture.html">Practical 1: Simulate a crack crossing a plate</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../classroom/02_gradients_and_recovery.html">Practical 2: Gradients and material recovery</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../classroom/03_learning_and_hybrid.html">Practical 3: Learn a field and assess its proposal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../classroom/01_simulate_fracture.html">Phase-field fracture of a notched square plate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../classroom/02_gradients_and_recovery.html">Recovering Young’s modulus from measured extension</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../classroom/03_learning_and_hybrid.html">Replacing the damage subproblem with a trained network</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Optional direct-replacement case study</span></p>
 <ul class="nav bd-sidenav">
@@ -195,7 +197,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../05a_backpropagation_step_by_step.html">Backpropagation through a stepped update</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1"><a class="reference internal" href="../06_learning_adapter.html">Train, save, reload, adapters, and checked proposals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06_learning_adapter.html">Learning field predictions and combining them with a solver</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../07_practice_references.html">Practice, Solutions, Glossary, and References</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../further_practice.html">Detailed notebooks and further practice</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../labs/00_why_average_predictions_can_fail.html">Lab 00: Branch Selection &amp; Energy-Based Objectives in Physics-Informed Learning</a></li>
@@ -213,7 +215,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../research/01_geometry.html">Representing particles and testing their geometry</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../research/02_observations.html">From measurements to a loss</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../research/03_derivatives.html">Verify a derivative before interpreting an update</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../research/03_history_visual.html">Why a fracture solver needs a memory-aware derivative</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../research/03_history_visual.html">Differentiating a fracture simulation with loading history</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../research/03_history.html">Differentiating fracture: memory, switches and useful limits</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../research/04_recovery.html">Why a correct gradient can give slow or ambiguous recovery</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../research/05_learning.html">A useful role for learning: propose, solve and check</a></li>
@@ -408,7 +410,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Lecture 3: Learning inside a numerical workflow</h1>
+    <h1>Lecture 3: Learned damage updates in PhAST</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -418,12 +420,12 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#define-and-train-a-small-model-08-minutes">Define and train a small model · 0–8 minutes</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#route-a-learn-the-damage-subsolve-818-minutes">Route A: learn the damage subsolve · 8–18 minutes</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#route-b-physically-correct-a-prediction-1828-minutes">Route B: physically correct a prediction · 18–28 minutes</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compare-models-through-a-common-interface-2838-minutes">Compare models through a common interface · 28–38 minutes</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-from-states-encountered-during-use-3846-minutes">Learning from states encountered during use · 38–46 minutes</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#connect-the-routes-to-the-practical-4650-minutes">Connect the routes to the practical · 46–50 minutes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#locate-the-learned-operation">Locate the learned operation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#define-the-specimen-and-constitutive-model">Define the specimen and constitutive model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#distinguish-the-three-damage-routes">Distinguish the three damage routes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#read-the-interface-and-obtain-the-checkpoint">Read the interface and obtain the checkpoint</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compare-fields-and-complete-cost">Compare fields and complete cost</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extend-the-exercise">Extend the exercise</a></li>
 </ul>
             </nav>
         </div>
@@ -435,117 +437,102 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="lecture-3-learning-inside-a-numerical-workflow">
-<h1>Lecture 3: Learning inside a numerical workflow<a class="headerlink" href="#lecture-3-learning-inside-a-numerical-workflow" title="Link to this heading">#</a></h1>
-<p><strong>50 minutes.</strong> This lecture connects the gradients from
-<a class="reference internal" href="02_differentiability_and_inverse.html"><span class="doc">Lecture 2</span></a> to neural-model training and
-hybrid computation. We follow the information passed between a model and a
-numerical calculation, then consider how that information changes during use.</p>
-<section id="define-and-train-a-small-model-08-minutes">
-<h2>Define and train a small model · 0–8 minutes<a class="headerlink" href="#define-and-train-a-small-model-08-minutes" title="Link to this heading">#</a></h2>
-<p>A learning task begins with stated input channels and a target output. For
-supervised fitting, a loss compares the prediction with stored reference
-targets, and backpropagation computes its gradient with respect to model
-weights. Residual-based training differentiates an equation evaluated at the
-prediction. Solver-in-the-loop training also follows the selected numerical
-updates. The <a class="reference internal" href="../06_learning_adapter.html"><span class="doc">learning chapter</span></a> expands these
-three computational graphs.</p>
-<div class="note admonition">
-<p class="admonition-title">Training and reusing a small field model</p>
-<p>Identify the coordinate and parameter inputs and scalar
-field target in the existing Helmholtz teaching model. Follow a short training
-step, then save and reload the weights together with normalisation and feature
-order. Compare the same input before and after reload.</p>
-<p><strong>Learning question:</strong> What information is needed to reuse a trained model?</p>
-</div>
+  <section class="tex2jax_ignore mathjax_ignore" id="lecture-3-learned-damage-updates-in-phast">
+<h1>Lecture 3: Learned damage updates in PhAST<a class="headerlink" href="#lecture-3-learned-damage-updates-in-phast" title="Link to this heading">#</a></h1>
+<p>A trained network can supply a field inside a finite-element calculation.
+Identify what the network receives, which operation it affects, and how to
+assess the resulting simulation. This practical evaluates a frozen graph
+network in a real PhAST fracture calculation.</p>
+<section id="locate-the-learned-operation">
+<h2>Locate the learned operation<a class="headerlink" href="#locate-the-learned-operation" title="Link to this heading">#</a></h2>
+<p>Mechanics determines displacement; tensile history supplies the driving field;
+the damage update determines the next damage field. The network predicts this
+damage update. Mechanics remains in PhAST. Bounds, irreversibility, boundary
+values and the damage residual still govern interpretation of an accepted state.</p>
 </section>
-<section id="route-a-learn-the-damage-subsolve-818-minutes">
-<h2>Route A: learn the damage subsolve · 8–18 minutes<a class="headerlink" href="#route-a-learn-the-damage-subsolve-818-minutes" title="Link to this heading">#</a></h2>
-<p>Within the staggered scheme, the damage subsolve receives the current
-mechanical driving quantity and the information needed to describe material,
-geometry, loading and history. A learned replacement would produce a damage
-update for those inputs. It remains coupled to the next mechanics update and
-to the convergence and admissibility checks for the complete increment.</p>
-<div class="note admonition">
-<p class="admonition-title">A learned damage update</p>
-<p>Start from the staggered loop and identify the damage
-subsolve. Replace that operation with a labelled learned damage update,
-show its input and output fields, and follow the next mechanics update.
-Keep the bounds, irreversibility and coupled convergence checks visible.
-The <a class="reference internal" href="../w53_direct_replacement.html"><span class="doc">single-replacement case study</span></a> illustrates
-this role with a retained Radius-GNO fracture trajectory and a measured
-damage-stage timing comparison.</p>
-<p><strong>Learning question:</strong> Which operation is learned, and what conditions still
-govern the accepted state?</p>
-</div>
+<section id="define-the-specimen-and-constitutive-model">
+<h2>Define the specimen and constitutive model<a class="headerlink" href="#define-the-specimen-and-constitutive-model" title="Link to this heading">#</a></h2>
+<p><a class="reference internal" href="../classroom/03_learning_and_hybrid.html"><span class="doc">Lab 3</span></a> builds a 10 mm square
+plate with an edge slot and three holes. Quasi-static loading advances through
+500 increments to a top displacement of 0.04 mm. Each increment performs one
+mechanics–damage pass (<code class="docutils literal notranslate"><span class="pre">max_stagger=1</span></code>); the supplied calculation does not
+iterate the coupled fields to staggered convergence at each increment.</p>
+<p>The material has <span class="math notranslate nohighlight">\(E=210000\,\mathrm{MPa}\)</span>, <span class="math notranslate nohighlight">\(\nu=0.3\)</span>,
+<span class="math notranslate nohighlight">\(G_c=2.7\,\mathrm{N/mm}\)</span> and <span class="math notranslate nohighlight">\(\ell_0=0.4\,\mathrm{mm}\)</span>. Its checkpoint-specific
+degradation law is</p>
+<div class="math notranslate nohighlight">
+\[g(d)=\frac{(1-d)^2}{(1-d)^2+d}.\]</div>
+<p>Damage reduces the full stress, while the tensile part of the elastic energy
+drives the history update. This combination does not follow from one common
+energy functional; it is a non-variational hybrid constitutive model. The
+classical and learned routes in Lab 3 use this same model, mesh and loading.
+Lab 1 uses a different constitutive model for the dynamic glass plate.</p>
 </section>
-<section id="route-b-physically-correct-a-prediction-1828-minutes">
-<h2>Route B: physically correct a prediction · 18–28 minutes<a class="headerlink" href="#route-b-physically-correct-a-prediction-1828-minutes" title="Link to this heading">#</a></h2>
-<p>A second route uses a model to propose a state and evaluates that proposal
-with the governing residual and the relevant constraints. A numerical
-correction can then refine the state; a reference solve can provide a fallback.
-The corrected state needs its own checks. The
-<a class="reference internal" href="../06_learning_adapter.html#fig-learning-cycle"><span class="std std-ref">existing learning-cycle figure</span></a> introduces
-these exchanges.</p>
-<div class="note admonition">
-<p class="admonition-title">Assessing and correcting a prediction</p>
-<p>Follow the inputs, prediction, residual evaluation, numerical correction and
-accepted field. Distinguish direct acceptance from reference fallback.
-Include prediction, checking, correction and fallback when measuring the
-cost of the complete calculation.</p>
-<p><strong>Learning question:</strong> How can we tell whether the complete hybrid calculation
-improves on its reference calculation?</p>
+<section id="distinguish-the-three-damage-routes">
+<h2>Distinguish the three damage routes<a class="headerlink" href="#distinguish-the-three-damage-routes" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Route</p></th>
+<th class="head"><p>Network role</p></th>
+<th class="head"><p>Accepted damage</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">classical</span></code></p></td>
+<td><p>No prediction</p></td>
+<td><p>Classical damage solve</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">learned_proposal</span></code></p></td>
+<td><p>Supplies an initial field</p></td>
+<td><p>Classical solve started from the prediction</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">learned_replacement</span></code></p></td>
+<td><p>Supplies a candidate field</p></td>
+<td><p>Checked prediction, or classical fallback</p></td>
+</tr>
+</tbody>
+</table>
 </div>
+<p>Direct replacement is the main application of interest. The proposal route
+provides a comparison with numerical correction. Each has its own cost and
+accuracy. Retain the fallback and report its use.</p>
 </section>
-<section id="compare-models-through-a-common-interface-2838-minutes">
-<h2>Compare models through a common interface · 28–38 minutes<a class="headerlink" href="#compare-models-through-a-common-interface-2838-minutes" title="Link to this heading">#</a></h2>
-<p>An MLP maps a chosen feature vector to an output; convolutional models use
-structured grids; graph models use a specified connectivity; neural operators
-aim to learn maps between functions through their chosen representations.
-Architecture choice follows the available data and the desired field map.
-Input meaning, spatial ordering, units and output interpretation must remain
-clear when models are exchanged.</p>
-<div class="note admonition">
-<p class="admonition-title">Comparing model interfaces</p>
-<p>Use the small field-model example to identify its input features, prediction
-and saved-model metadata. Consider how an RBF, grid-based model or graph model
-would represent the same field. Explain which inputs and spatial information
-each architecture requires. A quantitative comparison would use matched
-training data, field-error measures and complete computation times.</p>
-<p><strong>Learning question:</strong> Which parts of the model interface must agree for a
-comparison to be meaningful?</p>
-</div>
+<section id="read-the-interface-and-obtain-the-checkpoint">
+<h2>Read the interface and obtain the checkpoint<a class="headerlink" href="#read-the-interface-and-obtain-the-checkpoint" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">DamageStepContext</span></code> supplies the mesh, mechanical fields, loading history,
+previous damage and material data. The adapter converts these into the inputs
+expected by the saved network. Their order, units, boundary description and
+scaling must match those used during training. Compare the new specimen and
+loading with the training data when assessing transfer to another problem.</p>
+<p>The notebook imports the public mesh-graph adapter from the PhAST checkout.
+Obtain <code class="docutils literal notranslate"><span class="pre">mesh_graph_net.pt</span></code> from the instructor before starting; public
+automated distribution of these weights remains separate from the book.
+Printing a checksum identifies a file; verification also requires a trusted
+expected hash.</p>
 </section>
-<section id="learning-from-states-encountered-during-use-3846-minutes">
-<h2>Learning from states encountered during use · 38–46 minutes<a class="headerlink" href="#learning-from-states-encountered-during-use-3846-minutes" title="Link to this heading">#</a></h2>
-<p>Online prediction means applying the trained model during a calculation.
-Online learning also updates the model using incoming examples. Active
-learning selects which examples should receive new reference labels. A
-DAgger-style round specifically collects states visited by the current model,
-queries a reference procedure there, aggregates those labelled records and
-re-trains the model. Held-out evaluation is needed to assess the revised model.</p>
-<div class="note admonition">
-<p class="admonition-title">A conceptual DAgger round</p>
-<p>Trace the states visited by the current model, reference labelling of those
-states, dataset aggregation and another training round. Reserve a separate
-evaluation set to assess the updated model. This conceptual extension explains
-how the data distribution can change as a learned component is used.</p>
-<p><strong>Learning question:</strong> Why might model-visited states add information to the
-original training set?</p>
-</div>
+<section id="compare-fields-and-complete-cost">
+<h2>Compare fields and complete cost<a class="headerlink" href="#compare-fields-and-complete-cost" title="Link to this heading">#</a></h2>
+<p>Inspect reference, prediction and difference using common colour scales.
+Compare the damage residual and physical constraints alongside nodal field
+error. Record complete runtime, including inference, checking, correction and
+fallback. The supplied notebook contains this comparison code but no retained
+run outputs. A fresh whole-notebook timing, including its three solves and
+post-processing, is required before assigning a classroom runtime or speed-up.</p>
+<p>The lecture’s damage-stage timing and the optional
+<a class="reference internal" href="../w53_direct_replacement.html"><span class="doc">Radius-GNO case study</span></a> concern their own
+models, specimens and hardware. Neither provides a measured end-to-end speed-up
+for this mesh-graph classroom exercise.</p>
 </section>
-<section id="connect-the-routes-to-the-practical-4650-minutes">
-<h2>Connect the routes to the practical · 46–50 minutes<a class="headerlink" href="#connect-the-routes-to-the-practical-4650-minutes" title="Link to this heading">#</a></h2>
-<p>In <a class="reference internal" href="../classroom/03_learning_and_hybrid.html"><span class="doc">Practical 3: Learn a field and assess its proposal</span></a>, train and reuse a small scalar
-Helmholtz field model, inspect a proposal and evaluate the numerical response
-to its residual. The example teaches the model interface and reference
-correction or fallback in a compact setting. Its field and residual belong to
-the Helmholtz teaching problem. The direct-replacement fracture case study
-provides a separate application, while the DAgger discussion introduces an
-iterative data-collection and training strategy.</p>
-<p>Discuss both field quality and complete computation time when assessing a
-hybrid method. The same comparison links model learning back to the physical
-question that opened the course.</p>
+<section id="extend-the-exercise">
+<h2>Extend the exercise<a class="headerlink" href="#extend-the-exercise" title="Link to this heading">#</a></h2>
+<p>Explore acceptance tolerances, changed holes, predictor interfaces and
+per-increment cost. These are additional runs. The network was trained on a
+different specimen, so this example tests transfer. Keep the reference
+calculation visible when drawing conclusions.</p>
+<p>For training fundamentals, the original Helmholtz
+<a class="reference internal" href="../labs/04_train_save_reload_adapter.html"><span class="doc">train/save/reload tutorial</span></a>
+remains optional. Its simple field equation explains a training loop; the main
+Day 2 practical evaluates a supplied trained model within fracture mechanics.</p>
 </section>
 </section>
 
@@ -574,7 +561,7 @@ question that opened the course.</p>
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Practical 1: Simulate a crack crossing a plate</p>
+        <p class="prev-next-title">Phase-field fracture of a notched square plate</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -594,12 +581,12 @@ question that opened the course.</p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#define-and-train-a-small-model-08-minutes">Define and train a small model · 0–8 minutes</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#route-a-learn-the-damage-subsolve-818-minutes">Route A: learn the damage subsolve · 8–18 minutes</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#route-b-physically-correct-a-prediction-1828-minutes">Route B: physically correct a prediction · 18–28 minutes</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compare-models-through-a-common-interface-2838-minutes">Compare models through a common interface · 28–38 minutes</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-from-states-encountered-during-use-3846-minutes">Learning from states encountered during use · 38–46 minutes</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#connect-the-routes-to-the-practical-4650-minutes">Connect the routes to the practical · 46–50 minutes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#locate-the-learned-operation">Locate the learned operation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#define-the-specimen-and-constitutive-model">Define the specimen and constitutive model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#distinguish-the-three-damage-routes">Distinguish the three damage routes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#read-the-interface-and-obtain-the-checkpoint">Read the interface and obtain the checkpoint</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compare-fields-and-complete-cost">Compare fields and complete cost</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extend-the-exercise">Extend the exercise</a></li>
 </ul>
   </nav></div>
 

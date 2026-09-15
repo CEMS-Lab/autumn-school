@@ -10,10 +10,9 @@ responds and ask which material or geometric parameters can explain that
 response. In this part of the book, we develop this idea for a plate containing
 stiff particles and for a spatially varying stiffness field.
 
-We will study more than the movement of an optimiser. We will ask what is
-measured, what is unknown, how a finite-element calculation produces the
-measurement, and which conclusions follow from a numerical test. The examples
-progress from short calculations to protocols suitable for a fracture solver.
+We begin by identifying the measurements and unknowns, then follow how the
+finite-element calculation connects them. Short examples introduce the checks
+needed to interpret a later fracture-recovery study.
 
 ## Preparation
 
@@ -85,8 +84,8 @@ notebooks/inverse_experiments
 
 Before running code, write down your prediction. Change one quantity, repeat
 the calculation and compare the result with the prediction. In your answer,
-state both the observation and its explanation. A curve that looks smooth
-and a programme that exits successfully answer different questions.
+state both the observation and its explanation. Compare the plotted fields
+with the governing equations and the reported numerical checks.
 
 For this research edition, all numerical experiments are executed on HPC.
 The displayed figures are rendered from retained numerical arrays. Reading

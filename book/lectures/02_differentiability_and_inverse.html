@@ -33,7 +33,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/mobile_math.css?v=acf5579e" />
-    <link rel="stylesheet" type="text/css" href="../_static/learning_book.css?v=37e7f39f" />
+    <link rel="stylesheet" type="text/css" href="../_static/learning_book.css?v=d69ae7f6" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -52,7 +52,7 @@
     <script src="../_static/learning_book.js?v=5aaa4a9b"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Lecture 3: Learning inside a numerical workflow" href="03_hybrid_learning.html" />
+    <link rel="next" title="Lecture 3: Learned damage updates in PhAST" href="03_hybrid_learning.html" />
     <link rel="prev" title="Lecture 1: Phase-field fracture and PhAST" href="01_fracture_and_phast.html" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -174,13 +174,13 @@
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="01_fracture_and_phast.html">Lecture 1: Phase-field fracture and PhAST</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Lecture 2: Differentiability and inverse recovery</a></li>
-<li class="toctree-l1"><a class="reference internal" href="03_hybrid_learning.html">Lecture 3: Learning inside a numerical workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_hybrid_learning.html">Lecture 3: Learned damage updates in PhAST</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Three practical labs</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../classroom/01_simulate_fracture.html">Practical 1: Simulate a crack crossing a plate</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../classroom/02_gradients_and_recovery.html">Practical 2: Gradients and material recovery</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../classroom/03_learning_and_hybrid.html">Practical 3: Learn a field and assess its proposal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../classroom/01_simulate_fracture.html">Phase-field fracture of a notched square plate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../classroom/02_gradients_and_recovery.html">Recovering Young’s modulus from measured extension</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../classroom/03_learning_and_hybrid.html">Replacing the damage subproblem with a trained network</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Optional direct-replacement case study</span></p>
 <ul class="nav bd-sidenav">
@@ -197,7 +197,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../05a_backpropagation_step_by_step.html">Backpropagation through a stepped update</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1"><a class="reference internal" href="../06_learning_adapter.html">Train, save, reload, adapters, and checked proposals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06_learning_adapter.html">Learning field predictions and combining them with a solver</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../07_practice_references.html">Practice, Solutions, Glossary, and References</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../further_practice.html">Detailed notebooks and further practice</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../labs/00_why_average_predictions_can_fail.html">Lab 00: Branch Selection &amp; Energy-Based Objectives in Physics-Informed Learning</a></li>
@@ -215,7 +215,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../research/01_geometry.html">Representing particles and testing their geometry</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../research/02_observations.html">From measurements to a loss</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../research/03_derivatives.html">Verify a derivative before interpreting an update</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../research/03_history_visual.html">Why a fracture solver needs a memory-aware derivative</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../research/03_history_visual.html">Differentiating a fracture simulation with loading history</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../research/03_history.html">Differentiating fracture: memory, switches and useful limits</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../research/04_recovery.html">Why a correct gradient can give slow or ambiguous recovery</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../research/05_learning.html">A useful role for learning: propose, solve and check</a></li>
@@ -420,11 +420,12 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#choose-a-parameter-and-an-observation-06-minutes">Choose a parameter and an observation · 0–6 minutes</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#follow-the-sensitivity-backwards-618-minutes">Follow the sensitivity backwards · 6–18 minutes</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#specify-the-derivative-being-computed-1828-minutes">Specify the derivative being computed · 18–28 minutes</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-sequence-of-fracture-inverse-applications-2850-minutes">A sequence of fracture inverse applications · 28–50 minutes</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#connect-the-examples-to-the-practical-5055-minutes">Connect the examples to the practical · 50–55 minutes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#state-the-experiment">1. State the experiment</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#build-and-solve-the-forward-problem-with-phast">2. Build and solve the forward problem with PhAST</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#differentiate-a-scalar-mismatch">3. Differentiate a scalar mismatch</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#let-the-optimiser-choose-the-next-modulus">4. Let the optimiser choose the next modulus</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpret-and-check-the-result">5. Interpret and check the result</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extend-the-same-chain-rule-to-fracture">6. Extend the same chain rule to fracture</a></li>
 </ul>
             </nav>
         </div>
@@ -438,122 +439,133 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="lecture-2-differentiability-and-inverse-recovery">
 <h1>Lecture 2: Differentiability and inverse recovery<a class="headerlink" href="#lecture-2-differentiability-and-inverse-recovery" title="Link to this heading">#</a></h1>
-<p><strong>55 minutes.</strong> Building on the displacement and damage updates in
-<a class="reference internal" href="01_fracture_and_phast.html"><span class="doc">Lecture 1</span></a>, we ask how a chosen observation changes
-with a material or geometry parameter. The lecture uses elementary chain-rule
-calculations before connecting them to fracture applications.</p>
-<section id="choose-a-parameter-and-an-observation-06-minutes">
-<h2>Choose a parameter and an observation · 0–6 minutes<a class="headerlink" href="#choose-a-parameter-and-an-observation-06-minutes" title="Link to this heading">#</a></h2>
-<p>Let <span class="math notranslate nohighlight">\(p\)</span> denote the chosen parameters, <span class="math notranslate nohighlight">\(y\)</span> the observed response and <span class="math notranslate nohighlight">\(J\)</span> a
-scalar loss measuring disagreement with target observations. The forward
-calculation has the sequence</p>
+<p>The forward problem predicts a mechanical response from known inputs. The inverse
+problem estimates an unknown input from an observed response. Begin with the small
+elastic bar, then connect the same operations to the particle-position exhibits.</p>
+<section id="state-the-experiment">
+<h2>1. State the experiment<a class="headerlink" href="#state-the-experiment" title="Link to this heading">#</a></h2>
+<p>A uniform bar has length <span class="math notranslate nohighlight">\(L=100\,\mathrm{mm}\)</span> and area <span class="math notranslate nohighlight">\(A=10\,\mathrm{mm}^2\)</span>.
+Its left end is fixed and a tensile force <span class="math notranslate nohighlight">\(F=4000\,\mathrm{N}\)</span> acts at the right.
+The unknown is the uniform Young’s modulus <span class="math notranslate nohighlight">\(E\)</span>. The observation is the tip
+displacement <span class="math notranslate nohighlight">\(y_{\mathrm{obs}}\)</span>. Geometry, area and force are known independently.
+This example uses linear elasticity; damage evolution belongs to the later
+fracture applications.</p>
+</section>
+<section id="build-and-solve-the-forward-problem-with-phast">
+<h2>2. Build and solve the forward problem with PhAST<a class="headerlink" href="#build-and-solve-the-forward-problem-with-phast" title="Link to this heading">#</a></h2>
+<p>The continuum equation and its finite-element form are</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+\frac{\mathrm{d}}{\mathrm{d}x}\left(EA\frac{\mathrm{d}u}{\mathrm{d}x}\right)&amp;=0,\\
+u(0)&amp;=0,\qquad EA u'(L)=F,\\
+\mathbf K_{ff}(E)\mathbf u_f&amp;=\mathbf f_f.
+\end{aligned}
+\end{split}\]</div>
+<p>The subscript <span class="math notranslate nohighlight">\(f\)</span> denotes unconstrained degrees of freedom. Ten line elements
+give eleven nodes. Reuse this forward function throughout recovery:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">mesh</span> <span class="o">=</span> <span class="n">phast</span><span class="o">.</span><span class="n">line_mesh</span><span class="p">(</span><span class="n">length</span><span class="o">=</span><span class="mf">100.0</span><span class="p">,</span> <span class="n">n_elements</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">forward</span><span class="p">(</span><span class="n">E</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">phast</span><span class="o">.</span><span class="n">solve_bar</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">young_modulus</span><span class="o">=</span><span class="n">E</span><span class="p">,</span>
+                           <span class="n">area</span><span class="o">=</span><span class="mf">10.0</span><span class="p">,</span> <span class="n">end_force</span><span class="o">=</span><span class="mf">4000.0</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>For this uniform bar, <span class="math notranslate nohighlight">\(u(x)=Fx/(EA)\)</span> supplies an analytical comparison.
+The notebook creates a synthetic observation with <span class="math notranslate nohighlight">\(E_{\mathrm{ref}}=210\,\mathrm{GPa}\)</span>,
+giving <span class="math notranslate nohighlight">\(y_{\mathrm{obs}}\approx0.190476\,\mathrm{mm}\)</span>. Inspect nodal displacement,
+reaction and the free-degree residual before beginning recovery.</p>
+</section>
+<section id="differentiate-a-scalar-mismatch">
+<h2>3. Differentiate a scalar mismatch<a class="headerlink" href="#differentiate-a-scalar-mismatch" title="Link to this heading">#</a></h2>
+<p>At a trial modulus, predict <span class="math notranslate nohighlight">\(y(E)=u(L;E)\)</span> and define</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+\mathcal L(E)&amp;=\left(\frac{y(E)-y_{\mathrm{obs}}}{y_{\mathrm{obs}}}\right)^2,\\[0.5em]
+\frac{\mathrm{d}\mathcal L}{\mathrm{d}E}
+&amp;=\frac{2(y-y_{\mathrm{obs}})}{y_{\mathrm{obs}}^2}\frac{\mathrm{d}y}{\mathrm{d}E},\\[0.5em]
+\frac{\mathrm{d}y}{\mathrm{d}E}&amp;=-\frac{FL}{AE^2}.
+\end{aligned}
+\end{split}\]</div>
+<p>The computational sequence is <span class="math notranslate nohighlight">\(E\rightarrow\mathbf u\rightarrow y\rightarrow\mathcal L\)</span>.
+<code class="docutils literal notranslate"><span class="pre">loss.backward()</span></code> applies the chain rule through the recorded calculation,
+including the PhAST solve. At the initial <span class="math notranslate nohighlight">\(E=100\,\mathrm{GPa}\)</span> the bar extends
+too much: increasing <span class="math notranslate nohighlight">\(E\)</span> locally reduces the loss. One backward pass gives a
+gradient at the evaluated state. Plotting the loss over a range of modulus
+values requires a separate forward calculation at each value.</p>
+</section>
+<section id="let-the-optimiser-choose-the-next-modulus">
+<h2>4. Let the optimiser choose the next modulus<a class="headerlink" href="#let-the-optimiser-choose-the-next-modulus" title="Link to this heading">#</a></h2>
+<p>Use <span class="math notranslate nohighlight">\(q=\log(E/E_{\mathrm{scale}})\)</span> with <span class="math notranslate nohighlight">\(E_{\mathrm{scale}}=1\,\mathrm{MPa}\)</span>,
+so <span class="math notranslate nohighlight">\(E=E_{\mathrm{scale}}\exp(q)\)</span> remains positive. The code stores modulus
+values in MPa. The Day 2 notebook uses SGD with momentum:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">log_E</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Parameter</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="mf">100000.</span><span class="p">)))</span>
+<span class="n">optimiser</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">SGD</span><span class="p">([</span><span class="n">log_E</span><span class="p">],</span> <span class="n">lr</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">momentum</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">optimiser</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">forward</span><span class="p">(</span><span class="n">log_E</span><span class="o">.</span><span class="n">exp</span><span class="p">())</span><span class="o">.</span><span class="n">displacement</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">loss</span> <span class="o">=</span> <span class="p">((</span><span class="n">y</span> <span class="o">-</span> <span class="n">observed</span><span class="p">)</span> <span class="o">/</span> <span class="n">observed</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+<span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+<span class="n">optimiser</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Repeat prediction, loss, backward and update until the relative tip mismatch
+is below <span class="math notranslate nohighlight">\(10^{-4}\)</span> for five consecutive evaluations, with at most 80 updates.
+The force stays fixed. Momentum can produce overshoot and oscillation.
+The lecture’s plain-SGD example and the notebook’s momentum example have
+different histories: use the notebook’s printed result beside its own plots.</p>
+</section>
+<section id="interpret-and-check-the-result">
+<h2>5. Interpret and check the result<a class="headerlink" href="#interpret-and-check-the-result" title="Link to this heading">#</a></h2>
+<p><a class="reference internal" href="../classroom/02_gradients_and_recovery.html"><span class="doc">Lab 2</span></a> contains geometry,
+mesh, boundary conditions, displacement fields, a computational graph, modulus
+and loss histories, and an animated recovery. Compare the recovered field with
+the observed tip and analytical extension. Synthetic, noise-free data test this
+implementation; experimental identification adds measurement and model uncertainty.</p>
+<p>Finite differences and Taylor remainders are optional derivative checks:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+\mathcal L'(E)&amp;\approx\frac{\mathcal L(E+h)-\mathcal L(E-h)}{2h},\\[0.5em]
+R(h)&amp;=|\mathcal L(E+h)-\mathcal L(E)-h\mathcal L'(E)|.
+\end{aligned}
+\end{split}\]</div>
+<p>The first compares the gradient with nearby solves. For a smooth function and
+a correct derivative, the second decreases as <span class="math notranslate nohighlight">\(h^2\)</span> until numerical error
+dominates. These checks assess a local derivative separately from the inverse loop.
+The <a class="reference internal" href="../05_differentiation_and_inverse.html"><span class="doc">reference derivation</span></a> gives details.</p>
+</section>
+<section id="extend-the-same-chain-rule-to-fracture">
+<h2>6. Extend the same chain rule to fracture<a class="headerlink" href="#extend-the-same-chain-rule-to-fracture" title="Link to this heading">#</a></h2>
+<p>For observations <span class="math notranslate nohighlight">\(\mathbf y(\boldsymbol\theta)\)</span> and a symmetric positive-semidefinite
+weighting matrix <span class="math notranslate nohighlight">\(\mathbf W\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+\mathcal L&amp;=\tfrac12(\mathbf y-\mathbf y_{\mathrm{obs}})^T
+\mathbf W(\mathbf y-\mathbf y_{\mathrm{obs}}),\\[0.5em]
+\nabla_{\boldsymbol\theta}\mathcal L
+&amp;=\mathbf J^T\mathbf W(\mathbf y-\mathbf y_{\mathrm{obs}}),\\[0.5em]
+\mathbf J&amp;=\frac{\partial\mathbf y}{\partial\boldsymbol\theta}.
+\end{aligned}
+\end{split}\]</div>
+<p>This vector–Jacobian product combines the sensitivity of each observation into
+a gradient of the scalar loss. For an implicitly solved equilibrium equation,
+write the force residual as <span class="math notranslate nohighlight">\(\mathbf R(\mathbf u,\boldsymbol\theta)=0\)</span>.
+If the residual is differentiable and its displacement Jacobian is invertible,
+differentiating this equation locally gives</p>
 <div class="math notranslate nohighlight">
 \[
-p \longrightarrow \text{computed states}
-\longrightarrow y \longrightarrow J.
+\mathbf R_{\mathbf u}\frac{\partial\mathbf u}{\partial\boldsymbol\theta}
+=-\mathbf R_{\boldsymbol\theta}.
 \]</div>
-<p>For a fracture problem, observations might be sampled displacements, a
-load–displacement response or a stated measure of the crack field. The
-observation definition, boundary conditions and loading remain part of this
-map. Recovering a parameter also depends on how much information these
-observations contain.</p>
-</section>
-<section id="follow-the-sensitivity-backwards-618-minutes">
-<h2>Follow the sensitivity backwards · 6–18 minutes<a class="headerlink" href="#follow-the-sensitivity-backwards-618-minutes" title="Link to this heading">#</a></h2>
-<p>Reverse mode starts from the scalar loss and passes its sensitivity backwards
-through each operation. A vector–Jacobian product (VJP) performs one such
-local propagation. When a parameter is used at several updates, its
-contributions add. An optimisation method then uses the accumulated gradient
-to choose a parameter update.</p>
-<p>The <a class="reference internal" href="../05a_backpropagation_step_by_step.html#fig-backpropagation-step-by-step"><span class="std std-ref">existing backpropagation figure</span></a>
-locates these quantities. The
-<a class="reference internal" href="../05a_backpropagation_step_by_step.html"><span class="doc">three-step worked derivation</span></a> supplies
-a small algebraic calculation that can be checked by hand.</p>
-<div class="note admonition">
-<p class="admonition-title">Three updates and one shared parameter</p>
-<p>Follow three forward updates, the observation and the loss. Trace the reverse
-path through one VJP at each update and add the contributions from every use
-of the shared parameter. The optimisation update uses the resulting gradient.</p>
-<p><strong>Learning question:</strong> Why can an early update contribute to the final loss
-gradient?</p>
-</div>
-</section>
-<section id="specify-the-derivative-being-computed-1828-minutes">
-<h2>Specify the derivative being computed · 18–28 minutes<a class="headerlink" href="#specify-the-derivative-being-computed-1828-minutes" title="Link to this heading">#</a></h2>
-<p>Unrolling differentiates the sequence of operations actually executed.
-Implicit differentiation uses the equation defining a converged state, under
-appropriate local smoothness and nonsingularity assumptions. Fracture history,
-active constraints and branch changes affect that interpretation. The
-<a class="reference internal" href="../05_differentiation_and_inverse.html"><span class="doc">differentiation chapter</span></a> develops both
-routes and their assumptions.</p>
-<div class="note admonition">
-<p class="admonition-title">Checking the elastic-bar sensitivity</p>
-<p>Use the elastic-bar teaching model to compare
-an analytical sensitivity, autograd and finite differences over several
-perturbation sizes. Alongside it, draw the graphs for a fixed number of
-iterations and for a converged residual equation. State which graph each
-derivative follows.</p>
-<p><strong>Learning question:</strong> What evidence supports the gradient of the selected
-computational map?</p>
-</div>
-</section>
-<section id="a-sequence-of-fracture-inverse-applications-2850-minutes">
-<h2>A sequence of fracture inverse applications · 28–50 minutes<a class="headerlink" href="#a-sequence-of-fracture-inverse-applications-2850-minutes" title="Link to this heading">#</a></h2>
-<p>The following discussion problems extend the inverse formulation to fracture.
-For each, specify the unknowns, observations and assumptions, then identify the
-comparisons needed to assess a recovered parameter. The worked elastic-bar
-calculation in the practical provides a small numerical example of this process.</p>
-<div class="note admonition">
-<p class="admonition-title">Discussion: fracture-energy recovery</p>
-<p>Consider an unknown scalar <span class="math notranslate nohighlight">\(G_c\)</span>, a fixed specimen and prescribed loading.
-Choose an observation and define a mismatch loss. Explain how you would compare
-the target, initial prediction and fitted prediction using common scales,
-then assess the parameter trajectory and derivative accuracy.</p>
-<p><strong>Learning question:</strong> Which feature of the response provides information
-about <span class="math notranslate nohighlight">\(G_c\)</span>?</p>
-</div>
-<div class="note admonition">
-<p class="admonition-title">Discussion: one inclusion</p>
-<p>Extend the parameter description to one inclusion. Identify which geometry
-or material quantities are unknown and explain how its presence could affect
-an observed displacement or crack field. Specify a suitable comparison of
-target, initial and fitted configurations using common scales.</p>
-<p><strong>Learning question:</strong> Can the chosen observations distinguish the inclusion
-parameters being recovered?</p>
-</div>
-<div class="note admonition">
-<p class="admonition-title">Discussion: several inclusions</p>
-<p>Extend the single-inclusion description to several inclusions. Discuss how
-parameter correlation, initialisation and observations held out from fitting
-affect the interpretation of a recovery. Distinguish fitting the measured
-fields from uniquely identifying the underlying parameters.</p>
-<p><strong>Learning question:</strong> How does adding unknowns change the observations needed
-for recovery?</p>
-</div>
-<div class="note admonition">
-<p class="admonition-title">Discussion: an unknown load</p>
-<p>Consider recovering the magnitude of an applied load from displacement
-observations while the material properties are known. Define the
-parameter–state–observation–loss sequence. Then discuss what changes if both
-the load and elastic modulus are unknown.</p>
-<p><strong>Learning question:</strong> Which parts of the inverse workflow transfer to a new
-physical problem?</p>
-</div>
-</section>
-<section id="connect-the-examples-to-the-practical-5055-minutes">
-<h2>Connect the examples to the practical · 50–55 minutes<a class="headerlink" href="#connect-the-examples-to-the-practical-5055-minutes" title="Link to this heading">#</a></h2>
-<p>In <a class="reference internal" href="../classroom/02_gradients_and_recovery.html"><span class="doc">Practical 2: Gradients and material recovery</span></a>, begin with a damaged bar’s
-force and scalar mismatch loss. Predict the sensitivity signs, calculate the
-chain rule, then compare PyTorch’s backward pass with analytic derivatives
-and finite differences. Next inspect a degradation-law derivative and recover
-a modulus in a one-dimensional elastic bar. These teaching models make the
-derivative and recovery steps easy to inspect.
-The fracture discussion problems extend these scientific questions to coupled
-damage evolution. Assessing each recovery requires observations and derivative
-checks appropriate to its particular model.</p>
-<p>The same chain rule also computes gradients of neural-model weights.
-<a class="reference internal" href="03_hybrid_learning.html"><span class="doc">Lecture 3</span></a> uses that connection to introduce training
-and two different roles for a learned component in a numerical workflow.</p>
+<p>For evolving fracture, sensitivities also pass through earlier states, history
+and damage updates. Shared parameters contribute at each use. Particle-position
+recovery replaces <span class="math notranslate nohighlight">\(E\)</span> with inclusion coordinates and the tip measurement with
+selected field observations. Assess sensitivity, initialisation, active
+constraints and non-uniqueness for that problem. The
+<a class="reference internal" href="../research/08_visual_lab.html"><span class="doc">inverse visual laboratory</span></a>
+provides additional reading; these larger studies are separate from the bar practical.</p>
 </section>
 </section>
 
@@ -582,7 +594,7 @@ and two different roles for a learned component in a numerical workflow.</p>
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Lecture 3: Learning inside a numerical workflow</p>
+        <p class="prev-next-title">Lecture 3: Learned damage updates in PhAST</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -602,11 +614,12 @@ and two different roles for a learned component in a numerical workflow.</p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#choose-a-parameter-and-an-observation-06-minutes">Choose a parameter and an observation · 0–6 minutes</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#follow-the-sensitivity-backwards-618-minutes">Follow the sensitivity backwards · 6–18 minutes</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#specify-the-derivative-being-computed-1828-minutes">Specify the derivative being computed · 18–28 minutes</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-sequence-of-fracture-inverse-applications-2850-minutes">A sequence of fracture inverse applications · 28–50 minutes</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#connect-the-examples-to-the-practical-5055-minutes">Connect the examples to the practical · 50–55 minutes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#state-the-experiment">1. State the experiment</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#build-and-solve-the-forward-problem-with-phast">2. Build and solve the forward problem with PhAST</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#differentiate-a-scalar-mismatch">3. Differentiate a scalar mismatch</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#let-the-optimiser-choose-the-next-modulus">4. Let the optimiser choose the next modulus</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpret-and-check-the-result">5. Interpret and check the result</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extend-the-same-chain-rule-to-fracture">6. Extend the same chain rule to fracture</a></li>
 </ul>
   </nav></div>
 

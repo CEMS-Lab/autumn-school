@@ -5,20 +5,14 @@
 :width: 96%
 :alt: Three separate choices: fracture formulation, spatial discretisation and nonlinear solution algorithm. Phase field, XFEM and quasi-Newton answer different questions.
 
-A complete computational simulation requires three distinct engineering choices: the fracture formulation, the spatial discretization, and the nonlinear solver. Keeping these layers modular makes comparing methods clear and straightforward.
+Fracture formulation, spatial discretisation and solution algorithm are separate choices in a computational model.
 :::
 
 ## How Should We Represent a Crack?
 
-Imagine dropping a ceramic cup or watching a car windshield crack after being struck by a pebble. In the real physical world, fracture is an abrupt geometric split: atomic bonds stretch until they snap, creating two brand-new surfaces.
+A brittle crack creates new surfaces and changes the transfer of force through a solid. A computational model must describe both the deformation of the body and the evolving fracture.
 
-When engineers attempt to model this on a computer, they face a classic dilemma:
-*Should we represent the crack as a razor-sharp geometric boundary that literally slices our mesh in two, or can we represent the damaged material smoothly, like a continuous field of damage density?*
-
-In this chapter, we explore the three major ways computational mechanics represents cracking:
-1. **Sharp Interface Models (Classical LEFM):** Treating the crack as an exact lower-dimensional boundary $\Gamma$.
-2. **Cohesive-Zone Models (CZM):** Treating the crack as a traction–separation law along prescribed interfaces.
-3. **Phase-Field Models (PFM):** Regularising the crack as a continuous, diffuse damage band over a characteristic length $\ell$.
+Sharp-crack models represent a surface inside the body. Cohesive models relate the force across an interface to its opening. Phase-field models describe fracture using a continuous damage field spread over a length scale $\ell$.
 
 ---
 
@@ -39,7 +33,7 @@ Here:
 - $G_c$ is the critical energy release rate (fracture toughness), and
 - $\mathcal{H}^{d-1}(\Gamma)$ measures the crack surface area (or crack length in 2D).
 
-The key advantage of the sharp crack approach is conceptual clarity: it represents a literal physical discontinuity. However, simulating evolving cracks with sharp models is numerically challenging: as the crack propagates, branches, or kinks, the finite-element mesh must be continuously updated and remeshed to conform to the moving geometric interface.
+In a mesh that conforms to the crack, growth can require changes to the mesh. Enriched and embedded discretisations provide other ways to represent sharp cracks, as the XFEM example below illustrates.
 
 The energy balance principle originated with [Griffith (1921)](https://doi.org/10.1098/rsta.1921.0006) and was given its modern variational formulation for evolving cracks by [Francfort and Marigo (1998)](https://doi.org/10.1016/S0022-5096(98)00034-9).
 
@@ -128,14 +122,14 @@ Each representation offers distinct advantages depending on the engineering appl
 
 | Method | Geometric Representation | Mesh Requirements | Crack Branching & Merging | Primary Engineering Applications |
 | :--- | :--- | :--- | :--- | :--- |
-| **Sharp Crack (LEFM)** | Exact lower-dimensional surface $\Gamma$ | Conforming mesh with tip singularity elements | Requires remeshing at every crack extension step | Standard fatigue crack propagation along known paths |
-| **Cohesive Zone (CZM)** | Traction–separation interface law | Interface elements along predefined element boundaries | Predefined along mesh interfaces | Delamination in composites, adhesive joints, masonry |
-| **XFEM** | Enriched continuous displacement field | Fixed background mesh with Heaviside and tip enrichments | Requires level-set tracking for multiple crack fronts | Crack growth without global remeshing on structured grids |
-| **Phase Field (PFM)** | Continuous scalar damage field $d(x) \in [0, 1]$ | Standard finite elements (element size $h < \ell$) | Handled naturally via energy minimization without tracking | Complex crack topologies, branching, coalescence in 2D/3D |
+| **Sharp Crack (LEFM)** | Exact lower-dimensional surface $\Gamma$ | Depends on discretisation; a conforming approach aligns the mesh with the crack | Requires a numerical representation of evolving crack geometry | Fatigue crack propagation along known paths |
+| **Cohesive Zone (CZM)** | Traction–separation interface law | Interface elements or embedded interfaces | Depends on how new interfaces are introduced | Delamination in composites, adhesive joints, masonry |
+| **XFEM** | Displacement approximation enriched with jumps and near-tip functions | Background mesh with selected enriched nodes | Requires management of crack geometry and enrichment | Crack growth on a background mesh |
+| **Phase Field (PFM)** | Continuous scalar damage field $d(x) \in [0, 1]$ | Mesh fine enough to resolve the damage band; assess sensitivity to $h/\ell$ | Represented through damage-field evolution; depends on the model, loading and resolution | Complex crack topologies, branching and coalescence in 2D/3D |
 
 ### When to Choose Phase-Field Fracture
 
-Phase-field methods have become widely adopted in modern computational mechanics because they transform a complex geometric interface tracking problem into the solution of coupled partial differential equations on a fixed mesh. The crack trajectory, initiation, branching, and coalescence emerge naturally from energy minimization without requiring *ad hoc* geometric tracking criteria.
+Phase-field methods represent crack growth through an evolving field on the mesh. This makes branching and coalescence convenient to describe. The computed path and initiation load still depend on the energy model, length scale, loading and numerical resolution.
 
 ---
 
@@ -149,8 +143,6 @@ To reason clearly about any computational mechanics calculation, we maintain a c
    The mathematical approximation space and mesh topology used to discretize continuous fields (e.g., standard continuous linear triangular T3 elements).
 3. **Nonlinear Solution Strategy:**  
    The iterative numerical algorithm used to solve the coupled nonlinear system of equations (e.g., staggered alternating minimization, or monolithic Newton–Raphson).
-
-This separation is modular: a phase-field formulation can be discretized using standard continuous Galerkin finite elements, and the resulting equations can be solved using either a staggered alternating loop or a monolithic Newton–Raphson solver.
 
 ---
 
@@ -167,8 +159,8 @@ Break this down by identifying:
 :::{admonition} Solution
 :class: dropdown
 
-1. **Fracture Formulation:** The AT2 phase-field regularisation, which specifies the quadratic local dissipation function $w(d) = d^2$ and degradation law $g(d) = (1-d)^2$.
-2. **Spatial Discretization:** Standard continuous triangular (T3) finite elements with piecewise linear shape functions.
+1. **Fracture Formulation:** AT2 phase-field regularisation, with $w(d)=d^2$. The statement leaves the degradation law unspecified.
+2. **Spatial Discretization:** Triangular finite elements. Their interpolation order is unspecified.
 3. **Nonlinear Solver:** A staggered (alternating minimization) algorithm that decouples the mechanical equilibrium and damage updates within each load increment.
 :::
 

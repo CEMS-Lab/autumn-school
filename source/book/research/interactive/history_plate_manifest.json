@@ -12,7 +12,7 @@
   "source_hashes": {
     "build_history_panel.py": "4d6c47831ac9cc22a76ecd3a23ea5396e60b4cc5a539d4e39dd4fd89b793ed3c",
     "history_plate.template.html": "12c75569c3f71df12e1068c0f5536209084d40783f72112bf4f133e094ff3fe3",
-    "history_walkthrough.html": "8fdd530726403f3205745ae30d0b12969dd7a1626a32a272f1ae0e425af037ab",
+    "history_walkthrough.html": "420dab5efe3db2fa5b1bd688e6c52b90a39c1cc1ced495bddae763a06346e948",
     "render_forward_cycle.py": "47173b2017513dd64018a9aca1ce5e23414db87f00c5dcbc961031b7fc3b666a",
     "refresh_history_panel.py": "7a8afcdf472bc372259dd7b09ccce7d8cd8a43ac71581c58e9d377b55fca1d6a"
   },
@@ -62,7 +62,7 @@
     "forward_cycle.mp4": "a355ebead910af7cdcbbdce60e6a59dbd8275075c4d08da93a975e7e986ce249",
     "forward_cycle.png": "34a9cf1ab7768d0702b5687b4e0c8751305c171d27cca8b8661099d868f11067",
     "forward_cycle_manifest.json": "d02b31e243e91efe124a5c9cc42fe73eea23f000d5db21aad225dd1cd08bff81",
-    "history_plate.html": "2914e7deb0f1c584a1808f36ddfee535abf46111b3c3ba170feb0a28288a6cb2",
+    "history_plate.html": "0630d54e82ffc650caa5a4842921e33fdc24ea5284856247f4517999c6e63a08",
     "history_plate_arrays.npz": "e6d19babd2760540f81be749d25134e2c3e430b97a48a2ba2176127ef0c4fd4d"
   },
   "seconds": 2.415445101010846,
@@ -137,6 +137,10 @@
     "seconds": 2.415445101010846,
     "numpy": "2.4.2",
     "matplotlib": "3.10.8"
+  },
+  "prose_review_20260915": {
+    "scope": "Clarified derivative assumptions and unloading rules; numerical payload and media unchanged",
+    "numerical_execution": false
   },
   "editorial_refresh": {
     "date": "2026-09-09",

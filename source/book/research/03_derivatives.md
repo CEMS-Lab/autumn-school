@@ -26,10 +26,10 @@ At fixed $\theta$, evaluate $J(\theta+h)$ and $J(\theta-h)$:
 
 $$D_hJ=\frac{J(\theta+h)-J(\theta-h)}{2h}.$$
 
-This is a derivative with respect to **log stiffness**. Perturbing stiffness
-itself instead would calculate a different coordinate derivative. For $m$
-unknowns, a full coordinate-wise central-FD gradient requires $2m$ perturbed
-forwards; a separate baseline evaluation adds one more.
+This derivative is with respect to **log stiffness**. Differentiating with
+respect to stiffness gives a different value, related by the chain rule. For
+$m$ unknowns, central finite differences require two forward calculations per
+parameter, or $2m$ in total. A baseline calculation adds one more.
 
 ## The adjoint calculation
 

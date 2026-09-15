@@ -33,7 +33,7 @@
     <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="_static/mobile_math.css?v=acf5579e" />
-    <link rel="stylesheet" type="text/css" href="_static/learning_book.css?v=37e7f39f" />
+    <link rel="stylesheet" type="text/css" href="_static/learning_book.css?v=d69ae7f6" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -53,7 +53,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Detailed notebooks and further practice" href="further_practice.html" />
-    <link rel="prev" title="Train, save, reload, adapters, and checked proposals" href="06_learning_adapter.html" />
+    <link rel="prev" title="Learning field predictions and combining them with a solver" href="06_learning_adapter.html" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -174,13 +174,13 @@
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="lectures/01_fracture_and_phast.html">Lecture 1: Phase-field fracture and PhAST</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lectures/02_differentiability_and_inverse.html">Lecture 2: Differentiability and inverse recovery</a></li>
-<li class="toctree-l1"><a class="reference internal" href="lectures/03_hybrid_learning.html">Lecture 3: Learning inside a numerical workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lectures/03_hybrid_learning.html">Lecture 3: Learned damage updates in PhAST</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Three practical labs</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="classroom/01_simulate_fracture.html">Practical 1: Simulate a crack crossing a plate</a></li>
-<li class="toctree-l1"><a class="reference internal" href="classroom/02_gradients_and_recovery.html">Practical 2: Gradients and material recovery</a></li>
-<li class="toctree-l1"><a class="reference internal" href="classroom/03_learning_and_hybrid.html">Practical 3: Learn a field and assess its proposal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classroom/01_simulate_fracture.html">Phase-field fracture of a notched square plate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classroom/02_gradients_and_recovery.html">Recovering Young’s modulus from measured extension</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classroom/03_learning_and_hybrid.html">Replacing the damage subproblem with a trained network</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Optional direct-replacement case study</span></p>
 <ul class="nav bd-sidenav">
@@ -197,7 +197,7 @@
 <li class="toctree-l2"><a class="reference internal" href="05a_backpropagation_step_by_step.html">Backpropagation through a stepped update</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1"><a class="reference internal" href="06_learning_adapter.html">Train, save, reload, adapters, and checked proposals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_learning_adapter.html">Learning field predictions and combining them with a solver</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Practice, Solutions, Glossary, and References</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="further_practice.html">Detailed notebooks and further practice</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="labs/00_why_average_predictions_can_fail.html">Lab 00: Branch Selection &amp; Energy-Based Objectives in Physics-Informed Learning</a></li>
@@ -215,7 +215,7 @@
 <li class="toctree-l2"><a class="reference internal" href="research/01_geometry.html">Representing particles and testing their geometry</a></li>
 <li class="toctree-l2"><a class="reference internal" href="research/02_observations.html">From measurements to a loss</a></li>
 <li class="toctree-l2"><a class="reference internal" href="research/03_derivatives.html">Verify a derivative before interpreting an update</a></li>
-<li class="toctree-l2"><a class="reference internal" href="research/03_history_visual.html">Why a fracture solver needs a memory-aware derivative</a></li>
+<li class="toctree-l2"><a class="reference internal" href="research/03_history_visual.html">Differentiating a fracture simulation with loading history</a></li>
 <li class="toctree-l2"><a class="reference internal" href="research/03_history.html">Differentiating fracture: memory, switches and useful limits</a></li>
 <li class="toctree-l2"><a class="reference internal" href="research/04_recovery.html">Why a correct gradient can give slow or ambiguous recovery</a></li>
 <li class="toctree-l2"><a class="reference internal" href="research/05_learning.html">A useful role for learning: propose, solve and check</a></li>
@@ -448,16 +448,16 @@ document.write(`
 <h1>Practice, Solutions, Glossary, and References<a class="headerlink" href="#practice-solutions-glossary-and-references" title="Link to this heading">#</a></h1>
 <section id="workshop-synthesis-the-four-core-milestones">
 <h2>Workshop Synthesis: The Four Core Milestones<a class="headerlink" href="#workshop-synthesis-the-four-core-milestones" title="Link to this heading">#</a></h2>
-<p>Throughout this tutorial course, we navigated the bridge connecting continuum fracture mechanics to modern differentiable scientific computing and machine learning. As a review, ensure you can comfortably explain the four foundational milestones:</p>
+<p>The course connects fracture modelling, numerical solution, differentiation and learning. Use the following topics to review those connections.</p>
 <ol class="arabic simple">
 <li><p><strong>Pillar 1: What Phase-Field Fracture Is</strong><br />
 Explain how Griffith’s surface energy is approximated by a volume integral over a continuous scalar damage field <span class="math notranslate nohighlight">\(d(x)\)</span>, governed by the regularisation length <span class="math notranslate nohighlight">\(\ell\)</span>, the crack-density function <span class="math notranslate nohighlight">\(w(d)\)</span>, and the stiffness degradation law <span class="math notranslate nohighlight">\(g(d)\)</span>.</p></li>
-<li><p><strong>Pillar 2: The Computational Simulation Pipeline (PhAST)</strong><br />
-Trace an end-to-end simulation: defining domain coordinates and connectivity, assembling finite element tensors, applying boundary conditions and precracks, and executing the staggered alternating minimization loop until equilibrium residuals converge.</p></li>
-<li><p><strong>Pillar 3: Differentiability and Inverse Discovery</strong><br />
-Explain how reverse-mode automatic differentiation computes exact sensitivities through numerical mechanics graphs, verify autograd gradients against directional numerical finite differences, and formulate gradient-based inverse optimization to recover unknown physical parameters.</p></li>
-<li><p><strong>Pillar 4: Deep Learning Surrogates and Hybrid Correction</strong><br />
-Formulate how neural networks can serve as fast surrogate proposal models, evaluate neural predictions against physical PDE residuals, and use trusted numerical solvers in a hybrid loop to correct out-of-distribution predictions.</p></li>
+<li><p><strong>Pillar 2: Simulation with PhAST</strong>
+Trace the geometry, mesh, boundary conditions, mechanical update and damage solve, and explain the resulting fields and energy histories.</p></li>
+<li><p><strong>Pillar 3: Differentiation and Recovery</strong>
+Explain how the chain rule produces a parameter gradient, compare it with a finite-difference check, and use it to estimate an unknown parameter.</p></li>
+<li><p><strong>Pillar 4: Learning and Hybrid Correction</strong>
+Explain the role of a learned prediction, assess its residuals and constraints, and compare the complete hybrid calculation with its numerical reference.</p></li>
 </ol>
 </section>
 <hr class="docutils" />
@@ -465,8 +465,8 @@ Formulate how neural networks can serve as fast surrogate proposal models, evalu
 <h2>Best Practices for Computational Exploration<a class="headerlink" href="#best-practices-for-computational-exploration" title="Link to this heading">#</a></h2>
 <p>When experimenting with computational mechanics models in Jupyter or Colab:</p>
 <ul class="simple">
-<li><p><strong>Vary One Parameter at a Time:</strong> For example, decrease <span class="math notranslate nohighlight">\(\ell\)</span> to observe crack bandwidth narrowing, or increase <span class="math notranslate nohighlight">\(G_c\)</span> to observe higher fracture toughness and peak load.</p></li>
-<li><p><strong>Examine Both Fields and Curves:</strong> Do not rely solely on scalar metrics. Always inspect the full spatial damage and stress fields alongside global load-displacement curves.</p></li>
+<li><p><strong>Vary One Parameter at a Time:</strong> For example, change <span class="math notranslate nohighlight">\(\ell\)</span> and examine the damage-band width, or change <span class="math notranslate nohighlight">\(G_c\)</span> and compare the resulting peak load. Keep the other model inputs fixed and check that the mesh resolves each case.</p></li>
+<li><p><strong>Examine Both Fields and Curves:</strong> Inspect the full spatial damage and stress fields alongside global load-displacement curves.</p></li>
 <li><p><strong>Verify Gradients Early:</strong> When writing custom differentiable loss functions, verify gradients against finite differences before launching long optimization runs.</p></li>
 <li><p><strong>Check Physical Bounds:</strong> Ensure the damage field respects <span class="math notranslate nohighlight">\(0 \le d \le 1\)</span> and non-decreasing history <span class="math notranslate nohighlight">\(d_n \ge d_{n-1}\)</span>.</p></li>
 </ul>
@@ -485,15 +485,16 @@ Formulate how neural networks can serve as fast surrogate proposal models, evalu
 <td><p>Geometry, supports, loading, PhAST results and their interpretation.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="classroom/02_gradients_and_recovery.html"><span class="doc">Lab 2 — Gradients and recovery</span></a></p></td>
-<td><p>Degradation derivatives and elastic-bar parameter recovery.</p></td>
+<td><p>One force, one tip observation and Young’s-modulus recovery through PhAST.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="classroom/03_learning_and_hybrid.html"><span class="doc">Lab 3 — Learning and hybrid correction</span></a></p></td>
-<td><p>Training, saved models and physical correction of a proposed field.</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="classroom/03_learning_and_hybrid.html"><span class="doc">Lab 3 — Learned damage updates</span></a></p></td>
+<td><p>Frozen graph-network predictions, classical correction and checked direct replacement on a three-hole plate.</p></td>
 </tr>
 </tbody>
 </table>
 </div>
-<p>Each page includes Google Colab and practice/solution downloads. Visit
+<p>Each page includes Google Colab, notebook downloads and a conceptual answer.
+The learned lab needs the instructor-supplied checkpoint. Visit
 <a class="reference internal" href="further_practice.html"><span class="doc">Detailed notebooks and further practice</span></a> for the original individual notebooks and longer
 implementation walkthroughs.</p>
 </section>
@@ -511,8 +512,8 @@ apply supports and loading, solve, and interpret the saved fields.</p>
 </thead>
 <tbody>
 <tr class="row-even"><td><p>Course Lab 01</p></td>
-<td><p>How do the mesh, initial damage and imposed separation determine a quasistatic response?</p></td>
-<td><p>Revisit the saved fields and changed-load exercise above.</p></td>
+<td><p>How do a graded mesh and imposed separation affect dynamic crack growth?</p></td>
+<td><p>Inspect displacement, strain, stress and damage animations in the square-plate notebook.</p></td>
 </tr>
 <tr class="row-odd"><td><p>PhAST SENT setup</p></td>
 <td><p>How do a Gmsh geometry and named regions become a configured problem?</p></td>
@@ -537,7 +538,7 @@ and measure the complete runtime in your environment.</p>
 and damage <span class="math notranslate nohighlight">\(d\)</span>. The calculation uses a length scale <span class="math notranslate nohighlight">\(\ell\)</span>, a residual
 stiffness <span class="math notranslate nohighlight">\(\eta_{\mathrm{res}}\)</span>, and a displacement-controlled load increment.</p>
 <ol class="arabic simple">
-<li><p>Give the three terms in the fracture density that regularise a sharp crack.</p></li>
+<li><p>Identify the local damage term, the gradient term and the energy prefactor in the fracture contribution.</p></li>
 <li><p>Write the qualitative order of a staggered update.</p></li>
 <li><p>Name two visual outputs and one scalar output you would retain.</p></li>
 <li><p>A learned model proposes <span class="math notranslate nohighlight">\(d\)</span>. Name two checks required before using it as a
@@ -724,7 +725,7 @@ Transactions of the Royal Society A</em> 379 (2021),
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Train, save, reload, adapters, and checked proposals</p>
+        <p class="prev-next-title">Learning field predictions and combining them with a solver</p>
       </div>
     </a>
     <a class="right-next"

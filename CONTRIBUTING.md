@@ -27,6 +27,15 @@ notebooks and solution JSON, so a book rebuild preserves them.
 
 ## Curated classroom notebooks
 
+The 15 September Day 2 edition is identified by
+`notebooks/classroom/day2_edition.json`. Its canonical notebooks are the three
+supplied teaching files, mapped to the existing classroom URLs. Run
+`python source/book/scripts/build_classroom_pages.py` to retain code and outputs
+while regenerating navigation, downloads and conceptual answers. For this
+edition it delegates to `build_day2_pages.py`; it does not execute simulations
+or assert an earlier execution receipt applies. The historical classroom
+generator below is for the previous edition and must not overwrite these files.
+
 The primary route consists of three notebooks in `notebooks/classroom/`.
 `source/notebooks/build_classroom_labs.py` authors them from the retained
 examples and inspectable course helpers. `source/book/scripts/build_classroom_pages.py`

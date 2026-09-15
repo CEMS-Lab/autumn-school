@@ -11,9 +11,9 @@ The worked example and diagram below were developed for this course.
 :width: 100%
 :alt: Three updates propagate states forward. The terminal loss seeds adjoints, which propagate backwards through transposed state Jacobians. Add each shared-parameter contribution plus direct-loss and initial-state terms to obtain the total gradient; optimisation is a separate step.
 
-One parameter can influence a final loss at every update. Reverse mode passes
-a cotangent backwards and adds one parameter contribution per use of that
-parameter.
+A parameter can affect the final loss at several updates. Reverse mode
+carries the sensitivity of the loss backwards through those updates and adds
+the contribution from each use of the parameter.
 :::
 
 ## Start from a sequence of update maps
@@ -43,7 +43,9 @@ A_n=\frac{\partial S_n}{\partial z_n},
 B_n=\frac{\partial S_n}{\partial p}.
 $$
 
-For a scalar loss, the terminal adjoint is the vector
+Define $\lambda_n=\partial J/\partial z_n$. This vector, called the adjoint,
+measures how a small change in each component of the state at step $n$ affects
+the final loss. At the final step,
 
 $$
 \lambda_N=C^\mathsf{T}\nabla_y\ell,
@@ -190,13 +192,14 @@ observations generated in the notebook.
 
 ## An AT2 subproblem with fixed history and mechanics
 
-The PhAST source defines an AT2 damage weak form and an
-adjoint CG backward for selected damage-solve inputs in
-`vendor/PhAST/src/phast/solvers/damage_solver.py`. For an **unconstrained
-interior solve** (or a residual restricted to free damage degrees of freedom),
-with spatially constant $G_c$ and the mesh-dependent $\gamma$ correction omitted, a
-useful **fixed-history, fixed-mechanics reduced** notation for that damage
-subproblem is
+The PhAST source defines an AT2 damage weak form and an adjoint CG backward
+for selected damage-solve inputs in
+`vendor/PhAST/src/phast/solvers/damage_solver.py`.
+
+Consider this damage solve with mechanics, the history field $H$ and the
+length scale $\ell$ held fixed. Assume spatially constant $G_c$, omit the mesh
+correction $\gamma$, and restrict the residual to unconstrained damage degrees
+of freedom. The reduced problem can then be written as
 
 $$
 R_d(d;G_c,H)

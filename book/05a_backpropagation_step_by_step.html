@@ -33,7 +33,7 @@
     <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="_static/mobile_math.css?v=acf5579e" />
-    <link rel="stylesheet" type="text/css" href="_static/learning_book.css?v=37e7f39f" />
+    <link rel="stylesheet" type="text/css" href="_static/learning_book.css?v=d69ae7f6" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -52,7 +52,7 @@
     <script src="_static/learning_book.js?v=5aaa4a9b"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Train, save, reload, adapters, and checked proposals" href="06_learning_adapter.html" />
+    <link rel="next" title="Learning field predictions and combining them with a solver" href="06_learning_adapter.html" />
     <link rel="prev" title="Differentiable Mechanics and Inverse Parameter Discovery" href="05_differentiation_and_inverse.html" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -174,13 +174,13 @@
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="lectures/01_fracture_and_phast.html">Lecture 1: Phase-field fracture and PhAST</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lectures/02_differentiability_and_inverse.html">Lecture 2: Differentiability and inverse recovery</a></li>
-<li class="toctree-l1"><a class="reference internal" href="lectures/03_hybrid_learning.html">Lecture 3: Learning inside a numerical workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lectures/03_hybrid_learning.html">Lecture 3: Learned damage updates in PhAST</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Three practical labs</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="classroom/01_simulate_fracture.html">Practical 1: Simulate a crack crossing a plate</a></li>
-<li class="toctree-l1"><a class="reference internal" href="classroom/02_gradients_and_recovery.html">Practical 2: Gradients and material recovery</a></li>
-<li class="toctree-l1"><a class="reference internal" href="classroom/03_learning_and_hybrid.html">Practical 3: Learn a field and assess its proposal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classroom/01_simulate_fracture.html">Phase-field fracture of a notched square plate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classroom/02_gradients_and_recovery.html">Recovering Young’s modulus from measured extension</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classroom/03_learning_and_hybrid.html">Replacing the damage subproblem with a trained network</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Optional direct-replacement case study</span></p>
 <ul class="nav bd-sidenav">
@@ -197,7 +197,7 @@
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Backpropagation through a stepped update</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1"><a class="reference internal" href="06_learning_adapter.html">Train, save, reload, adapters, and checked proposals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_learning_adapter.html">Learning field predictions and combining them with a solver</a></li>
 <li class="toctree-l1"><a class="reference internal" href="07_practice_references.html">Practice, Solutions, Glossary, and References</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="further_practice.html">Detailed notebooks and further practice</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="labs/00_why_average_predictions_can_fail.html">Lab 00: Branch Selection &amp; Energy-Based Objectives in Physics-Informed Learning</a></li>
@@ -215,7 +215,7 @@
 <li class="toctree-l2"><a class="reference internal" href="research/01_geometry.html">Representing particles and testing their geometry</a></li>
 <li class="toctree-l2"><a class="reference internal" href="research/02_observations.html">From measurements to a loss</a></li>
 <li class="toctree-l2"><a class="reference internal" href="research/03_derivatives.html">Verify a derivative before interpreting an update</a></li>
-<li class="toctree-l2"><a class="reference internal" href="research/03_history_visual.html">Why a fracture solver needs a memory-aware derivative</a></li>
+<li class="toctree-l2"><a class="reference internal" href="research/03_history_visual.html">Differentiating a fracture simulation with loading history</a></li>
 <li class="toctree-l2"><a class="reference internal" href="research/03_history.html">Differentiating fracture: memory, switches and useful limits</a></li>
 <li class="toctree-l2"><a class="reference internal" href="research/04_recovery.html">Why a correct gradient can give slow or ambiguous recovery</a></li>
 <li class="toctree-l2"><a class="reference internal" href="research/05_learning.html">A useful role for learning: propose, solve and check</a></li>
@@ -447,9 +447,9 @@ The worked example and diagram below were developed for this course.</p>
 <a class="reference internal image-reference" href="_images/05a_backpropagation.svg"><img alt="Three updates propagate states forward. The terminal loss seeds adjoints, which propagate backwards through transposed state Jacobians. Add each shared-parameter contribution plus direct-loss and initial-state terms to obtain the total gradient; optimisation is a separate step." src="_images/05a_backpropagation.svg" style="width: 100%;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Figure 8 </span><span class="caption-text">One parameter can influence a final loss at every update. Reverse mode passes
-a cotangent backwards and adds one parameter contribution per use of that
-parameter.</span><a class="headerlink" href="#fig-backpropagation-step-by-step" title="Link to this image">#</a></p>
+<p><span class="caption-number">Figure 8 </span><span class="caption-text">A parameter can affect the final loss at several updates. Reverse mode
+carries the sensitivity of the loss backwards through those updates and adds
+the contribution from each use of the parameter.</span><a class="headerlink" href="#fig-backpropagation-step-by-step" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <section id="start-from-a-sequence-of-update-maps">
@@ -475,7 +475,9 @@ A_n=\frac{\partial S_n}{\partial z_n},
 \qquad
 B_n=\frac{\partial S_n}{\partial p}.
 \]</div>
-<p>For a scalar loss, the terminal adjoint is the vector</p>
+<p>Define <span class="math notranslate nohighlight">\(\lambda_n=\partial J/\partial z_n\)</span>. This vector, called the adjoint,
+measures how a small change in each component of the state at step <span class="math notranslate nohighlight">\(n\)</span> affects
+the final loss. At the final step,</p>
 <div class="math notranslate nohighlight">
 \[
 \lambda_N=C^\mathsf{T}\nabla_y\ell,
@@ -641,13 +643,13 @@ observations generated in the notebook.</p>
 </section>
 <section id="an-at2-subproblem-with-fixed-history-and-mechanics">
 <h2>An AT2 subproblem with fixed history and mechanics<a class="headerlink" href="#an-at2-subproblem-with-fixed-history-and-mechanics" title="Link to this heading">#</a></h2>
-<p>The PhAST source defines an AT2 damage weak form and an
-adjoint CG backward for selected damage-solve inputs in
-<code class="docutils literal notranslate"><span class="pre">vendor/PhAST/src/phast/solvers/damage_solver.py</span></code>. For an <strong>unconstrained
-interior solve</strong> (or a residual restricted to free damage degrees of freedom),
-with spatially constant <span class="math notranslate nohighlight">\(G_c\)</span> and the mesh-dependent <span class="math notranslate nohighlight">\(\gamma\)</span> correction omitted, a
-useful <strong>fixed-history, fixed-mechanics reduced</strong> notation for that damage
-subproblem is</p>
+<p>The PhAST source defines an AT2 damage weak form and an adjoint CG backward
+for selected damage-solve inputs in
+<code class="docutils literal notranslate"><span class="pre">vendor/PhAST/src/phast/solvers/damage_solver.py</span></code>.</p>
+<p>Consider this damage solve with mechanics, the history field <span class="math notranslate nohighlight">\(H\)</span> and the
+length scale <span class="math notranslate nohighlight">\(\ell\)</span> held fixed. Assume spatially constant <span class="math notranslate nohighlight">\(G_c\)</span>, omit the mesh
+correction <span class="math notranslate nohighlight">\(\gamma\)</span>, and restrict the residual to unconstrained damage degrees
+of freedom. The reduced problem can then be written as</p>
 <div class="math notranslate nohighlight">
 \[
 R_d(d;G_c,H)
@@ -736,7 +738,7 @@ sets, and the converged staggered states.</p></li>
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Train, save, reload, adapters, and checked proposals</p>
+        <p class="prev-next-title">Learning field predictions and combining them with a solver</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

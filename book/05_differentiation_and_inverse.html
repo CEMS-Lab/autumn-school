@@ -33,7 +33,7 @@
     <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="_static/mobile_math.css?v=acf5579e" />
-    <link rel="stylesheet" type="text/css" href="_static/learning_book.css?v=37e7f39f" />
+    <link rel="stylesheet" type="text/css" href="_static/learning_book.css?v=d69ae7f6" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -174,13 +174,13 @@
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="lectures/01_fracture_and_phast.html">Lecture 1: Phase-field fracture and PhAST</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lectures/02_differentiability_and_inverse.html">Lecture 2: Differentiability and inverse recovery</a></li>
-<li class="toctree-l1"><a class="reference internal" href="lectures/03_hybrid_learning.html">Lecture 3: Learning inside a numerical workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lectures/03_hybrid_learning.html">Lecture 3: Learned damage updates in PhAST</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Three practical labs</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="classroom/01_simulate_fracture.html">Practical 1: Simulate a crack crossing a plate</a></li>
-<li class="toctree-l1"><a class="reference internal" href="classroom/02_gradients_and_recovery.html">Practical 2: Gradients and material recovery</a></li>
-<li class="toctree-l1"><a class="reference internal" href="classroom/03_learning_and_hybrid.html">Practical 3: Learn a field and assess its proposal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classroom/01_simulate_fracture.html">Phase-field fracture of a notched square plate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classroom/02_gradients_and_recovery.html">Recovering Young’s modulus from measured extension</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classroom/03_learning_and_hybrid.html">Replacing the damage subproblem with a trained network</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Optional direct-replacement case study</span></p>
 <ul class="nav bd-sidenav">
@@ -197,7 +197,7 @@
 <li class="toctree-l2"><a class="reference internal" href="05a_backpropagation_step_by_step.html">Backpropagation through a stepped update</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1"><a class="reference internal" href="06_learning_adapter.html">Train, save, reload, adapters, and checked proposals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_learning_adapter.html">Learning field predictions and combining them with a solver</a></li>
 <li class="toctree-l1"><a class="reference internal" href="07_practice_references.html">Practice, Solutions, Glossary, and References</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="further_practice.html">Detailed notebooks and further practice</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="labs/00_why_average_predictions_can_fail.html">Lab 00: Branch Selection &amp; Energy-Based Objectives in Physics-Informed Learning</a></li>
@@ -215,7 +215,7 @@
 <li class="toctree-l2"><a class="reference internal" href="research/01_geometry.html">Representing particles and testing their geometry</a></li>
 <li class="toctree-l2"><a class="reference internal" href="research/02_observations.html">From measurements to a loss</a></li>
 <li class="toctree-l2"><a class="reference internal" href="research/03_derivatives.html">Verify a derivative before interpreting an update</a></li>
-<li class="toctree-l2"><a class="reference internal" href="research/03_history_visual.html">Why a fracture solver needs a memory-aware derivative</a></li>
+<li class="toctree-l2"><a class="reference internal" href="research/03_history_visual.html">Differentiating a fracture simulation with loading history</a></li>
 <li class="toctree-l2"><a class="reference internal" href="research/03_history.html">Differentiating fracture: memory, switches and useful limits</a></li>
 <li class="toctree-l2"><a class="reference internal" href="research/04_recovery.html">Why a correct gradient can give slow or ambiguous recovery</a></li>
 <li class="toctree-l2"><a class="reference internal" href="research/05_learning.html">A useful role for learning: propose, solve and check</a></li>
@@ -420,7 +420,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-detective-story-solving-inverse-problems-with-differentiable-mechanics">The Detective Story: Solving Inverse Problems with Differentiable Mechanics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estimating-a-material-property-from-measurements">Estimating a material property from measurements</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#formulating-the-forward-and-inverse-maps">Formulating the Forward and Inverse Maps</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#three-ways-to-obtain-a-sensitivity">Three ways to obtain a sensitivity</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#finite-differences">Finite differences</a></li>
@@ -453,22 +453,18 @@ document.write(`
 <a class="reference internal image-reference" href="_images/05_autograd_inverse.svg"><img alt="Parameters enter a supported forward computation and a scalar loss. Reverse sensitivities return a gradient, checked against a directional finite difference. An optional optimizer uses that gradient in a separate parameter update." src="_images/05_autograd_inverse.svg" style="width: 96%;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Figure 7 </span><span class="caption-text">In differentiable mechanics, parameters flow through the forward solver graph to produce an observation. Reverse-mode automatic differentiation computes the sensitivity gradient, which guides an optimizer to discover unknown physical properties.</span><a class="headerlink" href="#fig-autograd-inverse" title="Link to this image">#</a></p>
+<p><span class="caption-number">Figure 7 </span><span class="caption-text">The forward solver maps parameters to observations. Reverse-mode automatic differentiation computes a loss gradient that an optimiser can use to update the parameter estimates.</span><a class="headerlink" href="#fig-autograd-inverse" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
-<section id="the-detective-story-solving-inverse-problems-with-differentiable-mechanics">
-<h2>The Detective Story: Solving Inverse Problems with Differentiable Mechanics<a class="headerlink" href="#the-detective-story-solving-inverse-problems-with-differentiable-mechanics" title="Link to this heading">#</a></h2>
-<p>Imagine you are an engineer in a materials testing laboratory. You place a specimen of an unknown advanced alloy into a tensile testing machine, apply incremental stretch, and record the reaction forces and surface displacement fields using digital cameras (digital image correlation).</p>
-<p>Now comes the fundamental scientific puzzle:
-<em>What are the true underlying material properties—such as Young’s modulus <span class="math notranslate nohighlight">\(E\)</span>, Poisson’s ratio <span class="math notranslate nohighlight">\(\nu\)</span>, or fracture toughness <span class="math notranslate nohighlight">\(G_c\)</span>—that gave rise to these experimental measurements?</em></p>
-<p>In traditional engineering, solving this <strong>inverse problem</strong> required expensive brute-force guessing: pick a trial parameter, run a forward finite element simulation, see how far off the prediction is, and guess again.</p>
-<p>With <strong>differentiable mechanics</strong>, the simulation itself calculates the road map!
-Because our finite element equations are assembled into a differentiable computational graph in PyTorch, reverse-mode automatic differentiation (<code class="docutils literal notranslate"><span class="pre">autograd</span></code>) uses the chain rule to backpropagate the error between simulation and observation all the way back to the input material parameters:</p>
+<section id="estimating-a-material-property-from-measurements">
+<h2>Estimating a material property from measurements<a class="headerlink" href="#estimating-a-material-property-from-measurements" title="Link to this heading">#</a></h2>
+<p>A tensile test provides measurements such as reaction force and displacement. An inverse problem uses those measurements to estimate a material property. For example, if the geometry and applied force are known, the extension of an elastic bar can be used to estimate Young’s modulus.</p>
+<p>We compare the simulated observation <span class="math notranslate nohighlight">\(y(p)\)</span> with the measured value and express their difference through a loss <span class="math notranslate nohighlight">\(J\)</span>. Automatic differentiation computes how that loss changes with the parameter <span class="math notranslate nohighlight">\(p\)</span> by applying the chain rule to the supported simulation operations. For an observation depending on the displacement <span class="math notranslate nohighlight">\(u\)</span>, this gives</p>
 <div class="math notranslate nohighlight">
 \[
 \frac{\partial J}{\partial p} = \frac{\partial J}{\partial y} \cdot \frac{\partial y}{\partial u} \cdot \frac{\partial u}{\partial p}.
 \]</div>
-<p>With this exact sensitivity gradient in hand, standard optimization algorithms (<code class="docutils literal notranslate"><span class="pre">torch.optim.Adam</span></code> or L-BFGS) can systematically navigate the parameter landscape and pinpoint the true material properties.</p>
+<p>An optimiser uses this gradient to update the estimate. Recovery depends on how strongly the measurements constrain the parameter, as well as measurement noise, model assumptions and numerical accuracy.</p>
 </section>
 <hr class="docutils" />
 <section id="formulating-the-forward-and-inverse-maps">
@@ -606,14 +602,12 @@ requires assessment of measurement noise and model discrepancy.</p>
 <p>In the accompanying computational lesson, you will implement a complete differentiable mechanics problem in PyTorch:</p>
 <ol class="arabic simple">
 <li><p><strong>Forward Solution:</strong> Solve deformation in a one-dimensional elastic bar under tensile loading.</p></li>
-<li><p><strong>Derivative Verification:</strong> Compute sensitivities of an observation with respect to the elastic modulus using analytical formulas, automatic differentiation (<code class="docutils literal notranslate"><span class="pre">loss.backward()</span></code>), and central finite differences.</p></li>
-<li><p><strong>Inverse Identification:</strong> Use gradient descent to automatically recover the unknown ground-truth stiffness from synthetic displacement measurements.</p></li>
+<li><p><strong>Sensitivity:</strong> Use automatic differentiation (<code class="docutils literal notranslate"><span class="pre">loss.backward()</span></code>) through PhAST and interpret the sign using the analytical extension formula. Finite differences and Taylor tests are optional checks in the reference material.</p></li>
+<li><p><strong>Inverse Identification:</strong> Use SGD with momentum to recover one uniform modulus from one synthetic tip displacement at a fixed 4000 N force. Inspect the modulus, loss and displacement histories.</p></li>
 </ol>
 <div class="tip admonition">
 <p class="admonition-title">Hands-On Tutorial: Lab 2 (Gradients and Parameter Recovery)</p>
-<p><strong>Ready to try this in practice?</strong><br />
-Explore the interactive tutorial: <strong><a class="reference internal" href="classroom/02_gradients_and_recovery.html"><span class="doc">Practical 2: Gradients and material recovery</span></a></strong>.
-You can read through the worked autograd graph and parameter recovery trajectories directly here in the book, or run it interactively in <strong>Google Colab</strong> with one click:</p>
+<p>In <a class="reference internal" href="classroom/02_gradients_and_recovery.html"><span class="doc">Recovering Young’s modulus from measured extension</span></a>, solve the elastic bar and follow the modulus estimate through successive optimisation steps.</p>
 <div class="badge-row">
   <a class="badge-colab" href="https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/study/classroom/02_gradients_and_recovery.ipynb" target="_blank"><img src="_static/colab-badge.svg" alt="Open In Colab"/></a>
   <a class="badge-link" href="../notebooks/study/classroom/02_gradients_and_recovery.ipynb"><i class="fa-solid fa-download"></i> Download Practice Notebook</a>
@@ -623,20 +617,20 @@ You can read through the worked autograd graph and parameter recovery trajectori
 </section>
 <section id="directional-derivative-verification">
 <h2>Directional Derivative Verification<a class="headerlink" href="#directional-derivative-verification" title="Link to this heading">#</a></h2>
-<p>To verify that reverse-mode automatic differentiation yields the true gradient, we compare the directional derivative obtained from autograd with a numerical central difference:</p>
+<p>Compare the autograd directional derivative with a central finite difference:</p>
 <div class="math notranslate nohighlight">
 \[
 D_hJ(p;q) = \frac{J(p+hq)-J(p-hq)}{2h} \quad\approx\quad g^\mathsf{T}q.
 \]</div>
-<p>We evaluate this comparison across several perturbation step sizes <span class="math notranslate nohighlight">\(h\)</span>. A relative error metric measures consistency:</p>
+<p>Evaluate the comparison across several perturbation sizes <span class="math notranslate nohighlight">\(h\)</span>. The following scaled discrepancy measures agreement:</p>
 <div class="math notranslate nohighlight">
 \[
-\text{Relative Error} = \frac{|D_hJ - g^\mathsf{T}q|}{\max(1, |D_hJ|, |g^\mathsf{T}q|)}.
+\text{Scaled discrepancy} = \frac{|D_hJ - g^\mathsf{T}q|}{\max(1, |D_hJ|, |g^\mathsf{T}q|)}.
 \]</div>
-<p>When the step size <span class="math notranslate nohighlight">\(h\)</span> is in a well-balanced range (typically <span class="math notranslate nohighlight">\(10^{-4}\)</span> to <span class="math notranslate nohighlight">\(10^{-6}\)</span> for float64), the relative difference is close to machine precision, confirming that autograd correctly traverses every operation in the forward computational graph.</p>
+<p>Large perturbations introduce truncation error; very small perturbations can amplify cancellation and solver-tolerance effects. Useful step sizes depend on the parameter scale, precision and forward calculation. Apply the displayed scaling to nondimensional quantities, or choose a reference scale with the derivative’s units.</p>
 <div class="note admonition">
 <p class="admonition-title">Interpreting Gradient Verification</p>
-<p>A close match between autodiff and finite differences confirms that the computational graph correctly implements the intended mathematical derivative. In inverse problems, this verified gradient provides the foundation for stable, efficient optimization.</p>
+<p>Agreement over a suitable range of <span class="math notranslate nohighlight">\(h\)</span> supports local consistency for the tested parameter and direction. Parameter identifiability and agreement with experimental behaviour require separate assessment.</p>
 </div>
 </section>
 <section id="why-inverse-recovery-can-be-difficult">
@@ -737,7 +731,7 @@ example of implicit gradient computation, see the
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-detective-story-solving-inverse-problems-with-differentiable-mechanics">The Detective Story: Solving Inverse Problems with Differentiable Mechanics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estimating-a-material-property-from-measurements">Estimating a material property from measurements</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#formulating-the-forward-and-inverse-maps">Formulating the Forward and Inverse Maps</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#three-ways-to-obtain-a-sensitivity">Three ways to obtain a sensitivity</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#finite-differences">Finite differences</a></li>

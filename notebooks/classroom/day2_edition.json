@@ -1,0 +1,12 @@
+{
+  "date": "2026-09-15",
+  "source_folder": "AutumnSchoolDay2-Ani",
+  "mapping": {
+    "01_simulate_fracture": "phast_square_plate_classroom.ipynb",
+    "02_gradients_and_recovery": "Fin02_gradients_and_recovery.ipynb",
+    "03_learning_and_hybrid": "phast_learned_damage_classroom.ipynb"
+  },
+  "rebuild": "python source/book/scripts/build_classroom_pages.py",
+  "execution_status": "Supplied code and outputs retained; no new numerical execution claimed.",
+  "checkpoint": "Instructor-supplied mesh_graph_net.pt; excluded pending public distribution clearance."
+}

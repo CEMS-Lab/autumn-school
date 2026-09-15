@@ -87,9 +87,26 @@ def _verify_design_directives(app, exception):
             raise SphinxError("Design directives check failed:\n" + "\n".join(errors))
 
 
+def _practice_colab_links(app, pagename, templatename, context, doctree):
+    """Launch the practice notebook from both the toolbar and lesson badge."""
+    if pagename.startswith("classroom/"):
+        notebook = "classroom/" + pagename.split("/", 1)[1]
+    elif pagename.startswith("labs/"):
+        notebook = pagename.split("/", 1)[1]
+    else:
+        return
+    url = ("https://colab.research.google.com/github/CEMS-Lab/"
+           f"autumn-school/blob/main/notebooks/study/{notebook}.ipynb")
+    for group in context.get("header_buttons", []):
+        for button in group.get("buttons", []):
+            if button.get("text") == "Colab":
+                button["url"] = url
+
+
 def setup(app):
     app.connect("build-finished", _copy_local_mathjax)
     app.connect("build-finished", _verify_design_directives)
+    app.connect("html-page-context", _practice_colab_links, priority=900)
     # Expand retained notebook attachments for the optional inverse laboratory.
     import runpy
     support = runpy.run_path(str(Path(__file__).parent / "research" / "conf.py"))

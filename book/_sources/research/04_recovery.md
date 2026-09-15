@@ -19,9 +19,10 @@ to be stable in that direction can move slowly in the first direction.
 
 The plotted updates are $p^{k+1}=p^k-\alpha P\nabla J(p^k)$, starting from
 $(2,2)$. Plain descent uses $P=I$ and $\alpha=0.015$. Scaled descent uses
-$P=\mathrm{diag}(1,0.01)$ and $\alpha=0.8$. The latter is the inverse
-Hessian of this known quadratic, so both coordinates contract by $0.2$
-per update. Plain descent contracts the first coordinate by $0.985$ and
+$P=\mathrm{diag}(1,0.01)$ and $\alpha=0.8$. Here $P$ is the inverse of the
+matrix of second derivatives, called the Hessian. With $\alpha=0.8$, each
+coordinate becomes $0.2$ times its previous value at every update.
+Plain descent contracts the first coordinate by $0.985$ and
 multiplies the second by $-0.5$, explaining its slow progress and zigzag.
 These choices isolate conditioning in this prescribed quadratic.
 
@@ -120,11 +121,14 @@ the trade-off direction. With two observations, it shifts the mean slightly
 from the noise-free reference parameters.
 ```
 
-This is the exact conditional distribution for the specified linear Gaussian
-model. Applying it to an experiment requires checking the assumed noise
-model. Nonlinear fracture posterior inference similarly requires explicit
-priors, a likelihood, a sampling or approximation rule, and calibration;
-optimizer endpoints describe the explored attraction basins.
+This distribution is exact for the stated linear Gaussian model. Applying it
+to experimental data requires checking the noise assumption. For nonlinear
+fracture, estimating parameter probabilities also requires a prior, a
+measurement model and a method for sampling or approximating the resulting
+distribution. Check the resulting uncertainty estimates against independent
+or repeated observations. Repeated optimisation shows which solutions are
+reached from the chosen starting points; it does not assign probabilities to
+those solutions.
 
 ## Exercise 1: distinguish two difficulties
 
@@ -150,7 +154,7 @@ No. Its sensitivity is parallel to the first row. Independent noise can
 make repeated measurements useful, while the matrix rank remains unchanged. An observation sensitive to $p_1-p_2$ is needed here.
 :::
 
-## Exercise 3: interpret a far-start failure
+## Exercise 3: interpret recovery from a distant initial position
 
 A fracture run passes local AD--FD checks but finishes with one particle far
 from its reference position. List two hypotheses and one diagnostic for each.
@@ -158,9 +162,11 @@ from its reference position. List two hypotheses and one diagnostic for each.
 :::{admonition} Worked solution
 :class: dropdown
 
-Weak observability can be investigated with weighted Jacobian columns and
-singular vectors. A restricted attraction basin can be investigated with
-predeclared initial offsets and verified loss slices. Neither hypothesis
-follows from the failed recovery alone. Keep the same physical model when
-comparing these explanations.
+First, the observations may change very little when the particle moves.
+Inspect the observation Jacobian to find parameter directions that have little
+effect on the measured fields. Second, the optimiser may converge to different
+solutions from different starts. Compare prescribed initial offsets and plot
+the loss along selected parameter directions. A distant final estimate alone
+cannot distinguish these explanations. Keep the physical model fixed
+throughout the comparison.
 :::

@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Train, save, reload, adapters, and checked proposals &#8212; PhAST: Phase-field fracture with differentiable FEM</title>
+    <title>Learning field predictions and combining them with a solver &#8212; PhAST: Phase-field fracture with differentiable FEM</title>
   
   
   
@@ -33,7 +33,7 @@
     <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="_static/mobile_math.css?v=acf5579e" />
-    <link rel="stylesheet" type="text/css" href="_static/learning_book.css?v=37e7f39f" />
+    <link rel="stylesheet" type="text/css" href="_static/learning_book.css?v=d69ae7f6" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -174,13 +174,13 @@
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="lectures/01_fracture_and_phast.html">Lecture 1: Phase-field fracture and PhAST</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lectures/02_differentiability_and_inverse.html">Lecture 2: Differentiability and inverse recovery</a></li>
-<li class="toctree-l1"><a class="reference internal" href="lectures/03_hybrid_learning.html">Lecture 3: Learning inside a numerical workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lectures/03_hybrid_learning.html">Lecture 3: Learned damage updates in PhAST</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Three practical labs</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="classroom/01_simulate_fracture.html">Practical 1: Simulate a crack crossing a plate</a></li>
-<li class="toctree-l1"><a class="reference internal" href="classroom/02_gradients_and_recovery.html">Practical 2: Gradients and material recovery</a></li>
-<li class="toctree-l1"><a class="reference internal" href="classroom/03_learning_and_hybrid.html">Practical 3: Learn a field and assess its proposal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classroom/01_simulate_fracture.html">Phase-field fracture of a notched square plate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classroom/02_gradients_and_recovery.html">Recovering Young’s modulus from measured extension</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classroom/03_learning_and_hybrid.html">Replacing the damage subproblem with a trained network</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Optional direct-replacement case study</span></p>
 <ul class="nav bd-sidenav">
@@ -197,7 +197,7 @@
 <li class="toctree-l2"><a class="reference internal" href="05a_backpropagation_step_by_step.html">Backpropagation through a stepped update</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Train, save, reload, adapters, and checked proposals</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Learning field predictions and combining them with a solver</a></li>
 <li class="toctree-l1"><a class="reference internal" href="07_practice_references.html">Practice, Solutions, Glossary, and References</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="further_practice.html">Detailed notebooks and further practice</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="labs/00_why_average_predictions_can_fail.html">Lab 00: Branch Selection &amp; Energy-Based Objectives in Physics-Informed Learning</a></li>
@@ -215,7 +215,7 @@
 <li class="toctree-l2"><a class="reference internal" href="research/01_geometry.html">Representing particles and testing their geometry</a></li>
 <li class="toctree-l2"><a class="reference internal" href="research/02_observations.html">From measurements to a loss</a></li>
 <li class="toctree-l2"><a class="reference internal" href="research/03_derivatives.html">Verify a derivative before interpreting an update</a></li>
-<li class="toctree-l2"><a class="reference internal" href="research/03_history_visual.html">Why a fracture solver needs a memory-aware derivative</a></li>
+<li class="toctree-l2"><a class="reference internal" href="research/03_history_visual.html">Differentiating a fracture simulation with loading history</a></li>
 <li class="toctree-l2"><a class="reference internal" href="research/03_history.html">Differentiating fracture: memory, switches and useful limits</a></li>
 <li class="toctree-l2"><a class="reference internal" href="research/04_recovery.html">Why a correct gradient can give slow or ambiguous recovery</a></li>
 <li class="toctree-l2"><a class="reference internal" href="research/05_learning.html">A useful role for learning: propose, solve and check</a></li>
@@ -410,7 +410,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Train, save, reload, adapters, and checked proposals</h1>
+    <h1>Learning field predictions and combining them with a solver</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -444,8 +444,11 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="train-save-reload-adapters-and-checked-proposals">
-<h1>Train, save, reload, adapters, and checked proposals<a class="headerlink" href="#train-save-reload-adapters-and-checked-proposals" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="learning-field-predictions-and-combining-them-with-a-solver">
+<h1>Learning field predictions and combining them with a solver<a class="headerlink" href="#learning-field-predictions-and-combining-them-with-a-solver" title="Link to this heading">#</a></h1>
+<p>The Day 2 classroom application is <a class="reference internal" href="classroom/03_learning_and_hybrid.html"><span class="doc">Replacing the damage subproblem with a trained network</span></a>,
+which compares a supplied graph network with the classical PhAST damage solve.
+The Helmholtz examples below remain optional training and interface tutorials.</p>
 <figure class="align-default" id="fig-learning-cycle">
 <a class="reference internal image-reference" href="_images/06_learning_cycle.svg"><img alt="Offline reference data support training and checkpoint reload. Online model proposals are checked, then accepted or corrected by the reference solver. A dashed conceptual feedback path collects labelled states for another training round." src="_images/06_learning_cycle.svg" style="width: 96%;" />
 </a>
@@ -581,21 +584,18 @@ in-memory prediction for the same declared input.</p></li>
 </section>
 <section id="computational-lesson-train-save-reload-and-compare-a-toy-field-model">
 <h2>Computational lesson: train, save, reload, and compare a toy field model<a class="headerlink" href="#computational-lesson-train-save-reload-and-compare-a-toy-field-model" title="Link to this heading">#</a></h2>
-<p>The lesson below makes the saved state visible: feature order, normalisation,
-mesh signature, data split, checkpoint metadata, and a reload comparison all
-appear beside the code and field plots. Begin by predicting which information
-must survive serialization for a newly created model object to reproduce the
-same output. The lesson uses an original <code class="docutils literal notranslate"><span class="pre">ToyHelmholtzProblem</span></code> to examine
-the saved-model interface and prediction accuracy on a scalar field.</p>
+<p>This optional lesson trains a model for a scalar Helmholtz field, saves it
+and reloads it into a new model object. Compare the predictions before and
+after reloading. The example shows why the saved weights must be accompanied
+by the feature order, normalisation and model configuration. The field
+calculation uses the course’s <code class="docutils literal notranslate"><span class="pre">ToyHelmholtzProblem</span></code>.</p>
 <div class="tip admonition">
-<p class="admonition-title">Hands-On Tutorial: Lab 3 (Training and Model Reloading)</p>
-<p><strong>Ready to try this in practice?</strong><br />
-Explore the interactive tutorial: <strong><a class="reference internal" href="classroom/03_learning_and_hybrid.html"><span class="doc">Practical 3: Learn a field and assess its proposal</span></a></strong>.
-You can read through the MLP training loops and checkpoint verification directly here in the book, or run it interactively in <strong>Google Colab</strong> with one click:</p>
+<p class="admonition-title">Optional tutorial: Training and Model Reloading</p>
+<p>In <a class="reference internal" href="labs/04_train_save_reload_adapter.html"><span class="doc">Train, save, reload, and compare a field model</span></a>, train the field model and check that saving and reloading preserves its predictions.</p>
 <div class="badge-row">
-  <a class="badge-colab" href="https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/study/classroom/03_learning_and_hybrid.ipynb" target="_blank"><img src="_static/colab-badge.svg" alt="Open In Colab"/></a>
-  <a class="badge-link" href="../notebooks/study/classroom/03_learning_and_hybrid.ipynb"><i class="fa-solid fa-download"></i> Download Practice Notebook</a>
-  <a class="badge-link" href="../notebooks/solutions/classroom/03_learning_and_hybrid.ipynb"><i class="fa-solid fa-check-circle"></i> Download Worked Solutions</a>
+  <a class="badge-colab" href="https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/study/04_train_save_reload_adapter.ipynb" target="_blank"><img src="_static/colab-badge.svg" alt="Open In Colab"/></a>
+  <a class="badge-link" href="../notebooks/study/04_train_save_reload_adapter.ipynb"><i class="fa-solid fa-download"></i> Download Practice Notebook</a>
+  <a class="badge-link" href="../notebooks/solutions/04_train_save_reload_adapter.ipynb"><i class="fa-solid fa-check-circle"></i> Download Worked Solutions</a>
 </div>
 </div>
 <div class="tip admonition">
@@ -656,14 +656,12 @@ checks when interpreting the four field panels. The residual is defined by
 the scalar <code class="docutils literal notranslate"><span class="pre">ToyHelmholtzProblem</span></code>. Applying this pattern to fracture requires
 the fracture residual and its damage admissibility conditions.</p>
 <div class="tip admonition">
-<p class="admonition-title">Hands-On Tutorial: Lab 3 (Physical Assessment and Correction)</p>
-<p><strong>Ready to try this in practice?</strong><br />
-Explore the interactive tutorial: <strong><a class="reference internal" href="classroom/03_learning_and_hybrid.html"><span class="doc">Practical 3: Learn a field and assess its proposal</span></a></strong>.
-You can read through the residual assessment and solver correction steps directly here in the book, or run the tutorial in <strong>Google Colab</strong>:</p>
+<p class="admonition-title">Optional tutorial: Physical Assessment and Correction</p>
+<p>In <a class="reference internal" href="labs/05_hybrid_reference_correction.html"><span class="doc">Assess a proposal and use a reference correction</span></a>, assess a proposed field using the Helmholtz residual and examine when the reference correction is used.</p>
 <div class="badge-row">
-  <a class="badge-colab" href="https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/study/classroom/03_learning_and_hybrid.ipynb" target="_blank"><img src="_static/colab-badge.svg" alt="Open In Colab"/></a>
-  <a class="badge-link" href="../notebooks/study/classroom/03_learning_and_hybrid.ipynb"><i class="fa-solid fa-download"></i> Download Practice Notebook</a>
-  <a class="badge-link" href="../notebooks/solutions/classroom/03_learning_and_hybrid.ipynb"><i class="fa-solid fa-check-circle"></i> Download Worked Solutions</a>
+  <a class="badge-colab" href="https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/study/05_hybrid_reference_correction.ipynb" target="_blank"><img src="_static/colab-badge.svg" alt="Open In Colab"/></a>
+  <a class="badge-link" href="../notebooks/study/05_hybrid_reference_correction.ipynb"><i class="fa-solid fa-download"></i> Download Practice Notebook</a>
+  <a class="badge-link" href="../notebooks/solutions/05_hybrid_reference_correction.ipynb"><i class="fa-solid fa-check-circle"></i> Download Worked Solutions</a>
 </div>
 </div>
 </section>
@@ -688,8 +686,8 @@ when evaluating the method.</p>
 </section>
 <section id="evaluation-physical-metrics-and-model-validation">
 <h2>Evaluation: Physical Metrics and Model Validation<a class="headerlink" href="#evaluation-physical-metrics-and-model-validation" title="Link to this heading">#</a></h2>
-<p>Evaluating a machine learning model for physical problems requires examining both statistical accuracy and physical consistency. Standard mean squared error alone can be deceptive: a low average field error may mask an unphysical local stress concentration or an incorrect crack path.</p>
-<p>A comprehensive validation protocol evaluates:</p>
+<p>Compare both field error and physical consistency. A small average error can coexist with a misplaced crack or a large local error, so inspect the spatial fields alongside scalar measures.</p>
+<p>Useful comparisons include:</p>
 <ol class="arabic simple">
 <li><p><strong>Field-Level Discrepancy:</strong>
 <div class="math notranslate nohighlight">
@@ -697,14 +695,14 @@ when evaluating the method.</p>
 e_d = \frac{\|\widehat d - d_{\mathrm{ref}}\|_2}{\max(\|d_{\mathrm{ref}}\|_2, \epsilon)}
 \]</div>
 
-measures normalized spatial disagreement across test meshes.</p></li>
+measures the discrepancy on the evaluated field. Comparing different meshes also requires a consistent spatial weighting or a common evaluation grid.</p></li>
 <li><p><strong>Physical Constraints:</strong>
 Verify that predicted fields respect admissibility conditions (such as <span class="math notranslate nohighlight">\(0 \le d \le 1\)</span> and non-decreasing damage history <span class="math notranslate nohighlight">\(d_n \ge d_{n-1}\)</span>).</p></li>
 <li><p><strong>Mechanics Residuals:</strong>
 Substitute the predicted field directly into the governing mechanical weak form. A physically consistent prediction yields low equilibrium residuals.</p></li>
 <li><p><strong>Engineering Observables:</strong>
 Compare integral quantities of direct engineering interest, such as global reaction curves, peak load capacity, and total dissipated fracture energy.</p></li>
-<li><p><strong>Generalization Bounds:</strong>
+<li><p><strong>Performance on Unseen Cases:</strong>
 Report performance across varying load levels, mesh densities, and unseen geometries to characterize the model’s domain of applicability.</p></li>
 </ol>
 </section>

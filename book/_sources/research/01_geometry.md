@@ -40,9 +40,9 @@ Let $q=\|\mathbf x-\mathbf c\|$. Differentiating the sigmoid gives
 $\partial s/\partial r=s(1-s)/\varepsilon$ and, for $q>0$,
 $\nabla_{\mathbf c}s=s(1-s)(\mathbf x-\mathbf c)/(\varepsilon q)$.
 These formulas explain where geometric sensitivity comes from. It is
-concentrated near the transition, where $s(1-s)$ is largest. A material
-derivative still has to pass through equilibrium and the observation loss
-before it becomes a useful inverse-update direction.
+concentrated near the transition, where $s(1-s)$ is largest. To determine how
+the loss changes when a particle moves, these material-field derivatives must
+also be carried through the equilibrium calculation and observation model.
 
 The sigmoid smooths the interface. The Euclidean norm still has a directional
 ambiguity exactly at the centre. A code that regularises that distance must

@@ -33,7 +33,7 @@
     <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="_static/mobile_math.css?v=acf5579e" />
-    <link rel="stylesheet" type="text/css" href="_static/learning_book.css?v=37e7f39f" />
+    <link rel="stylesheet" type="text/css" href="_static/learning_book.css?v=d69ae7f6" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -174,13 +174,13 @@
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="lectures/01_fracture_and_phast.html">Lecture 1: Phase-field fracture and PhAST</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lectures/02_differentiability_and_inverse.html">Lecture 2: Differentiability and inverse recovery</a></li>
-<li class="toctree-l1"><a class="reference internal" href="lectures/03_hybrid_learning.html">Lecture 3: Learning inside a numerical workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lectures/03_hybrid_learning.html">Lecture 3: Learned damage updates in PhAST</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Three practical labs</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="classroom/01_simulate_fracture.html">Practical 1: Simulate a crack crossing a plate</a></li>
-<li class="toctree-l1"><a class="reference internal" href="classroom/02_gradients_and_recovery.html">Practical 2: Gradients and material recovery</a></li>
-<li class="toctree-l1"><a class="reference internal" href="classroom/03_learning_and_hybrid.html">Practical 3: Learn a field and assess its proposal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classroom/01_simulate_fracture.html">Phase-field fracture of a notched square plate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classroom/02_gradients_and_recovery.html">Recovering Young’s modulus from measured extension</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classroom/03_learning_and_hybrid.html">Replacing the damage subproblem with a trained network</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Optional direct-replacement case study</span></p>
 <ul class="nav bd-sidenav">
@@ -197,7 +197,7 @@
 <li class="toctree-l2"><a class="reference internal" href="05a_backpropagation_step_by_step.html">Backpropagation through a stepped update</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1"><a class="reference internal" href="06_learning_adapter.html">Train, save, reload, adapters, and checked proposals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_learning_adapter.html">Learning field predictions and combining them with a solver</a></li>
 <li class="toctree-l1"><a class="reference internal" href="07_practice_references.html">Practice, Solutions, Glossary, and References</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="further_practice.html">Detailed notebooks and further practice</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="labs/00_why_average_predictions_can_fail.html">Lab 00: Branch Selection &amp; Energy-Based Objectives in Physics-Informed Learning</a></li>
@@ -215,7 +215,7 @@
 <li class="toctree-l2"><a class="reference internal" href="research/01_geometry.html">Representing particles and testing their geometry</a></li>
 <li class="toctree-l2"><a class="reference internal" href="research/02_observations.html">From measurements to a loss</a></li>
 <li class="toctree-l2"><a class="reference internal" href="research/03_derivatives.html">Verify a derivative before interpreting an update</a></li>
-<li class="toctree-l2"><a class="reference internal" href="research/03_history_visual.html">Why a fracture solver needs a memory-aware derivative</a></li>
+<li class="toctree-l2"><a class="reference internal" href="research/03_history_visual.html">Differentiating a fracture simulation with loading history</a></li>
 <li class="toctree-l2"><a class="reference internal" href="research/03_history.html">Differentiating fracture: memory, switches and useful limits</a></li>
 <li class="toctree-l2"><a class="reference internal" href="research/04_recovery.html">Why a correct gradient can give slow or ambiguous recovery</a></li>
 <li class="toctree-l2"><a class="reference internal" href="research/05_learning.html">A useful role for learning: propose, solve and check</a></li>
@@ -420,10 +420,10 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-tensors-bridging-traditional-fem-with-modern-computing">Why Tensors? Bridging Traditional FEM with Modern Computing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#expressing-finite-elements-with-tensors">Expressing finite elements with tensors</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#defining-the-boundary-value-problem">Defining the Boundary-Value Problem</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#from-cells-to-fields">From cells to fields</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tensor-shapes-are-part-of-the-model-contract">Tensor shapes are part of the model contract</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tensor-dimensions-and-indexing">Tensor dimensions and indexing</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#assembled-and-matrix-free-routes">Assembled and matrix-free routes</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#static-and-dynamic-arrays">Static and dynamic arrays</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#where-automatic-differentiation-fits">Where automatic differentiation fits</a></li>
@@ -451,17 +451,11 @@ document.write(`
 <p><span class="caption-number">Figure 6 </span><span class="caption-text">The finite element pipeline translates physical boundary-value problems into discrete tensor operations, connecting continuous weak forms to PyTorch data structures.</span><a class="headerlink" href="#fig-fem-pipeline" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
-<section id="why-tensors-bridging-traditional-fem-with-modern-computing">
-<h2>Why Tensors? Bridging Traditional FEM with Modern Computing<a class="headerlink" href="#why-tensors-bridging-traditional-fem-with-modern-computing" title="Link to this heading">#</a></h2>
-<p>In traditional finite element analysis, code is organized around nested loops: iterating over thousands of elements, evaluating shape function gradients at each Gauss quadrature point, and accumulating element matrices into a global sparse system. In Python, explicit nested loops over large meshes are notoriously slow.</p>
-<p>Modern scientific machine learning replaces element loops with <strong>batched multi-dimensional tensor operations</strong> in PyTorch:</p>
-<ul class="simple">
-<li><p><strong>Nodal Coordinates:</strong> A tensor of shape <span class="math notranslate nohighlight">\((N_{\mathrm{node}}, 2)\)</span> defining the physical position <span class="math notranslate nohighlight">\((x, y)\)</span> of every mesh node.</p></li>
-<li><p><strong>Element Connectivity:</strong> An integer index tensor of shape <span class="math notranslate nohighlight">\((N_{\mathrm{elem}}, 3)\)</span> grouping node IDs into linear triangular (T3) elements.</p></li>
-<li><p><strong>Shape Function Gradients:</strong> A tensor of shape <span class="math notranslate nohighlight">\((N_{\mathrm{elem}}, N_q, 3, 2)\)</span> holding the spatial derivatives <span class="math notranslate nohighlight">\(\nabla N_i\)</span> at all <span class="math notranslate nohighlight">\(N_q\)</span> quadrature points.</p></li>
-<li><p><strong>Element Strains &amp; Stresses:</strong> Evaluated across the entire mesh simultaneously using tensor contractions (<code class="docutils literal notranslate"><span class="pre">torch.einsum</span></code>), running seamlessly on multi-core CPUs and GPUs!</p></li>
-</ul>
-<p>By representing the continuum problem as a computational tensor graph, the simulation pipeline becomes fast, vectorized, and inherently differentiable.</p>
+<section id="expressing-finite-elements-with-tensors">
+<h2>Expressing finite elements with tensors<a class="headerlink" href="#expressing-finite-elements-with-tensors" title="Link to this heading">#</a></h2>
+<p>A finite-element calculation repeats similar operations over many elements and quadrature points. Tensor operations group these calculations so that libraries such as PyTorch can evaluate them in batches.</p>
+<p>For a mesh of linear triangles, the main arrays contain node coordinates, element connectivity, shape-function gradients and field values. Their dimensions identify the element, quadrature point, local node and physical component used by each operation.</p>
+<p>Batching can improve performance on CPUs and GPUs. Automatic differentiation is available when the operations and solver components support the required derivatives.</p>
 </section>
 <hr class="docutils" />
 <section id="defining-the-boundary-value-problem">
@@ -476,7 +470,7 @@ u = \bar{u} \quad \text{on } \Gamma_u, \qquad \boldsymbol{\sigma}\cdot\mathbf{n}
 \]</div>
 </p></li>
 <li><p><strong>Precrack Representation:</strong> Whether a notch is modeled as a geometric cut or an initial seeded damage field (<span class="math notranslate nohighlight">\(d_0 = 1\)</span> along the notch line).</p></li>
-<li><p><strong>Physical Discretization:</strong> The characteristic element size <span class="math notranslate nohighlight">\(h\)</span>, ensuring the mesh can resolve the phase-field regularisation width (<span class="math notranslate nohighlight">\(h &lt; \ell\)</span>).</p></li>
+<li><p><strong>Mesh Resolution:</strong> Choose the element size <span class="math notranslate nohighlight">\(h\)</span> to resolve the damage band, and examine how the results change under refinement at fixed <span class="math notranslate nohighlight">\(\ell\)</span>.</p></li>
 </ul>
 <p>State how the notch is represented: a prescribed initial damage field or a
 geometric cut. These choices encode different computational objects and can
@@ -518,8 +512,8 @@ r_e(u,d)=\int_{\Omega_e}B_e^\mathsf{T}\sigma(u_h,d_h)\,\mathrm{d}x
 global residual. The same operation can be expressed with index operations,
 scatter-adds, or framework-specific sparse primitives.</p>
 </section>
-<section id="tensor-shapes-are-part-of-the-model-contract">
-<h2>Tensor shapes are part of the model contract<a class="headerlink" href="#tensor-shapes-are-part-of-the-model-contract" title="Link to this heading">#</a></h2>
+<section id="tensor-dimensions-and-indexing">
+<h2>Tensor dimensions and indexing<a class="headerlink" href="#tensor-dimensions-and-indexing" title="Link to this heading">#</a></h2>
 <p>Write expected shapes next to a tensor operation. For example, with batched
 cells and quadrature points, an implementation might use:</p>
 <ul class="simple">
@@ -612,16 +606,14 @@ and</p></li>
 <h2>Hands-On Lab: Running an End-to-End PhAST Fracture Simulation<a class="headerlink" href="#hands-on-lab-running-an-end-to-end-phast-fracture-simulation" title="Link to this heading">#</a></h2>
 <p>In the accompanying computational notebook, you will execute a complete phase-field fracture calculation using the PhAST solver:</p>
 <ol class="arabic simple">
-<li><p><strong>Geometry &amp; Meshing:</strong> Generate a two-dimensional rectangular specimen and discretize it with structured triangular (T3) finite elements.</p></li>
-<li><p><strong>Boundary Conditions &amp; Precrack:</strong> Identify boundary node sets (<code class="docutils literal notranslate"><span class="pre">left</span></code>, <code class="docutils literal notranslate"><span class="pre">right</span></code>, <code class="docutils literal notranslate"><span class="pre">top</span></code>, <code class="docutils literal notranslate"><span class="pre">bottom</span></code>) and define an initial center-notch precrack.</p></li>
-<li><p><strong>Solver Execution:</strong> Run the staggered displacement-damage solver over 60 incremental load steps.</p></li>
-<li><p><strong>Post-Processing &amp; Field Visualization:</strong> Extract the global load-displacement curve, observe peak softening, and render the localized diffuse damage field.</p></li>
+<li><p><strong>Geometry &amp; Meshing:</strong> Generate a 40 mm square specimen with a 20 mm edge notch and a graded triangular Gmsh mesh.</p></li>
+<li><p><strong>Boundary Conditions:</strong> Use named regions for symmetric vertical opening and horizontal restraint on the lateral edges.</p></li>
+<li><p><strong>Solver Execution:</strong> Run explicit dynamics with an implicit AT2 damage update over 50 microseconds, using a mesh-dependent stable time step.</p></li>
+<li><p><strong>Post-Processing:</strong> Reload saved fields, inspect displacement, strain, stress and damage, and animate them with fixed colour scales.</p></li>
 </ol>
 <div class="tip admonition">
 <p class="admonition-title">Hands-On Tutorial: Lab 01 (End-to-End PhAST Fracture Simulation)</p>
-<p><strong>Ready to try this in practice?</strong><br />
-Explore the interactive tutorial: <strong><a class="reference internal" href="classroom/01_simulate_fracture.html"><span class="doc">Practical 1: Simulate a crack crossing a plate</span></a></strong>.
-You can read through the full simulation pipeline and damage field plots directly here in the book, or run it interactively in <strong>Google Colab</strong> with one click:</p>
+<p>In <a class="reference internal" href="classroom/01_simulate_fracture.html"><span class="doc">Phase-field fracture of a notched square plate</span></a>, configure the notched plate, run PhAST and interpret the saved fields and energy histories.</p>
 <div class="badge-row">
   <a class="badge-colab" href="https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/study/classroom/01_simulate_fracture.ipynb" target="_blank"><img src="_static/colab-badge.svg" alt="Open In Colab"/></a>
   <a class="badge-link" href="../notebooks/study/classroom/01_simulate_fracture.ipynb"><i class="fa-solid fa-download"></i> Download Practice Notebook</a>
@@ -645,10 +637,8 @@ shape gradients. Contract the local-node axis and preserve the displacement
 component and spatial-derivative axes according to the chosen convention. For
 an affine displacement field, the displacement gradient and its symmetric
 strain should be constant across all elements and quadrature points (up to
-round-off). This is an excellent first unit test. The PhAST lesson makes the
-mesh, nodal fields, and boundary labels visible; this one-element affine test
-remains the right additional check before treating a vectorised tensor route
-as trustworthy.</p>
+round-off). This gives a simple reference calculation for checking the tensor
+implementation.</p>
 </div>
 </section>
 <section id="take-away">
@@ -704,10 +694,10 @@ how boundary conditions are enforced, and how the resulting field is checked.</p
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-tensors-bridging-traditional-fem-with-modern-computing">Why Tensors? Bridging Traditional FEM with Modern Computing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#expressing-finite-elements-with-tensors">Expressing finite elements with tensors</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#defining-the-boundary-value-problem">Defining the Boundary-Value Problem</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#from-cells-to-fields">From cells to fields</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tensor-shapes-are-part-of-the-model-contract">Tensor shapes are part of the model contract</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tensor-dimensions-and-indexing">Tensor dimensions and indexing</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#assembled-and-matrix-free-routes">Assembled and matrix-free routes</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#static-and-dynamic-arrays">Static and dynamic arrays</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#where-automatic-differentiation-fits">Where automatic differentiation fits</a></li>

@@ -33,7 +33,7 @@
     <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="_static/mobile_math.css?v=acf5579e" />
-    <link rel="stylesheet" type="text/css" href="_static/learning_book.css?v=37e7f39f" />
+    <link rel="stylesheet" type="text/css" href="_static/learning_book.css?v=d69ae7f6" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -175,13 +175,13 @@
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="lectures/01_fracture_and_phast.html">Lecture 1: Phase-field fracture and PhAST</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lectures/02_differentiability_and_inverse.html">Lecture 2: Differentiability and inverse recovery</a></li>
-<li class="toctree-l1"><a class="reference internal" href="lectures/03_hybrid_learning.html">Lecture 3: Learning inside a numerical workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lectures/03_hybrid_learning.html">Lecture 3: Learned damage updates in PhAST</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Three practical labs</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="classroom/01_simulate_fracture.html">Practical 1: Simulate a crack crossing a plate</a></li>
-<li class="toctree-l1"><a class="reference internal" href="classroom/02_gradients_and_recovery.html">Practical 2: Gradients and material recovery</a></li>
-<li class="toctree-l1"><a class="reference internal" href="classroom/03_learning_and_hybrid.html">Practical 3: Learn a field and assess its proposal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classroom/01_simulate_fracture.html">Phase-field fracture of a notched square plate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classroom/02_gradients_and_recovery.html">Recovering Young’s modulus from measured extension</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classroom/03_learning_and_hybrid.html">Replacing the damage subproblem with a trained network</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Optional direct-replacement case study</span></p>
 <ul class="nav bd-sidenav">
@@ -198,7 +198,7 @@
 <li class="toctree-l2"><a class="reference internal" href="05a_backpropagation_step_by_step.html">Backpropagation through a stepped update</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1"><a class="reference internal" href="06_learning_adapter.html">Train, save, reload, adapters, and checked proposals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_learning_adapter.html">Learning field predictions and combining them with a solver</a></li>
 <li class="toctree-l1"><a class="reference internal" href="07_practice_references.html">Practice, Solutions, Glossary, and References</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="further_practice.html">Detailed notebooks and further practice</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="labs/00_why_average_predictions_can_fail.html">Lab 00: Branch Selection &amp; Energy-Based Objectives in Physics-Informed Learning</a></li>
@@ -216,7 +216,7 @@
 <li class="toctree-l2"><a class="reference internal" href="research/01_geometry.html">Representing particles and testing their geometry</a></li>
 <li class="toctree-l2"><a class="reference internal" href="research/02_observations.html">From measurements to a loss</a></li>
 <li class="toctree-l2"><a class="reference internal" href="research/03_derivatives.html">Verify a derivative before interpreting an update</a></li>
-<li class="toctree-l2"><a class="reference internal" href="research/03_history_visual.html">Why a fracture solver needs a memory-aware derivative</a></li>
+<li class="toctree-l2"><a class="reference internal" href="research/03_history_visual.html">Differentiating a fracture simulation with loading history</a></li>
 <li class="toctree-l2"><a class="reference internal" href="research/03_history.html">Differentiating fracture: memory, switches and useful limits</a></li>
 <li class="toctree-l2"><a class="reference internal" href="research/04_recovery.html">Why a correct gradient can give slow or ambiguous recovery</a></li>
 <li class="toctree-l2"><a class="reference internal" href="research/05_learning.html">A useful role for learning: propose, solve and check</a></li>
@@ -487,10 +487,10 @@ available for closer study.</p>
 <td><p>Inspect a notched specimen and its loading, run PhAST, and interpret crack propagation, energy curves and saved fields.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="classroom/02_gradients_and_recovery.html"><span class="doc">Lab 2 — Gradients and parameter recovery</span></a></p></td>
-<td><p>Check a degradation derivative, trace an elastic-bar sensitivity, and recover a material parameter.</p></td>
+<td><p>Solve a 1D elastic bar with PhAST and recover its Young’s modulus from one force and one observed extension.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="classroom/03_learning_and_hybrid.html"><span class="doc">Lab 3 — Learning and hybrid correction</span></a></p></td>
-<td><p>Train a small field model, save and reload it, then assess and correct its prediction.</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="classroom/03_learning_and_hybrid.html"><span class="doc">Lab 3 — Learned damage updates</span></a></p></td>
+<td><p>Compare classical damage, a trained graph-network initial guess and checked direct replacement on a three-hole plate.</p></td>
 </tr>
 </tbody>
 </table>
@@ -498,11 +498,36 @@ available for closer study.</p>
 <p>The optional <a class="reference internal" href="w53_direct_replacement.html"><span class="doc">direct learned-replacement case study</span></a>
 connects Lab 3 to a retained Radius-GNO fracture trajectory and reports a
 matched damage-stage timing comparison.</p>
-<p>Each notebook page includes <strong>Google Colab</strong>, practice and worked-solution
-downloads. Start with the <a class="reference external" href="../SETUP.md">environment setup guide</a>.
-The first lab uses PhAST; the second combines a PhAST degradation law with an
-elastic-bar teaching model; the third uses a small Helmholtz field model to
-make training and correction easy to inspect.</p>
+<p>The local notebook downloads follow the <strong>15 September Day 2 edition</strong>. Each page
+includes a Colab link, notebook downloads and one conceptual recap answer.
+All three practicals use PhAST. The older Helmholtz training example remains
+in <a class="reference internal" href="further_practice.html"><span class="doc">Detailed notebooks and further practice</span></a> as optional background.</p>
+<p>Colab opens the notebooks on the published <code class="docutils literal notranslate"><span class="pre">main</span></code> branch. Local changes appear
+there after publication; use the downloads below to inspect this edition.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Open published edition</p></th>
+<th class="head"><p>Download this edition</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference external" href="https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/study/classroom/01_simulate_fracture.ipynb">Lab 1 in Colab</a></p></td>
+<td><p><a class="reference external" href="../notebooks/study/classroom/01_simulate_fracture.ipynb">Dynamic plate notebook</a></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/study/classroom/02_gradients_and_recovery.ipynb">Lab 2 in Colab</a></p></td>
+<td><p><a class="reference external" href="../notebooks/study/classroom/02_gradients_and_recovery.ipynb">Single-force bar notebook</a></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/study/classroom/03_learning_and_hybrid.ipynb">Lab 3 in Colab</a></p></td>
+<td><p><a class="reference external" href="../notebooks/study/classroom/03_learning_and_hybrid.ipynb">Learned damage notebook</a></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Start with the <a class="reference external" href="../SETUP.md">environment setup guide</a>. Lab 3 also requires the
+instructor-supplied <code class="docutils literal notranslate"><span class="pre">mesh_graph_net.pt</span></code>; obtain it before starting. Lab 2 retains
+its supplied figures and animation. Labs 1 and 3 generate their visual results
+when executed. Runtime depends on mesh size, solver settings, comparisons and
+animation export; a fresh whole-notebook Colab timing is still required.</p>
 </section>
 <section id="foundations-to-revisit">
 <h2>Foundations to revisit<a class="headerlink" href="#foundations-to-revisit" title="Link to this heading">#</a></h2>
@@ -520,15 +545,15 @@ damaged material. Symbols and assumptions are introduced beside their equations.
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="lectures/01_fracture_and_phast.html">Lecture 1: Phase-field fracture and PhAST</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lectures/02_differentiability_and_inverse.html">Lecture 2: Differentiability and inverse recovery</a></li>
-<li class="toctree-l1"><a class="reference internal" href="lectures/03_hybrid_learning.html">Lecture 3: Learning inside a numerical workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lectures/03_hybrid_learning.html">Lecture 3: Learned damage updates in PhAST</a></li>
 </ul>
 </div>
 <div class="toctree-wrapper compound">
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Three practical labs</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="classroom/01_simulate_fracture.html">Practical 1: Simulate a crack crossing a plate</a></li>
-<li class="toctree-l1"><a class="reference internal" href="classroom/02_gradients_and_recovery.html">Practical 2: Gradients and material recovery</a></li>
-<li class="toctree-l1"><a class="reference internal" href="classroom/03_learning_and_hybrid.html">Practical 3: Learn a field and assess its proposal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classroom/01_simulate_fracture.html">Phase-field fracture of a notched square plate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classroom/02_gradients_and_recovery.html">Recovering Young’s modulus from measured extension</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classroom/03_learning_and_hybrid.html">Replacing the damage subproblem with a trained network</a></li>
 </ul>
 </div>
 <div class="toctree-wrapper compound">
@@ -546,7 +571,7 @@ damaged material. Symbols and assumptions are introduced beside their equations.
 <li class="toctree-l1"><a class="reference internal" href="03_staggered_solution.html">The Staggered Solution Algorithm: Alternating Mechanics and Damage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="04_fem_to_tensors.html">From Weak Forms to Discrete Tensors: The PhAST Pipeline</a></li>
 <li class="toctree-l1"><a class="reference internal" href="05_differentiation_and_inverse.html">Differentiable Mechanics and Inverse Parameter Discovery</a></li>
-<li class="toctree-l1"><a class="reference internal" href="06_learning_adapter.html">Train, save, reload, adapters, and checked proposals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_learning_adapter.html">Learning field predictions and combining them with a solver</a></li>
 <li class="toctree-l1"><a class="reference internal" href="07_practice_references.html">Practice, Solutions, Glossary, and References</a></li>
 <li class="toctree-l1"><a class="reference internal" href="further_practice.html">Detailed notebooks and further practice</a></li>
 </ul>

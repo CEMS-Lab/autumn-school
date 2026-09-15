@@ -2,18 +2,20 @@
 
 ## Motivation and Learning Goals
 
-Predicting when, where, and how materials break is one of the foundational challenges of modern solid mechanics. In traditional engineering, we often treat cracks as sharp geometric discontinuities. In modern computational physics and scientific machine learning, however, we represent cracks as continuous damage fields governed by energy minimization.
+Cracks change how a solid carries load. Computational models describe this change using sharp crack surfaces, cohesive interfaces, or diffuse damage fields. This course develops the phase-field approach and shows how its numerical solution connects to differentiation and learning.
 
-Interpreting a damage band, a softening reaction curve, or an automatically computed sensitivity gradient requires understanding the interplay between three distinct layers:
+To interpret a damage field, a reaction curve, or a parameter gradient, identify three parts of the calculation:
+
 1. **The Physical Formulation:** The continuum theory and energy functional describing deformation and fracture.
 2. **The Numerical Discretization:** The finite element interpolation, mesh geometry, and quadrature rules that translate continuous fields into discrete tensors.
 3. **The Solution and Sensitivity Algorithm:** The nonlinear solver (such as staggered Newton iterations) and differentiation engine (such as reverse-mode automatic differentiation).
 
 By the end of this workshop, you will be able to:
+
 - **Understand Phase-Field Fracture:** Formulate the variational Griffith brittle fracture problem, explain the physical role of regularisation length $\ell$ and fracture toughness $G_c$, and contrast AT1 and AT2 models.
-- **Run the PhAST Solver End-to-End:** Set up a two-dimensional domain, generate a triangular mesh, assign boundary conditions, execute the coupled staggered solve, and extract reaction forces and damage fields.
+- **Run a PhAST simulation:** Set up a two-dimensional domain, generate a triangular mesh, assign boundary conditions, run the mechanical and damage updates, and interpret the saved fields and energy histories.
 - **Differentiate Mechanics Computations:** Construct a computational graph in PyTorch, verify analytical and autograd derivatives against directional finite differences, and solve an inverse parameter identification problem.
-- **Integrate Machine Learning Plug-and-Play:** Train neural operator adapters on field data, evaluate neural predictions against physical equilibrium residuals, and apply hybrid solver-in-the-loop corrections.
+- **Assess learned damage updates:** Use a supplied graph network, compare its predictions with the PhAST damage solution, and examine how residual checks and numerical correction affect the result. Optional notebooks introduce model training, saving and reloading.
 
 ---
 
@@ -24,9 +26,7 @@ Many non-linear physical systems exhibit multiple stable equilibrium states for 
 :::{admonition} Hands-On Tutorial: Lab 00 (Branch Selection & Energy Landscapes)
 :class: tip
 
-**Ready to try this in practice?**  
-Explore the interactive tutorial: **{doc}`labs/00_why_average_predictions_can_fail`**.  
-You can read through the worked derivations and energy plots directly here in the book, or run it interactively in **Google Colab** with one click:
+In {doc}`labs/00_why_average_predictions_can_fail`, compare predictions from squared-error and energy objectives on a system with multiple equilibrium branches.
 
 <div class="badge-row">
   <a class="badge-colab" href="https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/study/00_why_average_predictions_can_fail.ipynb" target="_blank"><img src="_static/colab-badge.svg" alt="Open In Colab"/></a>
@@ -35,11 +35,7 @@ You can read through the worked derivations and energy plots directly here in th
 </div>
 :::
 
-We compare two fundamental approaches:
-- **Supervised Regression (Mean Squared Error):** Which naturally converges to conditional averages.
-- **Physics-Informed Energy Minimization:** Which guides the model directly to physical equilibrium branches.
-
-This motivating exercise illustrates a key takeaway: in physical problems, optimizing a physically grounded energy functional is often essential for capturing true physical branches.
+The example compares two training objectives. Squared-error regression fits the observed targets and can approach their conditional mean. Energy minimisation favours low-energy states of the chosen physical model. When several stable branches exist, loading history, constraints and initialisation influence which branch is selected.
 
 ---
 

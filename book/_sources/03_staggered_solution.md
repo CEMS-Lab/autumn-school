@@ -8,22 +8,17 @@
 Within each load increment, the staggered scheme alternates between updating displacement with damage fixed, and updating damage with displacement fixed, until equilibrium residuals converge.
 :::
 
-## The Divide-and-Conquer Strategy
+## Alternating the coupled fields
 
-Solving for displacement $u(x)$ and phase-field damage $d(x)$ simultaneously is a formidable challenge:
-- Stretching the solid increases strain energy, which drives damage growth.
-- As damage grows, stiffness degrades ($g(d) \to 0$), which relaxes the stress and redistributes loads to neighboring intact elements.
+Displacement and damage influence one another. Deformation supplies the energy that drives damage, and damage changes the stiffness and redistributes stress.
 
-Because the total potential energy is non-convex in $(u, d)$ jointly, a monolithic Newton–Raphson solver can suffer from loss of positive definiteness, small convergence basins, or numerical instability.
+A staggered scheme solves these coupled equations in successive subproblems:
 
-To overcome this, computational mechanics uses the **staggered alternating minimization scheme** (Bourdin et al., 2000). The philosophy is simple: **divide and conquer**:
+1. Hold damage fixed and solve the mechanical problem.
+2. Hold displacement fixed and solve the damage problem with its irreversibility constraints.
+3. Check the field changes and residuals, then repeat at the same load level until the convergence criteria are satisfied.
 
-1. **Step 1: Freeze Damage ($d$ fixed), Solve for Displacement $u$:**  
-   With the damage field fixed, the mechanical subproblem reduces to a standard, well-conditioned linear elasticity problem.
-2. **Step 2: Freeze Displacement ($u$ fixed), Solve for Damage $d$:**  
-   With displacements fixed, the damage subproblem is strictly convex and mathematically mirrors a steady-state diffusion problem with a source term.
-3. **Step 3: Check Residuals and Iterate:**  
-   Alternate between the two subproblems until both mechanical and damage residuals fall below specified tolerance criteria, then advance to the next load increment.
+The material law and energy split determine whether the mechanical subproblem is linear. Convexity of the damage subproblem depends on the chosen energy and constraints. Staggering simplifies each update, although strong coupling can require many iterations.
 
 ---
 
@@ -168,7 +163,7 @@ The phrase “dynamic phase field” should therefore be accompanied by the time
 integrator, time step, inertia/damping assumptions, and the quantity used to
 enforce or approximate irreversibility.
 
-## Acceptance checks
+## Interpreting convergence
 
 At an accepted increment, consider at least the following checks:
 
@@ -187,11 +182,9 @@ Interpret the iteration count together with the residual definition. Field
 inspection helps identify an incorrect boundary condition, a flipped damage
 convention, or an under-resolved band even when the residual decreases.
 
-## Looking Ahead: Running the PhAST Staggered Solver
+## Applying the equations in PhAST
 
-In the next chapter, we put this staggered solution strategy into action using PhAST on a notched specimen loaded in tension. As you step through the simulation, pay close attention to two physical features:
-1. **The Damage Evolution:** Notice how damage remains concentrated near the precrack during initial elastic loading, then rapidly localizes and forms a propagating crack band once the critical fracture threshold is reached.
-2. **Solver Convergence Dynamics:** Notice how the staggered iteration count increases dynamically during active crack propagation as displacement and damage fields interact strongly before stabilizing.
+The next chapter introduces a dynamic notched-plate calculation. Inspect how the displacement update, damage solve and physical time step appear in its configuration. Compare successive damage fields to locate crack growth, and use the energy histories to interpret the accompanying mechanical response.
 
 
 ## Exercise: write the update before reading the code
@@ -217,9 +210,9 @@ and field changes, and accept the load step when the checks pass.
 The lower-bound constraint $d_n\geq d_{n-1}$, or a history
 construction designed to enforce its effect, is the one-way component.
 
-This ordering is the interpretation key for the later computational lesson.
-The lesson's stagger-iteration trace describes the configured block-update
-route and is interpreted alongside the residual and field checks.
+This ordering describes the quasistatic staggered scheme. In the dynamic
+classroom example, the mechanical update also evolves velocity and
+acceleration over physical time.
 :::
 
 ## Sources for this chapter

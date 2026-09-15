@@ -22,6 +22,9 @@ def digest(path):
 
 
 def main():
+    if (ROOT / 'notebooks/classroom/day2_edition.json').exists():
+        runpy.run_path(str(ROOT / 'source/book/scripts/build_day2_pages.py'))['main']()
+        return
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--evidence-dir", type=Path, help="Directory containing the three checked receipts and executed/ copies")
     args = parser.parse_args()

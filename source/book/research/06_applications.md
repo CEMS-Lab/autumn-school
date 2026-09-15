@@ -13,9 +13,9 @@ physical time from inverse updates before we generalize to multiple particles.
 
 We prescribe a notched plate, three stiff circular inclusions, material
 contrasts and loading. The unknowns are the three centres and radii. The
-observations are selected displacement and damage fields; synthetic damage
-observations and experimental displacement measurements require different
-observation contracts.
+observations are selected displacement and damage fields. Synthetic damage
+fields and experimental displacement measurements each need a stated rule for
+comparing the simulation with the data.
 
 The first research question is precise: does increasing a prescribed initial
 offset change recovery when everything else stays fixed? Use the same target,
@@ -219,11 +219,11 @@ C\approx\left(J^T\Sigma^{-1}J+\Lambda_{\rm prior}\right)^{-1},
 $$
 
 where $\Lambda_{\rm prior}$ is the local curvature of the negative log prior.
-This Gauss-Newton approximation describes one locally smooth basin. It needs
-care near active bounds, switching trajectories, significant residuals or
-multiple modes. Strong intervals created mainly by a strong prior should be
-identified as such. The linear exercise in this notebook illustrates the
-algebra; fracture posterior sampling is a separate computational study.
+This Gauss-Newton approximation describes uncertainty near one locally smooth
+solution. Its accuracy needs checking near parameter bounds, changes in crack
+path, large residuals or competing solutions. Identify intervals whose
+narrowness comes mainly from the prior. The linear exercise illustrates the
+algebra; estimating a fracture posterior requires a separate computational study.
 
 A sequential probabilistic update carries the uncertainty of earlier particles
 forward. Setting their variances to zero because they were optimized earlier
@@ -233,7 +233,10 @@ optimization locates modes. Posterior sampling instead follows the declared
 probability distribution; a collection of optimizer endpoints describes the
 attraction basins explored by those starts.
 
-### What can one crack tell us about an RVE?
+### What can one crack tell us about a representative volume element?
+
+A representative volume element (RVE) is a sample large enough to represent
+the bulk response of a heterogeneous material for the property being studied.
 
 Consider two microstructures that differ mainly away from the observed crack.
 If their measured trajectories are indistinguishable at the noise level, the
@@ -261,26 +264,27 @@ Sampling, surrogate construction and validation costs belong in the research
 budget. A gradient surrogate used for optimization also needs separate
 justification before it is used inside an exact posterior sampler.
 
-## Exercise: a complete experiment card
+## Exercise: compare two particle-recovery strategies
 
-Write a card for one of the applications. Include the following:
-
-- Unknowns, units and admissible bounds.
-- Fixed model, mesh, loading and initial state.
-- Fitting observations, normalisation and independent assessment.
-- Optimiser and stopping rule available without the true parameters.
-- Forward and derivative checks, total work and resource budget.
-- Stored fields, source fingerprint and the result needed to support the claim.
+Design a comparison between simultaneous and cumulative recovery for the
+three-particle plate. State the unknowns, measurements, units and parameter
+bounds. Explain which physical and numerical settings must stay fixed, how
+the optimiser will stop without knowing the true positions, and which unused
+observations will assess the result. Include all trial solves when comparing
+computational cost. Identify the fields and source version needed to reproduce
+and interpret the comparison.
 
 :::{admonition} Worked interpretation
 :class: dropdown
 
-For the three-particle application, stopping can use objective or step
-criteria and a declared budget. True centre/radius errors are post-run
-assessment quantities. A passing derivative check supports a local
-sensitivity; geometric recovery and predictive agreement are separate
-outcomes. Preserve failures and document exactly which assumptions differ
-between experiments.
+Both strategies should use the same plate, mesh, loading, initial state and
+fitting data, with the same observation weights and normalisation. Stopping
+can depend on the observation mismatch, update size and a fixed computation
+budget. Assess centre and radius errors afterwards using the synthetic
+reference. A local derivative check assesses sensitivity; recovery accuracy
+and predictions on unused observations assess different parts of the
+experiment. Retain runs that miss the reference so the comparison represents
+all prescribed starts, and record any differences in assumptions.
 :::
 
 ## Build an experiment from the lesson

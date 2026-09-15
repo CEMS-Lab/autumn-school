@@ -83,11 +83,11 @@ field connects the finite-element model to tensor operations. The existing
 {ref}`FEM pipeline <fig-fem-pipeline>` and
 {doc}`tensor chapter <../04_fem_to_tensors>` develop these operations.
 
-A matrix-free route evaluates an operator's action on a vector through local
-calculations. Its computational cost depends on the iteration and
-preconditioning used. Dynamics additionally evolves velocity and acceleration
-through physical time; the selected time integrator and time step become part
-of the model's numerical description.
+A matrix-free calculation evaluates the effect of a matrix on a vector using
+element calculations, without assembling the full matrix. Its cost depends on
+the iterative solver and its preconditioner, which helps the iterations
+converge. A dynamic calculation also updates velocity and acceleration through
+physical time, using a chosen time-integration method and time step.
 
 :::{admonition} One element and its tensor operations
 :class: note
@@ -106,11 +106,19 @@ time evolution?
 In {doc}`../classroom/01_simulate_fracture`, inspect the geometry and loading,
 run the small PhAST example, and interpret the advancing damage field alongside
 the loading history and elastic, fracture and kinetic energies. The selected
-configuration uses a geometric single-edge notch, explicit central-difference
-dynamics and an implicit spectral AT2 damage update. Projected CG with Jacobi
-preconditioning enforces the damage bounds. The imported mesh has 1,091 nodes
-and 1,940 triangles. It provides a short qualitative view of a crack crossing
-the plate; quantitative path and speed accuracy require mesh refinement.
+configuration uses a 40 mm square glass plate with a 20 mm geometric notch,
+explicit dynamics and an implicit spectral AT2 damage update. Students generate
+a graded Gmsh mesh with target sizes of 0.25 mm near the crack path and 2 mm
+away from it. Actual mesh counts are printed after generation. Equal and
+opposite vertical displacements act on the top and bottom; the left and right
+edges are restrained horizontally. The ramp lasts 20 microseconds within a
+50-microsecond simulation window.
+
+The notebook uses `phast.load_result` and `phast.compute_field` to inspect
+displacement, strain, stress and damage, then animate them with fixed colour
+scales. Run the horizontal-notch reference first; the inclined-notch exercise
+is an additional simulation. Quantitative path and speed accuracy require
+mesh refinement.
 
 Finish by choosing one parameter and one observable that could be compared
 between runs. {doc}`Lecture 2 <02_differentiability_and_inverse>` follows this

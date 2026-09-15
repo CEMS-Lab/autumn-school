@@ -1,128 +1,85 @@
-# Lecture 3: Learning inside a numerical workflow
+# Lecture 3: Learned damage updates in PhAST
 
-**50 minutes.** This lecture connects the gradients from
-{doc}`Lecture 2 <02_differentiability_and_inverse>` to neural-model training and
-hybrid computation. We follow the information passed between a model and a
-numerical calculation, then consider how that information changes during use.
+A trained network can supply a field inside a finite-element calculation.
+Identify what the network receives, which operation it affects, and how to
+assess the resulting simulation. This practical evaluates a frozen graph
+network in a real PhAST fracture calculation.
 
-## Define and train a small model · 0–8 minutes
+## Locate the learned operation
 
-A learning task begins with stated input channels and a target output. For
-supervised fitting, a loss compares the prediction with stored reference
-targets, and backpropagation computes its gradient with respect to model
-weights. Residual-based training differentiates an equation evaluated at the
-prediction. Solver-in-the-loop training also follows the selected numerical
-updates. The {doc}`learning chapter <../06_learning_adapter>` expands these
-three computational graphs.
+Mechanics determines displacement; tensile history supplies the driving field;
+the damage update determines the next damage field. The network predicts this
+damage update. Mechanics remains in PhAST. Bounds, irreversibility, boundary
+values and the damage residual still govern interpretation of an accepted state.
 
-:::{admonition} Training and reusing a small field model
-:class: note
+## Define the specimen and constitutive model
 
-Identify the coordinate and parameter inputs and scalar
-field target in the existing Helmholtz teaching model. Follow a short training
-step, then save and reload the weights together with normalisation and feature
-order. Compare the same input before and after reload.
+{doc}`Lab 3 <../classroom/03_learning_and_hybrid>` builds a 10 mm square
+plate with an edge slot and three holes. Quasi-static loading advances through
+500 increments to a top displacement of 0.04 mm. Each increment performs one
+mechanics–damage pass (`max_stagger=1`); the supplied calculation does not
+iterate the coupled fields to staggered convergence at each increment.
 
-**Learning question:** What information is needed to reuse a trained model?
-:::
+The material has $E=210000\,\mathrm{MPa}$, $\nu=0.3$,
+$G_c=2.7\,\mathrm{N/mm}$ and $\ell_0=0.4\,\mathrm{mm}$. Its checkpoint-specific
+degradation law is
 
-## Route A: learn the damage subsolve · 8–18 minutes
+$$g(d)=\frac{(1-d)^2}{(1-d)^2+d}.$$
 
-Within the staggered scheme, the damage subsolve receives the current
-mechanical driving quantity and the information needed to describe material,
-geometry, loading and history. A learned replacement would produce a damage
-update for those inputs. It remains coupled to the next mechanics update and
-to the convergence and admissibility checks for the complete increment.
+Damage reduces the full stress, while the tensile part of the elastic energy
+drives the history update. This combination does not follow from one common
+energy functional; it is a non-variational hybrid constitutive model. The
+classical and learned routes in Lab 3 use this same model, mesh and loading.
+Lab 1 uses a different constitutive model for the dynamic glass plate.
 
-:::{admonition} A learned damage update
-:class: note
+## Distinguish the three damage routes
 
-Start from the staggered loop and identify the damage
-subsolve. Replace that operation with a labelled learned damage update,
-show its input and output fields, and follow the next mechanics update.
-Keep the bounds, irreversibility and coupled convergence checks visible.
-The {doc}`single-replacement case study <../w53_direct_replacement>` illustrates
-this role with a retained Radius-GNO fracture trajectory and a measured
-damage-stage timing comparison.
+| Route | Network role | Accepted damage |
+| --- | --- | --- |
+| `classical` | No prediction | Classical damage solve |
+| `learned_proposal` | Supplies an initial field | Classical solve started from the prediction |
+| `learned_replacement` | Supplies a candidate field | Checked prediction, or classical fallback |
 
-**Learning question:** Which operation is learned, and what conditions still
-govern the accepted state?
-:::
+Direct replacement is the main application of interest. The proposal route
+provides a comparison with numerical correction. Each has its own cost and
+accuracy. Retain the fallback and report its use.
 
-## Route B: physically correct a prediction · 18–28 minutes
+## Read the interface and obtain the checkpoint
 
-A second route uses a model to propose a state and evaluates that proposal
-with the governing residual and the relevant constraints. A numerical
-correction can then refine the state; a reference solve can provide a fallback.
-The corrected state needs its own checks. The
-{ref}`existing learning-cycle figure <fig-learning-cycle>` introduces
-these exchanges.
+`DamageStepContext` supplies the mesh, mechanical fields, loading history,
+previous damage and material data. The adapter converts these into the inputs
+expected by the saved network. Their order, units, boundary description and
+scaling must match those used during training. Compare the new specimen and
+loading with the training data when assessing transfer to another problem.
 
-:::{admonition} Assessing and correcting a prediction
-:class: note
+The notebook imports the public mesh-graph adapter from the PhAST checkout.
+Obtain `mesh_graph_net.pt` from the instructor before starting; public
+automated distribution of these weights remains separate from the book.
+Printing a checksum identifies a file; verification also requires a trusted
+expected hash.
 
-Follow the inputs, prediction, residual evaluation, numerical correction and
-accepted field. Distinguish direct acceptance from reference fallback.
-Include prediction, checking, correction and fallback when measuring the
-cost of the complete calculation.
+## Compare fields and complete cost
 
-**Learning question:** How can we tell whether the complete hybrid calculation
-improves on its reference calculation?
-:::
+Inspect reference, prediction and difference using common colour scales.
+Compare the damage residual and physical constraints alongside nodal field
+error. Record complete runtime, including inference, checking, correction and
+fallback. The supplied notebook contains this comparison code but no retained
+run outputs. A fresh whole-notebook timing, including its three solves and
+post-processing, is required before assigning a classroom runtime or speed-up.
 
-## Compare models through a common interface · 28–38 minutes
+The lecture’s damage-stage timing and the optional
+{doc}`Radius-GNO case study <../w53_direct_replacement>` concern their own
+models, specimens and hardware. Neither provides a measured end-to-end speed-up
+for this mesh-graph classroom exercise.
 
-An MLP maps a chosen feature vector to an output; convolutional models use
-structured grids; graph models use a specified connectivity; neural operators
-aim to learn maps between functions through their chosen representations.
-Architecture choice follows the available data and the desired field map.
-Input meaning, spatial ordering, units and output interpretation must remain
-clear when models are exchanged.
+## Extend the exercise
 
-:::{admonition} Comparing model interfaces
-:class: note
+Explore acceptance tolerances, changed holes, predictor interfaces and
+per-increment cost. These are additional runs. The network was trained on a
+different specimen, so this example tests transfer. Keep the reference
+calculation visible when drawing conclusions.
 
-Use the small field-model example to identify its input features, prediction
-and saved-model metadata. Consider how an RBF, grid-based model or graph model
-would represent the same field. Explain which inputs and spatial information
-each architecture requires. A quantitative comparison would use matched
-training data, field-error measures and complete computation times.
-
-**Learning question:** Which parts of the model interface must agree for a
-comparison to be meaningful?
-:::
-
-## Learning from states encountered during use · 38–46 minutes
-
-Online prediction means applying the trained model during a calculation.
-Online learning also updates the model using incoming examples. Active
-learning selects which examples should receive new reference labels. A
-DAgger-style round specifically collects states visited by the current model,
-queries a reference procedure there, aggregates those labelled records and
-re-trains the model. Held-out evaluation is needed to assess the revised model.
-
-:::{admonition} A conceptual DAgger round
-:class: note
-
-Trace the states visited by the current model, reference labelling of those
-states, dataset aggregation and another training round. Reserve a separate
-evaluation set to assess the updated model. This conceptual extension explains
-how the data distribution can change as a learned component is used.
-
-**Learning question:** Why might model-visited states add information to the
-original training set?
-:::
-
-## Connect the routes to the practical · 46–50 minutes
-
-In {doc}`../classroom/03_learning_and_hybrid`, train and reuse a small scalar
-Helmholtz field model, inspect a proposal and evaluate the numerical response
-to its residual. The example teaches the model interface and reference
-correction or fallback in a compact setting. Its field and residual belong to
-the Helmholtz teaching problem. The direct-replacement fracture case study
-provides a separate application, while the DAgger discussion introduces an
-iterative data-collection and training strategy.
-
-Discuss both field quality and complete computation time when assessing a
-hybrid method. The same comparison links model learning back to the physical
-question that opened the course.
+For training fundamentals, the original Helmholtz
+{doc}`train/save/reload tutorial <../labs/04_train_save_reload_adapter>`
+remains optional. Its simple field equation explains a training loop; the main
+Day 2 practical evaluates a supplied trained model within fracture mechanics.

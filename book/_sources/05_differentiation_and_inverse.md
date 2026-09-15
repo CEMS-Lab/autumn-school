@@ -5,26 +5,20 @@
 :width: 96%
 :alt: Parameters enter a supported forward computation and a scalar loss. Reverse sensitivities return a gradient, checked against a directional finite difference. An optional optimizer uses that gradient in a separate parameter update.
 
-In differentiable mechanics, parameters flow through the forward solver graph to produce an observation. Reverse-mode automatic differentiation computes the sensitivity gradient, which guides an optimizer to discover unknown physical properties.
+The forward solver maps parameters to observations. Reverse-mode automatic differentiation computes a loss gradient that an optimiser can use to update the parameter estimates.
 :::
 
-## The Detective Story: Solving Inverse Problems with Differentiable Mechanics
+## Estimating a material property from measurements
 
-Imagine you are an engineer in a materials testing laboratory. You place a specimen of an unknown advanced alloy into a tensile testing machine, apply incremental stretch, and record the reaction forces and surface displacement fields using digital cameras (digital image correlation).
+A tensile test provides measurements such as reaction force and displacement. An inverse problem uses those measurements to estimate a material property. For example, if the geometry and applied force are known, the extension of an elastic bar can be used to estimate Young's modulus.
 
-Now comes the fundamental scientific puzzle:
-*What are the true underlying material properties—such as Young's modulus $E$, Poisson's ratio $\nu$, or fracture toughness $G_c$—that gave rise to these experimental measurements?*
-
-In traditional engineering, solving this **inverse problem** required expensive brute-force guessing: pick a trial parameter, run a forward finite element simulation, see how far off the prediction is, and guess again.
-
-With **differentiable mechanics**, the simulation itself calculates the road map!
-Because our finite element equations are assembled into a differentiable computational graph in PyTorch, reverse-mode automatic differentiation (`autograd`) uses the chain rule to backpropagate the error between simulation and observation all the way back to the input material parameters:
+We compare the simulated observation $y(p)$ with the measured value and express their difference through a loss $J$. Automatic differentiation computes how that loss changes with the parameter $p$ by applying the chain rule to the supported simulation operations. For an observation depending on the displacement $u$, this gives
 
 $$
 \frac{\partial J}{\partial p} = \frac{\partial J}{\partial y} \cdot \frac{\partial y}{\partial u} \cdot \frac{\partial u}{\partial p}.
 $$
 
-With this exact sensitivity gradient in hand, standard optimization algorithms (`torch.optim.Adam` or L-BFGS) can systematically navigate the parameter landscape and pinpoint the true material properties.
+An optimiser uses this gradient to update the estimate. Recovery depends on how strongly the measurements constrain the parameter, as well as measurement noise, model assumptions and numerical accuracy.
 
 ---
 
@@ -171,15 +165,13 @@ requires assessment of measurement noise and model discrepancy.
 
 In the accompanying computational lesson, you will implement a complete differentiable mechanics problem in PyTorch:
 1. **Forward Solution:** Solve deformation in a one-dimensional elastic bar under tensile loading.
-2. **Derivative Verification:** Compute sensitivities of an observation with respect to the elastic modulus using analytical formulas, automatic differentiation (`loss.backward()`), and central finite differences.
-3. **Inverse Identification:** Use gradient descent to automatically recover the unknown ground-truth stiffness from synthetic displacement measurements.
+2. **Sensitivity:** Use automatic differentiation (`loss.backward()`) through PhAST and interpret the sign using the analytical extension formula. Finite differences and Taylor tests are optional checks in the reference material.
+3. **Inverse Identification:** Use SGD with momentum to recover one uniform modulus from one synthetic tip displacement at a fixed 4000 N force. Inspect the modulus, loss and displacement histories.
 
 :::{admonition} Hands-On Tutorial: Lab 2 (Gradients and Parameter Recovery)
 :class: tip
 
-**Ready to try this in practice?**  
-Explore the interactive tutorial: **{doc}`classroom/02_gradients_and_recovery`**.
-You can read through the worked autograd graph and parameter recovery trajectories directly here in the book, or run it interactively in **Google Colab** with one click:
+In {doc}`classroom/02_gradients_and_recovery`, solve the elastic bar and follow the modulus estimate through successive optimisation steps.
 
 <div class="badge-row">
   <a class="badge-colab" href="https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/study/classroom/02_gradients_and_recovery.ipynb" target="_blank"><img src="_static/colab-badge.svg" alt="Open In Colab"/></a>
@@ -190,24 +182,24 @@ You can read through the worked autograd graph and parameter recovery trajectori
 
 ## Directional Derivative Verification
 
-To verify that reverse-mode automatic differentiation yields the true gradient, we compare the directional derivative obtained from autograd with a numerical central difference:
+Compare the autograd directional derivative with a central finite difference:
 
 $$
 D_hJ(p;q) = \frac{J(p+hq)-J(p-hq)}{2h} \quad\approx\quad g^\mathsf{T}q.
 $$
 
-We evaluate this comparison across several perturbation step sizes $h$. A relative error metric measures consistency:
+Evaluate the comparison across several perturbation sizes $h$. The following scaled discrepancy measures agreement:
 
 $$
-\text{Relative Error} = \frac{|D_hJ - g^\mathsf{T}q|}{\max(1, |D_hJ|, |g^\mathsf{T}q|)}.
+\text{Scaled discrepancy} = \frac{|D_hJ - g^\mathsf{T}q|}{\max(1, |D_hJ|, |g^\mathsf{T}q|)}.
 $$
 
-When the step size $h$ is in a well-balanced range (typically $10^{-4}$ to $10^{-6}$ for float64), the relative difference is close to machine precision, confirming that autograd correctly traverses every operation in the forward computational graph.
+Large perturbations introduce truncation error; very small perturbations can amplify cancellation and solver-tolerance effects. Useful step sizes depend on the parameter scale, precision and forward calculation. Apply the displayed scaling to nondimensional quantities, or choose a reference scale with the derivative's units.
 
 :::{admonition} Interpreting Gradient Verification
 :class: note
 
-A close match between autodiff and finite differences confirms that the computational graph correctly implements the intended mathematical derivative. In inverse problems, this verified gradient provides the foundation for stable, efficient optimization.
+Agreement over a suitable range of $h$ supports local consistency for the tested parameter and direction. Parameter identifiability and agreement with experimental behaviour require separate assessment.
 :::
 
 ## Why inverse recovery can be difficult

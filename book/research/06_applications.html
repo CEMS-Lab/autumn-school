@@ -33,7 +33,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/mobile_math.css?v=acf5579e" />
-    <link rel="stylesheet" type="text/css" href="../_static/learning_book.css?v=37e7f39f" />
+    <link rel="stylesheet" type="text/css" href="../_static/learning_book.css?v=d69ae7f6" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -174,13 +174,13 @@
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../lectures/01_fracture_and_phast.html">Lecture 1: Phase-field fracture and PhAST</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../lectures/02_differentiability_and_inverse.html">Lecture 2: Differentiability and inverse recovery</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lectures/03_hybrid_learning.html">Lecture 3: Learning inside a numerical workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lectures/03_hybrid_learning.html">Lecture 3: Learned damage updates in PhAST</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Three practical labs</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../classroom/01_simulate_fracture.html">Practical 1: Simulate a crack crossing a plate</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../classroom/02_gradients_and_recovery.html">Practical 2: Gradients and material recovery</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../classroom/03_learning_and_hybrid.html">Practical 3: Learn a field and assess its proposal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../classroom/01_simulate_fracture.html">Phase-field fracture of a notched square plate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../classroom/02_gradients_and_recovery.html">Recovering Young’s modulus from measured extension</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../classroom/03_learning_and_hybrid.html">Replacing the damage subproblem with a trained network</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Optional direct-replacement case study</span></p>
 <ul class="nav bd-sidenav">
@@ -197,7 +197,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../05a_backpropagation_step_by_step.html">Backpropagation through a stepped update</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1"><a class="reference internal" href="../06_learning_adapter.html">Train, save, reload, adapters, and checked proposals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06_learning_adapter.html">Learning field predictions and combining them with a solver</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../07_practice_references.html">Practice, Solutions, Glossary, and References</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../further_practice.html">Detailed notebooks and further practice</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../labs/00_why_average_predictions_can_fail.html">Lab 00: Branch Selection &amp; Energy-Based Objectives in Physics-Informed Learning</a></li>
@@ -215,7 +215,7 @@
 <li class="toctree-l2"><a class="reference internal" href="01_geometry.html">Representing particles and testing their geometry</a></li>
 <li class="toctree-l2"><a class="reference internal" href="02_observations.html">From measurements to a loss</a></li>
 <li class="toctree-l2"><a class="reference internal" href="03_derivatives.html">Verify a derivative before interpreting an update</a></li>
-<li class="toctree-l2"><a class="reference internal" href="03_history_visual.html">Why a fracture solver needs a memory-aware derivative</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_history_visual.html">Differentiating a fracture simulation with loading history</a></li>
 <li class="toctree-l2"><a class="reference internal" href="03_history.html">Differentiating fracture: memory, switches and useful limits</a></li>
 <li class="toctree-l2"><a class="reference internal" href="04_recovery.html">Why a correct gradient can give slow or ambiguous recovery</a></li>
 <li class="toctree-l2"><a class="reference internal" href="05_learning.html">A useful role for learning: propose, solve and check</a></li>
@@ -430,10 +430,10 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#application-3-selecting-observations">Application 3: selecting observations</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#application-4-uncertainty-and-generative-proposals">Application 4: uncertainty and generative proposals</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#from-a-recovered-geometry-to-uncertainty-intervals">From a recovered geometry to uncertainty intervals</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-can-one-crack-tell-us-about-an-rve">What can one crack tell us about an RVE?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-can-one-crack-tell-us-about-a-representative-volume-element">What can one crack tell us about a representative volume element?</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-a-complete-experiment-card">Exercise: a complete experiment card</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-compare-two-particle-recovery-strategies">Exercise: compare two particle-recovery strategies</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#build-an-experiment-from-the-lesson">Build an experiment from the lesson</a></li>
 </ul>
             </nav>
@@ -455,9 +455,9 @@ physical time from inverse updates before we generalize to multiple particles.</
 <h2>Application 1: three particles ahead of a crack<a class="headerlink" href="#application-1-three-particles-ahead-of-a-crack" title="Link to this heading">#</a></h2>
 <p>We prescribe a notched plate, three stiff circular inclusions, material
 contrasts and loading. The unknowns are the three centres and radii. The
-observations are selected displacement and damage fields; synthetic damage
-observations and experimental displacement measurements require different
-observation contracts.</p>
+observations are selected displacement and damage fields. Synthetic damage
+fields and experimental displacement measurements each need a stated rule for
+comparing the simulation with the data.</p>
 <p>The first research question is precise: does increasing a prescribed initial
 offset change recovery when everything else stays fixed? Use the same target,
 mesh, material parameters, fitting observations, bounds, optimiser and budgets
@@ -657,11 +657,11 @@ fraction. A local Gaussian approximation near a recovered mode has covariance</p
 C\approx\left(J^T\Sigma^{-1}J+\Lambda_{\rm prior}\right)^{-1},
 \]</div>
 <p>where <span class="math notranslate nohighlight">\(\Lambda_{\rm prior}\)</span> is the local curvature of the negative log prior.
-This Gauss-Newton approximation describes one locally smooth basin. It needs
-care near active bounds, switching trajectories, significant residuals or
-multiple modes. Strong intervals created mainly by a strong prior should be
-identified as such. The linear exercise in this notebook illustrates the
-algebra; fracture posterior sampling is a separate computational study.</p>
+This Gauss-Newton approximation describes uncertainty near one locally smooth
+solution. Its accuracy needs checking near parameter bounds, changes in crack
+path, large residuals or competing solutions. Identify intervals whose
+narrowness comes mainly from the prior. The linear exercise illustrates the
+algebra; estimating a fracture posterior requires a separate computational study.</p>
 <p>A sequential probabilistic update carries the uncertainty of earlier particles
 forward. Setting their variances to zero because they were optimized earlier
 overstates certainty. Each new datum enters a sequential update once, with a
@@ -670,8 +670,10 @@ optimization locates modes. Posterior sampling instead follows the declared
 probability distribution; a collection of optimizer endpoints describes the
 attraction basins explored by those starts.</p>
 </section>
-<section id="what-can-one-crack-tell-us-about-an-rve">
-<h3>What can one crack tell us about an RVE?<a class="headerlink" href="#what-can-one-crack-tell-us-about-an-rve" title="Link to this heading">#</a></h3>
+<section id="what-can-one-crack-tell-us-about-a-representative-volume-element">
+<h3>What can one crack tell us about a representative volume element?<a class="headerlink" href="#what-can-one-crack-tell-us-about-a-representative-volume-element" title="Link to this heading">#</a></h3>
+<p>A representative volume element (RVE) is a sample large enough to represent
+the bulk response of a heterogeneous material for the property being studied.</p>
 <p>Consider two microstructures that differ mainly away from the observed crack.
 If their measured trajectories are indistinguishable at the noise level, the
 data cannot choose between them. A useful output is therefore an ensemble of
@@ -698,25 +700,25 @@ budget. A gradient surrogate used for optimization also needs separate
 justification before it is used inside an exact posterior sampler.</p>
 </section>
 </section>
-<section id="exercise-a-complete-experiment-card">
-<h2>Exercise: a complete experiment card<a class="headerlink" href="#exercise-a-complete-experiment-card" title="Link to this heading">#</a></h2>
-<p>Write a card for one of the applications. Include the following:</p>
-<ul class="simple">
-<li><p>Unknowns, units and admissible bounds.</p></li>
-<li><p>Fixed model, mesh, loading and initial state.</p></li>
-<li><p>Fitting observations, normalisation and independent assessment.</p></li>
-<li><p>Optimiser and stopping rule available without the true parameters.</p></li>
-<li><p>Forward and derivative checks, total work and resource budget.</p></li>
-<li><p>Stored fields, source fingerprint and the result needed to support the claim.</p></li>
-</ul>
+<section id="exercise-compare-two-particle-recovery-strategies">
+<h2>Exercise: compare two particle-recovery strategies<a class="headerlink" href="#exercise-compare-two-particle-recovery-strategies" title="Link to this heading">#</a></h2>
+<p>Design a comparison between simultaneous and cumulative recovery for the
+three-particle plate. State the unknowns, measurements, units and parameter
+bounds. Explain which physical and numerical settings must stay fixed, how
+the optimiser will stop without knowing the true positions, and which unused
+observations will assess the result. Include all trial solves when comparing
+computational cost. Identify the fields and source version needed to reproduce
+and interpret the comparison.</p>
 <div class="dropdown admonition">
 <p class="admonition-title">Worked interpretation</p>
-<p>For the three-particle application, stopping can use objective or step
-criteria and a declared budget. True centre/radius errors are post-run
-assessment quantities. A passing derivative check supports a local
-sensitivity; geometric recovery and predictive agreement are separate
-outcomes. Preserve failures and document exactly which assumptions differ
-between experiments.</p>
+<p>Both strategies should use the same plate, mesh, loading, initial state and
+fitting data, with the same observation weights and normalisation. Stopping
+can depend on the observation mismatch, update size and a fixed computation
+budget. Assess centre and radius errors afterwards using the synthetic
+reference. A local derivative check assesses sensitivity; recovery accuracy
+and predictions on unused observations assess different parts of the
+experiment. Retain runs that miss the reference so the comparison represents
+all prescribed starts, and record any differences in assumptions.</p>
 </div>
 </section>
 <section id="build-an-experiment-from-the-lesson">
@@ -784,10 +786,10 @@ assessment criteria.</p>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#application-3-selecting-observations">Application 3: selecting observations</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#application-4-uncertainty-and-generative-proposals">Application 4: uncertainty and generative proposals</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#from-a-recovered-geometry-to-uncertainty-intervals">From a recovered geometry to uncertainty intervals</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-can-one-crack-tell-us-about-an-rve">What can one crack tell us about an RVE?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-can-one-crack-tell-us-about-a-representative-volume-element">What can one crack tell us about a representative volume element?</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-a-complete-experiment-card">Exercise: a complete experiment card</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-compare-two-particle-recovery-strategies">Exercise: compare two particle-recovery strategies</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#build-an-experiment-from-the-lesson">Build an experiment from the lesson</a></li>
 </ul>
   </nav></div>

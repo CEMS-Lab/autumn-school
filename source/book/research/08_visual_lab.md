@@ -7,8 +7,8 @@ myst:
 
 A loss landscape assigns a height to each candidate parameter pair. Here the
 horizontal coordinates are the unknown particle centre $(c_x,c_y)$ and the
-height is the loss. The plate is a physical domain; the landscape is a
-parameter domain. We connect the two views without confusing them.
+height is the loss. The plate shows where the inclusion lies in the specimen.
+The landscape shows how the loss changes between candidate inclusion positions.
 
 This visual laboratory connects three examples: a geometry-image inverse
 problem, a retained 25-point FEM scan, and a retained fracture-inverse trajectory.
@@ -56,9 +56,10 @@ the mismatch? What happens to the information available far from the circle?
 :alt: A three-dimensional geometry-loss surface and its top-down map show the computed descent trajectory into a low-loss region.
 
 The surface is calculated at 5,265 centre locations on a $65\times81$ grid.
-The map and surface display the same untransformed loss. Orange marks a
-computed descent using analytic gradients and a sufficient-decrease line
-search. Surface tessellation connects the calculated values for display.
+The map and surface display the same untransformed loss. Orange marks
+gradient-descent updates computed using analytic gradients. A line search
+chooses each step by checking that it reduces the loss sufficiently. The
+displayed surface joins the sampled values.
 ```
 
 At each iterate the algorithm evaluates its
@@ -97,8 +98,10 @@ L_{\rm single}(\mathbf c)=
 {\max(\sum_i d_i^{\rm obs},10^{-12})}.
 $$
 
-This is the archived damage-mass normalization. It differs from both the
-geometry-image MSE above and the four-frame objective in the next section.
+This recorded objective divides the summed squared damage error by the summed
+observed nodal damage, with a small lower bound on the denominator. It uses a
+different normalisation from the image mean-square error above and a different
+set of observations from the four-frame objective below.
 
 ```{figure} visuals/fem_sampled_loss.png
 :width: 100%
