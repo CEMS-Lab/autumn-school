@@ -459,8 +459,17 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-physical-model-in-one-page">2. The physical model in one page</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-parametric-specimen-geometry">3. A parametric specimen geometry</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generate-the-mesh-and-recover-the-named-regions">4. Generate the mesh and recover the named regions</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#material-and-the-stable-time-step">5. Material and the stable time step</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-boundary-conditions-and-the-solver-route">6. Loading, boundary conditions and the solver route</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#material-and-the-stable-time-step">5. Material and the stable time step</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#where-does-the-wave-speed-come-from">Where does the wave speed come from?</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-boundary-conditions-and-the-solver-route">6. Loading, boundary conditions and the solver route</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#read-the-configuration">Read the configuration</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#boundary-conditions-and-loading">Boundary conditions and loading</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#output-settings">Output settings</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ask-phast-to-explain-this-configuration">Ask PhAST to explain this configuration</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-the-simulation">7. Run the simulation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-reusable-post-processing-toolkit">8. A reusable post-processing toolkit</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#final-state">9. Final state</a></li>
@@ -920,13 +929,30 @@ consistent set.</p>
 </tbody>
 </table>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">phast.Material</span></code> resolves the constitutive data and reports the dilatational
-wave speed <span class="math notranslate nohighlight">\(c_p\)</span>. The explicit central-difference integrator is stable only when</p>
+<section id="where-does-the-wave-speed-come-from">
+<h3>Where does the wave speed come from?<a class="headerlink" href="#where-does-the-wave-speed-come-from" title="Link to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">material.c_p</span></code> is a property calculated inside PhAST from <span class="math notranslate nohighlight">\(E\)</span>, <span class="math notranslate nohighlight">\(\nu\)</span> and
+<span class="math notranslate nohighlight">\(\rho\)</span>. It is the longitudinal elastic-wave speed: the speed at which a small
+compression or extension disturbance travels through the material.
+For the plane-strain assumption used here,</p>
 <div class="math notranslate nohighlight">
-\[\Delta t \le \alpha\,\frac{h_\min}{c_p},\]</div>
-<p>with a safety factor <span class="math notranslate nohighlight">\(\alpha\)</span> of 0.8. PhAST applies this rule internally from the
-mesh that is actually supplied; the cell below reproduces the arithmetic so that
-the cost of refining the mesh is visible.</p>
+\[
+c_p=\sqrt{\frac{\lambda+2\mu}{\rho}}
+=\sqrt{\frac{E(1-\nu)}{\rho(1+\nu)(1-2\nu)}},\qquad
+\lambda=\frac{E\nu}{(1+\nu)(1-2\nu)},\qquad
+\mu=\frac{E}{2(1+\nu)}.
+\]</div>
+<p>These inputs give <span class="math notranslate nohighlight">\(c_p\approx3.81\times10^6\)</span> mm/s, or 3809.5 m/s.
+Writing <code class="docutils literal notranslate"><span class="pre">c_p</span> <span class="pre">=</span> <span class="pre">float(material.c_p)</span></code> stores that calculated value as a Python
+number. We choose the material inputs; PhAST supplies the formula.</p>
+<p>The wave-crossing time <span class="math notranslate nohighlight">\(h_{\min}/c_p\)</span> guides the explicit time step:</p>
+<div class="math notranslate nohighlight">
+\[\Delta t=\alpha\frac{h_{\min}}{c_p},\qquad \alpha=0.8.\]</div>
+<p>Here <span class="math notranslate nohighlight">\(h_{\min}\)</span> is the mesh’s minimum element-size measure and <span class="math notranslate nohighlight">\(\alpha\)</span> is our
+chosen safety factor. The precise stability limit depends on the elements and
+time integrator. PhAST derives its time step from the supplied mesh; the cell
+below reproduces the estimate. Refining the smallest elements reduces the time
+step and increases the number of updates needed for the same physical duration.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">material</span> <span class="o">=</span> <span class="n">phast</span><span class="o">.</span><span class="n">Material</span><span class="p">(</span>
@@ -953,6 +979,7 @@ the cost of refining the mesh is visible.</p>
 </div>
 </div>
 </div>
+</section>
 </section>
 <section id="loading-boundary-conditions-and-the-solver-route">
 <h2>6. Loading, boundary conditions and the solver route<a class="headerlink" href="#loading-boundary-conditions-and-the-solver-route" title="Link to this heading">#</a></h2>
@@ -987,18 +1014,141 @@ solve for the damage field.</p>
 <td><p>Supported, separate examples</p></td>
 </tr>
 <tr class="row-even"><td><p>Dynamic, explicit</p></td>
-<td><p>Learned proposal or audited replacement</p></td>
+<td><p>Learned proposal or checked replacement</p></td>
 <td><p>Experimental, see Section 13</p></td>
 </tr>
 </tbody>
 </table>
 </div>
-<p><strong>Simulated window.</strong> The reference run covers 50 microseconds, which is
-sufficient for the crack to cross the ligament. Set <code class="docutils literal notranslate"><span class="pre">T_TOTAL</span> <span class="pre">=</span> <span class="pre">1.0e-4</span></code> for the
-longer window used in the published example.</p>
-<p><strong>Snapshot cadence.</strong> <code class="docutils literal notranslate"><span class="pre">h5_every</span></code> controls how often a full field snapshot is
-written to the Zarr trajectory store. Every 20th step gives a smooth animation
-at a modest storage cost.</p>
+<section id="read-the-configuration">
+<h3>Read the configuration<a class="headerlink" href="#read-the-configuration" title="Link to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">make_config</span></code> is a function defined in this notebook. It assembles a Python
+dictionary whose keys are understood by PhAST. The YAML file is a readable
+record of those settings; writing it does not start the calculation.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Setting</p></th>
+<th class="head"><p>Meaning in this example</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">schema_version=1</span></code></p></td>
+<td><p>Version of the configuration format.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">problem.name</span></code></p></td>
+<td><p>Run label. SENT means single-edge-notched tension.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">geometry.units=&quot;mm&quot;</span></code></p></td>
+<td><p>Length unit; material, load and time quantities must use compatible units.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">mesh_path</span></code></p></td>
+<td><p>Path to the mesh generated above.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">E</span></code>, <code class="docutils literal notranslate"><span class="pre">nu</span></code>, <code class="docutils literal notranslate"><span class="pre">rho</span></code></p></td>
+<td><p>Young’s modulus [MPa], Poisson’s ratio and density [tonne/mm³]. They determine stiffness, inertia and wave speeds.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Gc</span></code></p></td>
+<td><p>Energy required per unit new crack area [N/mm].</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">l0</span></code></p></td>
+<td><p>Phase-field length scale [mm], setting the scale of the diffuse damage band.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">eta_residual</span></code></p></td>
+<td><p>Small dimensionless residual stiffness that prevents fully damaged material from having exactly zero stiffness.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">plane_stress=False</span></code></p></td>
+<td><p>Use plane strain, matching the material calculation above.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">energy_split=&quot;spectral&quot;</span></code></p></td>
+<td><p>Split the elastic energy using principal strains to distinguish tensile and compressive contributions.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">pf_model=&quot;AT2&quot;</span></code></p></td>
+<td><p>Use the phase-field model with a quadratic local damage term.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="boundary-conditions-and-loading">
+<h3>Boundary conditions and loading<a class="headerlink" href="#boundary-conditions-and-loading" title="Link to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">component=0</span></code> selects <span class="math notranslate nohighlight">\(u_x\)</span> and <code class="docutils literal notranslate"><span class="pre">component=1</span></code> selects <span class="math notranslate nohighlight">\(u_y\)</span>.
+<code class="docutils literal notranslate"><span class="pre">fix</span></code> sets the selected displacement to zero; <code class="docutils literal notranslate"><span class="pre">prescribe</span></code> assigns a value
+scaled by the loading ramp. The names <code class="docutils literal notranslate"><span class="pre">left</span></code>, <code class="docutils literal notranslate"><span class="pre">right</span></code>, <code class="docutils literal notranslate"><span class="pre">top</span></code> and <code class="docutils literal notranslate"><span class="pre">bottom</span></code>
+refer to the mesh regions identified earlier.</p>
+<p>This is <strong>displacement-controlled tension</strong>. At full loading, the top moves
+up by 0.002 mm and the bottom moves down by 0.002 mm: the total imposed
+extension is 0.004 mm. Reaction forces follow from the solution.
+The side constraints also restrain horizontal contraction on the left and
+right edges.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Setting</p></th>
+<th class="head"><p>Meaning in this example</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">u_amp=0.002</span></code></p></td>
+<td><p>Final displacement magnitude on each loaded edge [mm].</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">T_TOTAL</span></code>, <code class="docutils literal notranslate"><span class="pre">t_total</span></code></p></td>
+<td><p>Physical duration: <span class="math notranslate nohighlight">\(5\times10^{-5}\)</span> s = 50 microseconds. Computer runtime is measured separately.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">t_ramp=2e-5</span></code></p></td>
+<td><p>Reach the full displacement after 20 microseconds, then hold it.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">protocol=&quot;simple&quot;</span></code></p></td>
+<td><p>Select the simple loading protocol.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ramp_type=&quot;smooth_step&quot;</span></code></p></td>
+<td><p>Scale the displacement with the smooth cubic function below.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">solver_type=&quot;explicit&quot;</span></code></p></td>
+<td><p>Advance dynamic mechanics explicitly; the coupled damage problem uses its implicit solve.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">dt_safety=0.8</span></code></p></td>
+<td><p>Safety factor for the wave-speed-based time-step estimate.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="math notranslate nohighlight">
+\[
+s=\min\!\left(\max\!\left(\frac{t}{t_{\mathrm{ramp}}},0\right),1\right),
+\qquad a(t)=3s^2-2s^3,
+\qquad u_y^{\mathrm{top}}(t)=a(t)u_{\mathrm{amp}}.
+\]</div>
+<p>The bottom receives the opposite displacement. The smooth ramp begins and
+ends with zero slope, reducing abrupt changes in imposed boundary velocity.</p>
+</section>
+<section id="output-settings">
+<h3>Output settings<a class="headerlink" href="#output-settings" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Setting</p></th>
+<th class="head"><p>Meaning</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">trajectory=True</span></code></p></td>
+<td><p>Save a sequence of full field snapshots for post-processing.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">trajectory_format=&quot;zarr&quot;</span></code></p></td>
+<td><p>Store the arrays in Zarr format.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">SNAPSHOT_EVERY=20</span></code>, <code class="docutils literal notranslate"><span class="pre">h5_every</span></code></p></td>
+<td><p>Save every twentieth numerical step. The historical name <code class="docutils literal notranslate"><span class="pre">h5_every</span></code> also controls Zarr output.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">print_every=500</span></code></p></td>
+<td><p>Print progress every 500 steps, with additional messages at the start.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">fast=True</span></code></p></td>
+<td><p>Compatibility option retained from the supplied example. In the bundled YAML runner it is read but does not change the calculation; no speed-up is assumed.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The solver still advances every time step between saved snapshots. Snapshot
+spacing controls storage and the temporal resolution of the animation.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">T_TOTAL</span> <span class="o">=</span> <span class="mf">5.0e-5</span>       <span class="c1"># simulated window [s]</span>
@@ -1018,6 +1168,7 @@ at a modest storage cost.</p>
             <span class="s2">&quot;E&quot;</span><span class="p">:</span> <span class="n">E</span><span class="p">,</span> <span class="s2">&quot;nu&quot;</span><span class="p">:</span> <span class="n">nu</span><span class="p">,</span> <span class="s2">&quot;Gc&quot;</span><span class="p">:</span> <span class="n">Gc</span><span class="p">,</span> <span class="s2">&quot;l0&quot;</span><span class="p">:</span> <span class="n">l0</span><span class="p">,</span> <span class="s2">&quot;rho&quot;</span><span class="p">:</span> <span class="n">rho</span><span class="p">,</span>
             <span class="s2">&quot;eta_residual&quot;</span><span class="p">:</span> <span class="n">eta_residual</span><span class="p">,</span>
             <span class="s2">&quot;energy_split&quot;</span><span class="p">:</span> <span class="s2">&quot;spectral&quot;</span><span class="p">,</span> <span class="s2">&quot;pf_model&quot;</span><span class="p">:</span> <span class="s2">&quot;AT2&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;plane_stress&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>  <span class="c1"># match the plane-strain material above</span>
         <span class="p">},</span>
         <span class="s2">&quot;boundary_conditions&quot;</span><span class="p">:</span> <span class="p">[</span>
             <span class="p">{</span><span class="s2">&quot;nodes&quot;</span><span class="p">:</span> <span class="s2">&quot;left&quot;</span><span class="p">,</span>   <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;fix&quot;</span><span class="p">,</span>       <span class="s2">&quot;component&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">},</span>
@@ -1047,6 +1198,31 @@ at a modest storage cost.</p>
 </div>
 </div>
 </div>
+</section>
+<section id="ask-phast-to-explain-this-configuration">
+<h3>Ask PhAST to explain this configuration<a class="headerlink" href="#ask-phast-to-explain-this-configuration" title="Link to this heading">#</a></h3>
+<p>The following cell calls <code class="docutils literal notranslate"><span class="pre">explain-config</span></code>. It describes the saved YAML without
+generating a mesh or advancing the simulation. <code class="docutils literal notranslate"><span class="pre">sys.executable</span></code> selects the
+same Python environment as this notebook.</p>
+<p>For command-line help in Colab, run any of these lines in a separate cell:</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="o">!{</span>sys.executable<span class="o">}</span><span class="w"> </span>-m<span class="w"> </span>phast<span class="w"> </span>--help
+<span class="o">!{</span>sys.executable<span class="o">}</span><span class="w"> </span>-m<span class="w"> </span>phast<span class="w"> </span>run<span class="w"> </span>--help
+<span class="o">!{</span>sys.executable<span class="o">}</span><span class="w"> </span>-m<span class="w"> </span>phast<span class="w"> </span>postprocess<span class="w"> </span>--help
+</pre></div>
+</div>
+<p>For Python API documentation, use <code class="docutils literal notranslate"><span class="pre">help(phast.Material)</span></code> or
+<code class="docutils literal notranslate"><span class="pre">help(phast.load_result)</span></code>. After defining the viewer in Section 8,
+<code class="docutils literal notranslate"><span class="pre">help(RunViewer.animate_field)</span></code> explains its animation arguments.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+    <span class="p">[</span><span class="n">sys</span><span class="o">.</span><span class="n">executable</span><span class="p">,</span> <span class="s2">&quot;-m&quot;</span><span class="p">,</span> <span class="s2">&quot;phast&quot;</span><span class="p">,</span> <span class="s2">&quot;explain-config&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">config_file</span><span class="p">)],</span>
+    <span class="n">check</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
 <p>The <code class="docutils literal notranslate"><span class="pre">precheck</span></code> subcommand reports wave speeds, the stable increment and mesh
 quality without advancing the solution. Run it before committing to a long
 calculation.</p>
@@ -1057,6 +1233,7 @@ calculation.</p>
 </div>
 </div>
 </div>
+</section>
 </section>
 <section id="run-the-simulation">
 <h2>7. Run the simulation<a class="headerlink" href="#run-the-simulation" title="Link to this heading">#</a></h2>
@@ -1090,9 +1267,46 @@ the step, physical time and maximum damage. Record the elapsed time on your runt
 </section>
 <section id="a-reusable-post-processing-toolkit">
 <h2>8. A reusable post-processing toolkit<a class="headerlink" href="#a-reusable-post-processing-toolkit" title="Link to this heading">#</a></h2>
-<p>Everything below the solver is post-processing. The <code class="docutils literal notranslate"><span class="pre">RunViewer</span></code> class collects
-the operations that the exercises need: listing the stored snapshots, projecting
-element fields onto nodes, plotting a single frame, and animating a sequence.</p>
+<p><code class="docutils literal notranslate"><span class="pre">RunViewer</span></code> is a <strong>helper class defined in this notebook</strong>. It reads the saved
+calculation and prepares plots and animations; PhAST performs the mechanics
+and damage solves in Section 7.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Component</p></th>
+<th class="head"><p>Defined in</p></th>
+<th class="head"><p>Purpose</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">phast.load_result</span></code></p></td>
+<td><p>PhAST</p></td>
+<td><p>Open a completed run and access its saved results.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">phast.FEMMesh</span></code></p></td>
+<td><p>PhAST</p></td>
+<td><p>Read the saved mesh.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">phast.compute_field</span></code>, <code class="docutils literal notranslate"><span class="pre">phast.FIELD_REGISTRY</span></code></p></td>
+<td><p>PhAST</p></td>
+<td><p>Calculate and identify available visualisation fields.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">RunViewer</span></code></p></td>
+<td><p>This notebook</p></td>
+<td><p>Cache snapshots and organise field plots and animations.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">crack_tip_history</span></code></p></td>
+<td><p>This notebook</p></td>
+<td><p>Estimate the crack’s furthest x-position using a chosen damage threshold.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">FuncAnimation</span></code>, <code class="docutils literal notranslate"><span class="pre">PillowWriter</span></code></p></td>
+<td><p>Matplotlib</p></td>
+<td><p>Build animations and optionally save GIF files.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>PhAST also supplies <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">-m</span> <span class="pre">phast</span> <span class="pre">postprocess</span> <span class="pre">--help</span></code> for its own
+command-line post-processing tools.</p>
 <p>Two storage conventions matter. Displacement, velocity and damage are nodal
 fields with one value per node. Strain and stress are element fields with one
 constant value per triangle. <code class="docutils literal notranslate"><span class="pre">phast.compute_field</span></code> performs the projection from
@@ -1105,6 +1319,18 @@ animations.</p>
 <code class="docutils literal notranslate"><span class="pre">hydrostatic_stress</span></code>, <code class="docutils literal notranslate"><span class="pre">stress_triaxiality</span></code>, <code class="docutils literal notranslate"><span class="pre">strain_xx</span></code>, <code class="docutils literal notranslate"><span class="pre">strain_yy</span></code>,
 <code class="docutils literal notranslate"><span class="pre">strain_xy</span></code>, <code class="docutils literal notranslate"><span class="pre">von_mises_strain</span></code>, <code class="docutils literal notranslate"><span class="pre">max_principal_strain</span></code> and
 <code class="docutils literal notranslate"><span class="pre">min_principal_strain</span></code>.</p>
+<p>After running the class-definition cell below:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">view</span><span class="o">.</span><span class="n">plot_field</span><span class="p">(</span><span class="s2">&quot;damage&quot;</span><span class="p">)</span>                    <span class="c1"># final stored damage field</span>
+<span class="n">view</span><span class="o">.</span><span class="n">plot_field</span><span class="p">(</span><span class="s2">&quot;damage&quot;</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>          <span class="c1"># stored snapshot at/after step 100</span>
+<span class="n">animation</span> <span class="o">=</span> <span class="n">view</span><span class="o">.</span><span class="n">animate_field</span><span class="p">(</span><span class="s2">&quot;damage&quot;</span><span class="p">,</span> <span class="n">stride</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">fps</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">step=-1</span></code> selects the final saved snapshot. For another step number, the
+viewer selects the first stored step at or after it, or the last available
+snapshot if the request exceeds the saved range. <code class="docutils literal notranslate"><span class="pre">stride=4</span></code> displays every
+fourth saved snapshot; <code class="docutils literal notranslate"><span class="pre">fps=12</span></code> controls playback speed. These settings leave
+the numerical solution unchanged. <code class="docutils literal notranslate"><span class="pre">deform_scale</span></code> magnifies the displacement
+for display, and <code class="docutils literal notranslate"><span class="pre">gif_path</span></code> optionally selects a GIF output file.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib.animation</span><span class="w"> </span><span class="kn">import</span> <span class="n">FuncAnimation</span><span class="p">,</span> <span class="n">PillowWriter</span>
@@ -1793,8 +2019,17 @@ exploring this interface and inspect rejected updates.</p>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-physical-model-in-one-page">2. The physical model in one page</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-parametric-specimen-geometry">3. A parametric specimen geometry</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generate-the-mesh-and-recover-the-named-regions">4. Generate the mesh and recover the named regions</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#material-and-the-stable-time-step">5. Material and the stable time step</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-boundary-conditions-and-the-solver-route">6. Loading, boundary conditions and the solver route</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#material-and-the-stable-time-step">5. Material and the stable time step</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#where-does-the-wave-speed-come-from">Where does the wave speed come from?</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-boundary-conditions-and-the-solver-route">6. Loading, boundary conditions and the solver route</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#read-the-configuration">Read the configuration</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#boundary-conditions-and-loading">Boundary conditions and loading</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#output-settings">Output settings</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ask-phast-to-explain-this-configuration">Ask PhAST to explain this configuration</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-the-simulation">7. Run the simulation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-reusable-post-processing-toolkit">8. A reusable post-processing toolkit</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#final-state">9. Final state</a></li>

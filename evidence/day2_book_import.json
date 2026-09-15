@@ -1,8 +1,8 @@
 [
   {
     "notebook": "01_simulate_fracture",
-    "sha256": "c4466c0c1d695ddefbddd3c218b4a41186a6ec15f0e7c2c0f25a18aefb35a9bd",
-    "code_cells": 24,
+    "sha256": "6aa49f64206615e0b65d9a09927c37194a53d2ad89f59303bd9b337088a7442c",
+    "code_cells": 25,
     "fresh_execution": false,
     "outputs_retained": 0
   },
