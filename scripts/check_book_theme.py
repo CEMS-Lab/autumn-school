@@ -23,7 +23,9 @@ class Page(HTMLParser):
         self.source = source
         self.credit_present = (
             'name="author" content="Allamaprabhu Ani and Sathiskumar A. Ponnusami"' in source
-            and "Prepared by <span>Allamaprabhu Ani and Sathiskumar A. Ponnusami</span>" in source
+            and 'class="phast-course-creators">Prepared by' in source
+            and '<a href="https://allamaprabhuani.github.io">Allamaprabhu Ani</a>' in source
+            and '<a href="https://saponnusami.com">Sathiskumar A. Ponnusami</a>' in source
             and 'name="prepared-by" content="Allamaprabhu Ani and Sathiskumar A. Ponnusami"' in source
             and "Presented by <span>" not in source
             and "CEMS-Lab" in source and "UKACM Autumn School 2026" in source
