@@ -65,7 +65,7 @@ values requires a separate forward calculation at each value.
 
 Use $q=\log(E/E_{\mathrm{scale}})$ with $E_{\mathrm{scale}}=1\,\mathrm{MPa}$,
 so $E=E_{\mathrm{scale}}\exp(q)$ remains positive. The code stores modulus
-values in MPa. The Day 2 notebook uses SGD with momentum:
+values in MPa. The Day 3 notebook uses SGD with momentum:
 
 ```python
 log_E = torch.nn.Parameter(torch.log(torch.tensor(100000.)))

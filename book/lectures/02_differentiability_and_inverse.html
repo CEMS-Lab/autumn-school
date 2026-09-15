@@ -166,27 +166,27 @@
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="../index.html">
-                    PhAST: fracture simulation, differentiation and learning
+                    Autumn School — Days 2 and 3
                 </a>
             </li>
         </ul>
-        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Lecture guides</span></p>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Day 3 — Lecture guides</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="01_fracture_and_phast.html">Lecture 1: Phase-field fracture and PhAST</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Lecture 2: Differentiability and inverse recovery</a></li>
 <li class="toctree-l1"><a class="reference internal" href="03_hybrid_learning.html">Lecture 3: Learned damage updates in PhAST</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Three practical labs</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Day 3 — PhAST practicals</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../classroom/01_simulate_fracture.html">Phase-field fracture of a notched square plate</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../classroom/02_gradients_and_recovery.html">Recovering Young’s modulus from measured extension</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../classroom/03_learning_and_hybrid.html">Replacing the damage subproblem with a trained network</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Optional direct-replacement case study</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Day 3 — Optional direct-replacement case study</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../w53_direct_replacement.html">Case study: a direct learned damage replacement</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Reference chapters</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Day 3 — Reference chapters</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../00_welcome_and_routes.html">From Cracks to Computation: Learn by Doing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../01_crack_representations.html">Crack Representations: Sharp, Cohesive, and Diffuse</a></li>
@@ -209,7 +209,7 @@
 </ul>
 </details></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Optional inverse experiments</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Day 3 — Optional inverse experiments</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1 has-children"><a class="reference internal" href="../research/index.html">From gradients to reliable inverse experiments</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../research/01_geometry.html">Representing particles and testing their geometry</a></li>
@@ -499,7 +499,7 @@ values requires a separate forward calculation at each value.</p>
 <h2>4. Let the optimiser choose the next modulus<a class="headerlink" href="#let-the-optimiser-choose-the-next-modulus" title="Link to this heading">#</a></h2>
 <p>Use <span class="math notranslate nohighlight">\(q=\log(E/E_{\mathrm{scale}})\)</span> with <span class="math notranslate nohighlight">\(E_{\mathrm{scale}}=1\,\mathrm{MPa}\)</span>,
 so <span class="math notranslate nohighlight">\(E=E_{\mathrm{scale}}\exp(q)\)</span> remains positive. The code stores modulus
-values in MPa. The Day 2 notebook uses SGD with momentum:</p>
+values in MPa. The Day 3 notebook uses SGD with momentum:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">log_E</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Parameter</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="mf">100000.</span><span class="p">)))</span>
 <span class="n">optimiser</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">SGD</span><span class="p">([</span><span class="n">log_E</span><span class="p">],</span> <span class="n">lr</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">momentum</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
 <span class="n">optimiser</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>

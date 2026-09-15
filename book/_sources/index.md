@@ -1,12 +1,11 @@
-# PhAST: fracture simulation, differentiation and learning
+# Autumn School — Days 2 and 3
 
-How does a cracked body respond to loading? How does that response depend on a
-material parameter? Where can a learned model assist the calculation?
+Choose the materials for your teaching day:
 
-This course follows those three questions through phase-field fracture,
-differentiable simulation and hybrid learning. Begin with the lecture guides,
-then work through the three corresponding practical notebooks. Basic mechanics,
-calculus and introductory Python provide the starting point.
+- **[Day 2 — Mechanics and Machine Learning](#machine-learning-notebooks-student-access):** six notebooks, NB1–NB6, covering regression, neural networks, CNNs, physics-informed neural networks and neural operators.
+- **[Day 3 — Fracture, Differentiability and PhAST](#day-3-phast):** three lecture guides and three PhAST practicals covering fracture simulation, parameter recovery and learned damage updates.
+
+Basic mechanics, calculus and introductory Python provide the starting point.
 
 (machine-learning-notebooks-student-access)=
 ## Day 2 — Mechanics and Machine Learning
@@ -34,7 +33,14 @@ their training data within the notebooks.
 The combined ZIP contains separate `NB1`, `NB2`, `NB3` and `NB4` folders.
 For a local run, extract the individual dataset ZIP beside its notebook.
 
-## Three connected lectures
+(day-3-phast)=
+## Day 3 — Fracture, Differentiability and PhAST
+
+The materials below belong to Day 3. The PhAST practicals are labelled
+**Lab 1–Lab 3**; the Day 2 machine learning notebooks above are labelled
+**NB1–NB6**. Each day has its own setup and data requirements.
+
+### Three connected lectures
 
 | Lecture | Central question |
 | --- | --- |
@@ -46,7 +52,7 @@ The lecture guides connect the governing equations and illustrations to each
 practical. Discussion questions provide opportunities to interpret the model
 before running the corresponding calculation.
 
-## Three practical notebooks
+### Three PhAST practical notebooks
 
 Each lab moves through **predict → explain → compute → inspect → exercise →
 worked solution**. Short code cells introduce one operation at a time.
@@ -63,7 +69,7 @@ The optional {doc}`direct learned-replacement case study <w53_direct_replacement
 connects Lab 3 to a retained Radius-GNO fracture trajectory and reports a
 matched damage-stage timing comparison.
 
-The local notebook downloads follow the **15 September Day 2 edition**. Each page
+The Day 3 notebook downloads use the files updated on **15 September 2026**. Each page
 includes a Colab link, notebook downloads and one conceptual recap answer.
 All three practicals use PhAST. The older Helmholtz training example remains
 in {doc}`further_practice` as optional background.
@@ -83,7 +89,7 @@ its supplied figures and animation. Labs 1 and 3 generate their visual results
 when executed. Runtime depends on mesh size, solver settings, comparisons and
 animation export; a fresh whole-notebook Colab timing is still required.
 
-## Foundations to revisit
+### Day 3 reference chapters and further practice
 
 The reference chapters develop four complementary themes:
 
@@ -97,7 +103,7 @@ damaged material. Symbols and assumptions are introduced beside their equations.
 
 ```{toctree}
 :maxdepth: 1
-:caption: Lecture guides
+:caption: Day 3 — Lecture guides
 
 lectures/01_fracture_and_phast
 lectures/02_differentiability_and_inverse
@@ -106,7 +112,7 @@ lectures/03_hybrid_learning
 
 ```{toctree}
 :maxdepth: 1
-:caption: Three practical labs
+:caption: Day 3 — PhAST practicals
 
 classroom/01_simulate_fracture
 classroom/02_gradients_and_recovery
@@ -115,14 +121,14 @@ classroom/03_learning_and_hybrid
 
 ```{toctree}
 :maxdepth: 1
-:caption: Optional direct-replacement case study
+:caption: Day 3 — Optional direct-replacement case study
 
 w53_direct_replacement
 ```
 
 ```{toctree}
 :maxdepth: 1
-:caption: Reference chapters
+:caption: Day 3 — Reference chapters
 
 00_welcome_and_routes
 01_crack_representations
@@ -141,7 +147,7 @@ for independent study.
 
 ```{toctree}
 :maxdepth: 1
-:caption: Optional inverse experiments
+:caption: Day 3 — Optional inverse experiments
 
 research/index
 ```

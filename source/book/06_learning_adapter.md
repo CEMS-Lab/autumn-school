@@ -1,6 +1,6 @@
 # Learning field predictions and combining them with a solver
 
-The Day 2 classroom application is {doc}`classroom/03_learning_and_hybrid`,
+The Day 3 classroom application is {doc}`classroom/03_learning_and_hybrid`,
 which compares a supplied graph network with the classical PhAST damage solve.
 The Helmholtz examples below remain optional training and interface tutorials.
 

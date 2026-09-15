@@ -53,7 +53,7 @@ def main():
                       f'<a class="badge-link" href="{download_root}notebooks/solutions/classroom/{name}.ipynb">Download with recap answer</a> · '
                       f'<a class="badge-link" href="{download_root}SETUP.md">Environment setup</a>\n</div>\n')
             nb.cells[0].source += badges
-            nb.cells.insert(1, nbformat.v4.new_markdown_cell('**Day 2 edition · 15 September 2026.** ' + status))
+            nb.cells.insert(1, nbformat.v4.new_markdown_cell('**Day 3 · PhAST practical. Updated 15 September 2026.** ' + status))
             q, hint, answer = QUESTIONS[i]
             recap = '## Key takeaways\n\n' + '\n'.join('- ' + t for t in TAKEAWAYS[i])
             recap += '\n\n### Consolidation\n\n' + q

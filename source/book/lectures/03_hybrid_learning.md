@@ -82,4 +82,4 @@ calculation visible when drawing conclusions.
 For training fundamentals, the original Helmholtz
 {doc}`train/save/reload tutorial <../labs/04_train_save_reload_adapter>`
 remains optional. Its simple field equation explains a training loop; the main
-Day 2 practical evaluates a supplied trained model within fracture mechanics.
+Day 3 practical evaluates a supplied trained model within fracture mechanics.
