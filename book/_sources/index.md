@@ -8,22 +8,25 @@ differentiable simulation and hybrid learning. Begin with the lecture guides,
 then work through the three corresponding practical notebooks. Basic mechanics,
 calculus and introductory Python provide the starting point.
 
-## Machine learning notebooks — student access
+(machine-learning-notebooks-student-access)=
+## Day 2 — Mechanics and Machine Learning
 
-Open a notebook in Colab, connect to a runtime, and run the cells in order.
+All six notebooks are available in Google Colab. Click **Open in Colab**,
+connect to a runtime, and run the cells in order. Use **Download notebook**
+to save the Jupyter file for local use.
 NB1–4 download their datasets automatically when you run the data-loading cell.
 The download buttons also let you save a copy for local use. NB5–6 generate
 their training data within the notebooks.
 
 ```{raw} html
 <div style="overflow-x:auto">
-<table class="table"><thead><tr><th>Notebook</th><th>Google Colab</th><th>Dataset</th></tr></thead><tbody>
-<tr><td>NB1: Linear and Logistic Regression</td><td><a class="badge-link" href="https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/machine_learning/NB1_Linear_and_Logistic_Regression.ipynb" target="_blank" rel="noopener">Open in Colab</a></td><td><a class="badge-link" href="../datasets/machine_learning/NB1_data.zip" download>Download NB1 data</a></td></tr>
-<tr><td>NB2: Neural Networks</td><td><a class="badge-link" href="https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/machine_learning/NB2_Neural_Networks.ipynb" target="_blank" rel="noopener">Open in Colab</a></td><td><a class="badge-link" href="../datasets/machine_learning/NB2_data.zip" download>Download NB2 data</a></td></tr>
-<tr><td>NB3: Convolutional Neural Networks</td><td><a class="badge-link" href="https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/machine_learning/NB3_Convolutional_Neural_Networks.ipynb" target="_blank" rel="noopener">Open in Colab</a></td><td><a class="badge-link" href="../datasets/machine_learning/NB3_data.zip" download>Download NB3 data</a></td></tr>
-<tr><td>NB4: CNNs In Practice</td><td><a class="badge-link" href="https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/machine_learning/NB4_CNNs_In_Practice.ipynb" target="_blank" rel="noopener">Open in Colab</a></td><td><a class="badge-link" href="../datasets/machine_learning/NB4_data.zip" download>Download NB4 data</a></td></tr>
-<tr><td>NB5: Physics Informed Neural Networks</td><td><a class="badge-link" href="https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/machine_learning/NB5_Physics_Informed_Neural_Networks.ipynb" target="_blank" rel="noopener">Open in Colab</a></td><td>Generated in the notebook</td></tr>
-<tr><td>NB6: Neural Operators</td><td><a class="badge-link" href="https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/machine_learning/NB6_Neural_Operators.ipynb" target="_blank" rel="noopener">Open in Colab</a></td><td>Generated in the notebook</td></tr>
+<table class="table"><thead><tr><th>Notebook</th><th>Google Colab</th><th>Notebook download</th><th>Dataset</th></tr></thead><tbody>
+<tr><td>NB1: Linear and Logistic Regression</td><td><a class="badge-link" href="https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/machine_learning/NB1_Linear_and_Logistic_Regression.ipynb" target="_blank" rel="noopener">Open in Colab</a></td><td><a class="badge-link" href="../notebooks/machine_learning/NB1_Linear_and_Logistic_Regression.ipynb" download>Download notebook</a></td><td><a class="badge-link" href="../datasets/machine_learning/NB1_data.zip" download>Download NB1 data</a></td></tr>
+<tr><td>NB2: Neural Networks</td><td><a class="badge-link" href="https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/machine_learning/NB2_Neural_Networks.ipynb" target="_blank" rel="noopener">Open in Colab</a></td><td><a class="badge-link" href="../notebooks/machine_learning/NB2_Neural_Networks.ipynb" download>Download notebook</a></td><td><a class="badge-link" href="../datasets/machine_learning/NB2_data.zip" download>Download NB2 data</a></td></tr>
+<tr><td>NB3: Convolutional Neural Networks</td><td><a class="badge-link" href="https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/machine_learning/NB3_Convolutional_Neural_Networks.ipynb" target="_blank" rel="noopener">Open in Colab</a></td><td><a class="badge-link" href="../notebooks/machine_learning/NB3_Convolutional_Neural_Networks.ipynb" download>Download notebook</a></td><td><a class="badge-link" href="../datasets/machine_learning/NB3_data.zip" download>Download NB3 data</a></td></tr>
+<tr><td>NB4: CNNs In Practice</td><td><a class="badge-link" href="https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/machine_learning/NB4_CNNs_In_Practice.ipynb" target="_blank" rel="noopener">Open in Colab</a></td><td><a class="badge-link" href="../notebooks/machine_learning/NB4_CNNs_In_Practice.ipynb" download>Download notebook</a></td><td><a class="badge-link" href="../datasets/machine_learning/NB4_data.zip" download>Download NB4 data</a></td></tr>
+<tr><td>NB5: Physics Informed Neural Networks</td><td><a class="badge-link" href="https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/machine_learning/NB5_Physics_Informed_Neural_Networks.ipynb" target="_blank" rel="noopener">Open in Colab</a></td><td><a class="badge-link" href="../notebooks/machine_learning/NB5_Physics_Informed_Neural_Networks.ipynb" download>Download notebook</a></td><td>Generated in the notebook</td></tr>
+<tr><td>NB6: Neural Operators</td><td><a class="badge-link" href="https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/machine_learning/NB6_Neural_Operators.ipynb" target="_blank" rel="noopener">Open in Colab</a></td><td><a class="badge-link" href="../notebooks/machine_learning/NB6_Neural_Operators.ipynb" download>Download notebook</a></td><td>Generated in the notebook</td></tr>
 </tbody></table></div>
 <p><a class="badge-link" href="../datasets/machine_learning/All_notebook_data.zip" download>Download all notebook datasets (ZIP)</a></p>
 ```
