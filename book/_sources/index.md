@@ -2,7 +2,7 @@
 
 Choose the materials for your teaching day:
 
-- **[Day 2 — Mechanics and Machine Learning](#machine-learning-notebooks-student-access):** six notebooks, NB1–NB6, covering regression, neural networks, CNNs, physics-informed neural networks and neural operators.
+- **[Day 2 — Mechanics and Machine Learning](#machine-learning-notebooks-student-access):** six notebooks: NB1, NB2, NB3a, NB3b, NB5 and NB6, covering regression, neural networks, CNNs, physics-informed neural networks and neural operators.
 - **[Day 3 — Fracture, Differentiability and PhAST](#day-3-phast):** three lecture guides and three PhAST practicals covering fracture simulation, parameter recovery and learned damage updates.
 
 Basic mechanics, calculus and introductory Python provide the starting point.
@@ -13,7 +13,7 @@ Basic mechanics, calculus and introductory Python provide the starting point.
 All six notebooks are available in Google Colab. Click **Open in Colab**,
 connect to a runtime, and run the cells in order. Use **Download notebook**
 to save the Jupyter file for local use.
-NB1–4 download their datasets automatically when you run the data-loading cell.
+NB1, NB2, NB3a and NB3b download their datasets automatically when you run the data-loading cell.
 The download buttons also let you save a copy for local use. NB5–6 generate
 their training data within the notebooks.
 
@@ -22,15 +22,16 @@ their training data within the notebooks.
 <table class="table"><thead><tr><th>Notebook</th><th>Google Colab</th><th>Notebook download</th><th>Dataset</th></tr></thead><tbody>
 <tr><td>NB1: Linear and Logistic Regression</td><td><a class="badge-link" href="https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/machine_learning/NB1_Linear_and_Logistic_Regression.ipynb" target="_blank" rel="noopener"><img src="_static/colab-badge.svg" alt="Open in Colab" width="117" height="20" style="min-width:117px;max-width:none;height:20px"></a></td><td><a class="badge-link" href="../notebooks/machine_learning/NB1_Linear_and_Logistic_Regression.ipynb" download>Download notebook</a></td><td><a class="badge-link" href="../datasets/machine_learning/NB1_data.zip" download>Download NB1 data</a></td></tr>
 <tr><td>NB2: Neural Networks</td><td><a class="badge-link" href="https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/machine_learning/NB2_Neural_Networks.ipynb" target="_blank" rel="noopener"><img src="_static/colab-badge.svg" alt="Open in Colab" width="117" height="20" style="min-width:117px;max-width:none;height:20px"></a></td><td><a class="badge-link" href="../notebooks/machine_learning/NB2_Neural_Networks.ipynb" download>Download notebook</a></td><td><a class="badge-link" href="../datasets/machine_learning/NB2_data.zip" download>Download NB2 data</a></td></tr>
-<tr><td>NB3: Convolutional Neural Networks</td><td><a class="badge-link" href="https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/machine_learning/NB3_Convolutional_Neural_Networks.ipynb" target="_blank" rel="noopener"><img src="_static/colab-badge.svg" alt="Open in Colab" width="117" height="20" style="min-width:117px;max-width:none;height:20px"></a></td><td><a class="badge-link" href="../notebooks/machine_learning/NB3_Convolutional_Neural_Networks.ipynb" download>Download notebook</a></td><td><a class="badge-link" href="../datasets/machine_learning/NB3_data.zip" download>Download NB3 data</a></td></tr>
-<tr><td>NB4: CNNs In Practice</td><td><a class="badge-link" href="https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/machine_learning/NB4_CNNs_In_Practice.ipynb" target="_blank" rel="noopener"><img src="_static/colab-badge.svg" alt="Open in Colab" width="117" height="20" style="min-width:117px;max-width:none;height:20px"></a></td><td><a class="badge-link" href="../notebooks/machine_learning/NB4_CNNs_In_Practice.ipynb" download>Download notebook</a></td><td><a class="badge-link" href="../datasets/machine_learning/NB4_data.zip" download>Download NB4 data</a></td></tr>
+<tr><td>NB3a: How a CNN Works</td><td><a class="badge-link" href="https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/machine_learning/NB3a_How_a_CNN_Works.ipynb" target="_blank" rel="noopener"><img src="_static/colab-badge.svg" alt="Open in Colab" width="117" height="20" style="min-width:117px;max-width:none;height:20px"></a></td><td><a class="badge-link" href="../notebooks/machine_learning/NB3a_How_a_CNN_Works.ipynb" download>Download notebook</a></td><td><a class="badge-link" href="../datasets/machine_learning/NB3_data.zip" download>Download CNN data</a></td></tr>
+<tr><td>NB3b: CNNs on Microstructures</td><td><a class="badge-link" href="https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/machine_learning/NB3b_CNNs_on_Microstructures.ipynb" target="_blank" rel="noopener"><img src="_static/colab-badge.svg" alt="Open in Colab" width="117" height="20" style="min-width:117px;max-width:none;height:20px"></a></td><td><a class="badge-link" href="../notebooks/machine_learning/NB3b_CNNs_on_Microstructures.ipynb" download>Download notebook</a></td><td><a class="badge-link" href="../datasets/machine_learning/NB3_data.zip" download>Download CNN data</a></td></tr>
 <tr><td>NB5: Physics Informed Neural Networks</td><td><a class="badge-link" href="https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/machine_learning/NB5_Physics_Informed_Neural_Networks.ipynb" target="_blank" rel="noopener"><img src="_static/colab-badge.svg" alt="Open in Colab" width="117" height="20" style="min-width:117px;max-width:none;height:20px"></a></td><td><a class="badge-link" href="../notebooks/machine_learning/NB5_Physics_Informed_Neural_Networks.ipynb" download>Download notebook</a></td><td>Generated in the notebook</td></tr>
 <tr><td>NB6: Neural Operators</td><td><a class="badge-link" href="https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/machine_learning/NB6_Neural_Operators.ipynb" target="_blank" rel="noopener"><img src="_static/colab-badge.svg" alt="Open in Colab" width="117" height="20" style="min-width:117px;max-width:none;height:20px"></a></td><td><a class="badge-link" href="../notebooks/machine_learning/NB6_Neural_Operators.ipynb" download>Download notebook</a></td><td>Generated in the notebook</td></tr>
 </tbody></table></div>
 <p><a class="badge-link" href="../datasets/machine_learning/All_notebook_data.zip" download>Download all notebook datasets (ZIP)</a></p>
 ```
 
-The combined ZIP contains separate `NB1`, `NB2`, `NB3` and `NB4` folders.
+NB3a and NB3b share the CNN dataset. The combined ZIP contains separate
+`NB1`, `NB2` and `NB3` folders; use the `NB3` folder for both CNN notebooks.
 For a local run, extract the individual dataset ZIP beside its notebook.
 
 (day-3-phast)=
@@ -38,7 +39,7 @@ For a local run, extract the individual dataset ZIP beside its notebook.
 
 The materials below belong to Day 3. The PhAST practicals are labelled
 **Lab 1–Lab 3**; the Day 2 machine learning notebooks above are labelled
-**NB1–NB6**. Each day has its own setup and data requirements.
+**NB1, NB2, NB3a, NB3b, NB5 and NB6**. Each day has its own setup and data requirements.
 
 ### Three connected lectures
 
