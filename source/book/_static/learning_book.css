@@ -239,6 +239,7 @@ html[data-theme="dark"] .bd-article img:not(.only-dark, .dark-light) {
 /* Keep the day-heading permalinks visible for sharing classroom resources. */
 #day-2-mechanics-and-machine-learning > h2 > .headerlink,
 #day-3-fracture-differentiability-and-phast > h2 > .headerlink {
+  display: inline;
   visibility: visible;
   opacity: 1;
 }
