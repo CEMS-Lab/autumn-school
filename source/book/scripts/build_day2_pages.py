@@ -9,9 +9,11 @@ import hashlib
 import json
 import nbformat
 import re
+from urllib.parse import quote
 
 ROOT = Path(__file__).resolve().parents[3]
 NAMES = ('01_simulate_fracture', '02_gradients_and_recovery', '03_learning_and_hybrid')
+DOWNLOAD_NAMES = json.loads((ROOT / 'notebooks/classroom/day2_edition.json').read_text())['mapping']
 EDITION_NOTES = (
     'Figures and animations are retained from the supplied notebook. Complete the reference before trying the additional parameter studies.',
     'Figures and animation are retained from the supplied notebook. This book update preserves those outputs. The calculation uses SGD with momentum 0.5; the lecture deck also illustrates plain SGD, which has a different optimisation history.',
@@ -39,18 +41,34 @@ def main():
     for i, name in enumerate(NAMES):
         path = ROOT / 'notebooks/classroom' / (name + '.ipynb')
         original = nbformat.read(path, as_version=4)
+        filename = DOWNLOAD_NAMES[name]
+        encoded_filename = quote(filename, safe='')
+        title = filename.removesuffix('.ipynb').replace(' - ', ' — ', 1)
         status = EDITION_NOTES[i]
         for surface in ('book', 'study', 'solutions'):
             nb = copy.deepcopy(original)
+            # Refresh navigation even when the supplied file was downloaded
+            # from a previous published edition.
+            nb.cells[0].source = re.sub(r'<div class="badge-row">.*?</div>', '', nb.cells[0].source, flags=re.S)
+            nb.cells[0].source = re.sub(r'\[Download PhAST GNN assets ZIP\]\([^\n]+\)', '', nb.cells[0].source)
+            for cell in nb.cells:
+                if cell.cell_type == 'markdown':
+                    for old_stem, new_filename in DOWNLOAD_NAMES.items():
+                        for variant in ('study', 'solutions'):
+                            cell.source = cell.source.replace(f'notebooks/{variant}/classroom/{old_stem}.ipynb', f'notebooks/{variant}/classroom/{quote(new_filename, safe="")}')
             # Keep a valid heading hierarchy without changing numerical cells.
             nb.cells[0].source = nb.cells[0].source.replace('\n### ', '\n## ')
+            nb.cells[0].source = re.sub(r'^# ', '## ', nb.cells[0].source, flags=re.M)
+            nb.cells[0].source = f'# {title}\n\n' + nb.cells[0].source
+            nb.metadata['title'] = title
+            nb.metadata.setdefault('colab', {})['name'] = filename
             nb.metadata.setdefault('language_info', {})['pygments_lexer'] = 'ipython3'
-            url = 'https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/study/classroom/' + name + '.ipynb'
+            url = 'https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/study/classroom/' + encoded_filename
             download_root = '../../' if surface == 'book' else 'https://cems-lab.github.io/autumn-school/'
             badges = ('\n\n<div class="badge-row">\n'
                       f'<a class="badge-colab" href="{url}">Open in Colab (published edition)</a> · '
-                      f'<a class="badge-link" href="{download_root}notebooks/study/classroom/{name}.ipynb">Download notebook</a> · '
-                      f'<a class="badge-link" href="{download_root}notebooks/solutions/classroom/{name}.ipynb">Download with recap answer</a> · '
+                      f'<a class="badge-link" href="{download_root}notebooks/study/classroom/{encoded_filename}">Download notebook</a> · '
+                      f'<a class="badge-link" href="{download_root}notebooks/solutions/classroom/{encoded_filename}">Download with recap answer</a> · '
                       f'<a class="badge-link" href="{download_root}SETUP.md">Environment setup</a>\n</div>\n')
             nb.cells[0].source += badges
             if i == 2:
@@ -79,6 +97,8 @@ def main():
             nbformat.validate(nb)
             folder.mkdir(parents=True, exist_ok=True)
             nbformat.write(nb, folder / path.name)
+            if surface != 'book':
+                nbformat.write(nb, folder / filename)
         report.append({'notebook': name, 'sha256': hashlib.sha256(path.read_bytes()).hexdigest(),
                        'code_cells': len(fingerprint(original)), 'fresh_execution': False,
                        'outputs_retained': sum(len(c.get('outputs', [])) for c in original.cells)})

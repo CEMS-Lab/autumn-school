@@ -2,6 +2,8 @@
 
 from pathlib import Path
 from shutil import copytree
+import json
+from urllib.parse import quote
 
 project = "PhAST: Phase-field fracture with differentiable FEM"
 author = "Allamaprabhu Ani and Sathiskumar A. Ponnusami"
@@ -90,7 +92,9 @@ def _verify_design_directives(app, exception):
 def _practice_colab_links(app, pagename, templatename, context, doctree):
     """Launch the practice notebook from both the toolbar and lesson badge."""
     if pagename.startswith("classroom/"):
-        notebook = "classroom/" + pagename.split("/", 1)[1]
+        names = json.loads((Path(__file__).resolve().parents[2] / "notebooks/classroom/day2_edition.json").read_text())["mapping"]
+        stem = pagename.split("/", 1)[1]
+        notebook = "classroom/" + quote(names.get(stem, stem + '.ipynb').removesuffix('.ipynb'), safe='')
     elif pagename.startswith("labs/"):
         notebook = pagename.split("/", 1)[1]
     else:
@@ -101,6 +105,8 @@ def _practice_colab_links(app, pagename, templatename, context, doctree):
         for button in group.get("buttons", []):
             if button.get("text") == "Colab":
                 button["url"] = url
+            elif pagename.startswith("classroom/") and button.get("text") == ".ipynb":
+                button["url"] = f"https://cems-lab.github.io/autumn-school/notebooks/study/{notebook}.ipynb"
 
 
 def setup(app):

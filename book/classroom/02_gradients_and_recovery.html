@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Recovering Young’s modulus from measured extension &#8212; PhAST: Phase-field fracture with differentiable FEM</title>
+    <title>NB2 — Inverse Problem using PhAST &#8212; PhAST: Phase-field fracture with differentiable FEM</title>
   
   
   
@@ -52,8 +52,8 @@
     <script src="../_static/learning_book.js?v=5aaa4a9b"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="PhAST laboratory: fracture around three holes" href="03_learning_and_hybrid.html" />
-    <link rel="prev" title="Phase-field fracture - notched square plate" href="01_simulate_fracture.html" />
+    <link rel="next" title="NB3 — Hybrid FEM+DL with PhAST" href="03_learning_and_hybrid.html" />
+    <link rel="prev" title="NB1 — Intro to PhAST" href="01_simulate_fracture.html" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -172,10 +172,9 @@
         </ul>
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Day 3 — PhAST practicals</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="01_simulate_fracture.html">Phase-field fracture - notched square plate</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Recovering Young’s modulus from measured extension</a></li>
-<li class="toctree-l1"><a class="reference internal" href="03_learning_and_hybrid.html">PhAST laboratory: fracture around three holes</a></li>
-
+<li class="toctree-l1"><a class="reference internal" href="01_simulate_fracture.html">NB1 — Intro to PhAST</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">NB2 — Inverse Problem using PhAST</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_learning_and_hybrid.html">NB3 — Hybrid FEM+DL with PhAST</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Day 3 — Lecture guides</span></p>
 <ul class="nav bd-sidenav">
@@ -280,7 +279,7 @@
       
       
       
-      <li><a href="https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/study/classroom/02_gradients_and_recovery.ipynb" target="_blank"
+      <li><a href="https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/study/classroom/NB2%20-%20Inverse%20Problem%20using%20PhAST.ipynb" target="_blank"
    class="btn btn-sm dropdown-item"
    title="Launch on Colab"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -358,7 +357,7 @@
       
       
       
-      <li><a href="../_sources/classroom/02_gradients_and_recovery.ipynb" target="_blank"
+      <li><a href="https://cems-lab.github.io/autumn-school/notebooks/study/classroom/NB2%20-%20Inverse%20Problem%20using%20PhAST.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -442,7 +441,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Recovering Young’s modulus from measured extension</h1>
+    <h1>NB2 — Inverse Problem using PhAST</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -452,6 +451,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recovering-young-s-modulus-from-measured-extension">Recovering Young’s modulus from measured extension</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-differentiable-finite-element-exercise-with-phast">A differentiable finite-element exercise with <strong>PhAST</strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-phast-and-tools">1. Load PhAST and tools</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#geometry-and-material-setup">2. Geometry and material setup</a></li>
@@ -494,8 +494,11 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="recovering-young-s-modulus-from-measured-extension">
-<h1>Recovering Young’s modulus from measured extension<a class="headerlink" href="#recovering-young-s-modulus-from-measured-extension" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="nb2-inverse-problem-using-phast">
+<h1>NB2 — Inverse Problem using PhAST<a class="headerlink" href="#nb2-inverse-problem-using-phast" title="Link to this heading">#</a></h1>
+<section id="recovering-young-s-modulus-from-measured-extension">
+<h2>Recovering Young’s modulus from measured extension<a class="headerlink" href="#recovering-young-s-modulus-from-measured-extension" title="Link to this heading">#</a></h2>
+</section>
 <section id="a-differentiable-finite-element-exercise-with-phast">
 <h2>A differentiable finite-element exercise with <strong>PhAST</strong><a class="headerlink" href="#a-differentiable-finite-element-exercise-with-phast" title="Link to this heading">#</a></h2>
 <p><strong>UKACM Autumn School 2026 · 16 September</strong></p>
@@ -508,7 +511,7 @@ Queen Mary University of London</p>
 <p>We will build a 1D model, calculate its extension, and recover Young’s modulus by differentiating through the PhAST forward solve.</p>
 <p>The notebook saves its figures, animation and numerical tables in <code class="docutils literal notranslate"><span class="pre">bar_results/</span></code> in the working directory.</p>
 <div class="badge-row">
-<a class="badge-colab" href="https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/study/classroom/02_gradients_and_recovery.ipynb">Open in Colab (published edition)</a> · <a class="badge-link" href="../../notebooks/study/classroom/02_gradients_and_recovery.ipynb">Download notebook</a> · <a class="badge-link" href="../../notebooks/solutions/classroom/02_gradients_and_recovery.ipynb">Download with recap answer</a> · <a class="badge-link" href="../../SETUP.md">Environment setup</a>
+<a class="badge-colab" href="https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/study/classroom/NB2%20-%20Inverse%20Problem%20using%20PhAST.ipynb">Open in Colab (published edition)</a> · <a class="badge-link" href="../../notebooks/study/classroom/NB2%20-%20Inverse%20Problem%20using%20PhAST.ipynb">Download notebook</a> · <a class="badge-link" href="../../notebooks/solutions/classroom/NB2%20-%20Inverse%20Problem%20using%20PhAST.ipynb">Download with recap answer</a> · <a class="badge-link" href="../../SETUP.md">Environment setup</a>
 </div>
 <p><strong>Day 3 · PhAST practical. Updated 16 September 2026.</strong> Figures and animation are retained from the supplied notebook. This book update preserves those outputs. The calculation uses SGD with momentum 0.5; the lecture deck also illustrates plain SGD, which has a different optimisation history.</p>
 </section>
@@ -1463,7 +1466,7 @@ right product <span class="math notranslate nohighlight">\(EA\)</span>, not the 
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Phase-field fracture - notched square plate</p>
+        <p class="prev-next-title">NB1 — Intro to PhAST</p>
       </div>
     </a>
     <a class="right-next"
@@ -1471,7 +1474,7 @@ right product <span class="math notranslate nohighlight">\(EA\)</span>, not the 
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">PhAST laboratory: fracture around three holes</p>
+        <p class="prev-next-title">NB3 — Hybrid FEM+DL with PhAST</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -1491,6 +1494,7 @@ right product <span class="math notranslate nohighlight">\(EA\)</span>, not the 
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recovering-young-s-modulus-from-measured-extension">Recovering Young’s modulus from measured extension</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-differentiable-finite-element-exercise-with-phast">A differentiable finite-element exercise with <strong>PhAST</strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-phast-and-tools">1. Load PhAST and tools</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#geometry-and-material-setup">2. Geometry and material setup</a></li>

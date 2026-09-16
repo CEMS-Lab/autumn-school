@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Phase-field fracture - notched square plate &#8212; PhAST: Phase-field fracture with differentiable FEM</title>
+    <title>NB1 — Intro to PhAST &#8212; PhAST: Phase-field fracture with differentiable FEM</title>
 
 
 
@@ -52,7 +52,7 @@
     <script src="../_static/learning_book.js?v=5aaa4a9b"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Recovering Young’s modulus from measured extension" href="02_gradients_and_recovery.html" />
+    <link rel="next" title="NB2 — Inverse Problem using PhAST" href="02_gradients_and_recovery.html" />
     <link rel="prev" title="Autumn School — Days 2 and 3" href="../index.html" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -172,10 +172,9 @@
         </ul>
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Day 3 — PhAST practicals</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Phase-field fracture - notched square plate</a></li>
-<li class="toctree-l1"><a class="reference internal" href="02_gradients_and_recovery.html">Recovering Young’s modulus from measured extension</a></li>
-<li class="toctree-l1"><a class="reference internal" href="03_learning_and_hybrid.html">PhAST laboratory: fracture around three holes</a></li>
-
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">NB1 — Intro to PhAST</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_gradients_and_recovery.html">NB2 — Inverse Problem using PhAST</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_learning_and_hybrid.html">NB3 — Hybrid FEM+DL with PhAST</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Day 3 — Lecture guides</span></p>
 <ul class="nav bd-sidenav">
@@ -280,7 +279,7 @@
 
 
 
-      <li><a href="https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/study/classroom/01_simulate_fracture.ipynb" target="_blank"
+      <li><a href="https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/study/classroom/NB1%20-%20Intro%20to%20PhAST.ipynb" target="_blank"
    class="btn btn-sm dropdown-item"
    title="Launch on Colab"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -358,7 +357,7 @@
 
 
 
-      <li><a href="../_sources/classroom/01_simulate_fracture.ipynb" target="_blank"
+      <li><a href="https://cems-lab.github.io/autumn-school/notebooks/study/classroom/NB1%20-%20Intro%20to%20PhAST.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -442,7 +441,7 @@ document.write(`
 
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Phase-field fracture - notched square plate</h1>
+    <h1>NB1 — Intro to PhAST</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -452,6 +451,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#phase-field-fracture-notched-square-plate">Phase-field fracture - notched square plate</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-phast-laboratory-for-google-colab">A PhAST laboratory for Google Colab</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning objectives</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#software">Software</a></li>
@@ -497,8 +497,10 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
 
-  <section class="tex2jax_ignore mathjax_ignore" id="phase-field-fracture-notched-square-plate">
-<h1>Phase-field fracture - notched square plate<a class="headerlink" href="#phase-field-fracture-notched-square-plate" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="nb1-intro-to-phast">
+<h1>NB1 — Intro to PhAST<a class="headerlink" href="#nb1-intro-to-phast" title="Link to this heading">#</a></h1>
+<section id="phase-field-fracture-notched-square-plate">
+<h2>Phase-field fracture - notched square plate<a class="headerlink" href="#phase-field-fracture-notched-square-plate" title="Link to this heading">#</a></h2>
 <p><strong>UKACM Autumn School 2026 · 16 September</strong></p>
 <p>Developed by Allamaprabhu Ani and Sathiskumar A. Ponnusami,
 CEMS-Lab,
@@ -506,6 +508,7 @@ City St George’s, University of London
 Queen Mary University of London</p>
 <p><a class="reference external" href="https://github.com/CEMS-Lab/PhAST">PhAST repository</a> ·
 <a class="reference external" href="https://cems-lab.github.io/PhAST/">PhAST documentation</a></p>
+</section>
 <section id="a-phast-laboratory-for-google-colab">
 <h2>A PhAST laboratory for Google Colab<a class="headerlink" href="#a-phast-laboratory-for-google-colab" title="Link to this heading">#</a></h2>
 <p>This notebook shows dynamic fracture simulation. We start from defining geometry to animated
@@ -538,7 +541,7 @@ software interface. They do not constitute benchmark validation.</p>
 (<a class="reference external" href="https://github.com/CEMS-Lab/PhAST">CEMS-Lab/PhAST</a>). Gmsh generates the mesh.
 NumPy and Matplotlib derive scalar views of stored fields.</p>
 <div class="badge-row">
-<a class="badge-colab" href="https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/study/classroom/01_simulate_fracture.ipynb">Open in Colab (published edition)</a> · <a class="badge-link" href="../../notebooks/study/classroom/01_simulate_fracture.ipynb">Download notebook</a> · <a class="badge-link" href="../../notebooks/solutions/classroom/01_simulate_fracture.ipynb">Download with recap answer</a> · <a class="badge-link" href="../../SETUP.md">Environment setup</a>
+<a class="badge-colab" href="https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/study/classroom/NB1%20-%20Intro%20to%20PhAST.ipynb">Open in Colab (published edition)</a> · <a class="badge-link" href="../../notebooks/study/classroom/NB1%20-%20Intro%20to%20PhAST.ipynb">Download notebook</a> · <a class="badge-link" href="../../notebooks/solutions/classroom/NB1%20-%20Intro%20to%20PhAST.ipynb">Download with recap answer</a> · <a class="badge-link" href="../../SETUP.md">Environment setup</a>
 </div>
 <p><strong>Day 3 · PhAST practical. Updated 16 September 2026.</strong> Figures and animations are retained from the supplied notebook. Complete the reference before trying the additional parameter studies.</p>
 </section>
@@ -235487,7 +235490,7 @@ plot band width against <span class="math notranslate nohighlight">\(x\)</span> 
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Recovering Young’s modulus from measured extension</p>
+        <p class="prev-next-title">NB2 — Inverse Problem using PhAST</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -235507,6 +235510,7 @@ plot band width against <span class="math notranslate nohighlight">\(x\)</span> 
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#phase-field-fracture-notched-square-plate">Phase-field fracture - notched square plate</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-phast-laboratory-for-google-colab">A PhAST laboratory for Google Colab</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning objectives</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#software">Software</a></li>
