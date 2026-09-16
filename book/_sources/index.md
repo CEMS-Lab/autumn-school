@@ -37,45 +37,18 @@ For a local run, extract the individual dataset ZIP beside its notebook.
 (day-3-phast)=
 ## Day 3 — Fracture, Differentiability and PhAST
 
-The materials below belong to **Day 3, 16 September 2026**. The PhAST practicals
-are labelled **NB1–NB3** (also called Lab 1–Lab 3 in the lecture guides); the Day 2 machine learning notebooks above are labelled
-**NB1, NB2, NB3a, NB3b, NB5 and NB6**. Each day has its own setup and data requirements.
+These three PhAST notebooks are for **16 September 2026**. Click **Open in Colab**
+to run them online, or **Download notebook** to save a local copy. NB3 also
+provides the source and trained model in the **PhAST GNN assets ZIP**.
+The notebooks include their supplied figures and animations.
 
-### Three connected lectures
-
-| Lecture | Central question |
-| --- | --- |
-| {doc}`1. Phase-field fracture and PhAST <lectures/01_fracture_and_phast>` | How do geometry, material and loading produce a damage field? |
-| {doc}`2. Differentiability and inverse applications <lectures/02_differentiability_and_inverse>` | How can a measured response tell us about an unknown input? |
-| {doc}`3. Hybrid numerical and learned methods <lectures/03_hybrid_learning>` | How can a learned prediction work alongside a physical solver? |
-
-The lecture guides connect the governing equations and illustrations to each
-practical. Discussion questions provide opportunities to interpret the model
-before running the corresponding calculation.
-
-### Three PhAST practical notebooks
-
-Each lab moves through **predict → explain → compute → inspect → exercise →
-worked solution**. Short code cells introduce one operation at a time.
-Expandable setup and implementation details keep the complete calculation
-available for closer study.
-
-| Practical | What you will do |
-| --- | --- |
-| {doc}`NB1 — Intro to PhAST <classroom/01_simulate_fracture>` | Inspect a notched specimen and its loading, run PhAST, and interpret crack propagation, energy curves and saved fields. |
-| {doc}`NB2 — Inverse Problem using PhAST <classroom/02_gradients_and_recovery>` | Solve a 1D elastic bar with PhAST and recover its Young’s modulus from one force and one observed extension. |
-| {doc}`NB3 — Hybrid FEM+DL with PhAST <classroom/03_learning_and_hybrid>` | Compare conventional FEM with a frozen graph neural network that replaces the damage subproblem on a three-hole plate. |
-
-The optional {doc}`direct learned-replacement case study <w53_direct_replacement>`
-connects Lab 3 to a retained Radius-GNO fracture trajectory and reports a
-matched damage-stage timing comparison.
-
-The Day 3 notebooks below are the supplied **16 September 2026** edition,
-including their recorded figures and animations. All three use PhAST.
+```{raw} html
+<span id="three-phast-practical-notebooks"></span>
+```
 
 ```{raw} html
 <div class="ml-notebook-access" style="overflow-x:auto;">
-<table>
+<table class="table">
 <thead><tr><th>Day 3 notebook</th><th>Run online</th><th>Download</th><th>Resources</th></tr></thead>
 <tbody>
 <tr><td>NB1 — Intro to PhAST</td><td><a class="badge-link" href="https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/study/classroom/01_simulate_fracture.ipynb" target="_blank" rel="noopener"><img src="_static/colab-badge.svg" alt="Open in Colab" width="117" height="20" style="min-width:117px;max-width:none;height:20px"></a></td><td><a class="badge-link" href="../notebooks/study/classroom/01_simulate_fracture.ipynb" download>Download notebook</a></td><td>Prepared in the notebook</td></tr>
@@ -94,6 +67,35 @@ The supplied outputs are preserved. These updated notebooks have not been rerun
 end to end for this publication; a fresh whole-notebook Colab timing remains to
 be measured. The older Helmholtz example remains in {doc}`further_practice`.
 
+### Three connected lectures
+
+| Lecture | Central question |
+| --- | --- |
+| {doc}`1. Phase-field fracture and PhAST <lectures/01_fracture_and_phast>` | How do geometry, material and loading produce a damage field? |
+| {doc}`2. Differentiability and inverse applications <lectures/02_differentiability_and_inverse>` | How can a measured response tell us about an unknown input? |
+| {doc}`3. Hybrid numerical and learned methods <lectures/03_hybrid_learning>` | How can a learned prediction work alongside a physical solver? |
+
+The lecture guides connect the governing equations and illustrations to each
+practical. Discussion questions provide opportunities to interpret the model
+before running the corresponding calculation.
+
+### What each practical covers
+
+Each lab moves through **predict → explain → compute → inspect → exercise →
+worked solution**. Short code cells introduce one operation at a time.
+Expandable setup and implementation details keep the complete calculation
+available for closer study.
+
+| Practical | What you will do |
+| --- | --- |
+| {doc}`NB1 — Intro to PhAST <classroom/01_simulate_fracture>` | Inspect a notched specimen and its loading, run PhAST, and interpret crack propagation, energy curves and saved fields. |
+| {doc}`NB2 — Inverse Problem using PhAST <classroom/02_gradients_and_recovery>` | Solve a 1D elastic bar with PhAST and recover its Young’s modulus from one force and one observed extension. |
+| {doc}`NB3 — Hybrid FEM+DL with PhAST <classroom/03_learning_and_hybrid>` | Compare conventional FEM with a frozen graph neural network that replaces the damage subproblem on a three-hole plate. |
+
+The optional {doc}`direct learned-replacement case study <w53_direct_replacement>`
+connects Lab 3 to a retained Radius-GNO fracture trajectory and reports a
+matched damage-stage timing comparison.
+
 ### Day 3 reference chapters and further practice
 
 The reference chapters develop four complementary themes:
@@ -108,20 +110,20 @@ damaged material. Symbols and assumptions are introduced beside their equations.
 
 ```{toctree}
 :maxdepth: 1
-:caption: Day 3 — Lecture guides
-
-lectures/01_fracture_and_phast
-lectures/02_differentiability_and_inverse
-lectures/03_hybrid_learning
-```
-
-```{toctree}
-:maxdepth: 1
 :caption: Day 3 — PhAST practicals
 
 classroom/01_simulate_fracture
 classroom/02_gradients_and_recovery
 classroom/03_learning_and_hybrid
+```
+
+```{toctree}
+:maxdepth: 1
+:caption: Day 3 — Lecture guides
+
+lectures/01_fracture_and_phast
+lectures/02_differentiability_and_inverse
+lectures/03_hybrid_learning
 ```
 
 ```{toctree}

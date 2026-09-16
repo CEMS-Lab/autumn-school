@@ -52,7 +52,7 @@
     <script src="_static/learning_book.js?v=5aaa4a9b"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Lecture 1: Phase-field fracture and PhAST" href="lectures/01_fracture_and_phast.html" />
+    <link rel="next" title="Phase-field fracture - notched square plate" href="classroom/01_simulate_fracture.html" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -171,18 +171,18 @@
                 </a>
             </li>
         </ul>
-        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Day 3 — Lecture guides</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="lectures/01_fracture_and_phast.html">Lecture 1: Phase-field fracture and PhAST</a></li>
-<li class="toctree-l1"><a class="reference internal" href="lectures/02_differentiability_and_inverse.html">Lecture 2: Differentiability and inverse recovery</a></li>
-<li class="toctree-l1"><a class="reference internal" href="lectures/03_hybrid_learning.html">Lecture 3: Learned damage updates in PhAST</a></li>
-</ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Day 3 — PhAST practicals</span></p>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Day 3 — PhAST practicals</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="classroom/01_simulate_fracture.html">Phase-field fracture - notched square plate</a></li>
 <li class="toctree-l1"><a class="reference internal" href="classroom/02_gradients_and_recovery.html">Recovering Young’s modulus from measured extension</a></li>
 <li class="toctree-l1"><a class="reference internal" href="classroom/03_learning_and_hybrid.html">PhAST laboratory: fracture around three holes</a></li>
 
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Day 3 — Lecture guides</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="lectures/01_fracture_and_phast.html">Lecture 1: Phase-field fracture and PhAST</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lectures/02_differentiability_and_inverse.html">Lecture 2: Differentiability and inverse recovery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lectures/03_hybrid_learning.html">Lecture 3: Learned damage updates in PhAST</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Day 3 — Optional direct-replacement case study</span></p>
 <ul class="nav bd-sidenav">
@@ -425,7 +425,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#day-2-mechanics-and-machine-learning">Day 2 — Mechanics and Machine Learning</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#day-3-fracture-differentiability-and-phast">Day 3 — Fracture, Differentiability and PhAST</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#three-connected-lectures">Three connected lectures</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#three-phast-practical-notebooks">Three PhAST practical notebooks</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-each-practical-covers">What each practical covers</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#day-3-reference-chapters-and-further-practice">Day 3 reference chapters and further practice</a><ul class="nav section-nav flex-column">
 </ul>
 </li>
@@ -473,9 +473,25 @@ For a local run, extract the individual dataset ZIP beside its notebook.</p>
 </section>
 <section id="day-3-fracture-differentiability-and-phast">
 <span id="day-3-phast"></span><h2>Day 3 — Fracture, Differentiability and PhAST<a class="headerlink" href="#day-3-fracture-differentiability-and-phast" title="Link to this heading">#</a></h2>
-<p>The materials below belong to <strong>Day 3, 16 September 2026</strong>. The PhAST practicals
-are labelled <strong>NB1–NB3</strong> (also called Lab 1–Lab 3 in the lecture guides); the Day 2 machine learning notebooks above are labelled
-<strong>NB1, NB2, NB3a, NB3b, NB5 and NB6</strong>. Each day has its own setup and data requirements.</p>
+<p>These three PhAST notebooks are for <strong>16 September 2026</strong>. Click <strong>Open in Colab</strong>
+to run them online, or <strong>Download notebook</strong> to save a local copy. NB3 also
+provides the source and trained model in the <strong>PhAST GNN assets ZIP</strong>.
+The notebooks include their supplied figures and animations.</p>
+<span id="three-phast-practical-notebooks"></span><div class="ml-notebook-access" style="overflow-x:auto;">
+<table class="table">
+<thead><tr><th>Day 3 notebook</th><th>Run online</th><th>Download</th><th>Resources</th></tr></thead>
+<tbody>
+<tr><td>NB1 — Intro to PhAST</td><td><a class="badge-link" href="https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/study/classroom/01_simulate_fracture.ipynb" target="_blank" rel="noopener"><img src="_static/colab-badge.svg" alt="Open in Colab" width="117" height="20" style="min-width:117px;max-width:none;height:20px"></a></td><td><a class="badge-link" href="../notebooks/study/classroom/01_simulate_fracture.ipynb" download>Download notebook</a></td><td>Prepared in the notebook</td></tr>
+<tr><td>NB2 — Inverse Problem using PhAST</td><td><a class="badge-link" href="https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/study/classroom/02_gradients_and_recovery.ipynb" target="_blank" rel="noopener"><img src="_static/colab-badge.svg" alt="Open in Colab" width="117" height="20" style="min-width:117px;max-width:none;height:20px"></a></td><td><a class="badge-link" href="../notebooks/study/classroom/02_gradients_and_recovery.ipynb" download>Download notebook</a></td><td>Prepared in the notebook</td></tr>
+<tr><td>NB3 — Hybrid FEM+DL with PhAST</td><td><a class="badge-link" href="https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/study/classroom/03_learning_and_hybrid.ipynb" target="_blank" rel="noopener"><img src="_static/colab-badge.svg" alt="Open in Colab" width="117" height="20" style="min-width:117px;max-width:none;height:20px"></a></td><td><a class="badge-link" href="../notebooks/study/classroom/03_learning_and_hybrid.ipynb" download>Download notebook</a></td><td><a class="badge-link" href="../datasets/phast/phast_gnn_assets.zip" download>Download PhAST GNN assets ZIP</a></td></tr>
+</tbody></table></div><p>Start with the <a class="reference external" href="../SETUP.md">environment setup guide</a>. NB1 and NB2 can use a CPU
+runtime. <strong>For NB3, select a GPU runtime in Colab before running the setup.</strong>
+NB3 downloads the supplied source and frozen model from <code class="docutils literal notranslate"><span class="pre">phast_gnn_assets.zip</span></code>
+automatically; the resource button also provides the archive for local use.
+The notebook verifies the source and checkpoint hashes before loading them.</p>
+<p>The supplied outputs are preserved. These updated notebooks have not been rerun
+end to end for this publication; a fresh whole-notebook Colab timing remains to
+be measured. The older Helmholtz example remains in <a class="reference internal" href="further_practice.html"><span class="doc">Detailed notebooks and further practice</span></a>.</p>
 <section id="three-connected-lectures">
 <h3>Three connected lectures<a class="headerlink" href="#three-connected-lectures" title="Link to this heading">#</a></h3>
 <div class="pst-scrollable-table-container"><table class="table">
@@ -501,8 +517,8 @@ are labelled <strong>NB1–NB3</strong> (also called Lab 1–Lab 3 in the lectur
 practical. Discussion questions provide opportunities to interpret the model
 before running the corresponding calculation.</p>
 </section>
-<section id="three-phast-practical-notebooks">
-<h3>Three PhAST practical notebooks<a class="headerlink" href="#three-phast-practical-notebooks" title="Link to this heading">#</a></h3>
+<section id="what-each-practical-covers">
+<h3>What each practical covers<a class="headerlink" href="#what-each-practical-covers" title="Link to this heading">#</a></h3>
 <p>Each lab moves through <strong>predict → explain → compute → inspect → exercise →
 worked solution</strong>. Short code cells introduce one operation at a time.
 Expandable setup and implementation details keep the complete calculation
@@ -529,23 +545,6 @@ available for closer study.</p>
 <p>The optional <a class="reference internal" href="w53_direct_replacement.html"><span class="doc">direct learned-replacement case study</span></a>
 connects Lab 3 to a retained Radius-GNO fracture trajectory and reports a
 matched damage-stage timing comparison.</p>
-<p>The Day 3 notebooks below are the supplied <strong>16 September 2026</strong> edition,
-including their recorded figures and animations. All three use PhAST.</p>
-<div class="ml-notebook-access" style="overflow-x:auto;">
-<table>
-<thead><tr><th>Day 3 notebook</th><th>Run online</th><th>Download</th><th>Resources</th></tr></thead>
-<tbody>
-<tr><td>NB1 — Intro to PhAST</td><td><a class="badge-link" href="https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/study/classroom/01_simulate_fracture.ipynb" target="_blank" rel="noopener"><img src="_static/colab-badge.svg" alt="Open in Colab" width="117" height="20" style="min-width:117px;max-width:none;height:20px"></a></td><td><a class="badge-link" href="../notebooks/study/classroom/01_simulate_fracture.ipynb" download>Download notebook</a></td><td>Prepared in the notebook</td></tr>
-<tr><td>NB2 — Inverse Problem using PhAST</td><td><a class="badge-link" href="https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/study/classroom/02_gradients_and_recovery.ipynb" target="_blank" rel="noopener"><img src="_static/colab-badge.svg" alt="Open in Colab" width="117" height="20" style="min-width:117px;max-width:none;height:20px"></a></td><td><a class="badge-link" href="../notebooks/study/classroom/02_gradients_and_recovery.ipynb" download>Download notebook</a></td><td>Prepared in the notebook</td></tr>
-<tr><td>NB3 — Hybrid FEM+DL with PhAST</td><td><a class="badge-link" href="https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/study/classroom/03_learning_and_hybrid.ipynb" target="_blank" rel="noopener"><img src="_static/colab-badge.svg" alt="Open in Colab" width="117" height="20" style="min-width:117px;max-width:none;height:20px"></a></td><td><a class="badge-link" href="../notebooks/study/classroom/03_learning_and_hybrid.ipynb" download>Download notebook</a></td><td><a class="badge-link" href="../datasets/phast/phast_gnn_assets.zip" download>Download PhAST GNN assets ZIP</a></td></tr>
-</tbody></table></div><p>Start with the <a class="reference external" href="../SETUP.md">environment setup guide</a>. NB1 and NB2 can use a CPU
-runtime. <strong>For NB3, select a GPU runtime in Colab before running the setup.</strong>
-NB3 downloads the supplied source and frozen model from <code class="docutils literal notranslate"><span class="pre">phast_gnn_assets.zip</span></code>
-automatically; the resource button also provides the archive for local use.
-The notebook verifies the source and checkpoint hashes before loading them.</p>
-<p>The supplied outputs are preserved. These updated notebooks have not been rerun
-end to end for this publication; a fresh whole-notebook Colab timing remains to
-be measured. The older Helmholtz example remains in <a class="reference internal" href="further_practice.html"><span class="doc">Detailed notebooks and further practice</span></a>.</p>
 </section>
 <section id="day-3-reference-chapters-and-further-practice">
 <h3>Day 3 reference chapters and further practice<a class="headerlink" href="#day-3-reference-chapters-and-further-practice" title="Link to this heading">#</a></h3>
@@ -559,20 +558,20 @@ be measured. The older Helmholtz example remains in <a class="reference internal
 <p>Throughout the book, <span class="math notranslate nohighlight">\(d=0\)</span> denotes intact material and <span class="math notranslate nohighlight">\(d=1\)</span> denotes fully
 damaged material. Symbols and assumptions are introduced beside their equations.</p>
 <div class="toctree-wrapper compound">
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Day 3 — Lecture guides</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="lectures/01_fracture_and_phast.html">Lecture 1: Phase-field fracture and PhAST</a></li>
-<li class="toctree-l1"><a class="reference internal" href="lectures/02_differentiability_and_inverse.html">Lecture 2: Differentiability and inverse recovery</a></li>
-<li class="toctree-l1"><a class="reference internal" href="lectures/03_hybrid_learning.html">Lecture 3: Learned damage updates in PhAST</a></li>
-</ul>
-</div>
-<div class="toctree-wrapper compound">
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Day 3 — PhAST practicals</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="classroom/01_simulate_fracture.html">Phase-field fracture - notched square plate</a></li>
 <li class="toctree-l1"><a class="reference internal" href="classroom/02_gradients_and_recovery.html">Recovering Young’s modulus from measured extension</a></li>
 <li class="toctree-l1"><a class="reference internal" href="classroom/03_learning_and_hybrid.html">PhAST laboratory: fracture around three holes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="classroom/03_learning_and_hybrid.html#replacing-the-damage-subproblem-with-a-trained-network">Replacing the damage subproblem with a trained network</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Day 3 — Lecture guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="lectures/01_fracture_and_phast.html">Lecture 1: Phase-field fracture and PhAST</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lectures/02_differentiability_and_inverse.html">Lecture 2: Differentiability and inverse recovery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lectures/03_hybrid_learning.html">Lecture 3: Learned damage updates in PhAST</a></li>
 </ul>
 </div>
 <div class="toctree-wrapper compound">
@@ -620,11 +619,11 @@ for independent study.</p>
                   
 <div class="prev-next-area">
     <a class="right-next"
-       href="lectures/01_fracture_and_phast.html"
+       href="classroom/01_simulate_fracture.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Lecture 1: Phase-field fracture and PhAST</p>
+        <p class="prev-next-title">Phase-field fracture - notched square plate</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -647,7 +646,7 @@ for independent study.</p>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#day-2-mechanics-and-machine-learning">Day 2 — Mechanics and Machine Learning</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#day-3-fracture-differentiability-and-phast">Day 3 — Fracture, Differentiability and PhAST</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#three-connected-lectures">Three connected lectures</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#three-phast-practical-notebooks">Three PhAST practical notebooks</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-each-practical-covers">What each practical covers</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#day-3-reference-chapters-and-further-practice">Day 3 reference chapters and further practice</a><ul class="nav section-nav flex-column">
 </ul>
 </li>
