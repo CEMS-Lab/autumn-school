@@ -52,8 +52,8 @@
     <script src="../_static/learning_book.js?v=5aaa4a9b"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Replacing the damage subproblem with a trained network" href="03_learning_and_hybrid.html" />
-    <link rel="prev" title="Phase-field fracture of a notched square plate" href="01_simulate_fracture.html" />
+    <link rel="next" title="PhAST laboratory: fracture around three holes" href="03_learning_and_hybrid.html" />
+    <link rel="prev" title="Phase-field fracture - notched square plate" href="01_simulate_fracture.html" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -178,9 +178,10 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Day 3 — PhAST practicals</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="01_simulate_fracture.html">Phase-field fracture of a notched square plate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="01_simulate_fracture.html">Phase-field fracture - notched square plate</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Recovering Young’s modulus from measured extension</a></li>
-<li class="toctree-l1"><a class="reference internal" href="03_learning_and_hybrid.html">Replacing the damage subproblem with a trained network</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_learning_and_hybrid.html">PhAST laboratory: fracture around three holes</a></li>
+
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Day 3 — Optional direct-replacement case study</span></p>
 <ul class="nav bd-sidenav">
@@ -455,17 +456,14 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-phast-and-tools">1. Load PhAST and tools</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#geometry-and-material-setup">2. Geometry and material setup</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generate-the-line-mesh">3. Generate the line mesh</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#boundary-conditions-and-load">4. Boundary conditions and load</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#boundary-condition-and-loads">4. Boundary Condition and Loads</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#write-the-forward-function">5. Write the forward function</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#record-and-visualise-the-forward-solution">6. Record and visualise the forward solution</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#see-the-actual-extension">See the actual extension</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#strain-and-stored-elastic-energy">Strain and stored elastic energy</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#define-the-observation-and-inverse-question">7. Define the observation and inverse question</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#inverse-question">Inverse question</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#define-the-observation-and-inverse-question">7. Define the observation and inverse question</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#differentiate-through-the-phast-solve">8. Differentiate through the PhAST solve</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-same-derivative-by-hand">The same derivative by hand</a></li>
 </ul>
@@ -473,16 +471,18 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#set-up-a-positive-modulus-and-momentum-updates">9. Set up a positive modulus and momentum updates</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-the-inverse-loop">10. Run the inverse loop</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#read-the-recovery-history">11. Read the recovery history</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#animate-the-changing-inverse-prediction">Animate the changing inverse prediction</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#animation-showing-the-inverse-prediciton-updates">Animation showing the inverse prediciton updates</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#check-the-recovered-solution-and-save-the-results">12. Check the recovered solution and save the results</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretation-and-scope">13. Interpretation and scope</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recap">13. Recap:</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fun-exercises">Fun exercises:</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-takeaways">Key takeaways</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#consolidation">Consolidation</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
 </ul>
             </nav>
         </div>
@@ -498,14 +498,18 @@ document.write(`
 <h1>Recovering Young’s modulus from measured extension<a class="headerlink" href="#recovering-young-s-modulus-from-measured-extension" title="Link to this heading">#</a></h1>
 <section id="a-differentiable-finite-element-exercise-with-phast">
 <h2>A differentiable finite-element exercise with <strong>PhAST</strong><a class="headerlink" href="#a-differentiable-finite-element-exercise-with-phast" title="Link to this heading">#</a></h2>
-<p><em>UKACM Autumn School 2026 · CEMS Lab, City St George’s, University of London</em></p>
+<p><strong>UKACM Autumn School 2026 · 16 September</strong></p>
+<p>Developed by Allamaprabhu Ani and Sathiskumar A. Ponnusami, CEMS-Lab,
+City St George’s, University of London.</p>
+<p><a class="reference external" href="https://github.com/CEMS-Lab/PhAST">PhAST repository</a> ·
+<a class="reference external" href="https://cems-lab.github.io/PhAST/">PhAST documentation</a></p>
 <hr class="docutils" />
-<p><strong>Learning objective.</strong> Build a 1D bar model, calculate its extension, and recover Young’s modulus by differentiating through the PhAST forward solve.</p>
+<p>We will build a 1D model, calculate its extension, and recover Young’s modulus by differentiating through the PhAST forward solve.</p>
 <p>The notebook saves its figures, animation and numerical tables in <code class="docutils literal notranslate"><span class="pre">bar_results/</span></code> in the working directory.</p>
 <div class="badge-row">
 <a class="badge-colab" href="https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/study/classroom/02_gradients_and_recovery.ipynb">Open in Colab (published edition)</a> · <a class="badge-link" href="../../notebooks/study/classroom/02_gradients_and_recovery.ipynb">Download notebook</a> · <a class="badge-link" href="../../notebooks/solutions/classroom/02_gradients_and_recovery.ipynb">Download with recap answer</a> · <a class="badge-link" href="../../SETUP.md">Environment setup</a>
 </div>
-<p><strong>Day 3 · PhAST practical. Updated 15 September 2026.</strong> Figures and animation are retained from the supplied notebook. This book update preserves those outputs. The calculation uses SGD with momentum 0.5; the lecture deck also illustrates plain SGD, which has a different optimisation history.</p>
+<p><strong>Day 3 · PhAST practical. Updated 16 September 2026.</strong> Figures and animation are retained from the supplied notebook. This book update preserves those outputs. The calculation uses SGD with momentum 0.5; the lecture deck also illustrates plain SGD, which has a different optimisation history.</p>
 </section>
 <section id="load-phast-and-tools">
 <h2>1. Load PhAST and tools<a class="headerlink" href="#load-phast-and-tools" title="Link to this heading">#</a></h2>
@@ -518,17 +522,37 @@ document.write(`
 <span class="n">PHAST_SPEC</span> <span class="o">=</span> <span class="s2">&quot;phast @ git+https://github.com/CEMS-Lab/PhAST.git@157412953099bfcace1668bb35cb911826a4e95e&quot;</span>
 <span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">version_info</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span> <span class="o">&lt;</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">10</span><span class="p">):</span>
     <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;PhAST requires Python 3.10 or newer.&quot;</span><span class="p">)</span>
-<span class="k">if</span> <span class="n">importlib</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">find_spec</span><span class="p">(</span><span class="s2">&quot;phast&quot;</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+<span class="n">REQUIRED</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;line_mesh&quot;</span><span class="p">,</span> <span class="s2">&quot;solve_bar&quot;</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">course_solver_present</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;True only when the importable `phast` really is the course solver.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">importlib</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">find_spec</span><span class="p">(</span><span class="s2">&quot;phast&quot;</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">False</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">phast</span>
+    <span class="k">return</span> <span class="nb">all</span><span class="p">(</span><span class="nb">hasattr</span><span class="p">(</span><span class="n">phast</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">REQUIRED</span><span class="p">)</span>
+
+
+<span class="k">if</span> <span class="ow">not</span> <span class="n">course_solver_present</span><span class="p">():</span>
     <span class="n">subprocess</span><span class="o">.</span><span class="n">check_call</span><span class="p">([</span><span class="n">sys</span><span class="o">.</span><span class="n">executable</span><span class="p">,</span> <span class="s2">&quot;-m&quot;</span><span class="p">,</span> <span class="s2">&quot;pip&quot;</span><span class="p">,</span> <span class="s2">&quot;install&quot;</span><span class="p">,</span> <span class="s2">&quot;-q&quot;</span><span class="p">,</span> <span class="n">PHAST_SPEC</span><span class="p">])</span>
+    <span class="n">importlib</span><span class="o">.</span><span class="n">invalidate_caches</span><span class="p">()</span>
+
 <span class="kn">import</span><span class="w"> </span><span class="nn">phast</span>
-<span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">(</span><span class="nb">hasattr</span><span class="p">(</span><span class="n">phast</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;line_mesh&quot;</span><span class="p">,</span> <span class="s2">&quot;solve_bar&quot;</span><span class="p">)):</span>
-    <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Install with %pip install &#39;</span><span class="si">{</span><span class="n">PHAST_SPEC</span><span class="si">}</span><span class="s2">&#39;, then restart the kernel.&quot;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">(</span><span class="nb">hasattr</span><span class="p">(</span><span class="n">phast</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">REQUIRED</span><span class="p">):</span>
+    <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span>
+        <span class="s2">&quot;A different package named &#39;phast&#39; is shadowing the course solver:</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="sa">f</span><span class="s2">&quot;  </span><span class="si">{</span><span class="n">phast</span><span class="o">.</span><span class="vm">__file__</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="sa">f</span><span class="s2">&quot;Install with %pip install &#39;</span><span class="si">{</span><span class="n">PHAST_SPEC</span><span class="si">}</span><span class="s2">&#39;, then restart the kernel.&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;PhAST module: &quot;</span><span class="p">,</span> <span class="n">phast</span><span class="o">.</span><span class="vm">__file__</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Forward solver:&quot;</span><span class="p">,</span> <span class="n">phast</span><span class="o">.</span><span class="n">solve_bar</span><span class="o">.</span><span class="vm">__module__</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Forward solver: phast.bar
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>PhAST module:  /usr/local/lib/python3.13/dist-packages/phast/__init__.py
+Forward solver: phast.bar
 </pre></div>
 </div>
 </div>
@@ -681,12 +705,14 @@ tensor([[ 0,  1],
 </div>
 </div>
 </section>
-<section id="boundary-conditions-and-load">
-<h2>4. Boundary conditions and load<a class="headerlink" href="#boundary-conditions-and-load" title="Link to this heading">#</a></h2>
-<p>Fix the left end and apply a force of <span class="math notranslate nohighlight">\(F=4000\,\mathrm N\)</span> at the right end,
-directed along positive <span class="math notranslate nohighlight">\(x\)</span>:</p>
+<section id="boundary-condition-and-loads">
+<h2>4. Boundary Condition and Loads<a class="headerlink" href="#boundary-condition-and-loads" title="Link to this heading">#</a></h2>
+<p>Fix the left end: <span class="math notranslate nohighlight">\(u(0)=0\)</span>.</p>
+<p>Apply force <span class="math notranslate nohighlight">\(F=4000\,\mathrm N\)</span> to the right end, directed along positive <span class="math notranslate nohighlight">\(x\)</span>.</p>
 <div class="math notranslate nohighlight">
-\[u(0)=0,\qquad EA\frac{du}{dx}\bigg|_{x=L}=F.\]</div>
+\[u(0)=0\]</div>
+<div class="math notranslate nohighlight">
+\[ \qquad EA\frac{du}{dx}\bigg|_{x=L}=F.\]</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">left_displacement</span> <span class="o">=</span> <span class="mf">0.0</span>  <span class="c1"># mm</span>
@@ -725,15 +751,12 @@ directed along positive <span class="math notranslate nohighlight">\(x\)</span>:
 </section>
 <section id="write-the-forward-function">
 <h2>5. Write the forward function<a class="headerlink" href="#write-the-forward-function" title="Link to this heading">#</a></h2>
-<p>PhAST assembles the axial stiffness matrix and solves equilibrium for the free
-displacement degrees of freedom:</p>
+<p>PhAST assembles the axial stiffness, and solves static equilibrium:</p>
 <div class="math notranslate nohighlight">
-\[\mathbf K_{ff}(E)\mathbf u_f=\mathbf f_f.\]</div>
-<p>The subscript <span class="math notranslate nohighlight">\(f\)</span> identifies the unconstrained degrees of freedom. The fixed
-left-end displacement is zero. This example uses PhAST’s differentiable sparse
-solve with a SciPy SuperLU CPU backend.</p>
-<p>Returning tensors preserves the connection between <span class="math notranslate nohighlight">\(E\)</span> and the displacements
-for autograd.</p>
+\[\mathbf K * (E)\mathbf u=\mathbf f\]</div>
+<p>The subscript <span class="math notranslate nohighlight">\(f\)</span> denotes free displacement degrees of freedom. This 1D problem uses PhAST’s differentiable sparse solve with a SciPy SuperLU CPU backend.</p>
+<p>One call solves the linear system directly.</p>
+<p>Returning the result as tensors preserves the connection between <span class="math notranslate nohighlight">\(E\)</span> and the displacements for autograd.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">forward</span><span class="p">(</span><span class="n">E</span><span class="p">):</span>
@@ -937,9 +960,8 @@ U_e=\frac12 E\varepsilon_e^2 A h_e.\]</div>
 <h2>7. Define the observation and inverse question<a class="headerlink" href="#define-the-observation-and-inverse-question" title="Link to this heading">#</a></h2>
 <p>We retain <strong>one scalar observation</strong>, the tip displacement from the reference solve.</p>
 <p>Detaching it treats it as a fixed measurement during differentiation.</p>
-<section id="inverse-question">
-<h3>Inverse question<a class="headerlink" href="#inverse-question" title="Link to this heading">#</a></h3>
-<p>Estimate Young’s modulus <span class="math notranslate nohighlight">\(E\)</span> from the given extension and load.</p>
+<p>##Inverse question:
+<strong>Based on the given extension and load, estimate Young’s Modulus (E)</strong></p>
 <p>Start from <span class="math notranslate nohighlight">\(E_0=100\,\mathrm{GPa}\)</span>.</p>
 <p>This softer trial bar extends too much.</p>
 <div class="math notranslate nohighlight">
@@ -997,57 +1019,35 @@ Initial loss: 1.210000
 </div>
 </div>
 </section>
-</section>
 <section id="differentiate-through-the-phast-solve">
 <h2>8. Differentiate through the PhAST solve<a class="headerlink" href="#differentiate-through-the-phast-solve" title="Link to this heading">#</a></h2>
-<p>Set <code class="docutils literal notranslate"><span class="pre">requires_grad=True</span></code> on <span class="math notranslate nohighlight">\(E\)</span> to record supported tensor operations for
-autograd. PhAST’s sparse solve supplies a custom backward rule for the solution
-of the linear system. Together, these operations connect the modulus to the
-scalar displacement loss <span class="math notranslate nohighlight">\(\mathcal L\)</span>:</p>
+<p>Mark <span class="math notranslate nohighlight">\(E\)</span> with <code class="docutils literal notranslate"><span class="pre">requires_grad=True</span></code> and autograd records every tensor operation that consumes it.
+The chain it walks backwards is</p>
 <div class="math notranslate nohighlight">
-\[
-E \longrightarrow \mathbf K_{ff}(E) \longrightarrow \mathbf u_f(E)
-\longrightarrow y(E) \longrightarrow \mathcal L(E).
-\]</div>
-<p>Here <span class="math notranslate nohighlight">\(f\)</span> identifies the free displacement degrees of freedom and <span class="math notranslate nohighlight">\(y=u(L)\)</span> is
-the tip extension. At fixed force, differentiating equilibrium gives the
-displacement sensitivity:</p>
+\[E \;\longrightarrow\; \mathbf{K}(E) \;\longrightarrow\; \mathbf{u}(E) \;\longrightarrow\; y(E) \;\longrightarrow\; L(E)\]</div>
+<p>with <span class="math notranslate nohighlight">\(\mathbf{K}\)</span> the assembled stiffness, <span class="math notranslate nohighlight">\(\mathbf{u}\)</span> the displacement field, <span class="math notranslate nohighlight">\(y = u(L)\)</span> the tip
+extension we observe, and <span class="math notranslate nohighlight">\(L\)</span> the scalar mismatch.</p>
+<p>The awkward link is the solve. Differentiating <span class="math notranslate nohighlight">\(\mathbf{K}\mathbf{u} = \mathbf{f}\)</span> at fixed force,</p>
 <div class="math notranslate nohighlight">
-\[
-\mathbf K_{ff}\frac{\partial\mathbf u_f}{\partial E}
-=-\frac{\partial\mathbf K_{ff}}{\partial E}\mathbf u_f.
-\]</div>
-<p>For a scalar loss, reverse-mode differentiation expresses the gradient using an
-adjoint vector <span class="math notranslate nohighlight">\(\boldsymbol\lambda\)</span>. It solves a transposed linear system and
-then combines the adjoint with the stiffness sensitivity:</p>
-<div class="math notranslate nohighlight">
-\[
-\mathbf K_{ff}^{T}\boldsymbol\lambda
-=\frac{\partial\mathcal L}{\partial\mathbf u_f},
-\qquad
-\frac{d\mathcal L}{dE}
-=-\boldsymbol\lambda^{T}
-\frac{\partial\mathbf K_{ff}}{\partial E}\mathbf u_f.
-\]</div>
-<p>The right-hand side measures how the loss changes with displacement. This
-backward relation propagates that sensitivity to <span class="math notranslate nohighlight">\(E\)</span> through the equilibrium
-solve.</p>
+\[\mathbf{K}\,\frac{\partial \mathbf{u}}{\partial E} \;=\; -\,\frac{\partial \mathbf{K}}{\partial E}\,\mathbf{u}\]</div>
+<p>Same matrix, new right-hand side — the sensitivity reuses the forward factorisation and costs one
+back-substitution. This is what PhAST’s <code class="docutils literal notranslate"><span class="pre">SparseSolveAutograd</span></code> implements.</p>
 <section id="the-same-derivative-by-hand">
 <h3>The same derivative by hand<a class="headerlink" href="#the-same-derivative-by-hand" title="Link to this heading">#</a></h3>
-<p>For this uniform bar, the analytical tip displacement is <span class="math notranslate nohighlight">\(y=FL/(EA)\)</span>.
-The chain rule gives an independent check of the gradient:</p>
+<p><span class="math notranslate nohighlight">\(L\)</span> depends on <span class="math notranslate nohighlight">\(E\)</span> only through <span class="math notranslate nohighlight">\(y\)</span>, so the chain rule splits it in two:</p>
 <div class="math notranslate nohighlight">
-\[
-\frac{d\mathcal L}{dE}
-=\frac{d\mathcal L}{dy}\frac{dy}{dE}
-=\frac{2(y-y^{\mathrm{obs}})}{(y^{\mathrm{obs}})^2}
-\left(-\frac{y}{E}\right).
-\]</div>
-<p>The first factor differentiates the loss while holding the observation fixed.
-The second factor describes the mechanics: increasing <span class="math notranslate nohighlight">\(E\)</span> reduces the bar’s
-extension. At the initial guess, <span class="math notranslate nohighlight">\(dy/dE&lt;0\)</span> and <span class="math notranslate nohighlight">\(d\mathcal L/dy&gt;0\)</span>, so
-<span class="math notranslate nohighlight">\(d\mathcal L/dE&lt;0\)</span>. Increasing the modulus brings the predicted extension
-closer to the observation.</p>
+\[\frac{\mathrm{d}L}{\mathrm{d}E} \;=\; \frac{\mathrm{d}L}{\mathrm{d}y}\cdot\frac{\mathrm{d}y}{\mathrm{d}E}
+\;=\; \frac{2\,(y - y^{\text{obs}})}{(y^{\text{obs}})^{2}}\;\cdot\;\left(-\frac{y}{E}\right)\]</div>
+<p>The first factor is the loss we chose, differentiated with <span class="math notranslate nohighlight">\(y^{\text{obs}}\)</span> held fixed. The second is
+the mechanics: <div class="math notranslate nohighlight">
+\[y = FL/EA = (FL/A)E^{-1}\]</div>
+
+<div class="math notranslate nohighlight">
+\[\mathrm{d}y/\mathrm{d}E = -y/E\]</div>
+</p>
+<p>Both derivatives are negative at the initial guess, and both signs are physically obvious once
+stated: a stiffer bar stretches less, and the trial bar currently stretches too much, so increasing
+<span class="math notranslate nohighlight">\(E\)</span> reduces the mismatch.</p>
 <div class="cell tag_hide-input docutils container">
 <details class="admonition hide above-input">
 <summary aria-label="Toggle hidden content">
@@ -1057,7 +1057,7 @@ closer to the observation.</p>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mf">3.2</span><span class="p">),</span> <span class="n">layout</span><span class="o">=</span><span class="s2">&quot;constrained&quot;</span><span class="p">)</span>
 <span class="n">locations</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">]</span>
-<span class="n">symbols</span> <span class="o">=</span> <span class="p">[</span><span class="sa">r</span><span class="s2">&quot;$E$&quot;</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;$\mathbf</span><span class="si">{K}</span><span class="s2">(E)$&quot;</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;$\mathbf</span><span class="si">{u}</span><span class="s2">(E)$&quot;</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;$y(E)$&quot;</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;$\mathcal</span><span class="si">{L}</span><span class="s2">$&quot;</span><span class="p">]</span>
+<span class="n">symbols</span> <span class="o">=</span> <span class="p">[</span><span class="sa">r</span><span class="s2">&quot;$E$&quot;</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;$\mathbf</span><span class="si">{K}</span><span class="s2">(E)$&quot;</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;$\mathbf</span><span class="si">{u}</span><span class="s2">(E)$&quot;</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;$y(E)$&quot;</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;$L$&quot;</span><span class="p">]</span>
 <span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Modulus&quot;</span><span class="p">,</span> <span class="s2">&quot;Stiffness&quot;</span><span class="p">,</span> <span class="s2">&quot;Displacements&quot;</span><span class="p">,</span> <span class="s2">&quot;Tip prediction&quot;</span><span class="p">,</span> <span class="s2">&quot;Loss&quot;</span><span class="p">]</span>
 <span class="k">for</span> <span class="n">pos</span><span class="p">,</span> <span class="n">symbol</span><span class="p">,</span> <span class="n">label</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">locations</span><span class="p">,</span> <span class="n">symbols</span><span class="p">,</span> <span class="n">labels</span><span class="p">):</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="mf">.75</span><span class="p">,</span> <span class="n">symbol</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">24</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;#2980B9&quot;</span><span class="p">)</span>
@@ -1078,7 +1078,7 @@ closer to the observation.</p>
 </div>
 </details>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="../_images/194382bcba087c981d1582b46d122a9e1aabcca07d39769767c537e808ba3c6f.png"><img alt="../_images/194382bcba087c981d1582b46d122a9e1aabcca07d39769767c537e808ba3c6f.png" src="../_images/194382bcba087c981d1582b46d122a9e1aabcca07d39769767c537e808ba3c6f.png" style="width: 950px;" />
+<a class="reference internal image-reference" href="../_images/48c58d7fc19feb1f28b8b5e0285612cc566d9704f30fd1c0423d26871ad2f845.png"><img alt="../_images/48c58d7fc19feb1f28b8b5e0285612cc566d9704f30fd1c0423d26871ad2f845.png" src="../_images/48c58d7fc19feb1f28b8b5e0285612cc566d9704f30fd1c0423d26871ad2f845.png" style="width: 950px;" />
 </a>
 </div>
 </div>
@@ -1197,7 +1197,7 @@ z_{k+1}=z_k-\eta m_k,\qquad m_{-1}=0.\]</div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Recovered E: 209.990865 GPa
 Updates: 30; forward evaluations in recovery: 31
-Recovery-loop time on this machine: 0.0573 s
+Recovery-loop time on this machine: 0.0591 s
 </pre></div>
 </div>
 </div>
@@ -1207,7 +1207,7 @@ Recovery-loop time on this machine: 0.0573 s
 <h2>11. Read the recovery history<a class="headerlink" href="#read-the-recovery-history" title="Link to this heading">#</a></h2>
 <p>The blue curve shows the modulus after each inverse update. The dashed line is the known reference used to generate the synthetic observation.</p>
 <p>The red curve shows the same run’s displacement loss on a <strong>logarithmic vertical axis</strong>. Equal vertical distances represent equal factors of reduction. Dips occur when the trial modulus passes close to the correct value.</p>
-<p>The oscillations describe successive optimisation estimates at a fixed applied force. Their size and number depend on parameterisation, step size, momentum and the stopping rule.</p>
+<p>Overshoot describes the optimiser’s path; it is not physical vibration of the bar. Iteration count depends on parameterisation, step size, momentum and the stopping rule.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">records</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">history</span><span class="p">)</span>
@@ -1218,7 +1218,7 @@ Recovery-loop time on this machine: 0.0573 s
 <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Inverse update&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;E [GPa]&quot;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Recover the elastic modulus&quot;</span><span class="p">)</span>
 <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">frameon</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">semilogy</span><span class="p">(</span><span class="n">iterations</span><span class="p">,</span> <span class="n">losses</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;#C0392B&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Inverse update&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;Normalised loss $\mathcal</span><span class="si">{L}</span><span class="s2">$&quot;</span><span class="p">,</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Inverse update&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;Normalised loss $L$&quot;</span><span class="p">,</span>
             <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Match the observed extension&quot;</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">ax</span> <span class="ow">in</span> <span class="n">axes</span><span class="p">:</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s2">&quot;y&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;#E8E8E8&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">.6</span><span class="p">)</span>
@@ -1227,12 +1227,12 @@ Recovery-loop time on this machine: 0.0573 s
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="../_images/6bbb5a9b7dc765ae623ae16c6973bb012807800e83cf99489b92ddd7e6a268e4.png"><img alt="../_images/6bbb5a9b7dc765ae623ae16c6973bb012807800e83cf99489b92ddd7e6a268e4.png" src="../_images/6bbb5a9b7dc765ae623ae16c6973bb012807800e83cf99489b92ddd7e6a268e4.png" style="width: 950px;" />
+<a class="reference internal image-reference" href="../_images/442b3d382558163bb8afb06775e1e9630faeb8b557126b8ec3845c65b1547ff0.png"><img alt="../_images/442b3d382558163bb8afb06775e1e9630faeb8b557126b8ec3845c65b1547ff0.png" src="../_images/442b3d382558163bb8afb06775e1e9630faeb8b557126b8ec3845c65b1547ff0.png" style="width: 950px;" />
 </a>
 </div>
 </div>
-<section id="animate-the-changing-inverse-prediction">
-<h3>Animate the changing inverse prediction<a class="headerlink" href="#animate-the-changing-inverse-prediction" title="Link to this heading">#</a></h3>
+<section id="animation-showing-the-inverse-prediciton-updates">
+<h3>Animation showing the inverse prediciton updates<a class="headerlink" href="#animation-showing-the-inverse-prediciton-updates" title="Link to this heading">#</a></h3>
 <p>Each frame displays a recorded displacement field from an inverse evaluation. The applied force is constant. This animation shows how the predicted extension changes as the modulus estimate changes.</p>
 <p>The red dot is the <strong>single observation</strong> used in the loss. The grey reference field is shown for interpretation.</p>
 <div class="cell tag_hide-input docutils container">
@@ -1278,7 +1278,7 @@ Recovery-loop time on this machine: 0.0573 s
 <h2>12. Check the recovered solution and save the results<a class="headerlink" href="#check-the-recovered-solution-and-save-the-results" title="Link to this heading">#</a></h2>
 <p>The final check uses the same 4000 N force. The forward reference, initial trial and recovered trial can be compared directly.</p>
 <p>For this uniform bar, <span class="math notranslate nohighlight">\(E=FL/(A y^{\mathrm{obs}})\)</span> also gives an analytical inverse solution. The purpose of the iterative example is to learn the differentiable-solver workflow, which extends to problems without that closed-form inverse.</p>
-<p>The observation is synthetic and noise-free, generated with the same model. With known <span class="math notranslate nohighlight">\(L\)</span> and <span class="math notranslate nohighlight">\(A\)</span>, one nonzero force suffices for one unknown uniform modulus. Autograd supplies the gradients used by the optimisation loop. Comparing recovery methods would require a separate timing study.</p>
+<p>The observation is synthetic and noise-free, generated with the same model. With known <span class="math notranslate nohighlight">\(L\)</span> and <span class="math notranslate nohighlight">\(A\)</span>, one nonzero force suffices for one unknown uniform modulus. Autograd supplies gradients; these results do not establish a speed advantage over other recovery methods.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">recovered</span> <span class="o">=</span> <span class="n">forward</span><span class="p">(</span><span class="n">E_recovered</span><span class="p">)</span>
@@ -1385,8 +1385,8 @@ All forward, derivative and recovery checks passed.
   &quot;recovered_E_GPa&quot;: 209.99086454579844,
   &quot;relative_E_error&quot;: 4.350216286452824e-05,
   &quot;relative_tip_error&quot;: 4.350405538677826e-05,
-  &quot;inverse_seconds&quot;: 0.05730718300037552,
-  &quot;lesson_seconds_excluding_installation&quot;: 21.660546386000533,
+  &quot;inverse_seconds&quot;: 0.05914312299989888,
+  &quot;lesson_seconds_excluding_installation&quot;: 28.26430550500004,
   &quot;phast_revision&quot;: &quot;157412953099bfcace1668bb35cb911826a4e95e&quot;,
   &quot;checks_passed&quot;: true
 }
@@ -1396,13 +1396,39 @@ Figures, animation and numerical tables: /content/bar_results
 </div>
 </div>
 </section>
-<section id="interpretation-and-scope">
-<h2>13. Interpretation and scope<a class="headerlink" href="#interpretation-and-scope" title="Link to this heading">#</a></h2>
-<p>The inverse calculation reuses the forward solver inside a displacement loss.
-PhAST’s backward rule supplies the gradient used to update the modulus.</p>
-<p>This example recovers one uniform modulus from one synthetic, noise-free tip
-observation, with geometry and load known. Additional unknowns or measurement
-noise can require more observations, regularisation and uncertainty analysis.</p>
+<section id="recap">
+<h2>13. Recap:<a class="headerlink" href="#recap" title="Link to this heading">#</a></h2>
+<p>The sequence was:</p>
+<blockquote>
+<div><p>geometry → mesh → boundary condition and load → <strong>forward solve</strong> → record observations →
+reuse <em>the same</em> forward function inside a loss → autograd → update <span class="math notranslate nohighlight">\(E\)</span></p>
+</div></blockquote>
+<p>The forward solver was never modified.
+The inverse problem was built entirely <em>around</em> it, and the
+only thing that made that possible is that PhAST’s sparse solve carries a backward rule.</p>
+<p>Please note, for this exercise:</p>
+<ul class="simple">
+<li><p>The data were generated by the same model we then fitted, and contain <strong>no noise</strong>. This is
+verification, not validation against a real experiment.</p></li>
+<li><p>We demonstrated a single scalar parameter with one perfectly identifiable quantity. Real calibration problems are
+ill-posed, and that is where regularisation and uncertainty quantification enter.</p></li>
+</ul>
+<section id="fun-exercises">
+<h3>Fun exercises:<a class="headerlink" href="#fun-exercises" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p><strong>Change the starting guess</strong> to 500 GPa.</p></li>
+<li><p>Use a different optimiser like Adam or LBFGS; Try different optimisation step sizes <code class="docutils literal notranslate"><span class="pre">lr=0.3</span></code> and <code class="docutils literal notranslate"><span class="pre">lr=0.005</span></code>. How many iterations do they take?</p></li>
+<li><p><strong>Add noise.</strong> <code class="docutils literal notranslate"><span class="pre">observed</span></code> is a single scalar, so it has no spread of its own
+to scale by. Apply a fixed relative perturbation instead, keeping the result
+zero-dimensional so the rest of the notebook still works:
+<code class="docutils literal notranslate"><span class="pre">noisy</span> <span class="pre">=</span> <span class="pre">observed</span> <span class="pre">*</span> <span class="pre">(1</span> <span class="pre">+</span> <span class="pre">0.002</span> <span class="pre">*</span> <span class="pre">torch.randn(()))</span></code>.
+Rerun the recovery several times and report the spread of the recovered <span class="math notranslate nohighlight">\(E\)</span>.
+With one noisy observation and one unknown, can that spread be reduced by
+tightening the stopping rule alone?</p></li>
+<li><p><strong>Two unknowns.</strong> Make both <span class="math notranslate nohighlight">\(E\)</span> and <span class="math notranslate nohighlight">\(A\)</span> trainable. Watch the optimiser find <em>some</em> pair with the
+right product <span class="math notranslate nohighlight">\(EA\)</span>, not the right pair.</p></li>
+</ol>
+</section>
 </section>
 <section id="key-takeaways">
 <h2>Key takeaways<a class="headerlink" href="#key-takeaways" title="Link to this heading">#</a></h2>
@@ -1416,15 +1442,6 @@ noise can require more observations, regularisation and uncertainty analysis.</p
 <p>What happens to the tip displacement when E doubles at the same force?</p>
 <details class="course-hint"><summary>Hint</summary><p>Use u(L) = F L / (E A).</p></details>
 <details class="course-solution"><summary>Conceptual answer</summary><p>For this uniform linear-elastic bar, the displacement halves. The analytical relation also provides an independent check of the PhAST result.</p></details></section>
-</section>
-<section id="exercises">
-<h2>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
-<ol class="arabic simple">
-<li><p><strong>Change the starting guess</strong> to 500 GPa. Compare the optimisation history and final displacement mismatch with the original run.</p></li>
-<li><p><strong>Compare optimisers.</strong> Try SGD and Adam at learning rates <code class="docutils literal notranslate"><span class="pre">0.3</span></code> and <code class="docutils literal notranslate"><span class="pre">0.005</span></code>. Record the iterations and final relative displacement mismatch. As an extension, adapt the loop to LBFGS using its required closure.</p></li>
-<li><p><strong>Add measurement noise.</strong> After recording the scalar observation, replace it with <code class="docutils literal notranslate"><span class="pre">observed</span> <span class="pre">+</span> <span class="pre">0.002</span> <span class="pre">*</span> <span class="pre">observed.abs()</span> <span class="pre">*</span> <span class="pre">torch.randn_like(observed)</span></code>. Rerun the inverse calculation and compare the recovered modulus with the noise-free result.</p></li>
-<li><p><strong>Recover two unknowns.</strong> Make both <span class="math notranslate nohighlight">\(E\)</span> and <span class="math notranslate nohighlight">\(A\)</span> trainable. Use <span class="math notranslate nohighlight">\(u(L)=FL/(EA)\)</span> to explain why this observation identifies their product. Compare the pairs recovered from different initial guesses.</p></li>
-</ol>
 </section>
 </section>
 
@@ -1445,7 +1462,7 @@ noise can require more observations, regularisation and uncertainty analysis.</p
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Phase-field fracture of a notched square plate</p>
+        <p class="prev-next-title">Phase-field fracture - notched square plate</p>
       </div>
     </a>
     <a class="right-next"
@@ -1453,7 +1470,7 @@ noise can require more observations, regularisation and uncertainty analysis.</p
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Replacing the damage subproblem with a trained network</p>
+        <p class="prev-next-title">PhAST laboratory: fracture around three holes</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -1477,17 +1494,14 @@ noise can require more observations, regularisation and uncertainty analysis.</p
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-phast-and-tools">1. Load PhAST and tools</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#geometry-and-material-setup">2. Geometry and material setup</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generate-the-line-mesh">3. Generate the line mesh</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#boundary-conditions-and-load">4. Boundary conditions and load</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#boundary-condition-and-loads">4. Boundary Condition and Loads</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#write-the-forward-function">5. Write the forward function</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#record-and-visualise-the-forward-solution">6. Record and visualise the forward solution</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#see-the-actual-extension">See the actual extension</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#strain-and-stored-elastic-energy">Strain and stored elastic energy</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#define-the-observation-and-inverse-question">7. Define the observation and inverse question</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#inverse-question">Inverse question</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#define-the-observation-and-inverse-question">7. Define the observation and inverse question</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#differentiate-through-the-phast-solve">8. Differentiate through the PhAST solve</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-same-derivative-by-hand">The same derivative by hand</a></li>
 </ul>
@@ -1495,16 +1509,18 @@ noise can require more observations, regularisation and uncertainty analysis.</p
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#set-up-a-positive-modulus-and-momentum-updates">9. Set up a positive modulus and momentum updates</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-the-inverse-loop">10. Run the inverse loop</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#read-the-recovery-history">11. Read the recovery history</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#animate-the-changing-inverse-prediction">Animate the changing inverse prediction</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#animation-showing-the-inverse-prediciton-updates">Animation showing the inverse prediciton updates</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#check-the-recovered-solution-and-save-the-results">12. Check the recovered solution and save the results</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretation-and-scope">13. Interpretation and scope</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recap">13. Recap:</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fun-exercises">Fun exercises:</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-takeaways">Key takeaways</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#consolidation">Consolidation</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
 </ul>
   </nav></div>
 

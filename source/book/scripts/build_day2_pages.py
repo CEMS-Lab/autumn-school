@@ -1,4 +1,4 @@
-"""Publish the supplied Day 2 notebooks without claiming a new execution.
+"""Publish the supplied Day 3 notebooks without claiming a new execution.
 
 Canonical notebooks are in notebooks/classroom. This builds reading and download
 copies, retaining all code and outputs, and adds course navigation and guidance.
@@ -13,14 +13,14 @@ import re
 ROOT = Path(__file__).resolve().parents[3]
 NAMES = ('01_simulate_fracture', '02_gradients_and_recovery', '03_learning_and_hybrid')
 EDITION_NOTES = (
-    'Run the notebook to generate its plots and animations; this edition includes the code without retained run outputs. Complete the reference before trying the additional parameter studies.',
+    'Figures and animations are retained from the supplied notebook. Complete the reference before trying the additional parameter studies.',
     'Figures and animation are retained from the supplied notebook. This book update preserves those outputs. The calculation uses SGD with momentum 0.5; the lecture deck also illustrates plain SGD, which has a different optimisation history.',
-    'Obtain the instructor-supplied mesh_graph_net.pt before starting; Colab requests an upload. Run the notebook to generate the three comparisons and their plots. Fresh whole-notebook timing remains to be recorded.',
+    'Select a GPU runtime in Colab. The setup downloads phast_gnn_assets.zip automatically and verifies its source and checkpoint hashes. Figures and animations are retained from the supplied notebook; fresh whole-notebook timing remains to be recorded.',
 )
 TAKEAWAYS = (
     ['Named mesh regions connect geometry to boundary conditions.', 'Dynamic mechanics retains inertia and requires a stable time step.', 'Fixed colour scales make evolving fields comparable.'],
     ['The force remains 4000 N throughout the inverse loop.', 'Autograd differentiates the current forward solve and scalar loss.', 'The optimiser selects the next modulus; each update requires another forward evaluation.'],
-    ['Mechanics remains in PhAST for every damage route.', 'A learned initial guess is corrected by the classical damage solve.', 'Direct replacement is checked and may use classical fallback; compare complete cost and field accuracy.'],
+    ['Mechanics remains in PhAST for both loading paths.', 'The frozen graph neural network directly replaces the damage subproblem in the hybrid route.', 'Compare field accuracy and complete runtime; the matched damage-stage benchmark measures a separate part of the calculation.'],
 )
 QUESTIONS = (
     ('Why does refining the mesh increase dynamic computation time?', 'Consider the smallest element and the wave speed.', 'The explicit stability limit scales with the smallest element dimension divided by wave speed. A smaller element reduces the stable time step and increases the number of updates over the same physical duration.'),
@@ -53,17 +53,19 @@ def main():
                       f'<a class="badge-link" href="{download_root}notebooks/solutions/classroom/{name}.ipynb">Download with recap answer</a> · '
                       f'<a class="badge-link" href="{download_root}SETUP.md">Environment setup</a>\n</div>\n')
             nb.cells[0].source += badges
-            nb.cells.insert(1, nbformat.v4.new_markdown_cell('**Day 3 · PhAST practical. Updated 15 September 2026.** ' + status))
+            if i == 2:
+                nb.cells[0].source += f'\n[Download PhAST GNN assets ZIP]({download_root}datasets/phast/phast_gnn_assets.zip)\n'
+            nb.cells.insert(1, nbformat.v4.new_markdown_cell('**Day 3 · PhAST practical. Updated 16 September 2026.** ' + status))
             q, hint, answer = QUESTIONS[i]
             recap = '## Key takeaways\n\n' + '\n'.join('- ' + t for t in TAKEAWAYS[i])
             recap += '\n\n### Consolidation\n\n' + q
             recap += f'\n\n<details class="course-hint"><summary>Hint</summary><p>{hint}</p></details>'
             if surface != 'study':
                 recap += f'\n\n<details class="course-solution"><summary>Conceptual answer</summary><p>{answer}</p></details>'
-            exercise_index = next(j for j, cell in enumerate(nb.cells)
+            exercise_index = next((j for j, cell in enumerate(nb.cells)
                                   if cell.cell_type == 'markdown'
                                   and re.search(r'^#{2,3}\s+(?:\d+\.\s+)?Exercises\b',
-                                                cell.source, flags=re.M | re.I))
+                                                cell.source, flags=re.M | re.I)), len(nb.cells))
             nb.cells.insert(exercise_index, nbformat.v4.new_markdown_cell(recap))
             if surface == 'book':
                 # Display the retained PyTorch sparse-invariant warning in full.

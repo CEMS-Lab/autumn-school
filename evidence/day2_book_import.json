@@ -1,23 +1,23 @@
 [
   {
     "notebook": "01_simulate_fracture",
-    "sha256": "6aa49f64206615e0b65d9a09927c37194a53d2ad89f59303bd9b337088a7442c",
-    "code_cells": 25,
+    "sha256": "59ec0990f19e9a01260142918cf4f6aa1497b9528048bd715f23e697735831ca",
+    "code_cells": 32,
     "fresh_execution": false,
-    "outputs_retained": 0
+    "outputs_retained": 37
   },
   {
     "notebook": "02_gradients_and_recovery",
-    "sha256": "1af8d3ce9608996ff1bd85d6bbd5332075c2e485f6c7c7303c75e74d6ff7b4bf",
+    "sha256": "bc7811feb2502ad352d84986811fa21e5434839f2d04de1739b54ed0dee6e765",
     "code_cells": 24,
     "fresh_execution": false,
     "outputs_retained": 23
   },
   {
     "notebook": "03_learning_and_hybrid",
-    "sha256": "05507bf9edfe0f3f23fb0b2cfd0d4d8781fee25e2e366302b9bbadf25a27ac33",
-    "code_cells": 23,
+    "sha256": "4ba1d5b503caf0898352ac40147db9fe80adb3071d2e0caba330abdce39138c7",
+    "code_cells": 21,
     "fresh_execution": false,
-    "outputs_retained": 0
+    "outputs_retained": 30
   }
 ]

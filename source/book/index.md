@@ -37,8 +37,8 @@ For a local run, extract the individual dataset ZIP beside its notebook.
 (day-3-phast)=
 ## Day 3 — Fracture, Differentiability and PhAST
 
-The materials below belong to Day 3. The PhAST practicals are labelled
-**Lab 1–Lab 3**; the Day 2 machine learning notebooks above are labelled
+The materials below belong to **Day 3, 16 September 2026**. The PhAST practicals
+are labelled **NB1–NB3** (also called Lab 1–Lab 3 in the lecture guides); the Day 2 machine learning notebooks above are labelled
 **NB1, NB2, NB3a, NB3b, NB5 and NB6**. Each day has its own setup and data requirements.
 
 ### Three connected lectures
@@ -62,33 +62,37 @@ available for closer study.
 
 | Practical | What you will do |
 | --- | --- |
-| {doc}`Lab 1 — Simulate and interpret fracture <classroom/01_simulate_fracture>` | Inspect a notched specimen and its loading, run PhAST, and interpret crack propagation, energy curves and saved fields. |
-| {doc}`Lab 2 — Gradients and parameter recovery <classroom/02_gradients_and_recovery>` | Solve a 1D elastic bar with PhAST and recover its Young’s modulus from one force and one observed extension. |
-| {doc}`Lab 3 — Learned damage updates <classroom/03_learning_and_hybrid>` | Compare classical damage, a trained graph-network initial guess and checked direct replacement on a three-hole plate. |
+| {doc}`NB1 — Intro to PhAST <classroom/01_simulate_fracture>` | Inspect a notched specimen and its loading, run PhAST, and interpret crack propagation, energy curves and saved fields. |
+| {doc}`NB2 — Inverse Problem using PhAST <classroom/02_gradients_and_recovery>` | Solve a 1D elastic bar with PhAST and recover its Young’s modulus from one force and one observed extension. |
+| {doc}`NB3 — Hybrid FEM+DL with PhAST <classroom/03_learning_and_hybrid>` | Compare conventional FEM with a frozen graph neural network that replaces the damage subproblem on a three-hole plate. |
 
 The optional {doc}`direct learned-replacement case study <w53_direct_replacement>`
 connects Lab 3 to a retained Radius-GNO fracture trajectory and reports a
 matched damage-stage timing comparison.
 
-The Day 3 notebook downloads use the files updated on **15 September 2026**. Each page
-includes a Colab link, notebook downloads and one conceptual recap answer.
-All three practicals use PhAST. The older Helmholtz training example remains
-in {doc}`further_practice` as optional background.
+The Day 3 notebooks below are the supplied **16 September 2026** edition,
+including their recorded figures and animations. All three use PhAST.
 
-Colab opens the notebooks on the published `main` branch. Local changes appear
-there after publication; use the downloads below to inspect this edition.
+```{raw} html
+<div class="ml-notebook-access" style="overflow-x:auto;">
+<table>
+<thead><tr><th>Day 3 notebook</th><th>Run online</th><th>Download</th><th>Resources</th></tr></thead>
+<tbody>
+<tr><td>NB1 — Intro to PhAST</td><td><a class="badge-link" href="https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/study/classroom/01_simulate_fracture.ipynb" target="_blank" rel="noopener"><img src="_static/colab-badge.svg" alt="Open in Colab" width="117" height="20" style="min-width:117px;max-width:none;height:20px"></a></td><td><a class="badge-link" href="../notebooks/study/classroom/01_simulate_fracture.ipynb" download>Download notebook</a></td><td>Prepared in the notebook</td></tr>
+<tr><td>NB2 — Inverse Problem using PhAST</td><td><a class="badge-link" href="https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/study/classroom/02_gradients_and_recovery.ipynb" target="_blank" rel="noopener"><img src="_static/colab-badge.svg" alt="Open in Colab" width="117" height="20" style="min-width:117px;max-width:none;height:20px"></a></td><td><a class="badge-link" href="../notebooks/study/classroom/02_gradients_and_recovery.ipynb" download>Download notebook</a></td><td>Prepared in the notebook</td></tr>
+<tr><td>NB3 — Hybrid FEM+DL with PhAST</td><td><a class="badge-link" href="https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/study/classroom/03_learning_and_hybrid.ipynb" target="_blank" rel="noopener"><img src="_static/colab-badge.svg" alt="Open in Colab" width="117" height="20" style="min-width:117px;max-width:none;height:20px"></a></td><td><a class="badge-link" href="../notebooks/study/classroom/03_learning_and_hybrid.ipynb" download>Download notebook</a></td><td><a class="badge-link" href="../datasets/phast/phast_gnn_assets.zip" download>Download PhAST GNN assets ZIP</a></td></tr>
+</tbody></table></div>
+```
 
-| Open published edition | Download this edition |
-| --- | --- |
-| [Lab 1 in Colab](https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/study/classroom/01_simulate_fracture.ipynb) | [Dynamic plate notebook](../notebooks/study/classroom/01_simulate_fracture.ipynb) |
-| [Lab 2 in Colab](https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/study/classroom/02_gradients_and_recovery.ipynb) | [Single-force bar notebook](../notebooks/study/classroom/02_gradients_and_recovery.ipynb) |
-| [Lab 3 in Colab](https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/study/classroom/03_learning_and_hybrid.ipynb) | [Learned damage notebook](../notebooks/study/classroom/03_learning_and_hybrid.ipynb) |
+Start with the [environment setup guide](../SETUP.md). NB1 and NB2 can use a CPU
+runtime. **For NB3, select a GPU runtime in Colab before running the setup.**
+NB3 downloads the supplied source and frozen model from `phast_gnn_assets.zip`
+automatically; the resource button also provides the archive for local use.
+The notebook verifies the source and checkpoint hashes before loading them.
 
-Start with the [environment setup guide](../SETUP.md). Lab 3 also requires the
-instructor-supplied `mesh_graph_net.pt`; obtain it before starting. Lab 2 retains
-its supplied figures and animation. Labs 1 and 3 generate their visual results
-when executed. Runtime depends on mesh size, solver settings, comparisons and
-animation export; a fresh whole-notebook Colab timing is still required.
+The supplied outputs are preserved. These updated notebooks have not been rerun
+end to end for this publication; a fresh whole-notebook Colab timing remains to
+be measured. The older Helmholtz example remains in {doc}`further_practice`.
 
 ### Day 3 reference chapters and further practice
 
