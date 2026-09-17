@@ -167,8 +167,11 @@ For limited internet access, download the Day 3 lecture notes, worked notebooks
 and reference chapters as a single PDF. The text, equations, code and saved plots
 can be read offline; animations are represented by selected frames.
 
+Internal documentation for course participants. Copyrighted material; not to be
+distributed.
+
 ```{raw} html
-<p><a href="../downloads/PhAST_Autumn_School_2026_Day3.pdf" download>Download the Day 3 book (PDF, 4.3 MB)</a></p>
+<p><a href="../downloads/PhAST_Autumn_School_2026_Day3.pdf" download>Download the Day 3 book (PDF, 7.3 MB)</a></p>
 ```
 
 Running the notebooks in Colab and opening the linked animations requires an

@@ -183,41 +183,53 @@ def main():
     report=[]
     for doc in NOTEBOOKS: notebook(doc, report)
     toc = '\n'.join(x for pair in zip(LECTURES,NOTEBOOKS) for x in pair)
-    (STAGE/'preface.md').write_text('''# About this edition
+    (STAGE/'preface.md').write_text('''# Preface
 
 **UKACM Autumn School 2026 · Day 3 · 16 September 2026**
 
-Prepared by **Allamaprabhu Ani and Sathiskumar A. Ponnusami**, CEMS-Lab,
+Prepared by [Allamaprabhu Ani](https://allamaprabhuani.github.io) and
+[Sathiskumar A. Ponnusami](https://saponnusami.com), CEMS-Lab,
 City St George's, University of London; Queen Mary University of London.
 
-This book brings together three lecture guides, the worked practical notebooks
-and supporting mathematical chapters. Begin with a lecture and then follow its
-notebook. The reference chapters develop the equations in greater detail and
-can be consulted as needed.
+This book supports the Day 3 sessions on fracture, differentiability and PhAST.
+It brings together three lecture guides, worked practical notebooks and
+mathematical reference chapters for course participants, including those with
+limited internet access. Basic mechanics, calculus and introductory Python are
+the prerequisites. Read each lecture guide before its notebook and consult the
+reference chapters for the detailed equations.
 
 The practicals progress from dynamic fracture simulation to recovery of a
 bar's Young's modulus and direct learned replacement of a damage update.
+Their purpose is to connect physical assumptions, numerical operations and the
+interpretation of computed fields and gradients.
 The bar is linear elastic and contains no damage. The hybrid example uses a
 different specimen and constitutive model from the dynamic plate.
 
 ## Reading code and results
 
-Code listings and numerical figures are taken from the supplied notebooks.
-The saved outputs are reproduced, not newly executed for this edition. They
-document particular runs, not guaranteed outcomes on every computer. Parameters,
-software revisions, physical assumptions and comparison scope accompany the
-examples. Additional exercises remain exercises unless a result is shown.
+Code and figures come from the supplied notebooks and retain their saved results.
+Preparing this edition involved no new numerical runs. Each result should be
+read with its stated parameters, software revision and physical assumptions.
+Independent exercises are identified separately from worked results.
 
-Animations appear as selected frames in print. Their links open the complete
-HTML notebooks, where the animations can be played and code downloaded.
-Long installation and progress logs are abbreviated; numerical plots and
-result tables are retained. Expandable hints and conceptual answers are printed.
+Text, equations, code and saved plots can be read offline. Animations appear as
+selected frames; their links open the complete online notebooks. Internet access
+is needed to play those animations or use Colab. Long setup logs are abbreviated;
+result tables, hints and conceptual answers are retained.
 
 The notation uses $d=0$ for intact material and $d=1$ for fully damaged material.
 Numerical time increments describe the model; measured wall-clock times in the
 hybrid example describe computational cost. They are different quantities.
 
 [Online book and notebook downloads](https://cems-lab.github.io/autumn-school/book/index.html#day-3-phast)
+
+## Use and distribution
+
+**Internal documentation - not to be distributed.** This copy is for personal
+study by course participants. Do not forward, redistribute or republish it
+without the authors' permission. Copyright © 2026 Allamaprabhu Ani and
+Sathiskumar A. Ponnusami. All rights in the original course material are reserved;
+third-party material retains its existing rights and acknowledgements.
 ''')
     (STAGE/'index.md').write_text('''# Fracture, Differentiability and PhAST
 
@@ -263,7 +275,15 @@ latex_elements = {
 \newunicodechar{→}{\ensuremath{\rightarrow}}
 \setlength{\parskip}{0.3em}
 \setcounter{tocdepth}{1}
-\setcounter{secnumdepth}{0}
+\setcounter{secnumdepth}{-1}
+\counterwithout{figure}{chapter}
+\counterwithout{table}{chapter}
+\makeatletter
+\renewcommand{\@makechapterhead}[1]{%
+  \vspace*{12pt}{\parindent\z@\raggedright\sffamily\bfseries\LARGE
+  #1\par\nobreak\vskip24pt}}
+\renewcommand{\@makeschapterhead}[1]{\@makechapterhead{#1}}
+\makeatother
 \BeforeBeginEnvironment{sphinxadmonition}{\Needspace{6\baselineskip}}
 \AtBeginDocument{\hypersetup{pdfauthor={Allamaprabhu Ani and Sathiskumar A. Ponnusami},pdfsubject={UKACM Autumn School 2026: lectures and worked PhAST notebooks}}}
 """,
@@ -280,7 +300,8 @@ latex_elements = {
 \vspace{8mm}
 {\large Day 3 · 16 September 2026\par}
 \vfill
-{\large Allamaprabhu Ani\\Sathiskumar A. Ponnusami\par}
+{\large \href{https://allamaprabhuani.github.io}{Allamaprabhu Ani}\\
+\href{https://saponnusami.com}{Sathiskumar A. Ponnusami}\par}
 \vspace{8mm}
 CEMS-Lab\\City St George's, University of London\\Queen Mary University of London
 \vspace{16mm}
