@@ -4,6 +4,11 @@ The Day 3 classroom application is {doc}`classroom/03_learning_and_hybrid`,
 which compares a supplied graph network with the classical PhAST damage solve.
 The Helmholtz examples below remain optional training and interface tutorials.
 
+The correction and fallback strategies described in this reference chapter are
+possible extensions, not operations performed by NB3. In that practical, the
+GNN prediction is projected onto the damage bounds and its residual is measured;
+there is no subsequent FEM damage correction.
+
 :::{figure} figures/06_learning_cycle.*
 :name: fig-learning-cycle
 :width: 96%
@@ -106,8 +111,8 @@ $$
 
 The gradient passes through the residual evaluated at the prediction.
 Differentiating a converged state requires the solve's derivative.
-Boundary conditions and branch selection matter in both cases, as the opening
-algebraic teaser illustrates.
+Boundary conditions and branch selection matter in both cases: a derivative
+must correspond to the equation and solution branch actually being evaluated.
 
 **Solver-in-the-loop training** evaluates the consequences of a prediction:
 

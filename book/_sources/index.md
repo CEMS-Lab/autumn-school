@@ -43,6 +43,14 @@ provides the source and trained model in the **PhAST GNN assets ZIP**.
 The notebooks include their supplied figures and animations.
 
 ```{raw} html
+<p><a class="badge-link" href="../downloads/PhAST_Autumn_School_2026_Day3.pdf" download>Download the Day 3 book (PDF)</a></p>
+```
+
+The PDF brings together the lecture guides, worked notebooks and mathematical
+reference chapters. It includes the saved results and selected animation frames,
+with links to the full animations in the online notebooks.
+
+```{raw} html
 <span id="three-phast-practical-notebooks"></span>
 ```
 
@@ -63,9 +71,10 @@ NB3 downloads the supplied source and frozen model from `phast_gnn_assets.zip`
 automatically; the resource button also provides the archive for local use.
 The notebook verifies the source and checkpoint hashes before loading them.
 
-The supplied outputs are preserved. These updated notebooks have not been rerun
-end to end for this publication; a fresh whole-notebook Colab timing remains to
-be measured. The older Helmholtz example remains in {doc}`further_practice`.
+The supplied outputs are preserved. The notebooks have not been rerun end to end
+for this publication; rebuilding the book renders the saved results rather than
+performing new numerical calculations. The older Helmholtz example remains in
+{doc}`further_practice`.
 
 ### Three connected lectures
 

@@ -1,6 +1,6 @@
 # Lecture 1: Phase-field fracture and PhAST
 
-**45 minutes.** This lecture connects the physical description of a crack to
+This lecture connects the physical description of a crack to
 the numerical operations used to simulate it. Basic calculus and vectors are
 sufficient preparation; the finite-element ideas are introduced as they arise.
 
@@ -9,7 +9,7 @@ its deformation, damage field and reaction force change as the load increases.
 Later lectures ask how these observations depend on material parameters and
 where a learned model could contribute to the calculation.
 
-## From a crack to a damage field · 0–6 minutes
+## From a crack to a damage field
 
 A crack creates new surfaces and changes the way a specimen carries load.
 Phase-field fracture represents this process with a continuous damage field
@@ -28,7 +28,7 @@ field, the material model, loading and mesh also affect the observed profile.
 **Learning question:** Which quantity changes when we widen the diffuse band?
 :::
 
-## Energy and stiffness degradation · 6–18 minutes
+## Energy and stiffness degradation
 
 The model balances stored elastic energy, the energy required to create a
 diffuse crack, and external work. The fracture energy $G_c$ sets the cost of
@@ -52,7 +52,7 @@ fracture-energy scale, band width and mesh resolution.
 **Learning question:** How do these choices enter the physical model?
 :::
 
-## One numerical increment · 18–31 minutes
+## One numerical increment
 
 Finite elements interpolate displacement and damage from values stored at
 mesh nodes. A staggered calculation updates displacement with damage held
@@ -74,7 +74,7 @@ provides the irreversibility reference.
 changes the loading?
 :::
 
-## Tensors, matrix-free actions and dynamics · 31–41 minutes
+## Tensors, matrix-free actions and dynamics
 
 Coordinates describe where nodes lie; connectivity lists the nodes in each
 element; field arrays contain their displacement and damage. Gathering local
@@ -101,7 +101,7 @@ damage to locate the extra quantities in a dynamic calculation.
 time evolution?
 :::
 
-## Connect the model to the practical · 41–45 minutes
+## Connect the model to the practical
 
 In {doc}`../classroom/01_simulate_fracture`, inspect the geometry and loading,
 run the small PhAST example, and interpret the advancing damage field alongside

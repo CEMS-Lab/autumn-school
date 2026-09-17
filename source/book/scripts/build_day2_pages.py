@@ -17,7 +17,7 @@ DOWNLOAD_NAMES = json.loads((ROOT / 'notebooks/classroom/day2_edition.json').rea
 EDITION_NOTES = (
     'Figures and animations are retained from the supplied notebook. Complete the reference before trying the additional parameter studies.',
     'Figures and animation are retained from the supplied notebook. This book update preserves those outputs. The calculation uses SGD with momentum 0.5; the lecture deck also illustrates plain SGD, which has a different optimisation history.',
-    'Select a GPU runtime in Colab. The setup downloads phast_gnn_assets.zip automatically and verifies its source and checkpoint hashes. Figures and animations are retained from the supplied notebook; fresh whole-notebook timing remains to be recorded.',
+    'Select a GPU runtime in Colab. The setup downloads phast_gnn_assets.zip automatically and verifies its source and checkpoint hashes. Figures and animations are retained from the supplied notebook; this publication does not represent a new numerical execution.',
 )
 TAKEAWAYS = (
     ['Named mesh regions connect geometry to boundary conditions.', 'Dynamic mechanics retains inertia and requires a stable time step.', 'Fixed colour scales make evolving fields comparable.'],
@@ -27,7 +27,7 @@ TAKEAWAYS = (
 QUESTIONS = (
     ('Why does refining the mesh increase dynamic computation time?', 'Consider the smallest element and the wave speed.', 'The explicit stability limit scales with the smallest element dimension divided by wave speed. A smaller element reduces the stable time step and increases the number of updates over the same physical duration.'),
     ('What happens to the tip displacement when E doubles at the same force?', 'Use u(L) = F L / (E A).', 'For this uniform linear-elastic bar, the displacement halves. The analytical relation also provides an independent check of the PhAST result.'),
-    ('What evidence is needed to assess a direct damage replacement?', 'Compare the damage equation, constraints and the reference field.', 'Compare projected residuals, damage bounds, irreversibility and field differences with the classical reference. Measure complete runtime, including prediction, checks and fallback.'),
+    ('What evidence is needed to assess a direct damage replacement?', 'Compare the damage equation, constraints and the reference field.', 'Compare projected residuals, damage bounds, irreversibility and field differences with the classical reference. Measure complete runtime, including prediction and residual evaluation. This notebook does not apply an FEM correction or fallback to the GNN prediction.'),
 )
 
 
@@ -75,8 +75,11 @@ def main():
                 nb.cells[0].source += f'\n[Download PhAST GNN assets ZIP]({download_root}datasets/phast/phast_gnn_assets.zip)\n'
             nb.cells.insert(1, nbformat.v4.new_markdown_cell('**Day 3 · PhAST practical. Updated 16 September 2026.** ' + status))
             q, hint, answer = QUESTIONS[i]
-            recap = '## Key takeaways\n\n' + '\n'.join('- ' + t for t in TAKEAWAYS[i])
-            recap += '\n\n### Consolidation\n\n' + q
+            has_takeaways = any(c.cell_type == 'markdown' and
+                                re.search(r'^## Key takeaways\b', c.source, re.M)
+                                for c in nb.cells)
+            recap = '' if has_takeaways else '## Key takeaways\n\n' + '\n'.join('- ' + t for t in TAKEAWAYS[i])
+            recap += ('## Consolidation\n\n' if has_takeaways else '\n\n### Consolidation\n\n') + q
             recap += f'\n\n<details class="course-hint"><summary>Hint</summary><p>{hint}</p></details>'
             if surface != 'study':
                 recap += f'\n\n<details class="course-solution"><summary>Conceptual answer</summary><p>{answer}</p></details>'

@@ -499,10 +499,7 @@ document.write(`
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#download-your-results">20. Download your results</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-takeaways">Key takeaways</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Key takeaways</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#consolidation">Consolidation</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#consolidation">Consolidation</a></li>
 </ul>
             </nav>
         </div>
@@ -547,7 +544,7 @@ We compare the evolving fields, reactions, residuals and computational cost.</p>
 <a class="badge-colab" href="https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/study/classroom/NB3%20-%20Hybrid%20FEM%2BDL%20with%20PhAST.ipynb">Open in Colab (published edition)</a> · <a class="badge-link" href="../../notebooks/study/classroom/NB3%20-%20Hybrid%20FEM%2BDL%20with%20PhAST.ipynb">Download notebook</a> · <a class="badge-link" href="../../notebooks/solutions/classroom/NB3%20-%20Hybrid%20FEM%2BDL%20with%20PhAST.ipynb">Download with recap answer</a> · <a class="badge-link" href="../../SETUP.md">Environment setup</a>
 </div>
 <p><a class="reference external" href="../../datasets/phast/phast_gnn_assets.zip">Download PhAST GNN assets ZIP</a></p>
-<p><strong>Day 3 · PhAST practical. Updated 16 September 2026.</strong> Select a GPU runtime in Colab. The setup downloads phast_gnn_assets.zip automatically and verifies its source and checkpoint hashes. Figures and animations are retained from the supplied notebook; fresh whole-notebook timing remains to be recorded.</p>
+<p><strong>Day 3 · PhAST practical. Updated 16 September 2026.</strong> Select a GPU runtime in Colab. The setup downloads phast_gnn_assets.zip automatically and verifies its source and checkpoint hashes. Figures and animations are retained from the supplied notebook; this publication does not represent a new numerical execution.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 1. Colab: select a GPU before execution</span>
@@ -871,8 +868,8 @@ change the problem seen by the frozen model.</p>
 <section id="apply-boundary-conditions-and-loading">
 <h2>5. Apply boundary conditions and loading<a class="headerlink" href="#apply-boundary-conditions-and-loading" title="Link to this heading">#</a></h2>
 <p>Fix both displacement components on the bottom boundary. On the top boundary,
-fix horizontal displacement and increase vertical displacement to 0.04 mm over
-500 increments. The slot and hole boundaries are traction-free. No damage
+fix horizontal displacement and increase vertical displacement to 0.04 mm
+over <code class="docutils literal notranslate"><span class="pre">N_STEPS</span></code> increments. The slot and hole boundaries are traction-free. No damage
 Dirichlet value is prescribed on their surfaces.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -916,8 +913,11 @@ Dirichlet value is prescribed on their surfaces.</p>
 <section id="choose-the-solution-procedure">
 <h2>6. Choose the solution procedure<a class="headerlink" href="#choose-the-solution-procedure" title="Link to this heading">#</a></h2>
 <p>This is an <strong>implicit, quasi-static</strong> calculation. Inertia is neglected.
-The 500 increments describe the loading schedule; they are not dynamic time
-steps. Each increment contains one mechanics solve followed by one damage
+The load increments describe the loading schedule; they are not dynamic
+time steps. The supplied code selects 60 increments with <code class="docutils literal notranslate"><span class="pre">QUICK_TEST=True</span></code>
+and 500 with <code class="docutils literal notranslate"><span class="pre">QUICK_TEST=False</span></code>, unless <code class="docutils literal notranslate"><span class="pre">PHAST_DEMO_STEPS</span></code> overrides the count.
+Use the same count for both routes. A coarser schedule is not evidence of
+load-increment convergence. Each increment contains one mechanics solve followed by one damage
 update. Each conventional subsolver has its own internal iterations.</p>
 <p>We retain this one-pass staggered procedure to match the tested teaching
 example. It is not an outer staggered iteration continued until coupled
@@ -1123,7 +1123,8 @@ dictionary carrying the inference time.</p>
 <p>Execute the reference calculation first. The progress bar shows the current
 increment, maximum damage and projected residual. A conventional damage solve
 that fails to converge stops the calculation rather than producing a successful
-benchmark label. Retain the default 500 increments for the first comparison.</p>
+benchmark label. Record <code class="docutils literal notranslate"><span class="pre">N_STEPS</span></code> with the results so comparisons use
+the same loading schedule.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 8. Solve the specimen using conventional FEM</span>
@@ -1974,19 +1975,11 @@ the executed notebook separately from Colab to retain your answers.</p>
 <li><p>Compare field accuracy and complete runtime; the matched damage-stage benchmark measures a separate part of the calculation.</p></li>
 </ul>
 </section>
-<section id="id1">
-<h2>Key takeaways<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
-<ul class="simple">
-<li><p>Mechanics remains in PhAST for both loading paths.</p></li>
-<li><p>The frozen graph neural network directly replaces the damage subproblem in the hybrid route.</p></li>
-<li><p>Compare field accuracy and complete runtime; the matched damage-stage benchmark measures a separate part of the calculation.</p></li>
-</ul>
 <section id="consolidation">
-<h3>Consolidation<a class="headerlink" href="#consolidation" title="Link to this heading">#</a></h3>
+<h2>Consolidation<a class="headerlink" href="#consolidation" title="Link to this heading">#</a></h2>
 <p>What evidence is needed to assess a direct damage replacement?</p>
 <details class="course-hint"><summary>Hint</summary><p>Compare the damage equation, constraints and the reference field.</p></details>
-<details class="course-solution"><summary>Conceptual answer</summary><p>Compare projected residuals, damage bounds, irreversibility and field differences with the classical reference. Measure complete runtime, including prediction, checks and fallback.</p></details></section>
-</section>
+<details class="course-solution"><summary>Conceptual answer</summary><p>Compare projected residuals, damage bounds, irreversibility and field differences with the classical reference. Measure complete runtime, including prediction and residual evaluation. This notebook does not apply an FEM correction or fallback to the GNN prediction.</p></details></section>
 </section>
 
 
@@ -2081,10 +2074,7 @@ the executed notebook separately from Colab to retain your answers.</p>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#download-your-results">20. Download your results</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-takeaways">Key takeaways</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Key takeaways</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#consolidation">Consolidation</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#consolidation">Consolidation</a></li>
 </ul>
   </nav></div>
 

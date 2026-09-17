@@ -420,7 +420,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#workshop-synthesis-the-four-core-milestones">Workshop Synthesis: The Four Core Milestones</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#connecting-the-four-topics">Connecting the four topics</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#best-practices-for-computational-exploration">Best Practices for Computational Exploration</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#three-classroom-notebooks">Three classroom notebooks</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#continue-with-the-phast-documentation">Continue with the PhAST documentation</a></li>
@@ -446,17 +446,17 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="practice-solutions-glossary-and-references">
 <h1>Practice, Solutions, Glossary, and References<a class="headerlink" href="#practice-solutions-glossary-and-references" title="Link to this heading">#</a></h1>
-<section id="workshop-synthesis-the-four-core-milestones">
-<h2>Workshop Synthesis: The Four Core Milestones<a class="headerlink" href="#workshop-synthesis-the-four-core-milestones" title="Link to this heading">#</a></h2>
+<section id="connecting-the-four-topics">
+<h2>Connecting the four topics<a class="headerlink" href="#connecting-the-four-topics" title="Link to this heading">#</a></h2>
 <p>The course connects fracture modelling, numerical solution, differentiation and learning. Use the following topics to review those connections.</p>
 <ol class="arabic simple">
-<li><p><strong>Pillar 1: What Phase-Field Fracture Is</strong><br />
+<li><p><strong>Phase-field fracture</strong>
 Explain how Griffith’s surface energy is approximated by a volume integral over a continuous scalar damage field <span class="math notranslate nohighlight">\(d(x)\)</span>, governed by the regularisation length <span class="math notranslate nohighlight">\(\ell\)</span>, the crack-density function <span class="math notranslate nohighlight">\(w(d)\)</span>, and the stiffness degradation law <span class="math notranslate nohighlight">\(g(d)\)</span>.</p></li>
-<li><p><strong>Pillar 2: Simulation with PhAST</strong>
+<li><p><strong>Simulation with PhAST</strong>
 Trace the geometry, mesh, boundary conditions, mechanical update and damage solve, and explain the resulting fields and energy histories.</p></li>
-<li><p><strong>Pillar 3: Differentiation and Recovery</strong>
+<li><p><strong>Differentiation and recovery</strong>
 Explain how the chain rule produces a parameter gradient, compare it with a finite-difference check, and use it to estimate an unknown parameter.</p></li>
-<li><p><strong>Pillar 4: Learning and Hybrid Correction</strong>
+<li><p><strong>Learning within a mechanics solver</strong>
 Explain the role of a learned prediction, assess its residuals and constraints, and compare the complete hybrid calculation with its numerical reference.</p></li>
 </ol>
 </section>
@@ -487,14 +487,15 @@ Explain the role of a learned prediction, assess its residuals and constraints, 
 <tr class="row-odd"><td><p><a class="reference internal" href="classroom/02_gradients_and_recovery.html"><span class="doc">Lab 2 — Gradients and recovery</span></a></p></td>
 <td><p>One force, one tip observation and Young’s-modulus recovery through PhAST.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="classroom/03_learning_and_hybrid.html"><span class="doc">Lab 3 — Learned damage updates</span></a></p></td>
-<td><p>Frozen graph-network predictions, classical correction and checked direct replacement on a three-hole plate.</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="classroom/03_learning_and_hybrid.html"><span class="doc">NB3 — Hybrid FEM+DL with PhAST</span></a></p></td>
+<td><p>Direct graph-network damage replacement on a three-hole plate, compared with conventional FEM.</p></td>
 </tr>
 </tbody>
 </table>
 </div>
 <p>Each page includes Google Colab, notebook downloads and a conceptual answer.
-The learned lab needs the instructor-supplied checkpoint. Visit
+The learned lab downloads the supplied source and compatible frozen checkpoint
+from the PhAST GNN assets ZIP and verifies their hashes. Visit
 <a class="reference internal" href="further_practice.html"><span class="doc">Detailed notebooks and further practice</span></a> for the original individual notebooks and longer
 implementation walkthroughs.</p>
 </section>
@@ -753,7 +754,7 @@ Transactions of the Royal Society A</em> 379 (2021),
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#workshop-synthesis-the-four-core-milestones">Workshop Synthesis: The Four Core Milestones</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#connecting-the-four-topics">Connecting the four topics</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#best-practices-for-computational-exploration">Best Practices for Computational Exploration</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#three-classroom-notebooks">Three classroom notebooks</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#continue-with-the-phast-documentation">Continue with the PhAST documentation</a></li>

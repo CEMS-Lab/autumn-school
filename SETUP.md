@@ -1,84 +1,80 @@
-# Prepare the Day 2 notebooks
+# Prepare the Day 3 PhAST notebooks
 
-The three classroom notebooks install the public PhAST package and run on a
-CPU. Open them through the book’s Colab links or download them into a local
-Jupyter environment. Run each notebook from a fresh kernel, in cell order.
+Open the three practicals through the book's Colab links, or download them into
+a local Jupyter environment. Start each notebook from a fresh kernel and run
+the cells in order. NB1 and NB2 support a CPU runtime. **For NB3, select a GPU
+runtime in Colab before running the setup cell.**
 
 ## Python and installation
 
-PhAST requires Python 3.10 or newer. The bar notebook pins revision
-`157412953099bfcace1668bb35cb911826a4e95e`, whose package metadata removes
-the former Python 3.12 upper bound. The plate and learned-damage notebooks
-select the default PhAST branch unless `PHAST_REF` is set. Supported Python
-versions also depend on the availability of compatible dependencies.
+PhAST requires Python 3.10 or newer. Use the installation cells supplied with
+each notebook: the examples deliberately retain their own software versions.
+NB1 installs the public PhAST package. NB2 pins revision
+`157412953099bfcace1668bb35cb911826a4e95e` for the 1D bar interfaces.
+NB3 downloads a frozen source snapshot and its compatible trained model from
+[phast_gnn_assets.zip](https://cems-lab.github.io/autumn-school/datasets/phast/phast_gnn_assets.zip).
+It verifies the source files and expected checkpoint hash before loading.
+Do not substitute unrelated weights or a different source version.
 
-The installation cells skip installation when PhAST is already importable.
-Use a fresh environment to avoid accidentally running an older installation.
-Record the actual revision and package versions with your results. The
-learned-damage adapter checkout and installed solver should use the same revision.
+Some installation cells reuse an already importable PhAST package. A fresh
+environment avoids accidentally running an older installation. Record the
+resolved module path, package versions and device with your results.
 
-For a local environment:
+For a local notebook environment:
 
 ```bash
 python -m venv .venv
 source .venv/bin/activate
 python -m pip install --upgrade pip
-python -m pip install notebook "phast @ git+https://github.com/CEMS-Lab/PhAST.git"
+python -m pip install notebook
 python -m notebook
 ```
 
-On Windows, activate with `.venv\Scripts\activate`. Gmsh’s wheel requires
-system OpenGL libraries; the plate notebooks install `libglu1-mesa` on Colab.
-For a local Gmsh import error, check the platform’s Gmsh installation requirements.
-
-The older `vendor/PhAST` snapshot supports the detailed reference notebooks.
-The Day 2 notebooks install their own public PhAST revision.
+On Windows, activate with `.venv\Scripts\activate`. Then run the chosen
+notebook's setup cells. Gmsh's wheel requires system OpenGL libraries; the plate
+notebooks install `libglu1-mesa` on Colab. For a local Gmsh import error, check
+the platform's Gmsh installation requirements.
 
 ## Three practicals
 
-1. **Dynamic plate:** generate a graded Gmsh mesh, run the horizontal-notch
-   reference, reload the trajectory and animate displacement, strain, stress
-   and damage. The inclined-notch and changed-parameter exercises add runs.
-2. **Modulus recovery:** build a 1D elastic bar, apply one fixed 4000 N force,
-   record one tip observation and recover the uniform modulus. Figures,
-   animation and tables are saved in `bar_results/`.
-3. **Learned damage:** obtain the instructor’s `mesh_graph_net.pt` before
-   starting. Colab currently requests an upload. Locally, place it at
-   `phast_lab2/mesh_graph_net.pt`, the path used by the supplied notebook.
-   Only load trusted model files. The notebook prints a checksum; automated
-   verification would additionally require a trusted expected checksum.
+1. **NB1 — Intro to PhAST:** generate a graded mesh, simulate dynamic fracture
+   in a notched plate, reload the trajectory and inspect displacement, strain,
+   stress and damage. The inclined-notch and changed-parameter exercises are
+   additional calculations.
+2. **NB2 — Inverse Problem using PhAST:** build a 1D elastic bar, apply one
+   fixed 4000 N force and recover its uniform Young's modulus from one observed
+   tip displacement. Damage is not part of this example.
+3. **NB3 — Hybrid FEM+DL with PhAST:** compare conventional FEM with direct GNN
+   replacement of the damage subproblem. The setup downloads the required
+   assets automatically; for local use, the ZIP may also be placed beside the
+   notebook. No FEM damage correction follows the learned prediction.
 
-The learned notebook runs classical damage, a learned initial guess, and
-checked direct replacement. Its supplied checkpoint has no public download
-linked from this edition. Do not substitute unrelated weights.
+## Reading the saved results
 
-## Reading plots and measuring runtime
+All three notebooks contain saved figures and numerical outputs. Their HTML
+pages also retain animations. A book rebuild displays those saved results; it
+does not rerun the solver. New runs may differ with the software, hardware or
+parameters used.
 
-The bar notebook contains supplied outputs. The dynamic plate and learned
-notebooks contain plotting and animation code but no retained run outputs.
-Execute those cells to produce their visual results. A book rebuild renders
-supplied content; it does not run the numerical calculations.
-
-The teaching target is below two minutes after installation, including plots
-and exports. Fresh whole-notebook Colab timing is still required for this
-edition. Three comparison solves or additional exercises can exceed a
-single-reference timing. Record installation separately, then measure the
-complete chosen activity on the actual teaching machine.
+Installation, simulation and export costs depend on the environment. Where
+computational performance is studied in NB3, distinguish the damage-update
+measurement from the complete solver loop and from total notebook execution.
+Report the device and comparison scope alongside any measured time ratio.
 
 ## Authoring and rebuilding
 
-Canonical inputs are `notebooks/classroom/*.ipynb`; the supplied file mapping
-is in `notebooks/classroom/day2_edition.json`. Regenerate pages and downloads:
+Canonical inputs are `notebooks/classroom/*.ipynb`; their filename mapping is
+in `notebooks/classroom/day2_edition.json` (a retained historical filename).
+Regenerate pages and downloads with:
 
 ```bash
 python source/book/scripts/build_classroom_pages.py
 python -m sphinx -b html -E -a source/book book -W --keep-going
 ```
 
-This retains the supplied code and outputs, adds navigation and conceptual
-answers, and records import hashes. Earlier classroom execution receipts refer
-to earlier notebooks. The historical generation and retention runners must be
-reviewed before applying them to these new inputs.
+This retains numerical code and saved outputs, adds navigation and conceptual
+answers, and records import hashes. Earlier execution records apply to their
+own notebook revisions, not automatically to the current edition.
 
-Colab links refer to the published `main` branch. A local book update appears
-there only after an approved commit, push and Pages deployment.
+Colab links refer to the published `main` branch. Local changes appear online
+after a commit, push and successful Pages deployment.

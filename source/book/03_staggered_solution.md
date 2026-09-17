@@ -10,6 +10,11 @@ Within each load increment, the staggered scheme alternates between updating dis
 
 ## Alternating the coupled fields
 
+This chapter describes a converged quasistatic staggered scheme. NB1 instead
+advances dynamic mechanics explicitly, while NB3 uses one mechanics–damage
+pass per load increment. Neither practical should be interpreted as executing
+the full outer convergence loop illustrated above.
+
 Displacement and damage influence one another. Deformation supplies the energy that drives damage, and damage changes the stiffness and redistributes stress.
 
 A staggered scheme solves these coupled equations in successive subproblems:

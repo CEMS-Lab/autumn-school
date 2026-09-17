@@ -511,9 +511,9 @@ Queen Mary University of London</p>
 </section>
 <section id="a-phast-laboratory-for-google-colab">
 <h2>A PhAST laboratory for Google Colab<a class="headerlink" href="#a-phast-laboratory-for-google-colab" title="Link to this heading">#</a></h2>
-<p>This notebook shows dynamic fracture simulation. We start from defining geometry to animated
-results using the Open Source PhAST solver.
-as a set of reusable functions for the exercises at the end.</p>
+<p>This notebook develops a dynamic fracture simulation with PhAST, from
+geometry and material data to animated results. Reusable functions support
+the parameter studies at the end.</p>
 <p>The specimen is a single-edge-notched tension (SENT) plate of soda-lime glass,
 following the configuration used by Borden et al. (2012). The plate is pulled
 apart on its top and bottom edges. A diffuse crack grows from the notch tip and
@@ -552,10 +552,9 @@ NumPy and Matplotlib derive scalar views of stored fields.</p>
 <p>The installation step also checks that the <code class="docutils literal notranslate"><span class="pre">phast</span></code> it imports is really this
 solver, by testing for the interfaces the laboratory uses.</p>
 <p>Gmsh is distributed as a Python wheel that links against system OpenGL
-libraries, so one <code class="docutils literal notranslate"><span class="pre">apt</span></code> package is installed first on Colab. The whole cell
-takes one to three minutes on a fresh runtime.</p>
-<p>A CPU runtime is sufficient. The reference configuration completes in roughly
-half a minute to two minutes depending on the machine.</p>
+libraries, so one <code class="docutils literal notranslate"><span class="pre">apt</span></code> package is installed first on Colab.</p>
+<p>A CPU runtime is sufficient. Execution time depends on the machine, mesh
+and selected output settings.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">importlib.util</span>
@@ -1061,7 +1060,7 @@ consistent set.</p>
 <p><code class="docutils literal notranslate"><span class="pre">phast.Material</span></code> resolves the constitutive data and reports the dilatational
 wave speed <span class="math notranslate nohighlight">\(c_p\)</span>. The explicit central-difference integrator is stable only when</p>
 <div class="math notranslate nohighlight">
-\[\Delta t \le \alpha\,\frac{h_\min}{c_p},\]</div>
+\[\Delta t \le \alpha\,\frac{h_{\min}}{c_p},\]</div>
 <p>with a safety factor <span class="math notranslate nohighlight">\(\alpha\)</span> of 0.8. PhAST applies this rule internally from the
 mesh that is actually supplied; the cell below reproduces the arithmetic so that
 the cost of refining the mesh is visible.</p>
@@ -1984,10 +1983,12 @@ sequence can be driven directly from Python rather than hidden inside a command.
 </div>
 <p>Read the order carefully, because it is the whole idea of a staggered scheme.
 Mechanics is solved with the damage held fixed, then damage is solved with the
-displacement held fixed. The two subproblems are never solved together, which is
-what makes each one cheap and well behaved.</p>
-<p><code class="docutils literal notranslate"><span class="pre">step_solve_damage()</span></code> is the one to remember. <strong>The third laboratory replaces
-exactly that call with a trained network, and changes nothing else.</strong></p>
+displacement held fixed. The two subproblems are never solved together, which allows different numerical methods for the two subproblems.
+Their convergence and stability still require separate checks.</p>
+<p>In NB3, the analogous damage-solve operation is replaced by a trained
+network. Its FEM and GNN routes share the same mechanics, geometry and loading.
+NB3 itself uses a different specimen, constitutive law and quasi-static solver
+from this dynamic plate example.</p>
 <p><code class="docutils literal notranslate"><span class="pre">print_route_report()</span></code> states which route each part of the solver resolved to,
 so you never have to guess what ran.</p>
 <div class="cell docutils container">
@@ -2260,7 +2261,8 @@ Wall-clock time on this runtime: 67.1 s
 </section>
 <section id="a-reusable-post-processing-toolkit">
 <h2>8. A reusable post-processing toolkit<a class="headerlink" href="#a-reusable-post-processing-toolkit" title="Link to this heading">#</a></h2>
-<p>Everything below the solver is post-processing. The <code class="docutils literal notranslate"><span class="pre">RunViewer</span></code> class collects
+<p><code class="docutils literal notranslate"><span class="pre">RunViewer</span></code> is a helper class defined in this notebook, not a public
+PhAST class. It uses PhAST result and field interfaces and collects
 the operations that the exercises need: listing the stored snapshots, projecting
 element fields onto nodes, plotting a single frame, and animating a sequence.</p>
 <p>Two storage conventions matter. Displacement, velocity and damage are nodal
@@ -2689,11 +2691,9 @@ informative. Exercise 1 uses the mid-propagation snapshot for that reason.</p>
 <p>The derived series were built once in Section 8 and cached, so the only work
 left is rendering. Each frame updates the colour array of an existing drawing,
 which is considerably cheaper than redrawing the contours.</p>
-<p><code class="docutils literal notranslate"><span class="pre">stride</span></code> selects every nth stored snapshot. A stride of 4 gives a smooth
-animation from the reference run and keeps the whole section under half a minute
-on a Colab CPU runtime. Set <code class="docutils literal notranslate"><span class="pre">SAVE_GIFS</span> <span class="pre">=</span> <span class="pre">True</span></code> if you also want GIF files in the
-working directory for a report or for offline viewing; writing them roughly
-triples the time.</p>
+<p><code class="docutils literal notranslate"><span class="pre">stride</span></code> selects every nth stored snapshot. A stride of 4 reduces the
+number of frames while retaining the main stages of crack propagation. Set
+<code class="docutils literal notranslate"><span class="pre">SAVE_GIFS</span> <span class="pre">=</span> <span class="pre">True</span></code> to save GIF files for a report or offline viewing.</p>
 <p>The animations are displayed inline with <code class="docutils literal notranslate"><span class="pre">to_jshtml</span></code>, which embeds a player with
 frame controls.</p>
 <div class="cell docutils container">

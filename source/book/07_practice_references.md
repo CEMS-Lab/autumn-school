@@ -1,16 +1,16 @@
 # Practice, Solutions, Glossary, and References
 
-## Workshop Synthesis: The Four Core Milestones
+## Connecting the four topics
 
 The course connects fracture modelling, numerical solution, differentiation and learning. Use the following topics to review those connections.
 
-1. **Pillar 1: What Phase-Field Fracture Is**  
+1. **Phase-field fracture**
    Explain how Griffith's surface energy is approximated by a volume integral over a continuous scalar damage field $d(x)$, governed by the regularisation length $\ell$, the crack-density function $w(d)$, and the stiffness degradation law $g(d)$.
-2. **Pillar 2: Simulation with PhAST**
+2. **Simulation with PhAST**
    Trace the geometry, mesh, boundary conditions, mechanical update and damage solve, and explain the resulting fields and energy histories.
-3. **Pillar 3: Differentiation and Recovery**
+3. **Differentiation and recovery**
    Explain how the chain rule produces a parameter gradient, compare it with a finite-difference check, and use it to estimate an unknown parameter.
-4. **Pillar 4: Learning and Hybrid Correction**
+4. **Learning within a mechanics solver**
    Explain the role of a learned prediction, assess its residuals and constraints, and compare the complete hybrid calculation with its numerical reference.
 
 ---
@@ -32,10 +32,11 @@ When experimenting with computational mechanics models in Jupyter or Colab:
 | --- | --- |
 | {doc}`Lab 1 — Simulate fracture <classroom/01_simulate_fracture>` | Geometry, supports, loading, PhAST results and their interpretation. |
 | {doc}`Lab 2 — Gradients and recovery <classroom/02_gradients_and_recovery>` | One force, one tip observation and Young’s-modulus recovery through PhAST. |
-| {doc}`Lab 3 — Learned damage updates <classroom/03_learning_and_hybrid>` | Frozen graph-network predictions, classical correction and checked direct replacement on a three-hole plate. |
+| {doc}`NB3 — Hybrid FEM+DL with PhAST <classroom/03_learning_and_hybrid>` | Direct graph-network damage replacement on a three-hole plate, compared with conventional FEM. |
 
 Each page includes Google Colab, notebook downloads and a conceptual answer.
-The learned lab needs the instructor-supplied checkpoint. Visit
+The learned lab downloads the supplied source and compatible frozen checkpoint
+from the PhAST GNN assets ZIP and verifies their hashes. Visit
 {doc}`further_practice` for the original individual notebooks and longer
 implementation walkthroughs.
 

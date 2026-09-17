@@ -7,6 +7,8 @@ __pycache__/
 .ipynb_checkpoints/
 .DS_Store
 jupyter_execute/
+tmp/
+output/
 *.pyc
 book/.doctrees/
 book/.buildinfo

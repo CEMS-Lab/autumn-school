@@ -449,6 +449,10 @@ document.write(`
 <p>The Day 3 classroom application is <a class="reference internal" href="classroom/03_learning_and_hybrid.html"><span class="doc">NB3 — Hybrid FEM+DL with PhAST</span></a>,
 which compares a supplied graph network with the classical PhAST damage solve.
 The Helmholtz examples below remain optional training and interface tutorials.</p>
+<p>The correction and fallback strategies described in this reference chapter are
+possible extensions, not operations performed by NB3. In that practical, the
+GNN prediction is projected onto the damage bounds and its residual is measured;
+there is no subsequent FEM damage correction.</p>
 <figure class="align-default" id="fig-learning-cycle">
 <a class="reference internal image-reference" href="_images/06_learning_cycle.svg"><img alt="Offline reference data support training and checkpoint reload. Online model proposals are checked, then accepted or corrected by the reference solver. A dashed conceptual feedback path collects labelled states for another training round." src="_images/06_learning_cycle.svg" style="width: 96%;" />
 </a>
@@ -542,8 +546,8 @@ differentiates the predictor against those fixed targets.</p>
 \]</div>
 <p>The gradient passes through the residual evaluated at the prediction.
 Differentiating a converged state requires the solve’s derivative.
-Boundary conditions and branch selection matter in both cases, as the opening
-algebraic teaser illustrates.</p>
+Boundary conditions and branch selection matter in both cases: a derivative
+must correspond to the equation and solution branch actually being evaluated.</p>
 <p><strong>Solver-in-the-loop training</strong> evaluates the consequences of a prediction:</p>
 <div class="math notranslate nohighlight">
 \[

@@ -66,6 +66,11 @@ term helps prevent the elastic operator from becoming singular in a damaged
 zone. It should be reported because it affects the numerical problem and the
 post-peak response.
 
+This normalised quadratic law is the reference convention used in this chapter.
+NB1 writes the closely related additive form $(1-d)^2+\eta$, for which
+$g(0)=1+\eta$. NB3 retains its trained model's rational law. Keep these
+definitions distinct when comparing derivatives or implementing an example.
+
 For a hand calculation or a tensor implementation, differentiate explicitly:
 
 $$

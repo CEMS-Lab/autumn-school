@@ -420,12 +420,11 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#locate-the-learned-operation">Locate the learned operation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#define-the-specimen-and-constitutive-model">Define the specimen and constitutive model</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#distinguish-the-three-damage-routes">Distinguish the three damage routes</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#read-the-interface-and-obtain-the-checkpoint">Read the interface and obtain the checkpoint</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compare-fields-and-complete-cost">Compare fields and complete cost</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extend-the-exercise">Extend the exercise</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-same-physical-problem-two-damage-updates">The same physical problem, two damage updates</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#read-one-load-increment">Read one load increment</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#from-a-mesh-to-a-graph">From a mesh to a graph</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#two-comparisons-answer-different-questions">Two comparisons answer different questions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpret-performance-without-losing-accuracy">Interpret performance without losing accuracy</a></li>
 </ul>
             </nav>
         </div>
@@ -439,100 +438,117 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="lecture-3-learned-damage-updates-in-phast">
 <h1>Lecture 3: Learned damage updates in PhAST<a class="headerlink" href="#lecture-3-learned-damage-updates-in-phast" title="Link to this heading">#</a></h1>
-<p>A trained network can supply a field inside a finite-element calculation.
-Identify what the network receives, which operation it affects, and how to
-assess the resulting simulation. This practical evaluates a frozen graph
-network in a real PhAST fracture calculation.</p>
-<section id="locate-the-learned-operation">
-<h2>Locate the learned operation<a class="headerlink" href="#locate-the-learned-operation" title="Link to this heading">#</a></h2>
-<p>Mechanics determines displacement; tensile history supplies the driving field;
-the damage update determines the next damage field. The network predicts this
-damage update. Mechanics remains in PhAST. Bounds, irreversibility, boundary
-values and the damage residual still govern interpretation of an accepted state.</p>
-</section>
-<section id="define-the-specimen-and-constitutive-model">
-<h2>Define the specimen and constitutive model<a class="headerlink" href="#define-the-specimen-and-constitutive-model" title="Link to this heading">#</a></h2>
-<p><a class="reference internal" href="../classroom/03_learning_and_hybrid.html"><span class="doc">Lab 3</span></a> builds a 10 mm square
-plate with an edge slot and three holes. Quasi-static loading advances through
-500 increments to a top displacement of 0.04 mm. Each increment performs one
-mechanics–damage pass (<code class="docutils literal notranslate"><span class="pre">max_stagger=1</span></code>); the supplied calculation does not
-iterate the coupled fields to staggered convergence at each increment.</p>
+<p>A trained network can replace one operation inside a finite-element calculation.
+The central questions are what it receives, what it predicts, and whether the
+resulting fields remain accurate. <a class="reference internal" href="../classroom/03_learning_and_hybrid.html"><span class="doc">NB3</span></a>
+compares conventional FEM with a frozen graph neural network that directly
+predicts damage. Mechanics remains in PhAST.</p>
+<section id="the-same-physical-problem-two-damage-updates">
+<h2>The same physical problem, two damage updates<a class="headerlink" href="#the-same-physical-problem-two-damage-updates" title="Link to this heading">#</a></h2>
+<p>The specimen is a 10 mm square plate with a horizontal edge slot and three
+holes. The bottom boundary is fixed. The top boundary has zero horizontal
+displacement and an increasing vertical displacement, ending at 0.04 mm.
+The slot and hole surfaces are traction-free geometric boundaries, not regions
+of prescribed damage.</p>
 <p>The material has <span class="math notranslate nohighlight">\(E=210000\,\mathrm{MPa}\)</span>, <span class="math notranslate nohighlight">\(\nu=0.3\)</span>,
-<span class="math notranslate nohighlight">\(G_c=2.7\,\mathrm{N/mm}\)</span> and <span class="math notranslate nohighlight">\(\ell_0=0.4\,\mathrm{mm}\)</span>. Its checkpoint-specific
-degradation law is</p>
+<span class="math notranslate nohighlight">\(G_c=2.7\,\mathrm{N/mm}\)</span> and <span class="math notranslate nohighlight">\(\ell_0=0.4\,\mathrm{mm}\)</span>. Both routes retain
+the checkpoint-specific rational degradation law</p>
 <div class="math notranslate nohighlight">
-\[g(d)=\frac{(1-d)^2}{(1-d)^2+d}.\]</div>
-<p>Damage reduces the full stress, while the tensile part of the elastic energy
-drives the history update. This combination does not follow from one common
-energy functional; it is a non-variational hybrid constitutive model. The
-classical and learned routes in Lab 3 use this same model, mesh and loading.
-Lab 1 uses a different constitutive model for the dynamic glass plate.</p>
+\[g(d)=\frac{(1-d)^2}{d^2-d+1}, \qquad 0\le d\le1.\]</div>
+<p>The retained model degrades the full elastic stress while using tensile energy
+to drive the history. This combination is a non-variational constitutive
+choice: it should not be presented as the variation of one common split-energy
+functional. NB1 uses a different constitutive model for its dynamic glass plate.</p>
 </section>
-<section id="distinguish-the-three-damage-routes">
-<h2>Distinguish the three damage routes<a class="headerlink" href="#distinguish-the-three-damage-routes" title="Link to this heading">#</a></h2>
+<section id="read-one-load-increment">
+<h2>Read one load increment<a class="headerlink" href="#read-one-load-increment" title="Link to this heading">#</a></h2>
+<p>The calculation is quasi-static: inertia is neglected. At increment <span class="math notranslate nohighlight">\(n\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[\mathbf d_{n-1}\longrightarrow\mathbf u_n
+\longrightarrow\mathbf H_n\longrightarrow\mathbf d_n.\]</div>
+<ol class="arabic simple">
+<li><p>Solve mechanical equilibrium with the previous damage fixed.</p></li>
+<li><p>Update the maximum-history driving field.</p></li>
+<li><p>Solve the FEM damage equation, or predict damage with the GNN.</p></li>
+<li><p>Project onto the damage bounds, measure the residual and advance the load.</p></li>
+</ol>
+<p>Each increment uses one mechanics–damage pass. It is not an outer staggered
+iteration continued to coupled convergence. <code class="docutils literal notranslate"><span class="pre">QUICK_TEST=True</span></code> selects 60
+increments; setting it to <code class="docutils literal notranslate"><span class="pre">False</span></code> selects 500 unless <code class="docutils literal notranslate"><span class="pre">PHAST_DEMO_STEPS</span></code>
+overrides the count. Changing that count changes the load discretisation, so
+compare both routes with the same setting and assess increment sensitivity.</p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>Route</p></th>
-<th class="head"><p>Network role</p></th>
-<th class="head"><p>Accepted damage</p></th>
+<th class="head"><p>Damage operation</p></th>
+<th class="head"><p>What follows</p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">classical</span></code></p></td>
-<td><p>No prediction</p></td>
-<td><p>Classical damage solve</p></td>
+<tr class="row-even"><td><p>Conventional FEM</p></td>
+<td><p>FEM damage solve</p></td>
+<td><p>Projection and residual evaluation</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">learned_proposal</span></code></p></td>
-<td><p>Supplies an initial field</p></td>
-<td><p>Classical solve started from the prediction</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">learned_replacement</span></code></p></td>
-<td><p>Supplies a candidate field</p></td>
-<td><p>Checked prediction, or classical fallback</p></td>
+<tr class="row-odd"><td><p>Direct learned replacement</p></td>
+<td><p>GNN damage prediction</p></td>
+<td><p>Projection and residual evaluation; no FEM damage correction</p></td>
 </tr>
 </tbody>
 </table>
 </div>
-<p>Direct replacement is the main application of interest. The proposal route
-provides a comparison with numerical correction. Each has its own cost and
-accuracy. Retain the fallback and report its use.</p>
+<p>Both routes enforce <span class="math notranslate nohighlight">\(\mathbf d_n\ge\mathbf d_{n-1}\)</span> and <span class="math notranslate nohighlight">\(\mathbf d_n\le1\)</span>.
+Projection enforces these bounds; it does not solve the damage equation.
+The learned residual is measured, not used to trigger an FEM fallback.</p>
 </section>
-<section id="read-the-interface-and-obtain-the-checkpoint">
-<h2>Read the interface and obtain the checkpoint<a class="headerlink" href="#read-the-interface-and-obtain-the-checkpoint" title="Link to this heading">#</a></h2>
-<p><code class="docutils literal notranslate"><span class="pre">DamageStepContext</span></code> supplies the mesh, mechanical fields, loading history,
-previous damage and material data. The adapter converts these into the inputs
-expected by the saved network. Their order, units, boundary description and
-scaling must match those used during training. Compare the new specimen and
-loading with the training data when assessing transfer to another problem.</p>
-<p>The notebook imports the public mesh-graph adapter from the PhAST checkout.
-Obtain <code class="docutils literal notranslate"><span class="pre">mesh_graph_net.pt</span></code> from the instructor before starting; public
-automated distribution of these weights remains separate from the book.
-Printing a checksum identifies a file; verification also requires a trusted
-expected hash.</p>
+<section id="from-a-mesh-to-a-graph">
+<h2>From a mesh to a graph<a class="headerlink" href="#from-a-mesh-to-a-graph" title="Link to this heading">#</a></h2>
+<p>Every finite-element vertex is a graph node. Triangle edges define connections
+in both directions. The network receives an assembled history feature and a
+topological boundary indicator at each node, together with edge lengths scaled
+by the phase-field length. For the homogeneous linear triangles used here,</p>
+<div class="math notranslate nohighlight">
+\[q_i=\sum_{e\ni i}\frac{A_e H_e}{3G_c\ell_0}.\]</div>
+<p>The network transforms this feature as <span class="math notranslate nohighlight">\(\log_{10}(1+q_i)\)</span>, applies an encoder,
+ten message-passing blocks and a decoder, and returns one damage value per
+node. The FEM field is reconstructed using the same nodal ordering:</p>
+<div class="math notranslate nohighlight">
+\[d_h(\mathbf x)=\sum_i N_i(\mathbf x)d_i.\]</div>
+<p>The notebook downloads <code class="docutils literal notranslate"><span class="pre">phast_gnn_assets.zip</span></code>, which contains the compatible
+PhAST source and <code class="docutils literal notranslate"><span class="pre">moon_pi_dd.pt</span></code>. It verifies the supplied hashes before
+loading. These weights were trained on an inclined-slot specimen and remain
+fixed here: the exercise tests transfer to a different geometry, not training.</p>
 </section>
-<section id="compare-fields-and-complete-cost">
-<h2>Compare fields and complete cost<a class="headerlink" href="#compare-fields-and-complete-cost" title="Link to this heading">#</a></h2>
-<p>Inspect reference, prediction and difference using common colour scales.
-Compare the damage residual and physical constraints alongside nodal field
-error. Record complete runtime, including inference, checking, correction and
-fallback. The supplied notebook contains this comparison code but no retained
-run outputs. A fresh whole-notebook timing, including its three solves and
-post-processing, is required before assigning a classroom runtime or speed-up.</p>
-<p>The lecture’s damage-stage timing and the optional
-<a class="reference internal" href="../w53_direct_replacement.html"><span class="doc">Radius-GNO case study</span></a> concern their own
-models, specimens and hardware. Neither provides a measured end-to-end speed-up
-for this mesh-graph classroom exercise.</p>
+<section id="two-comparisons-answer-different-questions">
+<h2>Two comparisons answer different questions<a class="headerlink" href="#two-comparisons-answer-different-questions" title="Link to this heading">#</a></h2>
+<p><strong>Independent loading paths.</strong> The FEM and hybrid calculations start from
+independent initial states. Each GNN prediction influences its own next
+mechanics solve. Compare their damage fields at the same applied displacement,
+with common colour scales, and inspect reaction forces and residual histories.</p>
+<p><strong>Identical damage inputs.</strong> Replay stored FEM history and previous-damage
+fields through both damage updates. This isolates the replacement operation
+from differences that accumulate along the two loading paths.</p>
+<p>The relative nodal field error is</p>
+<div class="math notranslate nohighlight">
+\[e_d=\frac{\|\mathbf d_{\mathrm{GNN}}-\mathbf d_{\mathrm{FEM}}\|_2}
+{\|\mathbf d_{\mathrm{FEM}}\|_2}.\]</div>
+<p>This unweighted nodal norm is not a mesh-independent integral error. A small
+field error and a small constrained residual are different checks. Reactions
+are evaluated after damage is updated without re-equilibrating displacement
+within that increment; interpret them in the context of the one-pass scheme.</p>
 </section>
-<section id="extend-the-exercise">
-<h2>Extend the exercise<a class="headerlink" href="#extend-the-exercise" title="Link to this heading">#</a></h2>
-<p>Explore acceptance tolerances, changed holes, predictor interfaces and
-per-increment cost. These are additional runs. The network was trained on a
-different specimen, so this example tests transfer. Keep the reference
-calculation visible when drawing conclusions.</p>
-<p>For training fundamentals, the original Helmholtz
-<a class="reference internal" href="../labs/04_train_save_reload_adapter.html"><span class="doc">train/save/reload tutorial</span></a>
-remains optional. Its simple field equation explains a training loop; the main
-Day 3 practical evaluates a supplied trained model within fracture mechanics.</p>
+<section id="interpret-performance-without-losing-accuracy">
+<h2>Interpret performance without losing accuracy<a class="headerlink" href="#interpret-performance-without-losing-accuracy" title="Link to this heading">#</a></h2>
+<p>The saved notebook includes fields, animations and measured comparisons.
+Damage-update timing includes inference or FEM solution, transfers, projection
+and residual evaluation. Complete-loop timing also includes mechanics, history,
+reactions and storage, but excludes installation, model loading and figures.
+Report the device and measurement scope with any ratio. Faster damage updates
+do not by themselves establish a faster or equally accurate complete simulation.</p>
+<p>The optional <a class="reference internal" href="../w53_direct_replacement.html"><span class="doc">Radius-GNO case study</span></a> uses
+a different model and experiment. Its measurements are not results for this
+Moon-style graph-network exercise. The optional
+<a class="reference internal" href="../labs/04_train_save_reload_adapter.html"><span class="doc">Helmholtz tutorial</span></a> explains
+training and reloading a model; it is separate from this fracture application.</p>
 </section>
 </section>
 
@@ -581,12 +597,11 @@ Day 3 practical evaluates a supplied trained model within fracture mechanics.</p
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#locate-the-learned-operation">Locate the learned operation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#define-the-specimen-and-constitutive-model">Define the specimen and constitutive model</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#distinguish-the-three-damage-routes">Distinguish the three damage routes</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#read-the-interface-and-obtain-the-checkpoint">Read the interface and obtain the checkpoint</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compare-fields-and-complete-cost">Compare fields and complete cost</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extend-the-exercise">Extend the exercise</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-same-physical-problem-two-damage-updates">The same physical problem, two damage updates</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#read-one-load-increment">Read one load increment</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#from-a-mesh-to-a-graph">From a mesh to a graph</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#two-comparisons-answer-different-questions">Two comparisons answer different questions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpret-performance-without-losing-accuracy">Interpret performance without losing accuracy</a></li>
 </ul>
   </nav></div>
 

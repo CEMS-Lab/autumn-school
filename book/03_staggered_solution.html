@@ -452,6 +452,10 @@ document.write(`
 </figure>
 <section id="alternating-the-coupled-fields">
 <h2>Alternating the coupled fields<a class="headerlink" href="#alternating-the-coupled-fields" title="Link to this heading">#</a></h2>
+<p>This chapter describes a converged quasistatic staggered scheme. NB1 instead
+advances dynamic mechanics explicitly, while NB3 uses one mechanics–damage
+pass per load increment. Neither practical should be interpreted as executing
+the full outer convergence loop illustrated above.</p>
 <p>Displacement and damage influence one another. Deformation supplies the energy that drives damage, and damage changes the stiffness and redistributes stress.</p>
 <p>A staggered scheme solves these coupled equations in successive subproblems:</p>
 <ol class="arabic simple">

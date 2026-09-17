@@ -39,11 +39,11 @@
   <section class="intro-panel" aria-labelledby="route-title">
     <div><div class="eyebrow dark">A route through the day</div><h2 id="route-title">Predict. Compute. Explain.</h2><p>Before changing a parameter, predict its effect. Run a small calculation, inspect the fields, and explain the result using its assumptions and numerical checks.</p></div>
     <div class="day-route">
-      <a href="#representations"><b>A · 120 min</b><strong>The fracture model</strong><span>Cracks → energy → damage → solution</span></a>
-      <a href="#first-run"><b>B · 120 min</b><strong>From equations to a run</strong><span>Mesh → PhAST → results → derivatives</span></a>
-      <a href="#learning"><b>C · 120 min</b><strong>Learning around a solver</strong><span>Train → reload → assess → correct</span></a>
+      <a href="#representations"><b>A</b><strong>The fracture model</strong><span>Cracks → energy → damage → solution</span></a>
+      <a href="#first-run"><b>B</b><strong>From equations to a run</strong><span>Mesh → PhAST → results → derivatives</span></a>
+      <a href="#learning"><b>C</b><strong>Learning around a solver</strong><span>Train → reload → assess → correct</span></a>
     </div>
-    <p class="caption">Each session includes a ten-minute break. Use the slide notes for the hour-by-hour teaching schedule. The interactive diagrams below run entirely in your browser.</p>
+    <p class="caption">Follow the topics in order or use individual diagrams alongside the lectures. The interactive diagrams below run entirely in your browser.</p>
   </section>
 
   <section id="representations">
@@ -165,7 +165,7 @@ sum shared-node contributions</pre><code id="matrixfree-result"></code></div></d
 2. Follow SETUP.md to create the Python environment.
 3. Keep notebooks/day2_helpers beside the notebooks.
 4. Open notebook 01 and run cells from the top.</code></pre></div>
-    <aside class="note"><b>The five-minute contract.</b> Published timings cover the complete notebook after environment setup. Downloading Python packages or solver source is separate. The included receipts record local runtimes; measure Colab performance in a fresh runtime using the same setup and case.</aside>
+    <aside class="note"><b>Interpreting computational cost.</b> Installation, numerical solution and figure export are separate costs. Execution depends on the machine and selected problem. When comparing solvers, state the hardware, inputs and measured operations.</aside>
     <div class="question"><b>Observe</b><p>Where did damage increase? Does the displacement field agree with the applied constraints? What happens to the measured response as damage evolves?</p><details><summary>Interpret the result carefully</summary><p>Compare the initial and subsequent fields alongside the load history and numerical diagnostics. A pre-existing crack may already have d = 1; use increments to locate the evolving region.</p></details></div>
   </section>
 

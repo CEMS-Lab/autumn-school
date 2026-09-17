@@ -1,7 +1,7 @@
 [
   {
     "notebook": "01_simulate_fracture",
-    "sha256": "3a1eea95f28a41ea1479712464ce87e97493635abcd5b26f6ec8d1ad8a11496c",
+    "sha256": "a7dfae039a52a1dbcb037f1ea75a0069fe95c830500eeacac3b9e456446fc739",
     "code_cells": 32,
     "fresh_execution": false,
     "outputs_retained": 37
@@ -15,7 +15,7 @@
   },
   {
     "notebook": "03_learning_and_hybrid",
-    "sha256": "1640370136b13c27296b262d8276d7e1f2c6c4e825ac0d855410415259d6c783",
+    "sha256": "31ffbac38b62c93d72f1fdeb1f6707e8b9114b9cf2511790cbc853062093dbde",
     "code_cells": 21,
     "fresh_execution": false,
     "outputs_retained": 30

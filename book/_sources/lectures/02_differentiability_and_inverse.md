@@ -54,12 +54,10 @@ $$
 \end{aligned}
 $$
 
-The computational sequence is $E\rightarrow\mathbf u\rightarrow y\rightarrow\mathcal L$.
-`loss.backward()` applies the chain rule through the recorded calculation,
-including the PhAST solve. At the initial $E=100\,\mathrm{GPa}$ the bar extends
-too much: increasing $E$ locally reduces the loss. One backward pass gives a
-gradient at the evaluated state. Plotting the loss over a range of modulus
-values requires a separate forward calculation at each value.
+The sequence is $E\rightarrow\mathbf u\rightarrow y\rightarrow\mathcal L$.
+`loss.backward()` differentiates it, including the PhAST solve. At the initial
+$E=100\,\mathrm{GPa}$ the bar extends too much, so increasing $E$ locally
+reduces the loss. This gives a gradient at one state, not a sweep over moduli.
 
 ## 4. Let the optimiser choose the next modulus
 
@@ -80,16 +78,13 @@ optimiser.step()
 Repeat prediction, loss, backward and update until the relative tip mismatch
 is below $10^{-4}$ for five consecutive evaluations, with at most 80 updates.
 The force stays fixed. Momentum can produce overshoot and oscillation.
-The lecture’s plain-SGD example and the notebook’s momentum example have
-different histories: use the notebook’s printed result beside its own plots.
 
 ## 5. Interpret and check the result
 
-{doc}`Lab 2 <../classroom/02_gradients_and_recovery>` contains geometry,
-mesh, boundary conditions, displacement fields, a computational graph, modulus
-and loss histories, and an animated recovery. Compare the recovered field with
-the observed tip and analytical extension. Synthetic, noise-free data test this
-implementation; experimental identification adds measurement and model uncertainty.
+In {doc}`NB2 <../classroom/02_gradients_and_recovery>`, compare the recovered
+field with the observed tip and analytical extension. The synthetic, noise-free
+data test this implementation; experimental identification adds measurement
+and model uncertainty.
 
 Finite differences and Taylor remainders are optional derivative checks:
 
@@ -131,10 +126,7 @@ $$
 =-\mathbf R_{\boldsymbol\theta}.
 $$
 
-For evolving fracture, sensitivities also pass through earlier states, history
-and damage updates. Shared parameters contribute at each use. Particle-position
-recovery replaces $E$ with inclusion coordinates and the tip measurement with
-selected field observations. Assess sensitivity, initialisation, active
-constraints and non-uniqueness for that problem. The
-{doc}`inverse visual laboratory <../research/08_visual_lab>`
-provides additional reading; these larger studies are separate from the bar practical.
+In fracture, gradients also pass through earlier states, history and damage.
+Particle-position recovery uses inclusion coordinates as unknowns and field
+observations as data. Sensitivity, active constraints and non-uniqueness require
+assessment; see the optional {doc}`inverse visual laboratory <../research/08_visual_lab>`.

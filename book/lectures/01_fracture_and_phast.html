@@ -420,11 +420,11 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#from-a-crack-to-a-damage-field-06-minutes">From a crack to a damage field · 0–6 minutes</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#energy-and-stiffness-degradation-618-minutes">Energy and stiffness degradation · 6–18 minutes</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#one-numerical-increment-1831-minutes">One numerical increment · 18–31 minutes</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tensors-matrix-free-actions-and-dynamics-3141-minutes">Tensors, matrix-free actions and dynamics · 31–41 minutes</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#connect-the-model-to-the-practical-4145-minutes">Connect the model to the practical · 41–45 minutes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#from-a-crack-to-a-damage-field">From a crack to a damage field</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#energy-and-stiffness-degradation">Energy and stiffness degradation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#one-numerical-increment">One numerical increment</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tensors-matrix-free-actions-and-dynamics">Tensors, matrix-free actions and dynamics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#connect-the-model-to-the-practical">Connect the model to the practical</a></li>
 </ul>
             </nav>
         </div>
@@ -438,15 +438,15 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="lecture-1-phase-field-fracture-and-phast">
 <h1>Lecture 1: Phase-field fracture and PhAST<a class="headerlink" href="#lecture-1-phase-field-fracture-and-phast" title="Link to this heading">#</a></h1>
-<p><strong>45 minutes.</strong> This lecture connects the physical description of a crack to
+<p>This lecture connects the physical description of a crack to
 the numerical operations used to simulate it. Basic calculus and vectors are
 sufficient preparation; the finite-element ideas are introduced as they arise.</p>
 <p>We follow a notched specimen under tensile loading. The main question is how
 its deformation, damage field and reaction force change as the load increases.
 Later lectures ask how these observations depend on material parameters and
 where a learned model could contribute to the calculation.</p>
-<section id="from-a-crack-to-a-damage-field-06-minutes">
-<h2>From a crack to a damage field · 0–6 minutes<a class="headerlink" href="#from-a-crack-to-a-damage-field-06-minutes" title="Link to this heading">#</a></h2>
+<section id="from-a-crack-to-a-damage-field">
+<h2>From a crack to a damage field<a class="headerlink" href="#from-a-crack-to-a-damage-field" title="Link to this heading">#</a></h2>
 <p>A crack creates new surfaces and changes the way a specimen carries load.
 Phase-field fracture represents this process with a continuous damage field
 <span class="math notranslate nohighlight">\(d\)</span>: zero denotes intact material and one denotes fully damaged material.
@@ -461,8 +461,8 @@ field, the material model, loading and mesh also affect the observed profile.</p
 <p><strong>Learning question:</strong> Which quantity changes when we widen the diffuse band?</p>
 </div>
 </section>
-<section id="energy-and-stiffness-degradation-618-minutes">
-<h2>Energy and stiffness degradation · 6–18 minutes<a class="headerlink" href="#energy-and-stiffness-degradation-618-minutes" title="Link to this heading">#</a></h2>
+<section id="energy-and-stiffness-degradation">
+<h2>Energy and stiffness degradation<a class="headerlink" href="#energy-and-stiffness-degradation" title="Link to this heading">#</a></h2>
 <p>The model balances stored elastic energy, the energy required to create a
 diffuse crack, and external work. The fracture energy <span class="math notranslate nohighlight">\(G_c\)</span> sets the cost of
 creating crack surface. A degradation function reduces the selected elastic
@@ -481,8 +481,8 @@ fracture-energy scale, band width and mesh resolution.</p>
 <p><strong>Learning question:</strong> How do these choices enter the physical model?</p>
 </div>
 </section>
-<section id="one-numerical-increment-1831-minutes">
-<h2>One numerical increment · 18–31 minutes<a class="headerlink" href="#one-numerical-increment-1831-minutes" title="Link to this heading">#</a></h2>
+<section id="one-numerical-increment">
+<h2>One numerical increment<a class="headerlink" href="#one-numerical-increment" title="Link to this heading">#</a></h2>
 <p>Finite elements interpolate displacement and damage from values stored at
 mesh nodes. A staggered calculation updates displacement with damage held
 fixed, evaluates the driving field, and updates damage with the current
@@ -500,8 +500,8 @@ provides the irreversibility reference.</p>
 changes the loading?</p>
 </div>
 </section>
-<section id="tensors-matrix-free-actions-and-dynamics-3141-minutes">
-<h2>Tensors, matrix-free actions and dynamics · 31–41 minutes<a class="headerlink" href="#tensors-matrix-free-actions-and-dynamics-3141-minutes" title="Link to this heading">#</a></h2>
+<section id="tensors-matrix-free-actions-and-dynamics">
+<h2>Tensors, matrix-free actions and dynamics<a class="headerlink" href="#tensors-matrix-free-actions-and-dynamics" title="Link to this heading">#</a></h2>
 <p>Coordinates describe where nodes lie; connectivity lists the nodes in each
 element; field arrays contain their displacement and damage. Gathering local
 values, evaluating element contributions and adding them back to the global
@@ -523,8 +523,8 @@ damage to locate the extra quantities in a dynamic calculation.</p>
 time evolution?</p>
 </div>
 </section>
-<section id="connect-the-model-to-the-practical-4145-minutes">
-<h2>Connect the model to the practical · 41–45 minutes<a class="headerlink" href="#connect-the-model-to-the-practical-4145-minutes" title="Link to this heading">#</a></h2>
+<section id="connect-the-model-to-the-practical">
+<h2>Connect the model to the practical<a class="headerlink" href="#connect-the-model-to-the-practical" title="Link to this heading">#</a></h2>
 <p>In <a class="reference internal" href="../classroom/01_simulate_fracture.html"><span class="doc">NB1 — Intro to PhAST</span></a>, inspect the geometry and loading,
 run the small PhAST example, and interpret the advancing damage field alongside
 the loading history and elastic, fracture and kinetic energies. The selected
@@ -591,11 +591,11 @@ relationship through the computational graph.</p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#from-a-crack-to-a-damage-field-06-minutes">From a crack to a damage field · 0–6 minutes</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#energy-and-stiffness-degradation-618-minutes">Energy and stiffness degradation · 6–18 minutes</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#one-numerical-increment-1831-minutes">One numerical increment · 18–31 minutes</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tensors-matrix-free-actions-and-dynamics-3141-minutes">Tensors, matrix-free actions and dynamics · 31–41 minutes</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#connect-the-model-to-the-practical-4145-minutes">Connect the model to the practical · 41–45 minutes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#from-a-crack-to-a-damage-field">From a crack to a damage field</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#energy-and-stiffness-degradation">Energy and stiffness degradation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#one-numerical-increment">One numerical increment</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tensors-matrix-free-actions-and-dynamics">Tensors, matrix-free actions and dynamics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#connect-the-model-to-the-practical">Connect the model to the practical</a></li>
 </ul>
   </nav></div>
 

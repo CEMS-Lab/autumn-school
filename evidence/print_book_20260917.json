@@ -1,0 +1,33 @@
+{
+  "date": "2026-09-17",
+  "scope": "Day 3 lecture guides, worked notebooks and mathematical reference chapters",
+  "baseline_commit": "5ae157f305a2cbae27502480f465cc4fa7fc5303",
+  "pdf": "downloads/PhAST_Autumn_School_2026_Day3.pdf",
+  "pdf_sha256": "e7d20d482aa69236644e1f847db80fd6e55ed2705195d01f2a1151e09f5c13bb",
+  "pages": 132,
+  "rendered_pages": 132,
+  "visual_review": "All pages reviewed in the preceding typeset edition; changed pages reviewed again after final animation and layout corrections.",
+  "notebook_outputs": {
+    "saved_png": 24,
+    "animation_sequences": 10,
+    "console_outputs": 46,
+    "abbreviated_console_outputs": 5,
+    "browser_controls_omitted": 4,
+    "markdown_output": 1
+  },
+  "canonical_notebook_code_outputs_and_execution_counts_unchanged": true,
+  "new_numerical_runs_performed": false,
+  "html_and_latex_sphinx_builds": "passed with warnings treated as errors",
+  "website_static_checks": {
+    "html_pages": 41,
+    "local_asset_references": 1237,
+    "design_directives": "passed",
+    "errors": []
+  },
+  "limitations": [
+    "Saved notebook results are examples from their recorded runs, not a fresh execution or a runtime guarantee.",
+    "PDF animations are represented by selected frames and links to the online notebooks.",
+    "Exercises without supplied numerical solutions remain labelled as independent work.",
+    "Measured scientific timings and physical simulation times are retained; instructional duration and runtime promises are removed from the teaching pages."
+  ]
+}

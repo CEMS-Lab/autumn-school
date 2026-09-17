@@ -488,12 +488,10 @@ reaction and the free-degree residual before beginning recovery.</p>
 \frac{\mathrm{d}y}{\mathrm{d}E}&amp;=-\frac{FL}{AE^2}.
 \end{aligned}
 \end{split}\]</div>
-<p>The computational sequence is <span class="math notranslate nohighlight">\(E\rightarrow\mathbf u\rightarrow y\rightarrow\mathcal L\)</span>.
-<code class="docutils literal notranslate"><span class="pre">loss.backward()</span></code> applies the chain rule through the recorded calculation,
-including the PhAST solve. At the initial <span class="math notranslate nohighlight">\(E=100\,\mathrm{GPa}\)</span> the bar extends
-too much: increasing <span class="math notranslate nohighlight">\(E\)</span> locally reduces the loss. One backward pass gives a
-gradient at the evaluated state. Plotting the loss over a range of modulus
-values requires a separate forward calculation at each value.</p>
+<p>The sequence is <span class="math notranslate nohighlight">\(E\rightarrow\mathbf u\rightarrow y\rightarrow\mathcal L\)</span>.
+<code class="docutils literal notranslate"><span class="pre">loss.backward()</span></code> differentiates it, including the PhAST solve. At the initial
+<span class="math notranslate nohighlight">\(E=100\,\mathrm{GPa}\)</span> the bar extends too much, so increasing <span class="math notranslate nohighlight">\(E\)</span> locally
+reduces the loss. This gives a gradient at one state, not a sweep over moduli.</p>
 </section>
 <section id="let-the-optimiser-choose-the-next-modulus">
 <h2>4. Let the optimiser choose the next modulus<a class="headerlink" href="#let-the-optimiser-choose-the-next-modulus" title="Link to this heading">#</a></h2>
@@ -511,17 +509,14 @@ values in MPa. The Day 3 notebook uses SGD with momentum:</p>
 </div>
 <p>Repeat prediction, loss, backward and update until the relative tip mismatch
 is below <span class="math notranslate nohighlight">\(10^{-4}\)</span> for five consecutive evaluations, with at most 80 updates.
-The force stays fixed. Momentum can produce overshoot and oscillation.
-The lecture’s plain-SGD example and the notebook’s momentum example have
-different histories: use the notebook’s printed result beside its own plots.</p>
+The force stays fixed. Momentum can produce overshoot and oscillation.</p>
 </section>
 <section id="interpret-and-check-the-result">
 <h2>5. Interpret and check the result<a class="headerlink" href="#interpret-and-check-the-result" title="Link to this heading">#</a></h2>
-<p><a class="reference internal" href="../classroom/02_gradients_and_recovery.html"><span class="doc">Lab 2</span></a> contains geometry,
-mesh, boundary conditions, displacement fields, a computational graph, modulus
-and loss histories, and an animated recovery. Compare the recovered field with
-the observed tip and analytical extension. Synthetic, noise-free data test this
-implementation; experimental identification adds measurement and model uncertainty.</p>
+<p>In <a class="reference internal" href="../classroom/02_gradients_and_recovery.html"><span class="doc">NB2</span></a>, compare the recovered
+field with the observed tip and analytical extension. The synthetic, noise-free
+data test this implementation; experimental identification adds measurement
+and model uncertainty.</p>
 <p>Finite differences and Taylor remainders are optional derivative checks:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -559,13 +554,10 @@ differentiating this equation locally gives</p>
 \mathbf R_{\mathbf u}\frac{\partial\mathbf u}{\partial\boldsymbol\theta}
 =-\mathbf R_{\boldsymbol\theta}.
 \]</div>
-<p>For evolving fracture, sensitivities also pass through earlier states, history
-and damage updates. Shared parameters contribute at each use. Particle-position
-recovery replaces <span class="math notranslate nohighlight">\(E\)</span> with inclusion coordinates and the tip measurement with
-selected field observations. Assess sensitivity, initialisation, active
-constraints and non-uniqueness for that problem. The
-<a class="reference internal" href="../research/08_visual_lab.html"><span class="doc">inverse visual laboratory</span></a>
-provides additional reading; these larger studies are separate from the bar practical.</p>
+<p>In fracture, gradients also pass through earlier states, history and damage.
+Particle-position recovery uses inclusion coordinates as unknowns and field
+observations as data. Sensitivity, active constraints and non-uniqueness require
+assessment; see the optional <a class="reference internal" href="../research/08_visual_lab.html"><span class="doc">inverse visual laboratory</span></a>.</p>
 </section>
 </section>
 
