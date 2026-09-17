@@ -43,14 +43,6 @@ provides the source and trained model in the **PhAST GNN assets ZIP**.
 The notebooks include their supplied figures and animations.
 
 ```{raw} html
-<p><a class="badge-link" href="../downloads/PhAST_Autumn_School_2026_Day3.pdf" download>Download the Day 3 book (PDF)</a></p>
-```
-
-The PDF brings together the lecture guides, worked notebooks and mathematical
-reference chapters. It includes the saved results and selected animation frames,
-with links to the full animations in the online notebooks.
-
-```{raw} html
 <span id="three-phast-practical-notebooks"></span>
 ```
 
@@ -167,3 +159,17 @@ for independent study.
 
 research/index
 ```
+
+(offline-reading)=
+### Offline reading
+
+For limited internet access, download the Day 3 lecture notes, worked notebooks
+and reference chapters as a single PDF. The text, equations, code and saved plots
+can be read offline; animations are represented by selected frames.
+
+```{raw} html
+<p><a href="../downloads/PhAST_Autumn_School_2026_Day3.pdf" download>Download the Day 3 book (PDF, 4.3 MB)</a></p>
+```
+
+Running the notebooks in Colab and opening the linked animations requires an
+internet connection.
