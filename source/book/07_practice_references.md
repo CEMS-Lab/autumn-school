@@ -149,28 +149,6 @@ stiffness $\eta_{\mathrm{res}}$, and a displacement-controlled load increment.
 : Extended finite elements: an enriched finite-element approximation for
   discontinuities or near-tip features.
 
-## Contributing a new course activity
-
-An activity is easier for others to reuse when it has a narrow learning
-objective and an inspectable result. Include:
-
-1. a one-sentence question and the prerequisite chapter;
-2. a complete case definition: geometry, parameter choices, boundary
-   conditions, and initial state;
-3. a short prediction prompt before code is executed;
-4. labelled figures or datasets with their sources and processing steps;
-5. a numerical or physical check appropriate to the task;
-6. a solution or interpretation note; and
-7. the assumptions and scope of the result.
-
-Place the explanation, code, retained output, learner exercise, hint, and
-worked solution in that order. Include the case definition and interpretation
-in the chapter as well as in the downloadable code.
-
-Check the licence and attribution requirements before reusing a paper figure,
-dataset panel, or code fragment. The schematic figures in this book were
-authored for the course; cited papers and documentation provide further reading.
-
 ## Reference trail
 
 ### Further interactive study
@@ -230,15 +208,3 @@ conventions used here.
 - PyTorch contributors, [Autograd documentation](https://docs.pytorch.org/docs/stable/autograd.html).
 - JAX contributors, [Automatic differentiation guide](https://docs.jax.dev/en/latest/automatic-differentiation.html).
 - JAX-FEM contributors, [Quickstart and examples](https://deepmodeling.github.io/jax-fem/guide/Quickstart.html).
-
-## Final checklist
-
-Before sharing an educational fracture result, make the reader able to answer:
-
-- What is the crack representation?
-- Which energy, convention, and constraint are used?
-- Which mesh, boundary conditions, and fields are solved?
-- Which quantity was observed and which check was applied?
-- What is the scope of the conclusion?
-
-If these answers are visible, the result is useful even when it is small.
