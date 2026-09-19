@@ -1,0 +1,5 @@
+# Selected tested revision for the bar example. Recheck before updating the pin.
+phast @ git+https://github.com/CEMS-Lab/PhAST.git@6d1903e96874ce501f7bd466fdfd9d7b0ea10519
+pytest>=8,<9
+# SciPy 1.15.3's CPython 3.10 macOS wheel failed to load _spropack in rehearsal.
+scipy==1.14.1; sys_platform == "darwin" and python_version == "3.10"
