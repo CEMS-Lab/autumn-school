@@ -9,20 +9,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>NB1 — Intro to PhAST &#8212; PhAST: Phase-field fracture with differentiable FEM</title>
-
-
-
+  
+  
+  
   <script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "dark";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "dark";
   </script>
-
+  
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
 <link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
 <link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
 
-
+  
   <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
   <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/mobile_math.css?v=acf5579e" />
     <link rel="stylesheet" type="text/css" href="../_static/learning_book.css?v=fb5bad1b" />
-
+  
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
@@ -62,30 +62,30 @@
 <meta name="course" content="CEMS-Lab · UKACM Autumn School 2026">
 
   </head>
-
-
+  
+  
   <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="dark">
 
-
-
+  
+  
   <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
-
+  
   <div id="pst-scroll-pixel-helper"></div>
-
+  
   <button type="button" class="btn rounded-pill" id="pst-back-to-top">
     <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
-
+  
   <input type="checkbox"
           class="sidebar-toggle"
           id="pst-primary-sidebar-checkbox"/>
   <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
-
+  
   <input type="checkbox"
           class="sidebar-toggle"
           id="pst-secondary-sidebar-checkbox"/>
   <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
-
+  
   <div class="search-button__wrapper">
     <div class="search-button__overlay"></div>
     <div class="search-button__search-container">
@@ -111,43 +111,43 @@
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
 </div>
 
-
+  
     <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
     </header>
-
+  
 
   <div class="bd-container">
     <div class="bd-container__inner bd-page-width">
-
-
-
+      
+      
+      
       <div class="bd-sidebar-primary bd-sidebar">
+        
 
-
-
+  
   <div class="sidebar-header-items sidebar-primary__section">
-
-
-
-
+    
+    
+    
+    
   </div>
-
+  
     <div class="sidebar-primary-items__start sidebar-primary__section">
         <div class="sidebar-primary-item">
 
-
-
-
+  
+    
+  
 
 <a class="navbar-brand logo" href="../index.html">
-
-
-
-
-
-
+  
+  
+  
+  
+  
+  
     <p class="title logo__title">PhAST: Phase-field fracture with differentiable FEM</p>
-
+  
 </a></div>
         <div class="sidebar-primary-item">
 
@@ -162,7 +162,7 @@
  </script></div>
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
-
+        
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="../index.html">
@@ -230,39 +230,39 @@
     </div>
 </nav></div>
     </div>
-
-
+  
+  
   <div class="sidebar-primary-items__end sidebar-primary__section">
   </div>
-
+  
   <div id="rtd-footer-container"></div>
 
 
       </div>
-
+      
       <main id="main-content" class="bd-main" role="main">
-
-
+        
+        
 
 <div class="sbt-scroll-pixel-helper"></div>
 
           <div class="bd-content">
             <div class="bd-article-container">
-
+              
               <div class="bd-header-article d-print-none">
 <div class="header-article-items header-article__inner">
-
+  
     <div class="header-article-items__start">
-
+      
         <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
   <span class="fa-solid fa-bars"></span>
 </button></div>
-
+      
     </div>
-
-
+  
+  
     <div class="header-article-items__end">
-
+      
         <div class="header-article-item">
 
 <div class="article-header-buttons">
@@ -276,24 +276,24 @@
     <i class="fas fa-rocket"></i>
   </button>
   <ul class="dropdown-menu">
-
-
-
+      
+      
+      
       <li><a href="https://colab.research.google.com/github/CEMS-Lab/autumn-school/blob/main/notebooks/study/classroom/NB1%20-%20Intro%20to%20PhAST.ipynb" target="_blank"
    class="btn btn-sm dropdown-item"
    title="Launch on Colab"
    data-bs-placement="left" data-bs-toggle="tooltip"
 >
-
+  
 
 <span class="btn__icon-container">
-
+  
     <img alt="Colab logo" src="../_static/images/logo_colab.png">
   </span>
 <span class="btn__text-container">Colab</span>
 </a>
 </li>
-
+      
   </ul>
 </div>
 
@@ -307,15 +307,15 @@
     <i class="fab fa-github"></i>
   </button>
   <ul class="dropdown-menu">
-
-
-
+      
+      
+      
       <li><a href="https://github.com/CEMS-Lab/autumn-school" target="_blank"
    class="btn btn-sm btn-source-repository-button dropdown-item"
    title="Source repository"
    data-bs-placement="left" data-bs-toggle="tooltip"
 >
-
+  
 
 <span class="btn__icon-container">
   <i class="fab fa-github"></i>
@@ -323,16 +323,16 @@
 <span class="btn__text-container">Repository</span>
 </a>
 </li>
-
-
-
-
+      
+      
+      
+      
       <li><a href="https://github.com/CEMS-Lab/autumn-school/issues/new?title=Issue%20on%20page%20%2Fclassroom/01_simulate_fracture.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
 >
-
+  
 
 <span class="btn__icon-container">
   <i class="fas fa-lightbulb"></i>
@@ -340,7 +340,7 @@
 <span class="btn__text-container">Open issue</span>
 </a>
 </li>
-
+      
   </ul>
 </div>
 
@@ -354,15 +354,15 @@
     <i class="fas fa-download"></i>
   </button>
   <ul class="dropdown-menu">
-
-
-
+      
+      
+      
       <li><a href="https://cems-lab.github.io/autumn-school/notebooks/study/classroom/NB1%20-%20Intro%20to%20PhAST.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
 >
-
+  
 
 <span class="btn__icon-container">
   <i class="fas fa-file"></i>
@@ -370,17 +370,17 @@
 <span class="btn__text-container">.ipynb</span>
 </a>
 </li>
-
-
-
-
+      
+      
+      
+      
       <li>
 <button onclick="window.print()"
   class="btn btn-sm btn-download-pdf-button dropdown-item"
   title="Print to PDF"
   data-bs-placement="left" data-bs-toggle="tooltip"
 >
-
+  
 
 <span class="btn__icon-container">
   <i class="fas fa-file-pdf"></i>
@@ -388,7 +388,7 @@
 <span class="btn__text-container">.pdf</span>
 </button>
 </li>
-
+      
   </ul>
 </div>
 
@@ -400,7 +400,7 @@
   title="Fullscreen mode"
   data-bs-placement="bottom" data-bs-toggle="tooltip"
 >
-
+  
 
 <span class="btn__icon-container">
   <i class="fas fa-expand"></i>
@@ -432,20 +432,20 @@ document.write(`
     <span class="fa-solid fa-list"></span>
 </button>
 </div></div>
-
+      
     </div>
-
+  
 </div>
 </div>
-
-
+              
+              
 
 <div id="jb-print-docs-body" class="onlyprint">
     <h1>NB1 — Intro to PhAST</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
-
+            
             <div>
                 <h2> Contents </h2>
             </div>
@@ -492,11 +492,11 @@ document.write(`
     </div>
 </div>
 
-
-
+              
+                
 <div id="searchbox"></div>
                 <article class="bd-article">
-
+                  
   <section class="tex2jax_ignore mathjax_ignore" id="nb1-intro-to-phast">
 <h1>NB1 — Intro to PhAST<a class="headerlink" href="#nb1-intro-to-phast" title="Link to this heading">#</a></h1>
 <section id="phase-field-fracture-notched-square-plate">
@@ -2960,7 +2960,7 @@ input[type=range].anim-slider {
     var slider_id = "_anim_sliderd2ab3b0725784933aad371359f267229";
     var loop_select_id = "_anim_loop_selectd2ab3b0725784933aad371359f267229";
     var frames = new Array(31);
-
+    
   frames[0] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAggAAAHWCAYAAAASIHGhAAAAOnRFWHRTb2Z0d2FyZQBNYXRwbG90\
 bGliIHZlcnNpb24zLjEwLjAsIGh0dHBzOi8vbWF0cGxvdGxpYi5vcmcvlHJYcgAAAAlwSFlzAAAP\
 YQAAD2EBqD+naQAAY3RJREFUeJzt3XlcVOX+B/DPgMwMiwwCwoAikpo7UqiIuaVc0bQirdRMzfip\
@@ -39271,7 +39271,7 @@ input[type=range].anim-slider {
     var slider_id = "_anim_slider95718c66a0e14563ab8d4be70640d519";
     var loop_select_id = "_anim_loop_select95718c66a0e14563ab8d4be70640d519";
     var frames = new Array(31);
-
+    
   frames[0] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAggAAAHWCAYAAAASIHGhAAAAOnRFWHRTb2Z0d2FyZQBNYXRwbG90\
 bGliIHZlcnNpb24zLjEwLjAsIGh0dHBzOi8vbWF0cGxvdGxpYi5vcmcvlHJYcgAAAAlwSFlzAAAP\
 YQAAD2EBqD+naQAASVhJREFUeJzt3XtcVHXiP/7XGWAGFWYQFAYUFc1QUyRBcczKlMRL/mKl72q5\
@@ -53222,7 +53222,7 @@ input[type=range].anim-slider {
     var slider_id = "_anim_slider4ebfb9ef215b41c8910e2f1c4a857957";
     var loop_select_id = "_anim_loop_select4ebfb9ef215b41c8910e2f1c4a857957";
     var frames = new Array(31);
-
+    
   frames[0] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAggAAAHWCAYAAAASIHGhAAAAOnRFWHRTb2Z0d2FyZQBNYXRwbG90\
 bGliIHZlcnNpb24zLjEwLjAsIGh0dHBzOi8vbWF0cGxvdGxpYi5vcmcvlHJYcgAAAAlwSFlzAAAP\
 YQAAD2EBqD+naQAAUA5JREFUeJzt3XlcVOX+B/DPGWQG2QVZRAZcEzfScENzxwXNNG1RK9csu2gq\
@@ -83982,7 +83982,7 @@ input[type=range].anim-slider {
     var slider_id = "_anim_sliderff82a4f618e041f49151eba64a8ab523";
     var loop_select_id = "_anim_loop_selectff82a4f618e041f49151eba64a8ab523";
     var frames = new Array(31);
-
+    
   frames[0] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAggAAAHWCAYAAAASIHGhAAAAOnRFWHRTb2Z0d2FyZQBNYXRwbG90\
 bGliIHZlcnNpb24zLjEwLjAsIGh0dHBzOi8vbWF0cGxvdGxpYi5vcmcvlHJYcgAAAAlwSFlzAAAP\
 YQAAD2EBqD+naQAASpVJREFUeJzt3XtYVHX+B/D3cJkZBBnkNoCCYt4yRQ2T0DJTkix9Mm0zcxXJ\
@@ -107145,7 +107145,7 @@ input[type=range].anim-slider {
     var slider_id = "_anim_slider1662cf190e9e4556866e208e6e3489d3";
     var loop_select_id = "_anim_loop_select1662cf190e9e4556866e208e6e3489d3";
     var frames = new Array(31);
-
+    
   frames[0] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA4QAAAL4CAYAAAAj2Tk1AAAAOnRFWHRTb2Z0d2FyZQBNYXRwbG90\
 bGliIHZlcnNpb24zLjEwLjAsIGh0dHBzOi8vbWF0cGxvdGxpYi5vcmcvlHJYcgAAAAlwSFlzAAAP\
 YQAAD2EBqD+naQAApjhJREFUeJzs3XtcFOX+B/DP7Mqy3L2gLCgKecV7YnLwZ5pKQlnJyUzN1Dik\
@@ -172443,7 +172443,7 @@ input[type=range].anim-slider {
     var slider_id = "_anim_slider24e06fc2b6324358a9796a9461bef97c";
     var loop_select_id = "_anim_loop_select24e06fc2b6324358a9796a9461bef97c";
     var frames = new Array(30);
-
+    
   frames[0] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA4QAAAL4CAYAAAAj2Tk1AAAAOnRFWHRTb2Z0d2FyZQBNYXRwbG90\
 bGliIHZlcnNpb24zLjEwLjAsIGh0dHBzOi8vbWF0cGxvdGxpYi5vcmcvlHJYcgAAAAlwSFlzAAAP\
 YQAAD2EBqD+naQAApkNJREFUeJzs3XtcFFX/B/DP7Mqy3L2zoCh417wlJg8+ppkklJaUmZpPGpGW\
@@ -235467,14 +235467,14 @@ plot band width against <span class="math notranslate nohighlight">\(x\)</span> 
 
 
                 </article>
+              
 
-
-
-
-
-
+              
+              
+              
+              
                 <footer class="prev-next-footer d-print-none">
-
+                  
 <div class="prev-next-area">
     <a class="left-prev"
        href="../index.html"
@@ -235496,11 +235496,11 @@ plot band width against <span class="math notranslate nohighlight">\(x\)</span> 
     </a>
 </div>
                 </footer>
-
+              
             </div>
-
-
-
+            
+            
+              
                 <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
 
@@ -235549,19 +235549,21 @@ plot band width against <span class="math notranslate nohighlight">\(x\)</span> 
   </nav></div>
 
 </div></div>
-
-
+              
+            
           </div>
           <footer class="bd-footer-content">
-
+            
 <div class="bd-footer-content__inner container">
-
+  
   <div class="footer-item">
     <div class="phast-course-credit">
-  <!-- Course material prepared by Allamaprabhu Ani and Sathiskumar A. Ponnusami, CEMS-Lab, 2026. -->
+  <p class="phast-course-lecturer"><strong>Lecturer:</strong>
+    <a href="https://saponnusami.com">Sathiskumar Anusuya Ponnusami</a>, Queen Mary University of London.
+  </p>
   <p class="phast-course-creators">Prepared by
     <a href="https://allamaprabhuani.github.io">Allamaprabhu Ani</a> and
-    <a href="https://saponnusami.com">Sathiskumar A. Ponnusami</a>
+    <a href="https://saponnusami.com">Sathiskumar Anusuya Ponnusami</a>
   </p>
   <p class="phast-course-purpose">© 2026
     <a href="https://github.com/CEMS-Lab">CEMS-Lab</a>
@@ -235571,9 +235573,9 @@ plot band width against <span class="math notranslate nohighlight">\(x\)</span> 
   </p>
 </div>
   </div>
-
+  
   <div class="footer-item">
-
+    
 <div class="phast-discoveries" aria-label="Optional PhAST discoveries">
   <details class="phast-discovery" id="phast-gradient-discovery">
     <summary aria-label="PhAST ∇: a gradient discovery">PhAST ∇</summary>
@@ -235601,15 +235603,15 @@ plot band width against <span class="math notranslate nohighlight">\(x\)</span> 
 </div>
 
   </div>
-
+  
 </div>
           </footer>
-
+        
 
       </main>
     </div>
   </div>
-
+  
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
   <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
 <script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>

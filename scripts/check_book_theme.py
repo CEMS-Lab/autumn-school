@@ -25,7 +25,9 @@ class Page(HTMLParser):
             'name="author" content="Allamaprabhu Ani and Sathiskumar A. Ponnusami"' in source
             and 'class="phast-course-creators">Prepared by' in source
             and '<a href="https://allamaprabhuani.github.io">Allamaprabhu Ani</a>' in source
-            and '<a href="https://saponnusami.com">Sathiskumar A. Ponnusami</a>' in source
+            and '<a href="https://saponnusami.com">Sathiskumar Anusuya Ponnusami</a>' in source
+            and 'class="phast-course-lecturer"><strong>Lecturer:</strong>' in source
+            and 'Queen Mary University of London.' in source
             and 'name="prepared-by" content="Allamaprabhu Ani and Sathiskumar A. Ponnusami"' in source
             and "Presented by <span>" not in source
             and "CEMS-Lab" in source and "UKACM Autumn School 2026" in source
