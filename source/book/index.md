@@ -1,5 +1,9 @@
 # Autumn School — Days 2 and 3
 
+**Lecturer:** [Sathiskumar Anusuya Ponnusami](https://saponnusami.com), Queen Mary University of London.
+
+**Course materials prepared by:** [Allamaprabhu Ani](https://allamaprabhuani.github.io) and [Sathiskumar Anusuya Ponnusami](https://saponnusami.com).
+
 Choose the materials for your teaching day:
 
 - **[Day 2 — Mechanics and Machine Learning](#machine-learning-notebooks-student-access):** six notebooks: NB1, NB2, NB3a, NB3b, NB5 and NB6, covering regression, neural networks, CNNs, physics-informed neural networks and neural operators.
