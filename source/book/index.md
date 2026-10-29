@@ -1,8 +1,7 @@
 # Autumn School — Days 2 and 3
 
-**Lecturer:** [Sathiskumar Anusuya Ponnusami](https://saponnusami.com), Queen Mary University of London.
-
-**Course materials prepared by:** [Allamaprabhu Ani](https://allamaprabhuani.github.io) and [Sathiskumar Anusuya Ponnusami](https://saponnusami.com).
+**Lecturer: [Sathiskumar Anusuya Ponnusami](https://saponnusami.com)**  
+Queen Mary University of London.
 
 Choose the materials for your teaching day:
 
