@@ -89,10 +89,10 @@ def check_directives(book_dir=BOOK):
     if index_file.is_file():
         index_content = index_file.read_text(encoding="utf-8", errors="ignore")
         pillars = [
-            "What Phase-Field Fracture Is",
-            "Hands-on with the PhAST Solver",
+            "Phase-field fracture",
+            "Finite element simulation",
             "Differentiability and Inverse Problems",
-            "Deep Learning Integration",
+            "Machine learning integration",
         ]
         for pillar in pillars:
             if pillar.lower() not in index_content.lower():
