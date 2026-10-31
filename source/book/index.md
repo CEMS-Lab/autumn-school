@@ -1,5 +1,7 @@
 # Autumn School — Days 2 and 3
 
+[![Star PhAST on GitHub](https://img.shields.io/github/stars/CEMS-Lab/PhAST?style=social)](https://github.com/CEMS-Lab/PhAST) ![Approximate course page views](https://hits.sh/cems-lab.github.io/autumn-school.svg?label=course%20views&color=2b6b85)
+
 **Lecturer: [Sathiskumar Anusuya Ponnusami](https://saponnusami.com)**  
 Queen Mary University of London.
 
