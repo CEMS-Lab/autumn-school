@@ -1,5 +1,7 @@
 # Autumn School — Days 2 and 3
 
+[![Star PhAST on GitHub](https://img.shields.io/github/stars/CEMS-Lab/PhAST?style=social)](https://github.com/CEMS-Lab/PhAST) ![Approximate course page views](https://hits.sh/cems-lab.github.io/autumn-school.svg?label=course%20views&color=2b6b85)
+
 **Lecturer: [Sathiskumar Anusuya Ponnusami](https://saponnusami.com)**  
 Queen Mary University of London.
 
@@ -55,6 +57,10 @@ Day 3 develops three applications of PhAST: dynamic fracture simulation,
 gradient-based recovery of an elastic modulus, and a learned replacement for
 the damage subproblem. Each practical includes code, saved numerical results
 and visualisations.
+
+The [published PhAST paper](https://doi.org/10.1016/j.cma.2026.119547)
+describes the solver formulation, fracture benchmarks and inverse analysis.
+The earlier [preprint](https://arxiv.org/abs/2606.23458) is also available.
 
 **Notebook access:** The table below provides Colab links and local downloads.
 The **PhAST GNN assets ZIP** contains the solver source and trained model used in NB3.
