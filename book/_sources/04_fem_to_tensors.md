@@ -173,6 +173,8 @@ For a tiny evolving-fracture run, inspect at least:
 
 ## Hands-On Lab: Running an End-to-End PhAST Fracture Simulation
 
+[Allamaprabhu Ani](https://allamaprabhuani.github.io/) assisted with the hands-on PhAST session.
+
 In the accompanying computational notebook, you will execute a complete phase-field fracture calculation using the PhAST solver:
 
 1. **Geometry & Meshing:** Generate a 40 mm square specimen with a 20 mm edge notch and a graded triangular Gmsh mesh.
